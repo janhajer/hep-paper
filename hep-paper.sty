@@ -1,0 +1,312 @@
+%%
+%% This is file `hep-paper.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% hep-paper.dtx  (with options: `package')
+%% This is a generated file.
+%% Copyright (C) 2019-2020 by Jan Hajer
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3 of this license or (at your option) any later
+%% version. The latest version of this license is in:
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of
+%% LaTeX version 2005/12/01 or later.
+\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+\ProvidesPackage{hep-paper}[2020/01/01 v1.1 Publications in High Energy Physics]
+
+\DeclareOption{a4paper}{%
+  \setlength\paperheight{297mm}%
+  \setlength\paperwidth{210mm}%
+}
+\DeclareOption{a5paper}{%
+  \setlength\paperheight{210mm}%
+  \setlength\paperwidth{148mm}%
+}
+\DeclareOption{b5paper}{%
+  \setlength\paperheight{250mm}%
+  \setlength\paperwidth{176mm}%
+}
+\DeclareOption{letterpaper}{%
+  \setlength\paperheight{11in}%
+  \setlength\paperwidth{8.5in}%
+}
+\DeclareOption{legalpaper}{%
+  \setlength\paperheight{14in}%
+  \setlength\paperwidth{8.5in}%
+}
+\DeclareOption{executivepaper}{%
+  \setlength\paperheight{10.5in}%
+  \setlength\paperwidth{7.25in}%
+}
+\DeclareOption{landscape}{%
+  \setlength\@tempdima{\paperheight}%
+  \setlength\paperheight{\paperwidth}%
+  \setlength\paperwidth{\@tempdima}%
+}
+
+\DeclareOption{10pt}{\renewcommand\@ptsize{0}}
+\DeclareOption{11pt}{\renewcommand\@ptsize{1}}
+\DeclareOption{12pt}{\renewcommand\@ptsize{2}}
+
+\DeclareOption{placement}{\def\@placement}
+
+\ExecuteOptions{a4paper,11pt}
+\ProcessOptions\relax
+\let\small\relax
+\let\footnotesize\relax
+\let\scriptsize\relax
+\let\tiny\relax
+\let\large\relax
+\let\Large\relax
+\let\LARGE\relax
+\let\huge\relax
+\let\Huge\relax
+\input{size1\@ptsize.clo}
+
+\RequirePackage[hscale=.76, vscale=.8, vmarginratio=3:4, includeheadfoot]{geometry}
+
+\RequirePackage{ifluatex}
+\ifluatex
+  \RequirePackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX}
+  \RequirePackage{polyglossia}
+  \setmainlanguage{british}
+\else
+  \RequirePackage[utf8]{inputenc}
+  \RequirePackage[T1]{fontenc}
+  \RequirePackage{textcomp}
+  \RequirePackage[british]{babel}
+\fi
+\RequirePackage{lmodern}
+\RequirePackage{microtype}
+
+\RequirePackage{csquotes}
+\RequirePackage[all,british]{foreign}
+\DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
+
+\newcommand{\no}[1]{\textnumero~#1}
+
+\newcommand{\software}[2][\hspace{-\fontdimen2\font}]{\texttt{#2}~#1}
+
+\def\sloppy{%
+  \emergencystretch 3em \hfuzz .5\p@ \vfuzz\hfuzz%
+}
+
+\newcommand\no@break@before{%
+  \relax\ifvmode\else%
+    \ifhmode%
+      \ifdim\lastskip > 0pt%
+        \relax\unskip\nobreakspace%
+      \fi%
+    \fi%
+  \fi%
+}
+
+\RequirePackage[inline]{enumitem}
+\newlist{inlinelist}{enumerate*}{1}
+\setlist*[inlinelist,1]{itemjoin={,\ }, itemjoin*={, and\ }, after=.}
+
+\let\@foot@note\footnote
+\renewcommand{\footnote}[1]{\unskip\@foot@note{\ignorespaces#1}}
+
+\RequirePackage{mathtools}
+\RequirePackage{amssymb}
+\allowdisplaybreaks[1]
+
+\DeclareMathOperator{\diag}{diag}
+
+\AtEndOfClass{\let\i\undefined\DeclareMathOperator{\i}{i}}
+
+\RequirePackage{fixmath}
+\RequirePackage{alphabeta}
+
+\RequirePackage{physics}
+\RequirePackage{slashed}
+\RequirePackage{units}
+
+\newcommand{\inv}[2][1]{#2\ensuremath{^{-#1}}}
+
+\newcommand{\oset}[3][-1pt]{%
+  \raisebox{1pt}{%
+    \ensuremath{
+      \mathop{#3}\limits^{\vbox to#1{\kern-2\ex@\hbox{$\scriptscriptstyle#2$}\vss}}%
+    }%
+  }%
+}
+\newcommand{\overleftright}[1]{\oset{\leftrightarrow}{#1}}
+
+\RequirePackage{bm}
+\let\mathbf\bm
+\g@addto@macro\bfseries{\boldmath}
+\DeclareMathAlphabet{\mathsfit}{T1}{\sfdefault}{\mddefault}{\sldefault}
+\SetMathAlphabet{\mathsfit}{bold}{T1}{\sfdefault}{\bfdefault}{\sldefault}
+
+\renewcommand{\textfraction}{0.01}
+\setcounter{topnumber}{1}
+\renewcommand{\topfraction}{.9}
+\setcounter{bottomnumber}{0}
+\renewcommand{\floatpagefraction}{.8}
+
+\ifdefined\@placement%
+  \let\@figure@\figure%
+  \let\@end@figure@\endfigure%
+  \renewenvironment{figure}[1][tbp]{%
+    \@figure@[#1]\centering%
+    }{%
+    \@end@figure@%
+    }%
+  \let\@table@\table%
+  \let\@end@table@\endtable%
+  \renewenvironment{table}[1][tbp]{%
+    \@table@[#1]\centering%
+  }{%
+    \@end@table@%
+  }%
+\else%
+  \let\@figure@\figure%
+  \let\@end@figure@\endfigure%
+  \renewenvironment{figure}[1][]{%
+    \@figure@\centering%
+  }{%
+    \@end@figure@%
+  }%
+  \let\@table@\table%
+  \let\@end@table@\endtable%
+  \renewenvironment{table}[1][]{%
+    \@table@\centering%
+  }{%
+    \@end@table@%
+  }
+\fi%
+
+\RequirePackage[subrefformat = parens]{subcaption}
+\captionsetup{font=small}
+\captionsetup[sub]{font=small}
+\newcommand{\begin@subcaption@minipage}[2][b]{%
+  \caption@withoptargs\subcaption@minipage[#1]{#2}\centering\vskip 0pt%
+}
+\newenvironment{panels}[2][b]{%
+  \ifdim#2pt>1pt%
+    \newcommand{\panel}[1][b]{%
+      \endminipage\hfill\begin@subcaption@minipage[#1]{\linewidth/#2}%
+    }%
+    \begin@subcaption@minipage[#1]{\linewidth/#2}%
+  \else%
+    \newcommand{\panel}[2][b]{%
+      \endminipage\hfill\begin@subcaption@minipage[#1]{##2\linewidth}%
+    }%
+    \begin@subcaption@minipage[#1]{#2\linewidth}%
+  \fi%
+}{%
+  \endminipage%
+}
+
+\RequirePackage{booktabs}
+\RequirePackage{multirow}
+
+\RequirePackage{graphicx}
+\providecommand{\tikzsetnextfilename}[1]{}
+\newcommand{\graphic}[2][1]{%
+  \tikzsetnextfilename{#2}\centering\includegraphics[width=#1\linewidth]{#2}%
+}
+
+\date{}
+
+\author{}
+\AtEndOfClass{\newcommand{\email}[1]{%
+  \unskip\thanks{\href{mailto:#1}{\texttt{#1}}}%
+}}
+\RequirePackage{authblk}
+\renewcommand\Affilfont{\footnotesize}
+\newcommand{\affiliation}[2][]{\affil[#1]{\protecting{#2}}}
+
+\let\@preprint\relax
+\newcommand\preprint[1]{\long\gdef\@preprint{#1}}
+\RequirePackage{varwidth}
+\newcommand{\@preprint@box}{%
+  \begin{varwidth}{\textwidth}\textsc{\small\@preprint}\end{varwidth}%
+}
+\RequirePackage{atbegshi}
+\RequirePackage{picture}
+\AtBeginShipoutFirst{%
+  \put(
+    \textwidth+\oddsidemargin-\widthof{\@preprint@box},
+    -2pt-\topmargin-\heightof{\@preprint@box}
+  ){\normalfont\@preprint@box}
+}
+
+\let\old@abstract\abstract
+\renewcommand\abstract{\old@abstract\noindent\ignorespaces}
+
+\RequirePackage[sorting=none,style=numeric-comp,giveninits=true]{biblatex}
+\DeclareSourcemap{%
+  \maps[datatype=bibtex,overwrite=true]{%
+    \map{%
+      \step[fieldsource=Collaboration,final=true]%
+      \step[fieldset=usera,origfieldval,final=true]
+    }%
+    \map{%
+      \step[fieldsource=reportNumber,final=true]%
+      \step[fieldset=userb,origfieldval,final=true]
+    }%
+  }%
+}
+\renewbibmacro*{author}{%
+  \iffieldundef{usera}{\printnames{author}}{\textbf{\printfield{usera}}}%
+}
+\renewbibmacro*{in:}{%
+  \iffieldundef{journal}{}{\printtext{\bibstring{in}\intitlepunct}}%
+}
+\renewbibmacro*{finentry}{%
+  \iffieldundef{userb}{}{%
+    \textls[0]{\small{\textsc{%
+      \newunitpunct\textnumero\intitlepunct\printfield{userb}%
+    }}}%
+  }\finentry%
+}
+\let\old@printbibliography\printbibliography
+\renewcommand{\printbibliography}{\sloppy\old@printbibliography}
+
+\RequirePackage{hyperref}
+\hypersetup{
+  hidelinks,
+  linktoc=all,
+  pdfencoding=auto,
+  psdextra,
+  breaklinks=true,
+  pdfcreator={},
+  pdfproducer={}
+}
+\pdfstringdefDisableCommands{\def\varepsilon{\textepsilon}}
+\AtBeginDocument{
+  \pdfstringdefDisableCommands{\let\ensuremath\@gobble}
+  \pdfstringdefDisableCommands{\let\mathsurround\@gobble}
+  \pdfstringdefDisableCommands{\let\unskip\@gobble}
+  \pdfstringdefDisableCommands{\let\thanks\@gobble}
+  \pdfstringdefDisableCommands{\let\footnote\@gobble}
+  \pdfstringdefDisableCommands{\let\\\@gobble}
+  \hypersetup{
+    pdfauthor={\AB@authlist},
+    pdftitle={\@title}
+  }
+}
+
+\RequirePackage[noabbrev, capitalize, nameinlink]{cleveref}
+\crefname{enumi}{point}{points}
+
+\renewcommand\eqref{\no@break@before\labelcref}
+
+\let\old@subref\subref
+\renewcommand\subref{\no@break@before\old@subref}
+
+\let\old@cite\cite
+\renewcommand\cite{\no@break@before\old@cite}
+
+\DeclareRobustCommand{\labelcrefrange}[2]{\@crefrangenostar{labelcref}{#1}{#2}}
+
+\endinput
+%%
+%% End of file `hep-paper.sty'.
