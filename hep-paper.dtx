@@ -4,13 +4,13 @@
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
-% conditions of the LaTeX Project Public License, either version 1.3
+% conditions of the LaTeX Project Public License, either version 1.3c
 % of this license or (at your option) any later version.
 % The latest version of this license is in:
 %
 % http://www.latex-project.org/lppl.txt
 %
-% and version 1.3 or later is part of all distributions of LaTeX
+% and version 1.3c or later is part of all distributions of LaTeX
 % version 2005/12/01 or later.
 %
 % \fi
@@ -27,19 +27,15 @@
 
 \bibliography{bibliography}
 
-\DeclareFieldFormat{eprint:ctan}{%
-  CTAN\addcolon\space
-  \ifhyperref{\href{https://ctan.org/pkg/#1}{\nolinkurl{#1}}}{\nolinkurl{#1}}
-}
+\DeclareFieldFormat{eprint:ctan}{CTAN\addcolon\space\ifhyperref{\href{https://ctan.org/pkg/#1}{\nolinkurl{#1}}}{\nolinkurl{#1}}}
 \DeclareFieldAlias{eprint:CTAN}{eprint:ctan}
 
-\DeclareFieldFormat{eprint:github}{%
-  GitHub\addcolon\space
-  \ifhyperref{%
-    \href{https://github.com/\thefield{eprintclass}/#1}{\nolinkurl{\thefield{eprintclass}/#1}}}%
-    {\nolinkurl{\thefield{eprintclass}/#1}}%
-  }
+\DeclareFieldFormat{eprint:github}{GitHub\addcolon\space\ifhyperref{\href{https://github.com/\thefield{eprintclass}/#1}{\nolinkurl{\thefield{eprintclass}/#1}}}{\nolinkurl{\thefield{eprintclass}/#1}}}
 \DeclareFieldAlias{eprint:GitHub}{eprint:github}
+
+\newbibmacro*{related:online}[1]{\renewcommand*{\newunitpunct}{\addcomma\space}\entrydata{#1}{\usebibmacro{doi+eprint+url}}}
+\renewcommand*{\relatedpunct}{\addcolon\space}
+\renewcommand*{\relateddelim}{\adddot\space}
 
 \EnableCrossrefs
 \CodelineIndex
@@ -94,7 +90,7 @@
 %
 % \clearpage\tableofcontents\clearpage
 %
-% \newgeometry{scale=0.76,vmarginratio={3:4}, left=10em, marginparwidth=4.6cm, marginparsep=3mm}
+% \newgeometry{hscale=.75, vscale=.8, vmarginratio=3:4, includeheadfoot, left=10em, marginparwidth=4.6cm, marginparsep=3mm}
 %
 % \section{Introduction}
 %
@@ -103,7 +99,7 @@
 % | \documentclass{article}|\\
 % | \usepackage{hep-paper}|
 %
-% The most notable changes after loading the |hep-paper| package is the change of some LaTeX defaults.
+% The most notable changes after loading the |hep-paper| package \cite{hep-paper} is the change of some LaTeX defaults.
 % The paper and font sizes are set to A4 and \unit[11]{pt}, respectively.
 % Additionally, the paper geometry is set to the values known from the (depreciated) |a4wide| package \cite{a4wide} using the |geometry| package \cite{geometry}.
 % \footnote{Starting from this page the text of this document is additionally shifted to the right in order to facilitate a large left margin required by the |ltxdoc| package.
@@ -401,7 +397,7 @@
 %
 % Load the |geometry| package \cite{geometry} and adjust the text width and height to the values of the |a4wide| package \cite{a4wide}.
 %    \begin{macrocode}
-\RequirePackage[hscale=.76, vscale=.8, vmarginratio=3:4, includeheadfoot]{geometry}
+\RequirePackage[hscale=.75, vscale=.8, vmarginratio=3:4, includeheadfoot]{geometry}
 %    \end{macrocode}
 
 % \subsection{Text}
@@ -527,6 +523,25 @@
 %    \end{macrocode}
 % \end{macro}
 
+% \subsubsection{Math fonts}
+%
+% \begin{macro}{\mathsbf}
+% Load the |bm| package \cite{bm} for superior boldmath.
+% Make math symbols bold whenever they appear in bold macros such as title or subsection.
+%    \begin{macrocode}
+\RequirePackage{bm}
+\let\mathbf\bm
+\g@addto@macro\bfseries{\boldmath}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\mathsfit}
+% Define a italc sf math font.
+%    \begin{macrocode}
+\DeclareMathAlphabet{\mathsfit}{T1}{\sfdefault}{\mddefault}{\sldefault}
+\SetMathAlphabet{\mathsfit}{bold}{T1}{\sfdefault}{\bfdefault}{\sldefault}
+%    \end{macrocode}
+% \end{macro}
+
 % \subsubsection{Greek letters}
 %
 % Load the |fixmath| package \cite{fixmath} which makes upper Greek letters in math mode italic and load the |alphabeta| package \cite{alphabeta} which allows upright italic letters in text mode.
@@ -571,25 +586,6 @@
 \newcommand{\overleftright}[1]{\oset{\leftrightarrow}{#1}}
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
-
-% \subsubsection{Math fonts}
-%
-% \begin{macro}{\mathsbf}
-% Load the |bm| package \cite{bm} for superior boldmath.
-% Make math symbols bold whenever they appear in bold macros such as title or subsection.
-%    \begin{macrocode}
-\RequirePackage{bm}
-\let\mathbf\bm
-\g@addto@macro\bfseries{\boldmath}
-%    \end{macrocode}
-% \end{macro}
-% \begin{macro}{\mathsfit}
-% Define a italc sf math font.
-%    \begin{macrocode}
-\DeclareMathAlphabet{\mathsfit}{T1}{\sfdefault}{\mddefault}{\sldefault}
-\SetMathAlphabet{\mathsfit}{bold}{T1}{\sfdefault}{\bfdefault}{\sldefault}
-%    \end{macrocode}
 % \end{macro}
 
 % \subsection{Floats}
@@ -717,7 +713,7 @@
 % Provide macro for the email of authors used as |\author{|$\langle name\rangle$| \email{|$\langle email\rangle$|}}|.
 %    \begin{macrocode}
 \AtEndOfClass{\newcommand{\email}[1]{%
-  \unskip\thanks{\href{mailto:#1}{\texttt{#1}}}%
+  \unskip\thanks{\href{mailto:#1}{\texttt{#1}}}
 }}
 %    \end{macrocode}
 % \end{macro}

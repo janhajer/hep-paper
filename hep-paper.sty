@@ -9,10 +9,10 @@
 %% Copyright (C) 2019-2020 by Jan Hajer
 %% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either
-%% version 1.3 of this license or (at your option) any later
+%% version 1.3c of this license or (at your option) any later
 %% version. The latest version of this license is in:
 %% http://www.latex-project.org/lppl.txt
-%% and version 1.3 or later is part of all distributions of
+%% and version 1.3c or later is part of all distributions of
 %% LaTeX version 2005/12/01 or later.
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesPackage{hep-paper}[2020/01/01 v1.1 Publications in High Energy Physics]
@@ -66,7 +66,7 @@
 \let\Huge\relax
 \input{size1\@ptsize.clo}
 
-\RequirePackage[hscale=.76, vscale=.8, vmarginratio=3:4, includeheadfoot]{geometry}
+\RequirePackage[hscale=.75, vscale=.8, vmarginratio=3:4, includeheadfoot]{geometry}
 
 \RequirePackage{ifluatex}
 \ifluatex
@@ -80,10 +80,10 @@
   \RequirePackage{textcomp}
   \RequirePackage[british]{babel}
 \fi
+\RequirePackage{csquotes}
 \RequirePackage{lmodern}
 \RequirePackage{microtype}
 
-\RequirePackage{csquotes}
 \RequirePackage[all,british]{foreign}
 \DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
 
@@ -120,6 +120,12 @@
 
 \AtEndOfClass{\let\i\undefined\DeclareMathOperator{\i}{i}}
 
+\RequirePackage{bm}
+\let\mathbf\bm
+\g@addto@macro\bfseries{\boldmath}
+\DeclareMathAlphabet{\mathsfit}{T1}{\sfdefault}{\mddefault}{\sldefault}
+\SetMathAlphabet{\mathsfit}{bold}{T1}{\sfdefault}{\bfdefault}{\sldefault}
+
 \RequirePackage{fixmath}
 \RequirePackage{alphabeta}
 
@@ -137,12 +143,6 @@
   }%
 }
 \newcommand{\overleftright}[1]{\oset{\leftrightarrow}{#1}}
-
-\RequirePackage{bm}
-\let\mathbf\bm
-\g@addto@macro\bfseries{\boldmath}
-\DeclareMathAlphabet{\mathsfit}{T1}{\sfdefault}{\mddefault}{\sldefault}
-\SetMathAlphabet{\mathsfit}{bold}{T1}{\sfdefault}{\bfdefault}{\sldefault}
 
 \renewcommand{\textfraction}{0.01}
 \setcounter{topnumber}{1}
@@ -217,7 +217,7 @@
 
 \author{}
 \AtEndOfClass{\newcommand{\email}[1]{%
-  \unskip\thanks{\href{mailto:#1}{\texttt{#1}}}%
+  \unskip\thanks{\href{mailto:#1}{\texttt{#1}}}
 }}
 \RequirePackage{authblk}
 \renewcommand\Affilfont{\footnotesize}
