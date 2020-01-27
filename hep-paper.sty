@@ -51,38 +51,90 @@
 \DeclareOption{11pt}{\renewcommand\@ptsize{1}}
 \DeclareOption{12pt}{\renewcommand\@ptsize{2}}
 
-\DeclareOption{placement}{\def\@placement}
+\newif\if@placement@\DeclareOption{placement}{\@placement@true}
+\newif\if@no@bib@\DeclareOption{nobib}{\@no@bib@true}
+\newif\if@sans@serif@\DeclareOption{sansserif}{\@sans@serif@true}
+\newif\if@keep@default@\DeclareOption{keepdefault}{\@keep@default@true}
+\newif\if@par@skip@\DeclareOption{parskip}{\@par@skip@true}
+\newif\if@eqn@array@\DeclareOption{eqnarray}{\@eqn@array@true}
 
-\ExecuteOptions{a4paper,11pt}
+\if@keep@default@\else
+  \ExecuteOptions{a4paper, 11pt}
+\fi
 \ProcessOptions\relax
-\let\small\relax
-\let\footnotesize\relax
-\let\scriptsize\relax
-\let\tiny\relax
-\let\large\relax
-\let\Large\relax
-\let\LARGE\relax
-\let\huge\relax
-\let\Huge\relax
-\input{size1\@ptsize.clo}
 
-\RequirePackage[hscale=.75, vscale=.8, vmarginratio=3:4, includeheadfoot]{geometry}
+\if@keep@default@\else
+  \let\small\relax
+  \let\footnotesize\relax
+  \let\scriptsize\relax
+  \let\tiny\relax
+  \let\large\relax
+  \let\Large\relax
+  \let\LARGE\relax
+  \let\huge\relax
+  \let\Huge\relax
+  \input{size1\@ptsize.clo}
+\fi
+
+\if@keep@default@\else
+  \RequirePackage{geometry}
+  \geometry{hscale=.75, vscale=.8, vmarginratio=3:4, includeheadfoot}
+\fi
+
+\usepackage{parskip}
+\newcommand{\useparskip}{%
+  \setlength{\parskip}{.5\baselineskip plus 2pt}%
+  \setlength{\parindent}{0pt}%
+}
+\newcommand{\useparindent}{%
+  \setlength{\parskip}{0pt}%
+  \setlength{\parindent}{15pt}%
+}
+\if@par@skip@\else\useparindent\fi
 
 \RequirePackage{ifluatex}
-\ifluatex
-  \RequirePackage{fontspec}
-  \defaultfontfeatures{Ligatures=TeX}
+\RequirePackage{ifxetex}
+\newif\ifxetexorluatex
+\ifxetex\xetexorluatextrue\else
+  \ifluatex\xetexorluatextrue
+    \else\xetexorluatexfalse
+  \fi
+\fi
+
+\RequirePackage{alphabeta}
+\ifxetex\def\@encoding{EU1}
+  \else\ifluatex
+    \def\@encoding{EU2}
+  \else\def\@encoding{T1}
+  \fi
+\fi
+\RequirePackage[\@encoding]{fontenc}
+\RequirePackage{lmodern}
+\RequirePackage{textcomp}
+\RequirePackage{microtype}
+
+\ifxetexorluatex
+  \DeclareFontShape{TU}{lmss}{bx}{sc}{<->cmssbxcsc10}{}
+  \DeclareFontShape{TU}{lmss}{m}{sc}{<-9>cmsscsc8<9-10>cmsscsc9<10->cmsscsc10}{}
+\else
+  \sffamily
+  \DeclareFontShape{\@encoding}{lmss}{bx}{sc}{<->ssub*xcmss/bx/sc}{}
+  \DeclareFontShape{\@encoding}{lmss}{m}{sc}{<->ssub*xcmss/m/sc}{}
+\fi
+
+\ifxetexorluatex
   \RequirePackage{polyglossia}
-  \setmainlanguage{british}
+  \setmainlanguage{english}
 \else
   \RequirePackage[utf8]{inputenc}
-  \RequirePackage[T1]{fontenc}
-  \RequirePackage{textcomp}
   \RequirePackage[british]{babel}
 \fi
 \RequirePackage{csquotes}
-\RequirePackage{lmodern}
-\RequirePackage{microtype}
+
+\if@sans@serif@
+\sffamily
+\renewcommand{\familydefault}{\sfdefault}
+\fi
 
 \RequirePackage[all,british]{foreign}
 \DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
@@ -94,6 +146,8 @@
 \def\sloppy{%
   \emergencystretch 3em \hfuzz .5\p@ \vfuzz\hfuzz%
 }
+
+\newcommand{\online}[2]{\href{#1}{\url{#2}}}
 
 \newcommand\no@break@before{%
   \relax\ifvmode\else%
@@ -120,14 +174,30 @@
 
 \AtEndOfClass{\let\i\undefined\DeclareMathOperator{\i}{i}}
 
+\if@eqn@array@\else%
+  \let\eqnarray\@undefined
+  \let\endeqnarray\@undefined
+\fi
+
 \RequirePackage{bm}
 \let\mathbf\bm
 \g@addto@macro\bfseries{\boldmath}
-\DeclareMathAlphabet{\mathsfit}{T1}{\sfdefault}{\mddefault}{\sldefault}
-\SetMathAlphabet{\mathsfit}{bold}{T1}{\sfdefault}{\bfdefault}{\sldefault}
+\DeclareMathAlphabet{\mathup}{\@encoding}{\familydefault}{\mddefault}{\updefault}
+\SetMathAlphabet{\mathup}{bold}{\@encoding}{\familydefault}{\bfdefault}{\updefault}
+\if@sans@serif@
+\renewcommand\mathsf[1]{#1}
+\newcommand\mathsfup[1]{\mathup{#1}}
+\else
+\DeclareMathAlphabet{\mathsf}{\@encoding}{\sfdefault}{\mddefault}{\sldefault}
+\SetMathAlphabet{\mathsf}{bold}{\@encoding}{\sfdefault}{\bfdefault}{\sldefault}
+\DeclareMathAlphabet{\mathsfup}{\@encoding}{\sfdefault}{\mddefault}{\updefault}
+\SetMathAlphabet{\mathsfup}{bold}{\@encoding}{\sfdefault}{\bfdefault}{\updefault}
+\fi
 
 \RequirePackage{fixmath}
-\RequirePackage{alphabeta}
+\if@sans@serif@
+\RequirePackage[slantedGreek]{sfmath}
+\fi
 
 \RequirePackage{physics}
 \RequirePackage{slashed}
@@ -138,7 +208,10 @@
 \newcommand{\oset}[3][-1pt]{%
   \raisebox{1pt}{%
     \ensuremath{
-      \mathop{#3}\limits^{\vbox to#1{\kern-2\ex@\hbox{$\scriptscriptstyle#2$}\vss}}%
+      \mathop{#3}%
+      \limits^{%
+        \vbox to#1{\kern-2\ex@\hbox{$\scriptscriptstyle#2$}\vss}%
+      }%
     }%
   }%
 }
@@ -150,7 +223,7 @@
 \setcounter{bottomnumber}{0}
 \renewcommand{\floatpagefraction}{.8}
 
-\ifdefined\@placement%
+\if@placement@%
   \let\@figure@\figure%
   \let\@end@figure@\endfigure%
   \renewenvironment{figure}[1][tbp]{%
@@ -241,6 +314,7 @@
 \let\old@abstract\abstract
 \renewcommand\abstract{\old@abstract\noindent\ignorespaces}
 
+\if@no@bib@\else%
 \RequirePackage[sorting=none,style=numeric-comp,giveninits=true]{biblatex}
 \DeclareSourcemap{%
   \maps[datatype=bibtex,overwrite=true]{%
@@ -254,12 +328,15 @@
     }%
   }%
 }
+
 \renewbibmacro*{author}{%
   \iffieldundef{usera}{\printnames{author}}{\textbf{\printfield{usera}}}%
 }
+
 \renewbibmacro*{in:}{%
   \iffieldundef{journal}{}{\printtext{\bibstring{in}\intitlepunct}}%
 }
+
 \renewbibmacro*{finentry}{%
   \iffieldundef{userb}{}{%
     \textls[0]{\small{\textsc{%
@@ -267,8 +344,57 @@
     }}}%
   }\finentry%
 }
+
+\renewbibmacro*{related:default}[1]{%
+  \renewcommand*{\newunitpunct}{\addcomma\space}%
+  \entrydata{#1}{\usebibmacro{doi+eprint+url}}%
+}
+\renewcommand*{\relatedpunct}{\addcolon\space}
+\renewcommand*{\relateddelim}{\adddot\space}
+
+\DeclareFieldFormat{eprint:ctan}{%
+  CTAN\addcolon\space%
+    \ifhyperref{%
+      \href{https://ctan.org/pkg/#1}{\nolinkurl{#1}}%
+    }{%
+      \nolinkurl{#1}}%
+  }
+\DeclareFieldAlias{eprint:CTAN}{eprint:ctan}
+
+\DeclareFieldFormat{eprint:github}{%
+  GitHub\addcolon\space
+  \ifhyperref{%
+    \href{%
+      https://github.com/\thefield{eprintclass}/#1%
+    }{%
+      \nolinkurl{\thefield{eprintclass}/#1}%
+    }%
+  }{%
+    \nolinkurl{\thefield{eprintclass}/#1}}%
+  }
+\DeclareFieldAlias{eprint:GitHub}{eprint:github}
+
+\DeclareFieldFormat{eprint:sourceforge}{%
+  SourceForge\addcolon\space%
+    \ifhyperref{%
+      \href{https://sourceforge.net/projects/#1}{\nolinkurl{#1}}%
+    }{%
+      \nolinkurl{#1}}%
+  }
+\DeclareFieldAlias{eprint:SourceForge}{eprint:sourceforge}
+
+\DeclareFieldFormat{eprint:hepforge}{%
+  HEPForge\addcolon\space%
+    \ifhyperref{%
+      \href{https://#1/hepforge.org/}{\nolinkurl{#1}}%
+    }{%
+      \nolinkurl{#1}}%
+  }
+\DeclareFieldAlias{eprint:HEPForge}{eprint:hepforge}
+
 \let\old@printbibliography\printbibliography
 \renewcommand{\printbibliography}{\sloppy\old@printbibliography}
+\fi
 
 \RequirePackage{hyperref}
 \hypersetup{
@@ -296,6 +422,9 @@
 
 \RequirePackage[noabbrev, capitalize, nameinlink]{cleveref}
 \crefname{enumi}{point}{points}
+\Crefname{enumi}{Point}{Points}
+
+\AtBeginDocument{\renewcommand\ref{\no@break@before\labelcref}}
 
 \renewcommand\eqref{\no@break@before\labelcref}
 

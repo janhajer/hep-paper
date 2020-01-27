@@ -22,20 +22,9 @@
 %<*driver>
 \documentclass{ltxdoc}
 
-\usepackage{hep-paper}
-\usepackage{parskip}
+\usepackage[parskip]{hep-paper}
 
 \bibliography{bibliography}
-
-\DeclareFieldFormat{eprint:ctan}{CTAN\addcolon\space\ifhyperref{\href{https://ctan.org/pkg/#1}{\nolinkurl{#1}}}{\nolinkurl{#1}}}
-\DeclareFieldAlias{eprint:CTAN}{eprint:ctan}
-
-\DeclareFieldFormat{eprint:github}{GitHub\addcolon\space\ifhyperref{\href{https://github.com/\thefield{eprintclass}/#1}{\nolinkurl{\thefield{eprintclass}/#1}}}{\nolinkurl{\thefield{eprintclass}/#1}}}
-\DeclareFieldAlias{eprint:GitHub}{eprint:github}
-
-\newbibmacro*{related:online}[1]{\renewcommand*{\newunitpunct}{\addcomma\space}\entrydata{#1}{\usebibmacro{doi+eprint+url}}}
-\renewcommand*{\relatedpunct}{\addcolon\space}
-\renewcommand*{\relateddelim}{\adddot\space}
 
 \EnableCrossrefs
 \CodelineIndex
@@ -46,7 +35,7 @@
 %</driver>
 % \fi
 %
-% \CheckSum{442}
+% \CheckSum{0}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -96,20 +85,39 @@
 %
 % For usual publications it is enough to load additionally to the |article| class without optional arguments only the |hep-paper| package.
 %
-% | \documentclass{article}|\\
-% | \usepackage{hep-paper}|
+% | \documentclass|\oarg{options}|{article}|\\
+% | \usepackage|\oarg{options}|{hep-paper}|
 %
 % The most notable changes after loading the |hep-paper| package \cite{hep-paper} is the change of some LaTeX defaults.
+% Additionally, the font is changed to |lmodern| \cite{lmodern} with |microtype| \cite{microtype} optimizations.
+% Hyperlinks of the |hyperref| package \cite{hyperref} are activated and hidden.
+% Hyphenation is provided by the |babel| \cite{babel} and |polyglossia| \cite{polyglossia} packages in the case of normal TeX and LuaTeX, receptively.
+% Finally, quotation commands are provided by the recommended |csquotes| package \cite{csquotes}.
+% \DescribeMacro{\MakeOuterQuote}
+% The last package provides the convenient macro |\MakeOuterQuote{"}| allowing to simply use |"| instead of the pair |``| and |''|.
+%
+% \subsection{Options}
+%
+% \DescribeMacro{keep defaults}
 % The paper and font sizes are set to A4 and \unit[11]{pt}, respectively.
 % Additionally, the paper geometry is set to the values known from the (depreciated) |a4wide| package \cite{a4wide} using the |geometry| package \cite{geometry}.
 % \footnote{Starting from this page the text of this document is additionally shifted to the right in order to facilitate a large left margin required by the |ltxdoc| package.
 % This combination leads to a less than optimal page layout.}
-% The font is changed to |lmodern| \cite{lmodern} with |microtype| \cite{microtype} optimizations.
-% Hyperlinks of the |hyperref| package \cite{hyperref} are activated and hidden.
-% Hyphenation is provided by the |babel| \cite{babel} and |polyglossia| \cite{polyglossia} packages in the case of normal TeX and LuaTeX repectively.
-% Finally, quotation commands are provided by the recommended |csquotes| package \cite{csquotes}.
-% \DescribeMacro{\MakeOuterQuote}
-% The last package provides the convenient macro |\MakeOuterQuote{"}| allowing to simply use |"| instead of the pair |``| and |''|.
+% The |keep defaults| option prevents the adjustment of the page geometry and the font size.
+%
+% \DescribeMacro{par skip}
+% The |par skip| option makes use of the |parskip| package \cite{parskip} and changes how two paragraph are separated from each other.
+% The LaTeX default is separation via indentation the |par skip| option switches to separation via vertical space.
+% \footnote{This option is used for this document.}
+%
+% \DescribeMacro{sans serif}
+% The |sans serif| option ensures that text and math is typeset in sans serif.
+%
+% \DescribeMacro{placement}
+% The |placement| option overwrites all manual float placement.
+%
+% \DescribeMacro{no  bib}
+% The |no bib| option prevents the |biblatex| package \cite{biblatex} from being loaded.
 %
 % \section{Macros and environments}
 %
@@ -123,15 +131,16 @@
 % The following lines add \eg two authors with different affiliations
 %
 % | \author[1]{Author one \email{Email one}}|\\
-% | \affiliation{Affiliation one}|\\
+% | \affiliation[1]{Affiliation one}|\\
 % | \author[2]{Author two \email{Email two}}|\\
 % | \affiliation[1,2]{Affiliation two}|
 %
 % \DescribeMacro{\preprint}
-% The |\preprint|\marg{text} macro places a preprint number in the upper right corner of the title page.
+% The |\preprint|\marg{numer} macro places a pre-print number in the upper right corner of the title page.
 % The PDF meta information is set according to the |\title|\marg{text} and |\author|\marg{text} information.
+%
 % \DescribeEnv{abstract}
-% The |abstract| environment has been adjusted to not start with identation.
+% The |abstract| environment has been adjusted to not start with indentation.
 %
 % \subsection{References and footnotes}
 %
@@ -139,16 +148,17 @@
 % \DescribeMacro{\ie}
 % The |foreign| package \cite{foreign} defines macros such as |\eg|, |\ie|, and |\cf| which are typeset as \eg, \ie, and \cf.
 
+% \DescribeMacro{\cref}
+% References are extended with the |cleveref| package \cite{cleveref}, which allows to \eg write just |\cref|\marg{key}  in order to get 'Figure 1'.
+% The |cleveref| package furthermore allows to reference multiple objects within one |\cref|\marg{key} (similar to the |\cite|\marg{key} macro).
+%
 % \DescribeMacro{\ref}
 % \DescribeMacro{\cite}
-% References and citations are adjusted to not start on a new line in order to avoid the repeated use of |~\ref|\marg{text} and |~\cite|\marg{text}.
-%
-% \DescribeMacro{\cref}
-% References are extended with the |cleveref| package \cite{cleveref}, which allows to \eg write just |\cref|\marg{figure}  in order to get 'Figure 1'.
-% The |cleveref| package furthermore allows to reference multiple objects within one |\cref|\marg{text} (similar to the |\cite|\marg{text} macro).
+% References and citations are adjusted to not start on a new line in order to avoid the repeated use of |~\ref|\marg{key} and |~\cite|\marg{key}.
+% Additionally, |\ref| is redefined in order to handle multiple references at once.
 %
 % \DescribeMacro{\eqref}
-% The |\eqref|\marg{text} macro is also adjusted to not start on a new line and be able to reference multiple equations at once.
+% The |\eqref|\marg{key} macro is also adjusted to not start on a new line and be able to reference multiple equations at once.
 %
 % \DescribeMacro{\footnote}
 % Footnotes are adjusted to swallow white space before the footnote mark and at the beginning of the footnote text.
@@ -159,14 +169,22 @@
 % They in turn load the |amsmath| \cite{amsmath} and |amsfonts| \cite{amsfonts} packages.
 % \DescribeMacro{\mathbf}
 % Bold math, including |\mathbf| is provided by the |bm| package \cite{bm}.
+% ($ A  B  C \mathbf A \mathbf B \mathbf C$).
 % Macros switching to |bfseries| such as |\title|\marg{text} and |\section|\marg{text} are ensured to also typeset math in bold.
 % This may cause trouble if bold symbols carry an additional non-implicit meaning.
-% \DescribeMacro{\mathsfit}
-% Add an additional math italic sf font $\mathsfit A \mathsfit B \mathsfit C$ $\bm {\mathsfit A} \bm{\mathsfit B} \bm{\mathsfit C}$
+% \DescribeMacro{\mathup}
+% An upright math alphabet is defined.
+% ($\mathup A \mathup B \mathup C \mathbf{\mathup A} \mathbf{\mathup B} \mathbf{\mathup C}$).
+% \DescribeMacro{\mathsf}
+% The math sans serif alphabet is redefined to be italic.
+% ($\mathsf A \mathsf B \mathsf C \mathbf{\mathsf A} \mathbf{\mathsf B} \mathbf{\mathsf C}$).
+% \DescribeMacro{\mathsfup}
+% An upright sans serif math alphabet is defined.
+% ($\mathsfup A \mathsfup B \mathsfup C \mathbf{\mathsfup A} \mathbf{\mathsfup B} \mathbf{\mathsfup C}$).
 %
 % \DescribeMacro{\text}
 % The |\text|\marg{text} macro makes it possible to write text within math mode.
-% The often used |\mathrm|\marg{text} and |\rm|\marg{text} macros are \emph{not} the right tool for this purpose.
+% The often used |\mathrm|\marg{text} and |\rm|\marg{text} macros are \emph{not} the right tool for this purpose, as they only switch to roman font.
 %
 % \DescribeMacro{\nicefrac}
 % \DescribeMacro{\flatfrac}
@@ -176,7 +194,7 @@
 % \frac12 \ ,&& \nicefrac 12 \ ,&& \flatfrac 12\ .
 % \end{align}
 % \DescribeMacro{\numberwithin}
-% For longer paper it can be useful to re-number the equation in accordance with the section |\numberwithin{equation}{section}|.
+% For longer paper it can be useful to re-number the equation in accordance with the section numbering |\numberwithin{equation}{section}|.
 % \DescribeMacro{\subequations}
 % In order to further reduce the size the of equation counter it can be useful to wrap |align| environments with multiple rows in a |subequations| environment.
 %
@@ -189,10 +207,10 @@
 % \label{eq:greek}
 % \end{align}
 % and \eg to distinguish gauge $\nu$ and mass \nu\ eigenstates in models with massive light neutrinos.
-% Additionally, greek letters can now also typed directly using unicode.
+% Additionally, Greek letters can now also typed directly using Unicode.
 %
 % \DescribeMacro{\slashed}
-% The |\slashed|\marg{symbol} macro from the |slashed| \cite{slashed} package allows to use the Dirac slash notation.
+% The |\slashed|\marg{character} macro from the |slashed| \cite{slashed} package allows to use the Dirac slash notation.
 %
 % \DescribeMacro{\ev}
 % \DescribeMacro{\pdv}
@@ -250,8 +268,8 @@
 % \DescribeEnv{panels}
 % \DescribeMacro{\panel}
 % The |panels| environment makes use of the |subcaption| package \cite{subcaption}.
-% It provides subfloats and takes as mandatory argument either the number of subfloats (default 2) or the width of the first subfloat as fraction of the |\linewidth|.
-% Within the |\begin{panels}|\oarg{vert}\marg{width} environment the |\panel| macro initiates a new subfloat, in case that the width of the first subfloat has been given as an optional argument to the |panels| environment the |\panel|\marg{width} macro takes the width of the next subfloat as mandatory argument.
+% It provides sub-floats and takes as mandatory argument either the number of sub-floats (default 2) or the width of the first sub-float as fraction of the |\linewidth|.
+% Within the |\begin{panels}|\oarg{vert}\marg{width} environment the |\panel| macro initiates a new sub-float, in case that the width of the first sub-float has been given as an optional argument to the |panels| environment the |\panel|\marg{width} macro takes the width of the next sub-float as mandatory argument.
 % The example code is presented in \cref{tab:panels}.
 %
 % \DescribeEnv{tabular}
@@ -260,26 +278,29 @@
 % \DescribeMacro{\graphic}
 % \DescribeMacro{\graphicspath}
 % The |graphicx| package \cite{graphicx} is loaded and the |\graphic|\oarg{width}\marg{figure} macro is defined, which is a wrapper for the |\includegraphics|\marg{figure} macro and takes the figure width as fraction of the |\linewidth| as optional argument (default 1).
-% If the graphics are located in a subfolder its path can be indicated by |\graphicspath{{./|$\langle path\rangle$|/}}|.
+% If the graphics are located in a sub-folder its path can be indicated by |\graphicspath{{./|$\langle path\rangle$|/}}|.
 % \DescribeMacro{\raggedright}
 % The float environments have been adjusted to center their content.
-% The usual behaviour is reactived with |\raggedright|.
+% The usual behaviour is reactivated with |\raggedright|.
 %
 % \subsection{Bibliography}
 %
 % \DescribeMacro{\bibliography}
 % \DescribeMacro{\printbibliography}
-% For bibliography management the |biblatex| package \cite{biblatex} is loaded and extended to be able to cope with the |collaboration| and |report| fields provided by |inspire|.
+% For bibliography management the |biblatex| package \cite{biblatex} is loaded.
 % The user has to add the line |\bibliography|\marg{mybib} to the preamble of the document and |\printbibliography| at the end of the document.
 % The bibliography is generated by |biber| \cite{biber}.
+% |biblatex| is extended to be able to cope with the |collaboration| and |reportNumber| fields provided by \online{https://inspirehep.net}{inspirehep.net}.
+% Additionally, \online{https://ctan.org}{ctan.org}, \online{https://github.com}{github.com}, \online{https://sourceforge.net}{sourceforge.net}, and \online{https://hepforge.org}{hepforge.org} are recognized as |eprinttype|.
+% Finally, multiple |eprinttype|, |url|, and |doi| fields can be added using the |related| features provided by |biblatex|.
 %
 % \section{Conclusion}
 %
 % The majority of macros defined and packages loaded by this package are fairly lightweight and provide the author with the necessary tools to focus on the content instead of the layout.
 %
 % \DescribeMacro{arxiv-collector}
-% ArXiv requires the setup dependent |bbl| files instead of the original |bib| files, which causes trouble if the local LaTeX version differes from the one used by ArXiv.
-% The |arxiv-collector| python script \cite{arxiv-collector} alleviates this problem by collecting all files necessary for publication on ArXiv (including figures) .
+% ArXiv requires the setup dependent |bbl| files instead of the original |bib| files, which causes trouble if the local LaTeX version differs from the one used by arXiv.
+% The |arxiv-collector| python script \cite{arxiv-collector} alleviates this problem by collecting all files necessary for publication on arXiv (including figures) .
 %
 % \StopEventually{
 % \printbibliography
@@ -296,7 +317,7 @@
 % \subsubsection{Paper size}
 %
 % Redefine the article paper sizes options without any changes.
-% \paragraph{A4 paper}
+% A4 paper
 %    \begin{macrocode}
 \DeclareOption{a4paper}{%
   \setlength\paperheight{297mm}%
@@ -304,8 +325,7 @@
 }
 %    \end{macrocode}
 %
-% \paragraph{A5 paper}
-%
+% A5 paper
 %    \begin{macrocode}
 \DeclareOption{a5paper}{%
   \setlength\paperheight{210mm}%
@@ -313,7 +333,7 @@
 }
 %    \end{macrocode}
 %
-% \paragraph{B5 paper}
+% B5 paper
 %    \begin{macrocode}
 \DeclareOption{b5paper}{%
   \setlength\paperheight{250mm}%
@@ -321,7 +341,7 @@
 }
 %    \end{macrocode}
 %
-% \paragraph{Letter paper}
+% Letter paper
 %    \begin{macrocode}
 \DeclareOption{letterpaper}{%
   \setlength\paperheight{11in}%
@@ -329,7 +349,7 @@
 }
 %    \end{macrocode}
 %
-% \paragraph{Legal paper}
+% Legal paper
 %    \begin{macrocode}
 \DeclareOption{legalpaper}{%
   \setlength\paperheight{14in}%
@@ -337,7 +357,7 @@
 }
 %    \end{macrocode}
 %
-% \paragraph{Executive paper}
+% Executive paper
 %    \begin{macrocode}
 \DeclareOption{executivepaper}{%
   \setlength\paperheight{10.5in}%
@@ -366,66 +386,144 @@
 % \subsubsection{Placement}
 %
 %    \begin{macrocode}
-\DeclareOption{placement}{\def\@placement}
+\newif\if@placement@\DeclareOption{placement}{\@placement@true}
+\newif\if@no@bib@\DeclareOption{nobib}{\@no@bib@true}
+\newif\if@sans@serif@\DeclareOption{sansserif}{\@sans@serif@true}
+\newif\if@keep@default@\DeclareOption{keepdefault}{\@keep@default@true}
+\newif\if@par@skip@\DeclareOption{parskip}{\@par@skip@true}
+\newif\if@eqn@array@\DeclareOption{eqnarray}{\@eqn@array@true}
 %    \end{macrocode}
 
-% \subsubsection{Execute options}
+% \subsubsection{Execute and process options}
 %
 % Change the paper size to a4 and the font size to \unit[11]{pt}.
 %    \begin{macrocode}
-\ExecuteOptions{a4paper,11pt}
+\if@keep@default@\else
+  \ExecuteOptions{a4paper, 11pt}
+\fi
 \ProcessOptions\relax
 %    \end{macrocode}
-%
+
 % \subsection{Font size}
 %
 % Undefine previously defined font sizes and load the LaTeX font size file corresponding to the font size option loaded before.
 %    \begin{macrocode}
-\let\small\relax
-\let\footnotesize\relax
-\let\scriptsize\relax
-\let\tiny\relax
-\let\large\relax
-\let\Large\relax
-\let\LARGE\relax
-\let\huge\relax
-\let\Huge\relax
-\input{size1\@ptsize.clo}
+\if@keep@default@\else
+  \let\small\relax
+  \let\footnotesize\relax
+  \let\scriptsize\relax
+  \let\tiny\relax
+  \let\large\relax
+  \let\Large\relax
+  \let\LARGE\relax
+  \let\huge\relax
+  \let\Huge\relax
+  \input{size1\@ptsize.clo}
+\fi
 %    \end{macrocode}
 
 % \subsection{Geometry}
 %
 % Load the |geometry| package \cite{geometry} and adjust the text width and height to the values of the |a4wide| package \cite{a4wide}.
 %    \begin{macrocode}
-\RequirePackage[hscale=.75, vscale=.8, vmarginratio=3:4, includeheadfoot]{geometry}
+\if@keep@default@\else
+  \RequirePackage{geometry}
+  \geometry{hscale=.75, vscale=.8, vmarginratio=3:4, includeheadfoot}
+\fi
 %    \end{macrocode}
+
+%\begin{macro}{\useparskip}
+%\begin{macro}{\useparindent}
+% Load the |parskip| package \cite{parskip} and provide two commands switching between the two paragraph modes.
+%    \begin{macrocode}
+\usepackage{parskip}
+\newcommand{\useparskip}{%
+  \setlength{\parskip}{.5\baselineskip plus 2pt}%
+  \setlength{\parindent}{0pt}%
+}
+\newcommand{\useparindent}{%
+  \setlength{\parskip}{0pt}%
+  \setlength{\parindent}{15pt}%
+}
+\if@par@skip@\else\useparindent\fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+
+% \subsection{Engine}
+%
+% \begin{macro}{\ifxetexorluatex}
+% Load the |ifluatex| \cite{ifluatex} and |ifxetex| \cite{ifxetex} packages.
+% Define the new |\ifxetexorluatex| conditional.
+%    \begin{macrocode}
+\RequirePackage{ifluatex}
+\RequirePackage{ifxetex}
+\newif\ifxetexorluatex
+\ifxetex\xetexorluatextrue\else
+  \ifluatex\xetexorluatextrue
+    \else\xetexorluatexfalse
+  \fi
+\fi
+%    \end{macrocode}
+% \end{macro}
 
 % \subsection{Text}
 %
-% Load the |ifluatex| package \cite{ifluatex} and check if |lualatex| is being used.
-% In this case load the |fontspec| package \cite{fontspec} and the default font features together with the |polyglossia| package \cite{polyglossia}.
-% In the case of traditional LaTeX load the |inputenc| \cite{inputenc}, |fontenc| \cite{fontenc}, and |textcomp| \cite{textcomp} packages, in order to set the input and output properties of the font encoding and extend the known characters.
-% Additionally, load the the |babel| package \cite{babel} for hyphenation.
+% Load the |alphabeta| \cite{alphabeta} package first in order to archive the correct behaviour.
+% It provides upright italic letters in text mode.
+%    \begin{macrocode}
+\RequirePackage{alphabeta}
+%    \end{macrocode}
+%
+% Define |\@encoding| with the correct font encoding.
+% Load the |fontenc| package \cite{fontenc} with the correct encoding.
+%    \begin{macrocode}
+\ifxetex\def\@encoding{EU1}
+  \else\ifluatex
+    \def\@encoding{EU2}
+    \else\def\@encoding{T1}
+  \fi
+\fi
+\RequirePackage[\@encoding]{fontenc}
+%    \end{macrocode}
+% Load the |lmodern| font \cite{lmodern}, the |textcomp| extension \cite{textcomp}, and the |microtype| font optimization \cite{microtype}.
+%    \begin{macrocode}
+\RequirePackage{lmodern}
+\RequirePackage{textcomp}
+\RequirePackage{microtype}
+%    \end{macrocode}
+
+% Define sans serif small caps font shapes.
+%    \begin{macrocode}
+\ifxetexorluatex
+  \DeclareFontShape{TU}{lmss}{bx}{sc}{<->cmssbxcsc10}{}
+  \DeclareFontShape{TU}{lmss}{m}{sc}{<-9>cmsscsc8<9-10>cmsscsc9<10->cmsscsc10}{}
+\else
+  \sffamily
+  \DeclareFontShape{\@encoding}{lmss}{bx}{sc}{<->ssub*xcmss/bx/sc}{}
+  \DeclareFontShape{\@encoding}{lmss}{m}{sc}{<->ssub*xcmss/m/sc}{}
+\fi
+%    \end{macrocode}
+
+% Load the the |babel| \cite{babel} or |polyglossia| \cite{polyglossia} packages for hyphenation.
 % In both cases load also the recommended |csquotes| package \cite{csquotes}.
 %    \begin{macrocode}
-\RequirePackage{ifluatex}
-\ifluatex
-  \RequirePackage{fontspec}
-  \defaultfontfeatures{Ligatures=TeX}
+\ifxetexorluatex
   \RequirePackage{polyglossia}
-  \setmainlanguage{british}
+  \setmainlanguage{english}
 \else
   \RequirePackage[utf8]{inputenc}
-  \RequirePackage[T1]{fontenc}
-  \RequirePackage{textcomp}
   \RequirePackage[british]{babel}
 \fi
 \RequirePackage{csquotes}
 %    \end{macrocode}
-% Load the |lmodern| font, and the |microtype| font optimization.
+
+% Set the whole text to sans serif if requested.
 %    \begin{macrocode}
-\RequirePackage{lmodern}
-\RequirePackage{microtype}
+\if@sans@serif@
+\sffamily
+\renewcommand{\familydefault}{\sfdefault}
+\fi
 %    \end{macrocode}
 
 % \subsubsection{Text macros}
@@ -446,8 +544,8 @@
 %    \end{macrocode}
 % \end{macro}
 
-%\begin{macro}{\software}\label{test}
-% Define a macro for software with optional version information |\software|\oarg{version}\marg{text}.
+%\begin{macro}{\software}
+% Define a macro for software with optional version information |\software|\oarg{version}\marg{name}.
 %    \begin{macrocode}
 \newcommand{\software}[2][\hspace{-\fontdimen2\font}]{\texttt{#2}~#1}
 %    \end{macrocode}
@@ -459,6 +557,13 @@
 \def\sloppy{%
   \emergencystretch 3em \hfuzz .5\p@ \vfuzz\hfuzz%
 }
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\online}
+% The |\online| macro combines the features of the |\href| and the |\url| macros.
+%    \begin{macrocode}
+\newcommand{\online}[2]{\href{#1}{\url{#2}}}
 %    \end{macrocode}
 % \end{macro}
 
@@ -502,7 +607,7 @@
 %
 % Load the |mathtools| package \cite{mathtools} which loads the |amsmath| package \cite{amsmath}.
 % Additionally, load the |amssymb| package \cite{amsfonts} which provides further math symbols and also loads the |amsfont| package \cite{amsfonts}.
-% Allow pagebreaks within equations if necessary.
+% Allow page breaks within equations if necessary.
 %    \begin{macrocode}
 \RequirePackage{mathtools}
 \RequirePackage{amssymb}
@@ -523,9 +628,19 @@
 %    \end{macrocode}
 % \end{macro}
 
+% \begin{macro}{eqnarray}
+% Undefine the |eqnarray| environment.
+%    \begin{macrocode}
+\if@eqn@array@\else%
+  \let\eqnarray\@undefined
+  \let\endeqnarray\@undefined
+\fi
+%    \end{macrocode}
+% \end{macro}
+
 % \subsubsection{Math fonts}
 %
-% \begin{macro}{\mathsbf}
+% \begin{macro}{\mathbf}
 % Load the |bm| package \cite{bm} for superior boldmath.
 % Make math symbols bold whenever they appear in bold macros such as title or subsection.
 %    \begin{macrocode}
@@ -534,20 +649,41 @@
 \g@addto@macro\bfseries{\boldmath}
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\mathsfit}
-% Define a italc sf math font.
+% \begin{macro}{\mathup}
+% Define an upright math font.
 %    \begin{macrocode}
-\DeclareMathAlphabet{\mathsfit}{T1}{\sfdefault}{\mddefault}{\sldefault}
-\SetMathAlphabet{\mathsfit}{bold}{T1}{\sfdefault}{\bfdefault}{\sldefault}
+\DeclareMathAlphabet{\mathup}{\@encoding}{\familydefault}{\mddefault}{\updefault}
+\SetMathAlphabet{\mathup}{bold}{\@encoding}{\familydefault}{\bfdefault}{\updefault}
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\mathsf}
+% \begin{macro}{\mathsfup}
+% Redefine the mathsf font to be italic and define an upright mathsf font.
+%    \begin{macrocode}
+\if@sans@serif@
+  \renewcommand\mathsf[1]{#1}
+  \newcommand\mathsfup[1]{\mathup{#1}}
+\else
+  \DeclareMathAlphabet{\mathsf}{\@encoding}{\sfdefault}{\mddefault}{\sldefault}
+  \SetMathAlphabet{\mathsf}{bold}{\@encoding}{\sfdefault}{\bfdefault}{\sldefault}
+  \DeclareMathAlphabet{\mathsfup}{\@encoding}{\sfdefault}{\mddefault}{\updefault}
+  \SetMathAlphabet{\mathsfup}{bold}{\@encoding}{\sfdefault}{\bfdefault}{\updefault}
+\fi
+%    \end{macrocode}
+% \end{macro}
 % \end{macro}
 
 % \subsubsection{Greek letters}
 %
-% Load the |fixmath| package \cite{fixmath} which makes upper Greek letters in math mode italic and load the |alphabeta| package \cite{alphabeta} which allows upright italic letters in text mode.
+% Load the |fixmath| package \cite{fixmath} which makes upper Greek letters in math mode italic.
 %    \begin{macrocode}
 \RequirePackage{fixmath}
-\RequirePackage{alphabeta}
+%    \end{macrocode}
+% Ensure that also math is sans serif if the option sans serif is passed to the package
+%    \begin{macrocode}
+\if@sans@serif@
+  \RequirePackage[slantedGreek]{sfmath}
+\fi
 %    \end{macrocode}
 
 % \subsubsection{Physics notation}
@@ -579,7 +715,10 @@
 \newcommand{\oset}[3][-1pt]{%
   \raisebox{1pt}{%
     \ensuremath{
-      \mathop{#3}\limits^{\vbox to#1{\kern-2\ex@\hbox{$\scriptscriptstyle#2$}\vss}}%
+      \mathop{#3}%
+      \limits^{%
+        \vbox to#1{\kern-2\ex@\hbox{$\scriptscriptstyle#2$}\vss}%
+      }%
     }%
   }%
 }
@@ -603,7 +742,7 @@
 % \begin{environment}{table}
 % Ignore the manual placement if the |placement| option is set.
 %    \begin{macrocode}
-\ifdefined\@placement%
+\if@placement@%
   \let\@figure@\figure%
   \let\@end@figure@\endfigure%
   \renewenvironment{figure}[1][tbp]{%
@@ -638,7 +777,7 @@
 % \end{environment}
 % \end{environment}
 
-% \subsubsection{Subfloats}
+% \subsubsection{Sub-floats}
 %
 % \begin{environment}{panels}
 % \begin{macro}{\panel}
@@ -692,7 +831,7 @@
 %    \end{macrocode}
 % \end{macro}
 
-% \subsection{Titlepage}
+% \subsection{Title page}
 %
 % \begin{macro}{\date}
 % Allow empty date field.
@@ -753,7 +892,7 @@
 % \subsubsection{Abstract}
 %
 % \begin{environment}{abstract}
-% Adjust the |abstract| environment to not start with identation.
+% Adjust the |abstract| environment to not start with indentation.
 %    \begin{macrocode}
 \let\old@abstract\abstract
 \renewcommand\abstract{\old@abstract\noindent\ignorespaces}
@@ -764,9 +903,13 @@
 %
 % \begin{macro}{\bibliography}
 % Load the |biblatex| package \cite{biblatex} with a JHEP like bibliography style.
-% Add the collaboration and preprint information if present.
 %    \begin{macrocode}
+\if@no@bib@\else%
 \RequirePackage[sorting=none,style=numeric-comp,giveninits=true]{biblatex}
+%    \end{macrocode}
+% \end{macro}
+% Read the collaboration and pre-print information if present.
+%    \begin{macrocode}
 \DeclareSourcemap{%
   \maps[datatype=bibtex,overwrite=true]{%
     \map{%
@@ -779,12 +922,24 @@
     }%
   }%
 }
+%    \end{macrocode}
+
+% Override the author information with collaboration information if present.
+%    \begin{macrocode}
 \renewbibmacro*{author}{%
   \iffieldundef{usera}{\printnames{author}}{\textbf{\printfield{usera}}}%
 }
+%    \end{macrocode}
+
+% Remove spurious `In:' if no journal is present.
+%    \begin{macrocode}
 \renewbibmacro*{in:}{%
   \iffieldundef{journal}{}{\printtext{\bibstring{in}\intitlepunct}}%
 }
+%    \end{macrocode}
+
+% Add the pre-print information if present.
+%    \begin{macrocode}
 \renewbibmacro*{finentry}{%
   \iffieldundef{userb}{}{%
     \textls[0]{\small{\textsc{%
@@ -793,18 +948,81 @@
   }\finentry%
 }
 %    \end{macrocode}
-% \end{macro}
+
+% Enable multiple DOIs, pre-prints and URLs via the |related| feature
+%    \begin{macrocode}
+\renewbibmacro*{related:default}[1]{%
+  \renewcommand*{\newunitpunct}{\addcomma\space}%
+  \entrydata{#1}{\usebibmacro{doi+eprint+url}}%
+}
+\renewcommand*{\relatedpunct}{\addcolon\space}
+\renewcommand*{\relateddelim}{\adddot\space}
+%    \end{macrocode}
+
+% Add CTAN as a pre-print option
+%    \begin{macrocode}
+\DeclareFieldFormat{eprint:ctan}{%
+  CTAN\addcolon\space%
+    \ifhyperref{%
+      \href{https://ctan.org/pkg/#1}{\nolinkurl{#1}}%
+    }{%
+      \nolinkurl{#1}}%
+  }
+\DeclareFieldAlias{eprint:CTAN}{eprint:ctan}
+%    \end{macrocode}
+
+% Add GitHub as a pre-print option
+%    \begin{macrocode}
+\DeclareFieldFormat{eprint:github}{%
+  GitHub\addcolon\space
+  \ifhyperref{%
+    \href{%
+      https://github.com/\thefield{eprintclass}/#1%
+    }{%
+      \nolinkurl{\thefield{eprintclass}/#1}%
+    }%
+  }{%
+    \nolinkurl{\thefield{eprintclass}/#1}}%
+  }
+\DeclareFieldAlias{eprint:GitHub}{eprint:github}
+%    \end{macrocode}
+
+% Add SourceForge as a pre-print option
+%    \begin{macrocode}
+\DeclareFieldFormat{eprint:sourceforge}{%
+  SourceForge\addcolon\space%
+    \ifhyperref{%
+      \href{https://sourceforge.net/projects/#1}{\nolinkurl{#1}}%
+    }{%
+      \nolinkurl{#1}}%
+  }
+\DeclareFieldAlias{eprint:SourceForge}{eprint:sourceforge}
+%    \end{macrocode}
+
+% Add HEPForge as a pre-print option
+%    \begin{macrocode}
+\DeclareFieldFormat{eprint:hepforge}{%
+  HEPForge\addcolon\space%
+    \ifhyperref{%
+      \href{https://#1/hepforge.org/}{\nolinkurl{#1}}%
+    }{%
+      \nolinkurl{#1}}%
+  }
+\DeclareFieldAlias{eprint:HEPForge}{eprint:hepforge}
+%    \end{macrocode}
+
 % \begin{macro}{\printbibliography}
 % Allow the bibliography to be printed sloppy \cf |\sloppy|
 %    \begin{macrocode}
 \let\old@printbibliography\printbibliography
 \renewcommand{\printbibliography}{\sloppy\old@printbibliography}
+\fi
 %    \end{macrocode}
 % \end{macro}
 
 % \subsection{Hyperlinks}
 %
-% Load the |hyperref| package \cite{hyperref} enable unicode encoding and hide links.
+% Load the |hyperref| package \cite{hyperref} enable Unicode encoding and hide links.
 %
 %    \begin{macrocode}
 \RequirePackage{hyperref}
@@ -839,23 +1057,31 @@
 % \subsection{References}
 %
 % \begin{macro}{\cref}
-% Improve reference using the |cleveref| package \cite{cleveref} and prevent preceding line breaks various reference macros.
+% Improve reference using the |cleveref| package \cite{cleveref}.
 %
 %    \begin{macrocode}
 \RequirePackage[noabbrev, capitalize, nameinlink]{cleveref}
 \crefname{enumi}{point}{points}
+\Crefname{enumi}{Point}{Points}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\ref}
+% Adjust |\ref|\marg{key} in order to prevent preceding line breaks and to enable the possibility to reference multiple references at once.
+%    \begin{macrocode}
+\AtBeginDocument{\renewcommand\ref{\no@break@before\labelcref}}
 %    \end{macrocode}
 % \end{macro}
 
 % \begin{macro}{\eqref}
-% Adjust |\eqref|\marg{ref} in order to prevent preceding line breaks and to enable the possibility to cite multiple equations at once.
+% Adjust |\eqref|\marg{key} in order to prevent preceding line breaks and to enable the possibility to reference multiple equations at once.
 %    \begin{macrocode}
 \renewcommand\eqref{\no@break@before\labelcref}
 %    \end{macrocode}
 % \end{macro}
 
 % \begin{macro}{\subref}
-% Adjust |\subref|\marg{ref} in order to prevent preceeding line breaks.
+% Adjust |\subref|\marg{key} in order to prevent preceding line breaks.
 %    \begin{macrocode}
 \let\old@subref\subref
 \renewcommand\subref{\no@break@before\old@subref}
@@ -863,7 +1089,7 @@
 % \end{macro}
 
 % \begin{macro}{\cite}
-% Adjust |\cite|\marg{ref} in order to prevent preceeding line breaks.
+% Adjust |\cite|\marg{key} in order to prevent preceding line breaks.
 %    \begin{macrocode}
 \let\old@cite\cite
 \renewcommand\cite{\no@break@before\old@cite}
@@ -871,7 +1097,7 @@
 % \end{macro}
 
 % \begin{macro}{\labelcrefrange}
-% Define the missing |\labelcrefrange|\marg{ref1}\marg{ref2} macro.
+% Define the missing |\labelcrefrange|\marg{key1}\marg{key2} macro.
 %    \begin{macrocode}
 \DeclareRobustCommand{\labelcrefrange}[2]{\@crefrangenostar{labelcref}{#1}{#2}}
 %    \end{macrocode}
