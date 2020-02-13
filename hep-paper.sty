@@ -15,82 +15,28 @@
 %% and version 1.3c or later is part of all distributions of
 %% LaTeX version 2005/12/01 or later.
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesPackage{hep-paper}[2020/01/01 v1.1 Publications in High Energy Physics]
+\ProvidesPackage{hep-paper}[2020/01/02 v1.2 Publications in High Energy Physics]
 
-\DeclareOption{a4paper}{%
-  \setlength\paperheight{297mm}%
-  \setlength\paperwidth{210mm}%
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=hep,
+  prefix=hep@
 }
-\DeclareOption{a5paper}{%
-  \setlength\paperheight{210mm}%
-  \setlength\paperwidth{148mm}%
-}
-\DeclareOption{b5paper}{%
-  \setlength\paperheight{250mm}%
-  \setlength\paperwidth{176mm}%
-}
-\DeclareOption{letterpaper}{%
-  \setlength\paperheight{11in}%
-  \setlength\paperwidth{8.5in}%
-}
-\DeclareOption{legalpaper}{%
-  \setlength\paperheight{14in}%
-  \setlength\paperwidth{8.5in}%
-}
-\DeclareOption{executivepaper}{%
-  \setlength\paperheight{10.5in}%
-  \setlength\paperwidth{7.25in}%
-}
-\DeclareOption{landscape}{%
-  \setlength\@tempdima{\paperheight}%
-  \setlength\paperheight{\paperwidth}%
-  \setlength\paperwidth{\@tempdima}%
-}
+\DeclareStringOption[a4]{paper}
+\newcommand*{\@paper}[1]{\setkeys{hep}{paper={#1}}}
+\DeclareStringOption[11pt]{font}
+\DeclareBoolOption[false]{defaults}
+\DeclareBoolOption[true]{parindent}
+\DeclareComplementaryOption{parskip}{parindent}
+\DeclareBoolOption[true]{serif}
+\DeclareComplementaryOption{sansserif}{serif}
+\DeclareStringOption[british]{language}
+\newcommand*{\@language}[1]{\setkeys{hep}{language={#1}}}
+\DeclareBoolOption[false]{eqnarray}
+\DeclareBoolOption[true]{bibliography}
+\DeclareBoolOption[true]{manual}
 
-\DeclareOption{10pt}{\renewcommand\@ptsize{0}}
-\DeclareOption{11pt}{\renewcommand\@ptsize{1}}
-\DeclareOption{12pt}{\renewcommand\@ptsize{2}}
-
-\newif\if@placement@\DeclareOption{placement}{\@placement@true}
-\newif\if@no@bib@\DeclareOption{nobib}{\@no@bib@true}
-\newif\if@sans@serif@\DeclareOption{sansserif}{\@sans@serif@true}
-\newif\if@keep@default@\DeclareOption{keepdefault}{\@keep@default@true}
-\newif\if@par@skip@\DeclareOption{parskip}{\@par@skip@true}
-\newif\if@eqn@array@\DeclareOption{eqnarray}{\@eqn@array@true}
-
-\if@keep@default@\else
-  \ExecuteOptions{a4paper, 11pt}
-\fi
-\ProcessOptions\relax
-
-\if@keep@default@\else
-  \let\small\relax
-  \let\footnotesize\relax
-  \let\scriptsize\relax
-  \let\tiny\relax
-  \let\large\relax
-  \let\Large\relax
-  \let\LARGE\relax
-  \let\huge\relax
-  \let\Huge\relax
-  \input{size1\@ptsize.clo}
-\fi
-
-\if@keep@default@\else
-  \RequirePackage{geometry}
-  \geometry{hscale=.75, vscale=.8, vmarginratio=3:4, includeheadfoot}
-\fi
-
-\usepackage{parskip}
-\newcommand{\useparskip}{%
-  \setlength{\parskip}{.5\baselineskip plus 2pt}%
-  \setlength{\parindent}{0pt}%
-}
-\newcommand{\useparindent}{%
-  \setlength{\parskip}{0pt}%
-  \setlength{\parindent}{15pt}%
-}
-\if@par@skip@\else\useparindent\fi
+\ProcessKeyvalOptions*
 
 \RequirePackage{ifluatex}
 \RequirePackage{ifxetex}
@@ -105,7 +51,7 @@
 \ifxetex\def\@encoding{EU1}
   \else\ifluatex
     \def\@encoding{EU2}
-  \else\def\@encoding{T1}
+    \else\def\@encoding{T1}
   \fi
 \fi
 \RequirePackage[\@encoding]{fontenc}
@@ -115,28 +61,42 @@
 
 \ifxetexorluatex
   \DeclareFontShape{TU}{lmss}{bx}{sc}{<->cmssbxcsc10}{}
-  \DeclareFontShape{TU}{lmss}{m}{sc}{<-9>cmsscsc8<9-10>cmsscsc9<10->cmsscsc10}{}
+  \DeclareFontShape{TU}{lmss}{m}{sc}{%
+    <-9>cmsscsc8<9-10>cmsscsc9<10->cmsscsc10%
+  }{}
 \else
   \sffamily
   \DeclareFontShape{\@encoding}{lmss}{bx}{sc}{<->ssub*xcmss/bx/sc}{}
   \DeclareFontShape{\@encoding}{lmss}{m}{sc}{<->ssub*xcmss/m/sc}{}
 \fi
 
-\ifxetexorluatex
-  \RequirePackage{polyglossia}
-  \setmainlanguage{english}
-\else
+\ifxetexorluatex\else
   \RequirePackage[utf8]{inputenc}
-  \RequirePackage[british]{babel}
 \fi
+\RequirePackage[\hep@language]{babel}
 \RequirePackage{csquotes}
 
-\if@sans@serif@
-\sffamily
-\renewcommand{\familydefault}{\sfdefault}
+\ifhep@serif\else
+  \sffamily
+  \renewcommand\familydefault{\sfdefault}
 \fi
 
-\RequirePackage[all,british]{foreign}
+\ifhep@defaults\else
+  \def\remove@pt#1pt{#1}
+  \edef\@ptsize{\expandafter\remove@pt\hep@font}
+  \let\small\relax
+  \let\footnotesize\relax
+  \let\scriptsize\relax
+  \let\tiny\relax
+  \let\large\relax
+  \let\Large\relax
+  \let\LARGE\relax
+  \let\huge\relax
+  \let\Huge\relax
+  \input{size\@ptsize.clo}
+\fi
+
+\RequirePackage[all, \hep@language]{foreign}
 \DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
 
 \newcommand{\no}[1]{\textnumero~#1}
@@ -166,15 +126,50 @@
 \let\@foot@note\footnote
 \renewcommand{\footnote}[1]{\unskip\@foot@note{\ignorespaces#1}}
 
+\ifhep@defaults\else
+  \RequirePackage[\hep@paper paper]{geometry}
+  \geometry{hscale=.75, vscale=.8, vmarginratio=3:4, includeheadfoot}
+\fi
+
+\usepackage{parskip}
+\newcommand{\useparskip}{%
+  \setlength{\parskip}{.5\baselineskip plus 2pt}%
+  \setlength{\parindent}{0pt}%
+}
+\newcommand{\useparindent}{%
+  \setlength{\parskip}{0pt}%
+  \setlength{\parindent}{15pt}%
+  \if@twocolumn
+  \setlength\parindent{1em}
+\else
+  \setlength\parindent{17\p@}
+\fi
+}
+\ifhep@parindent\useparindent\fi
+
 \RequirePackage{mathtools}
 \RequirePackage{amssymb}
 \allowdisplaybreaks[1]
 
 \DeclareMathOperator{\diag}{diag}
 
-\AtEndOfClass{\let\i\undefined\DeclareMathOperator{\i}{i}}
+\RequirePackage{xparse}
+\DeclareDocumentCommand{\mathdef}{mO{0}m}{%
+  \expandafter\let\csname old\string#1\endcsname=#1
+  \expandafter\newcommand\csname new\string#1\endcsname[#2]{#3}
+  \DeclareRobustCommand#1{%
+    \ifmmode
+      \expandafter\let\expandafter\next\csname new\string#1\endcsname
+    \else
+      \expandafter\let\expandafter\next\csname old\string#1\endcsname
+    \fi
+    \next
+  }%
+}
 
-\if@eqn@array@\else%
+\mathdef{\i}{\mathoperator{i}}
+
+\ifhep@eqnarray\else%
   \let\eqnarray\@undefined
   \let\endeqnarray\@undefined
 \fi
@@ -182,21 +177,23 @@
 \RequirePackage{bm}
 \let\mathbf\bm
 \g@addto@macro\bfseries{\boldmath}
-\DeclareMathAlphabet{\mathup}{\@encoding}{\familydefault}{\mddefault}{\updefault}
-\SetMathAlphabet{\mathup}{bold}{\@encoding}{\familydefault}{\bfdefault}{\updefault}
-\if@sans@serif@
-\renewcommand\mathsf[1]{#1}
-\newcommand\mathsfup[1]{\mathup{#1}}
+\ifhep@serif
+  \DeclareMathAlphabet{\mathsf}%
+    {\@encoding}{\sfdefault}{\mddefault}{\sldefault}
+  \SetMathAlphabet{\mathsf}%
+    {bold}{\@encoding}{\sfdefault}{\bfdefault}{\sldefault}
+  \DeclareMathAlphabet{\mathsfup}%
+    {\@encoding}{\sfdefault}{\mddefault}{\updefault}
+  \SetMathAlphabet{\mathsfup}%
+    {bold}{\@encoding}{\sfdefault}{\bfdefault}{\updefault}
 \else
-\DeclareMathAlphabet{\mathsf}{\@encoding}{\sfdefault}{\mddefault}{\sldefault}
-\SetMathAlphabet{\mathsf}{bold}{\@encoding}{\sfdefault}{\bfdefault}{\sldefault}
-\DeclareMathAlphabet{\mathsfup}{\@encoding}{\sfdefault}{\mddefault}{\updefault}
-\SetMathAlphabet{\mathsfup}{bold}{\@encoding}{\sfdefault}{\bfdefault}{\updefault}
+  \renewcommand\mathsf[1]{#1}
+  \newcommand\mathsfup[1]{\mathrm{#1}}
 \fi
 
 \RequirePackage{fixmath}
-\if@sans@serif@
-\RequirePackage[slantedGreek]{sfmath}
+\ifhep@serif\else
+  \RequirePackage[slantedGreek]{sfmath}
 \fi
 
 \RequirePackage{physics}
@@ -223,7 +220,7 @@
 \setcounter{bottomnumber}{0}
 \renewcommand{\floatpagefraction}{.8}
 
-\if@placement@%
+\ifhep@manual%
   \let\@figure@\figure%
   \let\@end@figure@\endfigure%
   \renewenvironment{figure}[1][tbp]{%
@@ -283,8 +280,10 @@
 \RequirePackage{graphicx}
 \providecommand{\tikzsetnextfilename}[1]{}
 \newcommand{\graphic}[2][1]{%
-  \tikzsetnextfilename{#2}\centering\includegraphics[width=#1\linewidth]{#2}%
+  \tikzsetnextfilename{#2}\centering%
+  \includegraphics[width=#1\linewidth]{#2}%
 }
+\newcommand{\relgraphicspath}[1]{\graphicspath{{./#1/}}}
 
 \date{}
 
@@ -294,7 +293,15 @@
 }}
 \RequirePackage{authblk}
 \renewcommand\Affilfont{\footnotesize}
-\newcommand{\affiliation}[2][]{\affil[#1]{\protecting{#2}}}
+\newcommand\active@comma{,\penalty-5\relax}
+\newcommand\cat@comma@active{\catcode`\,\active}
+{\cat@comma@active\gdef,{\active@comma}}
+\newcommand\@affiliation@@[1]{\endgroup\affil{#1}}
+\def\@affiliation@[#1]#2{\endgroup\affil[#1]{#2}}
+\DeclareRobustCommand\@affiliation{%
+  \@ifnextchar[{\@affiliation@}{\@affiliation@@}%
+}
+\newcommand{\affiliation}{\begingroup\cat@comma@active\@affiliation}
 
 \let\@preprint\relax
 \newcommand\preprint[1]{\long\gdef\@preprint{#1}}
@@ -314,8 +321,10 @@
 \let\old@abstract\abstract
 \renewcommand\abstract{\old@abstract\noindent\ignorespaces}
 
-\if@no@bib@\else%
+\ifhep@bibliography%
 \RequirePackage[sorting=none,style=numeric-comp,giveninits=true]{biblatex}
+\newcommand{\@reg@exp}{\regexp{\A(\p{L}+)?\d+(\p{L}+)?\Z}}
+\newcommand{\@reg@exp@}{\regexp{\A(\p{L}+)?(\d+)(\p{L}+)?\Z}}
 \DeclareSourcemap{%
   \maps[datatype=bibtex,overwrite=true]{%
     \map{%
@@ -326,6 +335,12 @@
       \step[fieldsource=reportNumber,final=true]%
       \step[fieldset=userb,origfieldval,final=true]
     }%
+    \map[overwrite]{
+      \step[fieldsource=volume, match=\@reg@exp, final]
+      \step[fieldsource=volume, match=\@reg@exp@, replace={$2}]
+      \step[fieldsource=journal, fieldtarget=journaltitle]
+      \step[fieldset=journaltitle, fieldvalue={\space$1$2}, append=true]
+    }
   }%
 }
 
@@ -434,7 +449,9 @@
 \let\old@cite\cite
 \renewcommand\cite{\no@break@before\old@cite}
 
-\DeclareRobustCommand{\labelcrefrange}[2]{\@crefrangenostar{labelcref}{#1}{#2}}
+\DeclareRobustCommand{\labelcrefrange}[2]{%
+  \@crefrangenostar{labelcref}{#1}{#2}%
+}
 
 \endinput
 %%

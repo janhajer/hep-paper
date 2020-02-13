@@ -17,13 +17,39 @@
 %
 % \iffalse
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-paper}[2020/01/01 v1.1 Publications in High Energy Physics]
+%<package>\ProvidesPackage{hep-paper}[2020/01/02 v1.2 Publications in High Energy Physics]
 %
 %<*driver>
 \documentclass{ltxdoc}
 
 \usepackage[parskip]{hep-paper}
 
+\makeatletter
+\newenvironment{decl}[1][]%
+    {\par\small\addvspace{4.5ex plus 1ex}%
+     \vskip -\parskip
+     \ifx\relax#1\relax
+        \def\@decl@date{}%
+     \else
+        \def\@decl@date{\NEWfeature{#1}}%
+     \fi
+     \noindent\hspace{-\leftmargini}%
+     \begin{tabular}{|l|}\hline\ignorespaces}%
+    {\\\hline\end{tabular}\nobreak\@decl@date\par\nobreak
+     \vspace{2.3ex}\vskip -\parskip}
+\newcommand{\NEWdescription}[1]{%
+   \hskip 1sp \marginpar{\small\sffamily\raggedright
+     New description\\#1}}
+\makeatother
+
+% \SetMathAlphabet{\mathsf}{normal}{OT1}{lmss}{m}{sl}
+% \SetMathAlphabet{\mathsf}{bold}{OT1}{lmss}{bx}{sl}
+%
+% \SetMathAlphabet{\mathsfup}{normal}{OT1}{lmss}{m}{n}
+% \SetMathAlphabet{\mathsfup}{bold}{OT1}{lmss}{bx}{n}
+\makeatletter
+
+\makeatother
 \bibliography{bibliography}
 
 \EnableCrossrefs
@@ -53,8 +79,9 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2019/01/01}{Initial version}
-% \changes{v1.1}{2020/01/01}{Minor tweaks}
+% \changes{v1.0}{2019/01/01}{Initial version of the style file}
+% \changes{v1.1}{2020/01/01}{Translation to a documented LaTeX source file}
+% \changes{v1.2}{2020/02/01}{Inclusion of package options}
 %
 % \GetFileInfo{hep-paper.sty}
 %
@@ -63,9 +90,9 @@
 % \DoNotIndex{\advance,\begingroup,\catcode,\closein}
 % \DoNotIndex{\closeout,\day,\def,\edef,\else,\empty,\endgroup}
 %
-% \title{The |hep-paper| package\thanks{This document corresponds to \protecting{|hep-paper|}~\fileversion, % dated \filedate.}}
+% \title{The |hep-paper| package\thanks{This document corresponds to \protecting{|hep-paper|}~\fileversion.}}
 % \author{Jan Hajer \email{jan.hajer@uclouvain.be}}
-% \affiliation{UCLouvain}
+% \affiliation{Centre for Cosmology, Particle Physics and Phenomenology, Université catholique de Louvain, Louvain-la-Neuve B-1348, Belgium}
 % \preprint{Preprint-Number}
 % \date{\today}
 % \date{\normalsize\filedate}
@@ -79,7 +106,7 @@
 %
 % \clearpage\tableofcontents\clearpage
 %
-% \newgeometry{hscale=.75, vscale=.8, vmarginratio=3:4, includeheadfoot, left=10em, marginparwidth=4.6cm, marginparsep=3mm}
+% \newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
 %
 % \section{Introduction}
 %
@@ -89,8 +116,10 @@
 % | \usepackage|\oarg{options}|{hep-paper}|
 %
 % The most notable changes after loading the |hep-paper| package \cite{hep-paper} is the change of some LaTeX defaults.
+% The paper and font sizes are set to A4 and \unit[11]{pt}, respectively.
+% Additionally, the paper geometry is set to the values known from the (depreciated) |a4wide| package \cite{a4wide} using the |geometry| package \cite{geometry}.
 % Additionally, the font is changed to |lmodern| \cite{lmodern} with |microtype| \cite{microtype} optimizations.
-% Hyperlinks of the |hyperref| package \cite{hyperref} are activated and hidden.
+% Hyperlinks are implemented by  the |hyperref| package \cite{hyperref} and hidden.
 % Hyphenation is provided by the |babel| \cite{babel} and |polyglossia| \cite{polyglossia} packages in the case of normal TeX and LuaTeX, receptively.
 % Finally, quotation commands are provided by the recommended |csquotes| package \cite{csquotes}.
 % \DescribeMacro{\MakeOuterQuote}
@@ -98,26 +127,44 @@
 %
 % \subsection{Options}
 %
-% \DescribeMacro{keep defaults}
-% The paper and font sizes are set to A4 and \unit[11]{pt}, respectively.
-% Additionally, the paper geometry is set to the values known from the (depreciated) |a4wide| package \cite{a4wide} using the |geometry| package \cite{geometry}.
-% \footnote{Starting from this page the text of this document is additionally shifted to the right in order to facilitate a large left margin required by the |ltxdoc| package.
-% This combination leads to a less than optimal page layout.}
-% The |keep defaults| option prevents the adjustment of the page geometry and the font size.
+% \DescribeMacro{paper}
+% The |paper=|\meta{format} option loads the specified paper format.
+% The format choices are:
+% |a0|, |a1|, |a2|, |a3|, |a4|, |a5|, |a6|,
+% |b0|, |b1|, |b2|, |b3|, |b4|, |b5|, |b6|,
+% |c0|, |c1|, |c2|, |c3|, |c4|, |c5|, |c6|,
+% |ansia|, |ansib|, |ansic|, |ansid|, |ansie|,
+% |letter|, |executive|, |legal|.
 %
-% \DescribeMacro{par skip}
-% The |par skip| option makes use of the |parskip| package \cite{parskip} and changes how two paragraph are separated from each other.
-% The LaTeX default is separation via indentation the |par skip| option switches to separation via vertical space.
-% \footnote{This option is used for this document.}
+% \DescribeMacro{font}
+% The |font=|\meta{size} option loads the specified font size.
+% The size choices are:
+% |8pt|, |9pt|, |10pt|, |11pt|, |12pt|, |14pt|, |17pt|, |20pt|.
 %
-% \DescribeMacro{sans serif}
-% The |sans serif| option ensures that text and math is typeset in sans serif.
+% \DescribeMacro{defaults}
+% The |defaults| option prevents the adjustment of the page geometry and the font size set by the document class.
+%
+% \DescribeMacro{language}
+% The |language|=\meta{name} option switches the document language to the chosen value.
+% The possible values are given by the |babel| package \cite{babel}.
+% The default is |british|.
+%
+% \DescribeMacro{parskip}
+% The |parskip| option makes use of the |parskip| package \cite{parskip} and changes how two paragraphs are separated from each other.
+% The LaTeX default is separation via indentation the |parskip| option switches to separation via vertical space.
+% \footnote{The |parskip| option is used for this document.}
+%
+% \DescribeMacro{sansserif}
+% The |sansserif| option switches the document including math to sans serif font shape.
 %
 % \DescribeMacro{placement}
-% The |placement| option overwrites all manual float placement.
+% The |placement| option turns manual float placement off.
 %
-% \DescribeMacro{no  bib}
-% The |no bib| option prevents the |biblatex| package \cite{biblatex} from being loaded.
+% \DescribeMacro{bibliography}
+% The |bibliography|=\meta{bool} option can prevent the |biblatex| package \cite{biblatex} from being loaded.
+%
+% \DescribeMacro{eqnarray}
+% The |eqnarray| option prevents the |eqnarray| environment from being undefined.
 %
 % \section{Macros and environments}
 %
@@ -149,13 +196,13 @@
 % The |foreign| package \cite{foreign} defines macros such as |\eg|, |\ie|, and |\cf| which are typeset as \eg, \ie, and \cf.
 
 % \DescribeMacro{\cref}
-% References are extended with the |cleveref| package \cite{cleveref}, which allows to \eg write just |\cref|\marg{key}  in order to get 'Figure 1'.
+% References are extended with the |cleveref| package \cite{cleveref}, which allows to \eg type just |\cref|\marg{key}  in order to write 'Figure 1'.
 % The |cleveref| package furthermore allows to reference multiple objects within one |\cref|\marg{key} (similar to the |\cite|\marg{key} macro).
 %
 % \DescribeMacro{\ref}
 % \DescribeMacro{\cite}
 % References and citations are adjusted to not start on a new line in order to avoid the repeated use of |~\ref|\marg{key} and |~\cite|\marg{key}.
-% Additionally, |\ref| is redefined in order to handle multiple references at once.
+% Additionally, |\ref|\marg{key} is redefined in order to handle multiple references at once.
 %
 % \DescribeMacro{\eqref}
 % The |\eqref|\marg{key} macro is also adjusted to not start on a new line and be able to reference multiple equations at once.
@@ -163,32 +210,42 @@
 % \DescribeMacro{\footnote}
 % Footnotes are adjusted to swallow white space before the footnote mark and at the beginning of the footnote text.
 %
+% \DescribeMacro{\useparskip}
+% Switch to |parskip| mode.
+%
+% \DescribeMacro{\useparindent}
+% Switch to |parindent| mode.
+%
 % \subsection{Math}
 %
 % The |mathtools| \cite{mathtools} and |amssymb| \cite{amsfonts} packages are loaded.
 % They in turn load the |amsmath| \cite{amsmath} and |amsfonts| \cite{amsfonts} packages.
 % \DescribeMacro{\mathbf}
 % Bold math, including |\mathbf| is provided by the |bm| package \cite{bm}.
-% ($ A  B  C \mathbf A \mathbf B \mathbf C$).
+% ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
 % Macros switching to |bfseries| such as |\title|\marg{text} and |\section|\marg{text} are ensured to also typeset math in bold.
 % This may cause trouble if bold symbols carry an additional non-implicit meaning.
 % \DescribeMacro{\mathup}
 % An upright math alphabet is defined.
-% ($\mathup A \mathup B \mathup C \mathbf{\mathup A} \mathbf{\mathup B} \mathbf{\mathup C}$).
+% ($\mathrm A \mathrm b \mathrm \Gamma \mathrm \delta \mathbf{\mathrm A} \mathbf{\mathrm b} \mathbf{\mathrm \Gamma} \mathbf{\mathrm \delta}$).
 % \DescribeMacro{\mathsf}
 % The math sans serif alphabet is redefined to be italic.
-% ($\mathsf A \mathsf B \mathsf C \mathbf{\mathsf A} \mathbf{\mathsf B} \mathbf{\mathsf C}$).
+% ($\mathsf A \mathsf b \mathsf \Gamma \mathsf \delta \mathbf{\mathsf A} \mathbf{\mathsf b} \mathbf{\mathsf \Gamma} \mathbf{\mathsf \delta}$).
+% The later two alphabets are not distinguishable from the first two alphabets if the |sans serif| package option is chosen.
 % \DescribeMacro{\mathsfup}
 % An upright sans serif math alphabet is defined.
-% ($\mathsfup A \mathsfup B \mathsfup C \mathbf{\mathsfup A} \mathbf{\mathsfup B} \mathbf{\mathsfup C}$).
+% ($\mathsfup A \mathsfup B \mathsfup \Gamma \mathsfup \delta \mathbf{\mathsfup A} \mathbf{\mathsfup b} \mathbf{\mathsfup \Gamma} \mathbf{\mathsfup \delta}$).
+% FIXME Greek letters are broken
+% Details about the font handling in TeX can be found in \cite{fntguide}.
 %
 % \DescribeMacro{\text}
 % The |\text|\marg{text} macro makes it possible to write text within math mode.
-% The often used |\mathrm|\marg{text} and |\rm|\marg{text} macros are \emph{not} the right tool for this purpose, as they only switch to roman font.
+% The often used |\mathrm|\marg{text} and |\rm|\marg{text} macros are \emph{not} the correct tool for this purpose, as they switch to roman font shape.
+% This behaviour conflicts \eg with the |sans serif| package option.
 %
 % \DescribeMacro{\nicefrac}
 % \DescribeMacro{\flatfrac}
-% The |\frac|\marg{number}\marg{number} macro is accompanied by |\nicefrac|\marg{number}\marg{number} and |\flatfrac|\marg{number}\marg{number}.
+% The |\frac|\marg{number}\marg{number} macro is accompanied by |\nicefrac|\linebreak[1]\marg{number}\linebreak[1]\marg{number} and |\flatfrac|\marg{number}\marg{number}.
 % Providing the choices
 % \begin{align}
 % \frac12 \ ,&& \nicefrac 12 \ ,&& \flatfrac 12\ .
@@ -197,20 +254,19 @@
 % For longer paper it can be useful to re-number the equation in accordance with the section numbering |\numberwithin{equation}{section}|.
 % \DescribeMacro{\subequations}
 % In order to further reduce the size the of equation counter it can be useful to wrap |align| environments with multiple rows in a |subequations| environment.
+% \DescribeMacro{eqnarray}
+% The depreciated |eqnarray| environment is undefined as long this behaviour is not prevented by the |eqn array| package option and the |align| environment should be used instead.
 %
 % \subsubsection{Physics}
 %
-% Greek letters are adjusted to be italic and upright in math and text mode, respectively, using the |fixmath| \cite{fixmath} and |alphabeta| \cite{alphabeta} packages.
+% Greek letters are adjusted to always be italic and upright in math and text mode, respectively, using the |fixmath| \cite{fixmath} and |alphabeta| \cite{alphabeta} packages.
 % This allows differentiations like
 % \begin{align}
 % \sigma &= \unit[5]{fb} \ , & &\text{at \unit[5]{\sigma} C.L.} \ , & \mu &= \unit[5]{cm} \ , & l &= \text{\unit[5]{\mu m}} \ ,
 % \label{eq:greek}
 % \end{align}
 % and \eg to distinguish gauge $\nu$ and mass \nu\ eigenstates in models with massive light neutrinos.
-% Additionally, Greek letters can now also typed directly using Unicode.
-%
-% \DescribeMacro{\slashed}
-% The |\slashed|\marg{character} macro from the |slashed| \cite{slashed} package allows to use the Dirac slash notation.
+% Additionally, Greek letters can also be directly typed using Unicode.
 %
 % \DescribeMacro{\ev}
 % \DescribeMacro{\pdv}
@@ -226,6 +282,9 @@
 % &&\det(M)\ .
 % \end{align}
 %
+% \DescribeMacro{\slashed}
+% The |\slashed|\marg{character} macro from the |slashed| \cite{slashed} package allows to use the Dirac slash notation.
+%
 % \DescribeMacro{\overleftright}
 % A better looking over left right arrow is defined $\overleftright{\partial}$.
 % \DescribeMacro{\unit}
@@ -237,8 +296,9 @@
 %
 % \DescribeEnv{figure}
 % \DescribeEnv{table}
-% Manual float placement is deactivated and automatic float placement is adjusted to place one float at the top of pages and to reduce the number of float pages.
+% Automatic float placement is adjusted to place a single float at the top of pages and to reduce the number of float pages.
 % The most useful float placement is usually archived by placing the float \emph{in front} of the paragraph it is referenced first.
+% Additionally, manual float placement can be deactivated with the |placement| package option.
 %
 % \begin{table}
 % \begin{panels}{.6}
@@ -276,22 +336,22 @@
 % The |booktabs| \cite{booktabs} and |multirow| \cite{multirow} packages are loaded enabling publication quality tabulars such as in \cref{tab:booktabs}.
 %
 % \DescribeMacro{\graphic}
-% \DescribeMacro{\graphicspath}
+% \DescribeMacro{\relgraphicspath}
 % The |graphicx| package \cite{graphicx} is loaded and the |\graphic|\oarg{width}\marg{figure} macro is defined, which is a wrapper for the |\includegraphics|\marg{figure} macro and takes the figure width as fraction of the |\linewidth| as optional argument (default 1).
-% If the graphics are located in a sub-folder its path can be indicated by |\graphicspath{{./|$\langle path\rangle$|/}}|.
+% If the graphics are located in a sub-folder its path can be indicated by |\relgraphicspath|\marg{folder}.
 % \DescribeMacro{\raggedright}
 % The float environments have been adjusted to center their content.
-% The usual behaviour is reactivated with |\raggedright|.
+% The usual behaviour can be reactivated using |\raggedright|.
 %
 % \subsection{Bibliography}
 %
 % \DescribeMacro{\bibliography}
 % \DescribeMacro{\printbibliography}
-% For bibliography management the |biblatex| package \cite{biblatex} is loaded.
-% The user has to add the line |\bibliography|\marg{mybib} to the preamble of the document and |\printbibliography| at the end of the document.
+% The |biblatex| package \cite{biblatex} is loaded for bibliography management.
+% The user has to add the line |\bibliography|\marg{my.bib} to the preamble of the document and |\printbibliography| at the end of the document.
 % The bibliography is generated by |biber| \cite{biber}.
-% |biblatex| is extended to be able to cope with the |collaboration| and |reportNumber| fields provided by \online{https://inspirehep.net}{inspirehep.net}.
-% Additionally, \online{https://ctan.org}{ctan.org}, \online{https://github.com}{github.com}, \online{https://sourceforge.net}{sourceforge.net}, and \online{https://hepforge.org}{hepforge.org} are recognized as |eprinttype|.
+% |biblatex| is extended to be able to cope with the |collaboration| and |reportNumber| fields provided by \online{https://inspirehep.net}{inspirehep.net} and a bug in the volume number is fixed.
+% Additionally, \online{https://ctan.org}{ctan.org}, \online{https://github.com}{github.com}, \online{https://sourceforge.net}{sourceforge.net}, and \online{https://hepforge.org}{hepforge.org} are recognized as |eprinttype|s.
 % Finally, multiple |eprinttype|, |url|, and |doi| fields can be added using the |related| features provided by |biblatex|.
 %
 % \section{Conclusion}
@@ -304,157 +364,103 @@
 %
 % \StopEventually{
 % \printbibliography
+% \PrintChanges
 % }
 %
 % \appendix
 %
-% \section{Implementation}
+% \section{Options}
 %
-% \subsection{Options}
-%
-% Redefine article options and choose sane values.
-%
-% \subsubsection{Paper size}
-%
-% Redefine the article paper sizes options without any changes.
-% A4 paper
+% Load the |kvoptions| package and define a |hep| namespace.
 %    \begin{macrocode}
-\DeclareOption{a4paper}{%
-  \setlength\paperheight{297mm}%
-  \setlength\paperwidth{210mm}%
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=hep,
+  prefix=hep@
 }
 %    \end{macrocode}
 %
-% A5 paper
+% \begin{macro}{paper}
+% Define a |paper| option taking the values |a4|, |a5|, |b5|, |letter|, |legal|, |executive|.
+% Make |a4paper| the default.
 %    \begin{macrocode}
-\DeclareOption{a5paper}{%
-  \setlength\paperheight{210mm}%
-  \setlength\paperwidth{148mm}%
-}
-%    \end{macrocode}
-%
-% B5 paper
-%    \begin{macrocode}
-\DeclareOption{b5paper}{%
-  \setlength\paperheight{250mm}%
-  \setlength\paperwidth{176mm}%
-}
-%    \end{macrocode}
-%
-% Letter paper
-%    \begin{macrocode}
-\DeclareOption{letterpaper}{%
-  \setlength\paperheight{11in}%
-  \setlength\paperwidth{8.5in}%
-}
-%    \end{macrocode}
-%
-% Legal paper
-%    \begin{macrocode}
-\DeclareOption{legalpaper}{%
-  \setlength\paperheight{14in}%
-  \setlength\paperwidth{8.5in}%
-}
-%    \end{macrocode}
-%
-% Executive paper
-%    \begin{macrocode}
-\DeclareOption{executivepaper}{%
-  \setlength\paperheight{10.5in}%
-  \setlength\paperwidth{7.25in}%
-}
-%    \end{macrocode}
-% Define the landscape option
-%    \begin{macrocode}
-\DeclareOption{landscape}{%
-  \setlength\@tempdima{\paperheight}%
-  \setlength\paperheight{\paperwidth}%
-  \setlength\paperwidth{\@tempdima}%
-}
-%    \end{macrocode}
-
-% \subsubsection{Font size}
-%
-% Redefine the article font sizes options.
-%    \begin{macrocode}
-\DeclareOption{10pt}{\renewcommand\@ptsize{0}}
-\DeclareOption{11pt}{\renewcommand\@ptsize{1}}
-\DeclareOption{12pt}{\renewcommand\@ptsize{2}}
-%    \end{macrocode}
-% Define the package option |placement|.
-
-% \subsubsection{Placement}
-%
-%    \begin{macrocode}
-\newif\if@placement@\DeclareOption{placement}{\@placement@true}
-\newif\if@no@bib@\DeclareOption{nobib}{\@no@bib@true}
-\newif\if@sans@serif@\DeclareOption{sansserif}{\@sans@serif@true}
-\newif\if@keep@default@\DeclareOption{keepdefault}{\@keep@default@true}
-\newif\if@par@skip@\DeclareOption{parskip}{\@par@skip@true}
-\newif\if@eqn@array@\DeclareOption{eqnarray}{\@eqn@array@true}
-%    \end{macrocode}
-
-% \subsubsection{Execute and process options}
-%
-% Change the paper size to a4 and the font size to \unit[11]{pt}.
-%    \begin{macrocode}
-\if@keep@default@\else
-  \ExecuteOptions{a4paper, 11pt}
-\fi
-\ProcessOptions\relax
-%    \end{macrocode}
-
-% \subsection{Font size}
-%
-% Undefine previously defined font sizes and load the LaTeX font size file corresponding to the font size option loaded before.
-%    \begin{macrocode}
-\if@keep@default@\else
-  \let\small\relax
-  \let\footnotesize\relax
-  \let\scriptsize\relax
-  \let\tiny\relax
-  \let\large\relax
-  \let\Large\relax
-  \let\LARGE\relax
-  \let\huge\relax
-  \let\Huge\relax
-  \input{size1\@ptsize.clo}
-\fi
-%    \end{macrocode}
-
-% \subsection{Geometry}
-%
-% Load the |geometry| package \cite{geometry} and adjust the text width and height to the values of the |a4wide| package \cite{a4wide}.
-%    \begin{macrocode}
-\if@keep@default@\else
-  \RequirePackage{geometry}
-  \geometry{hscale=.75, vscale=.8, vmarginratio=3:4, includeheadfoot}
-\fi
-%    \end{macrocode}
-
-%\begin{macro}{\useparskip}
-%\begin{macro}{\useparindent}
-% Load the |parskip| package \cite{parskip} and provide two commands switching between the two paragraph modes.
-%    \begin{macrocode}
-\usepackage{parskip}
-\newcommand{\useparskip}{%
-  \setlength{\parskip}{.5\baselineskip plus 2pt}%
-  \setlength{\parindent}{0pt}%
-}
-\newcommand{\useparindent}{%
-  \setlength{\parskip}{0pt}%
-  \setlength{\parindent}{15pt}%
-}
-\if@par@skip@\else\useparindent\fi
+\DeclareStringOption[a4]{paper}
+\newcommand*{\@paper}[1]{\setkeys{hep}{paper={#1}}}
 %    \end{macrocode}
 % \end{macro}
+%
+% \begin{macro}{font}
+% Define a |font| option taking the values |8pt|, |9pt|, |10pt|, |11pt|, |12pt|, |14pt|, |17pt|, |20pt|.
+% Make \unit[11]{pt} the default font size.
+%    \begin{macrocode}
+\DeclareStringOption[11pt]{font}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{defaults}
+% Define the |defaults| option which deactivates the |paper| and |font| options and prevents the change of the class defaults.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{defaults}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{language}
+% Define the |language| option, which takes the values provided by the |babel| package \cite{babel}.
+% Make |british| the default language.
+%    \begin{macrocode}
+\DeclareStringOption[british]{language}
+\newcommand*{\@language}[1]{\setkeys{hep}{language={#1}}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{parskip}
+% Define the option pair |parindent| and |parskip| controlling the separation of paragraphs.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{parindent}
+\DeclareComplementaryOption{parskip}{parindent}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{sansserif}
+% Define the option pair |serif| and |sansserif| controling the font shape of the whole document.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{serif}
+\DeclareComplementaryOption{sansserif}{serif}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{eqnarray}
+% Provide the option |eqnarray| for reactivating the |eqnarray| environment.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{eqnarray}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{bibliography}
+% Provide the option |bibliography|for disabling the automatic loading of the |biblatex| package \cite{biblatex}.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{bibliography}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{manual}
+% Provide the option |manual| for deactivating the manual placement of floats.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{manual}
+%    \end{macrocode}
 % \end{macro}
 
-% \subsection{Engine}
+% \subsection{Process options}
+%
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+%    \end{macrocode}
+
+% \section{Engine}
 %
 % \begin{macro}{\ifxetexorluatex}
 % Load the |ifluatex| \cite{ifluatex} and |ifxetex| \cite{ifxetex} packages.
-% Define the new |\ifxetexorluatex| conditional.
+% Define the |\ifxetexorluatex| conditional.
 %    \begin{macrocode}
 \RequirePackage{ifluatex}
 \RequirePackage{ifxetex}
@@ -467,16 +473,16 @@
 %    \end{macrocode}
 % \end{macro}
 
-% \subsection{Text}
+% \section{Text}
 %
 % Load the |alphabeta| \cite{alphabeta} package first in order to archive the correct behaviour.
-% It provides upright italic letters in text mode.
+% It provides upright Greek letters in text mode.
 %    \begin{macrocode}
 \RequirePackage{alphabeta}
 %    \end{macrocode}
 %
 % Define |\@encoding| with the correct font encoding.
-% Load the |fontenc| package \cite{fontenc} with the correct encoding.
+% Load the |fontenc| package \cite{fontenc} with the correct encoding \cite{euenc}.
 %    \begin{macrocode}
 \ifxetex\def\@encoding{EU1}
   \else\ifluatex
@@ -497,7 +503,9 @@
 %    \begin{macrocode}
 \ifxetexorluatex
   \DeclareFontShape{TU}{lmss}{bx}{sc}{<->cmssbxcsc10}{}
-  \DeclareFontShape{TU}{lmss}{m}{sc}{<-9>cmsscsc8<9-10>cmsscsc9<10->cmsscsc10}{}
+  \DeclareFontShape{TU}{lmss}{m}{sc}{%
+    <-9>cmsscsc8<9-10>cmsscsc9<10->cmsscsc10%
+  }{}
 \else
   \sffamily
   \DeclareFontShape{\@encoding}{lmss}{bx}{sc}{<->ssub*xcmss/bx/sc}{}
@@ -505,34 +513,51 @@
 \fi
 %    \end{macrocode}
 
-% Load the the |babel| \cite{babel} or |polyglossia| \cite{polyglossia} packages for hyphenation.
+% Load the the |babel| \cite{babel} package for hyphenation.
 % In both cases load also the recommended |csquotes| package \cite{csquotes}.
 %    \begin{macrocode}
-\ifxetexorluatex
-  \RequirePackage{polyglossia}
-  \setmainlanguage{english}
-\else
+\ifxetexorluatex\else
   \RequirePackage[utf8]{inputenc}
-  \RequirePackage[british]{babel}
 \fi
+\RequirePackage[\hep@language]{babel}
 \RequirePackage{csquotes}
 %    \end{macrocode}
 
 % Set the whole text to sans serif if requested.
 %    \begin{macrocode}
-\if@sans@serif@
-\sffamily
-\renewcommand{\familydefault}{\sfdefault}
+\ifhep@serif\else
+  \sffamily
+  \renewcommand\familydefault{\sfdefault}
 \fi
 %    \end{macrocode}
 
-% \subsubsection{Text macros}
+% \subsection{Font size}
+%
+% Undefine previously defined font sizes and load the LaTeX font size file corresponding to the font size option loaded before.
+%    \begin{macrocode}
+\ifhep@defaults\else
+  \def\remove@pt#1pt{#1}
+  \edef\@ptsize{\expandafter\remove@pt\hep@font}
+  \let\small\relax
+  \let\footnotesize\relax
+  \let\scriptsize\relax
+  \let\tiny\relax
+  \let\large\relax
+  \let\Large\relax
+  \let\LARGE\relax
+  \let\huge\relax
+  \let\Huge\relax
+  \input{size\@ptsize.clo}
+\fi
+%    \end{macrocode}
+
+% \subsection{Text macros}
 %
 %\begin{macro}{\vs}
 % Load the |foreign| package \cite{foreign} in order to highlight abbreviations and vocabularies from foreign languages.
 % Add the missing |\vs| command.
 %    \begin{macrocode}
-\RequirePackage[all,british]{foreign}
+\RequirePackage[all, \hep@language]{foreign}
 \DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
 %    \end{macrocode}
 % \end{macro}
@@ -545,7 +570,7 @@
 % \end{macro}
 
 %\begin{macro}{\software}
-% Define a macro for software with optional version information |\software|\oarg{version}\marg{name}.
+% Define a macro for software with optional version information |\software|\linebreak[1]\oarg{version}\linebreak[1]\marg{name}.
 %    \begin{macrocode}
 \newcommand{\software}[2][\hspace{-\fontdimen2\font}]{\texttt{#2}~#1}
 %    \end{macrocode}
@@ -582,10 +607,10 @@
 %    \end{macrocode}
 % \end{macro}
 
-% \subsubsection{Lists}
+% \subsection{Lists}
 %
 % \begin{environment}{inlinelist}
-% Load the |enumitem| package \cite{enumitem} and define an inline list.
+% Load the |enumitem| package \cite{enumitem} and define an inline list environment.
 %    \begin{macrocode}
 \RequirePackage[inline]{enumitem}
 \newlist{inlinelist}{enumerate*}{1}
@@ -593,7 +618,7 @@
 %    \end{macrocode}
 % \end{environment}
 
-% \subsubsection{Footnotes}
+% \subsection{Footnotes}
 %
 % \begin{macro}{\footnote}
 % Ensure that no spaces appear before the footmark or at the beginning of the footnote.
@@ -603,7 +628,38 @@
 %    \end{macrocode}
 % \end{macro}
 
-% \subsection{Math}
+% \section{Geometry}
+%
+% Load the |geometry| package \cite{geometry} and adjust the text width and height to the values of the |a4wide| package \cite{a4wide}.
+%    \begin{macrocode}
+\ifhep@defaults\else
+  \RequirePackage[\hep@paper paper]{geometry}
+  \geometry{hscale=.75, vscale=.8, vmarginratio=3:4, includeheadfoot}
+\fi
+%    \end{macrocode}
+
+%\begin{macro}{\useparskip}
+%\begin{macro}{\useparindent}
+% Load the |parskip| package \cite{parskip} and provide two commands switching between the two paragraph modes.
+%    \begin{macrocode}
+\usepackage{parskip}
+\newcommand{\useparskip}{%
+  \setlength{\parskip}{.5\baselineskip plus 2pt}%
+  \setlength{\parindent}{0pt}%
+}
+\newcommand{\useparindent}{%
+  \setlength{\parskip}{0pt}%
+  \setlength{\parindent}{15pt}%
+  \if@twocolumn\setlength\parindent{1em}
+  \else\setlength\parindent{1.5em}
+  \fi
+}
+\ifhep@parindent\useparindent\fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+
+% \section{Math}
 %
 % Load the |mathtools| package \cite{mathtools} which loads the |amsmath| package \cite{amsmath}.
 % Additionally, load the |amssymb| package \cite{amsfonts} which provides further math symbols and also loads the |amsfont| package \cite{amsfonts}.
@@ -621,24 +677,43 @@
 %    \end{macrocode}
 % \end{macro}
 
+% \begin{macro}{\mathdef}
+% Load the |xparse| package and define the |\mathdef|\marg{name}\marg{macro} macro which (re-) defines macros in math mode only.
+%    \begin{macrocode}
+\RequirePackage{xparse}
+\DeclareDocumentCommand{\mathdef}{mO{0}m}{%
+  \expandafter\let\csname old\string#1\endcsname=#1
+  \expandafter\newcommand\csname new\string#1\endcsname[#2]{#3}
+  \DeclareRobustCommand#1{%
+    \ifmmode
+      \expandafter\let\expandafter\next\csname new\string#1\endcsname
+    \else
+      \expandafter\let\expandafter\next\csname old\string#1\endcsname
+    \fi
+    \next
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+
 % \begin{macro}{\i}
 % Provide an upright imaginary unit. This will cause trouble in languages where the letter |\i| is used.
 %    \begin{macrocode}
-\AtEndOfClass{\let\i\undefined\DeclareMathOperator{\i}{i}}
+\mathdef{\i}{\mathoperator{i}}
 %    \end{macrocode}
 % \end{macro}
 
 % \begin{macro}{eqnarray}
 % Undefine the |eqnarray| environment.
 %    \begin{macrocode}
-\if@eqn@array@\else%
+\ifhep@eqnarray\else%
   \let\eqnarray\@undefined
   \let\endeqnarray\@undefined
 \fi
 %    \end{macrocode}
 % \end{macro}
 
-% \subsubsection{Math fonts}
+% \subsection{Math fonts}
 %
 % \begin{macro}{\mathbf}
 % Load the |bm| package \cite{bm} for superior boldmath.
@@ -649,44 +724,41 @@
 \g@addto@macro\bfseries{\boldmath}
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\mathup}
-% Define an upright math font.
-%    \begin{macrocode}
-\DeclareMathAlphabet{\mathup}{\@encoding}{\familydefault}{\mddefault}{\updefault}
-\SetMathAlphabet{\mathup}{bold}{\@encoding}{\familydefault}{\bfdefault}{\updefault}
-%    \end{macrocode}
-% \end{macro}
 % \begin{macro}{\mathsf}
 % \begin{macro}{\mathsfup}
 % Redefine the mathsf font to be italic and define an upright mathsf font.
 %    \begin{macrocode}
-\if@sans@serif@
-  \renewcommand\mathsf[1]{#1}
-  \newcommand\mathsfup[1]{\mathup{#1}}
+\ifhep@serif
+  \DeclareMathAlphabet{\mathsf}%
+    {\@encoding}{\sfdefault}{\mddefault}{\sldefault}
+  \SetMathAlphabet{\mathsf}%
+    {bold}{\@encoding}{\sfdefault}{\bfdefault}{\sldefault}
+  \DeclareMathAlphabet{\mathsfup}%
+    {\@encoding}{\sfdefault}{\mddefault}{\updefault}
+  \SetMathAlphabet{\mathsfup}%
+    {bold}{\@encoding}{\sfdefault}{\bfdefault}{\updefault}
 \else
-  \DeclareMathAlphabet{\mathsf}{\@encoding}{\sfdefault}{\mddefault}{\sldefault}
-  \SetMathAlphabet{\mathsf}{bold}{\@encoding}{\sfdefault}{\bfdefault}{\sldefault}
-  \DeclareMathAlphabet{\mathsfup}{\@encoding}{\sfdefault}{\mddefault}{\updefault}
-  \SetMathAlphabet{\mathsfup}{bold}{\@encoding}{\sfdefault}{\bfdefault}{\updefault}
+  \renewcommand\mathsf[1]{#1}
+  \newcommand\mathsfup[1]{\mathrm{#1}}
 \fi
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
 
-% \subsubsection{Greek letters}
+% \subsection{Greek letters}
 %
-% Load the |fixmath| package \cite{fixmath} which makes upper Greek letters in math mode italic.
+% Load the |fixmath| package \cite{fixmath} which ensures that upper Greek letters in math mode are italic.
 %    \begin{macrocode}
 \RequirePackage{fixmath}
 %    \end{macrocode}
 % Ensure that also math is sans serif if the option sans serif is passed to the package
 %    \begin{macrocode}
-\if@sans@serif@
+\ifhep@serif\else
   \RequirePackage[slantedGreek]{sfmath}
 \fi
 %    \end{macrocode}
 
-% \subsubsection{Physics notation}
+% \subsection{Physics notation}
 %
 % \begin{macro}{\slashed}
 % \begin{macro}{\units}
@@ -727,7 +799,7 @@
 % \end{macro}
 % \end{macro}
 
-% \subsection{Floats}
+% \section{Floats}
 %
 % Adjust the LaTeX float placement defaults
 %    \begin{macrocode}
@@ -742,7 +814,7 @@
 % \begin{environment}{table}
 % Ignore the manual placement if the |placement| option is set.
 %    \begin{macrocode}
-\if@placement@%
+\ifhep@manual%
   \let\@figure@\figure%
   \let\@end@figure@\endfigure%
   \renewenvironment{figure}[1][tbp]{%
@@ -777,7 +849,7 @@
 % \end{environment}
 % \end{environment}
 
-% \subsubsection{Sub-floats}
+% \subsection{Sub-floats}
 %
 % \begin{environment}{panels}
 % \begin{macro}{\panel}
@@ -808,7 +880,7 @@
 % \end{macro}
 % \end{environment}
 
-% \subsubsection{Tables}
+% \subsection{Tables}
 %
 % \begin{environment}{tabular}
 % Enhance tables using the |booktabs| and |multirow| packages \cite{booktabs, multirow}.
@@ -818,20 +890,28 @@
 %    \end{macrocode}
 % \end{environment}
 
-% \subsubsection{Figures}
+% \subsection{Figures}
 %
 % \begin{macro}{\graphic}
-% Provide the |graphic| macro for the inclusion of figures with the |graphicx| package \cite{graphicx}.
+% Provide the |\graphic| macro for the inclusion of figures with the |graphicx| package \cite{graphicx}.
 %    \begin{macrocode}
 \RequirePackage{graphicx}
 \providecommand{\tikzsetnextfilename}[1]{}
 \newcommand{\graphic}[2][1]{%
-  \tikzsetnextfilename{#2}\centering\includegraphics[width=#1\linewidth]{#2}%
+  \tikzsetnextfilename{#2}\centering%
+  \includegraphics[width=#1\linewidth]{#2}%
 }
 %    \end{macrocode}
 % \end{macro}
+%
+% \begin{macro}{\relgraphicspath}
+% Provide the |\relgraphicspath| macro for the indication of a single subfolder with graphics.
+%    \begin{macrocode}
+\newcommand{\relgraphicspath}[1]{\graphicspath{{./#1/}}}
+%    \end{macrocode}
+% \end{macro}
 
-% \subsection{Title page}
+% \section{Title page}
 %
 % \begin{macro}{\date}
 % Allow empty date field.
@@ -840,7 +920,7 @@
 %    \end{macrocode}
 % \end{macro}
 
-% \subsubsection{Authors}
+% \subsection{Authors}
 %
 % \begin{macro}{\author}
 % Allow empty author field.
@@ -857,16 +937,28 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\affiliation}
 % Enable the handling of multiple authors with different affiliations using the |authblk| package \cite{authblk}.
 %    \begin{macrocode}
 \RequirePackage{authblk}
 \renewcommand\Affilfont{\footnotesize}
-\newcommand{\affiliation}[2][]{\affil[#1]{\protecting{#2}}}
+%    \end{macrocode}
+%
+% \begin{macro}{\affiliation}
+% Define the |\affiliation| macro, ensure that linebreaks happen after a comma.
+%    \begin{macrocode}
+\newcommand\active@comma{,\penalty-5\relax}
+\newcommand\cat@comma@active{\catcode`\,\active}
+{\cat@comma@active\gdef,{\active@comma}}
+\newcommand\@affiliation@@[1]{\endgroup\affil{#1}}
+\def\@affiliation@[#1]#2{\endgroup\affil[#1]{#2}}
+\DeclareRobustCommand\@affiliation{%
+  \@ifnextchar[{\@affiliation@}{\@affiliation@@}%
+}
+\newcommand{\affiliation}{\begingroup\cat@comma@active\@affiliation}
 %    \end{macrocode}
 % \end{macro}
 
-% \subsubsection{Preprint}
+% \subsection{Preprint}
 %
 % \begin{macro}{\preprint}
 % Places a preprint number in the top right corner of the titel page.
@@ -889,7 +981,7 @@
 %    \end{macrocode}
 % \end{macro}
 
-% \subsubsection{Abstract}
+% \subsection{Abstract}
 %
 % \begin{environment}{abstract}
 % Adjust the |abstract| environment to not start with indentation.
@@ -899,17 +991,20 @@
 %    \end{macrocode}
 % \end{environment}
 
-% \subsection{Bibliography}
+% \section{Bibliography}
 %
 % \begin{macro}{\bibliography}
 % Load the |biblatex| package \cite{biblatex} with a JHEP like bibliography style.
 %    \begin{macrocode}
-\if@no@bib@\else%
+\ifhep@bibliography%
 \RequirePackage[sorting=none,style=numeric-comp,giveninits=true]{biblatex}
 %    \end{macrocode}
 % \end{macro}
 % Read the collaboration and pre-print information if present.
+% Move letters from the volume field to the journal field.
 %    \begin{macrocode}
+\newcommand{\@reg@exp}{\regexp{\A(\p{L}+)?\d+(\p{L}+)?\Z}}
+\newcommand{\@reg@exp@}{\regexp{\A(\p{L}+)?(\d+)(\p{L}+)?\Z}}
 \DeclareSourcemap{%
   \maps[datatype=bibtex,overwrite=true]{%
     \map{%
@@ -920,6 +1015,12 @@
       \step[fieldsource=reportNumber,final=true]%
       \step[fieldset=userb,origfieldval,final=true]
     }%
+    \map[overwrite]{
+      \step[fieldsource=volume, match=\@reg@exp, final]
+      \step[fieldsource=volume, match=\@reg@exp@, replace={$2}]
+      \step[fieldsource=journal, fieldtarget=journaltitle]
+      \step[fieldset=journaltitle, fieldvalue={\space$1$2}, append=true]
+    }
   }%
 }
 %    \end{macrocode}
@@ -1020,7 +1121,7 @@
 %    \end{macrocode}
 % \end{macro}
 
-% \subsection{Hyperlinks}
+% \section{Hyperlinks and References}
 %
 % Load the |hyperref| package \cite{hyperref} enable Unicode encoding and hide links.
 %
@@ -1054,8 +1155,6 @@
 }
 %    \end{macrocode}
 
-% \subsection{References}
-%
 % \begin{macro}{\cref}
 % Improve reference using the |cleveref| package \cite{cleveref}.
 %
@@ -1099,7 +1198,9 @@
 % \begin{macro}{\labelcrefrange}
 % Define the missing |\labelcrefrange|\marg{key1}\marg{key2} macro.
 %    \begin{macrocode}
-\DeclareRobustCommand{\labelcrefrange}[2]{\@crefrangenostar{labelcref}{#1}{#2}}
+\DeclareRobustCommand{\labelcrefrange}[2]{%
+  \@crefrangenostar{labelcref}{#1}{#2}%
+}
 %    \end{macrocode}
 % \end{macro}
 %
