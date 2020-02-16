@@ -37,31 +37,21 @@
      \begin{tabular}{|l|}\hline\ignorespaces}%
     {\\\hline\end{tabular}\nobreak\@decl@date\par\nobreak
      \vspace{2.3ex}\vskip -\parskip}
-\newcommand{\NEWdescription}[1]{%
-   \hskip 1sp \marginpar{\small\sffamily\raggedright
-     New description\\#1}}
 \makeatother
 
-% \SetMathAlphabet{\mathsf}{normal}{OT1}{lmss}{m}{sl}
-% \SetMathAlphabet{\mathsf}{bold}{OT1}{lmss}{bx}{sl}
-%
-% \SetMathAlphabet{\mathsfup}{normal}{OT1}{lmss}{m}{n}
-% \SetMathAlphabet{\mathsfup}{bold}{OT1}{lmss}{bx}{n}
-\makeatletter
-
-\makeatother
 \bibliography{bibliography}
 
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
+
 \begin{document}
 \DocInput{hep-paper.dtx}
 \end{document}
 %</driver>
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{658}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -80,7 +70,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2019/01/01}{Initial version of the style file}
-% \changes{v1.1}{2020/01/01}{Translation to a documented LaTeX source file}
+% \changes{v1.1}{2020/01/01}{Transition to a documented LaTeX source file}
 % \changes{v1.2}{2020/02/01}{Inclusion of package options}
 %
 % \GetFileInfo{hep-paper.sty}
@@ -118,12 +108,8 @@
 % The most notable changes after loading the |hep-paper| package \cite{hep-paper} is the change of some LaTeX defaults.
 % The paper and font sizes are set to A4 and \unit[11]{pt}, respectively.
 % Additionally, the paper geometry is set to the values known from the (depreciated) |a4wide| package \cite{a4wide} using the |geometry| package \cite{geometry}.
-% Additionally, the font is changed to |lmodern| \cite{lmodern} with |microtype| \cite{microtype} optimizations.
-% Hyperlinks are implemented by  the |hyperref| package \cite{hyperref} and hidden.
-% Hyphenation is provided by the |babel| \cite{babel} and |polyglossia| \cite{polyglossia} packages in the case of normal TeX and LuaTeX, receptively.
-% Finally, quotation commands are provided by the recommended |csquotes| package \cite{csquotes}.
-% \DescribeMacro{\MakeOuterQuote}
-% The last package provides the convenient macro |\MakeOuterQuote{"}| allowing to simply use |"| instead of the pair |``| and |''|.
+% Finally, the font is changed to |lmodern| \cite{lmodern} with |microtype| \cite{microtype} optimizations.
+% Hyperlinks are implemented by the |hyperref| package \cite{hyperref} and hidden.
 %
 % \subsection{Options}
 %
@@ -144,8 +130,8 @@
 % \DescribeMacro{defaults}
 % The |defaults| option prevents the adjustment of the page geometry and the font size set by the document class.
 %
-% \DescribeMacro{language}
-% The |language|=\meta{name} option switches the document language to the chosen value.
+% \DescribeMacro{lang}
+% The |lang|=\meta{name} option switches the document language to the chosen value.
 % The possible values are given by the |babel| package \cite{babel}.
 % The default is |british|.
 %
@@ -157,8 +143,8 @@
 % \DescribeMacro{sansserif}
 % The |sansserif| option switches the document including math to sans serif font shape.
 %
-% \DescribeMacro{placement}
-% The |placement| option turns manual float placement off.
+% \DescribeMacro{manual}
+% The |manual| option turns manual float placement off.
 %
 % \DescribeMacro{bibliography}
 % The |bibliography|=\meta{bool} option can prevent the |biblatex| package \cite{biblatex} from being loaded.
@@ -182,39 +168,62 @@
 % | \author[2]{Author two \email{Email two}}|\\
 % | \affiliation[1,2]{Affiliation two}|
 %
+% The |\affiliation|\marg{text} macro breaks lines preferably at a comma.
+%
 % \DescribeMacro{\preprint}
 % The |\preprint|\marg{numer} macro places a pre-print number in the upper right corner of the title page.
 % The PDF meta information is set according to the |\title|\marg{text} and |\author|\marg{text} information.
 %
 % \DescribeEnv{abstract}
-% The |abstract| environment has been adjusted to not start with indentation.
+% The |abstract| environment has been adjusted to not start with an indentation.
 %
-% \subsection{References and footnotes}
+% \subsection{Text}
+%
+% Hyphenation is provided by the |babel| package \cite{babel}.
+% Finally, quotation commands are provided by the |csquotes| package \cite{csquotes} recommended by the |babel| package.
+% \DescribeMacro{\MakeOuterQuote}
+% The last package provides the convenient macro |\MakeOuterQuote{"}| allowing to simply use |"| instead of the pair |``| and |''|.
 %
 % \DescribeMacro{\eg}
-% \DescribeMacro{\ie}
-% The |foreign| package \cite{foreign} defines macros such as |\eg|, |\ie|, and |\cf| which are typeset as \eg, \ie, and \cf.
-
-% \DescribeMacro{\cref}
-% References are extended with the |cleveref| package \cite{cleveref}, which allows to \eg type just |\cref|\marg{key}  in order to write 'Figure 1'.
-% The |cleveref| package furthermore allows to reference multiple objects within one |\cref|\marg{key} (similar to the |\cite|\marg{key} macro).
+% \DescribeMacro{\vs}
+% The |foreign| package \cite{foreign} defines macros such as |\eg|, |\ie|, |\cf|, and |\vs| which are typeset as \eg, \ie, \cf, and \vs.
 %
-% \DescribeMacro{\ref}
-% \DescribeMacro{\cite}
-% References and citations are adjusted to not start on a new line in order to avoid the repeated use of |~\ref|\marg{key} and |~\cite|\marg{key}.
-% Additionally, |\ref|\marg{key} is redefined in order to handle multiple references at once.
+% \DescribeMacro{\no}
+% The |\no|\marg{number} macro is typeset as \no{123}.
 %
-% \DescribeMacro{\eqref}
-% The |\eqref|\marg{key} macro is also adjusted to not start on a new line and be able to reference multiple equations at once.
+% \DescribeMacro{\software}
+% The |\software|\oarg{version}\marg{name} macro is typeset as \software[2\epsilon]{LaTeX}.
 %
-% \DescribeMacro{\footnote}
-% Footnotes are adjusted to swallow white space before the footnote mark and at the beginning of the footnote text.
+% \DescribeMacro{\sloppy}
+% The |\sloppy| macro is redefined to be less invasive.
+%
+% \DescribeMacro{\online}
+% The |\online|\marg{text}\marg{url} macro combines the features of the |\href|\marg{text}\marg{url} and the |\url|\marg{text} macros.
+%
+% \DescribeMacro{inlinelist}
+% An |inlinelist| environment is defined using the |enumitem| package \cite{enumitem}.
 %
 % \DescribeMacro{\useparskip}
 % Switch to |parskip| mode.
 %
 % \DescribeMacro{\useparindent}
 % Switch to |parindent| mode.
+%
+% \subsubsection{References and footnotes}
+%
+% \DescribeMacro{\cref}
+% References are extended with the |cleveref| package \cite{cleveref}, which allows to \eg type just |\cref|\marg{key}  in order to write 'Figure 1'.
+% The |cleveref| package furthermore allows to reference multiple objects within one |\cref|\marg{key} (similar to the |\cite|\marg{key} macro).
+%
+% \DescribeMacro{\cite}
+% Citations are adjusted to not start on a new line in order to avoid the repeated use of |~\cite|\marg{key}.
+%
+% \DescribeMacro{\ref}
+% \DescribeMacro{\eqref}
+% References are also adjusted to not start on a new line and are redefined in order to handle multiple references at once.
+%
+% \DescribeMacro{\footnote}
+% Footnotes are adjusted to swallow white space before the footnote mark and at the beginning of the footnote text.
 %
 % \subsection{Math}
 %
@@ -225,8 +234,8 @@
 % ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
 % Macros switching to |bfseries| such as |\title|\marg{text} and |\section|\marg{text} are ensured to also typeset math in bold.
 % This may cause trouble if bold symbols carry an additional non-implicit meaning.
-% \DescribeMacro{\mathup}
-% An upright math alphabet is defined.
+% \DescribeMacro{\mathrm}
+% The |\mathrm| alphabet is redefined to be upright sans serif in sans serif environments and traditional |\mathrm| otherwise.
 % ($\mathrm A \mathrm b \mathrm \Gamma \mathrm \delta \mathbf{\mathrm A} \mathbf{\mathrm b} \mathbf{\mathrm \Gamma} \mathbf{\mathrm \delta}$).
 % \DescribeMacro{\mathsf}
 % The math sans serif alphabet is redefined to be italic.
@@ -241,7 +250,7 @@
 % \DescribeMacro{\text}
 % The |\text|\marg{text} macro makes it possible to write text within math mode.
 % The often used |\mathrm|\marg{text} and |\rm|\marg{text} macros are \emph{not} the correct tool for this purpose, as they switch to roman font shape.
-% This behaviour conflicts \eg with the |sans serif| package option.
+% This behaviour conflicts \eg with the |sansserif| package option.
 %
 % \DescribeMacro{\nicefrac}
 % \DescribeMacro{\flatfrac}
@@ -250,10 +259,21 @@
 % \begin{align}
 % \frac12 \ ,&& \nicefrac 12 \ ,&& \flatfrac 12\ .
 % \end{align}
+% \DescribeMacro{\diag}
+% A diagonal matrix operator is defined |\diag|.
+% \DescribeMacro{\mathdef}
+% The macro |\mathdef|\marg{name}\marg{behaviour} defined that defines macros only within mathmode without changing the text mode definition.
+% \DescribeMacro{\i}
+% The imaginary unit $\i$ is defined using this functionality.
+%
+% \DescribeMacro{\mathbf}
+% |\mathbf| is reimplemented using |\bm| and bold text macros such as |\title|\marg{text} and |\section|\marg{text} typeset also math in bold.
+%
 % \DescribeMacro{\numberwithin}
 % For longer paper it can be useful to re-number the equation in accordance with the section numbering |\numberwithin{equation}{section}|.
 % \DescribeMacro{\subequations}
 % In order to further reduce the size the of equation counter it can be useful to wrap |align| environments with multiple rows in a |subequations| environment.
+%
 % \DescribeMacro{eqnarray}
 % The depreciated |eqnarray| environment is undefined as long this behaviour is not prevented by the |eqn array| package option and the |align| environment should be used instead.
 %
@@ -298,7 +318,10 @@
 % \DescribeEnv{table}
 % Automatic float placement is adjusted to place a single float at the top of pages and to reduce the number of float pages.
 % The most useful float placement is usually archived by placing the float \emph{in front} of the paragraph it is referenced first.
-% Additionally, manual float placement can be deactivated with the |placement| package option.
+% Additionally, manual float placement can be deactivated with the |manual=|\meta{false} package option.
+% \DescribeMacro{\raggedright}
+% The float environments have been adjusted to center their content.
+% The usual behaviour can be reactivated using |\raggedright|.
 %
 % \begin{table}
 % \begin{panels}{.6}
@@ -339,9 +362,6 @@
 % \DescribeMacro{\relgraphicspath}
 % The |graphicx| package \cite{graphicx} is loaded and the |\graphic|\oarg{width}\marg{figure} macro is defined, which is a wrapper for the |\includegraphics|\marg{figure} macro and takes the figure width as fraction of the |\linewidth| as optional argument (default 1).
 % If the graphics are located in a sub-folder its path can be indicated by |\relgraphicspath|\marg{folder}.
-% \DescribeMacro{\raggedright}
-% The float environments have been adjusted to center their content.
-% The usual behaviour can be reactivated using |\raggedright|.
 %
 % \subsection{Bibliography}
 %
@@ -356,7 +376,7 @@
 %
 % \section{Conclusion}
 %
-% The majority of macros defined and packages loaded by this package are fairly lightweight and provide the author with the necessary tools to focus on the content instead of the layout.
+% The majority of macros defined and packages loaded by this package are fairly lightweight and provide the author with the necessary tools to focus on the content instead of the layout by reducing the amount of manual tasks.
 %
 % \DescribeMacro{arxiv-collector}
 % ArXiv requires the setup dependent |bbl| files instead of the original |bib| files, which causes trouble if the local LaTeX version differs from the one used by arXiv.
@@ -381,16 +401,15 @@
 %    \end{macrocode}
 %
 % \begin{macro}{paper}
-% Define a |paper| option taking the values |a4|, |a5|, |b5|, |letter|, |legal|, |executive|.
-% Make |a4paper| the default.
+% Define a |paper=|\meta{size} option.
+% Make A4 paper the default.
 %    \begin{macrocode}
 \DeclareStringOption[a4]{paper}
-\newcommand*{\@paper}[1]{\setkeys{hep}{paper={#1}}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{font}
-% Define a |font| option taking the values |8pt|, |9pt|, |10pt|, |11pt|, |12pt|, |14pt|, |17pt|, |20pt|.
+% Define a |font=|\meta{size} option.
 % Make \unit[11]{pt} the default font size.
 %    \begin{macrocode}
 \DeclareStringOption[11pt]{font}
@@ -398,18 +417,17 @@
 % \end{macro}
 %
 % \begin{macro}{defaults}
-% Define the |defaults| option which deactivates the |paper| and |font| options and prevents the change of the class defaults.
+% Define the |defaults| option which deactivates the |paper| and |font| options and prevents the change of the class defaults by this package.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{defaults}
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{language}
-% Define the |language| option, which takes the values provided by the |babel| package \cite{babel}.
+% \begin{macro}{lang}
+% Define the |lang| option, which takes the values provided by the |babel| package \cite{babel}.
 % Make |british| the default language.
 %    \begin{macrocode}
-\DeclareStringOption[british]{language}
-\newcommand*{\@language}[1]{\setkeys{hep}{language={#1}}}
+\DeclareStringOption[british]{lang}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -437,7 +455,7 @@
 % \end{macro}
 %
 % \begin{macro}{bibliography}
-% Provide the option |bibliography|for disabling the automatic loading of the |biblatex| package \cite{biblatex}.
+% Provide the option |bibliography| for disabling the automatic loading of the |biblatex| package \cite{biblatex}.
 %    \begin{macrocode}
 \DeclareBoolOption[true]{bibliography}
 %    \end{macrocode}
@@ -481,8 +499,8 @@
 \RequirePackage{alphabeta}
 %    \end{macrocode}
 %
-% Define |\@encoding| with the correct font encoding.
-% Load the |fontenc| package \cite{fontenc} with the correct encoding \cite{euenc}.
+% Define |\@encoding| with the font encoding suiting the engine used \cite{euenc}.
+% Load the |fontenc| package \cite{fontenc} with this encoding .
 %    \begin{macrocode}
 \ifxetex\def\@encoding{EU1}
   \else\ifluatex
@@ -513,13 +531,16 @@
 \fi
 %    \end{macrocode}
 
-% Load the the |babel| \cite{babel} package for hyphenation.
-% In both cases load also the recommended |csquotes| package \cite{csquotes}.
+% Load the |inputenc| \cite{inputenc} package.
 %    \begin{macrocode}
 \ifxetexorluatex\else
   \RequirePackage[utf8]{inputenc}
 \fi
-\RequirePackage[\hep@language]{babel}
+%    \end{macrocode}
+
+% Load the |babel| \cite{babel} package for hyphenation and the recommended |csquotes| package \cite{csquotes}.
+%    \begin{macrocode}
+\RequirePackage[\hep@lang]{babel}
 \RequirePackage{csquotes}
 %    \end{macrocode}
 
@@ -557,7 +578,7 @@
 % Load the |foreign| package \cite{foreign} in order to highlight abbreviations and vocabularies from foreign languages.
 % Add the missing |\vs| command.
 %    \begin{macrocode}
-\RequirePackage[all, \hep@language]{foreign}
+\RequirePackage[all, british]{foreign}
 \DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
 %    \end{macrocode}
 % \end{macro}
@@ -586,7 +607,7 @@
 % \end{macro}
 
 % \begin{macro}{\online}
-% The |\online| macro combines the features of the |\href| and the |\url| macros.
+% The |\online|\marg{text}\marg{url} macro combines the features of the |\href| and the |\url| macros.
 %    \begin{macrocode}
 \newcommand{\online}[2]{\href{#1}{\url{#2}}}
 %    \end{macrocode}
@@ -697,9 +718,9 @@
 % \end{macro}
 
 % \begin{macro}{\i}
-% Provide an upright imaginary unit. This will cause trouble in languages where the letter |\i| is used.
+% Provide an upright imaginary unit in math mode.
 %    \begin{macrocode}
-\mathdef{\i}{\mathoperator{i}}
+\AtBeginDocument{\mathdef{\i}{\operatorname{i}}}
 %    \end{macrocode}
 % \end{macro}
 
@@ -717,7 +738,7 @@
 %
 % \begin{macro}{\mathbf}
 % Load the |bm| package \cite{bm} for superior boldmath.
-% Make math symbols bold whenever they appear in bold macros such as title or subsection.
+% Make math symbols bold whenever they appear in bold macros such as |\title| \marg{text} or |\section|\marg{text}.
 %    \begin{macrocode}
 \RequirePackage{bm}
 \let\mathbf\bm
@@ -812,7 +833,7 @@
 
 % \begin{environment}{figure}
 % \begin{environment}{table}
-% Ignore the manual placement if the |placement| option is set.
+% Ignore the manual placement if the |manual| option is set to false.
 %    \begin{macrocode}
 \ifhep@manual%
   \let\@figure@\figure%
@@ -883,7 +904,7 @@
 % \subsection{Tables}
 %
 % \begin{environment}{tabular}
-% Enhance tables using the |booktabs| and |multirow| packages \cite{booktabs, multirow}.
+% Enhance tabulars using the |booktabs| and |multirow| packages \cite{booktabs, multirow}.
 %    \begin{macrocode}
 \RequirePackage{booktabs}
 \RequirePackage{multirow}
@@ -961,7 +982,7 @@
 % \subsection{Preprint}
 %
 % \begin{macro}{\preprint}
-% Places a preprint number in the top right corner of the titel page.
+% Places a preprint number in the top right corner of the first page.
 % This code uses the |varwidth| \cite{varwidth}, |atbegshi| \cite{atbegshi}, and |picture| \cite{picture} packages.
 %    \begin{macrocode}
 \let\@preprint\relax
@@ -1050,7 +1071,7 @@
 }
 %    \end{macrocode}
 
-% Enable multiple DOIs, pre-prints and URLs via the |related| feature
+% Enable multiple DOIs, pre-prints and URLs with the |related| feature
 %    \begin{macrocode}
 \renewbibmacro*{related:default}[1]{%
   \renewcommand*{\newunitpunct}{\addcomma\space}%
@@ -1137,7 +1158,7 @@
   pdfproducer={}
 }
 %    \end{macrocode}
-% Set the PDF meta data according to the paper information and ensure that unnecessary information are suppressed.
+% Set the PDF meta data according to the paper information and ensure that unnecessary information is suppressed.
 %
 %    \begin{macrocode}
 \pdfstringdefDisableCommands{\def\varepsilon{\textepsilon}}

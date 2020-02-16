@@ -23,15 +23,13 @@
   prefix=hep@
 }
 \DeclareStringOption[a4]{paper}
-\newcommand*{\@paper}[1]{\setkeys{hep}{paper={#1}}}
 \DeclareStringOption[11pt]{font}
 \DeclareBoolOption[false]{defaults}
+\DeclareStringOption[british]{lang}
 \DeclareBoolOption[true]{parindent}
 \DeclareComplementaryOption{parskip}{parindent}
 \DeclareBoolOption[true]{serif}
 \DeclareComplementaryOption{sansserif}{serif}
-\DeclareStringOption[british]{language}
-\newcommand*{\@language}[1]{\setkeys{hep}{language={#1}}}
 \DeclareBoolOption[false]{eqnarray}
 \DeclareBoolOption[true]{bibliography}
 \DeclareBoolOption[true]{manual}
@@ -73,7 +71,7 @@
 \ifxetexorluatex\else
   \RequirePackage[utf8]{inputenc}
 \fi
-\RequirePackage[\hep@language]{babel}
+\RequirePackage[\hep@lang]{babel}
 \RequirePackage{csquotes}
 
 \ifhep@serif\else
@@ -96,7 +94,7 @@
   \input{size\@ptsize.clo}
 \fi
 
-\RequirePackage[all, \hep@language]{foreign}
+\RequirePackage[all, british]{foreign}
 \DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
 
 \newcommand{\no}[1]{\textnumero~#1}
@@ -139,11 +137,9 @@
 \newcommand{\useparindent}{%
   \setlength{\parskip}{0pt}%
   \setlength{\parindent}{15pt}%
-  \if@twocolumn
-  \setlength\parindent{1em}
-\else
-  \setlength\parindent{17\p@}
-\fi
+  \if@twocolumn\setlength\parindent{1em}
+  \else\setlength\parindent{1.5em}
+  \fi
 }
 \ifhep@parindent\useparindent\fi
 
@@ -167,7 +163,7 @@
   }%
 }
 
-\mathdef{\i}{\mathoperator{i}}
+\AtBeginDocument{\mathdef{\i}{\operatorname{i}}}
 
 \ifhep@eqnarray\else%
   \let\eqnarray\@undefined
