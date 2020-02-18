@@ -16,7 +16,6 @@
 %% LaTeX version 2005/12/01 or later.
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesPackage{hep-paper}[2020/01/02 v1.2 Publications in High Energy Physics]
-
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
   family=hep,
@@ -71,6 +70,7 @@
 \ifxetexorluatex\else
   \RequirePackage[utf8]{inputenc}
 \fi
+
 \RequirePackage[\hep@lang]{babel}
 \RequirePackage{csquotes}
 
@@ -173,23 +173,15 @@
 \RequirePackage{bm}
 \let\mathbf\bm
 \g@addto@macro\bfseries{\boldmath}
-\ifhep@serif
-  \DeclareMathAlphabet{\mathsf}%
-    {\@encoding}{\sfdefault}{\mddefault}{\sldefault}
-  \SetMathAlphabet{\mathsf}%
-    {bold}{\@encoding}{\sfdefault}{\bfdefault}{\sldefault}
-  \DeclareMathAlphabet{\mathsfup}%
-    {\@encoding}{\sfdefault}{\mddefault}{\updefault}
-  \SetMathAlphabet{\mathsfup}%
-    {bold}{\@encoding}{\sfdefault}{\bfdefault}{\updefault}
-\else
-  \renewcommand\mathsf[1]{#1}
-  \newcommand\mathsfup[1]{\mathrm{#1}}
-\fi
-
-\RequirePackage{fixmath}
+\RequirePackage[
+  OMLmathsfit,
+  OMLmathsf,
+  OMLmathtt,
+  rmdefault=cmss
+]{isomath}
 \ifhep@serif\else
   \RequirePackage[slantedGreek]{sfmath}
+  \renewcommand{\mathsf}[1]{#1}
 \fi
 
 \RequirePackage{physics}
@@ -279,13 +271,13 @@
   \tikzsetnextfilename{#2}\centering%
   \includegraphics[width=#1\linewidth]{#2}%
 }
-\newcommand{\relgraphicspath}[1]{\graphicspath{{./#1/}}}
+\newcommand{\graphics}[1]{\graphicspath{{./#1/}}}
 
 \date{}
 
 \author{}
 \AtEndOfClass{\newcommand{\email}[1]{%
-  \unskip\thanks{\href{mailto:#1}{\texttt{#1}}}
+  \unskip\thanks{\online{mailto:#1}{#1}}
 }}
 \RequirePackage{authblk}
 \renewcommand\Affilfont{\footnotesize}
@@ -317,19 +309,23 @@
 \let\old@abstract\abstract
 \renewcommand\abstract{\old@abstract\noindent\ignorespaces}
 
-\ifhep@bibliography%
-\RequirePackage[sorting=none,style=numeric-comp,giveninits=true]{biblatex}
+\ifhep@bibliography
+\RequirePackage[
+  sorting=none,
+  style=numeric-comp,
+  giveninits=true
+]{biblatex}
 \newcommand{\@reg@exp}{\regexp{\A(\p{L}+)?\d+(\p{L}+)?\Z}}
 \newcommand{\@reg@exp@}{\regexp{\A(\p{L}+)?(\d+)(\p{L}+)?\Z}}
 \DeclareSourcemap{%
   \maps[datatype=bibtex,overwrite=true]{%
     \map{%
       \step[fieldsource=Collaboration,final=true]%
-      \step[fieldset=usera,origfieldval,final=true]
+      \step[fieldset=usere,origfieldval,final=true]
     }%
     \map{%
       \step[fieldsource=reportNumber,final=true]%
-      \step[fieldset=userb,origfieldval,final=true]
+      \step[fieldset=userf,origfieldval,final=true]
     }%
     \map[overwrite]{
       \step[fieldsource=volume, match=\@reg@exp, final]
@@ -341,66 +337,60 @@
 }
 
 \renewbibmacro*{author}{%
-  \iffieldundef{usera}{\printnames{author}}{\textbf{\printfield{usera}}}%
+  \iffieldundef{usere}{\printnames{author}}{\textbf{\printfield{usere}}}%
 }
 
 \renewbibmacro*{in:}{%
   \iffieldundef{journal}{}{\printtext{\bibstring{in}\intitlepunct}}%
 }
 
-\renewbibmacro*{finentry}{%
-  \iffieldundef{userb}{}{%
-    \textls[0]{\small{\textsc{%
-      \newunitpunct\textnumero\intitlepunct\printfield{userb}%
-    }}}%
-  }\finentry%
+\letbibmacro{doi+eprint+url-old}{doi+eprint+url}
+\renewbibmacro*{doi+eprint+url}{%
+  \usebibmacro{doi+eprint+url-old}
+  \iffieldundef{userf}{}{\textls[0]{%
+    \newunitpunct\space\textnumero\intitlepunct{%
+      \textsc{\printfield{userf}}%
+    }%
+  }}%
 }
-
-\renewbibmacro*{related:default}[1]{%
-  \renewcommand*{\newunitpunct}{\addcomma\space}%
-  \entrydata{#1}{\usebibmacro{doi+eprint+url}}%
-}
-\renewcommand*{\relatedpunct}{\addcolon\space}
-\renewcommand*{\relateddelim}{\adddot\space}
 
 \DeclareFieldFormat{eprint:ctan}{%
-  CTAN\addcolon\space%
-    \ifhyperref{%
-      \href{https://ctan.org/pkg/#1}{\nolinkurl{#1}}%
-    }{%
-      \nolinkurl{#1}}%
-  }
+  CTAN\addcolon\space\ifhyperref{%
+    \href{https://ctan.org/pkg/#1}{\nolinkurl{#1}}%
+  }{%
+    \nolinkurl{#1}%
+  }%
+}
 \DeclareFieldAlias{eprint:CTAN}{eprint:ctan}
 
 \DeclareFieldFormat{eprint:github}{%
-  GitHub\addcolon\space
-  \ifhyperref{%
-    \href{%
+  GitHub\addcolon\space\ifhyperref{\href{%
       https://github.com/\thefield{eprintclass}/#1%
     }{%
       \nolinkurl{\thefield{eprintclass}/#1}%
     }%
   }{%
-    \nolinkurl{\thefield{eprintclass}/#1}}%
-  }
+    \nolinkurl{\thefield{eprintclass}/#1}
+  }%
+}
 \DeclareFieldAlias{eprint:GitHub}{eprint:github}
 
 \DeclareFieldFormat{eprint:sourceforge}{%
-  SourceForge\addcolon\space%
-    \ifhyperref{%
-      \href{https://sourceforge.net/projects/#1}{\nolinkurl{#1}}%
-    }{%
-      \nolinkurl{#1}}%
-  }
+  SourceForge\addcolon\space\ifhyperref{%
+    \href{https://sourceforge.net/projects/#1}{\nolinkurl{#1}}%
+  }{%
+    \nolinkurl{#1}%
+  }%
+}
 \DeclareFieldAlias{eprint:SourceForge}{eprint:sourceforge}
 
 \DeclareFieldFormat{eprint:hepforge}{%
-  HEPForge\addcolon\space%
-    \ifhyperref{%
-      \href{https://#1/hepforge.org/}{\nolinkurl{#1}}%
-    }{%
-      \nolinkurl{#1}}%
-  }
+  HEPForge\addcolon\space\ifhyperref{%
+    \href{https://#1/hepforge.org/}{\nolinkurl{#1}}%
+  }{%
+    \nolinkurl{#1}%
+  }%
+}
 \DeclareFieldAlias{eprint:HEPForge}{eprint:hepforge}
 
 \let\old@printbibliography\printbibliography
@@ -409,10 +399,10 @@
 
 \RequirePackage{hyperref}
 \hypersetup{
-  hidelinks,
-  linktoc=all,
   pdfencoding=auto,
   psdextra,
+  hidelinks,
+  linktoc=all,
   breaklinks=true,
   pdfcreator={},
   pdfproducer={}

@@ -18,26 +18,28 @@
 % \iffalse
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
 %<package>\ProvidesPackage{hep-paper}[2020/01/02 v1.2 Publications in High Energy Physics]
-%
+
 %<*driver>
 \documentclass{ltxdoc}
 
-\usepackage[parskip]{hep-paper}
+\MacroIndent=1.5em
 
-\makeatletter
-\newenvironment{decl}[1][]%
-    {\par\small\addvspace{4.5ex plus 1ex}%
-     \vskip -\parskip
-     \ifx\relax#1\relax
-        \def\@decl@date{}%
-     \else
-        \def\@decl@date{\NEWfeature{#1}}%
-     \fi
-     \noindent\hspace{-\leftmargini}%
-     \begin{tabular}{|l|}\hline\ignorespaces}%
-    {\\\hline\end{tabular}\nobreak\@decl@date\par\nobreak
-     \vspace{2.3ex}\vskip -\parskip}
-\makeatother
+% \makeatletter
+% \newenvironment{decl}[1][]%
+%     {\par\small\addvspace{4.5ex plus 1ex}%
+%      \vskip -\parskip
+%      \ifx\relax#1\relax
+%         \def\@decl@date{}%
+%      \else
+%         \def\@decl@date{\NEWfeature{#1}}%
+%      \fi
+%      \noindent\hspace{-\leftmargini}%
+%      \begin{tabular}{|l|}\hline\ignorespaces}%
+%     {\\\hline\end{tabular}\nobreak\@decl@date\par\nobreak
+%      \vspace{2.3ex}\vskip -\parskip}
+% \makeatother
+
+\usepackage[parskip]{hep-paper}
 
 \bibliography{bibliography}
 
@@ -51,7 +53,7 @@
 %</driver>
 % \fi
 %
-% \CheckSum{658}
+% \CheckSum{613}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -70,7 +72,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2019/01/01}{Initial version of the style file}
-% \changes{v1.1}{2020/01/01}{Transition to a documented LaTeX source file}
+% \changes{v1.1}{2020/01/01}{Transition to documented LaTeX source file}
 % \changes{v1.2}{2020/02/01}{Inclusion of package options}
 %
 % \GetFileInfo{hep-paper.sty}
@@ -231,24 +233,17 @@
 % They in turn load the |amsmath| \cite{amsmath} and |amsfonts| \cite{amsfonts} packages.
 % \DescribeMacro{\mathbf}
 % Bold math, including |\mathbf| is provided by the |bm| package \cite{bm}.
-% ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
+% Therefore, ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
 % Macros switching to |bfseries| such as |\title|\marg{text} and |\section|\marg{text} are ensured to also typeset math in bold.
 % This may cause trouble if bold symbols carry an additional non-implicit meaning.
-% \DescribeMacro{\mathrm}
-% The |\mathrm| alphabet is redefined to be upright sans serif in sans serif environments and traditional |\mathrm| otherwise.
-% ($\mathrm A \mathrm b \mathrm \Gamma \mathrm \delta \mathbf{\mathrm A} \mathbf{\mathrm b} \mathbf{\mathrm \Gamma} \mathbf{\mathrm \delta}$).
 % \DescribeMacro{\mathsf}
 % The math sans serif alphabet is redefined to be italic.
 % ($\mathsf A \mathsf b \mathsf \Gamma \mathsf \delta \mathbf{\mathsf A} \mathbf{\mathsf b} \mathbf{\mathsf \Gamma} \mathbf{\mathsf \delta}$).
-% The later two alphabets are not distinguishable from the first two alphabets if the |sans serif| package option is chosen.
-% \DescribeMacro{\mathsfup}
-% An upright sans serif math alphabet is defined.
-% ($\mathsfup A \mathsfup B \mathsfup \Gamma \mathsfup \delta \mathbf{\mathsfup A} \mathbf{\mathsfup b} \mathbf{\mathsfup \Gamma} \mathbf{\mathsfup \delta}$).
-% FIXME Greek letters are broken
 % Details about the font handling in TeX can be found in \cite{fntguide}.
 %
 % \DescribeMacro{\text}
-% The |\text|\marg{text} macro makes it possible to write text within math mode.
+% The |\text|\marg{text} macro makes it possible to write text within math mode .
+% Therefore, ($ \text A  \text b  \text \Gamma \text \delta \text{\textbf A} \text{\textbf b} \text{\textbf \Gamma} \text{\textbf \delta}$).
 % The often used |\mathrm|\marg{text} and |\rm|\marg{text} macros are \emph{not} the correct tool for this purpose, as they switch to roman font shape.
 % This behaviour conflicts \eg with the |sansserif| package option.
 %
@@ -262,7 +257,7 @@
 % \DescribeMacro{\diag}
 % A diagonal matrix operator is defined |\diag|.
 % \DescribeMacro{\mathdef}
-% The macro |\mathdef|\marg{name}\marg{behaviour} defined that defines macros only within mathmode without changing the text mode definition.
+% The macro |\mathdef|\marg{name}\marg{code} defined that defines macros only within mathmode without changing the text mode definition.
 % \DescribeMacro{\i}
 % The imaginary unit $\i$ is defined using this functionality.
 %
@@ -359,9 +354,9 @@
 % The |booktabs| \cite{booktabs} and |multirow| \cite{multirow} packages are loaded enabling publication quality tabulars such as in \cref{tab:booktabs}.
 %
 % \DescribeMacro{\graphic}
-% \DescribeMacro{\relgraphicspath}
+% \DescribeMacro{\graphics}
 % The |graphicx| package \cite{graphicx} is loaded and the |\graphic|\oarg{width}\marg{figure} macro is defined, which is a wrapper for the |\includegraphics|\marg{figure} macro and takes the figure width as fraction of the |\linewidth| as optional argument (default 1).
-% If the graphics are located in a sub-folder its path can be indicated by |\relgraphicspath|\marg{folder}.
+% If the graphics are located in a sub-folder its path can be indicated by |\graphics|\marg{folder}.
 %
 % \subsection{Bibliography}
 %
@@ -372,7 +367,6 @@
 % The bibliography is generated by |biber| \cite{biber}.
 % |biblatex| is extended to be able to cope with the |collaboration| and |reportNumber| fields provided by \online{https://inspirehep.net}{inspirehep.net} and a bug in the volume number is fixed.
 % Additionally, \online{https://ctan.org}{ctan.org}, \online{https://github.com}{github.com}, \online{https://sourceforge.net}{sourceforge.net}, and \online{https://hepforge.org}{hepforge.org} are recognized as |eprinttype|s.
-% Finally, multiple |eprinttype|, |url|, and |doi| fields can be added using the |related| features provided by |biblatex|.
 %
 % \section{Conclusion}
 %
@@ -745,37 +739,21 @@
 \g@addto@macro\bfseries{\boldmath}
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\mathsf}
-% \begin{macro}{\mathsfup}
-% Redefine the mathsf font to be italic and define an upright mathsf font.
-%    \begin{macrocode}
-\ifhep@serif
-  \DeclareMathAlphabet{\mathsf}%
-    {\@encoding}{\sfdefault}{\mddefault}{\sldefault}
-  \SetMathAlphabet{\mathsf}%
-    {bold}{\@encoding}{\sfdefault}{\bfdefault}{\sldefault}
-  \DeclareMathAlphabet{\mathsfup}%
-    {\@encoding}{\sfdefault}{\mddefault}{\updefault}
-  \SetMathAlphabet{\mathsfup}%
-    {bold}{\@encoding}{\sfdefault}{\bfdefault}{\updefault}
-\else
-  \renewcommand\mathsf[1]{#1}
-  \newcommand\mathsfup[1]{\mathrm{#1}}
-\fi
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-
-% \subsection{Greek letters}
 %
 % Load the |fixmath| package \cite{fixmath} which ensures that upper Greek letters in math mode are italic.
 %    \begin{macrocode}
-\RequirePackage{fixmath}
+\RequirePackage[
+  OMLmathsfit,
+  OMLmathsf,
+  OMLmathtt,
+  rmdefault=cmss
+]{isomath}
 %    \end{macrocode}
 % Ensure that also math is sans serif if the option sans serif is passed to the package
 %    \begin{macrocode}
 \ifhep@serif\else
   \RequirePackage[slantedGreek]{sfmath}
+  \renewcommand{\mathsf}[1]{#1}
 \fi
 %    \end{macrocode}
 
@@ -802,8 +780,7 @@
 % \end{macro}
 
 % \begin{macro}{\oset}
-% \begin{macro}{\overleftright}
-% Define a new overset macro |\oset|\oarg{offsest}\marg{over}\marg{base} and use it to define a over left right arrow |\overleftright|\marg{base}.
+% Define a new overset macro |\oset|\oarg{offset}\marg{over}\marg{base}
 %    \begin{macrocode}
 \newcommand{\oset}[3][-1pt]{%
   \raisebox{1pt}{%
@@ -815,9 +792,13 @@
     }%
   }%
 }
-\newcommand{\overleftright}[1]{\oset{\leftrightarrow}{#1}}
 %    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\overleftright}
+% Define a over left right arrow |\overleftright|\marg{base}.
+%    \begin{macrocode}
+\newcommand{\overleftright}[1]{\oset{\leftrightarrow}{#1}}
+%    \end{macrocode}
 % \end{macro}
 
 % \section{Floats}
@@ -914,7 +895,7 @@
 % \subsection{Figures}
 %
 % \begin{macro}{\graphic}
-% Provide the |\graphic| macro for the inclusion of figures with the |graphicx| package \cite{graphicx}.
+% Provide the |\graphic| macro for the inclusion of figures using the |graphicx| package \cite{graphicx}.
 %    \begin{macrocode}
 \RequirePackage{graphicx}
 \providecommand{\tikzsetnextfilename}[1]{}
@@ -925,10 +906,10 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\relgraphicspath}
-% Provide the |\relgraphicspath| macro for the indication of a single subfolder with graphics.
+% \begin{macro}{\graphics}
+% Provide the |\graphics| macro for the indication of a single subfolder with graphics.
 %    \begin{macrocode}
-\newcommand{\relgraphicspath}[1]{\graphicspath{{./#1/}}}
+\newcommand{\graphics}[1]{\graphicspath{{./#1/}}}
 %    \end{macrocode}
 % \end{macro}
 
@@ -953,7 +934,7 @@
 % Provide macro for the email of authors used as |\author{|$\langle name\rangle$| \email{|$\langle email\rangle$|}}|.
 %    \begin{macrocode}
 \AtEndOfClass{\newcommand{\email}[1]{%
-  \unskip\thanks{\href{mailto:#1}{\texttt{#1}}}
+  \unskip\thanks{\online{mailto:#1}{#1}}
 }}
 %    \end{macrocode}
 % \end{macro}
@@ -1014,11 +995,19 @@
 
 % \section{Bibliography}
 %
+% Check if bibliography management is requested.
+%    \begin{macrocode}
+\ifhep@bibliography
+%    \end{macrocode}
+%
 % \begin{macro}{\bibliography}
 % Load the |biblatex| package \cite{biblatex} with a JHEP like bibliography style.
 %    \begin{macrocode}
-\ifhep@bibliography%
-\RequirePackage[sorting=none,style=numeric-comp,giveninits=true]{biblatex}
+\RequirePackage[
+  sorting=none,
+  style=numeric-comp,
+  giveninits=true
+]{biblatex}
 %    \end{macrocode}
 % \end{macro}
 % Read the collaboration and pre-print information if present.
@@ -1030,11 +1019,11 @@
   \maps[datatype=bibtex,overwrite=true]{%
     \map{%
       \step[fieldsource=Collaboration,final=true]%
-      \step[fieldset=usera,origfieldval,final=true]
+      \step[fieldset=usere,origfieldval,final=true]
     }%
     \map{%
       \step[fieldsource=reportNumber,final=true]%
-      \step[fieldset=userb,origfieldval,final=true]
+      \step[fieldset=userf,origfieldval,final=true]
     }%
     \map[overwrite]{
       \step[fieldsource=volume, match=\@reg@exp, final]
@@ -1049,7 +1038,7 @@
 % Override the author information with collaboration information if present.
 %    \begin{macrocode}
 \renewbibmacro*{author}{%
-  \iffieldundef{usera}{\printnames{author}}{\textbf{\printfield{usera}}}%
+  \iffieldundef{usere}{\printnames{author}}{\textbf{\printfield{usere}}}%
 }
 %    \end{macrocode}
 
@@ -1062,74 +1051,65 @@
 
 % Add the pre-print information if present.
 %    \begin{macrocode}
-\renewbibmacro*{finentry}{%
-  \iffieldundef{userb}{}{%
-    \textls[0]{\small{\textsc{%
-      \newunitpunct\textnumero\intitlepunct\printfield{userb}%
-    }}}%
-  }\finentry%
+\letbibmacro{doi+eprint+url-old}{doi+eprint+url}
+\renewbibmacro*{doi+eprint+url}{%
+  \usebibmacro{doi+eprint+url-old}
+  \iffieldundef{userf}{}{\textls[0]{%
+    \newunitpunct\space\textnumero\intitlepunct{%
+      \textsc{\printfield{userf}}%
+    }%
+  }}%
 }
-%    \end{macrocode}
-
-% Enable multiple DOIs, pre-prints and URLs with the |related| feature
-%    \begin{macrocode}
-\renewbibmacro*{related:default}[1]{%
-  \renewcommand*{\newunitpunct}{\addcomma\space}%
-  \entrydata{#1}{\usebibmacro{doi+eprint+url}}%
-}
-\renewcommand*{\relatedpunct}{\addcolon\space}
-\renewcommand*{\relateddelim}{\adddot\space}
 %    \end{macrocode}
 
 % Add CTAN as a pre-print option
 %    \begin{macrocode}
 \DeclareFieldFormat{eprint:ctan}{%
-  CTAN\addcolon\space%
-    \ifhyperref{%
-      \href{https://ctan.org/pkg/#1}{\nolinkurl{#1}}%
-    }{%
-      \nolinkurl{#1}}%
-  }
+  CTAN\addcolon\space\ifhyperref{%
+    \href{https://ctan.org/pkg/#1}{\nolinkurl{#1}}%
+  }{%
+    \nolinkurl{#1}%
+  }%
+}
 \DeclareFieldAlias{eprint:CTAN}{eprint:ctan}
 %    \end{macrocode}
 
 % Add GitHub as a pre-print option
 %    \begin{macrocode}
 \DeclareFieldFormat{eprint:github}{%
-  GitHub\addcolon\space
-  \ifhyperref{%
-    \href{%
+  GitHub\addcolon\space\ifhyperref{\href{%
       https://github.com/\thefield{eprintclass}/#1%
     }{%
       \nolinkurl{\thefield{eprintclass}/#1}%
     }%
   }{%
-    \nolinkurl{\thefield{eprintclass}/#1}}%
-  }
+    \nolinkurl{\thefield{eprintclass}/#1}
+  }%
+}
 \DeclareFieldAlias{eprint:GitHub}{eprint:github}
 %    \end{macrocode}
 
 % Add SourceForge as a pre-print option
 %    \begin{macrocode}
 \DeclareFieldFormat{eprint:sourceforge}{%
-  SourceForge\addcolon\space%
-    \ifhyperref{%
-      \href{https://sourceforge.net/projects/#1}{\nolinkurl{#1}}%
-    }{%
-      \nolinkurl{#1}}%
-  }
+  SourceForge\addcolon\space\ifhyperref{%
+    \href{https://sourceforge.net/projects/#1}{\nolinkurl{#1}}%
+  }{%
+    \nolinkurl{#1}%
+  }%
+}
 \DeclareFieldAlias{eprint:SourceForge}{eprint:sourceforge}
 %    \end{macrocode}
 
 % Add HEPForge as a pre-print option
 %    \begin{macrocode}
 \DeclareFieldFormat{eprint:hepforge}{%
-  HEPForge\addcolon\space%
-    \ifhyperref{%
-      \href{https://#1/hepforge.org/}{\nolinkurl{#1}}%
-    }{%
-      \nolinkurl{#1}}%
-  }
+  HEPForge\addcolon\space\ifhyperref{%
+    \href{https://#1/hepforge.org/}{\nolinkurl{#1}}%
+  }{%
+    \nolinkurl{#1}%
+  }%
+}
 \DeclareFieldAlias{eprint:HEPForge}{eprint:hepforge}
 %    \end{macrocode}
 
@@ -1138,9 +1118,13 @@
 %    \begin{macrocode}
 \let\old@printbibliography\printbibliography
 \renewcommand{\printbibliography}{\sloppy\old@printbibliography}
-\fi
 %    \end{macrocode}
 % \end{macro}
+%
+% End check for bibliography option.
+%    \begin{macrocode}
+\fi
+%    \end{macrocode}
 
 % \section{Hyperlinks and References}
 %
@@ -1149,10 +1133,10 @@
 %    \begin{macrocode}
 \RequirePackage{hyperref}
 \hypersetup{
-  hidelinks,
-  linktoc=all,
   pdfencoding=auto,
   psdextra,
+  hidelinks,
+  linktoc=all,
   breaklinks=true,
   pdfcreator={},
   pdfproducer={}
