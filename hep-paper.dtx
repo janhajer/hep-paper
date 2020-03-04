@@ -43,6 +43,9 @@
 
 \bibliography{bibliography}
 
+\usepackage{titletoc}
+\titlecontents{section}[0em]{\medskip\bfseries}{\thecontentslabel\hspace{.8em}}{}{\hfill\contentspage}
+
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
@@ -53,7 +56,7 @@
 %</driver>
 % \fi
 %
-% \CheckSum{613}
+% \CheckSum{818}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -145,11 +148,14 @@
 % \DescribeMacro{sansserif}
 % The |sansserif| option switches the document including math to sans serif font shape.
 %
-% \DescribeMacro{manual}
-% The |manual| option turns manual float placement off.
+% \DescribeMacro{manualplacement}
+% The |manualplacement| option turns manual float placement off.
 %
 % \DescribeMacro{bibliography}
-% The |bibliography|=\meta{bool} option can prevent the |biblatex| package \cite{biblatex} from being loaded.
+% The |bibliography|=\meta{key} option passes the \meta{key} as |style| string to the |biblatex| package \cite{biblatex} or for \meta{key}=|false| prevents loading |biblatex|.
+%
+% \DescribeMacro{glossaries}
+% The |glossaries| option turns the use of glossaries off.
 %
 % \DescribeMacro{eqnarray}
 % The |eqnarray| option prevents the |eqnarray| environment from being undefined.
@@ -181,8 +187,8 @@
 %
 % \subsection{Text}
 %
-% Hyphenation is provided by the |babel| package \cite{babel}.
-% Finally, quotation commands are provided by the |csquotes| package \cite{csquotes} recommended by the |babel| package.
+% \DescribeMacro{\enquote}
+% Hyphenation is provided by the |babel| package \cite{babel} and quotation commands are provided by the |csquotes| package \cite{csquotes} recommended by the |babel| package.
 % \DescribeMacro{\MakeOuterQuote}
 % The last package provides the convenient macro |\MakeOuterQuote{"}| allowing to simply use |"| instead of the pair |``| and |''|.
 %
@@ -196,9 +202,6 @@
 % \DescribeMacro{\software}
 % The |\software|\oarg{version}\marg{name} macro is typeset as \software[2\epsilon]{LaTeX}.
 %
-% \DescribeMacro{\sloppy}
-% The |\sloppy| macro is redefined to be less invasive.
-%
 % \DescribeMacro{\online}
 % The |\online|\marg{text}\marg{url} macro combines the features of the |\href|\marg{text}\marg{url} and the |\url|\marg{text} macros.
 %
@@ -211,11 +214,17 @@
 % \DescribeMacro{\useparindent}
 % Switch to |parindent| mode.
 %
+% \DescribeMacro{\textsc}
+% A sans serif version of \textsf{\textsc{Small Caps}} is provided.
+%
 % \subsubsection{References and footnotes}
 %
 % \DescribeMacro{\cref}
 % References are extended with the |cleveref| package \cite{cleveref}, which allows to \eg type just |\cref|\marg{key}  in order to write 'Figure 1'.
 % The |cleveref| package furthermore allows to reference multiple objects within one |\cref|\marg{key} (similar to the |\cite|\marg{key} macro).
+%
+% \DescribeMacro{\subcref}
+% The |\subcref| macro combines the features of the |\subref| and |\cref| macros.
 %
 % \DescribeMacro{\cite}
 % Citations are adjusted to not start on a new line in order to avoid the repeated use of |~\cite|\marg{key}.
@@ -227,6 +236,16 @@
 % \DescribeMacro{\footnote}
 % Footnotes are adjusted to swallow white space before the footnote mark and at the beginning of the footnote text.
 %
+% \subsubsection{Acronyms}
+%
+% \DescribeMacro{\acronym}
+% \DescribeMacro{\shortacronym}
+% \DescribeMacro{\longacronym}
+% The |\acronym|\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\marg{definition}\oarg{plural\linebreak[4]definition} macro generates the |\|\meta{abbreviation} and |\|\meta{abbreviation}|s| macros.
+% The starred version does not add an \enquote{s} to the abbreviation plural.
+% The long form is only shown at for first appearance of these macros, later appearances generate the abbreviation with a hyperlink to the long form.
+% The |\shortacronym| and |\longacronym| macros only show the short or long form of their acronym.
+%
 % \subsection{Math}
 %
 % The |mathtools| \cite{mathtools} and |amssymb| \cite{amsfonts} packages are loaded.
@@ -236,16 +255,15 @@
 % Therefore, ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
 % Macros switching to |bfseries| such as |\title|\marg{text} and |\section|\marg{text} are ensured to also typeset math in bold.
 % This may cause trouble if bold symbols carry an additional non-implicit meaning.
+% \DescribeMacro{\text}
+% The |\text|\marg{text} macro makes it possible to write text within math mode.
+% Therefore, ($ \text A  \text b  \text \Gamma \text \delta \text{\textbf A} \text{\textbf b} \text{\textbf \Gamma} \text{\textbf \delta}$).
+% The often used |\mathrm|\marg{text} and |\rm|\marg{text} macros are \emph{not} the correct tool for this purpose, as they switch to roman font shape.
+% This behaviour conflicts \eg with the |sansserif| package option.
 % \DescribeMacro{\mathsf}
 % The math sans serif alphabet is redefined to be italic.
 % ($\mathsf A \mathsf b \mathsf \Gamma \mathsf \delta \mathbf{\mathsf A} \mathbf{\mathsf b} \mathbf{\mathsf \Gamma} \mathbf{\mathsf \delta}$).
 % Details about the font handling in TeX can be found in \cite{fntguide}.
-%
-% \DescribeMacro{\text}
-% The |\text|\marg{text} macro makes it possible to write text within math mode .
-% Therefore, ($ \text A  \text b  \text \Gamma \text \delta \text{\textbf A} \text{\textbf b} \text{\textbf \Gamma} \text{\textbf \delta}$).
-% The often used |\mathrm|\marg{text} and |\rm|\marg{text} macros are \emph{not} the correct tool for this purpose, as they switch to roman font shape.
-% This behaviour conflicts \eg with the |sansserif| package option.
 %
 % \DescribeMacro{\nicefrac}
 % \DescribeMacro{\flatfrac}
@@ -270,7 +288,8 @@
 % In order to further reduce the size the of equation counter it can be useful to wrap |align| environments with multiple rows in a |subequations| environment.
 %
 % \DescribeMacro{eqnarray}
-% The depreciated |eqnarray| environment is undefined as long this behaviour is not prevented by the |eqn array| package option and the |align| environment should be used instead.
+% The depreciated |eqnarray| environment is undefined as long this behaviour is not prevented by the |eqnarray| package option.
+% The |align| environment should be used instead.
 %
 % \subsubsection{Physics}
 %
@@ -339,8 +358,12 @@
 % % \caption{The \protecting{|booktabs|} and \protecting{|multirow|} features.}
 % \label{tab:booktabs}
 % \end{panels}
-% \caption{Example use of the \protecting{|panels|} environment in Panel \subref{tab:panels} and the features from the \protecting{|booktabs|} and \protecting{|multirow|} packages in Panel \subref{tab:booktabs}.}
-% \label{tab:table}
+% \begin{subfigure}{2cm}
+% \caption{test}
+% \label{test}
+% \end{subfigure}
+% \caption{Example use of the \protecting{|panels|} environment in Panel \subref{tab:panels} and the features from the \protecting{|booktabs|} and \protecting{|multirow|} packages in Panel \subref{tab:booktabs}.
+% } \label{tab:table}
 % \end{table}
 %
 % \DescribeEnv{panels}
@@ -367,6 +390,16 @@
 % The bibliography is generated by |biber| \cite{biber}.
 % |biblatex| is extended to be able to cope with the |collaboration| and |reportNumber| fields provided by \online{https://inspirehep.net}{inspirehep.net} and a bug in the volume number is fixed.
 % Additionally, \online{https://ctan.org}{ctan.org}, \online{https://github.com}{github.com}, \online{https://sourceforge.net}{sourceforge.net}, and \online{https://hepforge.org}{hepforge.org} are recognized as |eprinttype|s.
+% \DescribeMacro{erratum}
+% Errata can be included using the |related| feature.
+% | \article{|\meta{key1}|,|\\
+% |   |\dots|,|\\
+% |   relatedtype="erratum",|\\
+% |   related="|\meta{key2}|",|\\
+% | }|\\
+% | \article{|\meta{key2}|,|\\
+% |   |\dots|,|\\
+% | }|
 %
 % \section{Conclusion}
 %
@@ -449,16 +482,23 @@
 % \end{macro}
 %
 % \begin{macro}{bibliography}
-% Provide the option |bibliography| for disabling the automatic loading of the |biblatex| package \cite{biblatex}.
+% Provide the option |bibliography| for passing a |style| string to the |biblatex| package \cite{biblatex} or disabling the automatic loading of |biblatex|.
 %    \begin{macrocode}
-\DeclareBoolOption[true]{bibliography}
+\DeclareStringOption[numeric-comp]{bibliography}
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{manual}
-% Provide the option |manual| for deactivating the manual placement of floats.
+% \begin{macro}{glossaries}
+% Provide the option |glossaries| able to turn of the use of the |glossaries-extra| package \cite{glossaries-extra}.
 %    \begin{macrocode}
-\DeclareBoolOption[true]{manual}
+\DeclareBoolOption[true]{glossaries}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{manualplacement}
+% Provide the option |manualplacement| for deactivating the manual placement of floats.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{manualplacement}
 %    \end{macrocode}
 % \end{macro}
 
@@ -487,18 +527,17 @@
 
 % \section{Text}
 %
-% Load the |alphabeta| \cite{alphabeta} package first in order to archive the correct behaviour.
-% It provides upright Greek letters in text mode.
+% Load |alphabeta| package \cite{alphabeta} first in order to archive the correct behaviour.
+% The |alphabeta| package provides upright Greek letters in text mode.
 %    \begin{macrocode}
 \RequirePackage{alphabeta}
 %    \end{macrocode}
 %
-% Define |\@encoding| with the font encoding suiting the engine used \cite{euenc}.
 % Load the |fontenc| package \cite{fontenc} with this encoding .
 %    \begin{macrocode}
-\ifxetex\def\@encoding{EU1}
+\ifxetex\def\@encoding{TU}
   \else\ifluatex
-    \def\@encoding{EU2}
+    \def\@encoding{TU}
     \else\def\@encoding{T1}
   \fi
 \fi
@@ -546,6 +585,14 @@
 \fi
 %    \end{macrocode}
 
+% \begin{macro}{\underline}
+% Load the |soul| package \cite{soul} for hyphenable underlined text.
+%    \begin{macrocode}
+\RequirePackage{soul}
+\let\underline\ul
+%    \end{macrocode}
+% \end{macro}
+
 % \subsection{Font size}
 %
 % Undefine previously defined font sizes and load the LaTeX font size file corresponding to the font size option loaded before.
@@ -587,15 +634,8 @@
 %\begin{macro}{\software}
 % Define a macro for software with optional version information |\software|\linebreak[1]\oarg{version}\linebreak[1]\marg{name}.
 %    \begin{macrocode}
-\newcommand{\software}[2][\hspace{-\fontdimen2\font}]{\texttt{#2}~#1}
-%    \end{macrocode}
-% \end{macro}
-
-% \begin{macro}{\sloppy}
-% Redefine |sloppy| to be less invasive \cf |\printbibliography|
-%    \begin{macrocode}
-\def\sloppy{%
-  \emergencystretch 3em \hfuzz .5\p@ \vfuzz\hfuzz%
+\newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
+  \textsc{\small #2}~#1%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -693,7 +733,8 @@
 % \end{macro}
 
 % \begin{macro}{\mathdef}
-% Load the |xparse| package and define the |\mathdef|\marg{name}\marg{macro} macro which (re-) defines macros in math mode only.
+% Define the |\mathdef|\marg{name}\marg{macro} macro which (re-) defines macros in math mode only.
+% This macro is implemented using the |xparse| package \cite{xparse}.
 %    \begin{macrocode}
 \RequirePackage{xparse}
 \DeclareDocumentCommand{\mathdef}{mO{0}m}{%
@@ -748,6 +789,8 @@
   OMLmathtt,
   rmdefault=cmss
 ]{isomath}
+\DeclareMathAlphabet{\mathsf}{OML}{cmbr}{m}{it}
+\SetMathAlphabet{\mathsf}{bold}{OML}{cmbr}{bx}{it}
 %    \end{macrocode}
 % Ensure that also math is sans serif if the option sans serif is passed to the package
 %    \begin{macrocode}
@@ -814,9 +857,9 @@
 
 % \begin{environment}{figure}
 % \begin{environment}{table}
-% Ignore the manual placement if the |manual| option is set to false.
+% Ignore the manual placement if the |manualplacement| option is set to false.
 %    \begin{macrocode}
-\ifhep@manual%
+\ifhep@manualplacement%
   \let\@figure@\figure%
   \let\@end@figure@\endfigure%
   \renewenvironment{figure}[1][tbp]{%
@@ -970,7 +1013,9 @@
 \newcommand\preprint[1]{\long\gdef\@preprint{#1}}
 \RequirePackage{varwidth}
 \newcommand{\@preprint@box}{%
-  \begin{varwidth}{\textwidth}\textsc{\small\@preprint}\end{varwidth}%
+  \begin{varwidth}{\textwidth}%
+    \textsc{\small\@preprint}%
+  \end{varwidth}%
 }
 \RequirePackage{atbegshi}
 \RequirePackage{picture}
@@ -995,19 +1040,20 @@
 
 % \section{Bibliography}
 %
-% Check if bibliography management is requested.
+% Check if bibliography management is requested using the |pdftexcmds| package \cite{pdftexcmds}.
 %    \begin{macrocode}
-\ifhep@bibliography
+\RequirePackage{pdftexcmds}
+\ifnum\pdf@strcmp{\hep@bibliography}{false}=0\else
 %    \end{macrocode}
 %
 % \begin{macro}{\bibliography}
 % Load the |biblatex| package \cite{biblatex} with a JHEP like bibliography style.
 %    \begin{macrocode}
-\RequirePackage[
+\RequirePackage[style=\hep@bibliography]{biblatex}
+\ExecuteBibliographyOptions{
   sorting=none,
-  style=numeric-comp,
   giveninits=true
-]{biblatex}
+}
 %    \end{macrocode}
 % \end{macro}
 % Read the collaboration and pre-print information if present.
@@ -1049,15 +1095,19 @@
 }
 %    \end{macrocode}
 
+% Provide the |\letbibmacro| macro for old |biblatex| installations.
+%    \begin{macrocode}
+\providecommand{\letbibmacro}[2]{\csletcs{abx@macro@#1}{abx@macro@#2}}
+%    \end{macrocode}
+
 % Add the pre-print information if present.
 %    \begin{macrocode}
 \letbibmacro{doi+eprint+url-old}{doi+eprint+url}
 \renewbibmacro*{doi+eprint+url}{%
   \usebibmacro{doi+eprint+url-old}
   \iffieldundef{userf}{}{\textls[0]{%
-    \newunitpunct\space\textnumero\intitlepunct{%
-      \textsc{\printfield{userf}}%
-    }%
+    \newunitpunct\textnumero\intitlepunct%
+    \textsc{\small\printfield{userf}}%
   }}%
 }
 %    \end{macrocode}
@@ -1113,8 +1163,14 @@
 \DeclareFieldAlias{eprint:HEPForge}{eprint:hepforge}
 %    \end{macrocode}
 
+% Add new bibliography string `Erratum´ for the use in the |relatedtype| field.
+%    \begin{macrocode}
+\NewBibliographyString{erratum}
+\DefineBibliographyStrings{english}{erratum={Erratum:}}
+%    \end{macrocode}
+
 % \begin{macro}{\printbibliography}
-% Allow the bibliography to be printed sloppy \cf |\sloppy|
+% Allow the bibliography to be printed sloppy
 %    \begin{macrocode}
 \let\old@printbibliography\printbibliography
 \renewcommand{\printbibliography}{\sloppy\old@printbibliography}
@@ -1170,6 +1226,35 @@
 %    \end{macrocode}
 % \end{macro}
 
+% \begin{macro}{\refstepcounter@...}
+% Adjust the |cleveref| |\refstepcounter@noarg| and |\refstepcounter@optarg| to use the |\@currentlabel| in order to fix problems with |\subref|.
+%    \begin{macrocode}
+\def\refstepcounter@noarg#1{%
+  \cref@old@refstepcounter{#1}%
+  \cref@constructprefix{#1}{\cref@result}%
+  \@ifundefined{cref@#1@alias}%
+    {\def\@tempa{#1}}%
+    {\def\@tempa{\csname cref@#1@alias\endcsname}}%
+  \protected@edef\cref@currentlabel{%
+    [\@tempa][\arabic{#1}][\cref@result]%
+    \noexpand\@currentlabel%
+  }% changed
+}
+
+\def\refstepcounter@optarg[#1]#2{%
+  \cref@old@refstepcounter{#2}%
+  \cref@constructprefix{#2}{\cref@result}%
+  \@ifundefined{cref@#1@alias}%
+    {\def\@tempa{#1}}%
+    {\def\@tempa{\csname cref@#1@alias\endcsname}}%
+  \protected@edef\cref@currentlabel{%
+    [\@tempa][\arabic{#2}][\cref@result]%
+    \noexpand\@currentlabel% changed
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+
 % \begin{macro}{\ref}
 % Adjust |\ref|\marg{key} in order to prevent preceding line breaks and to enable the possibility to reference multiple references at once.
 %    \begin{macrocode}
@@ -1192,6 +1277,13 @@
 %    \end{macrocode}
 % \end{macro}
 
+% \begin{macro}{\subcref}
+% Provide the |\subcref| macro.
+%    \begin{macrocode}
+\newcommand{\subcref}[1]{\cref{sub@#1}}
+%    \end{macrocode}
+% \end{macro}
+
 % \begin{macro}{\cite}
 % Adjust |\cite|\marg{key} in order to prevent preceding line breaks.
 %    \begin{macrocode}
@@ -1206,6 +1298,116 @@
 \DeclareRobustCommand{\labelcrefrange}[2]{%
   \@crefrangenostar{labelcref}{#1}{#2}%
 }
+%    \end{macrocode}
+% \end{macro}
+
+% \section{Acronyms}
+%
+% Acronyms are implemented with the |glossaries-extra| package \cite{glossaries-extra} which is an extension of the |glossaries| package \cite{glossaries}.
+%    \begin{macrocode}
+\ifhep@glossaries
+\RequirePackage{glossaries-extra}
+%    \end{macrocode}
+% The entry count feature is used.
+%    \begin{macrocode}
+\glsenableentrycount
+\glssetcategoryattribute{abbreviation}{entrycount}{1}
+%    \end{macrocode}
+% Provide macros for older |glossaries-extra| installations.
+%    \begin{macrocode}
+\providecommand{\glsxtrusefield}[2]{\@gls@entry@field{#1}{#2}}
+\providecommand{\glsxtrsetfieldifexists}[3]{\glsdoifexists{#1}{#3}}
+\providecommand{\gGlsXtrSetField}[3]{%
+  \glsxtrsetfieldifexists{#1}{#2}{%
+    \csgdef{glo@\glsdetoklabel{#1}@#2}{#3}%
+  }%
+}
+%    \end{macrocode}
+% Hyperlinks from the abbreviation to their definition in the text are set.
+%    \begin{macrocode}
+\glssetcategoryattribute{abbreviation}{nohyperfirst}{true}
+\renewcommand*{\glsdonohyperlink}[2]{{%
+  \glsxtrprotectlinks\edef\fieldvalue{%
+    \glsxtrusefield{\glslabel}{hastarget}%
+  }%
+  \ifdefstring\fieldvalue{true}{#2}{%
+    \gGlsXtrSetField{\glslabel}{hastarget}{true}%
+    \glsdohypertarget{#1}{#2}%
+  }%
+}}
+%    \end{macrocode}
+% \begin{macro}{\acronym}
+%
+% The |\acronym|\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\marg{definition}\oarg{plural\linebreak[4] definition} macro is defined.
+% \begin{itemize}[nosep]
+% \item[\#1] is the star for not having an s in the short plural
+% \item[\#2] is the optional typeset abbreviation
+% \item[\#3] is the mandatory abbreviation
+% \item[\#4] is the mandatory long form
+% \item[\#5] is the optional plural long form
+% \end{itemize}
+%    \begin{macrocode}
+\DeclareDocumentCommand{\acronym}{sommo}{
+  \newabbreviation[
+    longplural=\IfNoValueTF{#5}{#4s}{#5},
+    \glsshortpluralkey=\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}
+  ]{#3}{\IfNoValueTF{#2}{#3}{#2}}{#4}
+  \expandafter\newcommand\csname#3\endcsname{\cgls{#3}\@\xspace}
+  \pdfstringdefDisableCommands{\expandafter\def\csname#3\endcsname{%
+    \IfNoValueTF{#2}{#3}{#2} }%
+  }
+  \expandafter\mathdef\csname#3\endcsname{\text{\glsxtrshort{#3}}}%
+  \expandafter\newcommand\csname#3s\endcsname{\cglspl{#3}\@\xspace}
+  \pdfstringdefDisableCommands{\expandafter\def\csname#3s\endcsname{%
+    \IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}} }%
+  }%
+  \expandafter\mathdef\csname#3s\endcsname{\text{\glsxtrshortpl{#3}}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\shortacronym}
+% The |\shortacronym| never expands into the long form.
+%    \begin{macrocode}
+\DeclareDocumentCommand{\shortacronym}{somm}{
+  \newabbreviation[
+    \glsshortpluralkey=\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}
+  ]{#3}{\IfNoValueTF{#2}{#3}{#2}}{#4}
+  \expandafter\newcommand\csname#3\endcsname{\cgls*{#3}\@\xspace}
+  \pdfstringdefDisableCommands{\expandafter\def\csname#3\endcsname{%
+    \IfNoValueTF{#2}{#3}{#2} }%
+  }
+  \expandafter\mathdef\csname#3\endcsname{\text{\glsxtrshort*{#3}}}%
+  \expandafter\newcommand\csname#3s\endcsname{\cglspl*{#3}\@\xspace}
+  \pdfstringdefDisableCommands{\expandafter\def\csname#3s\endcsname{%
+    \IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}} }%
+  }%
+  \expandafter\mathdef\csname#3s\endcsname{\text{\glsxtrshortpl*{#3}}}%
+  \glsunset{#3}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\longacronym}
+% The |\longacronym| never shows the abbreviated form.
+%    \begin{macrocode}
+\DeclareDocumentCommand{\longacronym}{sommo}{
+  \expandafter\newcommand\csname#3\endcsname{#4\@\xspace}%
+  \pdfstringdefDisableCommands{\expandafter\def\csname#3\endcsname{#4 }}
+  \expandafter\newcommand\csname#3s\endcsname{%
+    \IfNoValueTF{#5}{#4s}{#5}\@\xspace%
+  }%
+  \pdfstringdefDisableCommands{\expandafter\def\csname#3s\endcsname{%
+    \IfNoValueTF{#5}{#4s}{#5} }%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\HEP}
+% Define first acronym.
+%    \begin{macrocode}
+\acronym{HEP}{High Energy Physics}[High Energy Physics]
+\fi
 %    \end{macrocode}
 % \end{macro}
 %
