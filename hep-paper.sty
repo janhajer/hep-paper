@@ -34,8 +34,13 @@
 \DeclareStringOption[numeric-comp]{bibliography}
 \DeclareBoolOption[true]{glossaries}
 \DeclareBoolOption[false]{manualplacement}
+\DeclareBoolOption[true]{title}
+\DeclareBoolOption[false]{revtex}
 
 \ProcessKeyvalOptions*
+\ifhep@revtex
+  \setkeys{hep}{bibliography=false, defaults, title=false, lang=american}
+\fi
 
 \RequirePackage{ifluatex}
 \RequirePackage{ifxetex}
@@ -77,7 +82,6 @@
 \RequirePackage{csquotes}
 
 \ifhep@serif\else
-  \sffamily
   \renewcommand\familydefault{\sfdefault}
 \fi
 
@@ -104,8 +108,9 @@
 
 \newcommand{\no}[1]{\textnumero~#1}
 
+\RequirePackage{relsize}
 \newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
-  \textsc{\small #2}~#1%
+  \textsc{\smaller #2}~#1%
 }
 
 \newcommand{\online}[2]{\href{#1}{\url{#2}}}
@@ -132,7 +137,8 @@
   \geometry{hscale=.75, vscale=.8, vmarginratio=3:4, includeheadfoot}
 \fi
 
-\usepackage{parskip}
+\ifhep@parindent\else
+\RequirePackage{parskip}
 \newcommand{\useparskip}{%
   \setlength{\parskip}{.5\baselineskip plus 2pt}%
   \setlength{\parindent}{0pt}%
@@ -144,7 +150,7 @@
   \else\setlength\parindent{1.5em}
   \fi
 }
-\ifhep@parindent\useparindent\fi
+\fi
 
 \RequirePackage{mathtools}
 \RequirePackage{amssymb}
@@ -176,18 +182,16 @@
 \RequirePackage{bm}
 \let\mathbf\bm
 \g@addto@macro\bfseries{\boldmath}
-\RequirePackage[
-  OMLmathsfit,
-  OMLmathsf,
-  OMLmathtt,
-  rmdefault=cmss
-]{isomath}
-\DeclareMathAlphabet{\mathsf}{OML}{cmbr}{m}{it}
-\SetMathAlphabet{\mathsf}{bold}{OML}{cmbr}{bx}{it}
-\ifhep@serif\else
+\ifhep@serif
+  \RequirePackage{fixmath}
+  \DeclareMathAlphabet{\mathsf}{OML}{cmbr}{m}{it}
+  \SetMathAlphabet{\mathsf}{bold}{OML}{cmbr}{bx}{it}
+\else
   \RequirePackage[slantedGreek]{sfmath}
-  \renewcommand{\mathsf}[1]{#1}
+  \DeclareMathAlphabet{\mathsf}{OML}{cmm}{m}{it}
+  \SetMathAlphabet{\mathsf}{bold}{OML}{cmm}{bx}{it}
 \fi
+\RequirePackage{mathrsfs}
 
 \RequirePackage{physics}
 \RequirePackage{slashed}
@@ -245,6 +249,21 @@
   }
 \fi%
 
+\ifhep@revtex
+  \setlength\abovecaptionskip{\f@size\p@}
+  \setlength\belowcaptionskip{0\p@}
+  \long\def\@makecaption#1#2{%
+    \vskip\abovecaptionskip
+    \sbox\@tempboxa{#1: #2}%
+    \ifdim \wd\@tempboxa >\hsize
+      #1: #2\par
+    \else
+      \global \@minipagefalse
+      \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+    \fi
+    \vskip\belowcaptionskip%
+  }
+\fi
 \RequirePackage[subrefformat = parens]{subcaption}
 \captionsetup{font=small}
 \captionsetup[sub]{font=small}
@@ -267,6 +286,15 @@
   \endminipage%
 }
 
+\ifhep@revtex
+  \renewcommand{\figurename}{Figure}
+  \renewcommand{\tablename}{Table}
+  \usepackage{ragged2e}
+  \DeclareCaptionFormat{revtex}{#1#2\justifying{#3}}
+  \captionsetup{font = small, format = revtex}
+  \captionsetup[sub]{font = footnotesize, format = plain}
+\fi
+
 \RequirePackage{booktabs}
 \RequirePackage{multirow}
 
@@ -278,6 +306,7 @@
 }
 \newcommand{\graphics}[1]{\graphicspath{{./#1/}}}
 
+\ifhep@title
 \date{}
 
 \author{}
@@ -315,6 +344,7 @@
 
 \let\old@abstract\abstract
 \renewcommand\abstract{\old@abstract\noindent\ignorespaces}
+\fi
 
 \RequirePackage{pdftexcmds}
 \ifnum\pdf@strcmp{\hep@bibliography}{false}=0\else
@@ -428,10 +458,14 @@
   \pdfstringdefDisableCommands{\let\footnote\@gobble}
   \pdfstringdefDisableCommands{\let\\\@gobble}
   \hypersetup{
-    pdfauthor={\AB@authlist},
     pdftitle={\@title}
   }
 }
+\ifhep@title
+  \AtBeginDocument{\hypersetup{pdfauthor=\AB@authlist}}
+\else
+  \AtBeginDocument{\hypersetup{pdfauthor={}}}
+\fi
 
 \RequirePackage[noabbrev, capitalize, nameinlink]{cleveref}
 \crefname{enumi}{point}{points}
@@ -478,7 +512,7 @@
 }
 
 \ifhep@glossaries
-\RequirePackage{glossaries-extra}
+\RequirePackage[nostyles, sort=none, automake=false]{glossaries-extra}
 \glsenableentrycount
 \glssetcategoryattribute{abbreviation}{entrycount}{1}
 \providecommand{\glsxtrusefield}[2]{\@gls@entry@field{#1}{#2}}

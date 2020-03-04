@@ -43,6 +43,8 @@
 
 \bibliography{bibliography}
 
+\listfiles
+
 \usepackage{titletoc}
 \titlecontents{section}[0em]{\medskip\bfseries}{\thecontentslabel\hspace{.8em}}{}{\hfill\contentspage}
 
@@ -56,7 +58,7 @@
 %</driver>
 % \fi
 %
-% \CheckSum{818}
+% \CheckSum{879}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -501,12 +503,34 @@
 \DeclareBoolOption[false]{manualplacement}
 %    \end{macrocode}
 % \end{macro}
+%
+% \begin{macro}{title}
+% Provide the option |title| for deactivating redefinition of title macros.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{title}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{revtex}
+% Provide the option |revtex| for |revtex| compatibility mode.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{revtex}
+%    \end{macrocode}
+% \end{macro}
+
 
 % \subsection{Process options}
 %
 %    \begin{macrocode}
 \ProcessKeyvalOptions*
 %    \end{macrocode}
+%
+%    \begin{macrocode}
+\ifhep@revtex
+  \setkeys{hep}{bibliography=false, defaults, title=false, lang=american}
+\fi
+%    \end{macrocode}
+
 
 % \section{Engine}
 %
@@ -580,7 +604,6 @@
 % Set the whole text to sans serif if requested.
 %    \begin{macrocode}
 \ifhep@serif\else
-  \sffamily
   \renewcommand\familydefault{\sfdefault}
 \fi
 %    \end{macrocode}
@@ -634,8 +657,9 @@
 %\begin{macro}{\software}
 % Define a macro for software with optional version information |\software|\linebreak[1]\oarg{version}\linebreak[1]\marg{name}.
 %    \begin{macrocode}
+\RequirePackage{relsize}
 \newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
-  \textsc{\small #2}~#1%
+  \textsc{\smaller #2}~#1%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -697,7 +721,8 @@
 %\begin{macro}{\useparindent}
 % Load the |parskip| package \cite{parskip} and provide two commands switching between the two paragraph modes.
 %    \begin{macrocode}
-\usepackage{parskip}
+\ifhep@parindent\else
+\RequirePackage{parskip}
 \newcommand{\useparskip}{%
   \setlength{\parskip}{.5\baselineskip plus 2pt}%
   \setlength{\parindent}{0pt}%
@@ -709,7 +734,7 @@
   \else\setlength\parindent{1.5em}
   \fi
 }
-\ifhep@parindent\useparindent\fi
+\fi
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -782,23 +807,26 @@
 % \end{macro}
 %
 % Load the |fixmath| package \cite{fixmath} which ensures that upper Greek letters in math mode are italic.
-%    \begin{macrocode}
-\RequirePackage[
-  OMLmathsfit,
-  OMLmathsf,
-  OMLmathtt,
-  rmdefault=cmss
-]{isomath}
-\DeclareMathAlphabet{\mathsf}{OML}{cmbr}{m}{it}
-\SetMathAlphabet{\mathsf}{bold}{OML}{cmbr}{bx}{it}
-%    \end{macrocode}
+% \begin{macro}{\mathsf}
 % Ensure that also math is sans serif if the option sans serif is passed to the package
 %    \begin{macrocode}
-\ifhep@serif\else
+\ifhep@serif
+  \RequirePackage{fixmath}
+  \DeclareMathAlphabet{\mathsf}{OML}{cmbr}{m}{it}
+  \SetMathAlphabet{\mathsf}{bold}{OML}{cmbr}{bx}{it}
+\else
   \RequirePackage[slantedGreek]{sfmath}
-  \renewcommand{\mathsf}[1]{#1}
+  \DeclareMathAlphabet{\mathsf}{OML}{cmm}{m}{it}
+  \SetMathAlphabet{\mathsf}{bold}{OML}{cmm}{bx}{it}
 \fi
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\mathscr}
+% Load the |mathrsfs| package for the |\mathscr| math script font.
+%    \begin{macrocode}
+\RequirePackage{mathrsfs}
+%    \end{macrocode}
+% \end{macro}
 
 % \subsection{Physics notation}
 %
@@ -896,6 +924,24 @@
 
 % \subsection{Sub-floats}
 %
+%    \begin{macrocode}
+\ifhep@revtex
+  \setlength\abovecaptionskip{\f@size\p@}
+  \setlength\belowcaptionskip{0\p@}
+  \long\def\@makecaption#1#2{%
+    \vskip\abovecaptionskip
+    \sbox\@tempboxa{#1: #2}%
+    \ifdim \wd\@tempboxa >\hsize
+      #1: #2\par
+    \else
+      \global \@minipagefalse
+      \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+    \fi
+    \vskip\belowcaptionskip%
+  }
+\fi
+%    \end{macrocode}
+%
 % \begin{environment}{panels}
 % \begin{macro}{\panel}
 % Load the |subcaption| package \cite{subcaption} and define the |panels| environment as well as the |\panel| macro.
@@ -924,6 +970,17 @@
 %    \end{macrocode}
 % \end{macro}
 % \end{environment}
+
+%    \begin{macrocode}
+\ifhep@revtex
+  \renewcommand{\figurename}{Figure}
+  \renewcommand{\tablename}{Table}
+  \usepackage{ragged2e}
+  \DeclareCaptionFormat{revtex}{#1#2\justifying{#3}}
+  \captionsetup{font = small, format = revtex}
+  \captionsetup[sub]{font = footnotesize, format = plain}
+\fi
+%    \end{macrocode}
 
 % \subsection{Tables}
 %
@@ -961,6 +1018,7 @@
 % \begin{macro}{\date}
 % Allow empty date field.
 %    \begin{macrocode}
+\ifhep@title
 \date{}
 %    \end{macrocode}
 % \end{macro}
@@ -1035,6 +1093,7 @@
 %    \begin{macrocode}
 \let\old@abstract\abstract
 \renewcommand\abstract{\old@abstract\noindent\ignorespaces}
+\fi
 %    \end{macrocode}
 % \end{environment}
 
@@ -1210,10 +1269,14 @@
   \pdfstringdefDisableCommands{\let\footnote\@gobble}
   \pdfstringdefDisableCommands{\let\\\@gobble}
   \hypersetup{
-    pdfauthor={\AB@authlist},
     pdftitle={\@title}
   }
 }
+\ifhep@title
+  \AtBeginDocument{\hypersetup{pdfauthor=\AB@authlist}}
+\else
+  \AtBeginDocument{\hypersetup{pdfauthor={}}}
+\fi
 %    \end{macrocode}
 
 % \begin{macro}{\cref}
@@ -1306,7 +1369,7 @@
 % Acronyms are implemented with the |glossaries-extra| package \cite{glossaries-extra} which is an extension of the |glossaries| package \cite{glossaries}.
 %    \begin{macrocode}
 \ifhep@glossaries
-\RequirePackage{glossaries-extra}
+\RequirePackage[nostyles, sort=none, automake=false]{glossaries-extra}
 %    \end{macrocode}
 % The entry count feature is used.
 %    \begin{macrocode}
