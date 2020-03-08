@@ -58,7 +58,7 @@
 %</driver>
 % \fi
 %
-% \CheckSum{879}
+% \CheckSum{990}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -360,10 +360,6 @@
 % % \caption{The \protecting{|booktabs|} and \protecting{|multirow|} features.}
 % \label{tab:booktabs}
 % \end{panels}
-% \begin{subfigure}{2cm}
-% \caption{test}
-% \label{test}
-% \end{subfigure}
 % \caption{Example use of the \protecting{|panels|} environment in Panel \subref{tab:panels} and the features from the \protecting{|booktabs|} and \protecting{|multirow|} packages in Panel \subref{tab:booktabs}.
 % } \label{tab:table}
 % \end{table}
@@ -527,7 +523,7 @@
 %
 %    \begin{macrocode}
 \ifhep@revtex
-  \setkeys{hep}{bibliography=false, defaults, title=false, lang=american}
+  \setkeys{hep}{defaults, title=false, lang=american, bibliography=false}
 \fi
 %    \end{macrocode}
 
@@ -559,11 +555,10 @@
 %
 % Load the |fontenc| package \cite{fontenc} with this encoding .
 %    \begin{macrocode}
-\ifxetex\def\@encoding{TU}
-  \else\ifluatex
-    \def\@encoding{TU}
-    \else\def\@encoding{T1}
-  \fi
+\ifxetexorluatex
+  \def\@encoding{TU}
+\else
+  \def\@encoding{T1}
 \fi
 \RequirePackage[\@encoding]{fontenc}
 %    \end{macrocode}
@@ -577,8 +572,8 @@
 % Define sans serif small caps font shapes.
 %    \begin{macrocode}
 \ifxetexorluatex
-  \DeclareFontShape{TU}{lmss}{bx}{sc}{<->cmssbxcsc10}{}
-  \DeclareFontShape{TU}{lmss}{m}{sc}{%
+  \DeclareFontShape{\@encoding}{lmss}{bx}{sc}{<->cmssbxcsc10}{}
+  \DeclareFontShape{\@encoding}{lmss}{m}{sc}{%
     <-9>cmsscsc8<9-10>cmsscsc9<10->cmsscsc10%
   }{}
 \else
@@ -687,13 +682,33 @@
 % \end{macro}
 
 % \subsection{Lists}
-%
-% \begin{environment}{inlinelist}
-% Load the |enumitem| package \cite{enumitem} and define an inline list environment.
+
+% Load the |enumitem| package \cite{enumitem}.
 %    \begin{macrocode}
 \RequirePackage[inline]{enumitem}
+%    \end{macrocode}
+%
+% \begin{environment}{inlinelist}
+% Define an inline list environment.
+%    \begin{macrocode}
 \newlist{inlinelist}{enumerate*}{1}
 \setlist*[inlinelist,1]{itemjoin={,\ }, itemjoin*={, and\ }, after=.}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{environment}{enumdescript}
+% Define an enumdescript list environment.
+%    \begin{macrocode}
+\newlist{enum@descript}{enumerate}{2}
+\setlist[enum@descript]{label=\arabic*.}
+\newenvironment{enumdescript}[1][]{
+\begin{enum@descript}[#1]
+  \let\old@item\item
+  \renewcommand{\item}[2][]{
+    \ifx&##1&\old@item\else\old@item[##1]\fi
+    \textbf{##2}\ifx##2\empty\else~\fi\@ifnextchar\par\@gobble\relax
+  }
+}{\end{enum@descript}}
 %    \end{macrocode}
 % \end{environment}
 
@@ -806,8 +821,8 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% Load the |fixmath| package \cite{fixmath} which ensures that upper Greek letters in math mode are italic.
 % \begin{macro}{\mathsf}
+% Load the |fixmath| package \cite{fixmath} which ensures that upper Greek letters in math mode are italic.
 % Ensure that also math is sans serif if the option sans serif is passed to the package
 %    \begin{macrocode}
 \ifhep@serif
@@ -975,7 +990,7 @@
 \ifhep@revtex
   \renewcommand{\figurename}{Figure}
   \renewcommand{\tablename}{Table}
-  \usepackage{ragged2e}
+  \RequirePackage{ragged2e}
   \DeclareCaptionFormat{revtex}{#1#2\justifying{#3}}
   \captionsetup{font = small, format = revtex}
   \captionsetup[sub]{font = footnotesize, format = plain}
@@ -1268,14 +1283,12 @@
   \pdfstringdefDisableCommands{\let\thanks\@gobble}
   \pdfstringdefDisableCommands{\let\footnote\@gobble}
   \pdfstringdefDisableCommands{\let\\\@gobble}
-  \hypersetup{
-    pdftitle={\@title}
-  }
 }
+\AtBeginShipout{\hypersetup{pdftitle={\@title}}}
 \ifhep@title
   \AtBeginDocument{\hypersetup{pdfauthor=\AB@authlist}}
 \else
-  \AtBeginDocument{\hypersetup{pdfauthor={}}}
+  \AtBeginDocument{\hypersetup{pdfauthor={\@author}}}
 \fi
 %    \end{macrocode}
 
@@ -1321,6 +1334,7 @@
 % \begin{macro}{\ref}
 % Adjust |\ref|\marg{key} in order to prevent preceding line breaks and to enable the possibility to reference multiple references at once.
 %    \begin{macrocode}
+\let\old@ref\ref
 \AtBeginDocument{\renewcommand\ref{\no@break@before\labelcref}}
 %    \end{macrocode}
 % \end{macro}
@@ -1337,6 +1351,9 @@
 %    \begin{macrocode}
 \let\old@subref\subref
 \renewcommand\subref{\no@break@before\old@subref}
+\renewcommand*\subcaption@ref[2]{\begingroup%
+  \caption@setoptions{sub}\subcaption@reffmt\p@subref{\old@ref#1{sub@#2}}%
+\endgroup}
 %    \end{macrocode}
 % \end{macro}
 
@@ -1363,13 +1380,53 @@
 }
 %    \end{macrocode}
 % \end{macro}
+% Begin of bibliography if.
+%    \begin{macrocode}
+\ifnum\pdf@strcmp{\hep@bibliography}{false}=0\else
+%    \end{macrocode}
+% Define bibstrings for reference names.
+%    \begin{macrocode}
+\NewBibliographyString{refname}
+\NewBibliographyString{refsname}
+\DefineBibliographyStrings{english}{%
+  refname = {Reference},
+  refsname = {References}
+}
+%    \end{macrocode}
+% \begin{macro}{\ccite}
+% \begin{macro}{\Ccite}
+% Define \emph{clever} citation macros.
+% \begin{macrocode}
+\DeclareCiteCommand{\ccite}{%
+  \ifnum\thecitetotal=1%
+    \bibstring{refname}%
+  \else%
+    \bibstring{refsname}%
+  \fi%
+  \addnbspace\bibopenbracket%
+  \usebibmacro{cite:init}\usebibmacro{prenote}%
+}{%
+  \usebibmacro{citeindex}\usebibmacro{cite:comp}%
+}{}{%
+  \usebibmacro{cite:dump}\usebibmacro{postnote}%
+  \bibclosebracket%
+}
+
+\newrobustcmd*{\Ccite}{\bibsentence\ccite}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% End of biblatex if.
+%    \begin{macrocode}
+\fi
+%    \end{macrocode}
 
 % \section{Acronyms}
 %
 % Acronyms are implemented with the |glossaries-extra| package \cite{glossaries-extra} which is an extension of the |glossaries| package \cite{glossaries}.
 %    \begin{macrocode}
 \ifhep@glossaries
-\RequirePackage[nostyles, sort=none, automake=false]{glossaries-extra}
+\RequirePackage[nostyles, sort=none]{glossaries-extra}
 %    \end{macrocode}
 % The entry count feature is used.
 %    \begin{macrocode}
@@ -1416,6 +1473,12 @@
     \glsshortpluralkey=\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}
   ]{#3}{\IfNoValueTF{#2}{#3}{#2}}{#4}
   \expandafter\newcommand\csname#3\endcsname{\cgls{#3}\@\xspace}
+  \expandafter\newcommand\csname#3first\endcsname{%
+    \protect\glstarget{#3}{\glsentrylong{#3} (\glsentryshort{#3})}\@\xspace%
+  }
+  \expandafter\newcommand\csname#3First\endcsname{%
+    \protect\glstarget{#3}{\Glsentrylong{#3} (\glsentryshort{#3})}\@\xspace%
+  }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3\endcsname{%
     \IfNoValueTF{#2}{#3}{#2} }%
   }
@@ -1466,13 +1529,30 @@
 }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\HEP}
-% Define first acronym.
+% Silence warning.
 %    \begin{macrocode}
-\acronym{HEP}{High Energy Physics}[High Energy Physics]
+\renewcommand*{\@gls@write@entrycounts}{%
+  \immediate\write\@auxout{%
+    \string\providecommand*{\string\@gls@entry@count}[2]{}
+  }%
+  \count@=0\relax
+  \forallglsentries{\@glsentry}{%
+    \glshasattribute{\@glsentry}{entrycount}{%
+      \ifglsused{\@glsentry}{%
+        \immediate\write\@auxout{%
+          \string\@gls@entry@count{\@glsentry}{%
+            \glsentrycurrcount{\@glsentry}%
+          }
+        }%
+      }{}\advance\count@ by \@ne
+    }{}%
+  }%
+}
+%    \end{macrocode}
+% End of acronym if.
+%    \begin{macrocode}
 \fi
 %    \end{macrocode}
-% \end{macro}
 %
 % \Finale
 
