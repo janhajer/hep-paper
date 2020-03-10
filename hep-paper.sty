@@ -102,27 +102,25 @@
   \input{size\@ptsize.clo}
 \fi
 
-\RequirePackage[all, british]{foreign}
+\RequirePackage{pdftexcmds}
+\newcommand{\hep@lang@foreign}{british}
+\ifnum\pdf@strcmp{\hep@lang}{american}=0%
+  \renewcommand{\hep@lang@foreign}{USenglish}%
+\fi
+\ifnum\pdf@strcmp{\hep@lang}{USenglish}=0%
+  \renewcommand{\hep@lang@foreign}{USenglish}%
+\fi
+\RequirePackage[all, \hep@lang@foreign]{foreign}
 \DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
 
 \newcommand{\no}[1]{\textnumero~#1}
 
 \RequirePackage{relsize}
 \newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
-  \textsc{\smaller #2}~#1%
+  {\smaller\textsc{#2}~#1}%
 }
 
 \newcommand{\online}[2]{\href{#1}{\url{#2}}}
-
-\newcommand\no@break@before{%
-  \relax\ifvmode\else%
-    \ifhmode%
-      \ifdim\lastskip > 0pt%
-        \relax\unskip\nobreakspace%
-      \fi%
-    \fi%
-  \fi%
-}
 
 
 \RequirePackage[inline]{enumitem}
@@ -210,14 +208,9 @@
 \newcommand{\inv}[2][1]{#2\ensuremath{^{-#1}}}
 
 \newcommand{\oset}[3][-1pt]{%
-  \raisebox{1pt}{%
-    \ensuremath{
-      \mathop{#3}%
-      \limits^{%
+  \raisebox{1pt}{\ensuremath{\mathop{#3}\limits^{%
         \vbox to#1{\kern-2\ex@\hbox{$\scriptscriptstyle#2$}\vss}%
-      }%
-    }%
-  }%
+  }}}%
 }
 \newcommand{\overleftright}[1]{\oset{\leftrightarrow}{#1}}
 
@@ -232,31 +225,23 @@
   \let\@end@figure@\endfigure%
   \renewenvironment{figure}[1][tbp]{%
     \@figure@[#1]\centering%
-    }{%
-    \@end@figure@%
-    }%
+    }{\@end@figure@}%
   \let\@table@\table%
   \let\@end@table@\endtable%
   \renewenvironment{table}[1][tbp]{%
     \@table@[#1]\centering%
-  }{%
-    \@end@table@%
-  }%
+  }{\@end@table@}%
 \else%
   \let\@figure@\figure%
   \let\@end@figure@\endfigure%
   \renewenvironment{figure}[1][]{%
     \@figure@\centering%
-  }{%
-    \@end@figure@%
-  }%
+  }{\@end@figure@}%
   \let\@table@\table%
   \let\@end@table@\endtable%
   \renewenvironment{table}[1][]{%
     \@table@\centering%
-  }{%
-    \@end@table@%
-  }
+  }{\@end@table@}
 \fi%
 
 \ifhep@revtex
@@ -292,9 +277,7 @@
     }%
     \begin@subcaption@minipage[#1]{#2\linewidth}%
   \fi%
-}{%
-  \endminipage%
-}
+}{\endminipage}
 
 \ifhep@revtex
   \renewcommand{\figurename}{Figure}
@@ -328,8 +311,8 @@
 \newcommand\active@comma{,\penalty-5\relax}
 \newcommand\cat@comma@active{\catcode`\,\active}
 {\cat@comma@active\gdef,{\active@comma}}
-\newcommand\@affiliation@@[1]{\endgroup\affil{#1}}
-\def\@affiliation@[#1]#2{\endgroup\affil[#1]{#2}}
+\newcommand\@affiliation@@[1]{\endgroup\@flushglue=0pt plus .5\linewidth\affil{#1}}
+\def\@affiliation@[#1]#2{\endgroup\@flushglue=0pt plus .5\linewidth\affil[#1]{#2}}
 \DeclareRobustCommand\@affiliation{%
   \@ifnextchar[{\@affiliation@}{\@affiliation@@}%
 }
@@ -356,7 +339,6 @@
 \renewcommand\abstract{\old@abstract\noindent\ignorespaces}
 \fi
 
-\RequirePackage{pdftexcmds}
 \ifnum\pdf@strcmp{\hep@bibliography}{false}=0\else
 \RequirePackage[style=\hep@bibliography]{biblatex}
 \ExecuteBibliographyOptions{
@@ -406,39 +388,37 @@
 \DeclareFieldFormat{eprint:ctan}{%
   CTAN\addcolon\space\ifhyperref{%
     \href{https://ctan.org/pkg/#1}{\nolinkurl{#1}}%
-  }{%
-    \nolinkurl{#1}%
-  }%
+  }{\nolinkurl{#1}}%
 }
 \DeclareFieldAlias{eprint:CTAN}{eprint:ctan}
 
 \DeclareFieldFormat{eprint:github}{%
   GitHub\addcolon\space\ifhyperref{\href{%
       https://github.com/\thefield{eprintclass}/#1%
-    }{%
-      \nolinkurl{\thefield{eprintclass}/#1}%
-    }%
-  }{%
-    \nolinkurl{\thefield{eprintclass}/#1}
-  }%
+    }{\nolinkurl{\thefield{eprintclass}/#1}}%
+  }{\nolinkurl{\thefield{eprintclass}/#1}}%
 }
 \DeclareFieldAlias{eprint:GitHub}{eprint:github}
+
+\DeclareFieldFormat{eprint:gitlab}{%
+  GitLab\addcolon\space\ifhyperref{\href{%
+      https://gitlab.com/\thefield{eprintclass}/#1%
+    }{\nolinkurl{\thefield{eprintclass}/#1}}%
+  }{\nolinkurl{\thefield{eprintclass}/#1}}%
+}
+\DeclareFieldAlias{eprint:GitLab}{eprint:gitlab}
 
 \DeclareFieldFormat{eprint:sourceforge}{%
   SourceForge\addcolon\space\ifhyperref{%
     \href{https://sourceforge.net/projects/#1}{\nolinkurl{#1}}%
-  }{%
-    \nolinkurl{#1}%
-  }%
+  }{\nolinkurl{#1}}%
 }
 \DeclareFieldAlias{eprint:SourceForge}{eprint:sourceforge}
 
 \DeclareFieldFormat{eprint:hepforge}{%
   HEPForge\addcolon\space\ifhyperref{%
     \href{https://#1/hepforge.org/}{\nolinkurl{#1}}%
-  }{%
-    \nolinkurl{#1}%
-  }%
+  }{\nolinkurl{#1}}%
 }
 \DeclareFieldAlias{eprint:HEPForge}{eprint:hepforge}
 
@@ -503,6 +483,16 @@
   }%
 }
 
+\newcommand\no@break@before{%
+  \relax\ifvmode\else%
+    \ifhmode%
+      \ifdim\lastskip > 0pt%
+        \relax\unskip\nobreakspace%
+      \fi%
+    \fi%
+  \fi%
+}
+
 \let\old@ref\ref
 \AtBeginDocument{\renewcommand\ref{\no@break@before\labelcref}}
 
@@ -511,17 +501,24 @@
 \let\old@subref\subref
 \renewcommand\subref{\no@break@before\old@subref}
 \renewcommand*\subcaption@ref[2]{\begingroup%
-  \caption@setoptions{sub}\subcaption@reffmt\p@subref{\old@ref#1{sub@#2}}%
+  \caption@setoptions{sub}%
+  \subcaption@reffmt\p@subref{\old@ref#1{sub@#2}}%
 \endgroup}
 
 \newcommand{\subcref}[1]{\cref{sub@#1}}
 
-\let\old@cite\cite
-\renewcommand\cite{\no@break@before\old@cite}
+\DeclareDocumentCommand{\eqcrefname}{mmo}{
+  \crefname{#1}{#2}{\IfValueTF{#3}{#3}{#2s}}
+  \creflabelformat{#1}{(##2##1##3)}
+}
 
 \DeclareRobustCommand{\labelcrefrange}[2]{%
   \@crefrangenostar{labelcref}{#1}{#2}%
 }
+
+\let\old@cite\cite
+\renewcommand\cite{\no@break@before\old@cite}
+
 \ifnum\pdf@strcmp{\hep@bibliography}{false}=0\else
 \NewBibliographyString{refname}
 \NewBibliographyString{refsname}
@@ -537,9 +534,7 @@
   \fi%
   \addnbspace\bibopenbracket%
   \usebibmacro{cite:init}\usebibmacro{prenote}%
-}{%
-  \usebibmacro{citeindex}\usebibmacro{cite:comp}%
-}{}{%
+}{\usebibmacro{citeindex}\usebibmacro{cite:comp}}{}{%
   \usebibmacro{cite:dump}\usebibmacro{postnote}%
   \bibclosebracket%
 }
@@ -568,27 +563,34 @@
     \glsdohypertarget{#1}{#2}%
   }%
 }}
+
+\usepackage[excludeor]{everyhook}
+\PushPostHook{par}{{\spacefactor=3000}}
+\newcommand{\if@begin@of@sentence}[2]{\leavevmode\protecting{%
+  \ifboolexpr{ test {\ifnumcomp{\spacefactor}{=}{3000}} or%
+               test {\ifnumcomp{\spacefactor}{=}{2000}}%
+  }{#1}{#2}%
+}}
+
 \DeclareDocumentCommand{\acronym}{sommo}{
   \newabbreviation[
     longplural=\IfNoValueTF{#5}{#4s}{#5},
     \glsshortpluralkey=\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}
   ]{#3}{\IfNoValueTF{#2}{#3}{#2}}{#4}
-  \expandafter\newcommand\csname#3\endcsname{\cgls{#3}\@\xspace}
-  \expandafter\newcommand\csname#3first\endcsname{%
-    \protect\glstarget{#3}{\glsentrylong{#3} (\glsentryshort{#3})}\@\xspace%
-  }
-  \expandafter\newcommand\csname#3First\endcsname{%
-    \protect\glstarget{#3}{\Glsentrylong{#3} (\glsentryshort{#3})}\@\xspace%
+  \expandafter\newcommand\csname#3\endcsname{%
+    \if@begin@of@sentence{\cGls{#3}}{\cgls{#3}}\@\xspace%
   }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3\endcsname{%
     \IfNoValueTF{#2}{#3}{#2} }%
   }
-  \expandafter\mathdef\csname#3\endcsname{\text{\glsxtrshort{#3}}}%
-  \expandafter\newcommand\csname#3s\endcsname{\cglspl{#3}\@\xspace}
+  \expandafter\mathdef\csname#3\endcsname{\text{\glsxtrshort{#3}}\glsunset{#3}}
+  \expandafter\newcommand\csname#3s\endcsname{%
+    \if@begin@of@sentence{\cGlspl{#3}}{\cglspl{#3}}\@\xspace%
+  }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3s\endcsname{%
     \IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}} }%
-  }%
-  \expandafter\mathdef\csname#3s\endcsname{\text{\glsxtrshortpl{#3}}}%
+  }
+  \expandafter\mathdef\csname#3s\endcsname{\text{\glsxtrshortpl{#3}}\glsunset{#3}}%
 }
 \DeclareDocumentCommand{\shortacronym}{somm}{
   \newabbreviation[
@@ -598,23 +600,28 @@
   \pdfstringdefDisableCommands{\expandafter\def\csname#3\endcsname{%
     \IfNoValueTF{#2}{#3}{#2} }%
   }
-  \expandafter\mathdef\csname#3\endcsname{\text{\glsxtrshort*{#3}}}%
+  \expandafter\mathdef\csname#3\endcsname{\text{\glsxtrshort*{#3}}}
   \expandafter\newcommand\csname#3s\endcsname{\cglspl*{#3}\@\xspace}
   \pdfstringdefDisableCommands{\expandafter\def\csname#3s\endcsname{%
     \IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}} }%
-  }%
+  }
   \expandafter\mathdef\csname#3s\endcsname{\text{\glsxtrshortpl*{#3}}}%
   \glsunset{#3}
 }
 \DeclareDocumentCommand{\longacronym}{sommo}{
-  \expandafter\newcommand\csname#3\endcsname{#4\@\xspace}%
+  \expandafter\newcommand\csname#3\endcsname{%
+    \if@begin@of@sentence{\MakeUppercase#4}{#4}\@\xspace%
+  }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3\endcsname{#4 }}
   \expandafter\newcommand\csname#3s\endcsname{%
-    \IfNoValueTF{#5}{#4s}{#5}\@\xspace%
-  }%
+    \if@begin@of@sentence{%
+      \IfNoValueTF{#5}{\MakeUppercase#4s}{\MakeUppercase#5}%
+    }{%
+      \IfNoValueTF{#5}{#4s}{#5}}\@\xspace%
+  }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3s\endcsname{%
     \IfNoValueTF{#5}{#4s}{#5} }%
-  }%
+  }
 }
 \renewcommand*{\@gls@write@entrycounts}{%
   \immediate\write\@auxout{%
@@ -633,6 +640,8 @@
     }{}%
   }%
 }
+\newcommand{\resetacronym}[1]{\protect\glsreset{#1}}
+\newcommand{\dummyacronym}[1]{\protect\glsunset{#1}}
 \fi
 
 \endinput
