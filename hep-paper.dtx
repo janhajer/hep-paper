@@ -207,8 +207,41 @@
 % The |\online|\marg{url}\marg{text} macro combines the features of the |\href|\marg{url}\marg{text} and the |\url|\marg{text} macros, resulting in \eg \online{https://ctan.org/pkg/hep-paper}{ctan.org/pkg/hep-paper}.
 %
 % \DescribeMacro{inlinelist}
-% \DescribeMacro{enumdescript}
 % An |inlinelist| and |enumdescript| environments are defined using the |enumitem| package \cite{enumitem}.
+% For example the list:
+%
+% |The three main points are|
+% |\begin{inlinelist}|
+% | \item one|
+% | \item two|
+% | \item three|
+% |\end{inlinelist}|
+%
+% will appear as:
+%
+% The three main points are
+% \begin{inlinelist}
+%  \item one
+%  \item two
+%  \item three
+% \end{inlinelist}
+%
+% \DescribeMacro{enumdescript}
+% And the list
+%
+% |\begin{enumdescript}[nosep, label=\Roman*)]|
+% | \item{First} one|
+% | \item{Second} two|
+% | \item{Third} three|
+% |\end{enumdescript}|
+%
+% Appears as
+%
+% \begin{enumdescript}[nosep, label=\Roman*)]
+%  \item{First} one
+%  \item{Second} two
+%  \item{Third} three
+% \end{enumdescript}
 %
 % \DescribeMacro{\textsc}
 % A sans serif version of \textsf{\textsc{Small Caps}} is provided.
@@ -705,7 +738,7 @@
 % \DoNotIndex{\newlist,\setlist*,\ }
 %    \begin{macrocode}
 \newlist{inlinelist}{enumerate*}{1}
-\setlist*[inlinelist,1]{itemjoin={,\ }, itemjoin*={, and\ }, after=.}
+\setlist*[inlinelist,1]{label=\roman*), itemjoin={,\ }, itemjoin*={, and\ }, after=.}
 %    \end{macrocode}
 % \end{environment}
 %
