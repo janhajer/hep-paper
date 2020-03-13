@@ -15,7 +15,7 @@
 %% and version 1.3c or later is part of all distributions of
 %% LaTeX version 2005/12/01 or later.
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesPackage{hep-paper}[2020/01/02 v1.2 Publications in High Energy Physics]
+\ProvidesPackage{hep-paper}[2020/03/01 v1.2 Publications in High Energy Physics]
 
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
@@ -125,7 +125,9 @@
 
 \RequirePackage[inline]{enumitem}
 \newlist{inlinelist}{enumerate*}{1}
-\setlist*[inlinelist,1]{label=\roman*), itemjoin={,\ }, itemjoin*={, and\ }, after=.}
+\setlist*[inlinelist,1]{%
+  label=\roman*), itemjoin={,\ }, itemjoin*={, and\ }, after=.%
+}
 \newlist{enum@descript}{enumerate}{2}
 \setlist[enum@descript]{label=\arabic*.}
 \newenvironment{enumdescript}[1][]{
@@ -220,25 +222,21 @@
 \setcounter{bottomnumber}{0}
 \renewcommand{\floatpagefraction}{.8}
 
+\let\@figure@\figure%
+\let\@end@figure@\endfigure%
+\let\@table@\table%
+\let\@end@table@\endtable%
 \ifhep@manualplacement%
-  \let\@figure@\figure%
-  \let\@end@figure@\endfigure%
   \renewenvironment{figure}[1][tbp]{%
     \@figure@[#1]\centering%
     }{\@end@figure@}%
-  \let\@table@\table%
-  \let\@end@table@\endtable%
   \renewenvironment{table}[1][tbp]{%
     \@table@[#1]\centering%
   }{\@end@table@}%
 \else%
-  \let\@figure@\figure%
-  \let\@end@figure@\endfigure%
   \renewenvironment{figure}[1][]{%
     \@figure@\centering%
   }{\@end@figure@}%
-  \let\@table@\table%
-  \let\@end@table@\endtable%
   \renewenvironment{table}[1][]{%
     \@table@\centering%
   }{\@end@table@}
@@ -262,10 +260,11 @@
 \RequirePackage[subrefformat = parens]{subcaption}
 \captionsetup{font=small}
 \captionsetup[sub]{font=small}
-\newcommand{\begin@subcaption@minipage}[2][b]{%
-  \caption@withoptargs\subcaption@minipage[#1]{#2}\centering\vskip 0pt%
-}
 \newenvironment{panels}[2][b]{%
+  \newcommand{\begin@subcaption@minipage}[2][b]{%
+    \caption@withoptargs\subcaption@minipage[##1]{##2}%
+    \centering\vskip 0pt%
+  }
   \ifdim#2pt>1pt%
     \newcommand{\panel}[1][b]{%
       \endminipage\hfill\begin@subcaption@minipage[#1]{\linewidth/#2}%
@@ -293,10 +292,9 @@
 
 \RequirePackage{graphicx}
 \providecommand{\tikzsetnextfilename}[1]{}
-\newcommand{\graphic}[2][1]{%
-  \tikzsetnextfilename{#2}\centering%
-  \includegraphics[width=#1\linewidth]{#2}%
-}
+\newcommand{\graphic}[2][1]{\tikzsetnextfilename{#2}{%
+  \centering\includegraphics[width=#1\linewidth]{#2}%
+}}
 \newcommand{\graphics}[1]{\graphicspath{{./#1/}}}
 
 \ifhep@title
@@ -545,7 +543,7 @@
 \fi
 
 \ifhep@glossaries
-\RequirePackage[nostyles, sort=none]{glossaries-extra}
+\RequirePackage[nostyles]{glossaries-extra}
 \glsenableentrycount
 \glssetcategoryattribute{abbreviation}{entrycount}{1}
 \providecommand{\glsxtrusefield}[2]{\@gls@entry@field{#1}{#2}}

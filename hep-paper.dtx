@@ -17,7 +17,7 @@
 %
 % \iffalse
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-paper}[2020/01/02 v1.2 Publications in High Energy Physics]
+%<package>\ProvidesPackage{hep-paper}[2020/03/01 v1.2 Publications in High Energy Physics]
 
 %<*driver>
 \documentclass{ltxdoc}
@@ -38,6 +38,15 @@
 %     {\\\hline\end{tabular}\nobreak\@decl@date\par\nobreak
 %      \vspace{2.3ex}\vskip -\parskip}
 % \makeatother
+
+\newenvironment{example}[1][.5]{%
+  \begin{minipage}[t]{\linewidth}%
+  \begin{minipage}[t]{#1\linewidth}
+  \newcommand{\second}{%
+    \end{minipage}%
+    \begin{minipage}[t]{\linewidth-#1\linewidth}%
+  }%
+}{\end{minipage}\end{minipage}}
 
 \usepackage[parskip]{hep-paper}
 
@@ -80,7 +89,7 @@
 %
 % \changes{v1.0}{2019/01/01}{Initial version of the style file}
 % \changes{v1.1}{2020/01/01}{Transition to documented \LaTeX\ source file}
-% \changes{v1.2}{2020/02/01}{Inclusion of package options}
+% \changes{v1.2}{2020/03/01}{Inclusion of package options}
 %
 % \GetFileInfo{hep-paper.sty}
 %
@@ -98,7 +107,7 @@
 %
 % \begin{abstract}
 % The |hep-paper| package aims to provide a single style file containing most configurations and macros necessary to write appealing publications in High Energy Physics.
-% Instead of reinventing the wheel by introducing newly created macros |hep-paper| preferably loads third party packages as long as they are light weight enough.
+% Instead of reinventing the wheel by introducing newly created macros |hep-paper| preferably loads third party packages as long as they are lightweight enough.
 % \end{abstract}
 %
 % \clearpage\tableofcontents\clearpage
@@ -116,7 +125,7 @@
 % The paper and font sizes are set to A4 and \unit[11]{pt}, respectively.
 % Additionally, the paper geometry is set to the values known from the (depreciated) |a4wide| package \cite{a4wide} using the |geometry| package \cite{geometry}.
 % Finally, the font is changed to |lmodern| \cite{lmodern} with |microtype| \cite{microtype} optimizations.
-% Hidden hyperlinks are implemented with the |hyperref| package \cite{hyperref}.
+% \PDF hyperlinks are implemented with the |hyperref| package \cite{hyperref}.
 %
 % \subsection{Options}
 %
@@ -148,24 +157,31 @@
 % \footnote{The |parskip| option is used for this document.}
 %
 % \DescribeMacro{sansserif}
-% The |sansserif| option switches the document including math to the sans serif font shape.
+% The |sansserif| option switches the document including math to sans serif font shape.
+%
+% \DescribeMacro{title}
+% The |title=false| option deactivates the titlepage adjustments.
 %
 % \DescribeMacro{manualplacement}
-% The |manualplacement| reactivates manual float placement.
+% The |manualplacement| option reactivates manual float placement.
 %
 % \DescribeMacro{bibliography}
 % The |bibliography|=\meta{key} option prevents the automatic loading of the |biblatex| package \cite{biblatex} for \meta{key}=|false| or passes the \meta{key} as |style| string to the |biblatex| package.
 %
 % \DescribeMacro{glossaries}
-% The |glossaries|=\meta{bool} option can deactive the use of the |glossaries| package \cite{glossaries, glossaries-extra}.
+% The |glossaries=false| option deactives the use of the |glossaries| package \cite{glossaries, glossaries-extra}.
+%
+% \DescribeMacro{revtex}
+% The |revtex| option switches the |hep-paper| package into a |revtex| \cite{revtex} compatibility mode.
 %
 % \DescribeMacro{eqnarray}
-% The |eqnarray|=\meta{bool} option can reactivated the depreciated |eqnarray| environment.
+% The |eqnarray| option reactivates the depreciated |eqnarray| environment.
 %
 % \section{Macros and environments}
 %
 % \subsection{Title page}
 %
+% The \PDF meta information is set according to the |\title|\marg{text} and |\author|\marg{text} information.
 % \DescribeMacro{\author}
 % \DescribeMacro{\affiliation}
 % \DescribeMacro{\email}
@@ -177,11 +193,8 @@
 % | \author[2]{Author two \email{Email two}}|\\
 % | \affiliation[1,2]{Affiliation two}|
 %
-% The |\affiliation|\marg{text} macro breaks lines preferably at a comma.
-%
 % \DescribeMacro{\preprint}
 % The |\preprint|\marg{numer} macro places a pre-print number in the upper right corner of the first page.
-% The \PDF meta information is set according to the |\title|\marg{text} and |\author|\marg{text} information.
 %
 % \DescribeEnv{abstract}
 % The |abstract| environment has been adjusted to not start with an indentation.
@@ -207,48 +220,56 @@
 % The |\online|\marg{url}\marg{text} macro combines the features of the |\href|\marg{url}\marg{text} and the |\url|\marg{text} macros, resulting in \eg \online{https://ctan.org/pkg/hep-paper}{ctan.org/pkg/hep-paper}.
 %
 % \DescribeMacro{inlinelist}
-% An |inlinelist| and |enumdescript| environments are defined using the |enumitem| package \cite{enumitem}.
-% For example the list:
+% Using the |enumitem| package \cite{enumitem} the |inlinelist|
 %
+% \begin{example}
 % |The three main points are|
+%
 % |\begin{inlinelist}|
+%
 % | \item one|
+%
 % | \item two|
+%
 % | \item three|
+%
 % |\end{inlinelist}|
-%
-% will appear as:
-%
+% \second
 % The three main points are
 % \begin{inlinelist}
 %  \item one
 %  \item two
 %  \item three
 % \end{inlinelist}
+% \end{example}
 %
 % \DescribeMacro{enumdescript}
-% And the list
+% and the |enumdescript| environments are defined
 %
-% |\begin{enumdescript}[nosep, label=\Roman*)]|
+% \begin{example}[.6]
+% |\begin{enumdescript}[label=\Roman*)]|
+%
 % | \item{First} one|
+%
 % | \item{Second} two|
+%
 % | \item{Third} three|
+%
 % |\end{enumdescript}|
-%
-% Appears as
-%
-% \begin{enumdescript}[nosep, label=\Roman*)]
+% \second
+% \begin{enumdescript}[label=\Roman*)]
 %  \item{First} one
 %  \item{Second} two
 %  \item{Third} three
 % \end{enumdescript}
+% \end{example}
 %
 % \DescribeMacro{\textsc}
 % A sans serif version of \textsf{\textsc{Small Caps}} is provided.
 %
 % \DescribeMacro{\useparskip}
 % \DescribeMacro{\useparindent}
-% In the case that the |parskip| option is activated the |\useparindent| macro switches back the usual parindent mode, while the |\useparskip| macro switches to the parskip mode.
+% If the |parskip| option is activated the |\useparindent| macro switches back the usual parindent mode, while the |\useparskip| macro switches to the parskip mode.
 %
 % \subsubsection{References and footnotes}
 %
@@ -256,14 +277,12 @@
 % References are extended with the |cleveref| package \cite{cleveref}, which allows to \eg just type |\cref|\marg{key}  in order to write 'Figure 1'.
 % Furthermore, the |cleveref| package allows to reference multiple objects within one |\cref|\marg{key} (similar to the |\cite|\marg{key} macro).
 %
-% \DescribeMacro{\subcref}
-% The |\subcref| macro combines the features of the |\subref| and |\cref| macros.
-%
 % \DescribeMacro{\cite}
 % Citations are adjusted to not start on a new line in order to avoid the repeated use of |~\cite|\marg{key}.
 %
 % \DescribeMacro{\ref}
 % \DescribeMacro{\eqref}
+% \DescribeMacro{\subref}
 % References are also adjusted to not start on a new line and are redefined in order to handle multiple references at once.
 %
 % \DescribeMacro{\footnote}
@@ -274,15 +293,16 @@
 % \DescribeMacro{\acronym}
 % \DescribeMacro{\shortacronym}
 % \DescribeMacro{\longacronym}
-% The |\acronym|\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\marg{definition}\oarg{plural\linebreak[4]definition} macro generates the |\|\meta{abbreviation} and |\|\meta{abbreviation}|s| macros.
+% The |\acronym|\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\marg{definition}\oarg{plural\linebreak[4]definition} macro generates the singluar |\|\meta{abbreviation} and plural |\|\meta{abbreviation}|s| macros.
 % The starred version does not add an \enquote{s} to the abbreviation plural.
 % The long form is only shown at the first appearance of these macros, later appearances generate the abbreviation with a hyperlink to the long form.
+% Capitalization at the beginning of paragraphs and sentences is ensured.
 % The |\shortacronym| and |\longacronym| macros only show the short or long form of their acronym.
 % \DescribeMacro{\resetacronym}
 % \DescribeMacro{\dummyacronym}
 % The first use form of the acronym can be enforced by resetting the acronym counter.
 % If the acronym counter equals one at the end of the document the short form of the acronym is not introduced.
-% Placing a |\dummyacronym|\marg{key} at the end of the document ensures that the counter becomes larger than one.
+% Placing a |\dummyacronym|\marg{key} at the end of the document ensures that the short form is introduced.
 %
 % \subsection{Math}
 %
@@ -299,6 +319,8 @@
 % \DescribeMacro{\mathsf}
 % The math sans serif alphabet is redefined to be italic sans serif if the main text is serif and italic serif if the main text is sans serif, \ie ($\mathsf A \mathsf b \mathsf \Gamma \mathsf \delta \mathbf{\mathsf A} \mathbf{\mathsf b} \mathbf{\mathsf \Gamma} \mathbf{\mathsf \delta}$).
 % Details about the font handling in \TeX\ can be found in \cite{fntguide}.
+% \DescribeMacro{\mathscr}
+% The |\mathcal| font \ie ($\mathcal{ABCD}$) is accompanied by the |\mathscr| font \ie ($\mathscr{ABCD}$).
 %
 % \DescribeMacro{\nicefrac}
 % \DescribeMacro{\flatfrac}
@@ -308,8 +330,9 @@
 % \end{align}
 % \DescribeMacro{\diag}
 % A diagonal matrix operator is defined |\diag|.
+%
 % \DescribeMacro{\mathdef}
-% The |\mathdef|\marg{name}\marg{code} macro (re-)defines macros only within math mode without changing the text mode definition.
+% The |\mathdef|\marg{name}\oarg{arguments}\marg{code} macro (re-)defines macros only within math mode without changing the text mode definition.
 % \DescribeMacro{\i}
 % The imaginary unit $\i$ is defined using this functionality.
 %
@@ -363,7 +386,7 @@
 % \DescribeEnv{table}
 % Automatic float placement is adjusted to place a single float at the top of pages and to reduce the number of float pages.
 % The most useful float placement is usually archived by placing the float \emph{in front} of the paragraph it is referenced in first.
-% Additionally, manual float placement is deactivated but can be reactivated using the |manualplacement|package option.
+% Additionally, manual float placement is deactivated but can be reactivated using the |manualplacement| package option.
 % \DescribeMacro{\raggedright}
 % The float environments have been adjusted to center their content.
 % The usual behaviour can be reactivated using |\raggedright|.
@@ -396,7 +419,7 @@
 % \DescribeEnv{panels}
 % \DescribeMacro{\panel}
 % The |panels| environment makes use of the |subcaption| package \cite{subcaption}.
-% It provides sub-floats and takes as mandatory argument either the number of sub-floats (default 2) or the width of the first sub-float as fraction of the |\linewidth|.
+% It provides sub-floats and takes as mandatory argument either the number of sub-floats (default~2) or the width of the first sub-float as fraction of the |\linewidth|.
 % Within the |\begin{panels}|\oarg{vert}\marg{width} environment the |\panel| macro initiates a new sub-float.
 % In the case that the width of the first sub-float has been given as an optional argument to the |panels| environment the |\panel|\marg{width} macro takes the width of the next sub-float as mandatory argument.
 % The example code is presented in \cref{tab:panels}.
@@ -406,7 +429,7 @@
 %
 % \DescribeMacro{\graphic}
 % \DescribeMacro{\graphics}
-% The |graphicx| package \cite{graphicx} is loaded and the |\graphic|\oarg{width}\marg{figure} macro is defined, which is a wrapper for the |\includegraphics|\marg{figure} macro and takes the figure width as fraction of the |\linewidth| as optional argument (default 1).
+% The |graphicx| package \cite{graphicx} is loaded and the |\graphic|\oarg{width}\marg{figure} macro is defined, which is a wrapper for the |\includegraphics|\marg{figure} macro and takes the figure width as fraction of the |\linewidth| as optional argument (default~1).
 % If the graphics are located in a sub-folder its path can be indicated by |\graphics|\marg{subfolder}.
 %
 % \subsection{Bibliography}
@@ -420,6 +443,7 @@
 % Additionally, \online{https://ctan.org}{ctan.org}, \online{https://github.com}{github.com}, \online{https://gitlab.com}{gitlab.com}, \online{https://sourceforge.net}{sourceforge.net}, and \online{https://hepforge.org}{hepforge.org} are recognized as |eprinttype|s.
 % \DescribeMacro{erratum}
 % Errata can be included using the |related| feature.
+%
 % | \article{|\meta{key1}|,|\\
 % |   |\dots|,|\\
 % |   relatedtype="erratum",|\\
@@ -554,13 +578,12 @@
 %    \end{macrocode}
 % \end{macro}
 
-
 % \subsection{Process options}
 %
 %    \begin{macrocode}
 \ProcessKeyvalOptions*
 %    \end{macrocode}
-%
+% Set the |revtex| compatibility options.
 % \DoNotIndex{\ifhep@revtex,\setkeys,\fi}
 %    \begin{macrocode}
 \ifhep@revtex
@@ -595,8 +618,8 @@
 \RequirePackage{alphabeta}
 %    \end{macrocode}
 %
-% Dependent on the engine used pick the correct font encoding, for details of the font encoding see \cite{encguide}.
-% Load the |fontenc| package \cite{fontenc} with this encoding .
+% Pick the correct font encoding depending on the engine used and load the |fontenc| package \cite{fontenc} with this encoding.
+% For details of the font encoding see \cite{encguide}.
 % \DoNotIndex{\def,\@encoding}
 %    \begin{macrocode}
 \ifxetexorluatex
@@ -661,7 +684,7 @@
 
 % \subsection{Font size}
 %
-% Undefine previously defined font sizes and load the \LaTeX\ font size file corresponding to the font size option loaded before.
+% Undefine previously defined font sizes and load the \LaTeX\ font size file corresponding to the font size option.
 % \DoNotIndex{\remove@pt,\edef,\@ptsize,\expandafter,\small,\relax,\footnotesize,\scriptsize}
 %    \begin{macrocode}
 \ifhep@defaults\else
@@ -738,7 +761,9 @@
 % \DoNotIndex{\newlist,\setlist*,\ }
 %    \begin{macrocode}
 \newlist{inlinelist}{enumerate*}{1}
-\setlist*[inlinelist,1]{label=\roman*), itemjoin={,\ }, itemjoin*={, and\ }, after=.}
+\setlist*[inlinelist,1]{%
+  label=\roman*), itemjoin={,\ }, itemjoin*={, and\ }, after=.%
+}
 %    \end{macrocode}
 % \end{environment}
 %
@@ -823,7 +848,7 @@
 % \end{macro}
 
 % \begin{macro}{\mathdef}
-% Define the |\mathdef|\marg{name}\marg{macro} macro which (re-) defines macros in math mode only.
+% Define the |\mathdef|\marg{name}\oarg{arguments}\marg{macro} macro which (re-)defines macros in math mode only.
 % This macro is implemented using the |xparse| package \cite{xparse}.
 %    \begin{macrocode}
 \RequirePackage{xparse}
@@ -949,25 +974,21 @@
 % Center the content of |figure| and |table| environments.
 % Ignore the manual placement if the |manualplacement| option is set to false.
 %    \begin{macrocode}
+\let\@figure@\figure%
+\let\@end@figure@\endfigure%
+\let\@table@\table%
+\let\@end@table@\endtable%
 \ifhep@manualplacement%
-  \let\@figure@\figure%
-  \let\@end@figure@\endfigure%
   \renewenvironment{figure}[1][tbp]{%
     \@figure@[#1]\centering%
     }{\@end@figure@}%
-  \let\@table@\table%
-  \let\@end@table@\endtable%
   \renewenvironment{table}[1][tbp]{%
     \@table@[#1]\centering%
   }{\@end@table@}%
 \else%
-  \let\@figure@\figure%
-  \let\@end@figure@\endfigure%
   \renewenvironment{figure}[1][]{%
     \@figure@\centering%
   }{\@end@figure@}%
-  \let\@table@\table%
-  \let\@end@table@\endtable%
   \renewenvironment{table}[1][]{%
     \@table@\centering%
   }{\@end@table@}
@@ -997,22 +1018,35 @@
 \fi
 %    \end{macrocode}
 %
-% \begin{environment}{panels}
-% \begin{macro}{\panel}
-% Load the |subcaption| package \cite{subcaption} and define the |panels| environment as well as the |\panel| macro.
+% Load the |subcaption| package \cite{subcaption}.
 %    \begin{macrocode}
 \RequirePackage[subrefformat = parens]{subcaption}
 \captionsetup{font=small}
 \captionsetup[sub]{font=small}
-\newcommand{\begin@subcaption@minipage}[2][b]{%
-  \caption@withoptargs\subcaption@minipage[#1]{#2}\centering\vskip 0pt%
-}
+%    \end{macrocode}
+% \begin{environment}{panels}
+% \begin{macro}{\panel}
+% Load the |subcaption| package \cite{subcaption} and define the |panels| environment as well as the |\panel| macro.
+%    \begin{macrocode}
 \newenvironment{panels}[2][b]{%
+%    \end{macrocode}
+% Define an internal macro for global behaviour.
+%    \begin{macrocode}
+  \newcommand{\begin@subcaption@minipage}[2][b]{%
+    \caption@withoptargs\subcaption@minipage[##1]{##2}%
+    \centering\vskip 0pt%
+  }
+%    \end{macrocode}
+% Define the |\panel| macro for the case that the number of panels is given.
+%    \begin{macrocode}
   \ifdim#2pt>1pt%
     \newcommand{\panel}[1][b]{%
       \endminipage\hfill\begin@subcaption@minipage[#1]{\linewidth/#2}%
     }%
     \begin@subcaption@minipage[#1]{\linewidth/#2}%
+%    \end{macrocode}
+% Define the |\panel| macro for the case that the width of the panel is given.
+%    \begin{macrocode}
   \else%
     \newcommand{\panel}[2][b]{%
       \endminipage\hfill\begin@subcaption@minipage[#1]{##2\linewidth}%
@@ -1053,15 +1087,14 @@
 %    \begin{macrocode}
 \RequirePackage{graphicx}
 \providecommand{\tikzsetnextfilename}[1]{}
-\newcommand{\graphic}[2][1]{%
-  \tikzsetnextfilename{#2}\centering%
-  \includegraphics[width=#1\linewidth]{#2}%
-}
+\newcommand{\graphic}[2][1]{\tikzsetnextfilename{#2}{%
+  \centering\includegraphics[width=#1\linewidth]{#2}%
+}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\graphics}
-% Provide the |\graphics| macro for the indication of a single subfolder with graphics.
+% Provide the |\graphics| macro for the inclusion of figures located in a subfolder.
 %    \begin{macrocode}
 \newcommand{\graphics}[1]{\graphicspath{{./#1/}}}
 %    \end{macrocode}
@@ -1498,7 +1531,7 @@
 % Acronyms are implemented with the |glossaries-extra| package \cite{glossaries-extra} which is an extension of the |glossaries| package \cite{glossaries}.
 %    \begin{macrocode}
 \ifhep@glossaries
-\RequirePackage[nostyles, sort=none]{glossaries-extra}
+\RequirePackage[nostyles]{glossaries-extra}
 %    \end{macrocode}
 % The entry count feature is used.
 %    \begin{macrocode}
@@ -1670,7 +1703,7 @@
 }
 %    \end{macrocode}
 % \end{macro}
-% Silence warning.
+% Silence warning if no acronyms are defined.
 %    \begin{macrocode}
 \renewcommand*{\@gls@write@entrycounts}{%
   \immediate\write\@auxout{%
@@ -1705,7 +1738,6 @@
 %    \end{macrocode}
 %
 % \Finale
-
 
 \endinput
 
