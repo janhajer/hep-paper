@@ -15,7 +15,7 @@
 %% and version 1.3c or later is part of all distributions of
 %% LaTeX version 2005/12/01 or later.
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesPackage{hep-paper}[2020/03/01 v1.2 Publications in High Energy Physics]
+\ProvidesPackage{hep-paper}[2020/04/01 v1.3 Publications in High Energy Physics]
 
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
@@ -52,6 +52,10 @@
 \fi
 
 \RequirePackage{alphabeta}
+\ifhep@serif\else
+  \RequirePackage{sansmathfonts}
+  \renewcommand\familydefault{\sfdefault}
+\fi
 \ifxetexorluatex
   \def\@encoding{TU}
 \else
@@ -79,10 +83,6 @@
 
 \RequirePackage[\hep@lang]{babel}
 \RequirePackage{csquotes}
-
-\ifhep@serif\else
-  \renewcommand\familydefault{\sfdefault}
-\fi
 
 \RequirePackage{soul}
 \let\underline\ul
@@ -120,7 +120,7 @@
   {\smaller\textsc{#2}~#1}%
 }
 
-\newcommand{\online}[2]{\href{#1}{\url{#2}}}
+\newcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}
 
 
 \RequirePackage[inline]{enumitem}
@@ -170,13 +170,13 @@
 
 \RequirePackage{xparse}
 \DeclareDocumentCommand{\mathdef}{mO{0}m}{%
-  \expandafter\let\csname old\string#1\endcsname=#1
-  \expandafter\newcommand\csname new\string#1\endcsname[#2]{#3}
+  \expandafter\let\csname text\string#1\endcsname=#1
+  \expandafter\newcommand\csname math\string#1\endcsname[#2]{#3}
   \DeclareRobustCommand#1{%
     \ifmmode
-      \expandafter\let\expandafter\next\csname new\string#1\endcsname
+      \expandafter\let\expandafter\next\csname math\string#1\endcsname
     \else
-      \expandafter\let\expandafter\next\csname old\string#1\endcsname
+      \expandafter\let\expandafter\next\csname text\string#1\endcsname
     \fi
     \next
   }%
@@ -198,6 +198,7 @@
   \SetMathAlphabet{\mathsf}{bold}{OML}{cmbr}{bx}{it}
 \else
   \RequirePackage[slantedGreek]{sfmath}
+  \RequirePackage{sansmathfonts}
   \DeclareMathAlphabet{\mathsf}{OML}{cmm}{m}{it}
   \SetMathAlphabet{\mathsf}{bold}{OML}{cmm}{bx}{it}
 \fi
@@ -208,6 +209,8 @@
 \RequirePackage{units}
 
 \newcommand{\inv}[2][1]{#2\ensuremath{^{-#1}}}
+
+\AtBeginDocument{\mathdef{\d}{\dd}}
 
 \newcommand{\oset}[3][-1pt]{%
   \raisebox{1pt}{\ensuremath{\mathop{#3}\limits^{%
@@ -279,12 +282,12 @@
 }{\endminipage}
 
 \ifhep@revtex
-  \renewcommand{\figurename}{Figure}
-  \renewcommand{\tablename}{Table}
   \RequirePackage{ragged2e}
   \DeclareCaptionFormat{revtex}{#1#2\justifying{#3}}
-  \captionsetup{font = small, format = revtex}
-  \captionsetup[sub]{font = footnotesize, format = plain}
+  \captionsetup{font=small, format=revtex}
+  \captionsetup[sub]{font=footnotesize, format=plain}
+  \renewcommand{\figurename}{Figure}
+  \renewcommand{\tablename}{Table}
 \fi
 
 \RequirePackage{booktabs}
@@ -293,7 +296,7 @@
 \RequirePackage{graphicx}
 \providecommand{\tikzsetnextfilename}[1]{}
 \newcommand{\graphic}[2][1]{\tikzsetnextfilename{#2}{%
-  \centering\includegraphics[width=#1\linewidth]{#2}%
+  \centering\includegraphics[width=#1\linewidth]{#2}\par%
 }}
 \newcommand{\graphics}[1]{\graphicspath{{./#1/}}}
 
@@ -326,13 +329,18 @@
     \textsc{\small\@preprint}%
   \end{varwidth}%
 }
+
 \RequirePackage{atbegshi}
 \RequirePackage{picture}
-\AtBeginShipoutFirst{%
-  \put(
-    \textwidth+\oddsidemargin-\widthof{\@preprint@box},
-    -2pt-\topmargin-\heightof{\@preprint@box}
-  ){\normalfont\@preprint@box}
+\let\old@maketitle\maketitle
+\renewcommand{\maketitle}{%
+  \old@maketitle%
+  \AtBeginShipoutFirst{%
+    \put(
+      \textwidth+\oddsidemargin-\widthof{\@preprint@box},
+      -2pt-\topmargin-\heightof{\@preprint@box}
+    ){\normalfont\@preprint@box}
+  }
 }
 
 \let\old@abstract\abstract
@@ -345,8 +353,12 @@
   sorting=none,
   giveninits=true
 }
-\newcommand{\@reg@exp}{\regexp{\A(\p{L}+)?\d+(\p{L}+)?\Z}}
-\newcommand{\@reg@exp@}{\regexp{\A(\p{L}+)?(\d+)(\p{L}+)?\Z}}
+\renewbibmacro*{in:}{%
+  \iffieldundef{journal}{}{\printtext{\bibstring{in}\intitlepunct}}%
+}
+\newcommand{\reg@exp@one}{\regexp{\A(\p{L}+)?\d+(\p{L}+)?\Z}}
+\newcommand{\reg@exp@two}{\regexp{\A(\p{L}+)?(\d+)(\p{L}+)?\Z}}
+\newcommand{\reg@exp@url}{\regexp{\A(ht|f)tp(s)?:\/\/}}
 \DeclareSourcemap{%
   \maps[datatype=bibtex,overwrite=true]{%
     \map{%
@@ -358,20 +370,25 @@
       \step[fieldset=userf,origfieldval,final=true]
     }%
     \map[overwrite]{
-      \step[fieldsource=volume, match=\@reg@exp, final]
-      \step[fieldsource=volume, match=\@reg@exp@, replace={$2}]
+      \step[fieldsource=volume, match=\reg@exp@one, final]
+      \step[fieldsource=volume, match=\reg@exp@two, replace={$2}]
       \step[fieldsource=journal, fieldtarget=journaltitle]
       \step[fieldset=journaltitle, fieldvalue={\space$1$2}, append=true]
+    }
+    \map{
+      \step[fieldsource=url, final=true]
+      \step[fieldset=verbc, origfieldval,final=true]
+      \step[fieldsource=verbc, match=\reg@exp@url, replace={}]
     }
   }%
 }
 
-\renewbibmacro*{author}{%
-  \iffieldundef{usere}{\printnames{author}}{\textbf{\printfield{usere}}}%
+\DeclareFieldFormat{url}{%
+  \mkbibacro{URL}\addcolon\space\online{#1}{\thefield{verbc}}%
 }
 
-\renewbibmacro*{in:}{%
-  \iffieldundef{journal}{}{\printtext{\bibstring{in}\intitlepunct}}%
+\renewbibmacro*{author}{%
+  \iffieldundef{usere}{\printnames{author}}{\textbf{\printfield{usere}}}%
 }
 
 \providecommand{\letbibmacro}[2]{\csletcs{abx@macro@#1}{abx@macro@#2}}
@@ -385,45 +402,35 @@
   }}%
 }
 
-\DeclareFieldFormat{eprint:ctan}{%
-  CTAN\addcolon\space\ifhyperref{%
-    \href{https://ctan.org/pkg/#1}{\nolinkurl{#1}}%
-  }{\nolinkurl{#1}}%
+\newcommand{\bib@online}[2]{%
+  \ifhyperref{\online{#1}{#2}}{\nolinkurl{#2}}%
 }
-\DeclareFieldAlias{eprint:CTAN}{eprint:ctan}
 
-\DeclareFieldFormat{eprint:github}{%
-  GitHub\addcolon\space\ifhyperref{\href{%
-      https://github.com/\thefield{eprintclass}/#1%
-    }{\nolinkurl{\thefield{eprintclass}/#1}}%
-  }{\nolinkurl{\thefield{eprintclass}/#1}}%
+\NewDocumentCommand{\new@eprint}{smm}{
+  \DeclareFieldFormat{eprint:#2}{%
+    \newcommand{\@path}{\IfBooleanT{#1}{\thefield{eprintclass}/}##1}%
+    #2\addcolon\space\bib@online{#3/\@path}{\@path}%
+  }%
 }
-\DeclareFieldAlias{eprint:GitHub}{eprint:github}
-
-\DeclareFieldFormat{eprint:gitlab}{%
-  GitLab\addcolon\space\ifhyperref{\href{%
-      https://gitlab.com/\thefield{eprintclass}/#1%
-    }{\nolinkurl{\thefield{eprintclass}/#1}}%
-  }{\nolinkurl{\thefield{eprintclass}/#1}}%
-}
-\DeclareFieldAlias{eprint:GitLab}{eprint:gitlab}
-
-\DeclareFieldFormat{eprint:sourceforge}{%
-  SourceForge\addcolon\space\ifhyperref{%
-    \href{https://sourceforge.net/projects/#1}{\nolinkurl{#1}}%
-  }{\nolinkurl{#1}}%
-}
-\DeclareFieldAlias{eprint:SourceForge}{eprint:sourceforge}
-
+\new@eprint{CTAN}{https://ctan.org/pkg}
+\DeclareFieldAlias{eprint:ctan}{eprint:CTAN}
+\new@eprint*{GitHub}{https://github.com}
+\DeclareFieldAlias{eprint:github}{eprint:GitHub}
+\new@eprint*{GitLab}{https://gitlab.com}
+\DeclareFieldAlias{eprint:gitlab}{eprint:GitLab}
+\new@eprint*{Bitbucket}{https://bitbucket.org}
+\DeclareFieldAlias{eprint:bitbucket}{eprint:Bitbucket}
+\new@eprint{Launchpad}{https://launchpad.net}
+\DeclareFieldAlias{eprint:launchpad}{eprint:Launchpad}
+\new@eprint{SourceForge}{https://sourceforge.net/projects}
+\DeclareFieldAlias{eprint:launchpad}{eprint:SourceForge}
 \DeclareFieldFormat{eprint:hepforge}{%
-  HEPForge\addcolon\space\ifhyperref{%
-    \href{https://#1/hepforge.org/}{\nolinkurl{#1}}%
-  }{\nolinkurl{#1}}%
+  HEPForge\addcolon\space\bib@online{https://#1/hepforge.org}{#1}%
 }
 \DeclareFieldAlias{eprint:HEPForge}{eprint:hepforge}
 
 \NewBibliographyString{erratum}
-\DefineBibliographyStrings{english}{erratum={Erratum:}}
+\DefineBibliographyStrings{english}{erratum={Erratum\addcolon}}
 
 \let\old@printbibliography\printbibliography
 \renewcommand{\printbibliography}{\sloppy\old@printbibliography}
@@ -456,32 +463,9 @@
 \fi
 
 \RequirePackage[noabbrev, capitalize, nameinlink]{cleveref}
+\newcommand{\creflastconjunction}{, and\nobreakspace}
 \crefname{enumi}{point}{points}
 \Crefname{enumi}{Point}{Points}
-
-\def\refstepcounter@noarg#1{%
-  \cref@old@refstepcounter{#1}%
-  \cref@constructprefix{#1}{\cref@result}%
-  \@ifundefined{cref@#1@alias}%
-    {\def\@tempa{#1}}%
-    {\def\@tempa{\csname cref@#1@alias\endcsname}}%
-  \protected@edef\cref@currentlabel{%
-    [\@tempa][\arabic{#1}][\cref@result]%
-    \noexpand\@currentlabel%
-  }% changed
-}
-
-\def\refstepcounter@optarg[#1]#2{%
-  \cref@old@refstepcounter{#2}%
-  \cref@constructprefix{#2}{\cref@result}%
-  \@ifundefined{cref@#1@alias}%
-    {\def\@tempa{#1}}%
-    {\def\@tempa{\csname cref@#1@alias\endcsname}}%
-  \protected@edef\cref@currentlabel{%
-    [\@tempa][\arabic{#2}][\cref@result]%
-    \noexpand\@currentlabel% changed
-  }%
-}
 
 \newcommand\no@break@before{%
   \relax\ifvmode\else%
@@ -507,7 +491,7 @@
 
 \newcommand{\subcref}[1]{\cref{sub@#1}}
 
-\DeclareDocumentCommand{\eqcrefname}{mmo}{
+\NewDocumentCommand{\eqcrefname}{mmo}{
   \crefname{#1}{#2}{\IfValueTF{#3}{#3}{#2s}}
   \creflabelformat{#1}{(##2##1##3)}
 }
@@ -565,14 +549,24 @@
 }}
 
 \usepackage[excludeor]{everyhook}
-\PushPostHook{par}{{\spacefactor=3000}}
+\newcommand{\begin@sentence}{1001}
+\PushPostHook{par}{{\spacefactor=\begin@sentence}}
+\def\frenchspacing{%
+  \sfcode`\.\begin@sentence \sfcode`\?\begin@sentence
+  \sfcode`\!\begin@sentence \sfcode`\:\begin@sentence
+  \sfcode`\;\@m \sfcode`\,\@m
+}
 \newcommand{\if@begin@of@sentence}[2]{\leavevmode\protecting{%
   \ifboolexpr{ test {\ifnumcomp{\spacefactor}{=}{3000}} or%
-               test {\ifnumcomp{\spacefactor}{=}{2000}}%
+               test {\ifnumcomp{\spacefactor}{=}{2000}} or%
+               test {\ifnumcomp{\spacefactor}{=}{\begin@sentence}}%
   }{#1}{#2}%
 }}
 
-\DeclareDocumentCommand{\acronym}{sommo}{
+\usepackage{xspace}
+\xspaceaddexceptions{\csq@qclose@i}
+
+\NewDocumentCommand{\acronym}{sommo}{
   \newabbreviation[
     longplural=\IfNoValueTF{#5}{#4s}{#5},
     \glsshortpluralkey=\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}
@@ -584,7 +578,7 @@
     \IfNoValueTF{#2}{#3}{#2} }%
   }
   \expandafter\mathdef\csname#3\endcsname{%
-    \text{\glsxtrshort{#3}}\glsunset{#3}%
+    \text{\glsxtrshort{#3}}\@gls@increment@currcount{#3}%
   }
   \expandafter\newcommand\csname#3s\endcsname{%
     \if@begin@of@sentence{\cGlspl{#3}}{\cglspl{#3}}\@\xspace%
@@ -593,26 +587,30 @@
     \IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}} }%
   }
   \expandafter\mathdef\csname#3s\endcsname{%
-    \text{\glsxtrshortpl{#3}}\glsunset{#3}%
+    \text{\glsxtrshortpl{#3}}\@gls@increment@currcount{#3}%
   }
 }
-\DeclareDocumentCommand{\shortacronym}{somm}{
-  \newabbreviation[
-    \glsshortpluralkey=\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}
-  ]{#3}{\IfNoValueTF{#2}{#3}{#2}}{#4}
-  \expandafter\newcommand\csname#3\endcsname{\cgls*{#3}\@\xspace}
+\NewDocumentCommand{\shortacronym}{somm}{
+  \expandafter\newcommand\csname#3\endcsname{%
+    \IfNoValueTF{#2}{#3}{#2}\@\xspace%
+  }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3\endcsname{%
     \IfNoValueTF{#2}{#3}{#2} }%
   }
-  \expandafter\mathdef\csname#3\endcsname{\text{\glsxtrshort*{#3}}}
-  \expandafter\newcommand\csname#3s\endcsname{\cglspl*{#3}\@\xspace}
+  \expandafter\mathdef\csname#3\endcsname{%
+    \text{\IfNoValueTF{#2}{#3}{#2}}%
+  }
+  \expandafter\newcommand\csname#3s\endcsname{%
+    \IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}\@\xspace%
+  }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3s\endcsname{%
     \IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}} }%
   }
-  \expandafter\mathdef\csname#3s\endcsname{\text{\glsxtrshortpl*{#3}}}%
-  \glsunset{#3}
+  \expandafter\mathdef\csname#3s\endcsname{%
+    \text{\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}}%
+  }%
 }
-\DeclareDocumentCommand{\longacronym}{sommo}{
+\NewDocumentCommand{\longacronym}{sommo}{
   \expandafter\newcommand\csname#3\endcsname{%
     \if@begin@of@sentence{\MakeUppercase#4}{#4}\@\xspace%
   }

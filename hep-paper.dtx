@@ -17,7 +17,7 @@
 %
 % \iffalse
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-paper}[2020/03/01 v1.2 Publications in High Energy Physics]
+%<package>\ProvidesPackage{hep-paper}[2020/04/01 v1.3 Publications in High Energy Physics]
 
 %<*driver>
 \documentclass{ltxdoc}
@@ -39,20 +39,22 @@
 %      \vspace{2.3ex}\vskip -\parskip}
 % \makeatother
 
-\newenvironment{example}[1][.5]{%
-  \begin{minipage}[t]{\linewidth}%
-  \begin{minipage}[t]{#1\linewidth}
-  \newcommand{\second}{%
-    \end{minipage}%
-    \begin{minipage}[t]{\linewidth-#1\linewidth}%
-  }%
-}{\end{minipage}\end{minipage}}
-
 \usepackage[parskip]{hep-paper}
+
+\usepackage{hologo}
 
 \bibliography{bibliography}
 
 \acronym{PDF}{portable document format}
+
+\newenvironment{columns}[1][.5]{%
+  \begin{minipage}[t]{\linewidth}%
+  \begin{minipage}[t]{#1\linewidth}
+  \newcommand{\column}{%
+    \end{minipage}%
+    \begin{minipage}[t]{\linewidth-#1\linewidth}%
+  }%
+}{\end{minipage}\end{minipage}}
 
 \listfiles
 
@@ -88,8 +90,9 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2019/01/01}{Initial version of the style file}
-% \changes{v1.1}{2020/01/01}{Transition to documented \LaTeX\ source file}
+% \changes{v1.1}{2020/01/01}{Transition to documented \hologo{LaTeX} source file}
 % \changes{v1.2}{2020/03/01}{Inclusion of package options}
+% \changes{v1.3}{2020/04/01}{Bug fixes}
 %
 % \GetFileInfo{hep-paper.sty}
 %
@@ -121,7 +124,7 @@
 % | \documentclass{article}|\\
 % | \usepackage{hep-paper}|
 %
-% The most notable changes after loading the |hep-paper| package is the change of some \LaTeX\ defaults.
+% The most notable changes after loading the |hep-paper| package is the change of some \hologo{LaTeX} defaults.
 % The paper and font sizes are set to A4 and \unit[11]{pt}, respectively.
 % Additionally, the paper geometry is set to the values known from the (depreciated) |a4wide| package \cite{a4wide} using the |geometry| package \cite{geometry}.
 % Finally, the font is changed to |lmodern| \cite{lmodern} with |microtype| \cite{microtype} optimizations.
@@ -153,7 +156,7 @@
 %
 % \DescribeMacro{parskip}
 % The |parskip| option makes use of the |parskip| package \cite{parskip} and changes how two paragraphs are separated from each other.
-% The \LaTeX\ default is separation via indentation the |parskip| option switches to separation via vertical space.
+% The \hologo{LaTeX} default is separation via indentation the |parskip| option switches to separation via vertical space.
 % \footnote{The |parskip| option is used for this document.}
 %
 % \DescribeMacro{sansserif}
@@ -194,17 +197,17 @@
 % | \affiliation[1,2]{Affiliation two}|
 %
 % \DescribeMacro{\preprint}
-% The |\preprint|\marg{numer} macro places a pre-print number in the upper right corner of the first page.
+% The |\preprint|\marg{numer} macro places a pre-print number in the upper right corner of the title page.
 %
 % \DescribeEnv{abstract}
-% The |abstract| environment has been adjusted to not start with an indentation.
+% The |abstract| environment is adjusted to not start with an indentation.
 %
 % \subsection{Text}
 %
-% \DescribeMacro{\enquote}
 % Hyphenation is provided by the |babel| package \cite{babel} and quotation commands are provided by the |csquotes| package \cite{csquotes} recommended by the |babel| package.
+% \DescribeMacro{\enquote}
 % \DescribeMacro{\MakeOuterQuote}
-% The latter package provides the convenient macro |\MakeOuterQuote{"}| allowing to simply use |"| instead of the pair |``| and |''|.
+% The latter package provides the convenient macros |\enquote|\marg{text} and |\MakeOuterQuote{"}| allowing to leave the choice of quotation marks to \hologo{LaTeX} and use |"| instead of the pair |``| and |''|, respectively.
 %
 % \DescribeMacro{\eg}
 % \DescribeMacro{\vs}
@@ -222,7 +225,7 @@
 % \DescribeMacro{inlinelist}
 % Using the |enumitem| package \cite{enumitem} the |inlinelist|
 %
-% \begin{example}
+% \begin{columns}
 % |The three main points are|
 %
 % |\begin{inlinelist}|
@@ -234,19 +237,19 @@
 % | \item three|
 %
 % |\end{inlinelist}|
-% \second
+% \column
 % The three main points are
 % \begin{inlinelist}
 %  \item one
 %  \item two
 %  \item three
 % \end{inlinelist}
-% \end{example}
+% \end{columns}
 %
 % \DescribeMacro{enumdescript}
 % and the |enumdescript| environments are defined
 %
-% \begin{example}[.6]
+% \begin{columns}[.6]
 % |\begin{enumdescript}[label=\Roman*)]|
 %
 % | \item{First} one|
@@ -256,16 +259,16 @@
 % | \item{Third} three|
 %
 % |\end{enumdescript}|
-% \second
+% \column
 % \begin{enumdescript}[label=\Roman*)]
 %  \item{First} one
 %  \item{Second} two
 %  \item{Third} three
 % \end{enumdescript}
-% \end{example}
+% \end{columns}
 %
 % \DescribeMacro{\textsc}
-% A sans serif version of \textsf{\textsc{Small Caps}} is provided.
+% A sans serif version of \textsf{\textsc{Small Caps}} is provided, using the |sansmathfonts| package \cite{sansmathfonts}.
 %
 % \DescribeMacro{\useparskip}
 % \DescribeMacro{\useparindent}
@@ -307,7 +310,7 @@
 % \subsection{Math}
 %
 % The |mathtools| \cite{mathtools} and |amssymb| \cite{amsfonts} packages are loaded.
-% They in turn load the |amsmath| \cite{amsmath} and |amsfonts| \cite{amsfonts} packages.
+% They in turn load the \hologo{AmSLaTeX} |amsmath| \cite{amsmath} and |amsfonts| \cite{amsfonts} packages.
 % \DescribeMacro{\mathbf}
 % Bold math, including |\mathbf| is provided by the |bm| package \cite{bm}, \ie ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
 % Macros switching to |bfseries| such as |\section|\marg{text} are ensured to also typeset math in bold.
@@ -318,7 +321,7 @@
 % This behaviour conflicts \eg with the |sansserif| package option.
 % \DescribeMacro{\mathsf}
 % The math sans serif alphabet is redefined to be italic sans serif if the main text is serif and italic serif if the main text is sans serif, \ie ($\mathsf A \mathsf b \mathsf \Gamma \mathsf \delta \mathbf{\mathsf A} \mathbf{\mathsf b} \mathbf{\mathsf \Gamma} \mathbf{\mathsf \delta}$).
-% Details about the font handling in \TeX\ can be found in \cite{fntguide}.
+% Details about the font handling in \hologo{TeX} can be found in \cite{fntguide}.
 % \DescribeMacro{\mathscr}
 % The |\mathcal| font \ie ($\mathcal{ABCD}$) is accompanied by the |\mathscr| font \ie ($\mathscr{ABCD}$).
 %
@@ -370,6 +373,8 @@
 % &&\det(M)\ .
 % \end{align}
 %
+% \DescribeMacro{\d}
+% Define the the differential |\d| in math mode.
 % \DescribeMacro{\slashed}
 % The |\slashed|\marg{character} macro from the |slashed| \cite{slashed} package allows to use the Dirac slash notation.
 %
@@ -438,9 +443,9 @@
 % \DescribeMacro{\printbibliography}
 % The |biblatex| package \cite{biblatex} is loaded for bibliography management.
 % The user has to add the line |\bibliography|\marg{my.bib} to the preamble of the document and |\printbibliography| at the end of the document.
-% The bibliography is generated by |biber| \cite{biber}.
+% The bibliography is generated by \hologo{biber} \cite{biber}.
 % |biblatex| is extended to be able to cope with the |collaboration| and |reportNumber| fields provided by \online{https://inspirehep.net}{inspirehep.net} and a bug in the volume number is fixed.
-% Additionally, \online{https://ctan.org}{ctan.org}, \online{https://github.com}{github.com}, \online{https://gitlab.com}{gitlab.com}, \online{https://sourceforge.net}{sourceforge.net}, and \online{https://hepforge.org}{hepforge.org} are recognized as |eprinttype|s.
+% Additionally, \online{https://ctan.org}{ctan.org}, \online{https://github.com}{github.com}, \online{https://gitlab.com}{gitlab.com}, \online{https://bitbucket.org}{bitbucket.org}, \online{https://www.launchpad.net}{launchpad.net}, \online{https://sourceforge.net}{sourceforge.net}, and \online{https://hepforge.org}{hepforge.org} are recognized as |eprinttype|s.
 % \DescribeMacro{erratum}
 % Errata can be included using the |related| feature.
 %
@@ -459,7 +464,7 @@
 % The majority of the loaded packages are fairly lightweight, the others can be deactivated with package options.
 %
 % \DescribeMacro{arxiv-collector}
-% ArXiv requires the setup dependent |bbl| files instead of the original |bib| files, which causes trouble if the local \LaTeX\ version differs from the one used by arXiv.
+% ArXiv requires the setup dependent |bbl| files instead of the original |bib| files, which causes trouble if the local \hologo{LaTeX} version differs from the one used by arXiv.
 % The |arxiv-collector| python script \cite{arxiv-collector} alleviates this problem by collecting all files necessary for publication on arXiv (including figures).
 %
 % \StopEventually{
@@ -471,7 +476,7 @@
 %
 % \section{Options}
 %
-% Load the |kvoptions| package and define a |hep| namespace.
+% Load the |kvoptions| package \cite{kvoptions} and define a |hep| namespace.
 % \DoNotIndex{\RequirePackage,\SetupKeyvalOptions}
 %    \begin{macrocode}
 \RequirePackage{kvoptions}
@@ -596,7 +601,7 @@
 %
 % \begin{macro}{\ifxetexorluatex}
 % Load the |ifluatex| \cite{ifluatex} and |ifxetex| \cite{ifxetex} packages.
-% Define the |\ifxetexorluatex| conditional.
+% Define the |\ifxetexorluatex| conditional checking if the package is executed by \hologo{LuaLaTeX} of \hologo{XeLaTeX}.
 % \DoNotIndex{\newif,\ifxetex,\xetexorluatextrue,\else,\ifluatex,\xetexorluatexfalse,\fi}
 %    \begin{macrocode}
 \RequirePackage{ifluatex}
@@ -612,10 +617,21 @@
 
 % \section{Text}
 %
-% Load |alphabeta| package \cite{alphabeta} first in order to archive the correct behaviour.
+% Load the |alphabeta| package \cite{alphabeta} first in order to archive the correct behaviour.
 % The |alphabeta| package provides upright Greek letters in text mode.
 %    \begin{macrocode}
 \RequirePackage{alphabeta}
+%    \end{macrocode}
+%
+% Load the |sansmathfonts| package \cite{sansmathfonts} first.
+% Although, most fonts will later be overwritten by the |lmodern| package \cite{lmodern} some mathematical objects are ensured to be in sans serif.
+% Set the whole text to sans serif if requested.
+% \DoNotIndex{\ifhep@serif,\renewcommand,\familydefault,\sfdefault}
+%    \begin{macrocode}
+\ifhep@serif\else
+  \RequirePackage{sansmathfonts}
+  \renewcommand\familydefault{\sfdefault}
+\fi
 %    \end{macrocode}
 %
 % Pick the correct font encoding depending on the engine used and load the |fontenc| package \cite{fontenc} with this encoding.
@@ -637,6 +653,16 @@
 %    \end{macrocode}
 
 % Define sans serif small caps font shapes.
+% The font abbreviations are
+% \begin{description}[nosep]
+%  \item[lmss] Latin modern sans serif font
+%  \item[cmss] Computer modern sans serif font
+%  \item[xcmss] Extended computer modern sans serif font (from the |sansmathfonts| package \cite{sansmathfonts})
+%  \item[bx] Bold extended series
+%  \item[m] Medium weight and width series
+%  \item[c] Medium weight, condensed width series
+%  \item[sc] Caps and small caps font shape
+% \end{description}
 % \DoNotIndex{\DeclareFontShape,\sffamily}
 %    \begin{macrocode}
 \ifxetexorluatex
@@ -665,14 +691,6 @@
 \RequirePackage{csquotes}
 %    \end{macrocode}
 
-% Set the whole text to sans serif if requested.
-% \DoNotIndex{\ifhep@serif,\renewcommand,\familydefault,\sfdefault}
-%    \begin{macrocode}
-\ifhep@serif\else
-  \renewcommand\familydefault{\sfdefault}
-\fi
-%    \end{macrocode}
-
 % \begin{macro}{\underline}
 % Load the |soul| package \cite{soul} for hyphenable underlined text.
 % \DoNotIndex{\let}
@@ -682,9 +700,9 @@
 %    \end{macrocode}
 % \end{macro}
 
-% \subsection{Font size}
+% \subsection{Font size} \label{sec:font size}
 %
-% Undefine previously defined font sizes and load the \LaTeX\ font size file corresponding to the font size option.
+% Undefine previously defined font sizes and load the \hologo{LaTeX} font size file corresponding to the font size option.
 % \DoNotIndex{\remove@pt,\edef,\@ptsize,\expandafter,\small,\relax,\footnotesize,\scriptsize}
 %    \begin{macrocode}
 \ifhep@defaults\else
@@ -745,7 +763,7 @@
 % The |\online|\marg{text}\marg{url} macro combines the features of the |\href| and the |\url| macros.
 % \DoNotIndex{\href,\url}
 %    \begin{macrocode}
-\newcommand{\online}[2]{\href{#1}{\url{#2}}}
+\newcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}
 %    \end{macrocode}
 % \end{macro}
 
@@ -798,6 +816,7 @@
 % \section{Geometry}
 %
 % Load the |geometry| package \cite{geometry} and adjust the text width and height to the values of the |a4wide| package \cite{a4wide}.
+% This step must happen after readjusting the font size in \cref{sec:font size}.
 % \DoNotIndex{\ifhep@defaults,\hep@paper,\geometry}
 %    \begin{macrocode}
 \ifhep@defaults\else
@@ -853,13 +872,13 @@
 %    \begin{macrocode}
 \RequirePackage{xparse}
 \DeclareDocumentCommand{\mathdef}{mO{0}m}{%
-  \expandafter\let\csname old\string#1\endcsname=#1
-  \expandafter\newcommand\csname new\string#1\endcsname[#2]{#3}
+  \expandafter\let\csname text\string#1\endcsname=#1
+  \expandafter\newcommand\csname math\string#1\endcsname[#2]{#3}
   \DeclareRobustCommand#1{%
     \ifmmode
-      \expandafter\let\expandafter\next\csname new\string#1\endcsname
+      \expandafter\let\expandafter\next\csname math\string#1\endcsname
     \else
-      \expandafter\let\expandafter\next\csname old\string#1\endcsname
+      \expandafter\let\expandafter\next\csname text\string#1\endcsname
     \fi
     \next
   }%
@@ -900,6 +919,15 @@
 % Load the |fixmath| package \cite{fixmath} which ensures that upper Greek letters in math mode are italic.
 % Ensure that also math mode is sans serif using the |sfmath| package \cite{sfmath} if the option sans serif is passed to the package.
 % Ensure that |\mathsf| is italic as well as sans serif and sans for sans and sans serif documents, respectively.
+% The font abbreviations are
+% \begin{description}[nosep]
+%  \item[OML] \hologo{TeX} math italic font encoding
+%  \item[cmm] Computer modern math italic font
+%  \item[cmbr] Computer modern bright font
+%  \item[bx] Bold extended series
+%  \item[m] Medium weight and width series
+%  \item[it] Italic font shape
+% \end{description}
 %    \begin{macrocode}
 \ifhep@serif
   \RequirePackage{fixmath}
@@ -907,6 +935,7 @@
   \SetMathAlphabet{\mathsf}{bold}{OML}{cmbr}{bx}{it}
 \else
   \RequirePackage[slantedGreek]{sfmath}
+  \RequirePackage{sansmathfonts}
   \DeclareMathAlphabet{\mathsf}{OML}{cmm}{m}{it}
   \SetMathAlphabet{\mathsf}{bold}{OML}{cmm}{bx}{it}
 \fi
@@ -941,6 +970,13 @@
 %    \end{macrocode}
 % \end{macro}
 
+% \begin{macro}{\d}
+% Provide a differential |\d|.
+%    \begin{macrocode}
+\AtBeginDocument{\mathdef{\d}{\dd}}
+%    \end{macrocode}
+% \end{macro}
+
 % \begin{macro}{\oset}
 % Define a new overset macro |\oset|\oarg{offset}\marg{over}\marg{base}
 %    \begin{macrocode}
@@ -960,7 +996,7 @@
 
 % \section{Floats}
 %
-% Adjust the \LaTeX\ float placement defaults
+% Adjust the \hologo{LaTeX} float placement defaults
 %    \begin{macrocode}
 \renewcommand{\textfraction}{0.01}
 \setcounter{topnumber}{1}
@@ -1026,7 +1062,7 @@
 %    \end{macrocode}
 % \begin{environment}{panels}
 % \begin{macro}{\panel}
-% Load the |subcaption| package \cite{subcaption} and define the |panels| environment as well as the |\panel| macro.
+% Define the |panels| environment and the |\panel| macro.
 %    \begin{macrocode}
 \newenvironment{panels}[2][b]{%
 %    \end{macrocode}
@@ -1058,15 +1094,15 @@
 % \end{macro}
 % \end{environment}
 
-% Reajust the captions to the revtex class.
+% Reajust the captions to the revtex class using the |ragged2e| package \cite{ragged2e}.
 %    \begin{macrocode}
 \ifhep@revtex
-  \renewcommand{\figurename}{Figure}
-  \renewcommand{\tablename}{Table}
   \RequirePackage{ragged2e}
   \DeclareCaptionFormat{revtex}{#1#2\justifying{#3}}
-  \captionsetup{font = small, format = revtex}
-  \captionsetup[sub]{font = footnotesize, format = plain}
+  \captionsetup{font=small, format=revtex}
+  \captionsetup[sub]{font=footnotesize, format=plain}
+  \renewcommand{\figurename}{Figure}
+  \renewcommand{\tablename}{Table}
 \fi
 %    \end{macrocode}
 
@@ -1088,7 +1124,7 @@
 \RequirePackage{graphicx}
 \providecommand{\tikzsetnextfilename}[1]{}
 \newcommand{\graphic}[2][1]{\tikzsetnextfilename{#2}{%
-  \centering\includegraphics[width=#1\linewidth]{#2}%
+  \centering\includegraphics[width=#1\linewidth]{#2}\par%
 }}
 %    \end{macrocode}
 % \end{macro}
@@ -1153,8 +1189,7 @@
 % \subsection{Preprint}
 %
 % \begin{macro}{\preprint}
-% Places a preprint number in the top right corner of the first page.
-% This code uses the |varwidth| \cite{varwidth}, |atbegshi| \cite{atbegshi}, and |picture| \cite{picture} packages.
+% Define the |\preprint| macro using the |varwidth| package \cite{varwidth}.
 %    \begin{macrocode}
 \let\@preprint\relax
 \newcommand\preprint[1]{\long\gdef\@preprint{#1}}
@@ -1164,13 +1199,23 @@
     \textsc{\small\@preprint}%
   \end{varwidth}%
 }
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\maketitle}
+% Places a preprint number in the top right corner of the title page using the |atbegshi| \cite{atbegshi} and |picture| \cite{picture} packages.
+%    \begin{macrocode}
 \RequirePackage{atbegshi}
 \RequirePackage{picture}
-\AtBeginShipoutFirst{%
-  \put(
-    \textwidth+\oddsidemargin-\widthof{\@preprint@box},
-    -2pt-\topmargin-\heightof{\@preprint@box}
-  ){\normalfont\@preprint@box}
+\let\old@maketitle\maketitle
+\renewcommand{\maketitle}{%
+  \old@maketitle%
+  \AtBeginShipoutFirst{%
+    \put(
+      \textwidth+\oddsidemargin-\widthof{\@preprint@box},
+      -2pt-\topmargin-\heightof{\@preprint@box}
+    ){\normalfont\@preprint@box}
+  }
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1206,50 +1251,103 @@
 }
 %    \end{macrocode}
 % \end{macro}
-% Read the collaboration and pre-print information if present.
-% Move letters from the volume field to the journal field.
-%    \begin{macrocode}
-\newcommand{\@reg@exp}{\regexp{\A(\p{L}+)?\d+(\p{L}+)?\Z}}
-\newcommand{\@reg@exp@}{\regexp{\A(\p{L}+)?(\d+)(\p{L}+)?\Z}}
-\DeclareSourcemap{%
-  \maps[datatype=bibtex,overwrite=true]{%
-    \map{%
-      \step[fieldsource=Collaboration,final=true]%
-      \step[fieldset=usere,origfieldval,final=true]
-    }%
-    \map{%
-      \step[fieldsource=reportNumber,final=true]%
-      \step[fieldset=userf,origfieldval,final=true]
-    }%
-    \map[overwrite]{
-      \step[fieldsource=volume, match=\@reg@exp, final]
-      \step[fieldsource=volume, match=\@reg@exp@, replace={$2}]
-      \step[fieldsource=journal, fieldtarget=journaltitle]
-      \step[fieldset=journaltitle, fieldvalue={\space$1$2}, append=true]
-    }
-  }%
-}
-%    \end{macrocode}
-
-% Override the author information with collaboration information if present.
-%    \begin{macrocode}
-\renewbibmacro*{author}{%
-  \iffieldundef{usere}{\printnames{author}}{\textbf{\printfield{usere}}}%
-}
-%    \end{macrocode}
-
+%
+% \begin{macro}{In:}
 % Remove spurious `In:' if no journal is present.
 %    \begin{macrocode}
 \renewbibmacro*{in:}{%
   \iffieldundef{journal}{}{\printtext{\bibstring{in}\intitlepunct}}%
 }
 %    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\reg@exp@one}
+% \begin{macro}{\reg@exp@two}
+% \begin{macro}{\reg@exp@url}
+% Define regular expressions in order to deal with inconsistent journal title and volume naming as well as URL protocols.
+%    \begin{macrocode}
+\newcommand{\reg@exp@one}{\regexp{\A(\p{L}+)?\d+(\p{L}+)?\Z}}
+\newcommand{\reg@exp@two}{\regexp{\A(\p{L}+)?(\d+)(\p{L}+)?\Z}}
+\newcommand{\reg@exp@url}{\regexp{\A(ht|f)tp(s)?:\/\/}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\DeclareSourcemap}
+% Use the |\DeclareSourcemap| feature.
+%    \begin{macrocode}
+\DeclareSourcemap{%
+  \maps[datatype=bibtex,overwrite=true]{%
+%    \end{macrocode}
+% \begin{macro}{Collaboration}
+% Read the collaboration information if present.
+%    \begin{macrocode}
+    \map{%
+      \step[fieldsource=Collaboration,final=true]%
+      \step[fieldset=usere,origfieldval,final=true]
+    }%
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{reportNumber}
+% Read the pre-print information if present.
+%    \begin{macrocode}
+    \map{%
+      \step[fieldsource=reportNumber,final=true]%
+      \step[fieldset=userf,origfieldval,final=true]
+    }%
+%    \end{macrocode}
+% \end{macro}
+% Move letters from the volume field to the journal field.
+%    \begin{macrocode}
+    \map[overwrite]{
+      \step[fieldsource=volume, match=\reg@exp@one, final]
+      \step[fieldsource=volume, match=\reg@exp@two, replace={$2}]
+      \step[fieldsource=journal, fieldtarget=journaltitle]
+      \step[fieldset=journaltitle, fieldvalue={\space$1$2}, append=true]
+    }
+%    \end{macrocode}
+% \begin{macro}{url}
+% Remove protocol from URL.
+%    \begin{macrocode}
+    \map{
+      \step[fieldsource=url, final=true]
+      \step[fieldset=verbc, origfieldval,final=true]
+      \step[fieldsource=verbc, match=\reg@exp@url, replace={}]
+    }
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
 
+% \begin{macro}{url}
+% Show URLs without the protocol.
+%    \begin{macrocode}
+\DeclareFieldFormat{url}{%
+  \mkbibacro{URL}\addcolon\space\online{#1}{\thefield{verbc}}%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{Collaboration}
+% Override the author information with collaboration information if present.
+%    \begin{macrocode}
+\renewbibmacro*{author}{%
+  \iffieldundef{usere}{\printnames{author}}{\textbf{\printfield{usere}}}%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\letbibmacro}
 % Provide the |\letbibmacro| macro for old |biblatex| installations.
 %    \begin{macrocode}
 \providecommand{\letbibmacro}[2]{\csletcs{abx@macro@#1}{abx@macro@#2}}
 %    \end{macrocode}
+% \end{macro}
 
+
+% \begin{macro}{reportNumber}
 % Add the pre-print information if present.
 %    \begin{macrocode}
 \letbibmacro{doi+eprint+url-old}{doi+eprint+url}
@@ -1261,64 +1359,94 @@
   }}%
 }
 %    \end{macrocode}
+% \end{macro}
 
+% \begin{macro}{\bib@online}
+% Private |\bib@online| macro
+%    \begin{macrocode}
+\newcommand{\bib@online}[2]{%
+  \ifhyperref{\online{#1}{#2}}{\nolinkurl{#2}}%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\new@eprint}
+% Private |\new@eprint| macro
+%    \begin{macrocode}
+\NewDocumentCommand{\new@eprint}{smm}{
+  \DeclareFieldFormat{eprint:#2}{%
+    \newcommand{\@path}{\IfBooleanT{#1}{\thefield{eprintclass}/}##1}%
+    #2\addcolon\space\bib@online{#3/\@path}{\@path}%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{CTAN}
 % Add CTAN as a pre-print option
 %    \begin{macrocode}
-\DeclareFieldFormat{eprint:ctan}{%
-  CTAN\addcolon\space\ifhyperref{%
-    \href{https://ctan.org/pkg/#1}{\nolinkurl{#1}}%
-  }{\nolinkurl{#1}}%
-}
-\DeclareFieldAlias{eprint:CTAN}{eprint:ctan}
+\new@eprint{CTAN}{https://ctan.org/pkg}
+\DeclareFieldAlias{eprint:ctan}{eprint:CTAN}
 %    \end{macrocode}
-
+% \end{macro}
+%
+% \begin{macro}{GitHub}
 % Add GitHub as a pre-print option
 %    \begin{macrocode}
-\DeclareFieldFormat{eprint:github}{%
-  GitHub\addcolon\space\ifhyperref{\href{%
-      https://github.com/\thefield{eprintclass}/#1%
-    }{\nolinkurl{\thefield{eprintclass}/#1}}%
-  }{\nolinkurl{\thefield{eprintclass}/#1}}%
-}
-\DeclareFieldAlias{eprint:GitHub}{eprint:github}
+\new@eprint*{GitHub}{https://github.com}
+\DeclareFieldAlias{eprint:github}{eprint:GitHub}
 %    \end{macrocode}
-
+% \end{macro}
+%
+% \begin{macro}{GitLab}
 % Add GitLab as a pre-print option
 %    \begin{macrocode}
-\DeclareFieldFormat{eprint:gitlab}{%
-  GitLab\addcolon\space\ifhyperref{\href{%
-      https://gitlab.com/\thefield{eprintclass}/#1%
-    }{\nolinkurl{\thefield{eprintclass}/#1}}%
-  }{\nolinkurl{\thefield{eprintclass}/#1}}%
-}
-\DeclareFieldAlias{eprint:GitLab}{eprint:gitlab}
+\new@eprint*{GitLab}{https://gitlab.com}
+\DeclareFieldAlias{eprint:gitlab}{eprint:GitLab}
 %    \end{macrocode}
-
+% \end{macro}
+%
+% \begin{macro}{Bitbucket}
+% Add Bitbucket as a pre-print option
+%    \begin{macrocode}
+\new@eprint*{Bitbucket}{https://bitbucket.org}
+\DeclareFieldAlias{eprint:bitbucket}{eprint:Bitbucket}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{Launchpad}
+% Add Launchpad as a pre-print option
+%    \begin{macrocode}
+\new@eprint{Launchpad}{https://launchpad.net}
+\DeclareFieldAlias{eprint:launchpad}{eprint:Launchpad}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{SourceForge}
 % Add SourceForge as a pre-print option
 %    \begin{macrocode}
-\DeclareFieldFormat{eprint:sourceforge}{%
-  SourceForge\addcolon\space\ifhyperref{%
-    \href{https://sourceforge.net/projects/#1}{\nolinkurl{#1}}%
-  }{\nolinkurl{#1}}%
-}
-\DeclareFieldAlias{eprint:SourceForge}{eprint:sourceforge}
+\new@eprint{SourceForge}{https://sourceforge.net/projects}
+\DeclareFieldAlias{eprint:launchpad}{eprint:SourceForge}
 %    \end{macrocode}
-
+% \end{macro}
+%
+% \begin{macro}{HEPForge}
 % Add HEPForge as a pre-print option
 %    \begin{macrocode}
 \DeclareFieldFormat{eprint:hepforge}{%
-  HEPForge\addcolon\space\ifhyperref{%
-    \href{https://#1/hepforge.org/}{\nolinkurl{#1}}%
-  }{\nolinkurl{#1}}%
+  HEPForge\addcolon\space\bib@online{https://#1/hepforge.org}{#1}%
 }
 \DeclareFieldAlias{eprint:HEPForge}{eprint:hepforge}
 %    \end{macrocode}
+% \end{macro}
 
+% \begin{macro}{erratum}
 % Add new bibliography string \enquote{Erratum} for the use in the |relatedtype| field.
 %    \begin{macrocode}
 \NewBibliographyString{erratum}
-\DefineBibliographyStrings{english}{erratum={Erratum:}}
+\DefineBibliographyStrings{english}{erratum={Erratum\addcolon}}
 %    \end{macrocode}
+% \end{macro}
 
 % \begin{macro}{\printbibliography}
 % Allow the bibliography to be printed sloppy
@@ -1374,37 +1502,9 @@
 %
 %    \begin{macrocode}
 \RequirePackage[noabbrev, capitalize, nameinlink]{cleveref}
+\newcommand{\creflastconjunction}{, and\nobreakspace}
 \crefname{enumi}{point}{points}
 \Crefname{enumi}{Point}{Points}
-%    \end{macrocode}
-% \end{macro}
-
-% \begin{macro}{\refstepcounter@...}
-% Adjust the |cleveref| |\refstepcounter@noarg| and |\refstepcounter@optarg| to use the |\@currentlabel| in order to fix problems with |\subref|.
-%    \begin{macrocode}
-\def\refstepcounter@noarg#1{%
-  \cref@old@refstepcounter{#1}%
-  \cref@constructprefix{#1}{\cref@result}%
-  \@ifundefined{cref@#1@alias}%
-    {\def\@tempa{#1}}%
-    {\def\@tempa{\csname cref@#1@alias\endcsname}}%
-  \protected@edef\cref@currentlabel{%
-    [\@tempa][\arabic{#1}][\cref@result]%
-    \noexpand\@currentlabel%
-  }% changed
-}
-
-\def\refstepcounter@optarg[#1]#2{%
-  \cref@old@refstepcounter{#2}%
-  \cref@constructprefix{#2}{\cref@result}%
-  \@ifundefined{cref@#1@alias}%
-    {\def\@tempa{#1}}%
-    {\def\@tempa{\csname cref@#1@alias\endcsname}}%
-  \protected@edef\cref@currentlabel{%
-    [\@tempa][\arabic{#2}][\cref@result]%
-    \noexpand\@currentlabel% changed
-  }%
-}
 %    \end{macrocode}
 % \end{macro}
 
@@ -1461,7 +1561,7 @@
 % \begin{macro}{\eqcrefname}
 % Define the |\eqcrefname| macro for named equation types.
 %    \begin{macrocode}
-\DeclareDocumentCommand{\eqcrefname}{mmo}{
+\NewDocumentCommand{\eqcrefname}{mmo}{
   \crefname{#1}{#2}{\IfValueTF{#3}{#3}{#2s}}
   \creflabelformat{#1}{(##2##1##3)}
 }
@@ -1562,19 +1662,36 @@
 }}
 %    \end{macrocode}
 
+% \begin{macro}{\begin@sentence}
+% \begin{macro}{\frenchspacing}
 % \begin{macro}{\if@begin@of@sentence}
 % Mark the beginning of a paragraph as if it would follow a full stop using the |everyhook| package \cite{everyhook}.
-% Provide a macro checking for the beginning of a sentence by examining the length of the preceeding space. (This breaks if |\frenchspacing| is activated)
+% Provide a macro checking for the beginning of a sentence by examining the length of the preceeding space.
 %    \begin{macrocode}
 \usepackage[excludeor]{everyhook}
-\PushPostHook{par}{{\spacefactor=3000}}
+\newcommand{\begin@sentence}{1001}
+\PushPostHook{par}{{\spacefactor=\begin@sentence}}
+\def\frenchspacing{%
+  \sfcode`\.\begin@sentence \sfcode`\?\begin@sentence
+  \sfcode`\!\begin@sentence \sfcode`\:\begin@sentence
+  \sfcode`\;\@m \sfcode`\,\@m
+}
 \newcommand{\if@begin@of@sentence}[2]{\leavevmode\protecting{%
   \ifboolexpr{ test {\ifnumcomp{\spacefactor}{=}{3000}} or%
-               test {\ifnumcomp{\spacefactor}{=}{2000}}%
+               test {\ifnumcomp{\spacefactor}{=}{2000}} or%
+               test {\ifnumcomp{\spacefactor}{=}{\begin@sentence}}%
   }{#1}{#2}%
 }}
 %    \end{macrocode}
 % \end{macro}
+% \end{macro}
+% \end{macro}
+
+% Load the |xspace| package \cite{xspace} and ensure compatibility with the |\enquote| macro.
+%    \begin{macrocode}
+\usepackage{xspace}
+\xspaceaddexceptions{\csq@qclose@i}
+%    \end{macrocode}
 
 % \begin{macro}{\acronym}
 % The |\acronym|\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\marg{definition}\oarg{plural\linebreak[4] definition} macro is defined.
@@ -1586,7 +1703,7 @@
 % \item optional plural long form
 % \end{enumerate}
 %    \begin{macrocode}
-\DeclareDocumentCommand{\acronym}{sommo}{
+\NewDocumentCommand{\acronym}{sommo}{
   \newabbreviation[
     longplural=\IfNoValueTF{#5}{#4s}{#5},
     \glsshortpluralkey=\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}
@@ -1607,7 +1724,7 @@
 % Provide the singular acronym macro in math mode.
 %    \begin{macrocode}
   \expandafter\mathdef\csname#3\endcsname{%
-    \text{\glsxtrshort{#3}}\glsunset{#3}%
+    \text{\glsxtrshort{#3}}\@gls@increment@currcount{#3}%
   }
 %    \end{macrocode}
 % Provide the plural acronym macro.
@@ -1625,7 +1742,7 @@
 % Provide the plural acronym macro in math mode.
 %    \begin{macrocode}
   \expandafter\mathdef\csname#3s\endcsname{%
-    \text{\glsxtrshortpl{#3}}\glsunset{#3}%
+    \text{\glsxtrshortpl{#3}}\@gls@increment@currcount{#3}%
   }
 }
 %    \end{macrocode}
@@ -1634,14 +1751,13 @@
 % \begin{macro}{\shortacronym}
 % The |\shortacronym| never expands into the long form.
 %    \begin{macrocode}
-\DeclareDocumentCommand{\shortacronym}{somm}{
-  \newabbreviation[
-    \glsshortpluralkey=\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}
-  ]{#3}{\IfNoValueTF{#2}{#3}{#2}}{#4}
+\NewDocumentCommand{\shortacronym}{somm}{
 %    \end{macrocode}
 % Provide the singular acronym macro.
 %    \begin{macrocode}
-  \expandafter\newcommand\csname#3\endcsname{\cgls*{#3}\@\xspace}
+  \expandafter\newcommand\csname#3\endcsname{%
+    \IfNoValueTF{#2}{#3}{#2}\@\xspace%
+  }
 %    \end{macrocode}
 % Expand the singular acronym macro in \PDF labels.
 %    \begin{macrocode}
@@ -1651,11 +1767,15 @@
 %    \end{macrocode}
 % Provide the singular acronym macro in math mode.
 %    \begin{macrocode}
-  \expandafter\mathdef\csname#3\endcsname{\text{\glsxtrshort*{#3}}}
+  \expandafter\mathdef\csname#3\endcsname{%
+    \text{\IfNoValueTF{#2}{#3}{#2}}%
+  }
 %    \end{macrocode}
 % Provide the plural acronym macro.
 %    \begin{macrocode}
-  \expandafter\newcommand\csname#3s\endcsname{\cglspl*{#3}\@\xspace}
+  \expandafter\newcommand\csname#3s\endcsname{%
+    \IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}\@\xspace%
+  }
 %    \end{macrocode}
 % Expand the plural acronym macro in \PDF labels.
 %    \begin{macrocode}
@@ -1665,8 +1785,9 @@
 %    \end{macrocode}
 % Provide the plural acronym macro in math mode.
 %    \begin{macrocode}
-  \expandafter\mathdef\csname#3s\endcsname{\text{\glsxtrshortpl*{#3}}}%
-  \glsunset{#3}
+  \expandafter\mathdef\csname#3s\endcsname{%
+    \text{\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}}%
+  }%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1674,7 +1795,7 @@
 % \begin{macro}{\longacronym}
 % The |\longacronym| never shows the abbreviated form.
 %    \begin{macrocode}
-\DeclareDocumentCommand{\longacronym}{sommo}{
+\NewDocumentCommand{\longacronym}{sommo}{
 %    \end{macrocode}
 % Provide the singular acronym macro.
 %    \begin{macrocode}
@@ -1744,3 +1865,32 @@
 % \PrintIndex
 % makeindex -s gglo.ist -o hep-paper.gls hep-paper.glo
 % makeindex -s gglo.ist -o hep-paper.ind hep-paper.idx
+
+% \begin{macro}{\refstepcounter@...}
+% Adjust the |cleveref| |\refstepcounter@noarg| and |\refstepcounter@optarg| to use the |\@currentlabel| in order to fix problems with |\subref|.
+%    \begin{macrocode}
+\def\refstepcounter@noarg#1{%
+  \cref@old@refstepcounter{#1}%
+  \cref@constructprefix{#1}{\cref@result}%
+  \@ifundefined{cref@#1@alias}%
+    {\def\@tempa{#1}}%
+    {\def\@tempa{\csname cref@#1@alias\endcsname}}%
+  \protected@edef\cref@currentlabel{%
+    [\@tempa][\arabic{#1}][\cref@result]%
+    \noexpand\@currentlabel%
+  }% changed
+}
+
+\def\refstepcounter@optarg[#1]#2{%
+  \cref@old@refstepcounter{#2}%
+  \cref@constructprefix{#2}{\cref@result}%
+  \@ifundefined{cref@#1@alias}%
+    {\def\@tempa{#1}}%
+    {\def\@tempa{\csname cref@#1@alias\endcsname}}%
+  \protected@edef\cref@currentlabel{%
+    [\@tempa][\arabic{#2}][\cref@result]%
+    \noexpand\@currentlabel% changed
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
