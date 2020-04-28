@@ -17,6 +17,7 @@
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesPackage{hep-paper}[2020/04/01 v1.3 Publications in High Energy Physics]
 
+\RequirePackage{pdftexcmds}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
   family=hep,
@@ -36,18 +37,41 @@
 \DeclareBoolOption[false]{manualplacement}
 \DeclareBoolOption[true]{title}
 \DeclareBoolOption[false]{revtex}
-
+\DeclareBoolOption[false]{jhep}
+\DeclareBoolOption[false]{jcap}
+\DeclareBoolOption[false]{pos}
 \ProcessKeyvalOptions*
+\ifhep@pos
+  \setkeys{hep}{title=false, defaults}
+\fi
 \ifhep@revtex
   \setkeys{hep}{defaults, title=false, lang=american, bibliography=false}
+\fi
+\newif\ifhep@sissa
+\ifhep@jhep\hep@sissatrue
+\else
+  \ifhep@jcap\hep@sissatrue
+  \else\hep@sissafalse
+  \fi
+\fi
+\ifhep@sissa
+  \setkeys{hep}{title=false, bibliography=false}
+  \PassOptionsToPackage{
+    colorlinks=true, linktocpage=true, pdfproducer=medialab, pdfa=true,
+    urlcolor=blue, anchorcolor=blue, citecolor=blue, filecolor=blue,
+    linkcolor=blue, menucolor=blue, pagecolor=blue
+  }{hyperref}
+  \hoffset 0pt
+  \voffset 0pt
 \fi
 
 \RequirePackage{ifluatex}
 \RequirePackage{ifxetex}
 \newif\ifxetexorluatex
-\ifxetex\xetexorluatextrue\else
+\ifxetex\xetexorluatextrue
+\else
   \ifluatex\xetexorluatextrue
-    \else\xetexorluatexfalse
+  \else\xetexorluatexfalse
   \fi
 \fi
 
@@ -65,7 +89,6 @@
 \RequirePackage{lmodern}
 \RequirePackage{textcomp}
 \RequirePackage{microtype}
-
 \ifxetexorluatex
   \DeclareFontShape{\@encoding}{lmss}{bx}{sc}{<->cmssbxcsc10}{}
   \DeclareFontShape{\@encoding}{lmss}{m}{sc}{%
@@ -80,13 +103,10 @@
 \ifxetexorluatex\else
   \RequirePackage[utf8]{inputenc}
 \fi
-
 \RequirePackage[\hep@lang]{babel}
 \RequirePackage{csquotes}
-
 \RequirePackage{soul}
 \let\underline\ul
-
 \ifhep@defaults\else
   \def\remove@pt#1pt{#1}
   \edef\@ptsize{\expandafter\remove@pt\hep@font}
@@ -102,26 +122,25 @@
   \input{size\@ptsize.clo}
 \fi
 
-\RequirePackage{pdftexcmds}
-\newcommand{\hep@lang@foreign}{british}
-\ifnum\pdf@strcmp{\hep@lang}{american}=0%
-  \renewcommand{\hep@lang@foreign}{USenglish}%
-\fi
-\ifnum\pdf@strcmp{\hep@lang}{USenglish}=0%
-  \renewcommand{\hep@lang@foreign}{USenglish}%
+\ifnum\pdf@strcmp{\hep@lang}{american}=0
+  \newcommand{\hep@lang@foreign}{USenglish}
+\else
+  \ifnum\pdf@strcmp{\hep@lang}{USenglish}=0
+    \newcommand{\hep@lang@foreign}{USenglish}
+  \else
+    \newcommand{\hep@lang@foreign}{british}
+  \fi
 \fi
 \RequirePackage[all, \hep@lang@foreign]{foreign}
 \DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
+\xspaceaddexceptions{\csq@qclose@i}
 
 \newcommand{\no}[1]{\textnumero~#1}
-
 \RequirePackage{relsize}
 \newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
   {\smaller\textsc{#2}~#1}%
 }
-
 \newcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}
-
 
 \RequirePackage[inline]{enumitem}
 \newlist{inlinelist}{enumerate*}{1}
@@ -184,11 +203,16 @@
 
 \AtBeginDocument{\mathdef{\i}{\operatorname{i}}}
 
-\ifhep@eqnarray\else%
+\def\overline#1{{\setul{-2ex}{}\ul{#1}}}
+\DeclareRobustCommand{\over@line}[1]{\@@overline{#1}}
+\mathdef{\overline}{\over@line}
+
+\ifhep@eqnarray\else
   \let\eqnarray\@undefined
   \let\endeqnarray\@undefined
 \fi
 
+\newcommand{\bmmax}{2}
 \RequirePackage{bm}
 \let\mathbf\bm
 \g@addto@macro\bfseries{\boldmath}
@@ -203,6 +227,12 @@
   \SetMathAlphabet{\mathsf}{bold}{OML}{cmm}{bx}{it}
 \fi
 \RequirePackage{mathrsfs}
+\RequirePackage{bbm}
+\ifhep@serif
+  \let\mathbb\mathbbm
+\else
+  \let\mathbb\mathbbmss
+\fi
 
 \RequirePackage{physics}
 \RequirePackage{slashed}
@@ -263,6 +293,9 @@
 \RequirePackage[subrefformat = parens]{subcaption}
 \captionsetup{font=small}
 \captionsetup[sub]{font=small}
+\providecommand*\subcaption@minipage[2]{%
+  \minipage#1{#2}\setcaptionsubtype\relax%
+}
 \newenvironment{panels}[2][b]{%
   \newcommand{\begin@subcaption@minipage}[2][b]{%
     \caption@withoptargs\subcaption@minipage[##1]{##2}%
@@ -343,31 +376,70 @@
   }
 }
 
-\let\old@abstract\abstract
-\renewcommand\abstract{\old@abstract\noindent\ignorespaces}
+\@ifundefined{abstract}{}{%
+  \let\old@abstract\abstract%
+  \renewcommand\abstract{\old@abstract\noindent\ignorespaces}%
+}
 \fi
 
 \ifnum\pdf@strcmp{\hep@bibliography}{false}=0\else
-\RequirePackage[style=\hep@bibliography]{biblatex}
+\begin{filecontents}{hep-paper.dbx}
+\DeclareDatamodelFields[type=field, datatype=literal]{
+  reportnumber, collaboration
+}
+\DeclareDatamodelFields[type=field, datatype=uri]{protocollessurl}
+\DeclareDatamodelEntryfields{
+  reportnumber, collaboration, protocollessurl
+}
+\end{filecontents}
+\RequirePackage[style=\hep@bibliography, datamodel=hep-paper]{biblatex}
+\DeclareSortingTemplate{none-ynt}{
+  \sort{\citeorder}
+  \sort[final]{
+    \field{sortkey}
+  }
+  \sort{
+    \field{sortyear}
+    \field{year}
+    \literal{9999}
+  }
+  \sort{
+    \field{sortname}
+    \field{author}
+    \field{editor}
+    \field{translator}
+    \field{sorttitle}
+    \field{title}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{title}
+  }
+}
 \ExecuteBibliographyOptions{
-  sorting=none,
+  sorting=none-ynt,
   giveninits=true
 }
 \renewbibmacro*{in:}{%
   \iffieldundef{journal}{}{\printtext{\bibstring{in}\intitlepunct}}%
 }
+\NewBibliographyString{erratum}
+\DefineBibliographyStrings{english}{erratum={Erratum\addcolon}}
+\let\old@printbibliography\printbibliography
+\renewcommand{\printbibliography}{\sloppy\old@printbibliography}
+
 \newcommand{\reg@exp@one}{\regexp{\A(\p{L}+)?\d+(\p{L}+)?\Z}}
 \newcommand{\reg@exp@two}{\regexp{\A(\p{L}+)?(\d+)(\p{L}+)?\Z}}
 \newcommand{\reg@exp@url}{\regexp{\A(ht|f)tp(s)?:\/\/}}
 \DeclareSourcemap{%
-  \maps[datatype=bibtex,overwrite=true]{%
+  \maps[datatype=bibtex, overwrite=true]{%
     \map{%
-      \step[fieldsource=Collaboration,final=true]%
-      \step[fieldset=usere,origfieldval,final=true]
+      \step[fieldsource=Collaboration, final=true]%
+      \step[fieldset=collaboration, origfieldval, final=true]
     }%
     \map{%
-      \step[fieldsource=reportNumber,final=true]%
-      \step[fieldset=userf,origfieldval,final=true]
+      \step[fieldsource=reportNumber, final=true]%
+      \step[fieldset=reportnumber, origfieldval, final=true]
     }%
     \map[overwrite]{
       \step[fieldsource=volume, match=\reg@exp@one, final]
@@ -377,35 +449,33 @@
     }
     \map{
       \step[fieldsource=url, final=true]
-      \step[fieldset=verbc, origfieldval,final=true]
-      \step[fieldsource=verbc, match=\reg@exp@url, replace={}]
+      \step[fieldset=protocollessurl, origfieldval, final=true]
+      \step[fieldsource=protocollessurl, match=\reg@exp@url, replace={}]
     }
   }%
 }
 
 \DeclareFieldFormat{url}{%
-  \mkbibacro{URL}\addcolon\space\online{#1}{\thefield{verbc}}%
+  \mkbibacro{URL}\addcolon\space\online{#1}{\thefield{protocollessurl}}%
 }
-
 \renewbibmacro*{author}{%
-  \iffieldundef{usere}{\printnames{author}}{\textbf{\printfield{usere}}}%
+  \iffieldundef{collaboration}{%
+    \printnames{author}}{\textbf{\printfield{collaboration}}%
+  }%
 }
-
 \providecommand{\letbibmacro}[2]{\csletcs{abx@macro@#1}{abx@macro@#2}}
-
 \letbibmacro{doi+eprint+url-old}{doi+eprint+url}
 \renewbibmacro*{doi+eprint+url}{%
   \usebibmacro{doi+eprint+url-old}
-  \iffieldundef{userf}{}{\textls[0]{%
+  \iffieldundef{reportnumber}{}{\textls[0]{%
     \newunitpunct\textnumero\intitlepunct%
-    \textsc{\small\printfield{userf}}%
+    \textsc{\small\printfield{reportnumber}}%
   }}%
 }
 
 \newcommand{\bib@online}[2]{%
   \ifhyperref{\online{#1}{#2}}{\nolinkurl{#2}}%
 }
-
 \NewDocumentCommand{\new@eprint}{smm}{
   \DeclareFieldFormat{eprint:#2}{%
     \newcommand{\@path}{\IfBooleanT{#1}{\thefield{eprintclass}/}##1}%
@@ -429,11 +499,6 @@
 }
 \DeclareFieldAlias{eprint:HEPForge}{eprint:hepforge}
 
-\NewBibliographyString{erratum}
-\DefineBibliographyStrings{english}{erratum={Erratum\addcolon}}
-
-\let\old@printbibliography\printbibliography
-\renewcommand{\printbibliography}{\sloppy\old@printbibliography}
 \fi
 
 \RequirePackage{hyperref}
@@ -462,7 +527,7 @@
   \AtBeginDocument{\hypersetup{pdfauthor={\@author}}}
 \fi
 
-\RequirePackage[noabbrev, capitalize, nameinlink]{cleveref}
+\RequirePackage[noabbrev, nameinlink]{cleveref}
 \newcommand{\creflastconjunction}{, and\nobreakspace}
 \crefname{enumi}{point}{points}
 \Crefname{enumi}{Point}{Points}
@@ -507,11 +572,11 @@
 \NewBibliographyString{refname}
 \NewBibliographyString{refsname}
 \DefineBibliographyStrings{english}{%
-  refname = {Reference},
-  refsname = {References}
+  refname = {reference},
+  refsname = {references}
 }
 \DeclareCiteCommand{\ccite}{%
-  \ifnum\thecitetotal=1%
+  \ifnum\thecitetotal=1
     \bibstring{refname}%
   \else%
     \bibstring{refsname}%
@@ -548,14 +613,16 @@
   }%
 }}
 
-\usepackage[excludeor]{everyhook}
+\RequirePackage[excludeor]{everyhook}
 \newcommand{\begin@sentence}{1001}
 \PushPostHook{par}{{\spacefactor=\begin@sentence}}
+
 \def\frenchspacing{%
   \sfcode`\.\begin@sentence \sfcode`\?\begin@sentence
   \sfcode`\!\begin@sentence \sfcode`\:\begin@sentence
   \sfcode`\;\@m \sfcode`\,\@m
 }
+
 \newcommand{\if@begin@of@sentence}[2]{\leavevmode\protecting{%
   \ifboolexpr{ test {\ifnumcomp{\spacefactor}{=}{3000}} or%
                test {\ifnumcomp{\spacefactor}{=}{2000}} or%
@@ -563,16 +630,14 @@
   }{#1}{#2}%
 }}
 
-\usepackage{xspace}
-\xspaceaddexceptions{\csq@qclose@i}
-
-\NewDocumentCommand{\acronym}{sommo}{
+\NewDocumentCommand{\acronym}{somsmo}{
   \newabbreviation[
-    longplural=\IfNoValueTF{#5}{#4s}{#5},
+    longplural=\IfNoValueTF{#6}{#5s}{#6},
     \glsshortpluralkey=\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}
-  ]{#3}{\IfNoValueTF{#2}{#3}{#2}}{#4}
+  ]{#3}{\IfNoValueTF{#2}{#3}{#2}}{#5}
   \expandafter\newcommand\csname#3\endcsname{%
-    \if@begin@of@sentence{\cGls{#3}}{\cgls{#3}}\@\xspace%
+    \if@begin@of@sentence{\cGls{#3}}{\cgls{#3}}%
+    \IfBooleanTF{#4}{}{\@\xspace}%
   }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3\endcsname{%
     \IfNoValueTF{#2}{#3}{#2} }%
@@ -581,7 +646,8 @@
     \text{\glsxtrshort{#3}}\@gls@increment@currcount{#3}%
   }
   \expandafter\newcommand\csname#3s\endcsname{%
-    \if@begin@of@sentence{\cGlspl{#3}}{\cglspl{#3}}\@\xspace%
+    \if@begin@of@sentence{\cGlspl{#3}}{\cglspl{#3}}%
+    \IfBooleanTF{#4}{}{\@\xspace}%
   }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3s\endcsname{%
     \IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}} }%
@@ -590,9 +656,9 @@
     \text{\glsxtrshortpl{#3}}\@gls@increment@currcount{#3}%
   }
 }
-\NewDocumentCommand{\shortacronym}{somm}{
+\NewDocumentCommand{\shortacronym}{somsmo}{
   \expandafter\newcommand\csname#3\endcsname{%
-    \IfNoValueTF{#2}{#3}{#2}\@\xspace%
+    \IfNoValueTF{#2}{#3}{#2}\IfBooleanTF{#4}{}{\@\xspace}%
   }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3\endcsname{%
     \IfNoValueTF{#2}{#3}{#2} }%
@@ -601,7 +667,8 @@
     \text{\IfNoValueTF{#2}{#3}{#2}}%
   }
   \expandafter\newcommand\csname#3s\endcsname{%
-    \IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}\@\xspace%
+    \IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}%
+    \IfBooleanTF{#4}{}{\@\xspace}%
   }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3s\endcsname{%
     \IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}} }%
@@ -610,19 +677,20 @@
     \text{\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}}%
   }%
 }
-\NewDocumentCommand{\longacronym}{sommo}{
+\NewDocumentCommand{\longacronym}{somsmo}{
   \expandafter\newcommand\csname#3\endcsname{%
-    \if@begin@of@sentence{\MakeUppercase#4}{#4}\@\xspace%
+    \if@begin@of@sentence{\MakeUppercase#5}{#5}%
+    \IfBooleanTF{#4}{}{\@\xspace}%
   }
-  \pdfstringdefDisableCommands{\expandafter\def\csname#3\endcsname{#4 }}
+  \pdfstringdefDisableCommands{\expandafter\def\csname#3\endcsname{#5 }}
   \expandafter\newcommand\csname#3s\endcsname{%
     \if@begin@of@sentence{%
-      \IfNoValueTF{#5}{\MakeUppercase#4s}{\MakeUppercase#5}%
+      \IfNoValueTF{#6}{\MakeUppercase#5s}{\MakeUppercase#6}%
     }{%
-      \IfNoValueTF{#5}{#4s}{#5}}\@\xspace%
+      \IfNoValueTF{#6}{#5s}{#6}}\IfBooleanTF{#4}{}{\@\xspace}%
   }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3s\endcsname{%
-    \IfNoValueTF{#5}{#4s}{#5} }%
+    \IfNoValueTF{#6}{#5s}{#6} }%
   }
 }
 \renewcommand*{\@gls@write@entrycounts}{%
@@ -644,6 +712,14 @@
 }
 \newcommand{\resetacronym}[1]{\protect\glsreset{#1}}
 \newcommand{\dummyacronym}[1]{\protect\glsunset{#1}}
+\@ifundefined{abstract}{}{%
+  \let\end@old@abstract\endabstract%
+  \renewcommand\endabstract{\glsresetall\end@old@abstract}%
+}
+\let\old@table@of@contents\tableofcontents
+\renewcommand\tableofcontents{%
+  \glsunsetall\old@table@of@contents\glsresetall%
+}
 \fi
 
 \endinput
