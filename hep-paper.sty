@@ -15,7 +15,7 @@
 %% and version 1.3c or later is part of all distributions of
 %% LaTeX version 2005/12/01 or later.
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesPackage{hep-paper}[2020/04/01 v1.3 Publications in High Energy Physics]
+\ProvidesPackage{hep-paper}[2020/05/01 v1.3 Publications in High Energy Physics]
 
 \RequirePackage{pdftexcmds}
 \RequirePackage{kvoptions}
@@ -290,7 +290,7 @@
     \vskip\belowcaptionskip%
   }
 \fi
-\RequirePackage[subrefformat = parens]{subcaption}
+\RequirePackage[subrefformat=parens]{subcaption}
 \captionsetup{font=small}
 \captionsetup[sub]{font=small}
 \providecommand*\subcaption@minipage[2]{%
@@ -383,17 +383,9 @@
 \fi
 
 \ifnum\pdf@strcmp{\hep@bibliography}{false}=0\else
-\begin{filecontents}{hep-paper.dbx}
-\DeclareDatamodelFields[type=field, datatype=literal]{
-  reportnumber, collaboration
-}
-\DeclareDatamodelFields[type=field, datatype=uri]{protocollessurl}
-\DeclareDatamodelEntryfields{
-  reportnumber, collaboration, protocollessurl
-}
-\end{filecontents}
 \RequirePackage[style=\hep@bibliography, datamodel=hep-paper]{biblatex}
-\DeclareSortingTemplate{none-ynt}{
+\providecommand{\DeclareSortingTemplate}{\DeclareSortingScheme}
+\DeclareSortingTemplate{hep-paper}{
   \sort{\citeorder}
   \sort[final]{
     \field{sortkey}
@@ -404,27 +396,27 @@
     \literal{9999}
   }
   \sort{
-    \field{sortname}
-    \field{author}
-    \field{editor}
-    \field{translator}
-    \field{sorttitle}
-    \field{title}
+    \field{month}
+  }
+  \sort{
+    \field{eprint}
+    \field{doi}
   }
   \sort{
     \field{sorttitle}
     \field{title}
   }
+  \sort{
+    \field{subtitle}
+    \field{volume}
+  }
 }
 \ExecuteBibliographyOptions{
-  sorting=none-ynt,
+  sorting=hep-paper,
   giveninits=true
 }
-\renewbibmacro*{in:}{%
-  \iffieldundef{journal}{}{\printtext{\bibstring{in}\intitlepunct}}%
-}
 \NewBibliographyString{erratum}
-\DefineBibliographyStrings{english}{erratum={Erratum\addcolon}}
+\DefineBibliographyStrings{english}{erratum={Erratum}}
 \let\old@printbibliography\printbibliography
 \renewcommand{\printbibliography}{\sloppy\old@printbibliography}
 
@@ -454,7 +446,9 @@
     }
   }%
 }
-
+\renewbibmacro*{in:}{%
+  \iffieldundef{journaltitle}{}{\printtext{\bibstring{in}\intitlepunct}}%
+}
 \DeclareFieldFormat{url}{%
   \mkbibacro{URL}\addcolon\space\online{#1}{\thefield{protocollessurl}}%
 }
@@ -520,7 +514,11 @@
   \pdfstringdefDisableCommands{\let\footnote\@gobble}
   \pdfstringdefDisableCommands{\let\\\@gobble}
 }
-\AtBeginShipout{\hypersetup{pdftitle={\@title}}}
+\ifhep@revtex
+  \AtBeginShipout{\hypersetup{pdftitle={\@title}}}
+\else
+  \AtBeginDocument{\hypersetup{pdftitle={\@title}}}
+\fi
 \ifhep@title
   \AtBeginDocument{\hypersetup{pdfauthor=\AB@authlist}}
 \else

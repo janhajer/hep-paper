@@ -28,7 +28,10 @@ and version 1.3c or later is part of all distributions of
 LaTeX version 2005/12/01 or later.
 \endpreamble
 
-\generate{\file{hep-paper.sty}{\from{hep-paper.dtx}{package}}}
+\generate{
+  \file{hep-paper.sty}{\from{hep-paper.dtx}{package}}
+  \file{hep-paper.dbx}{\from{hep-paper.dtx}{datamodel}}
+}
 
 \Msg{*********************************************************}
 \Msg{*}

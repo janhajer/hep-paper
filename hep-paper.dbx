@@ -1,0 +1,32 @@
+%%
+%% This is file `hep-paper.dbx',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% hep-paper.dtx  (with options: `datamodel')
+%% This is a generated file.
+%% Copyright (C) 2019-2020 by Jan Hajer
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version. The latest version of this license is in:
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2005/12/01 or later.
+\ProvidesFile{hep-paper.dbx}[2020/05/01 v1.3 HEP-Paper biblatex data model]
+
+\DeclareDatamodelFields[type=field, datatype=literal]{
+  reportnumber,
+  collaboration,
+}
+\DeclareDatamodelFields[type=field, datatype=uri]{protocollessurl}
+\DeclareDatamodelEntryfields{
+  reportnumber,
+  collaboration,
+  protocollessurl,
+}
+
+\endinput
+%%
+%% End of file `hep-paper.dbx'.
