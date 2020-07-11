@@ -15,7 +15,7 @@
 %% and version 1.3c or later is part of all distributions of
 %% LaTeX version 2005/12/01 or later.
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesPackage{hep-paper}[2020/05/01 v1.3 Publications in High Energy Physics]
+\ProvidesPackage{hep-paper}[2020/07/01 v1.4 Publications in High Energy Physics]
 
 \RequirePackage{pdftexcmds}
 \RequirePackage{kvoptions}
@@ -105,8 +105,8 @@
 \fi
 \RequirePackage[\hep@lang]{babel}
 \RequirePackage{csquotes}
-\RequirePackage{soul}
-\let\underline\ul
+\RequirePackage[normalem]{ulem}
+\let\underline\uline
 \ifhep@defaults\else
   \def\remove@pt#1pt{#1}
   \edef\@ptsize{\expandafter\remove@pt\hep@font}
@@ -142,7 +142,7 @@
 }
 \newcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}
 
-\RequirePackage[inline]{enumitem}
+\RequirePackage{enumitem}
 \newlist{inlinelist}{enumerate*}{1}
 \setlist*[inlinelist,1]{%
   label=\roman*), itemjoin={,\ }, itemjoin*={, and\ }, after=.%
@@ -158,6 +158,7 @@
   }
 }{\end{enum@descript}}
 
+\RequirePackage{footnotebackref}
 \let\@foot@note\footnote
 \renewcommand{\footnote}[1]{\unskip\@foot@note{\ignorespaces#1}}
 
@@ -186,6 +187,7 @@
 \allowdisplaybreaks[1]
 
 \DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\sgn}{sgn}
 
 \RequirePackage{xparse}
 \DeclareDocumentCommand{\mathdef}{mO{0}m}{%
@@ -203,9 +205,12 @@
 
 \AtBeginDocument{\mathdef{\i}{\operatorname{i}}}
 
-\def\overline#1{{\setul{-2ex}{}\ul{#1}}}
+\def\overline#1{{\renewcommand{\ULdepth}{-1.9ex}{}\uline{#1}}}
 \DeclareRobustCommand{\over@line}[1]{\@@overline{#1}}
 \mathdef{\overline}{\over@line}
+
+\RequirePackage{mleftright}
+\mleftright
 
 \ifhep@eqnarray\else
   \let\eqnarray\@undefined
@@ -227,12 +232,12 @@
   \SetMathAlphabet{\mathsf}{bold}{OML}{cmm}{bx}{it}
 \fi
 \RequirePackage{mathrsfs}
-\RequirePackage{bbm}
 \ifhep@serif
-  \let\mathbb\mathbbm
+  \RequirePackage{dsfont}
 \else
-  \let\mathbb\mathbbmss
+  \RequirePackage[sans]{dsfont}
 \fi
+\let\mathbb\mathds
 
 \RequirePackage{physics}
 \RequirePackage{slashed}
@@ -338,7 +343,7 @@
 
 \author{}
 \AtEndOfClass{\newcommand{\email}[1]{%
-  \unskip\thanks{\online{mailto:#1}{#1}}
+  \unskip\thanks{\online{mailto:#1}{#1}}%
 }}
 \RequirePackage{authblk}
 \renewcommand\Affilfont{\footnotesize}
@@ -415,8 +420,9 @@
   sorting=hep-paper,
   giveninits=true
 }
-\NewBibliographyString{erratum}
-\DefineBibliographyStrings{english}{erratum={Erratum}}
+\NewBibliographyString{erratum,erratums}
+\DefineBibliographyStrings{english}{erratum={Erratum},erratums={Errata}}
+\providecommand{\relateddelimerratum}{\addsemicolon\space}
 \let\old@printbibliography\printbibliography
 \renewcommand{\printbibliography}{\sloppy\old@printbibliography}
 
@@ -454,7 +460,7 @@
 }
 \renewbibmacro*{author}{%
   \iffieldundef{collaboration}{%
-    \printnames{author}}{\textbf{\printfield{collaboration}}%
+    \printnames{author}}{\textit{\printfield{collaboration}}%
   }%
 }
 \providecommand{\letbibmacro}[2]{\csletcs{abx@macro@#1}{abx@macro@#2}}
@@ -528,7 +534,7 @@
 \RequirePackage[noabbrev, nameinlink]{cleveref}
 \newcommand{\creflastconjunction}{, and\nobreakspace}
 \crefname{enumi}{point}{points}
-\Crefname{enumi}{Point}{Points}
+\crefname{inlinelisti}{point}{points}
 
 \newcommand\no@break@before{%
   \relax\ifvmode\else%

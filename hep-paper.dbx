@@ -14,7 +14,7 @@
 %% http://www.latex-project.org/lppl.txt
 %% and version 1.3c or later is part of all distributions of
 %% LaTeX version 2005/12/01 or later.
-\ProvidesFile{hep-paper.dbx}[2020/05/01 v1.3 HEP-Paper biblatex data model]
+\ProvidesFile{hep-paper.dbx}[2020/07/01 v1.4 HEP-Paper biblatex data model]
 
 \DeclareDatamodelFields[type=field, datatype=literal]{
   reportnumber,

@@ -18,10 +18,11 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-paper}[2020/05/01 v1.3 Publications in High Energy Physics]
-%<datamodel>\ProvidesFile{hep-paper.dbx}[2020/05/01 v1.3 HEP-Paper biblatex data model]
+%<package>\ProvidesPackage{hep-paper}[2020/07/01 v1.4 Publications in High Energy Physics]
+%<datamodel>\ProvidesFile{hep-paper.dbx}[2020/07/01 v1.4 HEP-Paper biblatex data model]
 %
 %<*driver>
+\RequirePackage[l2tabu, orthodox]{nag}
 
 \documentclass{ltxdoc}
 
@@ -43,25 +44,28 @@
 % \makeatother
 
 \usepackage[parskip]{hep-paper}
+% \renewcommand\ttdefault{lmvtt}
 
 \bibliography{bibliography}
 
 \acronym{PDF}{portable document format}
+\acronym{URL}{uniform resource locator}
 
 \usepackage{hologo}
-\usepackage{multicol}
 
 \usepackage{titletoc}
 \titlecontents{section}[0em]{\medskip\bfseries}{\thecontentslabel\hspace{.8em}}{}{\hfill\contentspage}
 
 \newenvironment{columns}[1][.5]{%
   \begin{minipage}[t]{\linewidth}%
-  \begin{minipage}[t]{#1\linewidth}
+  \begin{minipage}[t]{#1\linewidth}%
   \newcommand{\column}{%
     \end{minipage}%
     \begin{minipage}[t]{\linewidth-#1\linewidth}%
   }%
 }{\end{minipage}\end{minipage}}
+
+\setlength{\fboxsep}{1pt}
 
 \EnableCrossrefs
 \CodelineIndex
@@ -75,7 +79,7 @@
 %
 % \fi
 %
-% \CheckSum{1140}
+% \CheckSum{1148}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -97,6 +101,7 @@
 % \changes{v1.1}{2020/01/01}{Transition to documented \hologo{LaTeX} source file}
 % \changes{v1.2}{2020/03/01}{Introduction of package options}
 % \changes{v1.3}{2020/05/01}{Inclusion of JHEP and JCAP package options, fix incompatibility with recent subcaption package version, move biblatex datamodel into its own file}
+% \changes{v1.4}{2020/07/01}{Bug fixing}
 %
 % \GetFileInfo{hep-paper.sty}
 %
@@ -143,11 +148,13 @@
 % |c0|, |c1|, |c2|, |c3|, |c4|, |c5|, |c6|,
 % |ansia|, |ansib|, |ansic|, |ansid|, |ansie|,
 % |letter|, |executive|, |legal|.
+% The default is |a4|.
 %
 % \DescribeMacro{font}
 % The |font=|\meta{size} option loads the specified font size.
 % The possible \meta{sizes} are:
 % |8pt|, |9pt|, |10pt|, |11pt|, |12pt|, |14pt|, |17pt|, |20pt|.
+% The default is \unit[11]{pt}.
 %
 % \DescribeMacro{defaults}
 % The |defaults| option prevents the adjustment of the page geometry and the font size set by the document class.
@@ -163,20 +170,23 @@
 % \footnote{The |parskip| option is used for this document.}
 %
 % \DescribeMacro{sansserif}
-% The |sansserif| option switches the document including math to sans serif font shape.
+% The |sansserif| option switches the document including math to the sans serif font shape.
 %
 % \DescribeMacro{title}
 % The |title=false| option deactivates the title page adjustments.
-%
-% \DescribeMacro{manualplacement}
-% The |manualplacement| option reactivates manual float placement.
 %
 % \DescribeMacro{bibliography}
 % The |bibliography|=\meta{key} option prevents the automatic loading of the |biblatex| package \cite{biblatex} if \meta{key}=|false|.
 % Otherwise the \meta{key} is passed as |style| string to the |biblatex| package.
 %
 % \DescribeMacro{glossaries}
-% The |glossaries=false| option deactives the use of the |glossaries| package \cite{glossaries}.
+% The |glossaries=false| option deactives acronyms and the use of the |glossaries| package \cite{glossaries}.
+%
+% \DescribeMacro{manualplacement}
+% The |manualplacement| option reactivates manual float placement.
+%
+% \DescribeMacro{eqnarray}
+% The |eqnarray| option reactivates the depreciated |eqnarray| environment.
 %
 % \DescribeMacro{jhep}
 % The |jhep| option activates the |JHEP| \cite{jhep} compatibility mode.
@@ -189,9 +199,6 @@
 %
 % \DescribeMacro{pos}
 % The |pos| option activates the |PoS| compatibility mode.
-%
-% \DescribeMacro{eqnarray}
-% The |eqnarray| option reactivates the depreciated |eqnarray| environment.
 %
 % \section{Macros and environments}
 %
@@ -242,7 +249,6 @@
 % \DescribeMacro{inlinelist}
 % \begin{columns}
 % |The three main points are|
-%
 % |\begin{inlinelist}|
 %
 % | \item one|
@@ -285,7 +291,7 @@
 %
 % \DescribeMacro{\underline}
 % \DescribeMacro{\overline}
-% The |\underline| macro is redefined to allow linebreaks using the |soul| package \cite{soul}.
+% The |\underline| macro is redefined to allow linebreaks using the |ulem| package \cite{ulem}.
 % The |\overline| macro is extended to also \overline{overline} text outside of math environments.
 %
 % \DescribeMacro{\useparskip}
@@ -295,7 +301,7 @@
 % \subsubsection{References and footnotes}
 %
 % \DescribeMacro{\cref}
-% References are extended with the |cleveref| package \cite{cleveref}, which allows to \eg just type |\cref|\marg{key}  in order to write \enquote{Figure 1}.
+% References are extended with the |cleveref| package \cite{cleveref}, which allows to \eg just type |\cref|\marg{key}  in order to write \enquote{figure 1}.
 % Furthermore, the |cleveref| package allows to reference multiple objects within one |\cref|\marg{key1,key2}.
 %
 % \DescribeMacro{\cite}
@@ -319,10 +325,10 @@
 % The second star restores the \hologo{TeX} default of swallowing subsequent white space.
 % The long form is only shown at the first appearance of these macros, later appearances generate the abbreviation with a hyperlink to the long form.
 % Capitalization at the beginning of paragraphs and sentences is ensured.
-% The |\shortacronym| and |\longacronym| macros only show the short or long form of their acronym.
+% The |\shortacronym| and |\longacronym| macros are dropin replacements of the |\acronym| macro showing only the short or long form of their acronym.
 % \DescribeMacro{\resetacronym}
 % \DescribeMacro{\dummyacronym}
-% The first use form of the acronym can be enforced by resetting the acronym counter.
+% The first use form of the acronym can be enforced by resetting the acronym counter with |\resetacronym|\marg{key}.
 % If the acronym counter equals one at the end of the document the short form of the acronym is not introduced.
 % Placing a |\dummyacronym|\marg{key} at the end of the document ensures that the short form is introduced.
 %
@@ -330,9 +336,8 @@
 %
 % The |mathtools| \cite{mathtools} and |amssymb| \cite{amsfonts} packages are loaded.
 % They in turn load the \hologo{AmSLaTeX} |amsmath| \cite{amsmath} and |amsfonts| \cite{amsfonts} packages.
-% Details about the font handling in \hologo{TeX} can be found in \cite{fntguide}.
 % \DescribeMacro{\mathbf}
-% Bold math, including |\mathbf| is provided by the |bm| package \cite{bm}, \ie ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
+% Bold math, via |\mathbf| is improved by the |bm| package \cite{bm}, \ie ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
 % Macros switching to |bfseries| such as |\section|\marg{text} are ensured to also typeset math in bold.
 % This may cause trouble if bold symbols carry an additional non-implicit meaning.
 % \DescribeMacro{\text}
@@ -344,14 +349,17 @@
 % \DescribeMacro{\mathscr}
 % The |\mathcal| font \ie ($\mathcal{ABCD}$) is accompanied by the |\mathscr| font \ie ($\mathscr{ABCD}$).
 % \DescribeMacro{\mathbb}
-% The |\mathbb| font is changed by the |bbm| \cite{bbm-macros} package and adjusted depending on the |sansserif| option \ie ($\mathbb{Ab1}${\mathversion{bold}$\mathbb{Ab1}$}).
+% The |\mathbb| font is improved by the |doublestroke| package \cite{dsfont} and adjusted depending on the |sansserif| option \ie ($\mathbb{Ah1}$).
+% \DescribeMacro{\mathfrak}
+% Finally, the |\mathfrak| font is also available \ie ($\mathfrak{AaBb12}$).
+% Details about the font handling in \hologo{TeX} can be found in \ccite{fntguide}.
 %
 % \DescribeMacro{\nicefrac}
 % \DescribeMacro{\flatfrac}
 % The |\frac|\marg{number}\marg{number} macro is accompanied by |\nicefrac|\linebreak[1]\marg{number}\linebreak[1]\marg{number} and |\flatfrac|\marg{number}\marg{number} leading to $\frac12$, $\nicefrac 12$, and $\flatfrac 12$.
 % \DescribeMacro{\diag}
-%
-% A diagonal matrix operator is defined |\diag|.
+% \DescribeMacro{\sgn}
+% Diagonal matrix |\diag| and signum |\sgn| operators are defined.
 %
 % \DescribeMacro{\mathdef}
 % The |\mathdef|\marg{name}\oarg{arguments}\marg{code} macro (re-)defines macros only within math mode without changing the text mode definition.
@@ -364,11 +372,144 @@
 % For longer paper it can be useful to re-number the equation in accordance with the section numbering |\numberwithin{equation}{section}|.
 % \DescribeMacro{subequations}
 % In order to further reduce the size the of equation counter it can be useful to wrap |align| environments with multiple rows in a |subequations| environment.
-% Both macros are provided by the \hologo{AmSLaTeX} package.
+% Both macros are provided by the |amsmath| package.
 %
 % \DescribeMacro{eqnarray}
 % The depreciated |eqnarray| environment is undefined as long this behaviour is not prevented by the |eqnarray| package option.
-% The |split|, |multline|, |align|, |multlined|, |aligned|, |alignedat|, and |cases| environments should be used instead.
+% The |split|, |multline|, |align|, |multlined|, |aligned|, |alignedat|, and |cases| environments of the |amsmath| and |mathtools| packages should be used instead.
+%
+% \DescribeMacro{equation}%
+% Use the |equation| environment for short equations.
+%
+% \begin{columns}
+% |\begin{equation}|
+%
+% | left = right \ .|
+%
+% |\end{equation}|
+% \column
+% \begin{equation}
+% \framebox[2em]{left\strut} = \framebox[7em]{right\strut} \ .
+% \end{equation}
+% \end{columns}
+%
+% \DescribeMacro{multline}
+% Use the |multline| environment for longer equations.
+%
+% \begin{columns}
+% |\begin{multline}|
+%
+% | left = right 1 \\|
+%
+% | + right 2 \ .|
+%
+% |\end{multline}|
+% \column
+% \begin{multline}
+% \framebox[2em]{left\strut} = \framebox[7em]{right 1\strut} \\
+% \framebox[7em]{+ right 2\strut} \ .
+%   \end{multline}
+% \end{columns}
+%
+% \DescribeMacro{split}
+% Use the |split| sub environment for equations in which multiple equal signs should be aligned.
+%
+% \begin{columns}
+% |\begin{equation} \begin{split}|
+%
+% | left &= right 1 \\|
+%
+% | &= right 2 \ .|
+%
+% |\end{split} \end{equation}|
+% \column
+% \begin{equation}
+% \begin{split}
+% \framebox[2em]{left\strut} &= \framebox[7em]{right 1\strut} \\
+% &= \framebox[7em]{right 2\strut} \ .
+% \end{split}
+% \end{equation}
+% \end{columns}
+%
+% \DescribeMacro{align}
+% Use the |align| environment for the vertical alignment and horizontal distribution of multiple equations.
+%
+% \begin{columns}
+% |\begin{subequations}|
+% |\begin{align}|
+%
+% | left &= right \ , &|
+% | left &= right \ , \\|
+% | left &= right \ , &|
+% | left &= right \ .|
+%
+% |\end{align}|
+% |\end{subequations}|
+% \column
+% \begin{subequations}
+% \begin{align}
+% \framebox[2em]{left\strut} &= \framebox[3em]{right\strut} \ , &
+% \framebox[2em]{left\strut} &= \framebox[3em]{right\strut} \ , \\
+% \framebox[2em]{left\strut} &= \framebox[3em]{right\strut} \ , &
+% \framebox[2em]{left\strut} &= \framebox[3em]{right\strut} \ .
+% \end{align}
+% \end{subequations}
+% \end{columns}
+%
+% \DescribeMacro{aligned}
+% Use the |aligned| environment within a |equation| environment if the aligned equations should be labeled with a single equation number.
+%
+% \DescribeMacro{multlined}
+% Use the |multlined| environment if either |split| or |align| contain very long lines.
+%
+% \begin{columns}
+% |\begin{equation} \begin{split}|
+%
+% | left &= right 1 \\ &=|
+% | \begin{multlined}[t]|
+% |  right 2 \\ + right 3 \ .|
+% | \end{multlined}|
+% |\end{split} \end{equation}|
+% \column
+% \begin{equation}
+% \begin{split}
+% \framebox[2em]{left\strut} &= \framebox[7em]{right 1\strut} \\ &=
+%  \begin{multlined}[t]
+%   \framebox[7em]{right 2\strut} \\
+%   \framebox[7em]{+ right 3\strut} \ .
+% \end{multlined}
+% \end{split}
+% \end{equation}
+% \end{columns}
+%
+% \DescribeMacro{alignat}
+% Use the |alignat| environment together with the |\mathllap| macro for the alignment of multiple equations with vastly different lengths.
+%
+% \begin{columns}
+% |\begin{subequations}|
+% |\begin{alignat}{2}|
+%
+% | left &= long right && \ , \\|
+%
+% | le. 2 &= ri. 2 \ , &|
+%
+% | \mathllap{le. 3 = ri. 3} & \ .|
+% |\end{alignat}|
+% |\end{subequations}|
+% \column
+% \begin{subequations}
+% \begin{alignat}{2}
+% \framebox[2em]{left\strut} &=
+% \framebox[11em]{long right\strut} && \ , \\
+% \framebox[2em]{le.\ 2\strut}
+% &= \framebox[2.5em]{ri.\ 2\strut} \ , &
+% \mathllap{\framebox[2em]{le.\ 3\strut}
+% = \framebox[2.5em]{ri.\ 3\strut}} & \ .
+% \end{alignat}
+% \end{subequations}
+% \end{columns}
+%
+% As a rule of thumb if you have to use |\notag|, |\nonumber|, or perform manual spacing via |\quad| you are probably using the wrong environment.
 %
 % \subsubsection{Physics}
 %
@@ -771,11 +912,11 @@
 %    \end{macrocode}
 %
 % \begin{macro}{\underline}
-% Load the |soul| package \cite{soul} for hyphenable underlined text.
+% Load the |ulem| package \cite{ulem} for hyphenable underlined text.
 % \DoNotIndex{\let}
 %    \begin{macrocode}
-\RequirePackage{soul}
-\let\underline\ul
+\RequirePackage[normalem]{ulem}
+\let\underline\uline
 %    \end{macrocode}
 % \end{macro}
 %
@@ -857,7 +998,7 @@
 %
 % Load the |enumitem| package \cite{enumitem}.
 %    \begin{macrocode}
-\RequirePackage[inline]{enumitem}
+\RequirePackage{enumitem}
 %    \end{macrocode}
 %
 % \begin{environment}{inlinelist}
@@ -889,6 +1030,11 @@
 % \end{environment}
 
 % \subsection{Footnotes}
+%
+% Place a hyperlink from the footnote back to its referencing label using the |footnotebackref| package \cite{footnotebackref}.
+%    \begin{macrocode}
+\RequirePackage{footnotebackref}
+%    \end{macrocode}
 %
 % \begin{macro}{\footnote}
 % Ensure that no spaces appear before the footmark or at the beginning of the footnote.
@@ -946,10 +1092,13 @@
 %    \end{macrocode}
 
 % \begin{macro}{\diag}
-% Provide a diag operator
+% \begin{macro}{\sgn}
+% Provide the |\diag| and |\sgn| operators
 %    \begin{macrocode}
 \DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\sgn}{sgn}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 
 % \begin{macro}{\mathdef}
@@ -980,17 +1129,28 @@
 % \end{macro}
 
 % \begin{macro}{\overline}
-% Redefine |\overline| to be a text macro using the |soul| package \cite{soul}.
+% Redefine |\overline| to be a text macro using the |ulem| package \cite{ulem}.
 % Extend it as a math macro with the original definition from |amsmath| \cite{amsmath}.
 %    \begin{macrocode}
-\def\overline#1{{\setul{-2ex}{}\ul{#1}}}
+\def\overline#1{{\renewcommand{\ULdepth}{-1.9ex}{}\uline{#1}}}
 \DeclareRobustCommand{\over@line}[1]{\@@overline{#1}}
 \mathdef{\overline}{\over@line}
 %    \end{macrocode}
 % \end{macro}
 
+% \begin{macro}{\left}
+% \begin{macro}{\right}
+% Load the |mleftright| package \cite{mleftright} and adjust the spacing around |\left| and |\right|.
+%    \begin{macrocode}
+\RequirePackage{mleftright}
+\mleftright
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+
+
 % \begin{macro}{eqnarray}
-% Undefine the |eqnarray| environment.
+% Undefine the |eqnarray| environment if not prevented by package option.
 %    \begin{macrocode}
 \ifhep@eqnarray\else
   \let\eqnarray\@undefined
@@ -1014,7 +1174,7 @@
 %
 % \begin{macro}{\mathsf}
 % Load the |fixmath| package \cite{fixmath} which ensures that upper Greek letters in math mode are italic.
-% Ensure that also math mode is sans serif using the |sfmath| package \cite{sfmath} if the option sans serif is passed to the package.
+% Ensure that also math mode is sans serif using the |sfmath| package \cite{sfmath} if the sans serif option is used.
 % Ensure that |\mathsf| is italic as well as sans serif and sans for sans and sans serif documents, respectively.
 % The font abbreviations are
 % \begin{description}[nosep]
@@ -1045,14 +1205,14 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\mathbb}
-% Load the |bbm| package \cite{bbm-macros} for the |\mathbb| math blackboard style font in (sans-) serif.
+% Load the |dsfont| package \cite{dsfont} and adjust the |\mathbb| math blackboard style font according to the (sans-) serif option.
 %    \begin{macrocode}
-\RequirePackage{bbm}
 \ifhep@serif
-  \let\mathbb\mathbbm
+  \RequirePackage{dsfont}
 \else
-  \let\mathbb\mathbbmss
+  \RequirePackage[sans]{dsfont}
 \fi
+\let\mathbb\mathds
 %    \end{macrocode}
 % \end{macro}
 
@@ -1163,7 +1323,7 @@
 %    \end{macrocode}
 %
 % Load the |subcaption| package \cite{subcaption}.
-% Provide old |\subcaption@minipage| macro.
+% Provide the old |\subcaption@minipage| macro.
 %    \begin{macrocode}
 \RequirePackage[subrefformat=parens]{subcaption}
 \captionsetup{font=small}
@@ -1250,10 +1410,14 @@
 
 % \section{Title page}
 %
-% \begin{macro}{\date}
-% Allow empty date field.
+% Begin of |title| conditional.
 %    \begin{macrocode}
 \ifhep@title
+%    \end{macrocode}
+%
+% \begin{macro}{\date}
+% Allow absent date field.
+%    \begin{macrocode}
 \date{}
 %    \end{macrocode}
 % \end{macro}
@@ -1261,7 +1425,7 @@
 % \subsection{Authors}
 %
 % \begin{macro}{\author}
-% Allow empty author field.
+% Allow absent author field.
 %    \begin{macrocode}
 \author{}
 %    \end{macrocode}
@@ -1270,7 +1434,7 @@
 % Define a macro for the email of authors used as |\author{|$\langle name\rangle$| \email{|$\langle email\rangle$|}}|.
 %    \begin{macrocode}
 \AtEndOfClass{\newcommand{\email}[1]{%
-  \unskip\thanks{\online{mailto:#1}{#1}}
+  \unskip\thanks{\online{mailto:#1}{#1}}%
 }}
 %    \end{macrocode}
 % \end{macro}
@@ -1343,7 +1507,7 @@
 }
 %    \end{macrocode}
 % \end{environment}
-% End of check for |title| option.
+% End of |title| conditional.
 %    \begin{macrocode}
 \fi
 %    \end{macrocode}
@@ -1407,8 +1571,9 @@
 % \begin{macro}{erratum}
 % Add new bibliography string \enquote{Erratum} for the use in the |relatedtype| field.
 %    \begin{macrocode}
-\NewBibliographyString{erratum}
-\DefineBibliographyStrings{english}{erratum={Erratum}}
+\NewBibliographyString{erratum,erratums}
+\DefineBibliographyStrings{english}{erratum={Erratum},erratums={Errata}}
+\providecommand{\relateddelimerratum}{\addsemicolon\space}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1425,7 +1590,7 @@
 % \begin{macro}{\reg@exp@one}
 % \begin{macro}{\reg@exp@two}
 % \begin{macro}{\reg@exp@url}
-% Define regular expressions in order to deal with inconsistent journal title and volume naming as well as URL protocols.
+% Define regular expressions in order to deal with inconsistent journal title and volume naming as well as \URL protocols.
 %    \begin{macrocode}
 \newcommand{\reg@exp@one}{\regexp{\A(\p{L}+)?\d+(\p{L}+)?\Z}}
 \newcommand{\reg@exp@two}{\regexp{\A(\p{L}+)?(\d+)(\p{L}+)?\Z}}
@@ -1471,7 +1636,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{url}
-% Remove the protocol from URL.
+% Remove the protocol from \URL.
 %    \begin{macrocode}
     \map{
       \step[fieldsource=url, final=true]
@@ -1494,7 +1659,7 @@
 % \end{macro}
 %
 % \begin{macro}{url}
-% Show URLs without the protocol.
+% Show \URLs without the protocol.
 %    \begin{macrocode}
 \DeclareFieldFormat{url}{%
   \mkbibacro{URL}\addcolon\space\online{#1}{\thefield{protocollessurl}}%
@@ -1507,7 +1672,7 @@
 %    \begin{macrocode}
 \renewbibmacro*{author}{%
   \iffieldundef{collaboration}{%
-    \printnames{author}}{\textbf{\printfield{collaboration}}%
+    \printnames{author}}{\textit{\printfield{collaboration}}%
   }%
 }
 %    \end{macrocode}
@@ -1668,7 +1833,7 @@
 \RequirePackage[noabbrev, nameinlink]{cleveref}
 \newcommand{\creflastconjunction}{, and\nobreakspace}
 \crefname{enumi}{point}{points}
-\Crefname{enumi}{Point}{Points}
+\crefname{inlinelisti}{point}{points}
 %    \end{macrocode}
 % \end{macro}
 
@@ -2112,5 +2277,25 @@
     \noexpand\@currentlabel% changed
   }%
 }
+%    \end{macrocode}
+% \end{macro}
+
+
+\usepackage{contour}
+\usepackage{ulem}
+
+\renewcommand{\ULdepth}{1.8pt}
+\contourlength{0.8pt}
+
+\newcommand{\myuline}[1]{%
+  \uline{\phantom{#1}}\llap{\contour{white}{#1}}%
+}
+
+% \begin{macro}{\mathpzc}
+% Define the |\mathpzc| math script font based on the Zapf Chancery PostScript font.
+%    \begin{macrocode}
+\DeclareFontFamily{OT1}{pzc}{}
+\DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.15] pzcmi7t}{}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 %    \end{macrocode}
 % \end{macro}
