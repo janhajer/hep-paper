@@ -53,8 +53,8 @@
 
 \usepackage{hologo}
 
-\usepackage{titletoc}
-\titlecontents{section}[0em]{\medskip\bfseries}{\thecontentslabel\hspace{.8em}}{}{\hfill\contentspage}
+% \usepackage{titletoc}
+% \titlecontents{section}[0em]{\medskip\bfseries}{\thecontentslabel\hspace{.8em}}{}{\hfill\contentspage}
 
 \newenvironment{columns}[1][.5]{%
   \begin{minipage}[t]{\linewidth}%
@@ -79,7 +79,7 @@
 %
 % \fi
 %
-% \CheckSum{1148}
+% \CheckSum{1179}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -101,7 +101,7 @@
 % \changes{v1.1}{2020/01/01}{Transition to documented \hologo{LaTeX} source file}
 % \changes{v1.2}{2020/03/01}{Introduction of package options}
 % \changes{v1.3}{2020/05/01}{Inclusion of JHEP and JCAP package options, fix incompatibility with recent subcaption package version, move biblatex datamodel into its own file}
-% \changes{v1.4}{2020/07/01}{Bug fixing}
+% \changes{v1.4}{2020/07/01}{If possible the compatibility options are selected automatically}
 %
 % \GetFileInfo{hep-paper.sty}
 %
@@ -121,7 +121,7 @@
 % Instead of reinventing the wheel by introducing newly created macros |hep-paper| preferably loads third party packages as long as they are lightweight enough.
 % \end{abstract}
 %
-% \clearpage\tableofcontents\clearpage
+% \tableofcontents\clearpage
 %
 % \newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
 %
@@ -156,21 +156,26 @@
 % |8pt|, |9pt|, |10pt|, |11pt|, |12pt|, |14pt|, |17pt|, |20pt|.
 % The default is \unit[11]{pt}.
 %
-% \DescribeMacro{defaults}
-% The |defaults| option prevents the adjustment of the page geometry and the font size set by the document class.
-%
 % \DescribeMacro{lang}
 % The |lang|=\meta{name} option switches the document language to the chosen value.
 % The possible values are given by the |babel| package \cite{babel}.
 % The default is |british|.
 %
+% \DescribeMacro{sansserif}
+% The |sansserif| option switches the document including math to the sans serif font shape.
+%
 % \DescribeMacro{parskip}
 % The |parskip| option makes use of the |parskip| package \cite{parskip} and changes how two paragraphs are separated from each other.
 % The \hologo{LaTeX} default is separation via indentation the |parskip| option switches to separation via vertical space.
-% \footnote{The |parskip| option is used for this document.}
+% \footnote{Although the |parskip| option is used for this document, it is recommended only for very few document types such as technical manuals or answers to referees.}
 %
-% \DescribeMacro{sansserif}
-% The |sansserif| option switches the document including math to the sans serif font shape.
+% \subsubsection{Deactivation}
+%
+% The \software{hep-paper} package loads few bigger packages which have a large impact on the document.
+% The deactivation options prevent such adjustments.
+%
+% \DescribeMacro{defaults}
+% The |defaults| option prevents the adjustment of the page geometry and the font size set by the document class.
 %
 % \DescribeMacro{title}
 % The |title=false| option deactivates the title page adjustments.
@@ -182,23 +187,39 @@
 % \DescribeMacro{glossaries}
 % The |glossaries=false| option deactives acronyms and the use of the |glossaries| package \cite{glossaries}.
 %
-% \DescribeMacro{manualplacement}
-% The |manualplacement| option reactivates manual float placement.
+% \DescribeMacro{references}
+% The |references=false| option prevents the |cleveref| pacakge \cite{cleveref} from being loaded and deactivates further redefinitions of reference macros.
 %
-% \DescribeMacro{eqnarray}
-% The |eqnarray| option reactivates the depreciated |eqnarray| environment.
+% \subsubsection{Compatibility}
+%
+% The compatibility options activate the compatibility mode for certain classes and packages used for publications in high energy physics.
+% They are mostly suitable combinations of options described in the previous section.
+% If \software{hep-paper} is able to detect the presence of such a class or package, \ie if it is loaded before the \software{hep-paper} package, the compatibility mode is activated automatically.
+%
+% \DescribeMacro{beamer}
+% The |beamer| option activates the \software{beamer} \cite{beamer} compatibility mode.
 %
 % \DescribeMacro{jhep}
-% The |jhep| option activates the |JHEP| \cite{jhep} compatibility mode.
+% The |jhep| option activates the \software{JHEP} \cite{jhep} compatibility mode.
 %
 % \DescribeMacro{jcap}
-% The |jcap| option activates the |JCAP| \cite{jcap} compatibility mode.
+% The |jcap| option activates the \software{JCAP} \cite{jcap} compatibility mode.
 %
 % \DescribeMacro{revtex}
 % The |revtex| option activates the REV\hologo{TeX} \cite{revtex} compatibility mode.
 %
 % \DescribeMacro{pos}
-% The |pos| option activates the |PoS| compatibility mode.
+% The |pos| option activates the \software{PoS} compatibility mode.
+%
+% \subsubsection{Reactivation}
+%
+% The \software{hep-paper} package deactivates unrecommended macros, which can be reactivated manually.
+%
+% \DescribeMacro{manualplacement}
+% The |manualplacement| option reactivates manual float placement.
+%
+% \DescribeMacro{eqnarray}
+% The |eqnarray| option reactivates the depreciated |eqnarray| environment.
 %
 % \section{Macros and environments}
 %
@@ -536,8 +557,9 @@
 % &&\det(M)\ .
 % \end{align}
 %
+% \DescribeMacro{\cancel}
 % \DescribeMacro{\slashed}
-% The |\slashed|\marg{character} macro from the |slashed| \cite{slashed} package allows to use the Dirac slash notation.
+% The |\cancel|\marg{characters} macro from the |cancel| \cite{cancel} package and the |\slashed| \marg{character} macro from the |slashed| \cite{slashed} package allow to $\cancel{\text{cancel}}$ math and use the Dirac slash notation \ie $\slashed \partial$, respectively.
 %
 % \DescribeMacro{\overleftright}
 % A better looking over left right arrow is defined \ie $\overleftright{\partial}$.
@@ -551,9 +573,19 @@
 %
 % \DescribeEnv{figure}
 % \DescribeEnv{table}
-% Automatic float placement is adjusted to place a single float at the top of pages and to reduce the number of float pages.
-% The most useful float placement is usually archived by placing the float \emph{in front} of the paragraph it is referenced in first.
+% Automatic float placement is adjusted to place a single float at the top of pages and to reduce the number of float pages, using the \hologo{LaTeX} macros.
+
+% |\setcounter{bottomnumber}{0}| \hfill no floats at the bottom of a page (default 1) \\
+% |\setcounter{topnumber}{1}| \hfill a single float at the top of a page (default 2) \\
+% |\setcounter{dbltopnumber}{1}| \hfill same for full widts float in two-column mode \\
+% |\renewcommand{\textfraction}{.1}| \hfill large floats are allowed (default 0.2)\\
+% |\renewcommand{\topfraction}{.9}| \hfill (default 0.7) \\
+% |\renewcommand{\dbltopfraction}{.9}| \hfill (default 0.7) \\
+% |\renewcommand{\floatpagefraction}{.8}| \hfill floatpages must be full (default 0.5)
+
 % Additionally, manual float placement is deactivated but can be reactivated using the |manualplacement| package option.
+% It is however recommended to archive the desired design by adjusting above macros.
+% The most useful float placement is usually archived by placing the float \emph{in front} of the paragraph it is referenced in first.
 % \DescribeMacro{\raggedright}
 % The float environments have been adjusted to center their content.
 % The usual behaviour can be reactivated using |\raggedright|.
@@ -634,7 +666,7 @@
 % \PrintChanges
 % }
 %
-% \appendix
+% \addtocontents{toc}{\protect\clearpage}\appendix
 %
 % \section{Options}
 %
@@ -710,6 +742,13 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{references}
+% Provide the option |references| for preventing the |cleveref| package from being loaded redefinitions of reference macros.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{references}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{bibliography}
 % Provide the option |bibliography| for passing a |style| string to the |biblatex| package \cite{biblatex} or disabling the automatic loading of |biblatex|.
 %    \begin{macrocode}
@@ -738,6 +777,13 @@
 % \DoNotIndex{\ifhep@title}
 %    \begin{macrocode}
 \DeclareBoolOption[true]{title}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{beamer}
+% Provide the option |beamer| for \software{beamer} \cite{beamer} compatibility mode.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{beamer}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -778,14 +824,26 @@
 % Set the |pos| compatibility options.
 % \DoNotIndex{\ifhep@pos,\setkeys,\fi}
 %    \begin{macrocode}
+\@ifclassloaded{PoS}{\setkeys{hep}{pos}}{}
 \ifhep@pos
   \setkeys{hep}{title=false, defaults}
+\fi
+%    \end{macrocode}
+%
+% Set the |beamer| compatibility options.
+%    \begin{macrocode}
+\@ifclassloaded{beamer}{\setkeys{hep}{beamer}}{}
+\ifhep@beamer
+  \setkeys{hep}{title=false, defaults, sansserif, references=false}
 \fi
 %    \end{macrocode}
 %
 % Set the |revtex| compatibility options.
 % \DoNotIndex{\ifhep@revtex}
 %    \begin{macrocode}
+\@ifclassloaded{revtex4}{\setkeys{hep}{revtex}}{}
+\@ifclassloaded{revtex4-1}{\setkeys{hep}{revtex}}{}
+\@ifclassloaded{revtex4-2}{\setkeys{hep}{revtex}}{}
 \ifhep@revtex
   \setkeys{hep}{defaults, title=false, lang=american, bibliography=false}
 \fi
@@ -793,6 +851,8 @@
 %
 % Define the SISSA conditional.
 %    \begin{macrocode}
+\@ifpackageloaded{jheppub}{\setkeys{hep}{jhep}}{}
+\@ifpackageloaded{jcappub}{\setkeys{hep}{jcap}}{}
 \newif\ifhep@sissa
 \ifhep@jhep\hep@sissatrue
 \else
@@ -998,7 +1058,7 @@
 %
 % Load the |enumitem| package \cite{enumitem}.
 %    \begin{macrocode}
-\RequirePackage{enumitem}
+\RequirePackage[inline]{enumitem}
 %    \end{macrocode}
 %
 % \begin{environment}{inlinelist}
@@ -1052,8 +1112,14 @@
 % \DoNotIndex{\ifhep@defaults,\hep@paper,\geometry}
 %    \begin{macrocode}
 \ifhep@defaults\else
-  \RequirePackage[\hep@paper paper]{geometry}
-  \geometry{hscale=.75, vscale=.8, vmarginratio=3:4, includeheadfoot}
+  \RequirePackage{geometry}
+  \geometry{%
+    \hep@paper paper,
+    hscale=.75,
+    vscale=.8,
+    vmarginratio=3:4,
+    includeheadfoot
+  }
 \fi
 %    \end{macrocode}
 
@@ -1218,16 +1284,19 @@
 
 % \subsection{Physics notation}
 %
+% \begin{macro}{\cancel}
 % \begin{macro}{\slashed}
 % \begin{macro}{\unit}
 % Load the |physics| package \cite{physics} which provides macros useful for publications in physics.
-% Additionally, load the |slashed| package \cite{slashed} which provides the slashed macro for Dirac notation.
+% Additionally, load the |cancel| \cite{cancel} and |slashed| \cite{slashed} packages which provide the |\cancel| and |\slashed| macros.
 % Finally, load the |units| package \cite{units} which provides the |\units| and |\nicefrac| macros.
 %    \begin{macrocode}
 \RequirePackage{physics}
+\RequirePackage{cancel}
 \RequirePackage{slashed}
 \RequirePackage{units}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 
@@ -1266,11 +1335,13 @@
 %
 % Adjust the \hologo{LaTeX} float placement defaults
 %    \begin{macrocode}
-\renewcommand{\textfraction}{0.01}
-\setcounter{topnumber}{1}
-\renewcommand{\topfraction}{.9}
-\setcounter{bottomnumber}{0}
-\renewcommand{\floatpagefraction}{.8}
+\setcounter{bottomnumber}{0} % 1
+\setcounter{topnumber}{1} % 2
+\setcounter{dbltopnumber}{1} % 2
+\renewcommand{\topfraction}{.9} % .7
+\renewcommand{\dbltopfraction}{.9} % .7
+\renewcommand{\textfraction}{.1} % .2
+\renewcommand{\floatpagefraction}{.8} % .5
 %    \end{macrocode}
 
 % \begin{environment}{figure}
@@ -1817,13 +1888,22 @@
 \ifhep@revtex
   \AtBeginShipout{\hypersetup{pdftitle={\@title}}}
 \else
-  \AtBeginDocument{\hypersetup{pdftitle={\@title}}}
+  \ifhep@beamer\else
+    \AtBeginDocument{\hypersetup{pdftitle={\@title}}}
+  \fi
 \fi
 \ifhep@title
   \AtBeginDocument{\hypersetup{pdfauthor=\AB@authlist}}
 \else
-  \AtBeginDocument{\hypersetup{pdfauthor={\@author}}}
+  \ifhep@beamer\else
+    \AtBeginDocument{\hypersetup{pdfauthor={\@author}}}
+  \fi
 \fi
+%    \end{macrocode}
+
+% Begin of |references| conditional
+%    \begin{macrocode}
+\ifhep@references
 %    \end{macrocode}
 
 % \begin{macro}{\cref}
@@ -1906,6 +1986,11 @@
 }
 %    \end{macrocode}
 % \end{macro}
+
+% End of |references| conditional
+%    \begin{macrocode}
+\fi
+%    \end{macrocode}
 
 % \subsection{Citations}
 %
@@ -2193,7 +2278,7 @@
 % \begin{macro}{abstract}
 % Adjust the |abstract| environment to reset all acronym counters.
 %    \begin{macrocode}
-\@ifundefined{abstract}{}{%
+\@ifundefined{endabstract}{}{%
   \let\end@old@abstract\endabstract%
   \renewcommand\endabstract{\glsresetall\end@old@abstract}%
 }

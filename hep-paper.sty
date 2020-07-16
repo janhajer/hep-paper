@@ -17,6 +17,8 @@
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesPackage{hep-paper}[2020/07/01 v1.4 Publications in High Energy Physics]
 
+
+
 \RequirePackage{pdftexcmds}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
@@ -32,21 +34,33 @@
 \DeclareBoolOption[true]{serif}
 \DeclareComplementaryOption{sansserif}{serif}
 \DeclareBoolOption[false]{eqnarray}
+\DeclareBoolOption[true]{references}
 \DeclareStringOption[numeric-comp]{bibliography}
 \DeclareBoolOption[true]{glossaries}
 \DeclareBoolOption[false]{manualplacement}
 \DeclareBoolOption[true]{title}
+\DeclareBoolOption[false]{beamer}
 \DeclareBoolOption[false]{revtex}
 \DeclareBoolOption[false]{jhep}
 \DeclareBoolOption[false]{jcap}
 \DeclareBoolOption[false]{pos}
 \ProcessKeyvalOptions*
+\@ifclassloaded{PoS}{\setkeys{hep}{pos}}{}
 \ifhep@pos
   \setkeys{hep}{title=false, defaults}
 \fi
+\@ifclassloaded{beamer}{\setkeys{hep}{beamer}}{}
+\ifhep@beamer
+  \setkeys{hep}{title=false, defaults, sansserif, references=false}
+\fi
+\@ifclassloaded{revtex4}{\setkeys{hep}{revtex}}{}
+\@ifclassloaded{revtex4-1}{\setkeys{hep}{revtex}}{}
+\@ifclassloaded{revtex4-2}{\setkeys{hep}{revtex}}{}
 \ifhep@revtex
   \setkeys{hep}{defaults, title=false, lang=american, bibliography=false}
 \fi
+\@ifpackageloaded{jheppub}{\setkeys{hep}{jhep}}{}
+\@ifpackageloaded{jcappub}{\setkeys{hep}{jcap}}{}
 \newif\ifhep@sissa
 \ifhep@jhep\hep@sissatrue
 \else
@@ -142,7 +156,7 @@
 }
 \newcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}
 
-\RequirePackage{enumitem}
+\RequirePackage[inline]{enumitem}
 \newlist{inlinelist}{enumerate*}{1}
 \setlist*[inlinelist,1]{%
   label=\roman*), itemjoin={,\ }, itemjoin*={, and\ }, after=.%
@@ -163,8 +177,14 @@
 \renewcommand{\footnote}[1]{\unskip\@foot@note{\ignorespaces#1}}
 
 \ifhep@defaults\else
-  \RequirePackage[\hep@paper paper]{geometry}
-  \geometry{hscale=.75, vscale=.8, vmarginratio=3:4, includeheadfoot}
+  \RequirePackage{geometry}
+  \geometry{%
+    \hep@paper paper,
+    hscale=.75,
+    vscale=.8,
+    vmarginratio=3:4,
+    includeheadfoot
+  }
 \fi
 
 \ifhep@parindent\else
@@ -240,6 +260,7 @@
 \let\mathbb\mathds
 
 \RequirePackage{physics}
+\RequirePackage{cancel}
 \RequirePackage{slashed}
 \RequirePackage{units}
 
@@ -254,11 +275,13 @@
 }
 \newcommand{\overleftright}[1]{\oset{\leftrightarrow}{#1}}
 
-\renewcommand{\textfraction}{0.01}
-\setcounter{topnumber}{1}
-\renewcommand{\topfraction}{.9}
-\setcounter{bottomnumber}{0}
-\renewcommand{\floatpagefraction}{.8}
+\renewcommand{\textfraction}{.1} % .2
+\setcounter{topnumber}{1} % 2
+\setcounter{dbltopnumber}{1} % 2
+\renewcommand{\topfraction}{.9} % .7
+\renewcommand{\dbltopfraction}{.9} % .7
+\setcounter{bottomnumber}{0} % 1
+\renewcommand{\floatpagefraction}{.8} % .5
 
 \let\@figure@\figure%
 \let\@end@figure@\endfigure%
@@ -523,13 +546,19 @@
 \ifhep@revtex
   \AtBeginShipout{\hypersetup{pdftitle={\@title}}}
 \else
-  \AtBeginDocument{\hypersetup{pdftitle={\@title}}}
+  \ifhep@beamer\else
+    \AtBeginDocument{\hypersetup{pdftitle={\@title}}}
+  \fi
 \fi
 \ifhep@title
   \AtBeginDocument{\hypersetup{pdfauthor=\AB@authlist}}
 \else
-  \AtBeginDocument{\hypersetup{pdfauthor={\@author}}}
+  \ifhep@beamer\else
+    \AtBeginDocument{\hypersetup{pdfauthor={\@author}}}
+  \fi
 \fi
+
+\ifhep@references
 
 \RequirePackage[noabbrev, nameinlink]{cleveref}
 \newcommand{\creflastconjunction}{, and\nobreakspace}
@@ -568,6 +597,8 @@
 \DeclareRobustCommand{\labelcrefrange}[2]{%
   \@crefrangenostar{labelcref}{#1}{#2}%
 }
+
+\fi
 
 \let\old@cite\cite
 \renewcommand\cite{\no@break@before\old@cite}
@@ -716,7 +747,7 @@
 }
 \newcommand{\resetacronym}[1]{\protect\glsreset{#1}}
 \newcommand{\dummyacronym}[1]{\protect\glsunset{#1}}
-\@ifundefined{abstract}{}{%
+\@ifundefined{endabstract}{}{%
   \let\end@old@abstract\endabstract%
   \renewcommand\endabstract{\glsresetall\end@old@abstract}%
 }
