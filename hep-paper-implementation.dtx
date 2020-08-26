@@ -21,30 +21,19 @@
 %<package>\ProvidesPackage{hep-paper}[2020/07/01 v1.4 Publications in High Energy Physics]
 %<datamodel>\ProvidesFile{hep-paper.dbx}[2020/07/01 v1.4 HEP-Paper biblatex data model]
 %
-%<*driver>
+%<*documentation>
+%    \begin{macrocode}
+%
 \RequirePackage[l2tabu, orthodox]{nag}
-
 \documentclass{ltxdoc}
+
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
 
 \MacroIndent=1.5em
 
-% \makeatletter
-% \newenvironment{decl}[1][]%
-%     {\par\small\addvspace{4.5ex plus 1ex}%
-%      \vskip -\parskip
-%      \ifx\relax#1\relax
-%         \def\@decl@date{}%
-%      \else
-%         \def\@decl@date{\NEWfeature{#1}}%
-%      \fi
-%      \noindent\hspace{-\leftmargini}%
-%      \begin{tabular}{|l|}\hline\ignorespaces}%
-%     {\\\hline\end{tabular}\nobreak\@decl@date\par\nobreak
-%      \vspace{2.3ex}\vskip -\parskip}
-% \makeatother
-
 \usepackage[parskip]{hep-paper}
-% \renewcommand\ttdefault{lmvtt}
 
 \bibliography{bibliography}
 
@@ -52,9 +41,6 @@
 \acronym{URL}{uniform resource locator}
 
 \usepackage{hologo}
-
-% \usepackage{titletoc}
-% \titlecontents{section}[0em]{\medskip\bfseries}{\thecontentslabel\hspace{.8em}}{}{\hfill\contentspage}
 
 \newenvironment{columns}[1][.5]{%
   \begin{minipage}[t]{\linewidth}%
@@ -66,20 +52,21 @@
 }{\end{minipage}\end{minipage}}
 
 \setlength{\fboxsep}{1pt}
+%
+%    \end{macrocode}
+%</documentation>
 
-\EnableCrossrefs
-\CodelineIndex
-\RecordChanges
-
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
 \begin{document}
-\DocInput{hep-paper.dtx}
+\DocInput{hep-paper-implementation.dtx}
 \end{document}
-
 %</driver>
 %
 % \fi
 %
-% \CheckSum{1179}
+% \CheckSum{1296}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -97,583 +84,593 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2019/01/01}{Initial version of the style file}
-% \changes{v1.1}{2020/01/01}{Transition to documented \hologo{LaTeX} source file}
-% \changes{v1.2}{2020/03/01}{Introduction of package options}
-% \changes{v1.3}{2020/05/01}{Inclusion of JHEP and JCAP package options, fix incompatibility with recent subcaption package version, move biblatex datamodel into its own file}
-% \changes{v1.4}{2020/07/01}{If possible the compatibility options are selected automatically}
-%
-% \GetFileInfo{hep-paper.sty}
-%
-% \DoNotIndex{\,,\@}
-% \DoNotIndex{\@affiliation,\@affil@opt,\@affil}
-%
-% \title{The |hep-paper| package\thanks{This document corresponds to \protecting{|hep-paper|}~\fileversion.}}
-% \author{Jan Hajer \email{jan.hajer@uclouvain.be}}
-% \affiliation{Centre for Cosmology, Particle Physics and Phenomenology, Université catholique de Louvain, Louvain-la-Neuve B-1348, Belgium}
-% \preprint{Preprint-Number}
-% \date{\normalfont\filedate}
-%
-% \maketitle
-%
-% \begin{abstract}
-% The |hep-paper| package aims to provide a single style file containing most configurations and macros necessary to write appealing publications in High Energy Physics.
-% Instead of reinventing the wheel by introducing newly created macros |hep-paper| preferably loads third party packages as long as they are lightweight enough.
-% \end{abstract}
-%
-% \tableofcontents\clearpage
-%
-% \newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
-%
-% \section{Introduction}
-%
-% For usual publications it is enough to load additionally to the |article| class without optional arguments only the |hep-paper| package \cite{hep-paper}.
-%
-% | \documentclass{article}|\\
-% | \usepackage{hep-paper}|
-%
-% The most notable changes after loading the |hep-paper| package is the change of some \hologo{LaTeX} defaults.
-% The paper and font sizes are set to A4 and \unit[11]{pt}, respectively.
-% Additionally, the paper geometry is set to the values known from the (depreciated) |a4wide| package \cite{a4wide} using the |geometry| package \cite{geometry}.
-% Furthermore, the font is changed to |lmodern| \cite{lmodern} with |microtype| \cite{microtype} optimizations.
-% Finally, \PDF hyperlinks are implemented with the |hyperref| package \cite{hyperref}.
-%
-% \subsection{Options}
-%
-% \DescribeMacro{paper}
-% The |paper=|\meta{format} option loads the specified paper format.
-% The possible \meta{formats} are:
-% |a0|, |a1|, |a2|, |a3|, |a4|, |a5|, |a6|,
-% |b0|, |b1|, |b2|, |b3|, |b4|, |b5|, |b6|,
-% |c0|, |c1|, |c2|, |c3|, |c4|, |c5|, |c6|,
-% |ansia|, |ansib|, |ansic|, |ansid|, |ansie|,
-% |letter|, |executive|, |legal|.
-% The default is |a4|.
-%
-% \DescribeMacro{font}
-% The |font=|\meta{size} option loads the specified font size.
-% The possible \meta{sizes} are:
-% |8pt|, |9pt|, |10pt|, |11pt|, |12pt|, |14pt|, |17pt|, |20pt|.
-% The default is \unit[11]{pt}.
-%
-% \DescribeMacro{lang}
-% The |lang|=\meta{name} option switches the document language to the chosen value.
-% The possible values are given by the |babel| package \cite{babel}.
-% The default is |british|.
-%
-% \DescribeMacro{sansserif}
-% The |sansserif| option switches the document including math to the sans serif font shape.
-%
-% \DescribeMacro{parskip}
-% The |parskip| option makes use of the |parskip| package \cite{parskip} and changes how two paragraphs are separated from each other.
-% The \hologo{LaTeX} default is separation via indentation the |parskip| option switches to separation via vertical space.
-% \footnote{Although the |parskip| option is used for this document, it is recommended only for very few document types such as technical manuals or answers to referees.}
-%
-% \subsubsection{Deactivation}
-%
-% The \software{hep-paper} package loads few bigger packages which have a large impact on the document.
-% The deactivation options prevent such adjustments.
-%
-% \DescribeMacro{defaults}
-% The |defaults| option prevents the adjustment of the page geometry and the font size set by the document class.
-%
-% \DescribeMacro{title}
-% The |title=false| option deactivates the title page adjustments.
-%
-% \DescribeMacro{bibliography}
-% The |bibliography|=\meta{key} option prevents the automatic loading of the |biblatex| package \cite{biblatex} if \meta{key}=|false|.
-% Otherwise the \meta{key} is passed as |style| string to the |biblatex| package.
-%
-% \DescribeMacro{glossaries}
-% The |glossaries=false| option deactives acronyms and the use of the |glossaries| package \cite{glossaries}.
-%
-% \DescribeMacro{references}
-% The |references=false| option prevents the |cleveref| pacakge \cite{cleveref} from being loaded and deactivates further redefinitions of reference macros.
-%
-% \subsubsection{Compatibility}
-%
-% The compatibility options activate the compatibility mode for certain classes and packages used for publications in high energy physics.
-% They are mostly suitable combinations of options described in the previous section.
-% If \software{hep-paper} is able to detect the presence of such a class or package, \ie if it is loaded before the \software{hep-paper} package, the compatibility mode is activated automatically.
-%
-% \DescribeMacro{beamer}
-% The |beamer| option activates the \software{beamer} \cite{beamer} compatibility mode.
-%
-% \DescribeMacro{jhep}
-% The |jhep| option activates the \software{JHEP} \cite{jhep} compatibility mode.
-%
-% \DescribeMacro{jcap}
-% The |jcap| option activates the \software{JCAP} \cite{jcap} compatibility mode.
-%
-% \DescribeMacro{revtex}
-% The |revtex| option activates the REV\hologo{TeX} \cite{revtex} compatibility mode.
-%
-% \DescribeMacro{pos}
-% The |pos| option activates the \software{PoS} compatibility mode.
-%
-% \subsubsection{Reactivation}
-%
-% The \software{hep-paper} package deactivates unrecommended macros, which can be reactivated manually.
-%
-% \DescribeMacro{manualplacement}
-% The |manualplacement| option reactivates manual float placement.
-%
-% \DescribeMacro{eqnarray}
-% The |eqnarray| option reactivates the depreciated |eqnarray| environment.
-%
-% \section{Macros and environments}
-%
-% \subsection{Title page}
-%
-% \DescribeMacro{\author}
-% \DescribeMacro{\affiliation}
-% \DescribeMacro{\email}
-% In order to facilitate multiple authors with different affiliations the |authblk| package \cite{authblk} is loaded.
-% The following lines add \eg two authors with different affiliations
-%
-% | \author[1]{Author one \email{Email one}}|\\
-% | \affiliation[1]{Affiliation one}|\\
-% | \author[2]{Author two \email{Email two}}|\\
-% | \affiliation[1,2]{Affiliation two}|
-%
-% \DescribeMacro{\title}
-% The \PDF meta information is set according to the |\title|\marg{text} and |\author| \marg{text} information.
-%
-% \DescribeMacro{\preprint}
-% The |\preprint|\marg{numer} macro places a pre-print number in the upper right corner of the title page.
-%
-% \DescribeEnv{abstract}
-% The |abstract| environment is adjusted to not start with an indentation.
-%
-% \subsection{Text}
-%
-% Hyphenation is provided by the |babel| package \cite{babel} and quotation commands are provided by the |csquotes| package \cite{csquotes} recommended by the |babel| package.
-% \DescribeMacro{\enquote}
-% \DescribeMacro{\MakeOuterQuote}
-% The latter package provides the convenient macros |\enquote|\marg{text} and |\MakeOuterQuote{"}| allowing to leave the choice of quotation marks to \hologo{LaTeX} and use |"| instead of the pair |``| and |''|, respectively.
-%
-% \DescribeMacro{\eg}
-% \DescribeMacro{\vs}
-% The |foreign| package \cite{foreign} defines macros such as |\eg|, |\ie|, |\cf|, and |\vs| which are typeset as \eg, \ie, \cf, and \vs.
-%
-% \DescribeMacro{\no}
-% The |\no|\marg{number} macro is typeset as \no{123}.
-%
-% \DescribeMacro{\software}
-% The |\software|\oarg{version}\marg{name} macro is typeset as \software[\fileversion]{HEP-Paper}.
-%
-% \DescribeMacro{\online}
-% The |\online|\marg{url}\marg{text} macro combines the features of the |\href|\marg{url} \marg{text} \cite{hyperref} and the |\url|\marg{text} \cite{url} macros, resulting in \eg \online{https://ctan.org/pkg/hep-paper}{ctan.org/pkg/hep-paper}.
-%
-% The |inlinelist| and |enumdescript| environments are defined using the |enumitem| package \cite{enumitem}.
-%
-% \DescribeMacro{inlinelist}
-% \begin{columns}
-% |The three main points are|
-% |\begin{inlinelist}|
-%
-% | \item one|
-%
-% | \item two|
-%
-% | \item three|
-%
-% |\end{inlinelist}|
-% \column
-% The three main points are
-% \begin{inlinelist}
-%  \item one
-%  \item two
-%  \item three
-% \end{inlinelist}
-% \end{columns}
-%
-% \DescribeMacro{enumdescript}
-% \begin{columns}[.6]
-% |\begin{enumdescript}[label=\Roman*)]|
-%
-% | \item{First} one|
-%
-% | \item{Second} two|
-%
-% | \item{Third} three|
-%
-% |\end{enumdescript}|
-% \column
-% \begin{enumdescript}[label=\Roman*)]
-%  \item{First} one
-%  \item{Second} two
-%  \item{Third} three
-% \end{enumdescript}
-% \end{columns}
-%
-% \DescribeMacro{\textsc}
-% A sans serif version of \textsf{\textsc{Small Caps}} is provided, using the |sansmathfonts| package \cite{sansmathfonts}.
-%
-% \DescribeMacro{\underline}
-% \DescribeMacro{\overline}
-% The |\underline| macro is redefined to allow linebreaks using the |ulem| package \cite{ulem}.
-% The |\overline| macro is extended to also \overline{overline} text outside of math environments.
-%
-% \DescribeMacro{\useparskip}
-% \DescribeMacro{\useparindent}
-% If the |parskip| option is activated the |\useparindent| macro switches back the usual parindent mode, while the |\useparskip| macro switches to the parskip mode.
-%
-% \subsubsection{References and footnotes}
-%
-% \DescribeMacro{\cref}
-% References are extended with the |cleveref| package \cite{cleveref}, which allows to \eg just type |\cref|\marg{key}  in order to write \enquote{figure 1}.
-% Furthermore, the |cleveref| package allows to reference multiple objects within one |\cref|\marg{key1,key2}.
-%
-% \DescribeMacro{\cite}
-% Citations are adjusted to not start on a new line in order to avoid the repeated use of |~\cite|\marg{key}.
-%
-% \DescribeMacro{\ref}
-% \DescribeMacro{\eqref}
-% \DescribeMacro{\subref}
-% References are also adjusted to not start on a new line and are redefined in order to handle multiple references at once.
-%
-% \DescribeMacro{\footnote}
-% Footnotes are adjusted to swallow white space before the footnote mark and at the beginning of the footnote text.
-%
-% \subsubsection{Acronyms}
-%
-% \DescribeMacro{\acronym}
-% \DescribeMacro{\shortacronym}
-% \DescribeMacro{\longacronym}
-% The |\acronym|\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\meta{*}\marg{definition}\oarg{plural\linebreak[4]definition} macro generates the singluar |\|\meta{abbreviation} and plural |\|\meta{abbreviation}|s| macros.
-% % The first star prevents the addition of an \enquote{s} to the abbreviation plural.
-% The second star restores the \hologo{TeX} default of swallowing subsequent white space.
-% The long form is only shown at the first appearance of these macros, later appearances generate the abbreviation with a hyperlink to the long form.
-% Capitalization at the beginning of paragraphs and sentences is ensured.
-% The |\shortacronym| and |\longacronym| macros are dropin replacements of the |\acronym| macro showing only the short or long form of their acronym.
-% \DescribeMacro{\resetacronym}
-% \DescribeMacro{\dummyacronym}
-% The first use form of the acronym can be enforced by resetting the acronym counter with |\resetacronym|\marg{key}.
-% If the acronym counter equals one at the end of the document the short form of the acronym is not introduced.
-% Placing a |\dummyacronym|\marg{key} at the end of the document ensures that the short form is introduced.
-%
-% \subsection{Math}
-%
-% The |mathtools| \cite{mathtools} and |amssymb| \cite{amsfonts} packages are loaded.
-% They in turn load the \hologo{AmSLaTeX} |amsmath| \cite{amsmath} and |amsfonts| \cite{amsfonts} packages.
-% \DescribeMacro{\mathbf}
-% Bold math, via |\mathbf| is improved by the |bm| package \cite{bm}, \ie ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
-% Macros switching to |bfseries| such as |\section|\marg{text} are ensured to also typeset math in bold.
-% This may cause trouble if bold symbols carry an additional non-implicit meaning.
-% \DescribeMacro{\text}
-% The |\text|\marg{text} macro makes it possible to write text within math mode, \ie ($ \text A  \text b  \text \Gamma \text \delta \text{\textbf A} \text{\textbf b} \text{\textbf \Gamma} \text{\textbf \delta}$).
-% The often used |\mathrm|\marg{text} and |\rm|\marg{text} macros are \emph{not} the correct tool for this purpose, as they switch to roman font shape.
-% This behaviour conflicts \eg with the |sansserif| package option.
-% \DescribeMacro{\mathsf}
-% The math sans serif alphabet is redefined to be italic sans serif if the main text is serif and italic serif if the main text is sans serif, \ie ($\mathsf A \mathsf b \mathsf \Gamma \mathsf \delta \mathbf{\mathsf A} \mathbf{\mathsf b} \mathbf{\mathsf \Gamma} \mathbf{\mathsf \delta}$).
-% \DescribeMacro{\mathscr}
-% The |\mathcal| font \ie ($\mathcal{ABCD}$) is accompanied by the |\mathscr| font \ie ($\mathscr{ABCD}$).
-% \DescribeMacro{\mathbb}
-% The |\mathbb| font is improved by the |doublestroke| package \cite{dsfont} and adjusted depending on the |sansserif| option \ie ($\mathbb{Ah1}$).
-% \DescribeMacro{\mathfrak}
-% Finally, the |\mathfrak| font is also available \ie ($\mathfrak{AaBb12}$).
-% Details about the font handling in \hologo{TeX} can be found in \ccite{fntguide}.
-%
-% \DescribeMacro{\nicefrac}
-% \DescribeMacro{\flatfrac}
-% The |\frac|\marg{number}\marg{number} macro is accompanied by |\nicefrac|\linebreak[1]\marg{number}\linebreak[1]\marg{number} and |\flatfrac|\marg{number}\marg{number} leading to $\frac12$, $\nicefrac 12$, and $\flatfrac 12$.
-% \DescribeMacro{\diag}
-% \DescribeMacro{\sgn}
-% Diagonal matrix |\diag| and signum |\sgn| operators are defined.
-%
-% \DescribeMacro{\mathdef}
-% The |\mathdef|\marg{name}\oarg{arguments}\marg{code} macro (re-)defines macros only within math mode without changing the text mode definition.
-%
-% \DescribeMacro{\i}
-% \DescribeMacro{\d}
-% The imaginary unit $\i$ and the differential $\d$ are defined using this functionality.
-%
-% \DescribeMacro{\numberwithin}
-% For longer paper it can be useful to re-number the equation in accordance with the section numbering |\numberwithin{equation}{section}|.
-% \DescribeMacro{subequations}
-% In order to further reduce the size the of equation counter it can be useful to wrap |align| environments with multiple rows in a |subequations| environment.
-% Both macros are provided by the |amsmath| package.
-%
-% \DescribeMacro{eqnarray}
-% The depreciated |eqnarray| environment is undefined as long this behaviour is not prevented by the |eqnarray| package option.
-% The |split|, |multline|, |align|, |multlined|, |aligned|, |alignedat|, and |cases| environments of the |amsmath| and |mathtools| packages should be used instead.
-%
-% \DescribeMacro{equation}%
-% Use the |equation| environment for short equations.
-%
-% \begin{columns}
-% |\begin{equation}|
-%
-% | left = right \ .|
-%
-% |\end{equation}|
-% \column
-% \begin{equation}
-% \framebox[2em]{left\strut} = \framebox[7em]{right\strut} \ .
-% \end{equation}
-% \end{columns}
-%
-% \DescribeMacro{multline}
-% Use the |multline| environment for longer equations.
-%
-% \begin{columns}
-% |\begin{multline}|
-%
-% | left = right 1 \\|
-%
-% | + right 2 \ .|
-%
-% |\end{multline}|
-% \column
-% \begin{multline}
-% \framebox[2em]{left\strut} = \framebox[7em]{right 1\strut} \\
-% \framebox[7em]{+ right 2\strut} \ .
-%   \end{multline}
-% \end{columns}
-%
-% \DescribeMacro{split}
-% Use the |split| sub environment for equations in which multiple equal signs should be aligned.
-%
-% \begin{columns}
-% |\begin{equation} \begin{split}|
-%
-% | left &= right 1 \\|
-%
-% | &= right 2 \ .|
-%
-% |\end{split} \end{equation}|
-% \column
-% \begin{equation}
-% \begin{split}
-% \framebox[2em]{left\strut} &= \framebox[7em]{right 1\strut} \\
-% &= \framebox[7em]{right 2\strut} \ .
-% \end{split}
-% \end{equation}
-% \end{columns}
-%
-% \DescribeMacro{align}
-% Use the |align| environment for the vertical alignment and horizontal distribution of multiple equations.
-%
-% \begin{columns}
-% |\begin{subequations}|
-% |\begin{align}|
-%
-% | left &= right \ , &|
-% | left &= right \ , \\|
-% | left &= right \ , &|
-% | left &= right \ .|
-%
-% |\end{align}|
-% |\end{subequations}|
-% \column
-% \begin{subequations}
-% \begin{align}
-% \framebox[2em]{left\strut} &= \framebox[3em]{right\strut} \ , &
-% \framebox[2em]{left\strut} &= \framebox[3em]{right\strut} \ , \\
-% \framebox[2em]{left\strut} &= \framebox[3em]{right\strut} \ , &
-% \framebox[2em]{left\strut} &= \framebox[3em]{right\strut} \ .
-% \end{align}
-% \end{subequations}
-% \end{columns}
-%
-% \DescribeMacro{aligned}
-% Use the |aligned| environment within a |equation| environment if the aligned equations should be labeled with a single equation number.
-%
-% \DescribeMacro{multlined}
-% Use the |multlined| environment if either |split| or |align| contain very long lines.
-%
-% \begin{columns}
-% |\begin{equation} \begin{split}|
-%
-% | left &= right 1 \\ &=|
-% | \begin{multlined}[t]|
-% |  right 2 \\ + right 3 \ .|
-% | \end{multlined}|
-% |\end{split} \end{equation}|
-% \column
-% \begin{equation}
-% \begin{split}
-% \framebox[2em]{left\strut} &= \framebox[7em]{right 1\strut} \\ &=
-%  \begin{multlined}[t]
-%   \framebox[7em]{right 2\strut} \\
-%   \framebox[7em]{+ right 3\strut} \ .
-% \end{multlined}
-% \end{split}
-% \end{equation}
-% \end{columns}
-%
-% \DescribeMacro{alignat}
-% Use the |alignat| environment together with the |\mathllap| macro for the alignment of multiple equations with vastly different lengths.
-%
-% \begin{columns}
-% |\begin{subequations}|
-% |\begin{alignat}{2}|
-%
-% | left &= long right && \ , \\|
-%
-% | le. 2 &= ri. 2 \ , &|
-%
-% | \mathllap{le. 3 = ri. 3} & \ .|
-% |\end{alignat}|
-% |\end{subequations}|
-% \column
-% \begin{subequations}
-% \begin{alignat}{2}
-% \framebox[2em]{left\strut} &=
-% \framebox[11em]{long right\strut} && \ , \\
-% \framebox[2em]{le.\ 2\strut}
-% &= \framebox[2.5em]{ri.\ 2\strut} \ , &
-% \mathllap{\framebox[2em]{le.\ 3\strut}
-% = \framebox[2.5em]{ri.\ 3\strut}} & \ .
-% \end{alignat}
-% \end{subequations}
-% \end{columns}
-%
-% As a rule of thumb if you have to use |\notag|, |\nonumber|, or perform manual spacing via |\quad| you are probably using the wrong environment.
-%
-% \subsubsection{Physics}
-%
-% Greek letters are adjusted to always be italic and upright in math and text mode, respectively, using the |fixmath| \cite{fixmath} and |alphabeta| \cite{alphabeta} packages.
-% This allows differentiations like
-% \begin{align}
-% \sigma &= \unit[5]{fb} \ , & &\text{at \unit[5]{\sigma} C.L.} \ , & \mu &= \unit[5]{cm} \ , & l &= \text{\unit[5]{\mu m}} \ ,
-% \label{eq:greek}
-% \end{align}
-% and \eg to distinguish gauge $\nu$ and mass \nu\ eigenstates in models with massive neutrinos.
-% Additionally, Greek letters can also be directly typed using Unicode.
-%
-% \DescribeMacro{\ev}
-% \DescribeMacro{\pdv}
-% \DescribeMacro{\comm}
-% \DescribeMacro{\order}
-% The |physics| package \cite{physics} provides additional macros such as
-% \begin{align}
-% &\ev{\phi} \ ,
-% &&\pdv[n]{f}{x} \ ,
-% &&\comm{A}{B} \ ,
-% &&\order{x^2} \ ,
-% &&\eval*{x}_0^\infty \ ,
-% &&\det(M)\ .
-% \end{align}
-%
-% \DescribeMacro{\cancel}
-% \DescribeMacro{\slashed}
-% The |\cancel|\marg{characters} macro from the |cancel| \cite{cancel} package and the |\slashed| \marg{character} macro from the |slashed| \cite{slashed} package allow to $\cancel{\text{cancel}}$ math and use the Dirac slash notation \ie $\slashed \partial$, respectively.
-%
-% \DescribeMacro{\overleftright}
-% A better looking over left right arrow is defined \ie $\overleftright{\partial}$.
-%
-% \DescribeMacro{\unit}
-% \DescribeMacro{\inv}
-% The correct spacing for units, \cf \cref{eq:greek}, is provided by the macro |\unit|\oarg{value} \marg{unit} from the |units| package \cite{units} which can also be used in text mode.
-% The macro |\inv|\oarg{power}\marg{text} allows to avoid math mode also for inverse units such as \unit[5]{\inv{fb}} typeset via |\unit[5]{\inv{fb}}|.
-%
-% \subsection{Floats}
-%
-% \DescribeEnv{figure}
-% \DescribeEnv{table}
-% Automatic float placement is adjusted to place a single float at the top of pages and to reduce the number of float pages, using the \hologo{LaTeX} macros.
+% \changes{v1.0}{2019/01/01}{Initial version of the style file.}
+% \changes{v1.1}{2020/01/01}{Transition to documented \hologo{LaTeX} source file.}
+% \changes{v1.2}{2020/03/01}{Introduction of package options.}
+% \changes{v1.3}{2020/05/01}{Inclusion of JHEP and JCAP package options. Fix of incompatibility with recent subcaption package version. Move of biblatex datamodel into its own file}
+% \changes{v1.4}{2020/07/01}{If possible the compatibility options are selected automatically. Inclusion of PubMed IDs in bibliography.}
+%
+% \ifshort
+%<*documentation>
+%    \begin{macrocode}
+\begin{document}
+% \fi
 
-% |\setcounter{bottomnumber}{0}| \hfill no floats at the bottom of a page (default 1) \\
-% |\setcounter{topnumber}{1}| \hfill a single float at the top of a page (default 2) \\
-% |\setcounter{dbltopnumber}{1}| \hfill same for full widts float in two-column mode \\
-% |\renewcommand{\textfraction}{.1}| \hfill large floats are allowed (default 0.2)\\
-% |\renewcommand{\topfraction}{.9}| \hfill (default 0.7) \\
-% |\renewcommand{\dbltopfraction}{.9}| \hfill (default 0.7) \\
-% |\renewcommand{\floatpagefraction}{.8}| \hfill floatpages must be full (default 0.5)
+\GetFileInfo{hep-paper.sty}
 
-% Additionally, manual float placement is deactivated but can be reactivated using the |manualplacement| package option.
-% It is however recommended to archive the desired design by adjusting above macros.
-% The most useful float placement is usually archived by placing the float \emph{in front} of the paragraph it is referenced in first.
-% \DescribeMacro{\raggedright}
-% The float environments have been adjusted to center their content.
-% The usual behaviour can be reactivated using |\raggedright|.
-%
-% \begin{table}
-% \begin{panels}{.6}
-% \raggedright
-% |\begin{panels}{.6}|\\
-% |code|\\
-% |\panel{.4}|\\
-% |\begin{tabular}...\end{tabular}|\\
-% |\end{panels}|\\
-% \caption{Code for this panel environment.}
-% \label{tab:panels}
-% \panel{.4}
-% \begin{tabular}{cccc}
-% \toprule
-% \multicolumn{2}{c}{one}& \multicolumn{2}{c}{two} \\ \cmidrule(r){1-2} \cmidrule(l){3-4}
-% \multirow{2}{*}{a} & b & c & d \\
-%  & b & c & d \\
-% \bottomrule
-% \end{tabular}
-% % \caption{The \protecting{|booktabs|} and \protecting{|multirow|} features.}
-% \label{tab:booktabs}
-% \end{panels}
-% \caption{Example use of the \protecting{|panels|} environment in Panel \subref{tab:panels} and the features from the \protecting{|booktabs|} and \protecting{|multirow|} packages in Panel \subref{tab:booktabs}.
-% } \label{tab:table}
-% \end{table}
-%
-% \DescribeEnv{panels}
-% \DescribeMacro{\panel}
-% The |panels| environment makes use of the |subcaption| package \cite{subcaption}.
-% It provides sub-floats and takes as mandatory argument either the number of sub-floats (default~2) or the width of the first sub-float as fraction of the |\linewidth|.
-% Within the |\begin{panels}|\oarg{vertical alignment}\marg{width} environment the |\panel| macro initiates a new sub-float.
-% In the case that the width of the first sub-float has been given as an optional argument to the |panels| environment the |\panel|\marg{width} macro takes the width of the next sub-float as mandatory argument.
-% The example code is presented in \cref{tab:panels}.
-%
-% \DescribeEnv{tabular}
-% The |booktabs| \cite{booktabs} and |multirow| \cite{multirow} packages are loaded enabling publication quality tabulars such as in \cref{tab:booktabs}.
-%
-% \DescribeMacro{\graphic}
-% \DescribeMacro{\graphics}
-% The |graphicx| package \cite{graphicx} is loaded and the |\graphic|\oarg{width}\marg{figure} macro is defined, which is a wrapper for the |\includegraphics|\marg{figure} macro and takes the figure width as fraction of the |\linewidth| as optional argument (default~1).
-% If the graphics are located in a sub-folder its path can be indicated by |\graphics|\marg{subfolder}.
-%
-% \subsection{Bibliography}
-%
-% \DescribeMacro{\bibliography}
-% \DescribeMacro{\printbibliography}
-% The |biblatex| package \cite{biblatex} is loaded for bibliography management.
-% The user has to add the line |\bibliography|\marg{my.bib} to the preamble of the document and |\printbibliography| at the end of the document.
-% The bibliography is generated by \software{Biber} \cite{biber}.
-% |biblatex| is extended to be able to cope with the |collaboration| and |reportNumber| fields provided by \online{https://inspirehep.net}{inspirehep.net} and a bug in the volume number is fixed.
-% Additionally, \online{https://ctan.org}{ctan.org}, \online{https://github.com}{github.com}, \online{https://gitlab.com}{gitlab.com}, \online{https://bitbucket.org}{bitbucket.org}, \online{https://www.launchpad.net}{launchpad.net}, \online{https://sourceforge.net}{sourceforge.net}, and \online{https://hepforge.org}{hepforge.org} are recognized as |eprinttype|s.
-% \DescribeMacro{erratum}
-% Errata can be included using the |related| feature.
-%
-% | \article{|\meta{key1}|,|\\
-% |   |\dots|,|\\
-% |   relatedtype="erratum",|\\
-% |   related="|\meta{key2}|",|\\
-% | }|\\
-% | \article{|\meta{key2}|,|\\
-% |   |\dots|,|\\
-% | }|
-%
-% \section{Conclusion}
-%
-% The |hep-paper| package provides a matching selection of preloaded packages and additional macros enabling the user to focus on the content instead of the layout by reducing the amount of manual tasks.
-% The majority of the loaded packages are fairly lightweight, the others can be deactivated with package options.
-%
-% \DescribeMacro{arxiv-collector}
-% ArXiv.org \cite{arxiv} requires the setup dependent |bbl| files instead of the original |bib| files, which causes trouble if the local \hologo{LaTeX} version differs from the one used by arXiv.
-% The |arxiv-collector| python script \cite{arxiv-collector} alleviates this problem by collecting all files necessary for publication on arXiv (including figures).
+\title{The |hep-paper| package\thanks{This document corresponds to \protecting{|hep-paper|}~\fileversion.}}
+\author{Jan Hajer \email{jan.hajer@uclouvain.be}}
+\affiliation{Centre for Cosmology, Particle Physics and Phenomenology, Université catholique de Louvain, Louvain-la-Neuve B-1348, Belgium}
+\preprint{Preprint-Number}
+\date{\normalfont\filedate}
+
+\maketitle
+
+\begin{abstract}
+The |hep-paper| package aims to provide a single style file containing most configurations and macros necessary to write appealing publications in High Energy Physics.
+Instead of reinventing the wheel by introducing newly created macros |hep-paper| preferably loads third party packages as long as they are lightweight enough.
+\end{abstract}
+
+\tableofcontents\clearpage
+
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+
+\section{Introduction}
+
+For usual publications it is enough to load additionally to the |article| class without optional arguments only the |hep-paper| package \cite{hep-paper}.
+
+| \documentclass{article}|\\
+| \usepackage{hep-paper}|
+
+The most notable changes after loading the |hep-paper| package is the change of some \hologo{LaTeX} defaults.
+The paper and font sizes are set to A4 and \unit[11]{pt}, respectively.
+Additionally, the paper geometry is set to the values known from the (depreciated) |a4wide| package \cite{a4wide} using the |geometry| package \cite{geometry}.
+Furthermore, the font is changed to |lmodern| \cite{lmodern} with |microtype| \cite{microtype} optimizations.
+Finally, \PDF hyperlinks are implemented with the |hyperref| package \cite{hyperref}.
+
+\subsection{Options}
+
+\DescribeMacro{paper}
+The |paper=|\meta{format} option loads the specified paper format.
+The possible \meta{formats} are:
+|a0|, |a1|, |a2|, |a3|, |a4|, |a5|, |a6|,
+|b0|, |b1|, |b2|, |b3|, |b4|, |b5|, |b6|,
+|c0|, |c1|, |c2|, |c3|, |c4|, |c5|, |c6|,
+|ansia|, |ansib|, |ansic|, |ansid|, |ansie|,
+|letter|, |executive|, |legal|.
+The default is |a4|.
+
+\DescribeMacro{font}
+The |font=|\meta{size} option loads the specified font size.
+The possible \meta{sizes} are:
+|8pt|, |9pt|, |10pt|, |11pt|, |12pt|, |14pt|, |17pt|, |20pt|.
+The default is \unit[11]{pt}.
+
+\DescribeMacro{lang}
+The |lang|=\meta{name} option switches the document language to the chosen value.
+The possible values are given by the |babel| package \cite{babel}.
+The default is |british|.
+
+\DescribeMacro{sansserif}
+The |sansserif| option switches the document including math to the sans serif font shape.
+
+\DescribeMacro{parskip}
+The |parskip| option makes use of the |parskip| package \cite{parskip} and changes how two paragraphs are separated from each other.
+The \hologo{LaTeX} default is separation via indentation the |parskip| option switches to separation via vertical space.
+\footnote{Although the |parskip| option is used for this document, it is recommended only for very few document types such as technical manuals or answers to referees.}
+
+\subsubsection{Deactivation}
+
+The \software{hep-paper} package loads few bigger packages which have a large impact on the document.
+The deactivation options prevent such adjustments.
+
+\DescribeMacro{defaults}
+The |defaults| option prevents the adjustment of the page geometry and the font size set by the document class.
+
+\DescribeMacro{title}
+The |title=false| option deactivates the title page adjustments.
+
+\DescribeMacro{bibliography}
+The |bibliography|=\meta{key} option prevents the automatic loading of the |biblatex| package \cite{biblatex} if \meta{key}=|false|.
+Otherwise the \meta{key} is passed as |style| string to the |biblatex| package.
+
+\DescribeMacro{glossaries}
+The |glossaries=false| option deactives acronyms and the use of the |glossaries| package \cite{glossaries}.
+
+\DescribeMacro{references}
+The |references=false| option prevents the |cleveref| pacakge \cite{cleveref} from being loaded and deactivates further redefinitions of reference macros.
+
+\subsubsection{Compatibility}
+
+The compatibility options activate the compatibility mode for certain classes and packages used for publications in high energy physics.
+They are mostly suitable combinations of options described in the previous section.
+If \software{hep-paper} is able to detect the presence of such a class or package, \ie if it is loaded before the \software{hep-paper} package, the compatibility mode is activated automatically.
+
+\DescribeMacro{beamer}
+The |beamer| option activates the \software{beamer} \cite{beamer} compatibility mode.
+
+\DescribeMacro{jhep}
+The |jhep| option activates the \software{JHEP} \cite{jhep} compatibility mode.
+
+\DescribeMacro{jcap}
+The |jcap| option activates the \software{JCAP} \cite{jcap} compatibility mode.
+
+\DescribeMacro{revtex}
+The |revtex| option activates the REV\hologo{TeX} \cite{revtex} compatibility mode.
+
+\DescribeMacro{pos}
+The |pos| option activates the \software{PoS} compatibility mode.
+
+\subsubsection{Reactivation}
+
+The \software{hep-paper} package deactivates unrecommended macros, which can be reactivated manually.
+
+\DescribeMacro{manualplacement}
+The |manualplacement| option reactivates manual float placement.
+
+\DescribeMacro{eqnarray}
+The |eqnarray| option reactivates the depreciated |eqnarray| environment.
+
+\section{Macros and environments}
+
+\subsection{Title page}
+
+\DescribeMacro{\author}
+\DescribeMacro{\affiliation}
+\DescribeMacro{\email}
+In order to facilitate multiple authors with different affiliations the |authblk| package \cite{authblk} is loaded.
+The following lines add \eg two authors with different affiliations
+
+| \author[1]{Author one \email{Email one}}|\\
+| \affiliation[1]{Affiliation one}|\\
+| \author[2]{Author two \email{Email two}}|\\
+| \affiliation[1,2]{Affiliation two}|
+
+\DescribeMacro{\title}
+The \PDF meta information is set according to the |\title|\marg{text} and |\author| \marg{text} information.
+
+\DescribeMacro{\preprint}
+The |\preprint|\marg{numer} macro places a pre-print number in the upper right corner of the title page.
+
+\DescribeEnv{abstract}
+The |abstract| environment is adjusted to not start with an indentation.
+
+\subsection{Text}
+
+Hyphenation is provided by the |babel| package \cite{babel} and quotation commands are provided by the |csquotes| package \cite{csquotes} recommended by the |babel| package.
+\DescribeMacro{\enquote}
+\DescribeMacro{\MakeOuterQuote}
+The latter package provides the convenient macros |\enquote|\marg{text} and |\MakeOuterQuote{"}| allowing to leave the choice of quotation marks to \hologo{LaTeX} and use |"| instead of the pair |``| and |''|, respectively.
+
+\DescribeMacro{\eg}
+\DescribeMacro{\vs}
+The |foreign| package \cite{foreign} defines macros such as |\eg|, |\ie|, |\cf|, and |\vs| which are typeset as \eg, \ie, \cf, and \vs.
+
+\DescribeMacro{\no}
+The |\no|\marg{number} macro is typeset as \no{123}.
+
+\DescribeMacro{\software}
+The |\software|\oarg{version}\marg{name} macro is typeset as \software[\fileversion]{HEP-Paper}.
+
+\DescribeMacro{\online}
+The |\online|\marg{url}\marg{text} macro combines the features of the |\href|\marg{url} \marg{text} \cite{hyperref} and the |\url|\marg{text} \cite{url} macros, resulting in \eg \online{https://ctan.org/pkg/hep-paper}{ctan.org/pkg/hep-paper}.
+
+The |inlinelist| and |enumdescript| environments are defined using the |enumitem| package \cite{enumitem}.
+
+\DescribeMacro{inlinelist}
+\begin{columns}
+|The three main points are|
+|\begin{inlinelist}|
+
+| \item one|
+
+| \item two|
+
+| \item three|
+
+|\end{inlinelist}|
+\column
+The three main points are
+\begin{inlinelist}
+ \item one
+ \item two
+ \item three
+\end{inlinelist}
+\end{columns}
+
+\DescribeMacro{enumdescript}
+\begin{columns}[.6]
+|\begin{enumdescript}[label=\Roman*)]|
+
+| \item{First} one|
+
+| \item{Second} two|
+
+| \item{Third} three|
+
+|\end{enumdescript}|
+\column
+\begin{enumdescript}[label=\Roman*)]
+ \item{First} one
+ \item{Second} two
+ \item{Third} three
+\end{enumdescript}
+\end{columns}
+
+\DescribeMacro{\textsc}
+A bold versions \textbf{\textsc{Small Caps}} and a sans serif version of \textsf{\textsc{Small Caps}} is provided, using the |sansmathfonts| package \cite{sansmathfonts}.
+
+\DescribeMacro{\underline}
+\DescribeMacro{\overline}
+The |\underline| macro is redefined to allow linebreaks using the |ulem| package \cite{ulem}.
+The |\overline| macro is extended to also \overline{overline} text outside of math environments.
+
+\DescribeMacro{\useparskip}
+\DescribeMacro{\useparindent}
+If the |parskip| option is activated the |\useparindent| macro switches back the usual parindent mode, while the |\useparskip| macro switches to the parskip mode.
+
+\subsubsection{References and footnotes}
+
+\DescribeMacro{\cref}
+References are extended with the |cleveref| package \cite{cleveref}, which allows to \eg just type |\cref|\marg{key}  in order to write \enquote{figure 1}.
+Furthermore, the |cleveref| package allows to reference multiple objects within one |\cref|\marg{key1,key2}.
+
+\DescribeMacro{\cite}
+Citations are adjusted to not start on a new line in order to avoid the repeated use of |~\cite|\marg{key}.
+
+\DescribeMacro{\ref}
+\DescribeMacro{\eqref}
+\DescribeMacro{\subref}
+References are also adjusted to not start on a new line and are redefined in order to handle multiple references at once.
+
+\DescribeMacro{\footnote}
+Footnotes are adjusted to swallow white space before the footnote mark and at the beginning of the footnote text.
+
+\subsubsection{Acronyms}
+
+\DescribeMacro{\acronym}
+\DescribeMacro{\shortacronym}
+\DescribeMacro{\longacronym}
+The |\acronym|\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\meta{*}\marg{definition}\oarg{plural\linebreak[4]definition} macro generates the singluar |\|\meta{abbreviation} and plural |\|\meta{abbreviation}|s| macros.
+The first star prevents the addition of an \enquote{s} to the abbreviation plural.
+The second star restores the \hologo{TeX} default of swallowing subsequent white space.
+The long form is only shown at the first appearance of these macros, later appearances generate the abbreviation with a hyperlink to the long form.
+Capitalization at the beginning of paragraphs and sentences is ensured.
+The |\shortacronym| and |\longacronym| macros are dropin replacements of the |\acronym| macro showing only the short or long form of their acronym.
+\DescribeMacro{\resetacronym}
+\DescribeMacro{\dummyacronym}
+The first use form of the acronym can be enforced by resetting the acronym counter with |\resetacronym|\marg{key}.
+If the acronym counter equals one at the end of the document the short form of the acronym is not introduced.
+Placing a |\dummyacronym|\marg{key} at the end of the document ensures that the short form is introduced.
+
+\subsection{Math}
+
+The |mathtools| \cite{mathtools} and |amssymb| \cite{amsfonts} packages are loaded.
+They in turn load the \hologo{AmSLaTeX} |amsmath| \cite{amsmath} and |amsfonts| \cite{amsfonts} packages.
+\DescribeMacro{\mathbf}
+Bold math, via |\mathbf| is improved by the |bm| package \cite{bm}, \ie ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
+Macros switching to |bfseries| such as |\section|\marg{text} are ensured to also typeset math in bold.
+This may cause trouble if bold symbols carry an additional non-implicit meaning.
+\DescribeMacro{\text}
+The |\text|\marg{text} macro makes it possible to write text within math mode, \ie ($ \text A  \text b  \text \Gamma \text \delta \text{\textbf A} \text{\textbf b} \text{\textbf \Gamma} \text{\textbf \delta}$).
+The often used |\mathrm|\marg{text} and |{\rm|\meta{text}|}| macros are \emph{not} the correct tool for this purpose, as they switch to roman font shape.
+This behaviour conflicts \eg with the |sansserif| package option.
+\DescribeMacro{\mathsf}
+The math sans serif alphabet is redefined to be italic sans serif if the main text is serif and italic serif if the main text is sans serif, \ie ($\mathsf A \mathsf b \mathsf \Gamma \mathsf \delta \mathbf{\mathsf A} \mathbf{\mathsf b} \mathbf{\mathsf \Gamma} \mathbf{\mathsf \delta}$).
+\DescribeMacro{\mathscr}
+The |\mathcal| font \ie ($\mathcal{ABCD}$) is accompanied by the |\mathscr| font \ie ($\mathscr{ABCD}$).
+\DescribeMacro{\mathbb}
+The |\mathbb| font is improved by the |doublestroke| package \cite{dsfont} and adjusted depending on the |sansserif| option \ie ($\mathbb{Ah1}$).
+\DescribeMacro{\mathfrak}
+Finally, the |\mathfrak| font is also available \ie ($\mathfrak{AaBb12}$).
+Details about the font handling in \hologo{TeX} can be found in \ccite{fntguide}.
+
+\DescribeMacro{\nicefrac}
+\DescribeMacro{\flatfrac}
+The |\frac|\marg{number}\marg{number} macro is accompanied by |\nicefrac|\linebreak[1]\marg{number}\linebreak[1]\marg{number} and |\flatfrac|\marg{number}\marg{number} leading to $\frac12$, $\nicefrac 12$, and $\flatfrac 12$.
+\DescribeMacro{\diag}
+\DescribeMacro{\sgn}
+Diagonal matrix |\diag| and signum |\sgn| operators are defined.
+
+\DescribeMacro{\mathdef}
+The |\mathdef|\marg{name}\oarg{arguments}\marg{code} macro (re-)defines macros only within math mode without changing the text mode definition.
+
+\DescribeMacro{\i}
+\DescribeMacro{\d}
+The imaginary unit $\i$ and the differential $\d$ are defined using this functionality.
+
+\DescribeMacro{\numberwithin}
+For longer paper it can be useful to re-number the equation in accordance with the section numbering |\numberwithin{equation}{section}|.
+\DescribeMacro{subequations}
+In order to further reduce the size the of equation counter it can be useful to wrap |align| environments with multiple rows in a |subequations| environment.
+Both macros are provided by the |amsmath| package.
+
+\DescribeMacro{eqnarray}
+The depreciated |eqnarray| environment is undefined as long this behaviour is not prevented by the |eqnarray| package option.
+The |split|, |multline|, |align|, |multlined|, |aligned|, |alignedat|, and |cases| environments of the |amsmath| and |mathtools| packages should be used instead.
+
+\DescribeMacro{equation}
+Use the |equation| environment for short equations.
+
+\begin{columns}
+|\begin{equation}|
+
+| left = right \ .|
+
+|\end{equation}|
+\column
+\begin{equation}
+\framebox[2em]{left\strut} = \framebox[7em]{right\strut} \ .
+\end{equation}
+\end{columns}
+
+\DescribeMacro{multline}
+Use the |multline| environment for longer equations.
+
+\begin{columns}
+|\begin{multline}|
+
+| left = right 1 \\|
+
+| + right 2 \ .|
+
+|\end{multline}|
+\column
+\begin{multline}
+\framebox[2em]{left\strut} = \framebox[7em]{right 1\strut} \\
+\framebox[7em]{+ right 2\strut} \ .
+  \end{multline}
+\end{columns}
+
+\DescribeMacro{split}
+Use the |split| sub environment for equations in which multiple equal signs should be aligned.
+
+\begin{columns}
+|\begin{equation} \begin{split}|
+
+| left &= right 1 \\|
+
+| &= right 2 \ .|
+
+|\end{split} \end{equation}|
+\column
+\begin{equation}
+\begin{split}
+\framebox[2em]{left\strut} &= \framebox[7em]{right 1\strut} \\
+&= \framebox[7em]{right 2\strut} \ .
+\end{split}
+\end{equation}
+\end{columns}
+
+\DescribeMacro{align}
+Use the |align| environment for the vertical alignment and horizontal distribution of multiple equations.
+
+\begin{columns}
+|\begin{subequations}|
+|\begin{align}|
+
+| left &= right \ , &|
+| left &= right \ , \\|
+| left &= right \ , &|
+| left &= right \ .|
+
+|\end{align}|
+|\end{subequations}|
+\column
+\begin{subequations}
+\begin{align}
+\framebox[2em]{left\strut} &= \framebox[3em]{right\strut} \ , &
+\framebox[2em]{left\strut} &= \framebox[3em]{right\strut} \ , \\
+\framebox[2em]{left\strut} &= \framebox[3em]{right\strut} \ , &
+\framebox[2em]{left\strut} &= \framebox[3em]{right\strut} \ .
+\end{align}
+\end{subequations}
+\end{columns}
+
+\DescribeMacro{aligned}
+Use the |aligned| environment within a |equation| environment if the aligned equations should be labeled with a single equation number.
+
+\DescribeMacro{multlined}
+Use the |multlined| environment if either |split| or |align| contain very long lines.
+
+\begin{columns}
+|\begin{equation} \begin{split}|
+
+| left &= right 1 \\ &=|
+| \begin{multlined}[t]|
+|  right 2 \\ + right 3 \ .|
+| \end{multlined}|
+|\end{split} \end{equation}|
+\column
+\begin{equation}
+\begin{split}
+\framebox[2em]{left\strut} &= \framebox[7em]{right 1\strut} \\ &=
+ \begin{multlined}[t]
+  \framebox[7em]{right 2\strut} \\
+  \framebox[7em]{+ right 3\strut} \ .
+\end{multlined}
+\end{split}
+\end{equation}
+\end{columns}
+
+\DescribeMacro{alignat}
+Use the |alignat| environment together with the |\mathllap| macro for the alignment of multiple equations with vastly different lengths.
+
+\begin{columns}
+|\begin{subequations}|
+|\begin{alignat}{2}|
+
+| left &= long right && \ , \\|
+
+| le. 2 &= ri. 2 \ , &|
+
+| \mathllap{le. 3 = ri. 3} & \ .|
+|\end{alignat}|
+|\end{subequations}|
+\column
+\begin{subequations}
+\begin{alignat}{2}
+\framebox[2em]{left\strut} &=
+\framebox[11em]{long right\strut} && \ , \\
+\framebox[2em]{le.\ 2\strut}
+&= \framebox[2.5em]{ri.\ 2\strut} \ , &
+\mathllap{\framebox[2em]{le.\ 3\strut}
+= \framebox[2.5em]{ri.\ 3\strut}} & \ .
+\end{alignat}
+\end{subequations}
+\end{columns}
+
+As a rule of thumb if you have to use |\notag|, |\nonumber|, or perform manual spacing via |\quad| you are probably using the wrong environment.
+
+\subsubsection{Physics}
+
+Greek letters are adjusted to always be italic and upright in math and text mode, respectively, using the |fixmath| \cite{fixmath} and |alphabeta| \cite{alphabeta} packages.
+This allows differentiations like
+\begin{align}
+\sigma &= \unit[5]{fb} \ , & &\text{at \unit[5]{\sigma} C.L.} \ , & \mu &= \unit[5]{cm} \ , & l &= \text{\unit[5]{\mu m}} \ ,
+\label{eq:greek}
+\end{align}
+and \eg to distinguish gauge $\nu$ and mass \nu\ eigenstates in models with massive neutrinos.
+Additionally, Greek letters can also be directly typed using Unicode.
+
+\DescribeMacro{\ev}
+\DescribeMacro{\pdv}
+\DescribeMacro{\comm}
+\DescribeMacro{\order}
+The |physics| package \cite{physics} provides additional macros such as
+\begin{align}
+&\ev{\phi} \ ,
+&&\pdv[n]{f}{x} \ ,
+&&\comm{A}{B} \ ,
+&&\order{x^2} \ ,
+&&\eval{x}_0^\infty \ ,
+&&\det(M)\ .
+\end{align}
+
+\DescribeMacro{\cancel}
+\DescribeMacro{\slashed}
+The |\cancel|\marg{characters} macro from the |cancel| \cite{cancel} package and the |\slashed| \marg{character} macro from the |slashed| \cite{slashed} package allow to $\cancel{\text{cancel}}$ math and use the Dirac slash notation \ie $\slashed \partial$, respectively.
+
+\DescribeMacro{\overleftright}
+A better looking over left right arrow is defined \ie $\overleftright{\partial}$.
+
+\DescribeMacro{\unit}
+\DescribeMacro{\inv}
+The correct spacing for units, \cf \cref{eq:greek}, is provided by the macro |\unit|\oarg{value} \marg{unit} from the |units| package \cite{units} which can also be used in text mode.
+The macro |\inv|\oarg{power}\marg{text} allows to avoid math mode also for inverse units such as \unit[5]{\inv{fb}} typeset via |\unit[5]{\inv{fb}}|.
+
+\subsection{Floats}
+
+\DescribeEnv{figure}
+\DescribeEnv{table}
+Automatic float placement is adjusted to place a single float at the top of pages and to reduce the number of float pages, using the \hologo{LaTeX} macros.
+
+|\setcounter{bottomnumber}{0}| \hfill no floats at the bottom of a page (default 1) \\
+|\setcounter{topnumber}{1}| \hfill a single float at the top of a page (default 2) \\
+|\setcounter{dbltopnumber}{1}| \hfill same for full widths floats in two-column mode \\
+|\renewcommand{\textfraction}{.1}| \hfill large floats are allowed (default 0.2)\\
+|\renewcommand{\topfraction}{.9}| \hfill (default 0.7) \\
+|\renewcommand{\dbltopfraction}{.9}| \hfill (default 0.7) \\
+|\renewcommand{\floatpagefraction}{.8}| \hfill float pages must be full (default 0.5)
+
+Additionally, manual float placement is deactivated but can be reactivated using the |manualplacement| package option.
+It is however recommended to archive the desired design by adjusting above macros.
+The most useful float placement is usually archived by placing the float \emph{in front} of the paragraph it is referenced in first.
+\DescribeMacro{\raggedright}
+The float environments have been adjusted to center their content.
+The usual behaviour can be reactivated using |\raggedright|.
+
+\begin{table}
+\begin{panels}{.6}
+\raggedright
+|\begin{panels}{.6}|\\
+|code|\\
+|\panel{.4}|\\
+|\begin{tabular}...\end{tabular}|\\
+|\end{panels}|\\
+\caption{Code for this panel environment.}
+\label{tab:panels}
+\panel{.4}
+\begin{tabular}{cccc}
+\toprule
+\multicolumn{2}{c}{one}& \multicolumn{2}{c}{two} \\ \cmidrule(r){1-2} \cmidrule(l){3-4}
+\multirow{2}{*}{a} & b & c & d \\
+ & b & c & d \\
+\bottomrule
+\end{tabular}
+\caption{The \protecting{|booktabs|} and \protecting{|multirow|} features.}
+\label{tab:booktabs}
+\end{panels}
+\caption{Example use of the \protecting{|panels|} environment in Panel \subref{tab:panels} and the features from the \protecting{|booktabs|} and \protecting{|multirow|} packages in Panel \subref{tab:booktabs}.
+} \label{tab:table}
+\end{table}
+
+\DescribeEnv{panels}
+\DescribeMacro{\panel}
+The |panels| environment makes use of the |subcaption| package \cite{subcaption}.
+It provides sub-floats and takes as mandatory argument either the number of sub-floats (default~2) or the width of the first sub-float as fraction of the |\linewidth|.
+Within the |\begin{panels}|\oarg{vertical alignment}\marg{width} environment the |\panel| macro initiates a new sub-float.
+In the case that the width of the first sub-float has been given as an optional argument to the |panels| environment the |\panel|\marg{width} macro takes the width of the next sub-float as mandatory argument.
+The example code is presented in \cref{tab:panels}.
+
+\DescribeEnv{tabular}
+The |booktabs| \cite{booktabs} and |multirow| \cite{multirow} packages are loaded enabling publication quality tabulars such as in \cref{tab:booktabs}.
+
+\DescribeMacro{\graphic}
+\DescribeMacro{\graphics}
+The |graphicx| package \cite{graphicx} is loaded and the |\graphic|\oarg{width}\marg{figure} macro is defined, which is a wrapper for the |\includegraphics|\marg{figure} macro and takes the figure width as fraction of the |\linewidth| as optional argument (default~1).
+If the graphics are located in a sub-folder its path can be indicated by |\graphics|\marg{subfolder}.
+
+\subsection{Bibliography}
+
+\DescribeMacro{\bibliography}
+\DescribeMacro{\printbibliography}
+The |biblatex| package \cite{biblatex} is loaded for bibliography management.
+The user has to add the line |\bibliography|\marg{my.bib} to the preamble of the document and |\printbibliography| at the end of the document.
+The bibliography is generated by \software{Biber} \cite{biber}.
+|biblatex| is extended to be able to cope with the |collaboration| and |reportNumber| fields provided by \online{https://inspirehep.net}{inspirehep.net} and a bug in the volume number is fixed.
+Additionally, the PubMed IDs are recognized and \online{https://ctan.org}{ctan.org}, \online{https://github.com}{github.com}, \online{https://gitlab.com}{gitlab.com}, \online{https://bitbucket.org}{bitbucket.org}, \online{https://www.launchpad.net}{launchpad.net}, \online{https://sourceforge.net}{sourceforge.net}, and \online{https://hepforge.org}{hepforge.org} are valid |eprinttype|s.
+\DescribeMacro{erratum}
+Errata can be included using the |related| feature.
+
+| \article{|\meta{key1}|,|\\
+|   |\dots|,|\\
+|   relatedtype="erratum",|\\
+|   related="|\meta{key2}|",|\\
+| }|\\
+| \article{|\meta{key2}|,|\\
+|   |\dots|,|\\
+| }|
+
+\section{Conclusion}
+
+The |hep-paper| package provides a matching selection of preloaded packages and additional macros enabling the user to focus on the content instead of the layout by reducing the amount of manual tasks.
+The majority of the loaded packages are fairly lightweight, the others can be deactivated with package options.
+
+\DescribeMacro{arxiv-collector}
+ArXiv.org \cite{arxiv} requires the setup dependent |bbl| files instead of the original |bib| files, which causes trouble if the local \hologo{LaTeX} version differs from the one used by arXiv.
+The |arxiv-collector| python script \cite{arxiv-collector} alleviates this problem by collecting all files necessary for publication on arXiv (including figures).
+
+% \ifshort
+\printbibliography
+
+\end{document}
+%    \end{macrocode}
+%</documentation>
+%\fi
 %
 % \StopEventually{
 % \printbibliography
 % \PrintChanges
 % }
 %
-% \addtocontents{toc}{\protect\clearpage}\appendix
+% \addtocontents{toc}{\protect\clearpage}\appendix \clearpage
 %
 % \section{Options}
 %
 %<*package>
-
+%
 % Load the |pdftexcmds| \cite{pdftexcmds} and |kvoptions| \cite{kvoptions} packages and define a |hep| namespace.
-% \DoNotIndex{\RequirePackage,\SetupKeyvalOptions}
 %    \begin{macrocode}
 \RequirePackage{pdftexcmds}
 \RequirePackage{kvoptions}
@@ -686,7 +683,6 @@
 % \begin{macro}{paper}
 % Define a |paper=|\meta{size} option.
 % Make A4 paper the default.
-% \DoNotIndex{\DeclareStringOption}
 %    \begin{macrocode}
 \DeclareStringOption[a4]{paper}
 %    \end{macrocode}
@@ -700,14 +696,6 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{defaults}
-% Define the |defaults| option which deactivates the |paper| and |font| options and prevents the change of the class defaults by this package.
-% \DoNotIndex{\DeclareBoolOption,\ifhep@defaults}
-%    \begin{macrocode}
-\DeclareBoolOption[false]{defaults}
-%    \end{macrocode}
-% \end{macro}
-%
 % \begin{macro}{lang}
 % Define the |lang| option, which takes the values provided by the |babel| package \cite{babel}.
 % Make |british| the default language.
@@ -716,36 +704,35 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{parskip}
-% Define the option pair |parindent| and |parskip| controlling the separation of paragraphs.
-% \DoNotIndex{\DeclareComplementaryOption,\ifhep@parindent}
-%    \begin{macrocode}
-\DeclareBoolOption[true]{parindent}
-\DeclareComplementaryOption{parskip}{parindent}
-%    \end{macrocode}
-% \end{macro}
-%
 % \begin{macro}{sansserif}
 % Define the option pair |serif| and |sansserif| controling the font shape of the whole document.
-% \DoNotIndex{\ifhep@serif}
 %    \begin{macrocode}
 \DeclareBoolOption[true]{serif}
 \DeclareComplementaryOption{sansserif}{serif}
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{eqnarray}
-% Provide the option |eqnarray| for reactivating the |eqnarray| environment.
-% \DoNotIndex{\ifhep@eqnarray}
+% \begin{macro}{parskip}
+% Define the option pair |parindent| and |parskip| controlling the separation of paragraphs.
 %    \begin{macrocode}
-\DeclareBoolOption[false]{eqnarray}
+\DeclareBoolOption[true]{parindent}
+\DeclareComplementaryOption{parskip}{parindent}
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{references}
-% Provide the option |references| for preventing the |cleveref| package from being loaded redefinitions of reference macros.
+% \subsection{Deactivation}
+%
+% \begin{macro}{defaults}
+% Define the |defaults| option which deactivates the |paper| and |font| options and prevents the change of the class defaults by this package.
 %    \begin{macrocode}
-\DeclareBoolOption[true]{references}
+\DeclareBoolOption[false]{defaults}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{title}
+% Provide the option |title| for deactivating redefinition of title macros.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{title}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -758,27 +745,19 @@
 %
 % \begin{macro}{glossaries}
 % Provide the option |glossaries| able to turn of the use of the |glossaries| package \cite{glossaries}.
-% \DoNotIndex{\ifhep@glossaries}
 %    \begin{macrocode}
 \DeclareBoolOption[true]{glossaries}
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{manualplacement}
-% Provide the |manualplacement| option for reactivating the manual placement of floats.
-% \DoNotIndex{\ifhep@manualplacement}
+% \begin{macro}{references}
+% Provide the option |references| for preventing the |cleveref| package from being loaded redefinitions of reference macros.
 %    \begin{macrocode}
-\DeclareBoolOption[false]{manualplacement}
+\DeclareBoolOption[true]{references}
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{title}
-% Provide the option |title| for deactivating redefinition of title macros.
-% \DoNotIndex{\ifhep@title}
-%    \begin{macrocode}
-\DeclareBoolOption[true]{title}
-%    \end{macrocode}
-% \end{macro}
+% \subsection{Compatibility}
 %
 % \begin{macro}{beamer}
 % Provide the option |beamer| for \software{beamer} \cite{beamer} compatibility mode.
@@ -815,6 +794,22 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \subsection{Reactivation}
+%
+% \begin{macro}{eqnarray}
+% Provide the option |eqnarray| for reactivating the |eqnarray| environment.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{eqnarray}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{manualplacement}
+% Provide the |manualplacement| option for reactivating the manual placement of floats.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{manualplacement}
+%    \end{macrocode}
+% \end{macro}
+%
 % \subsection{Process options}
 %
 %    \begin{macrocode}
@@ -822,7 +817,6 @@
 %    \end{macrocode}
 %
 % Set the |pos| compatibility options.
-% \DoNotIndex{\ifhep@pos,\setkeys,\fi}
 %    \begin{macrocode}
 \@ifclassloaded{PoS}{\setkeys{hep}{pos}}{}
 \ifhep@pos
@@ -839,7 +833,6 @@
 %    \end{macrocode}
 %
 % Set the |revtex| compatibility options.
-% \DoNotIndex{\ifhep@revtex}
 %    \begin{macrocode}
 \@ifclassloaded{revtex4}{\setkeys{hep}{revtex}}{}
 \@ifclassloaded{revtex4-1}{\setkeys{hep}{revtex}}{}
@@ -881,7 +874,6 @@
 % \begin{macro}{\ifxetexorluatex}
 % Load the |ifluatex| \cite{ifluatex} and |ifxetex| \cite{ifxetex} packages.
 % Define the |\ifxetexorluatex| conditional checking if the package is executed by \hologo{LuaLaTeX} or \hologo{XeLaTeX}.
-% \DoNotIndex{\newif,\ifxetex,\xetexorluatextrue,\else,\ifluatex,\xetexorluatexfalse,\fi}
 %    \begin{macrocode}
 \RequirePackage{ifluatex}
 \RequirePackage{ifxetex}
@@ -906,7 +898,6 @@
 % Set the whole text to sans serif if requested.
 % Load the |sansmathfonts| package \cite{sansmathfonts} first.
 % Although, most fonts will later be overwritten by the |lmodern| package \cite{lmodern} some mathematical objects are ensured to be in sans serif.
-% \DoNotIndex{\ifhep@serif,\renewcommand,\familydefault,\sfdefault}
 %    \begin{macrocode}
 \ifhep@serif\else
   \RequirePackage{sansmathfonts}
@@ -916,7 +907,6 @@
 %
 % Pick the correct font encoding depending on the engine used and load the |fontenc| package \cite{fontenc} with this encoding.
 % For details of the font encoding see \cite{encguide}.
-% \DoNotIndex{\def,\@encoding}
 %    \begin{macrocode}
 \ifxetexorluatex
   \def\@encoding{TU}
@@ -925,34 +915,49 @@
 \fi
 \RequirePackage[\@encoding]{fontenc}
 %    \end{macrocode}
-% Load the |lmodern| font \cite{lmodern}, the |textcomp| extension \cite{textcomp}, and the |microtype| font optimization \cite{microtype}.
+% Fix the remaining coputer modern fonts \cite{fix-cm}, load the |lmodern| font \cite{lmodern}, the |textcomp| extension \cite{textcomp}, and the |microtype| font optimization \cite{microtype}.
 %    \begin{macrocode}
+\RequirePackage{fix-cm}
 \RequirePackage{lmodern}
 \RequirePackage{textcomp}
 \RequirePackage{microtype}
 %    \end{macrocode}
 %
-% Define sans serif small caps font shapes.
+% Define bold and sans serif small caps font shapes using the fontspec package \cite{fontspec}.
 % The font abbreviations are
 % \begin{description}[nosep]
+%  \item[lmr] Latin modern roman font
 %  \item[lmss] Latin modern sans serif font
 %  \item[cmss] Computer modern sans serif font
 %  \item[xcmss] Extended computer modern sans serif font (from the |sansmathfonts| package \cite{sansmathfonts})
 %  \item[bx] Bold extended series
+%  \item[b] Bold series
 %  \item[m] Medium weight and width series
 %  \item[c] Medium weight, condensed width series
 %  \item[sc] Caps and small caps font shape
 % \end{description}
-% \DoNotIndex{\DeclareFontShape,\sffamily}
 %    \begin{macrocode}
 \ifxetexorluatex
+  \RequirePackage{fontspec}
+  \setmainfont{Latin Modern Roman}[
+    UprightFeatures={SmallCapsFont={[lmromancaps10-regular.otf]}},
+    BoldFeatures={
+      SmallCapsFeatures={Letters=SmallCaps},
+      SmallCapsFont={[cmunbx.otf]}
+    }
+  ]
   \DeclareFontShape{\@encoding}{lmss}{bx}{sc}{<->cmssbxcsc10}{}
+  \DeclareFontShape{\@encoding}{lmss}{b}{sc}{<->cmssbxcsc10}{}
   \DeclareFontShape{\@encoding}{lmss}{m}{sc}{%
     <-9>cmsscsc8<9-10>cmsscsc9<10->cmsscsc10%
   }{}
 \else
+  \rmfamily
+  \DeclareFontShape{\@encoding}{lmr}{b}{sc}{<->ssub*cmr/bx/sc}{}
+  \DeclareFontShape{\@encoding}{lmr}{bx}{sc}{<->ssub*cmr/bx/sc}{}
   \sffamily
   \DeclareFontShape{\@encoding}{lmss}{bx}{sc}{<->ssub*xcmss/bx/sc}{}
+  \DeclareFontShape{\@encoding}{lmss}{b}{sc}{<->ssub*xcmss/bx/sc}{}
   \DeclareFontShape{\@encoding}{lmss}{m}{sc}{<->ssub*xcmss/m/sc}{}
 \fi
 %    \end{macrocode}
@@ -965,7 +970,6 @@
 %    \end{macrocode}
 %
 % Load the |babel| \cite{babel} package for hyphenation and the recommended |csquotes| package \cite{csquotes}.
-% \DoNotIndex{\hep@lang}
 %    \begin{macrocode}
 \RequirePackage[\hep@lang]{babel}
 \RequirePackage{csquotes}
@@ -973,7 +977,6 @@
 %
 % \begin{macro}{\underline}
 % Load the |ulem| package \cite{ulem} for hyphenable underlined text.
-% \DoNotIndex{\let}
 %    \begin{macrocode}
 \RequirePackage[normalem]{ulem}
 \let\underline\uline
@@ -983,7 +986,6 @@
 % \subsection{Font size} \label{sec:font size}
 %
 % Undefine previously defined font sizes and load the \hologo{LaTeX} font size file corresponding to the font size option.
-% \DoNotIndex{\remove@pt,\edef,\@ptsize,\expandafter,\small,\relax,\footnotesize,\scriptsize}
 %    \begin{macrocode}
 \ifhep@defaults\else
   \def\remove@pt#1pt{#1}
@@ -1006,7 +1008,6 @@
 %\begin{macro}{\vs}
 % Load the |foreign| package \cite{foreign} in order to highlight abbreviations and vocabularies from foreign languages.
 % Add the missing |\vs| command.
-% \DoNotIndex{\DeclareRobustCommand,\xperiodafter,\foreignabbrfont,\pdf@strcmp,\hep@lang@foreign}
 %    \begin{macrocode}
 \ifnum\pdf@strcmp{\hep@lang}{american}=0
   \newcommand{\hep@lang@foreign}{USenglish}
@@ -1037,19 +1038,25 @@
 %
 %\begin{macro}{\software}
 % Define a macro for software with optional version information |\software|\linebreak[1]\oarg{version}\linebreak[1]\marg{name}, using the |relsize| package \cite{relsize}.
-% \DoNotIndex{\hspace,\fontdimen,\font,\smaller,\textsc}
 %    \begin{macrocode}
 \RequirePackage{relsize}
 \newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
-  {\smaller\textsc{#2}~#1}%
+  {\smaller\textsc{#2} #1}%
 }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\online}
-% The |\online|\marg{text}\marg{url} macro combines the features of the |\href| and the |\url| macros.
-% \DoNotIndex{\href,\url}
+% Switch to a proportional typewriter font for \URLs and define the |\online|\marg{text}\marg{url} macro combining the features of the |\href| and the |\url| macros.
 %    \begin{macrocode}
+\AtEndOfPackage{
+  \let\hep@url\url
+  \renewcommand\url[1]{{\fontfamily{lmvtt}\selectfont\hep@url{#1}}}
+  \let\hep@no@link@url\nolinkurl
+  \renewcommand\nolinkurl[1]{%
+    {\fontfamily{lmvtt}\selectfont\hep@no@link@url{#1}}%
+  }
+}
 \newcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}
 %    \end{macrocode}
 % \end{macro}
@@ -1063,7 +1070,6 @@
 %
 % \begin{environment}{inlinelist}
 % Define an inline list environment.
-% \DoNotIndex{\newlist,\setlist*,\ }
 %    \begin{macrocode}
 \newlist{inlinelist}{enumerate*}{1}
 \setlist*[inlinelist,1]{%
@@ -1074,42 +1080,24 @@
 %
 % \begin{environment}{enumdescript}
 % Define an enumdescript list environment.
-% \DoNotIndex{\arabic*,\old@item,\item,ifx,\textbf,\empty,\@ifnextchar,\par,\@gobble}
 %    \begin{macrocode}
 \newlist{enum@descript}{enumerate}{2}
 \setlist[enum@descript]{label=\arabic*.}
 \newenvironment{enumdescript}[1][]{
 \begin{enum@descript}[#1]
-  \let\old@item\item
+  \let\hep@item\item
   \renewcommand{\item}[2][]{
-    \ifx&##1&\old@item\else\old@item[##1]\fi
+    \ifx&##1&\hep@item\else\hep@item[##1]\fi
     \textbf{##2}\ifx##2\empty\else~\fi\@ifnextchar\par\@gobble\relax
   }
 }{\end{enum@descript}}
 %    \end{macrocode}
 % \end{environment}
 
-% \subsection{Footnotes}
-%
-% Place a hyperlink from the footnote back to its referencing label using the |footnotebackref| package \cite{footnotebackref}.
-%    \begin{macrocode}
-\RequirePackage{footnotebackref}
-%    \end{macrocode}
-%
-% \begin{macro}{\footnote}
-% Ensure that no spaces appear before the footmark or at the beginning of the footnote.
-% \DoNotIndex{\unskip,\@foot@note,\ignorespaces}
-%    \begin{macrocode}
-\let\@foot@note\footnote
-\renewcommand{\footnote}[1]{\unskip\@foot@note{\ignorespaces#1}}
-%    \end{macrocode}
-% \end{macro}
-
 % \section{Geometry}
 %
 % Load the |geometry| package \cite{geometry} and adjust the text width and height to the values of the |a4wide| package \cite{a4wide}.
 % This step must happen after readjusting the font size in \cref{sec:font size}.
-% \DoNotIndex{\ifhep@defaults,\hep@paper,\geometry}
 %    \begin{macrocode}
 \ifhep@defaults\else
   \RequirePackage{geometry}
@@ -1126,7 +1114,6 @@
 %\begin{macro}{\useparskip}
 %\begin{macro}{\useparindent}
 % Load the |parskip| package \cite{parskip} if requested and provide two commands switching between the two paragraph modes.
-% \DoNotIndex{\ifhep@parindent,\setlength,\parskip,\baselineskip,\parindent}
 %    \begin{macrocode}
 \ifhep@parindent\else
 \RequirePackage{parskip}
@@ -1231,7 +1218,7 @@
 % Load the |bm| package \cite{bm} for superior boldmath after limiting the number of allocated math alphabets.
 % Make math symbols bold whenever they appear in bold macros such as |\section|\marg{text}.
 %    \begin{macrocode}
-\newcommand{\bmmax}{2}
+\ifhep@serif\providecommand{\bmmax}{2}\else\providecommand{\bmmax}{1}\fi
 \RequirePackage{bm}
 \let\mathbf\bm
 \g@addto@macro\bfseries{\boldmath}
@@ -1254,14 +1241,14 @@
 %    \begin{macrocode}
 \ifhep@serif
   \RequirePackage{fixmath}
-  \DeclareMathAlphabet{\mathsf}{OML}{cmbr}{m}{it}
-  \SetMathAlphabet{\mathsf}{bold}{OML}{cmbr}{bx}{it}
+  \newcommand\hep@sf@font{cmbr}
 \else
   \RequirePackage[slantedGreek]{sfmath}
   \RequirePackage{sansmathfonts}
-  \DeclareMathAlphabet{\mathsf}{OML}{cmm}{m}{it}
-  \SetMathAlphabet{\mathsf}{bold}{OML}{cmm}{bx}{it}
+  \newcommand\hep@sf@font{cmm}
 \fi
+\SetMathAlphabet{\mathsf}{normal}{OML}{\hep@sf@font}{m}{it}
+\SetMathAlphabet{\mathsf}{bold}{OML}{\hep@sf@font}{bx}{it}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\mathscr}
@@ -1274,11 +1261,11 @@
 % Load the |dsfont| package \cite{dsfont} and adjust the |\mathbb| math blackboard style font according to the (sans-) serif option.
 %    \begin{macrocode}
 \ifhep@serif
-  \RequirePackage{dsfont}
+  \newcommand\hep@bb@font{dsrom}
 \else
-  \RequirePackage[sans]{dsfont}
+  \newcommand\hep@bb@font{dsss}
 \fi
-\let\mathbb\mathds
+\SetMathAlphabet{\mathbb}{normal}{U}{\hep@bb@font}{m}{n}
 %    \end{macrocode}
 % \end{macro}
 
@@ -1492,7 +1479,7 @@
 \date{}
 %    \end{macrocode}
 % \end{macro}
-
+%
 % \subsection{Authors}
 %
 % \begin{macro}{\author}
@@ -1501,20 +1488,25 @@
 \author{}
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\email}
-% Define a macro for the email of authors used as |\author{|$\langle name\rangle$| \email{|$\langle email\rangle$|}}|.
-%    \begin{macrocode}
-\AtEndOfClass{\newcommand{\email}[1]{%
-  \unskip\thanks{\online{mailto:#1}{#1}}%
-}}
-%    \end{macrocode}
-% \end{macro}
 %
 % Enable the handling of multiple authors with different affiliations using the |authblk| package \cite{authblk}.
 %    \begin{macrocode}
 \RequirePackage{authblk}
 \renewcommand\Affilfont{\footnotesize}
 %    \end{macrocode}
+%
+% \begin{macro}{\email}
+% Define a macro for typesetting emails.
+% Redefine this macro to place the email address in a footnote if called from within the |\author| macro |\author{|$\langle name\rangle$ |\email{|$\langle email\rangle$|}}|.
+%    \begin{macrocode}
+\newcommand{\email}[1]{\online{mailto:#1}{#1}}
+\let\hep@author\author
+\def\author{%
+  \renewcommand{\email}[1]{\unskip\thanks{\online{mailto:##1}{##1}}}%
+  \hep@author
+}
+%    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\affiliation}
 % Define the |\affiliation| macro, ensure that linebreaks happen after a comma.
@@ -1554,9 +1546,9 @@
 %    \begin{macrocode}
 \RequirePackage{atbegshi}
 \RequirePackage{picture}
-\let\old@maketitle\maketitle
+\let\hep@maketitle\maketitle
 \renewcommand{\maketitle}{%
-  \old@maketitle%
+  \hep@maketitle%
   \AtBeginShipoutFirst{%
     \put(
       \textwidth+\oddsidemargin-\widthof{\@preprint@box},
@@ -1573,8 +1565,8 @@
 % Adjust the |abstract| environment to not start with indentation.
 %    \begin{macrocode}
 \@ifundefined{abstract}{}{%
-  \let\old@abstract\abstract%
-  \renewcommand\abstract{\old@abstract\noindent\ignorespaces}%
+  \let\hep@abstract\abstract%
+  \renewcommand\abstract{\hep@abstract\noindent\ignorespaces}%
 }
 %    \end{macrocode}
 % \end{environment}
@@ -1598,35 +1590,18 @@
 % \end{macro}
 %
 % \begin{macro}{hep-paper}
-% Define a new sorting template that sorts only multi key |\cite| entries according to their date and leaves the rest of the bibliography entries in the order they appear in the text.
 % Provide the |\DeclareSortingTemplate| macro for older |biblatex| installations.
+% Define a new sorting template that sorts only multi key |\cite| entries according to their date and leaves the rest of the bibliography entries in the order they appear in the text.
 %    \begin{macrocode}
 \providecommand{\DeclareSortingTemplate}{\DeclareSortingScheme}
 \DeclareSortingTemplate{hep-paper}{
   \sort{\citeorder}
-  \sort[final]{
-    \field{sortkey}
-  }
-  \sort{
-    \field{sortyear}
-    \field{year}
-    \literal{9999}
-  }
-  \sort{
-    \field{month}
-  }
-  \sort{
-    \field{eprint}
-    \field{doi}
-  }
-  \sort{
-    \field{sorttitle}
-    \field{title}
-  }
-  \sort{
-    \field{subtitle}
-    \field{volume}
-  }
+  \sort[final]{\field{sortkey}}
+  \sort{\field{sortyear} \field{year} \literal{9999}}
+  \sort{\field{month}}
+  \sort{\field{eprint} \field{doi}}
+  \sort{\field{sorttitle} \field{title}}
+  \sort{\field{subtitle} \field{volume}}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1651,8 +1626,8 @@
 % \begin{macro}{\printbibliography}
 % Allow the bibliography to be printed sloppy
 %    \begin{macrocode}
-\let\old@printbibliography\printbibliography
-\renewcommand{\printbibliography}{\sloppy\old@printbibliography}
+\let\hep@printbibliography\printbibliography
+\renewcommand{\printbibliography}{\sloppy\hep@printbibliography}
 %    \end{macrocode}
 % \end{macro}
 
@@ -1661,12 +1636,15 @@
 % \begin{macro}{\reg@exp@one}
 % \begin{macro}{\reg@exp@two}
 % \begin{macro}{\reg@exp@url}
-% Define regular expressions in order to deal with inconsistent journal title and volume naming as well as \URL protocols.
+% \begin{macro}{\reg@exp@pmc}
+% Define regular expressions in order to deal with inconsistent journal title and volume naming as well as \URL protocols and the PMCID.
 %    \begin{macrocode}
 \newcommand{\reg@exp@one}{\regexp{\A(\p{L}+)?\d+(\p{L}+)?\Z}}
 \newcommand{\reg@exp@two}{\regexp{\A(\p{L}+)?(\d+)(\p{L}+)?\Z}}
 \newcommand{\reg@exp@url}{\regexp{\A(ht|f)tp(s)?:\/\/}}
+\newcommand{\reg@exp@pmc}{\regexp{\A(PMC)?}}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -1714,10 +1692,49 @@
       \step[fieldset=protocollessurl, origfieldval, final=true]
       \step[fieldsource=protocollessurl, match=\reg@exp@url, replace={}]
     }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{pmc}
+% Remove the PMC from the PMCID.
+%    \begin{macrocode}
+    \map{
+      \step[fieldsource=pmcid, final=true]
+      \step[fieldset=pmc, origfieldval, final=true]
+      \step[fieldsource=pmc, match=\reg@exp@pmc, replace={}]
+    }
   }%
 }
 %    \end{macrocode}
 % \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\letbibmacro}
+% Provide the |\letbibmacro| macro for old |biblatex| installations.
+%    \begin{macrocode}
+\providecommand{\letbibmacro}[2]{\csletcs{abx@macro@#1}{abx@macro@#2}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{collaboration}
+% Execute the author macro even if only the collaboration information if present and override the author information with collaboration information if present.
+%    \begin{macrocode}
+\renewbibmacro*{author/translator+others}{%
+  \ifboolexpr{
+    test \ifuseauthor and (
+      not test {\ifnameundef{author}} or
+      not test {\iffieldundef{collaboration}}
+    )
+  }
+  {\usebibmacro{author}}
+  {\usebibmacro{translator+others}}
+}
+\letbibmacro{hep@bib@author}{author}
+\renewbibmacro*{author}{%
+  \iffieldundef{collaboration}{%
+    \usebibmacro{hep@bib@author}}{\textit{\printfield{collaboration}}%
+  }%
+}
+%    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{In:}
@@ -1738,40 +1755,6 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{collaboration}
-% Override the author information with collaboration information if present.
-%    \begin{macrocode}
-\renewbibmacro*{author}{%
-  \iffieldundef{collaboration}{%
-    \printnames{author}}{\textit{\printfield{collaboration}}%
-  }%
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\letbibmacro}
-% Provide the |\letbibmacro| macro for old |biblatex| installations.
-%    \begin{macrocode}
-\providecommand{\letbibmacro}[2]{\csletcs{abx@macro@#1}{abx@macro@#2}}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{reportnumber}
-% Add the pre-print information if present.
-%    \begin{macrocode}
-\letbibmacro{doi+eprint+url-old}{doi+eprint+url}
-\renewbibmacro*{doi+eprint+url}{%
-  \usebibmacro{doi+eprint+url-old}
-  \iffieldundef{reportnumber}{}{\textls[0]{%
-    \newunitpunct\textnumero\intitlepunct%
-    \textsc{\small\printfield{reportnumber}}%
-  }}%
-}
-%    \end{macrocode}
-% \end{macro}
-
-% \subsection{Eprints}
-%
 % \begin{macro}{\bib@online}
 % Private |\bib@online| macro
 %    \begin{macrocode}
@@ -1780,6 +1763,45 @@
 }
 %    \end{macrocode}
 % \end{macro}
+%
+% \begin{macro}{pmid}
+% \begin{macro}{pmcid}
+% Present PubMed IDs.
+%    \begin{macrocode}
+\DeclareFieldFormat{pmid}{%
+  \mkbibacro{PM}\addcolon\space%
+  \bib@online{https://www.ncbi.nlm.nih.gov/pubmed/#1}{#1}%
+}
+\DeclareFieldFormat{pmc}{%
+  \mkbibacro{PMC}\addcolon\space%
+  \bib@online{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC#1}{#1}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{pmcid}
+% \begin{macro}{pmid}
+% \begin{macro}{reportnumber}
+% Add the pre-print and PubMed information if present.
+%    \begin{macrocode}
+\letbibmacro{doi+eprint+url-old}{doi+eprint+url}
+\renewbibmacro*{doi+eprint+url}{%
+  \usebibmacro{doi+eprint+url-old}
+  \iffieldundef{pmc}{%
+    \iffieldundef{pmid}{}{\printfield{pmid}\newunit}%
+  }{\printfield{pmc}\newunit}
+  \iffieldundef{reportnumber}{}{\newunitpunct\textls*[1]{%
+    \textnumero\intitlepunct%
+    \textsc{\small\printfield{reportnumber}}%
+  }\newunit}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+
+% \subsection{Eprints}
 %
 % \begin{macro}{\new@eprint}
 % Private |\new@eprint| macro
@@ -1851,26 +1873,22 @@
 %    \end{macrocode}
 % \end{macro}
 %
-
+%
 % End check for bibliography option.
 %    \begin{macrocode}
 \fi
 %    \end{macrocode}
 
-% \section{Hyperlinks and References}
+% \section{Hyperlinks, Footnotes and References}
 %
 % Load the |hyperref| package \cite{hyperref} enable Unicode encoding and hide links.
 %
 %    \begin{macrocode}
 \RequirePackage{hyperref}
 \hypersetup{
-  pdfencoding=auto,
-  psdextra,
-  hidelinks,
-  linktoc=all,
-  breaklinks=true,
-  pdfcreator={},
-  pdfproducer={}
+  pdfencoding=auto, psdextra,
+  hidelinks, linktoc=all, breaklinks=true,
+  pdfcreator={}, pdfproducer={}
 }
 %    \end{macrocode}
 % Set the \PDF meta data according to the paper information and ensure that unnecessary information is suppressed.
@@ -1901,11 +1919,30 @@
 \fi
 %    \end{macrocode}
 
+
+% \subsection{Footnotes}
+%
+% Place a hyperlink from the footnote back to its referencing label using the |footnotebackref| package \cite{footnotebackref}.
+%    \begin{macrocode}
+\def\BackrefFootnoteTag{}
+\RequirePackage{footnotebackref}
+%    \end{macrocode}
+%
+% \begin{macro}{\footnote}
+% Ensure that no spaces appear before the footmark or at the beginning of the footnote.
+%    \begin{macrocode}
+\let\@foot@note\footnote
+\renewcommand{\footnote}[1]{\unskip\@foot@note{\ignorespaces#1}}
+%    \end{macrocode}
+% \end{macro}
+
+% \subsection{References}
+%
 % Begin of |references| conditional
 %    \begin{macrocode}
 \ifhep@references
 %    \end{macrocode}
-
+%
 % \begin{macro}{\cref}
 % Improve reference using the |cleveref| package \cite{cleveref}.
 %
@@ -1916,10 +1953,9 @@
 \crefname{inlinelisti}{point}{points}
 %    \end{macrocode}
 % \end{macro}
-
+%
 %\begin{macro}{\no@break@before}
 % Define a macro able to prevent line breaks.
-% \DoNotIndex{\no@break@before,\ifvmode,\ifhmode,\ifdim,\lastskip,\unskip,\nobreakspace}
 %    \begin{macrocode}
 \newcommand\no@break@before{%
   \relax\ifvmode\else%
@@ -1932,11 +1968,11 @@
 }
 %    \end{macrocode}
 % \end{macro}
-
+%
 % \begin{macro}{\ref}
 % Adjust |\ref|\marg{key} in order to prevent preceding line breaks and to enable the possibility to reference multiple references at once.
 %    \begin{macrocode}
-\let\old@ref\ref
+\let\hep@ref\ref
 \AtBeginDocument{\renewcommand\ref{\no@break@before\labelcref}}
 %    \end{macrocode}
 % \end{macro}
@@ -1952,11 +1988,11 @@
 % \begin{macro}{\subref}
 % Adjust |\subref|\marg{key} in order to prevent preceding line breaks.
 %    \begin{macrocode}
-\let\old@subref\subref
-\renewcommand\subref{\no@break@before\old@subref}
+\let\hep@subref\subref
+\renewcommand\subref{\no@break@before\hep@subref}
 \renewcommand*\subcaption@ref[2]{\begingroup%
   \caption@setoptions{sub}%
-  \subcaption@reffmt\p@subref{\old@ref#1{sub@#2}}%
+  \subcaption@reffmt\p@subref{\hep@ref#1{sub@#2}}%
 \endgroup}
 %    \end{macrocode}
 % \end{macro}
@@ -1986,7 +2022,7 @@
 }
 %    \end{macrocode}
 % \end{macro}
-
+%
 % End of |references| conditional
 %    \begin{macrocode}
 \fi
@@ -1997,8 +2033,8 @@
 % \begin{macro}{\cite}
 % Adjust |\cite|\marg{key} in order to prevent preceding line breaks.
 %    \begin{macrocode}
-\let\old@cite\cite
-\renewcommand\cite{\no@break@before\old@cite}
+\let\hep@cite\cite
+\renewcommand\cite{\no@break@before\hep@cite}
 %    \end{macrocode}
 % \end{macro}
 
@@ -2122,15 +2158,21 @@
 %    \begin{macrocode}
 \NewDocumentCommand{\acronym}{somsmo}{
   \newabbreviation[
-    longplural=\IfNoValueTF{#6}{#5s}{#6},
-    \glsshortpluralkey=\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}
+    type=\acronymtype,
+    sort=#3,
+    \glsshortpluralkey=\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}},
+    longplural=\IfNoValueTF{#6}{#5s}{#6}
   ]{#3}{\IfNoValueTF{#2}{#3}{#2}}{#5}
 %    \end{macrocode}
 % Provide the singular acronym macro.
 %    \begin{macrocode}
   \expandafter\newcommand\csname#3\endcsname{%
-    \if@begin@of@sentence{\cGls{#3}}{\cgls{#3}}%
-    \IfBooleanTF{#4}{}{\@\xspace}%
+    \if@begin@of@sentence{%
+      \ifglsused{#3}{\cgls{#3}}{\cGls{#3}}%
+    }{\cgls{#3}}%
+    \ifnum\glsentrycurrcount{#3}>1\relax
+      \IfBooleanTF{#4}{}{\@\xspace}%
+    \else\@\xspace\fi
   }
 %    \end{macrocode}
 % Expand the singular acronym macro in \PDF labels.
@@ -2279,18 +2321,45 @@
 % Adjust the |abstract| environment to reset all acronym counters.
 %    \begin{macrocode}
 \@ifundefined{endabstract}{}{%
-  \let\end@old@abstract\endabstract%
-  \renewcommand\endabstract{\glsresetall\end@old@abstract}%
+  \let\end@hep@abstract\endabstract%
+  \renewcommand\endabstract{\glsresetall\end@hep@abstract}%
 }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\tableofcontents}
+% \begin{macro}{\listoffigures}
+% \begin{macro}{\listoftables}
 % Adjust the |\tableofcontents| macro to never show the long form of acronyms.
 %    \begin{macrocode}
-\let\old@table@of@contents\tableofcontents
+\let\hep@table@of@contents\tableofcontents
 \renewcommand\tableofcontents{%
-  \glsunsetall\old@table@of@contents\glsresetall%
+  \glsunsetall\hep@table@of@contents\glsresetall%
+}
+\let\hep@list@of@figures\listoffigures
+\renewcommand\listoffigures{%
+  \glsunsetall\hep@list@of@figures\glsresetall%
+}
+\let\hep@list@of@tables\listoftables
+\renewcommand\listoftables{%
+  \glsunsetall\hep@list@of@tables\glsresetall%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\acronyms}
+% Add a possibility to have different groups of acronyms.
+%    \begin{macrocode}
+\NewDocumentCommand{\acronyms}{om}{%
+  \IfNoValueTF{#1}{
+    \newglossary{#2}{#2.in}{#2.out}{#2}%
+    \renewcommand{\acronymtype}{#2}%
+  }{
+    \newglossary{#1}{#1.in}{#1.out}{#2}%
+    \renewcommand{\acronymtype}{#1}%
+  }
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2305,23 +2374,26 @@
 % \section{Biblatex datamodel file} \label{sec:data model}
 %
 %<*datamodel>
-
-% \begin{macro}{reportnumber}
+%
 % \begin{macro}{collaboration}
+% \begin{macro}{reportnumber}
+% \begin{macro}{pmid}
+% \begin{macro}{pmcid}
+% \begin{macro}{pmc}
 % \begin{macro}{protocollessurl}
 % Define the |dbx| file containing the |hep-paper| datamodel.
 %    \begin{macrocode}
 \DeclareDatamodelFields[type=field, datatype=literal]{
-  reportnumber,
-  collaboration,
+  collaboration, reportnumber, pmid, pmcid, pmc,
 }
 \DeclareDatamodelFields[type=field, datatype=uri]{protocollessurl}
 \DeclareDatamodelEntryfields{
-  reportnumber,
-  collaboration,
-  protocollessurl,
+  collaboration, reportnumber, pmid, pmcid, pmc, protocollessurl,
 }
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -2333,54 +2405,51 @@
 \endinput
 
 % \PrintIndex
-% makeindex -s gglo.ist -o hep-paper.gls hep-paper.glo
-% makeindex -s gglo.ist -o hep-paper.ind hep-paper.idx
+% makeindex -s gglo.ist -o hep-paper-implementation.gls hep-paper-implementation.glo
+% makeindex -s gglo.ist -o hep-paper-implementation.ind hep-paper-implementation.idx
 
 % \begin{macro}{\refstepcounter@...}
 % Adjust the |cleveref| |\refstepcounter@noarg| and |\refstepcounter@optarg| to use the |\@currentlabel| in order to fix problems with |\subref|.
 %    \begin{macrocode}
-\def\refstepcounter@noarg#1{%
-  \cref@old@refstepcounter{#1}%
-  \cref@constructprefix{#1}{\cref@result}%
-  \@ifundefined{cref@#1@alias}%
-    {\def\@tempa{#1}}%
-    {\def\@tempa{\csname cref@#1@alias\endcsname}}%
-  \protected@edef\cref@currentlabel{%
-    [\@tempa][\arabic{#1}][\cref@result]%
-    \noexpand\@currentlabel%
-  }% changed
-}
-
-\def\refstepcounter@optarg[#1]#2{%
-  \cref@old@refstepcounter{#2}%
-  \cref@constructprefix{#2}{\cref@result}%
-  \@ifundefined{cref@#1@alias}%
-    {\def\@tempa{#1}}%
-    {\def\@tempa{\csname cref@#1@alias\endcsname}}%
-  \protected@edef\cref@currentlabel{%
-    [\@tempa][\arabic{#2}][\cref@result]%
-    \noexpand\@currentlabel% changed
-  }%
-}
-%    \end{macrocode}
-% \end{macro}
-
-
-\usepackage{contour}
-\usepackage{ulem}
-
-\renewcommand{\ULdepth}{1.8pt}
-\contourlength{0.8pt}
-
-\newcommand{\myuline}[1]{%
-  \uline{\phantom{#1}}\llap{\contour{white}{#1}}%
-}
+% \def\refstepcounter@noarg#1{%
+%   \cref@old@refstepcounter{#1}%
+%   \cref@constructprefix{#1}{\cref@result}%
+%   \@ifundefined{cref@#1@alias}%
+%     {\def\@tempa{#1}}%
+%     {\def\@tempa{\csname cref@#1@alias\endcsname}}%
+%   \protected@edef\cref@currentlabel{%
+%     [\@tempa][\arabic{#1}][\cref@result]%
+%     \noexpand\@currentlabel%
+%   }% changed
+% }
+%
+% \def\refstepcounter@optarg[#1]#2{%
+%   \cref@old@refstepcounter{#2}%
+%   \cref@constructprefix{#2}{\cref@result}%
+%   \@ifundefined{cref@#1@alias}%
+%     {\def\@tempa{#1}}%
+%     {\def\@tempa{\csname cref@#1@alias\endcsname}}%
+%   \protected@edef\cref@currentlabel{%
+%     [\@tempa][\arabic{#2}][\cref@result]%
+%     \noexpand\@currentlabel% changed
+%   }%
+% }
+% %    \end{macrocode}
+% % \end{macro}
+%
+%
+% \usepackage{contour}
+% \renewcommand{\ULdepth}{1.8pt}
+% \contourlength{0.8pt}
+% \newcommand{\myuline}[1]{%
+%   \uline{\phantom{#1}}\llap{\contour{white}{#1}}%
+% }
 
 % \begin{macro}{\mathpzc}
 % Define the |\mathpzc| math script font based on the Zapf Chancery PostScript font.
 %    \begin{macrocode}
-\DeclareFontFamily{OT1}{pzc}{}
-\DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.15] pzcmi7t}{}
-\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+% \DeclareFontFamily{OT1}{pzc}{}
+% \DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.15] pzcmi7t}{}
+% \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 %    \end{macrocode}
 % \end{macro}

@@ -4,7 +4,7 @@
 %%
 %% The original source files were:
 %%
-%% hep-paper.dtx  (with options: `package')
+%% hep-paper-implementation.dtx  (with options: `package')
 %% This is a generated file.
 %% Copyright (C) 2019-2020 by Jan Hajer
 %% This file may be distributed and/or modified under the
@@ -17,8 +17,6 @@
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesPackage{hep-paper}[2020/07/01 v1.4 Publications in High Energy Physics]
 
-
-
 \RequirePackage{pdftexcmds}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
@@ -27,23 +25,23 @@
 }
 \DeclareStringOption[a4]{paper}
 \DeclareStringOption[11pt]{font}
-\DeclareBoolOption[false]{defaults}
 \DeclareStringOption[british]{lang}
-\DeclareBoolOption[true]{parindent}
-\DeclareComplementaryOption{parskip}{parindent}
 \DeclareBoolOption[true]{serif}
 \DeclareComplementaryOption{sansserif}{serif}
-\DeclareBoolOption[false]{eqnarray}
-\DeclareBoolOption[true]{references}
+\DeclareBoolOption[true]{parindent}
+\DeclareComplementaryOption{parskip}{parindent}
+\DeclareBoolOption[false]{defaults}
+\DeclareBoolOption[true]{title}
 \DeclareStringOption[numeric-comp]{bibliography}
 \DeclareBoolOption[true]{glossaries}
-\DeclareBoolOption[false]{manualplacement}
-\DeclareBoolOption[true]{title}
+\DeclareBoolOption[true]{references}
 \DeclareBoolOption[false]{beamer}
 \DeclareBoolOption[false]{revtex}
 \DeclareBoolOption[false]{jhep}
 \DeclareBoolOption[false]{jcap}
 \DeclareBoolOption[false]{pos}
+\DeclareBoolOption[false]{eqnarray}
+\DeclareBoolOption[false]{manualplacement}
 \ProcessKeyvalOptions*
 \@ifclassloaded{PoS}{\setkeys{hep}{pos}}{}
 \ifhep@pos
@@ -100,17 +98,31 @@
   \def\@encoding{T1}
 \fi
 \RequirePackage[\@encoding]{fontenc}
+\RequirePackage{fix-cm}
 \RequirePackage{lmodern}
 \RequirePackage{textcomp}
 \RequirePackage{microtype}
 \ifxetexorluatex
+  \RequirePackage{fontspec}
+  \setmainfont{Latin Modern Roman}[
+    UprightFeatures={SmallCapsFont={[lmromancaps10-regular.otf]}},
+    BoldFeatures={
+      SmallCapsFeatures={Letters=SmallCaps},
+      SmallCapsFont={[cmunbx.otf]}
+    }
+  ]
   \DeclareFontShape{\@encoding}{lmss}{bx}{sc}{<->cmssbxcsc10}{}
+  \DeclareFontShape{\@encoding}{lmss}{b}{sc}{<->cmssbxcsc10}{}
   \DeclareFontShape{\@encoding}{lmss}{m}{sc}{%
     <-9>cmsscsc8<9-10>cmsscsc9<10->cmsscsc10%
   }{}
 \else
+  \rmfamily
+  \DeclareFontShape{\@encoding}{lmr}{b}{sc}{<->ssub*cmr/bx/sc}{}
+  \DeclareFontShape{\@encoding}{lmr}{bx}{sc}{<->ssub*cmr/bx/sc}{}
   \sffamily
   \DeclareFontShape{\@encoding}{lmss}{bx}{sc}{<->ssub*xcmss/bx/sc}{}
+  \DeclareFontShape{\@encoding}{lmss}{b}{sc}{<->ssub*xcmss/bx/sc}{}
   \DeclareFontShape{\@encoding}{lmss}{m}{sc}{<->ssub*xcmss/m/sc}{}
 \fi
 
@@ -152,7 +164,15 @@
 \newcommand{\no}[1]{\textnumero~#1}
 \RequirePackage{relsize}
 \newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
-  {\smaller\textsc{#2}~#1}%
+  {\smaller\textsc{#2} #1}%
+}
+\AtEndOfPackage{
+  \let\hep@url\url
+  \renewcommand\url[1]{{\fontfamily{lmvtt}\selectfont\hep@url{#1}}}
+  \let\hep@no@link@url\nolinkurl
+  \renewcommand\nolinkurl[1]{%
+    {\fontfamily{lmvtt}\selectfont\hep@no@link@url{#1}}%
+  }
 }
 \newcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}
 
@@ -165,16 +185,12 @@
 \setlist[enum@descript]{label=\arabic*.}
 \newenvironment{enumdescript}[1][]{
 \begin{enum@descript}[#1]
-  \let\old@item\item
+  \let\hep@item\item
   \renewcommand{\item}[2][]{
-    \ifx&##1&\old@item\else\old@item[##1]\fi
+    \ifx&##1&\hep@item\else\hep@item[##1]\fi
     \textbf{##2}\ifx##2\empty\else~\fi\@ifnextchar\par\@gobble\relax
   }
 }{\end{enum@descript}}
-
-\RequirePackage{footnotebackref}
-\let\@foot@note\footnote
-\renewcommand{\footnote}[1]{\unskip\@foot@note{\ignorespaces#1}}
 
 \ifhep@defaults\else
   \RequirePackage{geometry}
@@ -237,27 +253,27 @@
   \let\endeqnarray\@undefined
 \fi
 
-\newcommand{\bmmax}{2}
+\ifhep@serif\providecommand{\bmmax}{2}\else\providecommand{\bmmax}{1}\fi
 \RequirePackage{bm}
 \let\mathbf\bm
 \g@addto@macro\bfseries{\boldmath}
 \ifhep@serif
   \RequirePackage{fixmath}
-  \DeclareMathAlphabet{\mathsf}{OML}{cmbr}{m}{it}
-  \SetMathAlphabet{\mathsf}{bold}{OML}{cmbr}{bx}{it}
+  \newcommand\hep@sf@font{cmbr}
 \else
   \RequirePackage[slantedGreek]{sfmath}
   \RequirePackage{sansmathfonts}
-  \DeclareMathAlphabet{\mathsf}{OML}{cmm}{m}{it}
-  \SetMathAlphabet{\mathsf}{bold}{OML}{cmm}{bx}{it}
+  \newcommand\hep@sf@font{cmm}
 \fi
+\SetMathAlphabet{\mathsf}{normal}{OML}{\hep@sf@font}{m}{it}
+\SetMathAlphabet{\mathsf}{bold}{OML}{\hep@sf@font}{bx}{it}
 \RequirePackage{mathrsfs}
 \ifhep@serif
-  \RequirePackage{dsfont}
+  \newcommand\hep@bb@font{dsrom}
 \else
-  \RequirePackage[sans]{dsfont}
+  \newcommand\hep@bb@font{dsss}
 \fi
-\let\mathbb\mathds
+\SetMathAlphabet{\mathbb}{normal}{U}{\hep@bb@font}{m}{n}
 
 \RequirePackage{physics}
 \RequirePackage{cancel}
@@ -275,12 +291,12 @@
 }
 \newcommand{\overleftright}[1]{\oset{\leftrightarrow}{#1}}
 
-\renewcommand{\textfraction}{.1} % .2
+\setcounter{bottomnumber}{0} % 1
 \setcounter{topnumber}{1} % 2
 \setcounter{dbltopnumber}{1} % 2
 \renewcommand{\topfraction}{.9} % .7
 \renewcommand{\dbltopfraction}{.9} % .7
-\setcounter{bottomnumber}{0} % 1
+\renewcommand{\textfraction}{.1} % .2
 \renewcommand{\floatpagefraction}{.8} % .5
 
 \let\@figure@\figure%
@@ -363,13 +379,15 @@
 
 \ifhep@title
 \date{}
-
 \author{}
-\AtEndOfClass{\newcommand{\email}[1]{%
-  \unskip\thanks{\online{mailto:#1}{#1}}%
-}}
 \RequirePackage{authblk}
 \renewcommand\Affilfont{\footnotesize}
+\newcommand{\email}[1]{\online{mailto:#1}{#1}}
+\let\hep@author\author
+\def\author{%
+  \renewcommand{\email}[1]{\unskip\thanks{\online{mailto:##1}{##1}}}%
+  \hep@author
+}
 \newcommand\active@comma{,\penalty-5\relax}
 \newcommand\cat@comma@active{\catcode`\,\active}
 {\cat@comma@active\gdef,{\active@comma}}
@@ -393,9 +411,9 @@
 
 \RequirePackage{atbegshi}
 \RequirePackage{picture}
-\let\old@maketitle\maketitle
+\let\hep@maketitle\maketitle
 \renewcommand{\maketitle}{%
-  \old@maketitle%
+  \hep@maketitle%
   \AtBeginShipoutFirst{%
     \put(
       \textwidth+\oddsidemargin-\widthof{\@preprint@box},
@@ -405,8 +423,8 @@
 }
 
 \@ifundefined{abstract}{}{%
-  \let\old@abstract\abstract%
-  \renewcommand\abstract{\old@abstract\noindent\ignorespaces}%
+  \let\hep@abstract\abstract%
+  \renewcommand\abstract{\hep@abstract\noindent\ignorespaces}%
 }
 \fi
 
@@ -415,29 +433,12 @@
 \providecommand{\DeclareSortingTemplate}{\DeclareSortingScheme}
 \DeclareSortingTemplate{hep-paper}{
   \sort{\citeorder}
-  \sort[final]{
-    \field{sortkey}
-  }
-  \sort{
-    \field{sortyear}
-    \field{year}
-    \literal{9999}
-  }
-  \sort{
-    \field{month}
-  }
-  \sort{
-    \field{eprint}
-    \field{doi}
-  }
-  \sort{
-    \field{sorttitle}
-    \field{title}
-  }
-  \sort{
-    \field{subtitle}
-    \field{volume}
-  }
+  \sort[final]{\field{sortkey}}
+  \sort{\field{sortyear} \field{year} \literal{9999}}
+  \sort{\field{month}}
+  \sort{\field{eprint} \field{doi}}
+  \sort{\field{sorttitle} \field{title}}
+  \sort{\field{subtitle} \field{volume}}
 }
 \ExecuteBibliographyOptions{
   sorting=hep-paper,
@@ -446,12 +447,13 @@
 \NewBibliographyString{erratum,erratums}
 \DefineBibliographyStrings{english}{erratum={Erratum},erratums={Errata}}
 \providecommand{\relateddelimerratum}{\addsemicolon\space}
-\let\old@printbibliography\printbibliography
-\renewcommand{\printbibliography}{\sloppy\old@printbibliography}
+\let\hep@printbibliography\printbibliography
+\renewcommand{\printbibliography}{\sloppy\hep@printbibliography}
 
 \newcommand{\reg@exp@one}{\regexp{\A(\p{L}+)?\d+(\p{L}+)?\Z}}
 \newcommand{\reg@exp@two}{\regexp{\A(\p{L}+)?(\d+)(\p{L}+)?\Z}}
 \newcommand{\reg@exp@url}{\regexp{\A(ht|f)tp(s)?:\/\/}}
+\newcommand{\reg@exp@pmc}{\regexp{\A(PMC)?}}
 \DeclareSourcemap{%
   \maps[datatype=bibtex, overwrite=true]{%
     \map{%
@@ -473,6 +475,28 @@
       \step[fieldset=protocollessurl, origfieldval, final=true]
       \step[fieldsource=protocollessurl, match=\reg@exp@url, replace={}]
     }
+    \map{
+      \step[fieldsource=pmcid, final=true]
+      \step[fieldset=pmc, origfieldval, final=true]
+      \step[fieldsource=pmc, match=\reg@exp@pmc, replace={}]
+    }
+  }%
+}
+\providecommand{\letbibmacro}[2]{\csletcs{abx@macro@#1}{abx@macro@#2}}
+\renewbibmacro*{author/translator+others}{%
+  \ifboolexpr{
+    test \ifuseauthor and (
+      not test {\ifnameundef{author}} or
+      not test {\iffieldundef{collaboration}}
+    )
+  }
+  {\usebibmacro{author}}
+  {\usebibmacro{translator+others}}
+}
+\letbibmacro{hep@bib@author}{author}
+\renewbibmacro*{author}{%
+  \iffieldundef{collaboration}{%
+    \usebibmacro{hep@bib@author}}{\textit{\printfield{collaboration}}%
   }%
 }
 \renewbibmacro*{in:}{%
@@ -481,24 +505,29 @@
 \DeclareFieldFormat{url}{%
   \mkbibacro{URL}\addcolon\space\online{#1}{\thefield{protocollessurl}}%
 }
-\renewbibmacro*{author}{%
-  \iffieldundef{collaboration}{%
-    \printnames{author}}{\textit{\printfield{collaboration}}%
-  }%
-}
-\providecommand{\letbibmacro}[2]{\csletcs{abx@macro@#1}{abx@macro@#2}}
-\letbibmacro{doi+eprint+url-old}{doi+eprint+url}
-\renewbibmacro*{doi+eprint+url}{%
-  \usebibmacro{doi+eprint+url-old}
-  \iffieldundef{reportnumber}{}{\textls[0]{%
-    \newunitpunct\textnumero\intitlepunct%
-    \textsc{\small\printfield{reportnumber}}%
-  }}%
-}
-
 \newcommand{\bib@online}[2]{%
   \ifhyperref{\online{#1}{#2}}{\nolinkurl{#2}}%
 }
+\DeclareFieldFormat{pmid}{%
+  \mkbibacro{PM}\addcolon\space%
+  \bib@online{https://www.ncbi.nlm.nih.gov/pubmed/#1}{#1}%
+}
+\DeclareFieldFormat{pmc}{%
+  \mkbibacro{PMC}\addcolon\space%
+  \bib@online{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC#1}{#1}%
+}
+\letbibmacro{doi+eprint+url-old}{doi+eprint+url}
+\renewbibmacro*{doi+eprint+url}{%
+  \usebibmacro{doi+eprint+url-old}
+  \iffieldundef{pmc}{%
+    \iffieldundef{pmid}{}{\printfield{pmid}\newunit}%
+  }{\printfield{pmc}\newunit}
+  \iffieldundef{reportnumber}{}{\newunitpunct\textls*[1]{%
+    \textnumero\intitlepunct%
+    \textsc{\small\printfield{reportnumber}}%
+  }\newunit}%
+}
+
 \NewDocumentCommand{\new@eprint}{smm}{
   \DeclareFieldFormat{eprint:#2}{%
     \newcommand{\@path}{\IfBooleanT{#1}{\thefield{eprintclass}/}##1}%
@@ -521,18 +550,13 @@
   HEPForge\addcolon\space\bib@online{https://#1/hepforge.org}{#1}%
 }
 \DeclareFieldAlias{eprint:HEPForge}{eprint:hepforge}
-
 \fi
 
 \RequirePackage{hyperref}
 \hypersetup{
-  pdfencoding=auto,
-  psdextra,
-  hidelinks,
-  linktoc=all,
-  breaklinks=true,
-  pdfcreator={},
-  pdfproducer={}
+  pdfencoding=auto, psdextra,
+  hidelinks, linktoc=all, breaklinks=true,
+  pdfcreator={}, pdfproducer={}
 }
 \pdfstringdefDisableCommands{\def\varepsilon{\textepsilon}}
 \AtBeginDocument{
@@ -558,13 +582,16 @@
   \fi
 \fi
 
-\ifhep@references
+\def\BackrefFootnoteTag{}
+\RequirePackage{footnotebackref}
+\let\@foot@note\footnote
+\renewcommand{\footnote}[1]{\unskip\@foot@note{\ignorespaces#1}}
 
+\ifhep@references
 \RequirePackage[noabbrev, nameinlink]{cleveref}
 \newcommand{\creflastconjunction}{, and\nobreakspace}
 \crefname{enumi}{point}{points}
 \crefname{inlinelisti}{point}{points}
-
 \newcommand\no@break@before{%
   \relax\ifvmode\else%
     \ifhmode%
@@ -574,17 +601,16 @@
     \fi%
   \fi%
 }
-
-\let\old@ref\ref
+\let\hep@ref\ref
 \AtBeginDocument{\renewcommand\ref{\no@break@before\labelcref}}
 
 \renewcommand\eqref{\no@break@before\labelcref}
 
-\let\old@subref\subref
-\renewcommand\subref{\no@break@before\old@subref}
+\let\hep@subref\subref
+\renewcommand\subref{\no@break@before\hep@subref}
 \renewcommand*\subcaption@ref[2]{\begingroup%
   \caption@setoptions{sub}%
-  \subcaption@reffmt\p@subref{\old@ref#1{sub@#2}}%
+  \subcaption@reffmt\p@subref{\hep@ref#1{sub@#2}}%
 \endgroup}
 
 \newcommand{\subcref}[1]{\cref{sub@#1}}
@@ -597,11 +623,10 @@
 \DeclareRobustCommand{\labelcrefrange}[2]{%
   \@crefrangenostar{labelcref}{#1}{#2}%
 }
-
 \fi
 
-\let\old@cite\cite
-\renewcommand\cite{\no@break@before\old@cite}
+\let\hep@cite\cite
+\renewcommand\cite{\no@break@before\hep@cite}
 
 \ifnum\pdf@strcmp{\hep@bibliography}{false}=0\else
 \NewBibliographyString{refname}
@@ -667,12 +692,18 @@
 
 \NewDocumentCommand{\acronym}{somsmo}{
   \newabbreviation[
-    longplural=\IfNoValueTF{#6}{#5s}{#6},
-    \glsshortpluralkey=\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}
+    type=\acronymtype,
+    sort=#3,
+    \glsshortpluralkey=\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}},
+    longplural=\IfNoValueTF{#6}{#5s}{#6}
   ]{#3}{\IfNoValueTF{#2}{#3}{#2}}{#5}
   \expandafter\newcommand\csname#3\endcsname{%
-    \if@begin@of@sentence{\cGls{#3}}{\cgls{#3}}%
-    \IfBooleanTF{#4}{}{\@\xspace}%
+    \if@begin@of@sentence{%
+      \ifglsused{#3}{\cgls{#3}}{\cGls{#3}}%
+    }{\cgls{#3}}%
+    \ifnum\glsentrycurrcount{#3}>1\relax
+      \IfBooleanTF{#4}{}{\@\xspace}%
+    \else\@\xspace\fi
   }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3\endcsname{%
     \IfNoValueTF{#2}{#3}{#2} }%
@@ -748,12 +779,29 @@
 \newcommand{\resetacronym}[1]{\protect\glsreset{#1}}
 \newcommand{\dummyacronym}[1]{\protect\glsunset{#1}}
 \@ifundefined{endabstract}{}{%
-  \let\end@old@abstract\endabstract%
-  \renewcommand\endabstract{\glsresetall\end@old@abstract}%
+  \let\end@hep@abstract\endabstract%
+  \renewcommand\endabstract{\glsresetall\end@hep@abstract}%
 }
-\let\old@table@of@contents\tableofcontents
+\let\hep@table@of@contents\tableofcontents
 \renewcommand\tableofcontents{%
-  \glsunsetall\old@table@of@contents\glsresetall%
+  \glsunsetall\hep@table@of@contents\glsresetall%
+}
+\let\hep@list@of@figures\listoffigures
+\renewcommand\listoffigures{%
+  \glsunsetall\hep@list@of@figures\glsresetall%
+}
+\let\hep@list@of@tables\listoftables
+\renewcommand\listoftables{%
+  \glsunsetall\hep@list@of@tables\glsresetall%
+}
+\NewDocumentCommand{\acronyms}{om}{%
+  \IfNoValueTF{#1}{
+    \newglossary{#2}{#2.in}{#2.out}{#2}%
+    \renewcommand{\acronymtype}{#2}%
+  }{
+    \newglossary{#1}{#1.in}{#1.out}{#2}%
+    \renewcommand{\acronymtype}{#1}%
+  }
 }
 \fi
 

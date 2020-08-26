@@ -11,7 +11,6 @@
 %% and version 1.3c or later is part of all distributions of
 %% LaTeX version 2005/12/01 or later.
 %%
-
 \input docstrip.tex
 \keepsilent
 \usedir{tex/latex/hep-paper}
@@ -29,8 +28,9 @@ LaTeX version 2005/12/01 or later.
 \endpreamble
 
 \generate{
-  \file{hep-paper.sty}{\from{hep-paper.dtx}{package}}
-  \file{hep-paper.dbx}{\from{hep-paper.dtx}{datamodel}}
+  \file{hep-paper.sty}{\from{hep-paper-implementation.dtx}{package}}
+  \file{hep-paper.dbx}{\from{hep-paper-implementation.dtx}{datamodel}}
+  \file{hep-paper-documentation.tex}{\from{hep-paper-implementation.dtx}{documentation}}
 }
 
 \Msg{*********************************************************}
