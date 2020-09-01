@@ -18,12 +18,10 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-paper}[2020/07/01 v1.4 Publications in High Energy Physics]
-%<datamodel>\ProvidesFile{hep-paper.dbx}[2020/07/01 v1.4 HEP-Paper biblatex data model]
+%<package>\ProvidesPackage{hep-paper}[2020/08/01 v1.4 Publications in High Energy Physics]
+%<datamodel>\ProvidesFile{hep-paper.dbx}[2020/08/01 v1.4 HEP-Paper biblatex data model]
 %
 %<*documentation>
-%    \begin{macrocode}
-%
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltxdoc}
 
@@ -52,8 +50,6 @@
 }{\end{minipage}\end{minipage}}
 
 \setlength{\fboxsep}{1pt}
-%
-%    \end{macrocode}
 %</documentation>
 
 %<*driver>
@@ -66,7 +62,7 @@
 %
 % \fi
 %
-% \CheckSum{1296}
+% \CheckSum{1302}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -88,11 +84,11 @@
 % \changes{v1.1}{2020/01/01}{Transition to documented \hologo{LaTeX} source file.}
 % \changes{v1.2}{2020/03/01}{Introduction of package options.}
 % \changes{v1.3}{2020/05/01}{Inclusion of JHEP and JCAP package options. Fix of incompatibility with recent subcaption package version. Move of biblatex datamodel into its own file}
-% \changes{v1.4}{2020/07/01}{If possible the compatibility options are selected automatically. Inclusion of PubMed IDs in bibliography.}
+% \changes{v1.4}{2020/08/01}{If possible the compatibility options are selected automatically. Inclusion of PubMed IDs in bibliography.}
 %
 % \ifshort
 %<*documentation>
-%    \begin{macrocode}
+%
 \begin{document}
 % \fi
 
@@ -302,7 +298,7 @@ A bold versions \textbf{\textsc{Small Caps}} and a sans serif version of \textsf
 
 \DescribeMacro{\underline}
 \DescribeMacro{\overline}
-The |\underline| macro is redefined to allow linebreaks using the |ulem| package \cite{ulem}.
+The |\underline| macro is redefined to allow line-breaks using the |ulem| package \cite{ulem}.
 The |\overline| macro is extended to also \overline{overline} text outside of math environments.
 
 \DescribeMacro{\useparskip}
@@ -331,12 +327,12 @@ Footnotes are adjusted to swallow white space before the footnote mark and at th
 \DescribeMacro{\acronym}
 \DescribeMacro{\shortacronym}
 \DescribeMacro{\longacronym}
-The |\acronym|\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\meta{*}\marg{definition}\oarg{plural\linebreak[4]definition} macro generates the singluar |\|\meta{abbreviation} and plural |\|\meta{abbreviation}|s| macros.
+The |\acronym|\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\meta{*}\marg{definition}\oarg{plural\linebreak[4]definition} macro generates the singular |\|\meta{abbreviation} and plural |\|\meta{abbreviation}|s| macros.
 The first star prevents the addition of an \enquote{s} to the abbreviation plural.
 The second star restores the \hologo{TeX} default of swallowing subsequent white space.
 The long form is only shown at the first appearance of these macros, later appearances generate the abbreviation with a hyperlink to the long form.
 Capitalization at the beginning of paragraphs and sentences is ensured.
-The |\shortacronym| and |\longacronym| macros are dropin replacements of the |\acronym| macro showing only the short or long form of their acronym.
+The |\shortacronym| and |\longacronym| macros are drop-in replacements of the |\acronym| macro showing only the short or long form of their acronym.
 \DescribeMacro{\resetacronym}
 \DescribeMacro{\dummyacronym}
 The first use form of the acronym can be enforced by resetting the acronym counter with |\resetacronym|\marg{key}.
@@ -648,27 +644,31 @@ The |hep-paper| package provides a matching selection of preloaded packages and 
 The majority of the loaded packages are fairly lightweight, the others can be deactivated with package options.
 
 \DescribeMacro{arxiv-collector}
-ArXiv.org \cite{arxiv} requires the setup dependent |bbl| files instead of the original |bib| files, which causes trouble if the local \hologo{LaTeX} version differs from the one used by arXiv.
+\nolinkurl{arxiv.org} \cite{arxiv} requires the setup dependent |bbl| files instead of the original |bib| files, which causes trouble if the local \hologo{LaTeX} version differs from the one used by arXiv.
 The |arxiv-collector| python script \cite{arxiv-collector} alleviates this problem by collecting all files necessary for publication on arXiv (including figures).
 
 % \ifshort
 \printbibliography
 
 \end{document}
-%    \end{macrocode}
+%
 %</documentation>
-%\fi
+% \fi
 %
 % \StopEventually{
 % \printbibliography
 % \PrintChanges
 % }
 %
-% \addtocontents{toc}{\protect\clearpage}\appendix \clearpage
+% \addtocontents{toc}{\protect\clearpage}
+% \clearpage
+% \appendix
+%
+% \ifshort
+%<*package>
+% \fi
 %
 % \section{Options}
-%
-%<*package>
 %
 % Load the |pdftexcmds| \cite{pdftexcmds} and |kvoptions| \cite{kvoptions} packages and define a |hep| namespace.
 %    \begin{macrocode}
@@ -816,11 +816,14 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
 \ProcessKeyvalOptions*
 %    \end{macrocode}
 %
+% \subsection{Set compatibility}
+%
 % Set the |pos| compatibility options.
 %    \begin{macrocode}
 \@ifclassloaded{PoS}{\setkeys{hep}{pos}}{}
 \ifhep@pos
-  \setkeys{hep}{title=false, defaults}
+  \setkeys{hep}{defaults, title=false}
+  \DeclareRobustCommand\boldmath{\@nomath\boldmath\mathversion{bold}}
 \fi
 %    \end{macrocode}
 %
@@ -828,7 +831,7 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
 %    \begin{macrocode}
 \@ifclassloaded{beamer}{\setkeys{hep}{beamer}}{}
 \ifhep@beamer
-  \setkeys{hep}{title=false, defaults, sansserif, references=false}
+  \setkeys{hep}{defaults, title=false, references=false, sansserif}
 \fi
 %    \end{macrocode}
 %
@@ -838,7 +841,7 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
 \@ifclassloaded{revtex4-1}{\setkeys{hep}{revtex}}{}
 \@ifclassloaded{revtex4-2}{\setkeys{hep}{revtex}}{}
 \ifhep@revtex
-  \setkeys{hep}{defaults, title=false, lang=american, bibliography=false}
+  \setkeys{hep}{defaults, title=false, bibliography=false, lang=american}
 \fi
 %    \end{macrocode}
 %
@@ -864,28 +867,16 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
     urlcolor=blue, anchorcolor=blue, citecolor=blue, filecolor=blue,
     linkcolor=blue, menucolor=blue, pagecolor=blue
   }{hyperref}
-  \hoffset 0pt
-  \voffset 0pt
+  \PassOptionsToPackage{reset}{geometry}
 \fi
 %    \end{macrocode}
-
-% \section{Engine}
-%
-% \begin{macro}{\ifxetexorluatex}
-% Load the |ifluatex| \cite{ifluatex} and |ifxetex| \cite{ifxetex} packages.
-% Define the |\ifxetexorluatex| conditional checking if the package is executed by \hologo{LuaLaTeX} or \hologo{XeLaTeX}.
+% Set the JHEP compatibility options.
 %    \begin{macrocode}
-\RequirePackage{ifluatex}
-\RequirePackage{ifxetex}
-\newif\ifxetexorluatex
-\ifxetex\xetexorluatextrue
-\else
-  \ifluatex\xetexorluatextrue
-  \else\xetexorluatexfalse
-  \fi
+\ifhep@jhep
+  \voffset 0in
+  \hoffset 0in
 \fi
 %    \end{macrocode}
-% \end{macro}
 
 % \section{Text}
 %
@@ -905,15 +896,31 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
 \fi
 %    \end{macrocode}
 %
+% \begin{macro}{\ifxetexorluatex}
+% Load the |ifluatex| \cite{ifluatex} and |ifxetex| \cite{ifxetex} packages.
+% Define the |\ifxetexorluatex| conditional checking if the package is executed by \hologo{LuaLaTeX} or \hologo{XeLaTeX}.
+%    \begin{macrocode}
+\RequirePackage{ifluatex}
+\RequirePackage{ifxetex}
+\newif\ifxetexorluatex
+\ifxetex\xetexorluatextrue
+\else
+  \ifluatex\xetexorluatextrue
+  \else\xetexorluatexfalse
+  \fi
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
 % Pick the correct font encoding depending on the engine used and load the |fontenc| package \cite{fontenc} with this encoding.
 % For details of the font encoding see \cite{encguide}.
 %    \begin{macrocode}
 \ifxetexorluatex
-  \def\@encoding{TU}
+  \def\hep@encoding{TU}
 \else
-  \def\@encoding{T1}
+  \def\hep@encoding{T1}
 \fi
-\RequirePackage[\@encoding]{fontenc}
+\RequirePackage[\hep@encoding]{fontenc}
 %    \end{macrocode}
 % Fix the remaining coputer modern fonts \cite{fix-cm}, load the |lmodern| font \cite{lmodern}, the |textcomp| extension \cite{textcomp}, and the |microtype| font optimization \cite{microtype}.
 %    \begin{macrocode}
@@ -946,19 +953,19 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
       SmallCapsFont={[cmunbx.otf]}
     }
   ]
-  \DeclareFontShape{\@encoding}{lmss}{bx}{sc}{<->cmssbxcsc10}{}
-  \DeclareFontShape{\@encoding}{lmss}{b}{sc}{<->cmssbxcsc10}{}
-  \DeclareFontShape{\@encoding}{lmss}{m}{sc}{%
+  \DeclareFontShape{\hep@encoding}{lmss}{bx}{sc}{<->cmssbxcsc10}{}
+  \DeclareFontShape{\hep@encoding}{lmss}{b}{sc}{<->cmssbxcsc10}{}
+  \DeclareFontShape{\hep@encoding}{lmss}{m}{sc}{%
     <-9>cmsscsc8<9-10>cmsscsc9<10->cmsscsc10%
   }{}
 \else
   \rmfamily
-  \DeclareFontShape{\@encoding}{lmr}{b}{sc}{<->ssub*cmr/bx/sc}{}
-  \DeclareFontShape{\@encoding}{lmr}{bx}{sc}{<->ssub*cmr/bx/sc}{}
+  \DeclareFontShape{\hep@encoding}{lmr}{b}{sc}{<->ssub*cmr/bx/sc}{}
+  \DeclareFontShape{\hep@encoding}{lmr}{bx}{sc}{<->ssub*cmr/bx/sc}{}
   \sffamily
-  \DeclareFontShape{\@encoding}{lmss}{bx}{sc}{<->ssub*xcmss/bx/sc}{}
-  \DeclareFontShape{\@encoding}{lmss}{b}{sc}{<->ssub*xcmss/bx/sc}{}
-  \DeclareFontShape{\@encoding}{lmss}{m}{sc}{<->ssub*xcmss/m/sc}{}
+  \DeclareFontShape{\hep@encoding}{lmss}{bx}{sc}{<->ssub*xcmss/bx/sc}{}
+  \DeclareFontShape{\hep@encoding}{lmss}{b}{sc}{<->ssub*xcmss/bx/sc}{}
+  \DeclareFontShape{\hep@encoding}{lmss}{m}{sc}{<->ssub*xcmss/m/sc}{}
 \fi
 %    \end{macrocode}
 
@@ -988,8 +995,8 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
 % Undefine previously defined font sizes and load the \hologo{LaTeX} font size file corresponding to the font size option.
 %    \begin{macrocode}
 \ifhep@defaults\else
-  \def\remove@pt#1pt{#1}
-  \edef\@ptsize{\expandafter\remove@pt\hep@font}
+  \def\hep@remove@pt#1pt{#1}
+  \edef\hep@pt@size{\expandafter\hep@remove@pt\hep@font}
   \let\small\relax
   \let\footnotesize\relax
   \let\scriptsize\relax
@@ -999,7 +1006,7 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
   \let\LARGE\relax
   \let\huge\relax
   \let\Huge\relax
-  \input{size\@ptsize.clo}
+  \input{size\hep@pt@size.clo}
 \fi
 %    \end{macrocode}
 
@@ -1041,22 +1048,14 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
 %    \begin{macrocode}
 \RequirePackage{relsize}
 \newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
-  {\smaller\textsc{#2} #1}%
+  {\smaller\textsc{#2}~#1}%
 }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\online}
-% Switch to a proportional typewriter font for \URLs and define the |\online|\marg{text}\marg{url} macro combining the features of the |\href| and the |\url| macros.
+% Define the |\online|\marg{text}\marg{url} macro combining the features of the |\href| and the |\url| macros.
 %    \begin{macrocode}
-\AtEndOfPackage{
-  \let\hep@url\url
-  \renewcommand\url[1]{{\fontfamily{lmvtt}\selectfont\hep@url{#1}}}
-  \let\hep@no@link@url\nolinkurl
-  \renewcommand\nolinkurl[1]{%
-    {\fontfamily{lmvtt}\selectfont\hep@no@link@url{#1}}%
-  }
-}
 \newcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}
 %    \end{macrocode}
 % \end{macro}
@@ -1254,7 +1253,7 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
 % \begin{macro}{\mathscr}
 % Load the |mathrsfs| package for the |\mathscr| math script font.
 %    \begin{macrocode}
-\RequirePackage{mathrsfs}
+\DeclareMathAlphabet{\mathscr}{U}{rsfs}{m}{n}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\mathbb}
@@ -1361,9 +1360,25 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
 
 % \subsection{Sub-floats}
 %
-% Prevent the |caption| package \cite{caption} from complaining about the |revtex| class.
+% \begin{macro}{\ifhep@journal}
+% Define a new journal conditional.
 %    \begin{macrocode}
-\ifhep@revtex
+\newif\ifhep@journal
+\ifhep@sissa\hep@journaltrue
+\else
+  \ifhep@revtex\hep@journaltrue
+  \else
+    \ifhep@pos\hep@journaltrue
+    \else\hep@journalfalse
+    \fi
+  \fi
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% Prevent the |caption| package \cite{caption} from complaining about the journal classes and packages.
+%    \begin{macrocode}
+\ifhep@journal
   \setlength\abovecaptionskip{\f@size\p@}
   \setlength\belowcaptionskip{0\p@}
   \long\def\@makecaption#1#2{%
@@ -1785,16 +1800,17 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
 % \begin{macro}{reportnumber}
 % Add the pre-print and PubMed information if present.
 %    \begin{macrocode}
-\letbibmacro{doi+eprint+url-old}{doi+eprint+url}
+\letbibmacro{hep-doi+eprint+url}{doi+eprint+url}
 \renewbibmacro*{doi+eprint+url}{%
-  \usebibmacro{doi+eprint+url-old}
+  \usebibmacro{hep-doi+eprint+url}
   \iffieldundef{pmc}{%
     \iffieldundef{pmid}{}{\printfield{pmid}\newunit}%
   }{\printfield{pmc}\newunit}
-  \iffieldundef{reportnumber}{}{\newunitpunct\textls*[1]{%
-    \textnumero\intitlepunct%
+  \iffieldundef{reportnumber}{}{%
+    \newunitpunct\textnumero\intitlepunct%
     \textsc{\small\printfield{reportnumber}}%
-  }\newunit}%
+    \newunit%
+  }%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1879,7 +1895,7 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
 \fi
 %    \end{macrocode}
 
-% \section{Hyperlinks, Footnotes and References}
+% \section{Hyperlinks, Footnotes and References} \label{sec:hyperlinks}
 %
 % Load the |hyperref| package \cite{hyperref} enable Unicode encoding and hide links.
 %
@@ -1918,7 +1934,6 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
   \fi
 \fi
 %    \end{macrocode}
-
 
 % \subsection{Footnotes}
 %
@@ -2079,7 +2094,7 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
 
 % \section{Acronyms}
 %
-% Acronyms are implemented with the |glossaries-extra| package \cite{glossaries-extra} which is an extension of the |glossaries| package \cite{glossaries}.
+% Acronyms are implemented with the |glossaries-extra| package \cite{glossaries-extra} which is an extension of the |glossaries| package \cite{glossaries} and must be loaded after the |hyperref| pacakge in \cref{sec:hyperlinks}.
 %    \begin{macrocode}
 \ifhep@glossaries
 \RequirePackage[nostyles]{glossaries-extra}
@@ -2369,11 +2384,12 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
 \fi
 %    \end{macrocode}
 %
+% \ifshort
 %</package>
+%<*datamodel>
+% \fi
 %
 % \section{Biblatex datamodel file} \label{sec:data model}
-%
-%<*datamodel>
 %
 % \begin{macro}{collaboration}
 % \begin{macro}{reportnumber}
@@ -2398,7 +2414,9 @@ The |arxiv-collector| python script \cite{arxiv-collector} alleviates this probl
 % \end{macro}
 % \end{macro}
 %
+% \ifshort
 %</datamodel>
+% \fi
 %
 % \Finale
 

@@ -15,7 +15,7 @@
 %% and version 1.3c or later is part of all distributions of
 %% LaTeX version 2005/12/01 or later.
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesPackage{hep-paper}[2020/07/01 v1.4 Publications in High Energy Physics]
+\ProvidesPackage{hep-paper}[2020/08/01 v1.4 Publications in High Energy Physics]
 
 \RequirePackage{pdftexcmds}
 \RequirePackage{kvoptions}
@@ -45,17 +45,18 @@
 \ProcessKeyvalOptions*
 \@ifclassloaded{PoS}{\setkeys{hep}{pos}}{}
 \ifhep@pos
-  \setkeys{hep}{title=false, defaults}
+  \setkeys{hep}{defaults, title=false}
+  \DeclareRobustCommand\boldmath{\@nomath\boldmath\mathversion{bold}}
 \fi
 \@ifclassloaded{beamer}{\setkeys{hep}{beamer}}{}
 \ifhep@beamer
-  \setkeys{hep}{title=false, defaults, sansserif, references=false}
+  \setkeys{hep}{defaults, title=false, references=false, sansserif}
 \fi
 \@ifclassloaded{revtex4}{\setkeys{hep}{revtex}}{}
 \@ifclassloaded{revtex4-1}{\setkeys{hep}{revtex}}{}
 \@ifclassloaded{revtex4-2}{\setkeys{hep}{revtex}}{}
 \ifhep@revtex
-  \setkeys{hep}{defaults, title=false, lang=american, bibliography=false}
+  \setkeys{hep}{defaults, title=false, bibliography=false, lang=american}
 \fi
 \@ifpackageloaded{jheppub}{\setkeys{hep}{jhep}}{}
 \@ifpackageloaded{jcappub}{\setkeys{hep}{jcap}}{}
@@ -73,10 +74,18 @@
     urlcolor=blue, anchorcolor=blue, citecolor=blue, filecolor=blue,
     linkcolor=blue, menucolor=blue, pagecolor=blue
   }{hyperref}
-  \hoffset 0pt
-  \voffset 0pt
+  \PassOptionsToPackage{reset}{geometry}
+\fi
+\ifhep@jhep
+  \voffset 0in
+  \hoffset 0in
 \fi
 
+\RequirePackage{alphabeta}
+\ifhep@serif\else
+  \RequirePackage{sansmathfonts}
+  \renewcommand\familydefault{\sfdefault}
+\fi
 \RequirePackage{ifluatex}
 \RequirePackage{ifxetex}
 \newif\ifxetexorluatex
@@ -86,18 +95,12 @@
   \else\xetexorluatexfalse
   \fi
 \fi
-
-\RequirePackage{alphabeta}
-\ifhep@serif\else
-  \RequirePackage{sansmathfonts}
-  \renewcommand\familydefault{\sfdefault}
-\fi
 \ifxetexorluatex
-  \def\@encoding{TU}
+  \def\hep@encoding{TU}
 \else
-  \def\@encoding{T1}
+  \def\hep@encoding{T1}
 \fi
-\RequirePackage[\@encoding]{fontenc}
+\RequirePackage[\hep@encoding]{fontenc}
 \RequirePackage{fix-cm}
 \RequirePackage{lmodern}
 \RequirePackage{textcomp}
@@ -111,19 +114,19 @@
       SmallCapsFont={[cmunbx.otf]}
     }
   ]
-  \DeclareFontShape{\@encoding}{lmss}{bx}{sc}{<->cmssbxcsc10}{}
-  \DeclareFontShape{\@encoding}{lmss}{b}{sc}{<->cmssbxcsc10}{}
-  \DeclareFontShape{\@encoding}{lmss}{m}{sc}{%
+  \DeclareFontShape{\hep@encoding}{lmss}{bx}{sc}{<->cmssbxcsc10}{}
+  \DeclareFontShape{\hep@encoding}{lmss}{b}{sc}{<->cmssbxcsc10}{}
+  \DeclareFontShape{\hep@encoding}{lmss}{m}{sc}{%
     <-9>cmsscsc8<9-10>cmsscsc9<10->cmsscsc10%
   }{}
 \else
   \rmfamily
-  \DeclareFontShape{\@encoding}{lmr}{b}{sc}{<->ssub*cmr/bx/sc}{}
-  \DeclareFontShape{\@encoding}{lmr}{bx}{sc}{<->ssub*cmr/bx/sc}{}
+  \DeclareFontShape{\hep@encoding}{lmr}{b}{sc}{<->ssub*cmr/bx/sc}{}
+  \DeclareFontShape{\hep@encoding}{lmr}{bx}{sc}{<->ssub*cmr/bx/sc}{}
   \sffamily
-  \DeclareFontShape{\@encoding}{lmss}{bx}{sc}{<->ssub*xcmss/bx/sc}{}
-  \DeclareFontShape{\@encoding}{lmss}{b}{sc}{<->ssub*xcmss/bx/sc}{}
-  \DeclareFontShape{\@encoding}{lmss}{m}{sc}{<->ssub*xcmss/m/sc}{}
+  \DeclareFontShape{\hep@encoding}{lmss}{bx}{sc}{<->ssub*xcmss/bx/sc}{}
+  \DeclareFontShape{\hep@encoding}{lmss}{b}{sc}{<->ssub*xcmss/bx/sc}{}
+  \DeclareFontShape{\hep@encoding}{lmss}{m}{sc}{<->ssub*xcmss/m/sc}{}
 \fi
 
 \ifxetexorluatex\else
@@ -134,8 +137,8 @@
 \RequirePackage[normalem]{ulem}
 \let\underline\uline
 \ifhep@defaults\else
-  \def\remove@pt#1pt{#1}
-  \edef\@ptsize{\expandafter\remove@pt\hep@font}
+  \def\hep@remove@pt#1pt{#1}
+  \edef\hep@pt@size{\expandafter\hep@remove@pt\hep@font}
   \let\small\relax
   \let\footnotesize\relax
   \let\scriptsize\relax
@@ -145,7 +148,7 @@
   \let\LARGE\relax
   \let\huge\relax
   \let\Huge\relax
-  \input{size\@ptsize.clo}
+  \input{size\hep@pt@size.clo}
 \fi
 
 \ifnum\pdf@strcmp{\hep@lang}{american}=0
@@ -164,15 +167,7 @@
 \newcommand{\no}[1]{\textnumero~#1}
 \RequirePackage{relsize}
 \newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
-  {\smaller\textsc{#2} #1}%
-}
-\AtEndOfPackage{
-  \let\hep@url\url
-  \renewcommand\url[1]{{\fontfamily{lmvtt}\selectfont\hep@url{#1}}}
-  \let\hep@no@link@url\nolinkurl
-  \renewcommand\nolinkurl[1]{%
-    {\fontfamily{lmvtt}\selectfont\hep@no@link@url{#1}}%
-  }
+  {\smaller\textsc{#2}~#1}%
 }
 \newcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}
 
@@ -267,7 +262,7 @@
 \fi
 \SetMathAlphabet{\mathsf}{normal}{OML}{\hep@sf@font}{m}{it}
 \SetMathAlphabet{\mathsf}{bold}{OML}{\hep@sf@font}{bx}{it}
-\RequirePackage{mathrsfs}
+\DeclareMathAlphabet{\mathscr}{U}{rsfs}{m}{n}
 \ifhep@serif
   \newcommand\hep@bb@font{dsrom}
 \else
@@ -319,7 +314,17 @@
   }{\@end@table@}
 \fi%
 
-\ifhep@revtex
+\newif\ifhep@journal
+\ifhep@sissa\hep@journaltrue
+\else
+  \ifhep@revtex\hep@journaltrue
+  \else
+    \ifhep@pos\hep@journaltrue
+    \else\hep@journalfalse
+    \fi
+  \fi
+\fi
+\ifhep@journal
   \setlength\abovecaptionskip{\f@size\p@}
   \setlength\belowcaptionskip{0\p@}
   \long\def\@makecaption#1#2{%
@@ -516,16 +521,17 @@
   \mkbibacro{PMC}\addcolon\space%
   \bib@online{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC#1}{#1}%
 }
-\letbibmacro{doi+eprint+url-old}{doi+eprint+url}
+\letbibmacro{hep-doi+eprint+url}{doi+eprint+url}
 \renewbibmacro*{doi+eprint+url}{%
-  \usebibmacro{doi+eprint+url-old}
+  \usebibmacro{hep-doi+eprint+url}
   \iffieldundef{pmc}{%
     \iffieldundef{pmid}{}{\printfield{pmid}\newunit}%
   }{\printfield{pmc}\newunit}
-  \iffieldundef{reportnumber}{}{\newunitpunct\textls*[1]{%
-    \textnumero\intitlepunct%
+  \iffieldundef{reportnumber}{}{%
+    \newunitpunct\textnumero\intitlepunct%
     \textsc{\small\printfield{reportnumber}}%
-  }\newunit}%
+    \newunit%
+  }%
 }
 
 \NewDocumentCommand{\new@eprint}{smm}{

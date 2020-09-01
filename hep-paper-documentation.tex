@@ -251,7 +251,7 @@ A bold versions \textbf{\textsc{Small Caps}} and a sans serif version of \textsf
 
 \DescribeMacro{\underline}
 \DescribeMacro{\overline}
-The |\underline| macro is redefined to allow linebreaks using the |ulem| package \cite{ulem}.
+The |\underline| macro is redefined to allow line-breaks using the |ulem| package \cite{ulem}.
 The |\overline| macro is extended to also \overline{overline} text outside of math environments.
 
 \DescribeMacro{\useparskip}
@@ -280,12 +280,12 @@ Footnotes are adjusted to swallow white space before the footnote mark and at th
 \DescribeMacro{\acronym}
 \DescribeMacro{\shortacronym}
 \DescribeMacro{\longacronym}
-The |\acronym|\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\meta{*}\marg{definition}\oarg{plural\linebreak[4]definition} macro generates the singluar |\|\meta{abbreviation} and plural |\|\meta{abbreviation}|s| macros.
+The |\acronym|\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\meta{*}\marg{definition}\oarg{plural\linebreak[4]definition} macro generates the singular |\|\meta{abbreviation} and plural |\|\meta{abbreviation}|s| macros.
 The first star prevents the addition of an \enquote{s} to the abbreviation plural.
 The second star restores the \hologo{TeX} default of swallowing subsequent white space.
 The long form is only shown at the first appearance of these macros, later appearances generate the abbreviation with a hyperlink to the long form.
 Capitalization at the beginning of paragraphs and sentences is ensured.
-The |\shortacronym| and |\longacronym| macros are dropin replacements of the |\acronym| macro showing only the short or long form of their acronym.
+The |\shortacronym| and |\longacronym| macros are drop-in replacements of the |\acronym| macro showing only the short or long form of their acronym.
 \DescribeMacro{\resetacronym}
 \DescribeMacro{\dummyacronym}
 The first use form of the acronym can be enforced by resetting the acronym counter with |\resetacronym|\marg{key}.
@@ -597,7 +597,7 @@ The |hep-paper| package provides a matching selection of preloaded packages and 
 The majority of the loaded packages are fairly lightweight, the others can be deactivated with package options.
 
 \DescribeMacro{arxiv-collector}
-ArXiv.org \cite{arxiv} requires the setup dependent |bbl| files instead of the original |bib| files, which causes trouble if the local \hologo{LaTeX} version differs from the one used by arXiv.
+\nolinkurl{arxiv.org} \cite{arxiv} requires the setup dependent |bbl| files instead of the original |bib| files, which causes trouble if the local \hologo{LaTeX} version differs from the one used by arXiv.
 The |arxiv-collector| python script \cite{arxiv-collector} alleviates this problem by collecting all files necessary for publication on arXiv (including figures).
 
 \printbibliography

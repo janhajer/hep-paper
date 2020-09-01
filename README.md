@@ -12,6 +12,14 @@ For usual publications it is enough to load additionally to the `article` class 
     \documentclass{article}
     \usepackage{hep-paper}
 
+## Installation
+
+Running `pdflatex hep-paper.ins` will generate the main style file `hep-paper.sty` together with the necessary datamodel file `hep-paper.dbx`.
+These two files must be moved into a folder the `tex` installation is aware of, e.g. the folder containing the document that should use the `hep-paper` package.
+Additionally the documentation file `hep-paper-documentation.tex` will be generated.
+Subsequently running `pdflatex hep-paper-documentation.tex` will generate the documentation `hep-paper-documentation.pdf`.
+Finally running `pdflatex hep-paper-implementation.dtx` will generate the complete documentation of the implementation `hep-paper-implementation.pdf`
+
 ## Author
 
 Jan Hajer
