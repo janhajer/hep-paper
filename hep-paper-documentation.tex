@@ -29,6 +29,8 @@
 
 \acronym{PDF}{portable document format}
 \acronym{URL}{uniform resource locator}
+\acronym{CM}{computer modern}
+\acronym{LM}{latin modern}
 
 \usepackage{hologo}
 
@@ -47,11 +49,12 @@
 
 \GetFileInfo{hep-paper.sty}
 
-\title{The |hep-paper| package\thanks{This document corresponds to \protecting{|hep-paper|}~\fileversion.}}
+\title{The \protecting{|hep-paper|} package\thanks{This document corresponds to \protecting{|hep-paper|}~\fileversion.}}
+\subtitle{Publications in high energy physics}
 \author{Jan Hajer \email{jan.hajer@uclouvain.be}}
 \affiliation{Centre for Cosmology, Particle Physics and Phenomenology, Université catholique de Louvain, Louvain-la-Neuve B-1348, Belgium}
 \preprint{Preprint-Number}
-\date{\normalfont\filedate}
+\date{\filedate}
 
 \maketitle
 
@@ -74,7 +77,7 @@ For usual publications it is enough to load additionally to the |article| class 
 The most notable changes after loading the |hep-paper| package is the change of some \hologo{LaTeX} defaults.
 The paper and font sizes are set to A4 and \unit[11]{pt}, respectively.
 Additionally, the paper geometry is set to the values known from the (depreciated) |a4wide| package \cite{a4wide} using the |geometry| package \cite{geometry}.
-Furthermore, the font is changed to |lmodern| \cite{lmodern} with |microtype| \cite{microtype} optimizations.
+Furthermore, the font is changed to \LM using the |lmodern| package \cite{lmodern} with |microtype| \cite{microtype} optimizations.
 Finally, \PDF hyperlinks are implemented with the |hyperref| package \cite{hyperref}.
 
 \subsection{Options}
@@ -208,7 +211,7 @@ The |inlinelist| and |enumdescript| environments are defined using the |enumitem
 
 \DescribeMacro{inlinelist}
 \begin{columns}
-|The three main points are|
+|The three main points are|\hfill\strut{}
 |\begin{inlinelist}|
 
 | \item one|
@@ -270,7 +273,7 @@ Citations are adjusted to not start on a new line in order to avoid the repeated
 \DescribeMacro{\ref}
 \DescribeMacro{\eqref}
 \DescribeMacro{\subref}
-References are also adjusted to not start on a new line and are redefined in order to handle multiple references at once.
+References are also adjusted to not start on a new line.
 
 \DescribeMacro{\footnote}
 Footnotes are adjusted to swallow white space before the footnote mark and at the beginning of the footnote text.
@@ -322,7 +325,7 @@ The |\frac|\marg{number}\marg{number} macro is accompanied by |\nicefrac|\linebr
 Diagonal matrix |\diag| and signum |\sgn| operators are defined.
 
 \DescribeMacro{\mathdef}
-The |\mathdef|\marg{name}\oarg{arguments}\marg{code} macro (re-)defines macros only within math mode without changing the text mode definition.
+The |\mathdef|\marg{name}\oarg{arguments}\marg{code} macro \prefix{re}{defines} macros only within math mode without changing the text mode definition.
 
 \DescribeMacro{\i}
 \DescribeMacro{\d}

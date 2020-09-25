@@ -15,7 +15,7 @@
 %% and version 1.3c or later is part of all distributions of
 %% LaTeX version 2005/12/01 or later.
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesPackage{hep-paper}[2020/08/01 v1.4 Publications in High Energy Physics]
+\ProvidesPackage{hep-paper}[2020/09/01 v1.5 Publications in High Energy Physics]
 
 \RequirePackage{pdftexcmds}
 \RequirePackage{kvoptions}
@@ -51,6 +51,7 @@
 \@ifclassloaded{beamer}{\setkeys{hep}{beamer}}{}
 \ifhep@beamer
   \setkeys{hep}{defaults, title=false, references=false, sansserif}
+  \@ifpackageloaded{beamerbasefont}{\usefonttheme{professionalfonts}}{}
 \fi
 \@ifclassloaded{revtex4}{\setkeys{hep}{revtex}}{}
 \@ifclassloaded{revtex4-1}{\setkeys{hep}{revtex}}{}
@@ -81,10 +82,8 @@
   \hoffset 0in
 \fi
 
-\RequirePackage{alphabeta}
 \ifhep@serif\else
-  \RequirePackage{sansmathfonts}
-  \renewcommand\familydefault{\sfdefault}
+  \renewcommand{\familydefault}{\sfdefault}
 \fi
 \RequirePackage{ifluatex}
 \RequirePackage{ifxetex}
@@ -103,6 +102,7 @@
 \RequirePackage[\hep@encoding]{fontenc}
 \RequirePackage{fix-cm}
 \RequirePackage{lmodern}
+\renewcommand{\ttdefault}{lmvtt}
 \RequirePackage{textcomp}
 \RequirePackage{microtype}
 \ifxetexorluatex
@@ -170,6 +170,8 @@
   {\smaller\textsc{#2}~#1}%
 }
 \newcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}
+\newcommand{\email}[1]{\online{mailto:#1}{#1}}
+\newcommand{\prefix}[2]{(#1\mbox{-)}\allowbreak #2}
 
 \RequirePackage[inline]{enumitem}
 \newlist{inlinelist}{enumerate*}{1}
@@ -214,7 +216,6 @@
 \fi
 
 \RequirePackage{mathtools}
-\RequirePackage{amssymb}
 \allowdisplaybreaks[1]
 
 \DeclareMathOperator{\diag}{diag}
@@ -248,27 +249,57 @@
   \let\endeqnarray\@undefined
 \fi
 
-\ifhep@serif\providecommand{\bmmax}{2}\else\providecommand{\bmmax}{1}\fi
+\RequirePackage{exscale}
+\RequirePackage{amssymb}
+\RequirePackage{alphabeta}
+\RequirePackage{fixmath}
+\ifhep@serif
+  \newcommand\hep@font@sf{cmbrm}
+  \DeclareMathAlphabet{\mathsf}{OML}{\hep@font@sf}{m}{it}
+  \SetMathAlphabet{\mathsf}{bold}{OML}{\hep@font@sf}{b}{it}
+\else
+  \newcommand\hep@font@sf{lmr}
+  \newcommand\hep@font@text{lmss}
+  \newcommand\hep@font@math{cmbrm}
+  \newcommand\hep@font@symbol{cmsssy}
+  \newcommand\hep@font@extra{cmssex}
+  \newcommand\hep@font@amsa{ssmsa}
+  \newcommand\hep@font@amsb{ssmsb}
+  \DeclareFontSubstitution{OML}{\hep@font@math}{m}{it}
+  \DeclareFontSubstitution{OMS}{\hep@font@symbol}{m}{n}
+  \DeclareFontSubstitution{OMX}{\hep@font@extra}{m}{n}
+  \DeclareSymbolFont{operators}{OT1}{\hep@font@text}{m}{n}
+  \DeclareSymbolFont{letters}{OML}{\hep@font@math}{m}{it}
+  \DeclareSymbolFont{symbols}{OMS}{\hep@font@symbol}{m}{n}
+  \DeclareSymbolFont{largesymbols}{OMX}{\hep@font@extra}{m}{n}
+  \SetSymbolFont{operators}{bold}{OT1}{\hep@font@text}{b}{n}
+  \SetSymbolFont{letters}{bold}{OML}{\hep@font@math}{b}{it}
+  \SetSymbolFont{symbols}{bold}{OMS}{\hep@font@symbol}{b}{n}
+  \AtBeginDocument{%
+    \@ifpackageloaded{amsfonts}{%
+      \DeclareSymbolFont{AMSa}{U}{\hep@font@amsa}{m}{n}
+      \DeclareSymbolFont{AMSb}{U}{\hep@font@amsb}{m}{n}
+    }{}%
+    \@ifpackageloaded{esint}{%
+      \DeclareSymbolFont{largesymbolsA}{U}{ssesint}{m}{n}
+    }{}
+  }
+  \DeclareSymbolFontAlphabet{\mathrm}{operators}
+  \DeclareSymbolFontAlphabet{\mathnormal}{letters}
+  \DeclareSymbolFontAlphabet{\mathcal}{symbols}
+  \DeclareMathAlphabet{\mathit}{OML}{\hep@font@text}{m}{it}
+  \SetMathAlphabet\mathit{bold}{OML}{\hep@font@text}{bx}{it}
+  \DeclareMathAlphabet{\mathtt}{OT1}{cmtl}{m}{n}
+  \DeclareMathAlphabet{\mathsf}{OML}{\hep@font@sf}{m}{it}
+  \SetMathAlphabet{\mathsf}{bold}{OML}{\hep@font@sf}{bx}{it}
+\fi
 \RequirePackage{bm}
-\let\mathbf\bm
+\AtBeginDocument{\let\mathbf\bm}
 \g@addto@macro\bfseries{\boldmath}
-\ifhep@serif
-  \RequirePackage{fixmath}
-  \newcommand\hep@sf@font{cmbr}
-\else
-  \RequirePackage[slantedGreek]{sfmath}
-  \RequirePackage{sansmathfonts}
-  \newcommand\hep@sf@font{cmm}
-\fi
-\SetMathAlphabet{\mathsf}{normal}{OML}{\hep@sf@font}{m}{it}
-\SetMathAlphabet{\mathsf}{bold}{OML}{\hep@sf@font}{bx}{it}
 \DeclareMathAlphabet{\mathscr}{U}{rsfs}{m}{n}
-\ifhep@serif
-  \newcommand\hep@bb@font{dsrom}
-\else
-  \newcommand\hep@bb@font{dsss}
-\fi
-\SetMathAlphabet{\mathbb}{normal}{U}{\hep@bb@font}{m}{n}
+\SetMathAlphabet{\mathbb}{normal}{U}{%
+  \ifhep@serif dsrom\else dsss\fi%
+}{m}{n}
 
 \RequirePackage{physics}
 \RequirePackage{cancel}
@@ -384,10 +415,40 @@
 
 \ifhep@title
 \date{}
+\RequirePackage{titling}
+\let\hep@preprint@font\relax
+\newcommand{\preprintfont}[1]{\def\hep@preprint@font{#1}}
+\let\hep@title@font\relax
+\newcommand{\titlefont}[1]{\def\hep@title@font{#1}}
+\let\hep@subtitle@font\relax
+\newcommand{\subtitlefont}[1]{\def\hep@subtitle@font{#1}}
+\let\hep@author@font\relax
+\newcommand{\authorfont}[1]{\def\hep@author@font{#1}}
+\let\hep@affiliation@font\relax
+\newcommand{\affiliationfont}[1]{\def\hep@affiliation@font{#1}}
+\let\hep@date@font\relax
+\newcommand{\datefont}[1]{\def\hep@date@font{#1}}
+
+\newcommand{\presubtitle}[1]{\def\hep@pre@sub@title{#1}}
+\newcommand{\subtitle}[1]{\def\sub@title{#1}}
+\newcommand{\postsubtitle}[1]{\def\hep@post@sub@title{#1}}
+\renewcommand{\maketitlehookb}{%
+  \@ifundefined{sub@title}{}{%
+    \hep@pre@sub@title\sub@title\hep@post@sub@title%
+  }%
+}
+\pretitle{\begin{center}\LARGE\hep@title@font}
+\posttitle{\par\end{center}}
+\presubtitle{\begin{center}\large\hep@subtitle@font}
+\postsubtitle{\par\end{center}}
+\preauthor{\begin{center}\large\hep@author@font\lineskip.5em\begin{tabular}[t]{c}}
+\postauthor{\end{tabular}\par\end{center}}
+\predate{\begin{center}\hep@date@font}
+\postdate{\par\end{center}}
 \author{}
 \RequirePackage{authblk}
-\renewcommand\Affilfont{\footnotesize}
-\newcommand{\email}[1]{\online{mailto:#1}{#1}}
+\renewcommand{\Affilfont}{\small\hep@affiliation@font}
+\renewcommand\Authfont{\hep@author@font}
 \let\hep@author\author
 \def\author{%
   \renewcommand{\email}[1]{\unskip\thanks{\online{mailto:##1}{##1}}}%
@@ -405,27 +466,27 @@
 \DeclareRobustCommand\@affiliation{\@ifnextchar[{\@affil@opt}{\@affil}}
 \newcommand{\affiliation}{\begingroup\cat@comma@active\@affiliation}
 
-\let\@preprint\relax
-\newcommand\preprint[1]{\long\gdef\@preprint{#1}}
+\let\hep@preprint\relax
+\newcommand\preprint[1]{\def\hep@preprint{#1}}
 \RequirePackage{varwidth}
-\newcommand{\@preprint@box}{%
+\newcommand{\hep@preprint@box}{%
   \begin{varwidth}{\textwidth}%
-    \textsc{\small\@preprint}%
+    \small\hep@preprint@font\hep@preprint%
   \end{varwidth}%
 }
+\preprintfont{\sc}
 
 \RequirePackage{atbegshi}
 \RequirePackage{picture}
-\let\hep@maketitle\maketitle
-\renewcommand{\maketitle}{%
-  \hep@maketitle%
+\newcommand{\placepreprint}{%
   \AtBeginShipoutFirst{%
     \put(
-      \textwidth+\oddsidemargin-\widthof{\@preprint@box},
-      -2pt-\topmargin-\heightof{\@preprint@box}
-    ){\normalfont\@preprint@box}
+      \textwidth+\oddsidemargin-\widthof{\hep@preprint@box},
+      -2pt-\topmargin-\heightof{\hep@preprint@box}
+    ){\normalfont\hep@preprint@box}
   }
 }
+\renewcommand{\maketitlehooka}{\placepreprint\vspace{-\bigskipamount}}
 
 \@ifundefined{abstract}{}{%
   \let\hep@abstract\abstract%
@@ -608,7 +669,7 @@
   \fi%
 }
 \let\hep@ref\ref
-\AtBeginDocument{\renewcommand\ref{\no@break@before\labelcref}}
+\AtBeginDocument{\renewcommand\ref{\no@break@before\hep@ref}}
 
 \renewcommand\eqref{\no@break@before\labelcref}
 
