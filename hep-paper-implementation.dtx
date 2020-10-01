@@ -16,18 +16,21 @@
 % \fi
 %
 % \iffalse
-%
+
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-paper}[2020/09/01 v1.5 Publications in High Energy Physics]
-%<datamodel>\ProvidesFile{hep-paper.dbx}[2020/09/01 v1.5 HEP-Paper biblatex data model]
+%<package>\ProvidesPackage{hep-paper}[2020/10/01 v1.5 Publications in High Energy Physics]
+%<datamodel>\ProvidesFile{hep-paper.dbx}[2020/10/01 v1.5 HEP-Paper biblatex data model]
+%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2020/10/01 v1.5 HEP-Paper documentation]
 %
 %<*documentation>
+
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltxdoc}
 
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
+\def\MacroFont{\fontencoding\encodingdefault\fontfamily{lmtt}\fontseries\mddefault\fontshape\shapedefault\small}
 
 \MacroIndent=1.5em
 
@@ -43,13 +46,14 @@
 \usepackage{hologo}
 
 \newenvironment{columns}[1][.5]{%
+  \par\vspace{-\bigskipamount}%
   \begin{minipage}[t]{\linewidth}%
   \begin{minipage}[t]{#1\linewidth}%
   \newcommand{\column}{%
     \end{minipage}%
     \begin{minipage}[t]{\linewidth-#1\linewidth}%
   }%
-}{\end{minipage}\end{minipage}}
+}{\end{minipage}\end{minipage}\par}
 
 \setlength{\fboxsep}{1pt}
 %</documentation>
@@ -64,7 +68,7 @@
 %
 % \fi
 %
-% \CheckSum{1454}
+% \CheckSum{1551}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -87,14 +91,12 @@
 % \changes{v1.2}{2020/03/01}{Introduction of package options.}
 % \changes{v1.3}{2020/05/01}{Inclusion of JHEP and JCAP package options. Fix of incompatibility with recent subcaption package version. Move of biblatex datamodel into its own file}
 % \changes{v1.4}{2020/09/01}{If possible the compatibility options are selected automatically. Inclusion of PubMed IDs in bibliography.}
-% \changes{v1.5}{2020/10/01}{Reduce the numer of mathalphabets used in sans serif mode. Add more title options such as a subtitle.}
+% \changes{v1.5}{2020/10/01}{Reduce the numer of math alphabets used in sans serif mode. Add more title options such as a subtitle. Use standard class options.}
 %
 % \ifshort
 %<*documentation>
-%
-\begin{document}
 % \fi
-
+%
 \GetFileInfo{hep-paper.sty}
 
 \title{The \software{hep-paper} package\thanks{This document corresponds to \software{hep-paper}~\fileversion.}}
@@ -104,11 +106,15 @@
 \preprint{Preprint-Number}
 \date{\filedate}
 
+% \ifshort
+\begin{document}
+% \fi
+
 \maketitle
 
 \begin{abstract}
 The \software{hep-paper} package aims to provide a single style file containing most configurations and macros necessary to write appealing publications in High Energy Physics.
-Instead of reinventing the wheel by introducing newly created macros |hep-paper| preferably loads third party packages as long as they are lightweight enough.
+Instead of reinventing the wheel by introducing newly created macros \software{hep-paper} preferably loads third party packages as long as they are lightweight enough.
 \end{abstract}
 
 \tableofcontents\clearpage
@@ -118,13 +124,13 @@ Instead of reinventing the wheel by introducing newly created macros |hep-paper|
 \section{Introduction}
 
 For usual publications it is enough to load additionally to the |article| class without optional arguments only the \software{hep-paper} package \cite{hep-paper}.
-
-| \documentclass{article}|\\
-| \usepackage{hep-paper}|
-
+\begin{verbatim}
+\documentclass{article}
+\usepackage{hep-paper}
+\end{verbatim}
 The most notable changes after loading the \software{hep-paper} package is the change of some \hologo{LaTeX} defaults.
 The paper and font sizes are set to A4 and \unit[11]{pt}, respectively.
-Additionally, the paper geometry is set to the values known from the (depreciated) \software{a4wide} package \cite{a4wide} using the \software{geometry} package \cite{geometry}.
+Additionally, the paper geometry is adjusted using the \software{geometry} package \cite{geometry}.
 Furthermore, the font is changed to \LM using the \software{lmodern} package \cite{lmodern} with \software{microtype} \cite{microtype} optimizations.
 Finally, \PDF hyperlinks are implemented with the \software{hyperref} package \cite{hyperref}.
 
@@ -147,17 +153,23 @@ The possible \meta{sizes} are:
 The default is \unit[11]{pt}.
 
 \DescribeMacro{lang}
-The |lang|=\meta{name} option switches the document language to the chosen value.
-The possible values are given by the \software{babel} package \cite{babel}.
+The |lang|=\meta{name} option switches the document language to one of the values values provided by the \software{babel} package \cite{babel}.
 The default is |british|.
 
 \DescribeMacro{sansserif}
-The |sansserif| option switches the document including math to the sans serif font shape.
+The |sansserif| option switches the document including math to sans serif font shape.
 
 \DescribeMacro{parskip}
-The |parskip| option makes use of the \software{parskip} package \cite{parskip} and changes how two paragraphs are separated from each other.
+The |parskip| option changes how paragraphs are separated from each other using the \software{parskip} package \cite{parskip}.
 The \hologo{LaTeX} default is separation via indentation the |parskip| option switches to separation via vertical space.
 \footnote{Although the |parskip| option is used for this document, it is recommended only for very few document types such as technical manuals or answers to referees.}
+
+\DescribeMacro{symbols}
+The |symbols|=\meta{family} set the family of the symbol fonts.
+|symbols=ams| loads two \hologo{AmS} fonts \cite{amsfonts} and the \software{bm} bold fonts.
+The default setting replaces additionally the blackboard font with the \software{dsfont} \cite{dsfont}.
+|symbols=minion| switches the symbol fonts to the Adobe MinionPro companion font from the \software{MnSymbol} package \cite{MnSymbol}.
+|symbols=false| deactivates additional symbol fonts.
 
 \subsubsection{Deactivation}
 
@@ -215,25 +227,36 @@ The |eqnarray| option reactivates the depreciated |eqnarray| environment.
 
 \subsection{Title page}
 
+\DescribeMacro{\title}
+The \PDF meta information is set according to the |\title|\marg{text} and |\author| \marg{text} information.
+
+\DescribeMacro{\subtitle}
+The |\subtitle|\marg{subtitle} macro is defined using the \software{titling} package \cite{titling}.
+
 \DescribeMacro{\author}
 \DescribeMacro{\affiliation}
 \DescribeMacro{\email}
 In order to facilitate multiple authors with different affiliations the \software{authblk} package \cite{authblk} is loaded.
 The following lines add \eg two authors with different affiliations
-
-| \author[1]{Author one \email{Email one}}|\\
-| \affiliation[1]{Affiliation one}|\\
-| \author[2]{Author two \email{Email two}}|\\
-| \affiliation[1,2]{Affiliation two}|
-
-\DescribeMacro{\title}
-The \PDF meta information is set according to the |\title|\marg{text} and |\author| \marg{text} information.
+\begin{verbatim}
+\author[1]{Author one \email{email one}}
+\affiliation[1]{Affiliation one}
+\author[2]{Author two \email{email two}}
+\affiliation[1,2]{Affiliation two}
+\end{verbatim}
 
 \DescribeMacro{\preprint}
 The |\preprint|\marg{numer} macro places a pre-print number in the upper right corner of the title page.
 
 \DescribeEnv{abstract}
 The |abstract| environment is adjusted to not start with an indentation.
+
+\DescribeMacro{\titlefont}
+\DescribeMacro{\subtitlefont}
+\DescribeMacro{\authorfont}
+\DescribeMacro{\affiliationfont}
+\DescribeMacro{\preprintfont}
+Various title font macros are defined, allowing to change the appearance of the |\maketitle| output.
 
 \subsection{Text}
 
@@ -255,20 +278,19 @@ The |\software|\oarg{version}\marg{name} macro is typeset as \software[\filevers
 \DescribeMacro{\online}
 The |\online|\marg{url}\marg{text} macro combines the features of the |\href|\marg{url} \marg{text} \cite{hyperref} and the |\url|\marg{text} \cite{url} macros, resulting in \eg \online{https://ctan.org/pkg/hep-paper}{ctan.org/pkg/hep-paper}.
 
-The |inlinelist| and |enumdescript| environments are defined using the \software{enumitem} package \cite{enumitem}.
 
 \DescribeMacro{inlinelist}
+\DescribeMacro{enumdescript}
+The |inlinelist| and |enumdescript| environments are defined using the \software{enumitem} package \cite{enumitem}.
 \begin{columns}
-|The three main points are|\hfill\strut{}
-|\begin{inlinelist}|
-
-| \item one|
-
-| \item two|
-
-| \item three|
-
-|\end{inlinelist}|
+\begin{verbatim}
+The three main points are
+\begin{inlinelist}
+  \item one
+  \item two
+  \item three
+\end{inlinelist}
+\end{verbatim}
 \column
 The three main points are
 \begin{inlinelist}
@@ -277,18 +299,15 @@ The three main points are
  \item three
 \end{inlinelist}
 \end{columns}
-
-\DescribeMacro{enumdescript}
+\vspace{4ex}
 \begin{columns}[.6]
-|\begin{enumdescript}[label=\Roman*)]|
-
-| \item{First} one|
-
-| \item{Second} two|
-
-| \item{Third} three|
-
-|\end{enumdescript}|
+\begin{verbatim}
+\begin{enumdescript}[label=\Roman*)]
+  \item{First} one
+  \item{Second} two
+  \item{Third} three
+\end{enumdescript}
+\end{verbatim}
 \column
 \begin{enumdescript}[label=\Roman*)]
  \item{First} one
@@ -298,7 +317,7 @@ The three main points are
 \end{columns}
 
 \DescribeMacro{\textsc}
-A bold versions \textbf{\textsc{Small Caps}} and a sans serif version of \textsf{\textsc{Small Caps}} is provided, using the \software{sansmathfonts} package \cite{sansmathfonts}.
+A bold versions \textbf{\textsc{Small Caps}} and a sans serif version of \textsf{\textsc{Small Caps}} based on the \CM font is provided, the latter using the \software{sansmathfonts} package \cite{sansmathfonts}.
 
 \DescribeMacro{\underline}
 \DescribeMacro{\overline}
@@ -353,7 +372,6 @@ Macros switching to |bfseries| such as |\section|\marg{text} are ensured to also
 This may cause trouble if bold symbols carry an additional non-implicit meaning.
 \DescribeMacro{\text}
 The |\text|\marg{text} macro makes it possible to write text within math mode, \ie ($ \text A  \text b  \text \Gamma \text \delta \text{\textbf A} \text{\textbf b} \text{\textbf \Gamma} \text{\textbf \delta}$).
-The often used |\mathrm|\marg{text} and |{\rm|\meta{text}|}| macros are \emph{not} the correct tool for this purpose, as they switch to roman font shape.
 This behaviour conflicts \eg with the \software{sansserif} package option.
 \DescribeMacro{\mathsf}
 The math sans serif alphabet is redefined to be italic sans serif if the main text is serif and italic serif if the main text is sans serif, \ie ($\mathsf A \mathsf b \mathsf \Gamma \mathsf \delta \mathbf{\mathsf A} \mathbf{\mathsf b} \mathbf{\mathsf \Gamma} \mathbf{\mathsf \delta}$).
@@ -391,13 +409,12 @@ The |split|, |multline|, |align|, |multlined|, |aligned|, |alignedat|, and |case
 
 \DescribeMacro{equation}
 Use the |equation| environment for short equations.
-
 \begin{columns}
-|\begin{equation}|
-
-| left = right \ .|
-
-|\end{equation}|
+\begin{verbatim}
+\begin{equation}
+  left = right \ .
+\end{equation}
+\end{verbatim}
 \column
 \begin{equation}
 \framebox[2em]{left\strut} = \framebox[7em]{right\strut} \ .
@@ -406,33 +423,29 @@ Use the |equation| environment for short equations.
 
 \DescribeMacro{multline}
 Use the |multline| environment for longer equations.
-
 \begin{columns}
-|\begin{multline}|
-
-| left = right 1 \\|
-
-| + right 2 \ .|
-
-|\end{multline}|
+\begin{verbatim}
+\begin{multline}
+  left = right 1 \\
+  + right 2 \ .
+\end{multline}
+\end{verbatim}
 \column
 \begin{multline}
 \framebox[2em]{left\strut} = \framebox[7em]{right 1\strut} \\
 \framebox[7em]{+ right 2\strut} \ .
-  \end{multline}
+\end{multline}
 \end{columns}
 
 \DescribeMacro{split}
 Use the |split| sub environment for equations in which multiple equal signs should be aligned.
-
 \begin{columns}
-|\begin{equation} \begin{split}|
-
-| left &= right 1 \\|
-
-| &= right 2 \ .|
-
-|\end{split} \end{equation}|
+\begin{verbatim}
+\begin{equation} \begin{split}
+  left &= right 1 \\
+  &= right 2 \ .
+\end{split} \end{equation}
+\end{verbatim}
 \column
 \begin{equation}
 \begin{split}
@@ -444,18 +457,15 @@ Use the |split| sub environment for equations in which multiple equal signs shou
 
 \DescribeMacro{align}
 Use the |align| environment for the vertical alignment and horizontal distribution of multiple equations.
-
 \begin{columns}
-|\begin{subequations}|
-|\begin{align}|
-
-| left &= right \ , &|
-| left &= right \ , \\|
-| left &= right \ , &|
-| left &= right \ .|
-
-|\end{align}|
-|\end{subequations}|
+\begin{verbatim}
+\begin{subequations} \begin{align}
+  left &= right \ , &
+  left &= right \ , \\
+  left &= right \ , &
+  left &= right \ .
+\end{align} \end{subequations}
+\end{verbatim}
 \column
 \begin{subequations}
 \begin{align}
@@ -472,15 +482,15 @@ Use the |aligned| environment within a |equation| environment if the aligned equ
 
 \DescribeMacro{multlined}
 Use the |multlined| environment if either |split| or |align| contain very long lines.
-
 \begin{columns}
-|\begin{equation} \begin{split}|
-
-| left &= right 1 \\ &=|
-| \begin{multlined}[t]|
-|  right 2 \\ + right 3 \ .|
-| \end{multlined}|
-|\end{split} \end{equation}|
+\begin{verbatim}
+\begin{equation} \begin{split}
+  left &= right 1 \\ &=
+  \begin{multlined}[t]
+     right 2 \\ + right 3 \ .
+  \end{multlined}
+\end{split} \end{equation}
+\end{verbatim}
 \column
 \begin{equation}
 \begin{split}
@@ -495,18 +505,16 @@ Use the |multlined| environment if either |split| or |align| contain very long l
 
 \DescribeMacro{alignat}
 Use the |alignat| environment together with the |\mathllap| macro for the alignment of multiple equations with vastly different lengths.
-
 \begin{columns}
-|\begin{subequations}|
-|\begin{alignat}{2}|
-
-| left &= long right && \ , \\|
-
-| le. 2 &= ri. 2 \ , &|
-
-| \mathllap{le. 3 = ri. 3} & \ .|
-|\end{alignat}|
-|\end{subequations}|
+\begin{verbatim}
+\begin{subequations}
+\begin{alignat}{2}
+  left &= long right && \ , \\
+  le. 2 &= ri. 2 \ , &
+  \mathllap{le. 3 = ri. 3} & \ .
+\end{alignat}
+\end{subequations}
+\end{verbatim}
 \column
 \begin{subequations}
 \begin{alignat}{2}
@@ -582,12 +590,13 @@ The usual behaviour can be reactivated using |\raggedright|.
 
 \begin{table}
 \begin{panels}{.6}
-\raggedright
-|\begin{panels}{.6}|\\
-|code|\\
-|\panel{.4}|\\
-|\begin{tabular}...\end{tabular}|\\
-|\end{panels}|\\
+\begin{verbatim}
+\begin{panels}{.6}
+  code
+\panel{.4}
+  \begin{tabular}...\end{tabular}
+\end{panels}
+\end{verbatim}
 \caption{Code for this panel environment.}
 \label{tab:panels}
 \panel{.4}
@@ -632,15 +641,16 @@ The bibliography is generated by \software{Biber} \cite{biber}.
 Additionally, the PubMed IDs are recognized and \online{https://ctan.org}{ctan.org}, \online{https://github.com}{github.com}, \online{https://gitlab.com}{gitlab.com}, \online{https://bitbucket.org}{bitbucket.org}, \online{https://www.launchpad.net}{launchpad.net}, \online{https://sourceforge.net}{sourceforge.net}, and \online{https://hepforge.org}{hepforge.org} are valid |eprinttype|s.
 \DescribeMacro{erratum}
 Errata can be included using the |related| feature.
-
-| \article{|\meta{key1}|,|\\
-|   |\dots|,|\\
-|   relatedtype="erratum",|\\
-|   related="|\meta{key2}|",|\\
-| }|\\
-| \article{|\meta{key2}|,|\\
-|   |\dots|,|\\
-| }|
+\begin{verbatim}
+\article{key1,
+  ...,
+  relatedtype="erratum",
+  related="key2",
+}
+\article{key2,
+  ...,
+}
+\end{verbatim}
 
 \section{Conclusion}
 
@@ -672,52 +682,51 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %<*package>
 % \fi
 %
-% \section{Math fonts}
+% \section{Allocation of math alphabets}
 %
-% Of the 16 available math fonts, \hologo{TeX} loads four fonts by default
+% Of the 16 available math alphabets, \hologo{TeX} loads four alphabets by default
 % \begin{enumdescript}[start=0]
 % \item{OT1} \label{it:math text} Text (latin, greek, numerals, text symbols)
 % \item{OML} \label{it:math italic} Math Italic (latin, greek, numerals, text symbols)
 % \item{OMS} \label{it:math symbol} Symbol (|\mathcal|, operators)
 % \item{OMX} \label{it:math extension} Math Extension (big operators, delimiters)
 % \end{enumdescript}
-% The text font \ref{it:math text} of \CM is \textbf{cmr10} |\OT1/cmr/m/n/10| and \LM is \textbf{rm-lmr10} |\OT1/lmr/m/n/10|, the |sansserif| option uses \textbf{cmsmf10} |\OT1/cmsmf/m/n/10|.
-% The italic font \ref{it:math italic} of \CM is \textbf{cmmi10} |\OML/cmm/m/it/10|, and of \LM is \textbf{lmmi10} |\OML/lmm/m/it/10|, \dots.
-% The symbol font \ref{math symbol} of \CM is \textbf{cmsy10} |\OMS/cmsy/m/n/10|, and of \LM is \textbf{lmsy10} |\OMS/lmsy/m/n/10|, \dots
-% The extension font of \CM is \textbf{cmex10} |\OMX/cmex/m/n/5|, and of \LM is \textbf{lmex10} |\OMX/lmex/m/n/5|, \dots
-% The \software{exscale} package replaces the extension font \ref{it:math extension} with a scalable \CM font \textbf{cmex10} |\OMX/cmex/m/n/10|.
-% The \software{amssymb} (\software{amsfonts}) packages load two more symbol fonts
+% The text font \ref{it:math text}\strut\ of \CM is \textbf{cmr10} |\OT1/cmr/m/n/10|, which is relaced by \LM to be \textbf{rm-lmr10} |\OT1/lmr/m/n/10|, the |sansserif| option uses \textbf{rm-lmss10} |\OT1/lmss/m/n/10|.
+% The italic math font \ref{it:math italic} of \CM is \textbf{cmmi10} |\OML/cmm/m/it/|\allowbreak|10|, and is repalced by \LM to be \textbf{lmmi10} |\OML/lmm/m/it/10|, the |sansserif| options uses \textbf{cmbrmi10} |\OML/cmbrm/m/it/10| from the \software{cmbright} package \cite{cmbright}.
+% The symbol font \ref{it:math symbol}\strut\ of \CM is \textbf{cmsy10} |\OMS/cmsy/m/n/10|, and is repalced by \LM to be \textbf{lmsy10} |\OMS/lmsy/m/n/10|, the |sansserif| options uses \textbf{cmsssy10} |\OMS/cmsssy/m/n/10| from the \software{sansmathfonts} package \cite{sansmathfonts}.
+% The extension font \ref{it:math extension}\strut\ of \CM is \textbf{cmex10} |\OMX/cmex/m/n/5|, and is replaced by the \software{exscale} package \cite{exscale} to be \textbf{cmex10} |\OMX/cmex/m/n/10|, the |sansserif| option loads \textbf{cmssex10} |\OMX/cmssex/m/n/10|.
+% The \software{amssymb} (\software{amsfonts}) packages \cite{amssymb} load two more symbol fonts
 % \begin{enumdescript}[start=4]
-% \item{msam10} |\U/msa/m/n/10| AMS symbol font A (Math operators (extravagant))
-% \item{msbm10} |\U/msb/m/n/10| AMS symbol font B (|\mathbb|, negated operators)
+% \item{msam10} \label{it:math ams a} |\U/msa/m/n/10| AMS symbol font A (special math operators)
+% \item{msbm10} \label{it:math ams b} |\U/msb/m/n/10| AMS symbol font B (|\mathbb|, negated operators)
 % \end{enumdescript}
-% With the sansserif option they are replaced with \textbf{ssmsam10} |\U/ssmsa/m/n/10| and \textbf{ssmsbm10} |\U/ssmsb/m/n/10|.
-% The \software{bm} package loads the bold version for the fonts \ref{it:math italic,it:math symbol,it:math extension}.
-% For \CM they are \textbf{cmbx10} |\OT1/cmr/bx/n/10|, \textbf{cmmib10} |\OML/cmm/b/it/10|, and \textbf{cmbsy10} |\OMS/cmsy/b/n/10|.
-% For \LM they are \textbf{rm-lmbx10} |\OT1/lmr/bx/n/10|\textbf{lmmib10} |\OML/lmm/b/it/10|, and \textbf{lmbsy10} |\OMS/lmsy/b/n/10|.
-% For the sansserif option they are \textbf{cmsmfbx10} |\OT1/cmsmf/bx/n/10|, \textbf{cmssmib10} |\OML/cmssm/b/it/10|, and \textbf{cmssbsy10} |\OMS/cmsssy/b/n/10|.
+% The |sansserif| option replaces them with \textbf{ssmsam10} |\U/ssmsa/m/n/10| and \textbf{ssmsbm10} |\U/ssmsb/m/n/10| from the \software{sansmathfonts} package \cite{sansmathfonts}, respectively.
+% The \software{bm} package \cite{bm} loads the bold version for the fonts \labelcref{it:math text,it:math italic,it:math symbol}.
 %
-% \subsection{On demand}
-%
-% The script font from the \software{mathrsfs} package is loaded if used
+% Other math alphabets are only loaded on demand, \eg |\mathsf| uses a sans serif font and |\mathbf| without \software{bm} uses a bold font.
+% The |\mathscr| macro uses the script font from the \software{mathrsfs} package \cite{mathrsfs}
 % \begin{enumdescript}[start=9]
 % \item{rsfs10} |\U/rsfs/m/n/10| Math script font (capital letters)
 % \end{enumdescript}
-% The \software{dsfont} package provides the |\dsmath| fonts
+% The |\mathbb| macro loads the double stroke font from the \software{dsfont} package \cite{dsfont}, this can be prevented with the |symbols=ams| option.
 % \begin{enumdescript}[start=10]
 % \item{dsrom10} |\U/dsrom/m/n/10| Double stroke font
 % \end{enumdescript}
-% The \software{amssymb} package provides the |\mathfrak| font
+% The |\mathfrak| macro loads the fractur font from the \software{amssymb} package \cite{amssymb}
 % \begin{enumdescript}[start=11]
 % \item{eufm10} |\U/euf/m/n/10| Math fraktur (Basic Latin)
 % \end{enumdescript}
 %
-% The \software{hep-paper} package uses nine of the available 16 math font slots.
-% This number can be reduced by three using |\newcommand{\bmmax}{0}| of the \software{bm} package.
+% The \software{hep-paper} package uses nine of the available 16 math alphabets.
+% This number can be reduced by three using |\newcommand{\bmmax}{0}| from the \software{bm} package \cite{bm}.
+%
+% The |symbols=minion| options replaces the fonts \labelcref{it:math symbol,it:math extension,it:math ams a,it:math ams b} with corresponding fonts from the \software{MnSymbol} package \cite{MnSymbol}.
+% Additionally, two more symbol alphabets are allocated, the \software{bm} package \cite{bm} loads one more font and now |\mathcal| triggers the use of one additional alphabet.
+% Hence, the minion option uses three to four more math alphabets than a usual setup.
 %
 % \section{Options}
 %
-% Load the |pdftexcmds| \cite{pdftexcmds} and |kvoptions| \cite{kvoptions} packages and define a |hep| namespace.
+% Load the \software{pdftexcmds} \cite{pdftexcmds} and \software{kvoptions} \cite{kvoptions} packages and define a |hep| namespace.
 %    \begin{macrocode}
 \RequirePackage{pdftexcmds}
 \RequirePackage{kvoptions}
@@ -764,6 +773,13 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \begin{macrocode}
 \DeclareBoolOption[true]{parindent}
 \DeclareComplementaryOption{parskip}{parindent}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{symbols}
+% Provide the option |symbols| allowing to switch the symbol font.
+%    \begin{macrocode}
+\DeclareStringOption[true]{symbols}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -821,21 +837,21 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{jhep}
-% Provide the option |jhep| for |JHEP| \cite{jhep} compatibility mode.
+% Provide the option |jhep| for JHEP \cite{jhep} compatibility mode.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{jhep}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{jcap}
-% Provide the option |jcap| for |JCAP| \cite{jcap} compatibility mode.
+% Provide the option |jcap| for JCAP \cite{jcap} compatibility mode.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{jcap}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{pos}
-% Provide the option |pos| for |PoS| compatibility mode.
+% Provide the option |pos| for PoS compatibility mode.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{pos}
 %    \end{macrocode}
@@ -861,6 +877,22 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 %    \begin{macrocode}
 \ProcessKeyvalOptions*
+%    \end{macrocode}
+%
+% Read the class options regarding font and paper size.
+%    \begin{macrocode}
+\def\hep@get@class#1.cls#2\relax{\def\hep@class{#1}}
+\def\hep@getclass{\expandafter\hep@get@class\@filelist\relax}
+\hep@getclass
+\@ifclasswith{\hep@class}{10pt}{\setkeys{hep}{font=10pt}}{}
+\@ifclasswith{\hep@class}{12pt}{\setkeys{hep}{font=12pt}}{}
+\@ifclasswith{\hep@class}{a5paper}{\setkeys{hep}{paper=a5}}{}
+\@ifclasswith{\hep@class}{b5paper}{\setkeys{hep}{paper=b5}}{}
+\@ifclasswith{\hep@class}{letterpaper}{\setkeys{hep}{paper=letter}}{}
+\@ifclasswith{\hep@class}{legalpaper}{\setkeys{hep}{paper=legal}}{}
+\@ifclasswith{\hep@class}{executivepaper}{%
+  \setkeys{hep}{paper=executive}%
+}{}
 %    \end{macrocode}
 %
 % \subsection{Set compatibility}
@@ -1146,7 +1178,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 
 % \section{Geometry}
 %
-% Load the \software{geometry} package \cite{geometry} and adjust the text width and height to the values of the \software{a4wide} package \cite{a4wide}.
+% Load the \software{geometry} package \cite{geometry} and adjust the text width and height.
 % This step must happen after readjusting the font size in \cref{sec:font size}.
 %    \begin{macrocode}
 \ifhep@defaults\else
@@ -1231,7 +1263,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % \begin{macro}{\overline}
 % Redefine |\overline| to be a text macro using the \software{ulem} package \cite{ulem}.
-% Extend it as a math macro with the original definition from |amsmath| \cite{amsmath}.
+% Extend it as a math macro with the original definition from the \software{amsmath} package \cite{amsmath}.
 %    \begin{macrocode}
 \def\overline#1{{\renewcommand{\ULdepth}{-1.9ex}{}\uline{#1}}}
 \DeclareRobustCommand{\over@line}[1]{\@@overline{#1}}
@@ -1261,14 +1293,33 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % \subsection{Math fonts}
 %
-% Load the \software{exscale} package in order to fix Latin Modern |lmex| fonts.
-% Additionally, load the \software{amssymb} package \cite{amsfonts} which provides further math symbols and also loads the \software{amsfonts} package \cite{amsfonts}.
+% Define conditionals based on the |symbols| package option.
+%    \begin{macrocode}
+\newif\ifhep@symbols
+\ifnum\pdf@strcmp{\hep@symbols}{false}=0\else\hep@symbolstrue\fi
+\newif\ifhep@ams
+\ifnum\pdf@strcmp{\hep@symbols}{ams}=0 \hep@amstrue\fi
+\newif\ifhep@minion
+\ifnum\pdf@strcmp{\hep@symbols}{minion}=0 \hep@miniontrue\fi
+%    \end{macrocode}
+%
 % Load the \software{fixmath} \cite{fixmath} and \software{alphabeta} \cite{alphabeta} packages ensuring that upper Greek letters in math mode are italic and providing upright Greek letters in text mode, respectively.
 %    \begin{macrocode}
-\RequirePackage{exscale}
-\RequirePackage{amssymb}
-\RequirePackage{alphabeta}
-\RequirePackage{fixmath}
+\ifhep@symbols
+  \RequirePackage{alphabeta}
+  \RequirePackage{fixmath}
+%    \end{macrocode}
+%
+% Either load the \software{MnSymbol} package \cite{MnSymbol} or the the \software{exscale} package in order to fix Latin Modern |lmex| fonts.
+% Additionally, load the \software{amssymb} package \cite{amsfonts} which provides further math symbols and also loads the \software{amsfonts} package \cite{amsfonts}.
+%    \begin{macrocode}
+  \ifhep@minion
+    \RequirePackage{MnSymbol}
+  \else
+    \RequirePackage{exscale}
+    \RequirePackage{amssymb}
+  \fi
+\fi
 %    \end{macrocode}
 %
 % \begin{macro}{\mathsf}
@@ -1291,29 +1342,35 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % Declare font substitutions.
 %    \begin{macrocode}
   \DeclareFontSubstitution{OML}{\hep@font@math}{m}{it}
-  \DeclareFontSubstitution{OMS}{\hep@font@symbol}{m}{n}
-  \DeclareFontSubstitution{OMX}{\hep@font@extra}{m}{n}
+  \ifhep@symbols\ifhep@minion\else
+    \DeclareFontSubstitution{OMS}{\hep@font@symbol}{m}{n}
+    \DeclareFontSubstitution{OMX}{\hep@font@extra}{m}{n}
+  \fi\fi
 %    \end{macrocode}
 % Declare the symbol fonts.
 %    \begin{macrocode}
   \DeclareSymbolFont{operators}{OT1}{\hep@font@text}{m}{n}
   \DeclareSymbolFont{letters}{OML}{\hep@font@math}{m}{it}
-  \DeclareSymbolFont{symbols}{OMS}{\hep@font@symbol}{m}{n}
-  \DeclareSymbolFont{largesymbols}{OMX}{\hep@font@extra}{m}{n}
+  \ifhep@symbols\ifhep@minion\else
+    \DeclareSymbolFont{symbols}{OMS}{\hep@font@symbol}{m}{n}
+    \DeclareSymbolFont{largesymbols}{OMX}{\hep@font@extra}{m}{n}
+  \fi\fi
 %    \end{macrocode}
 % Set bold symbol fonts.
 %    \begin{macrocode}
   \SetSymbolFont{operators}{bold}{OT1}{\hep@font@text}{b}{n}
   \SetSymbolFont{letters}{bold}{OML}{\hep@font@math}{b}{it}
-  \SetSymbolFont{symbols}{bold}{OMS}{\hep@font@symbol}{b}{n}
+  \ifhep@symbols\ifhep@minion\else
+    \SetSymbolFont{symbols}{bold}{OMS}{\hep@font@symbol}{b}{n}
+  \fi\fi
 %    \end{macrocode}
 % Adjust the fonts loaded by the \software{amsfonts} \cite{amsfonts} and \software{esint} \cite{esint} packages.
 %    \begin{macrocode}
+  \ifhep@symbols\ifhep@minion\else
+    \DeclareSymbolFont{AMSa}{U}{\hep@font@amsa}{m}{n}
+    \DeclareSymbolFont{AMSb}{U}{\hep@font@amsb}{m}{n}
+  \fi\fi
   \AtBeginDocument{%
-    \@ifpackageloaded{amsfonts}{%
-      \DeclareSymbolFont{AMSa}{U}{\hep@font@amsa}{m}{n}
-      \DeclareSymbolFont{AMSb}{U}{\hep@font@amsb}{m}{n}
-    }{}%
     \@ifpackageloaded{esint}{%
       \DeclareSymbolFont{largesymbolsA}{U}{ssesint}{m}{n}
     }{}
@@ -1323,7 +1380,9 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \begin{macrocode}
   \DeclareSymbolFontAlphabet{\mathrm}{operators}
   \DeclareSymbolFontAlphabet{\mathnormal}{letters}
-  \DeclareSymbolFontAlphabet{\mathcal}{symbols}
+  \ifhep@minion\else
+    \DeclareSymbolFontAlphabet{\mathcal}{symbols}
+  \fi
 %    \end{macrocode}
 % Declare |\mathit|.
 %    \begin{macrocode}
@@ -1351,24 +1410,34 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % Load the \software{bm} package \cite{bm} for superior boldmath.
 % Make math symbols bold whenever they appear in bold macros such as |\section|\marg{text}.
 %    \begin{macrocode}
-\RequirePackage{bm}
-\AtBeginDocument{\let\mathbf\bm}
-\g@addto@macro\bfseries{\boldmath}
+\ifhep@symbols
+  \RequirePackage{bm}
+  \AtBeginDocument{\let\mathbf\bm}
+  \g@addto@macro\bfseries{\boldmath}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\mathscr}
 % Provid the |\mathscr| math script font from the \software{mathrsfs} package \cite{mathrsfs}.
 %    \begin{macrocode}
-\DeclareMathAlphabet{\mathscr}{U}{rsfs}{m}{n}
+  \DeclareMathAlphabet{\mathscr}{U}{rsfs}{m}{n}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\mathbb}
 % Redefine the the |\mathbb| math blackboard style font according to the \prefix{sans}{serif} option with the font from the \software{dsfont} package \cite{dsfont}.
 %    \begin{macrocode}
-\SetMathAlphabet{\mathbb}{normal}{U}{%
-  \ifhep@serif dsrom\else dsss\fi%
-}{m}{n}
+  \ifhep@minion
+    \DeclareMathAlphabet{\mathbb}{U}{%
+      \ifhep@serif dsrom\else dsss\fi%
+    }{m}{n}
+  \else
+    \ifhep@ams\else
+      \SetMathAlphabet{\mathbb}{normal}{U}{%
+        \ifhep@serif dsrom\else dsss\fi%
+      }{m}{n}
+    \fi
+  \fi
+\fi
 %    \end{macrocode}
 % \end{macro}
 
@@ -1378,8 +1447,8 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \begin{macro}{\slashed}
 % \begin{macro}{\unit}
 % Load the \software{physics} package \cite{physics} which provides macros useful for publications in physics.
-% Additionally, load the |cancel| \cite{cancel} and |slashed| \cite{slashed} packages which provide the |\cancel| and |\slashed| macros.
-% Finally, load the |units| package \cite{units} which provides the |\units| and |\nicefrac| macros.
+% Additionally, load the \software{cancel} \cite{cancel} and \software{slashed} \cite{slashed} packages which provide the |\cancel| and |\slashed| macros.
+% Finally, load the \software{units} package \cite{units} which provides the |\units| and |\nicefrac| macros.
 %    \begin{macrocode}
 \RequirePackage{physics}
 \RequirePackage{cancel}
@@ -1648,13 +1717,15 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \end{macrocode}
 % \end{macro}
 %
-% Set standard values.
+% Set standard values mostly taken from the \software{titling} package, add the font hook, and reduce the |date| font size.
 %    \begin{macrocode}
 \pretitle{\begin{center}\LARGE\hep@title@font}
 \posttitle{\par\end{center}}
 \presubtitle{\begin{center}\large\hep@subtitle@font}
 \postsubtitle{\par\end{center}}
-\preauthor{\begin{center}\large\hep@author@font\lineskip.5em\begin{tabular}[t]{c}}
+\preauthor{%
+  \begin{center}\large\hep@author@font\lineskip.5em\begin{tabular}[t]{c}%
+}
 \postauthor{\end{tabular}\par\end{center}}
 \predate{\begin{center}\hep@date@font}
 \postdate{\par\end{center}}
@@ -1687,17 +1758,21 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \begin{macro}{\affiliation}
 % Define the |\affiliation| macro, ensure that linebreaks happen after a comma.
 %    \begin{macrocode}
-\newcommand\active@comma{,\penalty-5\relax}
-\newcommand\cat@comma@active{\catcode`\,\active}
-{\cat@comma@active\gdef,{\active@comma}}
-\newcommand\@affil[1]{%
+\newcommand\hep@active@comma{,\penalty-5\relax}
+\newcommand\hep@cat@comma@active{\catcode`\,\active}
+{\hep@cat@comma@active\gdef,{\hep@active@comma}}
+\newcommand\hep@affil[1]{%
   \endgroup\@flushglue=0pt plus .5\linewidth\affil{#1}%
 }
-\def\@affil@opt[#1]#2{%
+\def\hep@affil@opt[#1]#2{%
   \endgroup\@flushglue=0pt plus .5\linewidth\affil[#1]{#2}%
 }
-\DeclareRobustCommand\@affiliation{\@ifnextchar[{\@affil@opt}{\@affil}}
-\newcommand{\affiliation}{\begingroup\cat@comma@active\@affiliation}
+\DeclareRobustCommand\hep@affiliation{%
+  \@ifnextchar[{\hep@affil@opt}{\hep@affil}%
+}
+\newcommand{\affiliation}{%
+  \begingroup\hep@cat@comma@active\hep@affiliation%
+}
 %    \end{macrocode}
 % \end{macro}
 
@@ -1718,7 +1793,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\maketitle}
+% \begin{macro}{\placepreprint}
 % Places a preprint number in the top right corner of the title page using the \software{atbegshi} \cite{atbegshi} and \software{picture} \cite{picture} packages.
 %    \begin{macrocode}
 \RequirePackage{atbegshi}

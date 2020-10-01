@@ -14,8 +14,9 @@
 %% http://www.latex-project.org/lppl.txt
 %% and version 1.3c or later is part of all distributions of
 %% LaTeX version 2005/12/01 or later.
+
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesPackage{hep-paper}[2020/09/01 v1.5 Publications in High Energy Physics]
+\ProvidesPackage{hep-paper}[2020/10/01 v1.5 Publications in High Energy Physics]
 
 \RequirePackage{pdftexcmds}
 \RequirePackage{kvoptions}
@@ -30,6 +31,7 @@
 \DeclareComplementaryOption{sansserif}{serif}
 \DeclareBoolOption[true]{parindent}
 \DeclareComplementaryOption{parskip}{parindent}
+\DeclareStringOption[true]{symbols}
 \DeclareBoolOption[false]{defaults}
 \DeclareBoolOption[true]{title}
 \DeclareStringOption[numeric-comp]{bibliography}
@@ -43,6 +45,18 @@
 \DeclareBoolOption[false]{eqnarray}
 \DeclareBoolOption[false]{manualplacement}
 \ProcessKeyvalOptions*
+\def\hep@get@class#1.cls#2\relax{\def\hep@class{#1}}
+\def\hep@getclass{\expandafter\hep@get@class\@filelist\relax}
+\hep@getclass
+\@ifclasswith{\hep@class}{10pt}{\setkeys{hep}{font=10pt}}{}
+\@ifclasswith{\hep@class}{12pt}{\setkeys{hep}{font=12pt}}{}
+\@ifclasswith{\hep@class}{a5paper}{\setkeys{hep}{paper=a5}}{}
+\@ifclasswith{\hep@class}{b5paper}{\setkeys{hep}{paper=b5}}{}
+\@ifclasswith{\hep@class}{letterpaper}{\setkeys{hep}{paper=letter}}{}
+\@ifclasswith{\hep@class}{legalpaper}{\setkeys{hep}{paper=legal}}{}
+\@ifclasswith{\hep@class}{executivepaper}{%
+  \setkeys{hep}{paper=executive}%
+}{}
 \@ifclassloaded{PoS}{\setkeys{hep}{pos}}{}
 \ifhep@pos
   \setkeys{hep}{defaults, title=false}
@@ -128,7 +142,6 @@
   \DeclareFontShape{\hep@encoding}{lmss}{b}{sc}{<->ssub*xcmss/bx/sc}{}
   \DeclareFontShape{\hep@encoding}{lmss}{m}{sc}{<->ssub*xcmss/m/sc}{}
 \fi
-
 \ifxetexorluatex\else
   \RequirePackage[utf8]{inputenc}
 \fi
@@ -163,7 +176,6 @@
 \RequirePackage[all, \hep@lang@foreign]{foreign}
 \DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
 \xspaceaddexceptions{\csq@qclose@i}
-
 \newcommand{\no}[1]{\textnumero~#1}
 \RequirePackage{relsize}
 \newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
@@ -199,7 +211,6 @@
     includeheadfoot
   }
 \fi
-
 \ifhep@parindent\else
 \RequirePackage{parskip}
 \newcommand{\useparskip}{%
@@ -217,10 +228,8 @@
 
 \RequirePackage{mathtools}
 \allowdisplaybreaks[1]
-
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\sgn}{sgn}
-
 \RequirePackage{xparse}
 \DeclareDocumentCommand{\mathdef}{mO{0}m}{%
   \expandafter\let\csname text\string#1\endcsname=#1
@@ -234,25 +243,32 @@
     \next
   }%
 }
-
 \AtBeginDocument{\mathdef{\i}{\operatorname{i}}}
-
 \def\overline#1{{\renewcommand{\ULdepth}{-1.9ex}{}\uline{#1}}}
 \DeclareRobustCommand{\over@line}[1]{\@@overline{#1}}
 \mathdef{\overline}{\over@line}
-
 \RequirePackage{mleftright}
 \mleftright
-
 \ifhep@eqnarray\else
   \let\eqnarray\@undefined
   \let\endeqnarray\@undefined
 \fi
-
-\RequirePackage{exscale}
-\RequirePackage{amssymb}
-\RequirePackage{alphabeta}
-\RequirePackage{fixmath}
+\newif\ifhep@symbols
+\ifnum\pdf@strcmp{\hep@symbols}{false}=0\else\hep@symbolstrue\fi
+\newif\ifhep@ams
+\ifnum\pdf@strcmp{\hep@symbols}{ams}=0 \hep@amstrue\fi
+\newif\ifhep@minion
+\ifnum\pdf@strcmp{\hep@symbols}{minion}=0 \hep@miniontrue\fi
+\ifhep@symbols
+  \RequirePackage{alphabeta}
+  \RequirePackage{fixmath}
+  \ifhep@minion
+    \RequirePackage{MnSymbol}
+  \else
+    \RequirePackage{exscale}
+    \RequirePackage{amssymb}
+  \fi
+\fi
 \ifhep@serif
   \newcommand\hep@font@sf{cmbrm}
   \DeclareMathAlphabet{\mathsf}{OML}{\hep@font@sf}{m}{it}
@@ -266,50 +282,65 @@
   \newcommand\hep@font@amsa{ssmsa}
   \newcommand\hep@font@amsb{ssmsb}
   \DeclareFontSubstitution{OML}{\hep@font@math}{m}{it}
-  \DeclareFontSubstitution{OMS}{\hep@font@symbol}{m}{n}
-  \DeclareFontSubstitution{OMX}{\hep@font@extra}{m}{n}
+  \ifhep@symbols\ifhep@minion\else
+    \DeclareFontSubstitution{OMS}{\hep@font@symbol}{m}{n}
+    \DeclareFontSubstitution{OMX}{\hep@font@extra}{m}{n}
+  \fi\fi
   \DeclareSymbolFont{operators}{OT1}{\hep@font@text}{m}{n}
   \DeclareSymbolFont{letters}{OML}{\hep@font@math}{m}{it}
-  \DeclareSymbolFont{symbols}{OMS}{\hep@font@symbol}{m}{n}
-  \DeclareSymbolFont{largesymbols}{OMX}{\hep@font@extra}{m}{n}
+  \ifhep@symbols\ifhep@minion\else
+    \DeclareSymbolFont{symbols}{OMS}{\hep@font@symbol}{m}{n}
+    \DeclareSymbolFont{largesymbols}{OMX}{\hep@font@extra}{m}{n}
+  \fi\fi
   \SetSymbolFont{operators}{bold}{OT1}{\hep@font@text}{b}{n}
   \SetSymbolFont{letters}{bold}{OML}{\hep@font@math}{b}{it}
-  \SetSymbolFont{symbols}{bold}{OMS}{\hep@font@symbol}{b}{n}
+  \ifhep@symbols\ifhep@minion\else
+    \SetSymbolFont{symbols}{bold}{OMS}{\hep@font@symbol}{b}{n}
+  \fi\fi
+  \ifhep@symbols\ifhep@minion\else
+    \DeclareSymbolFont{AMSa}{U}{\hep@font@amsa}{m}{n}
+    \DeclareSymbolFont{AMSb}{U}{\hep@font@amsb}{m}{n}
+  \fi\fi
   \AtBeginDocument{%
-    \@ifpackageloaded{amsfonts}{%
-      \DeclareSymbolFont{AMSa}{U}{\hep@font@amsa}{m}{n}
-      \DeclareSymbolFont{AMSb}{U}{\hep@font@amsb}{m}{n}
-    }{}%
     \@ifpackageloaded{esint}{%
       \DeclareSymbolFont{largesymbolsA}{U}{ssesint}{m}{n}
     }{}
   }
   \DeclareSymbolFontAlphabet{\mathrm}{operators}
   \DeclareSymbolFontAlphabet{\mathnormal}{letters}
-  \DeclareSymbolFontAlphabet{\mathcal}{symbols}
+  \ifhep@minion\else
+    \DeclareSymbolFontAlphabet{\mathcal}{symbols}
+  \fi
   \DeclareMathAlphabet{\mathit}{OML}{\hep@font@text}{m}{it}
   \SetMathAlphabet\mathit{bold}{OML}{\hep@font@text}{bx}{it}
   \DeclareMathAlphabet{\mathtt}{OT1}{cmtl}{m}{n}
   \DeclareMathAlphabet{\mathsf}{OML}{\hep@font@sf}{m}{it}
   \SetMathAlphabet{\mathsf}{bold}{OML}{\hep@font@sf}{bx}{it}
 \fi
-\RequirePackage{bm}
-\AtBeginDocument{\let\mathbf\bm}
-\g@addto@macro\bfseries{\boldmath}
-\DeclareMathAlphabet{\mathscr}{U}{rsfs}{m}{n}
-\SetMathAlphabet{\mathbb}{normal}{U}{%
-  \ifhep@serif dsrom\else dsss\fi%
-}{m}{n}
+\ifhep@symbols
+  \RequirePackage{bm}
+  \AtBeginDocument{\let\mathbf\bm}
+  \g@addto@macro\bfseries{\boldmath}
+  \DeclareMathAlphabet{\mathscr}{U}{rsfs}{m}{n}
+  \ifhep@minion
+    \DeclareMathAlphabet{\mathbb}{U}{%
+      \ifhep@serif dsrom\else dsss\fi%
+    }{m}{n}
+  \else
+    \ifhep@ams\else
+      \SetMathAlphabet{\mathbb}{normal}{U}{%
+        \ifhep@serif dsrom\else dsss\fi%
+      }{m}{n}
+    \fi
+  \fi
+\fi
 
 \RequirePackage{physics}
 \RequirePackage{cancel}
 \RequirePackage{slashed}
 \RequirePackage{units}
-
 \newcommand{\inv}[2][1]{#2\ensuremath{^{-#1}}}
-
 \AtBeginDocument{\mathdef{\d}{\dd}}
-
 \newcommand{\oset}[3][-1pt]{%
   \raisebox{1pt}{\ensuremath{\mathop{#3}\limits^{%
         \vbox to#1{\kern-2\ex@\hbox{$\scriptscriptstyle#2$}\vss}%
@@ -324,7 +355,6 @@
 \renewcommand{\dbltopfraction}{.9} % .7
 \renewcommand{\textfraction}{.1} % .2
 \renewcommand{\floatpagefraction}{.8} % .5
-
 \let\@figure@\figure%
 \let\@end@figure@\endfigure%
 \let\@table@\table%
@@ -393,7 +423,6 @@
     \begin@subcaption@minipage[#1]{#2\linewidth}%
   \fi%
 }{\endminipage}
-
 \ifhep@revtex
   \RequirePackage{ragged2e}
   \DeclareCaptionFormat{revtex}{#1#2\justifying{#3}}
@@ -428,7 +457,6 @@
 \newcommand{\affiliationfont}[1]{\def\hep@affiliation@font{#1}}
 \let\hep@date@font\relax
 \newcommand{\datefont}[1]{\def\hep@date@font{#1}}
-
 \newcommand{\presubtitle}[1]{\def\hep@pre@sub@title{#1}}
 \newcommand{\subtitle}[1]{\def\sub@title{#1}}
 \newcommand{\postsubtitle}[1]{\def\hep@post@sub@title{#1}}
@@ -441,7 +469,9 @@
 \posttitle{\par\end{center}}
 \presubtitle{\begin{center}\large\hep@subtitle@font}
 \postsubtitle{\par\end{center}}
-\preauthor{\begin{center}\large\hep@author@font\lineskip.5em\begin{tabular}[t]{c}}
+\preauthor{%
+  \begin{center}\large\hep@author@font\lineskip.5em\begin{tabular}[t]{c}%
+}
 \postauthor{\end{tabular}\par\end{center}}
 \predate{\begin{center}\hep@date@font}
 \postdate{\par\end{center}}
@@ -454,17 +484,21 @@
   \renewcommand{\email}[1]{\unskip\thanks{\online{mailto:##1}{##1}}}%
   \hep@author
 }
-\newcommand\active@comma{,\penalty-5\relax}
-\newcommand\cat@comma@active{\catcode`\,\active}
-{\cat@comma@active\gdef,{\active@comma}}
-\newcommand\@affil[1]{%
+\newcommand\hep@active@comma{,\penalty-5\relax}
+\newcommand\hep@cat@comma@active{\catcode`\,\active}
+{\hep@cat@comma@active\gdef,{\hep@active@comma}}
+\newcommand\hep@affil[1]{%
   \endgroup\@flushglue=0pt plus .5\linewidth\affil{#1}%
 }
-\def\@affil@opt[#1]#2{%
+\def\hep@affil@opt[#1]#2{%
   \endgroup\@flushglue=0pt plus .5\linewidth\affil[#1]{#2}%
 }
-\DeclareRobustCommand\@affiliation{\@ifnextchar[{\@affil@opt}{\@affil}}
-\newcommand{\affiliation}{\begingroup\cat@comma@active\@affiliation}
+\DeclareRobustCommand\hep@affiliation{%
+  \@ifnextchar[{\hep@affil@opt}{\hep@affil}%
+}
+\newcommand{\affiliation}{%
+  \begingroup\hep@cat@comma@active\hep@affiliation%
+}
 
 \let\hep@preprint\relax
 \newcommand\preprint[1]{\def\hep@preprint{#1}}
@@ -475,7 +509,6 @@
   \end{varwidth}%
 }
 \preprintfont{\sc}
-
 \RequirePackage{atbegshi}
 \RequirePackage{picture}
 \newcommand{\placepreprint}{%
@@ -670,23 +703,18 @@
 }
 \let\hep@ref\ref
 \AtBeginDocument{\renewcommand\ref{\no@break@before\hep@ref}}
-
 \renewcommand\eqref{\no@break@before\labelcref}
-
 \let\hep@subref\subref
 \renewcommand\subref{\no@break@before\hep@subref}
 \renewcommand*\subcaption@ref[2]{\begingroup%
   \caption@setoptions{sub}%
   \subcaption@reffmt\p@subref{\hep@ref#1{sub@#2}}%
 \endgroup}
-
 \newcommand{\subcref}[1]{\cref{sub@#1}}
-
 \NewDocumentCommand{\eqcrefname}{mmo}{
   \crefname{#1}{#2}{\IfValueTF{#3}{#3}{#2s}}
   \creflabelformat{#1}{(##2##1##3)}
 }
-
 \DeclareRobustCommand{\labelcrefrange}[2]{%
   \@crefrangenostar{labelcref}{#1}{#2}%
 }
@@ -694,7 +722,6 @@
 
 \let\hep@cite\cite
 \renewcommand\cite{\no@break@before\hep@cite}
-
 \ifnum\pdf@strcmp{\hep@bibliography}{false}=0\else
 \NewBibliographyString{refname}
 \NewBibliographyString{refsname}
@@ -739,24 +766,20 @@
     \glsdohypertarget{#1}{#2}%
   }%
 }}
-
 \RequirePackage[excludeor]{everyhook}
 \newcommand{\begin@sentence}{1001}
 \PushPostHook{par}{{\spacefactor=\begin@sentence}}
-
 \def\frenchspacing{%
   \sfcode`\.\begin@sentence \sfcode`\?\begin@sentence
   \sfcode`\!\begin@sentence \sfcode`\:\begin@sentence
   \sfcode`\;\@m \sfcode`\,\@m
 }
-
 \newcommand{\if@begin@of@sentence}[2]{\leavevmode\protecting{%
   \ifboolexpr{ test {\ifnumcomp{\spacefactor}{=}{3000}} or%
                test {\ifnumcomp{\spacefactor}{=}{2000}} or%
                test {\ifnumcomp{\spacefactor}{=}{\begin@sentence}}%
   }{#1}{#2}%
 }}
-
 \NewDocumentCommand{\acronym}{somsmo}{
   \newabbreviation[
     type=\acronymtype,
