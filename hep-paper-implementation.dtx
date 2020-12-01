@@ -18,9 +18,9 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-paper}[2020/10/01 v1.5 Publications in High Energy Physics]
-%<datamodel>\ProvidesFile{hep-paper.dbx}[2020/10/01 v1.5 HEP-Paper biblatex data model]
-%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2020/10/01 v1.5 HEP-Paper documentation]
+%<package>\ProvidesPackage{hep-paper}[2020/12/01 v1.6 Publications in High Energy Physics]
+%<datamodel>\ProvidesFile{hep-paper.dbx}[2020/12/01 v1.6 HEP-Paper biblatex data model]
+%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2020/12/01 v1.6 HEP-Paper documentation]
 %
 %<*documentation>
 
@@ -30,7 +30,6 @@
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
-\def\MacroFont{\fontencoding\encodingdefault\fontfamily{lmtt}\fontseries\mddefault\fontshape\shapedefault\small}
 
 \MacroIndent=1.5em
 
@@ -44,6 +43,7 @@
 \acronym{LM}{latin modern}
 
 \usepackage{hologo}
+\usepackage{fonttable}
 
 \newenvironment{columns}[1][.5]{%
   \par\vspace{-\bigskipamount}%
@@ -56,6 +56,7 @@
 }{\end{minipage}\end{minipage}\par}
 
 \setlength{\fboxsep}{1pt}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
 %</documentation>
 
 %<*driver>
@@ -68,7 +69,7 @@
 %
 % \fi
 %
-% \CheckSum{1551}
+% \CheckSum{1673}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -92,6 +93,7 @@
 % \changes{v1.3}{2020/05/01}{Inclusion of JHEP and JCAP package options. Fix of incompatibility with recent subcaption package version. Move of biblatex datamodel into its own file}
 % \changes{v1.4}{2020/09/01}{If possible the compatibility options are selected automatically. Inclusion of PubMed IDs in bibliography.}
 % \changes{v1.5}{2020/10/01}{Reduce the numer of math alphabets used in sans serif mode. Add more title options such as a subtitle. Use standard class options.}
+% \changes{v1.6}{2020/12/01}{Implementation of the twocolumn mode.}
 %
 % \ifshort
 %<*documentation>
@@ -99,7 +101,7 @@
 %
 \GetFileInfo{hep-paper.sty}
 
-\title{The \software{hep-paper} package\thanks{This document corresponds to \software{hep-paper}~\fileversion.}}
+\title{The \textsmaller[1.5]{HEP\raisebox{.25ex}{--}PAPER} package\thanks{This document corresponds to \software{hep-paper}~\fileversion.}}
 \subtitle{Publications in high energy physics}
 \author{Jan Hajer \email{jan.hajer@uclouvain.be}}
 \affiliation{Centre for Cosmology, Particle Physics and Phenomenology, Université catholique de Louvain, Louvain-la-Neuve B-1348, Belgium}
@@ -131,7 +133,7 @@ For usual publications it is enough to load additionally to the |article| class 
 The most notable changes after loading the \software{hep-paper} package is the change of some \hologo{LaTeX} defaults.
 The paper and font sizes are set to A4 and \unit[11]{pt}, respectively.
 Additionally, the paper geometry is adjusted using the \software{geometry} package \cite{geometry}.
-Furthermore, the font is changed to \LM using the \software{lmodern} package \cite{lmodern} with \software{microtype} \cite{microtype} optimizations.
+Furthermore, the font is changed to \LM using the \software{cfr-lm} package \cite{cfr-lm} with \software{microtype} \cite{microtype} optimizations.
 Finally, \PDF hyperlinks are implemented with the \software{hyperref} package \cite{hyperref}.
 
 \subsection{Options}
@@ -166,18 +168,21 @@ The \hologo{LaTeX} default is separation via indentation the |parskip| option sw
 
 \DescribeMacro{symbols}
 The |symbols|=\meta{family} set the family of the symbol fonts.
-|symbols=ams| loads two \hologo{AmS} fonts \cite{amsfonts} and the \software{bm} bold fonts.
-The default setting replaces additionally the blackboard font with the \software{dsfont} \cite{dsfont}.
+|symbols=ams| loads the two \hologo{AmS} fonts \cite{amsfonts} and the \software{bm} bold fonts.
+The default |symbols=true| replaces additionally the blackboard font with the \software{dsfont} \cite{dsfont}.
 |symbols=minion| switches the symbol fonts to the Adobe MinionPro companion font from the \software{MnSymbol} package \cite{MnSymbol}.
-|symbols=false| deactivates additional symbol fonts.
+|symbols=false| deactivates loading any additional symbol fonts.
 
 \subsubsection{Deactivation}
 
 The \software{hep-paper} package loads few bigger packages which have a large impact on the document.
-The deactivation options prevent such adjustments.
+The deactivation options can prevent such and other adjustments.
 
 \DescribeMacro{defaults}
 The |defaults| option prevents the adjustment of the page geometry and the font size set by the document class.
+
+\DescribeMacro{lining}
+The |lining| option deactivates the use of text- (\texto{123}) in favour of lining- (\textl{123}) figures in text mode.
 
 \DescribeMacro{title}
 The |title=false| option deactivates the title page adjustments.
@@ -213,6 +218,9 @@ The |revtex| option activates the REV\hologo{TeX} \cite{revtex} compatibility mo
 \DescribeMacro{pos}
 The |pos| option activates the \software{PoS} compatibility mode.
 
+\DescribeMacro{springer}
+The |springer| option activates the compatibility mode the |svjour| class \cite{svjour}.
+
 \subsubsection{Reactivation}
 
 The \software{hep-paper} package deactivates unrecommended macros, which can be reactivated manually.
@@ -224,6 +232,11 @@ The |manualplacement| option reactivates manual float placement.
 The |eqnarray| option reactivates the depreciated |eqnarray| environment.
 
 \section{Macros and environments}
+
+\DescribeMacro{twocolumn}
+\DescribeMacro{abstract*}
+If the global |twocolumn| option is present the page geometry is changed to cover almost the entire page.
+Additionally the |abstract*| environment is defined that generates a one column abstract and takes care of placing the title information.
 
 \subsection{Title page}
 
@@ -260,7 +273,7 @@ Various title font macros are defined, allowing to change the appearance of the 
 
 \subsection{Text}
 
-Hyphenation is provided by the \software{babel} package \cite{babel} and quotation commands are provided by the \software{csquotes} package \cite{csquotes} recommended by the \software{babel} package.
+Hyphenation is provided by the \software{babel} package \cite{babel} and quotation commands are provided by the \software{csquotes} package \cite{csquotes}.
 \DescribeMacro{\enquote}
 \DescribeMacro{\MakeOuterQuote}
 The latter package provides the convenient macros |\enquote|\marg{text} and |\MakeOuterQuote{"}| allowing to leave the choice of quotation marks to \hologo{LaTeX} and use |"| instead of the pair |``| and |''|, respectively.
@@ -276,7 +289,7 @@ The |\no|\marg{number} macro is typeset as \no{123}.
 The |\software|\oarg{version}\marg{name} macro is typeset as \software[\fileversion]{HEP-Paper}.
 
 \DescribeMacro{\online}
-The |\online|\marg{url}\marg{text} macro combines the features of the |\href|\marg{url} \marg{text} \cite{hyperref} and the |\url|\marg{text} \cite{url} macros, resulting in \eg \online{https://ctan.org/pkg/hep-paper}{ctan.org/pkg/hep-paper}.
+The |\online|\marg{url}\marg{text} macro combines the features of the |\href|\marg{url}\allowbreak\marg{text}\allowbreak \cite{hyperref} and the |\url|\marg{text} \cite{url} macros, resulting in \eg \online{https://ctan.org/pkg/hep-paper}{ctan.org/pkg/hep-paper}.
 
 
 \DescribeMacro{inlinelist}
@@ -317,7 +330,7 @@ The three main points are
 \end{columns}
 
 \DescribeMacro{\textsc}
-A bold versions \textbf{\textsc{Small Caps}} and a sans serif version of \textsf{\textsc{Small Caps}} based on the \CM font is provided, the latter using the \software{sansmathfonts} package \cite{sansmathfonts}.
+A bold versions \textbf{\textsc{Small Caps}} and a sans serif version of \textsf{\textsc{Small Caps}} based on the \CM font \cite{cm} is provided, the latter using the \software{sansmathfonts} package \cite{sansmathfonts}.
 
 \DescribeMacro{\underline}
 \DescribeMacro{\overline}
@@ -326,7 +339,7 @@ The |\overline| macro is extended to also \overline{overline} text outside of ma
 
 \DescribeMacro{\useparskip}
 \DescribeMacro{\useparindent}
-If the |parskip| option is activated the |\useparindent| macro switches back the usual parindent mode, while the |\useparskip| macro switches to the parskip mode.
+If the |parskip| option is activated the |\useparindent| macro switches to the usual parindent mode, while the |\useparskip| macro switches to the parskip mode.
 
 \subsubsection{References and footnotes}
 
@@ -354,7 +367,8 @@ The |\acronym|\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\meta{*}\mar
 The first star prevents the addition of an \enquote{s} to the abbreviation plural.
 The second star restores the \hologo{TeX} default of swallowing subsequent white space.
 The long form is only shown at the first appearance of these macros, later appearances generate the abbreviation with a hyperlink to the long form.
-Capitalization at the beginning of paragraphs and sentences is ensured.
+The long form is never used in math mode.
+Capitalization at the beginning of paragraphs and sentences is (mostly) ensured.
 The |\shortacronym| and |\longacronym| macros are drop-in replacements of the |\acronym| macro showing only the short or long form of their acronym.
 \DescribeMacro{\resetacronym}
 \DescribeMacro{\dummyacronym}
@@ -369,10 +383,8 @@ They in turn load the \hologo{AmSLaTeX} \software{amsmath} \cite{amsmath} and \s
 \DescribeMacro{\mathbf}
 Bold math, via |\mathbf| is improved by the \software{bm} package \cite{bm}, \ie ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
 Macros switching to |bfseries| such as |\section|\marg{text} are ensured to also typeset math in bold.
-This may cause trouble if bold symbols carry an additional non-implicit meaning.
 \DescribeMacro{\text}
 The |\text|\marg{text} macro makes it possible to write text within math mode, \ie ($ \text A  \text b  \text \Gamma \text \delta \text{\textbf A} \text{\textbf b} \text{\textbf \Gamma} \text{\textbf \delta}$).
-This behaviour conflicts \eg with the \software{sansserif} package option.
 \DescribeMacro{\mathsf}
 The math sans serif alphabet is redefined to be italic sans serif if the main text is serif and italic serif if the main text is sans serif, \ie ($\mathsf A \mathsf b \mathsf \Gamma \mathsf \delta \mathbf{\mathsf A} \mathbf{\mathsf b} \mathbf{\mathsf \Gamma} \mathbf{\mathsf \delta}$).
 \DescribeMacro{\mathscr}
@@ -385,7 +397,8 @@ Details about the font handling in \hologo{TeX} can be found in \ccite{fntguide}
 
 \DescribeMacro{\nicefrac}
 \DescribeMacro{\flatfrac}
-The |\frac|\marg{number}\marg{number} macro is accompanied by |\nicefrac|\linebreak[1]\marg{number}\linebreak[1]\marg{number} and |\flatfrac|\marg{number}\marg{number} leading to $\frac12$, $\nicefrac 12$, and $\flatfrac 12$.
+\DescribeMacro{\textfrac}
+The |\frac|\marg{number}\marg{number} macro is accompanied by |\nicefrac|\linebreak[1]\marg{number}\linebreak[1]\marg{number}, |\textfrac|\marg{number}\marg{number}, and |\flatfrac|\marg{number}\marg{number} leading to $\frac12$, $\nicefrac12$, \textfrac12, and $\flatfrac12$.
 \DescribeMacro{\diag}
 \DescribeMacro{\sgn}
 Diagonal matrix |\diag| and signum |\sgn| operators are defined.
@@ -532,13 +545,19 @@ As a rule of thumb if you have to use |\notag|, |\nonumber|, or perform manual s
 
 \subsubsection{Physics}
 
+\DescribeMacro{\unit}
+\DescribeMacro{\inv}
+The correct spacing for units, \cf \cref{eq:greek}, is provided by the macro |\unit|\oarg{value} \marg{unit} from the \software{units} package \cite{units} which can also be used in text mode.
+The macro |\inv|\oarg{power}\marg{text} allows to avoid math mode also for inverse units such as \unit[5]{\inv{fb}} typeset via |\unit[5]{\inv{fb}}|.
+
 Greek letters are adjusted to always be italic and upright in math and text mode, respectively, using the \software{fixmath} \cite{fixmath} and \software{alphabeta} \cite{alphabeta} packages.
 This allows differentiations like
 \begin{align}
-\sigma &= \unit[5]{fb} \ , & &\text{at \unit[5]{\sigma} C.L.} \ , & \mu &= \unit[5]{cm} \ , & l &= \text{\unit[5]{\mu m}} \ ,
+\sigma &= \unit[5]{fb} \ , & &\text{at \unit[5]{\sigma} C.L.} \ , & \mu &= \unit[5]{cm} \ , & l &= \unit[5]{\text \mu m} \ ,
 \label{eq:greek}
 \end{align}
 and \eg to distinguish gauge $\nu$ and mass \nu\ eigenstates in models with massive neutrinos.
+Note that |\mathrm| and therefore |\unit| transform italic greek character to seemingly random upright characters, this can be avoided by using |\unit{\text\mu m}|.
 Additionally, Greek letters can also be directly typed using Unicode.
 
 \DescribeMacro{\ev}
@@ -561,11 +580,6 @@ The |\cancel|\marg{characters} macro from the \software{cancel} package \cite{ca
 
 \DescribeMacro{\overleftright}
 A better looking over left right arrow is defined \ie $\overleftright{\partial}$.
-
-\DescribeMacro{\unit}
-\DescribeMacro{\inv}
-The correct spacing for units, \cf \cref{eq:greek}, is provided by the macro |\unit|\oarg{value} \marg{unit} from the \software{units} package \cite{units} which can also be used in text mode.
-The macro |\inv|\oarg{power}\marg{text} allows to avoid math mode also for inverse units such as \unit[5]{\inv{fb}} typeset via |\unit[5]{\inv{fb}}|.
 
 \subsection{Floats}
 
@@ -682,18 +696,103 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %<*package>
 % \fi
 %
-% \section{Allocation of math alphabets}
+% \section{Math alphabet allocation}
 %
-% Of the 16 available math alphabets, \hologo{TeX} loads four alphabets by default
+% \bgroup
+% \makeatletter
+% \renewcommand{\arraystretch}{0}
+% \setlength{\tabcolsep}{0pt}
+% \nodecimals
+% \nohexoct
+% \fntcolwidth=0pt
+% \setlength\arrayrulewidth{0pt}
+%
+% \begin{figure}
+% \begin{panels}[t]{.22}
+% \fonttable{rm-\ifhep@serif lmr\else lmss\fi10}
+% \caption{Text}
+% \panel{.22}
+% \fontrange{0}{127}
+% \fonttable{\ifhep@serif lm\else cmbr\fi mi10}
+% \caption{Math}\vspace{2ex}
+% \fonttable{\ifhep@serif lm\else cmbr\fi sy10}
+% \caption{Symbol}
+% \panel{.352}
+% \fontrange{0}{127}
+% \fonttable{\ifhep@serif\else ss\fi msam10}
+% \caption{AMS a}\vspace{2ex}
+% \fonttable{\ifhep@serif\else ss\fi msbm10}
+% \caption{AMS b}
+% \panel{.19}
+% \fontrange{0}{127}
+% \fonttable{eufm10}
+% \caption{Euler fraktur}\vspace{2ex}
+% \fontrange{64}{95}
+% \fonttable{eusm10}
+% \caption{Euler caligraphy}\vspace{2ex}
+% \fonttable{MnSymbolS10}
+% \caption{Minion caligraphy}\vspace{2ex}
+% \fonttable{ds\ifhep@serif rom\else ss\fi10}
+% \caption{Doublestroke}
+% \end{panels}
+% \caption{Basic math fonts}
+% \end{figure}
+%
+% \begin{figure}
+% \hspace*{-2cm}%
+% \begin{panels}[t]{.3}
+% \fontrange{0}{127}
+% \fonttable{cm\ifhep@serif\else ss\fi ex10}
+% \caption{Computer modern}
+% \panel{.22}
+% \fontrange{0}{143}
+% \fonttable{MnSymbolE5}
+% \caption{Mn Symbol E 1}
+% \panel{.6}
+% \fontrange{144}{215}
+% \fonttable{MnSymbolE5}
+% \caption{Mn Symbol E 2}\vspace{2ex}
+% \begin{minipage}{.48\linewidth}
+% \fontrange{0}{127}\fonttable{MnSymbolF10}
+% \caption{Mn Symbols F}
+% \end{minipage}%
+% \begin{minipage}{.5\linewidth}
+% \fontrange{0}{47}\fonttable{\ifhep@serif\else ss\fi esint10}
+% \caption{Extended set of integrals}
+% \end{minipage}
+% \end{panels}
+% \caption{Math extension fonts}
+% \end{figure}
+%
+% \begin{figure}
+% \begin{panels}[t]{.26}
+% \fonttable{MnSymbolA10}
+% \caption{Mn Symbol A}
+% \panel{.26}
+% \fonttable{MnSymbolB10}
+% \caption{Mn Symbol B}
+% \panel{.26}
+% \fonttable{MnSymbolC10}
+% \caption{Mn Symbol C}
+% \panel{.2}
+% \fonttable{MnSymbolD10}
+% \caption{Mn Symbol D}
+% \end{panels}
+% \makeatother
+% \caption{Minion symbol fonts}
+% \end{figure}
+% \egroup
+%
+% Of the 16 available math alphabets, \hologo{TeX} loads four by default
 % \begin{enumdescript}[start=0]
-% \item{OT1} \label{it:math text} Text (latin, greek, numerals, text symbols)
+% \item{OT1} \label{it:math text} Text (latin, upper case greek, numerals, text symbols)
 % \item{OML} \label{it:math italic} Math Italic (latin, greek, numerals, text symbols)
 % \item{OMS} \label{it:math symbol} Symbol (|\mathcal|, operators)
 % \item{OMX} \label{it:math extension} Math Extension (big operators, delimiters)
 % \end{enumdescript}
-% The text font \ref{it:math text}\strut\ of \CM is \textbf{cmr10} |\OT1/cmr/m/n/10|, which is relaced by \LM to be \textbf{rm-lmr10} |\OT1/lmr/m/n/10|, the |sansserif| option uses \textbf{rm-lmss10} |\OT1/lmss/m/n/10|.
-% The italic math font \ref{it:math italic} of \CM is \textbf{cmmi10} |\OML/cmm/m/it/|\allowbreak|10|, and is repalced by \LM to be \textbf{lmmi10} |\OML/lmm/m/it/10|, the |sansserif| options uses \textbf{cmbrmi10} |\OML/cmbrm/m/it/10| from the \software{cmbright} package \cite{cmbright}.
-% The symbol font \ref{it:math symbol}\strut\ of \CM is \textbf{cmsy10} |\OMS/cmsy/m/n/10|, and is repalced by \LM to be \textbf{lmsy10} |\OMS/lmsy/m/n/10|, the |sansserif| options uses \textbf{cmsssy10} |\OMS/cmsssy/m/n/10| from the \software{sansmathfonts} package \cite{sansmathfonts}.
+% The text font \ref{it:math text}\strut\ of \CM is \textbf{cmr10} |\OT1/cmr/m/n/10|, which is replaced by \LM to be \textbf{rm-lmr10} |\OT1/lmr/m/n/10|, the |sansserif| option uses \textbf{rm-lmss10} |\OT1/lmss/m/n/10|.
+% The italic math font \ref{it:math italic} of \CM is \textbf{cmmi10} |\OML/cmm/m/it/|\allowbreak|10|, and is replaced by \LM to be \textbf{lmmi10} |\OML/lmm/m/it/10|, the |sansserif| options uses \textbf{cmbrmi10} |\OML/cmbrm/m/it/10| from the \software{cmbright} package \cite{cmbright}.
+% The symbol font \ref{it:math symbol}\strut\ of \CM is \textbf{cmsy10} |\OMS/cmsy/m/n/10|, and is replaced by \LM to be \textbf{lmsy10} |\OMS/lmsy/m/n/10|, the |sansserif| options uses \textbf{cmsssy10} |\OMS/cmsssy/m/n/10| from the \software{sansmathfonts} package \cite{sansmathfonts}.
 % The extension font \ref{it:math extension}\strut\ of \CM is \textbf{cmex10} |\OMX/cmex/m/n/5|, and is replaced by the \software{exscale} package \cite{exscale} to be \textbf{cmex10} |\OMX/cmex/m/n/10|, the |sansserif| option loads \textbf{cmssex10} |\OMX/cmssex/m/n/10|.
 % The \software{amssymb} (\software{amsfonts}) packages \cite{amssymb} load two more symbol fonts
 % \begin{enumdescript}[start=4]
@@ -703,7 +802,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % The |sansserif| option replaces them with \textbf{ssmsam10} |\U/ssmsa/m/n/10| and \textbf{ssmsbm10} |\U/ssmsb/m/n/10| from the \software{sansmathfonts} package \cite{sansmathfonts}, respectively.
 % The \software{bm} package \cite{bm} loads the bold version for the fonts \labelcref{it:math text,it:math italic,it:math symbol}.
 %
-% Other math alphabets are only loaded on demand, \eg |\mathsf| uses a sans serif font and |\mathbf| without \software{bm} uses a bold font.
+% Other math alphabets are only loaded on demand, \eg |\mathsf| uses a sans serif font and |\mathbf| without the \software{bm} package uses a bold font.
 % The |\mathscr| macro uses the script font from the \software{mathrsfs} package \cite{mathrsfs}
 % \begin{enumdescript}[start=9]
 % \item{rsfs10} |\U/rsfs/m/n/10| Math script font (capital letters)
@@ -718,7 +817,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{enumdescript}
 %
 % The \software{hep-paper} package uses nine of the available 16 math alphabets.
-% This number can be reduced by three using |\newcommand{\bmmax}{0}| from the \software{bm} package \cite{bm}.
+% This number can be reduced by three using |\newcommand{\bmmax}{0}| from the \software{bm} package \cite{bm} and brought down to the default of four with the option |symbols=false|.
 %
 % The |symbols=minion| options replaces the fonts \labelcref{it:math symbol,it:math extension,it:math ams a,it:math ams b} with corresponding fonts from the \software{MnSymbol} package \cite{MnSymbol}.
 % Additionally, two more symbol alphabets are allocated, the \software{bm} package \cite{bm} loads one more font and now |\mathcal| triggers the use of one additional alphabet.
@@ -745,7 +844,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{font}
-% Define a |font=|\meta{size} option.
+% Define a |figures=|\meta{size} option.
 % Make \unit[11]{pt} the default font size.
 %    \begin{macrocode}
 \DeclareStringOption[11pt]{font}
@@ -777,7 +876,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{symbols}
-% Provide the option |symbols| allowing to switch the symbol font.
+% Provide the |symbols| option allowing to switch the symbol font.
 %    \begin{macrocode}
 \DeclareStringOption[true]{symbols}
 %    \end{macrocode}
@@ -792,29 +891,42 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{lining}
+% Define the |lining| option deactivating the use of text figures in text mode.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{lining}
+%    \end{macrocode}
+% \end{macro}
 % \begin{macro}{title}
-% Provide the option |title| for deactivating redefinition of title macros.
+% Provide the |title| option deactivating redefinitions of title macros.
 %    \begin{macrocode}
 \DeclareBoolOption[true]{title}
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{physics}
+% Provide the |physics| option for deactivating redefinition of physics macros.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{physics}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{bibliography}
-% Provide the option |bibliography| for passing a |style| string to the \software{biblatex} package \cite{biblatex} or disabling the automatic loading of |biblatex|.
+% Provide the |bibliography| option for passing a |style| string to the \software{biblatex} package \cite{biblatex} or disabling the automatic loading of |biblatex|.
 %    \begin{macrocode}
 \DeclareStringOption[numeric-comp]{bibliography}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{glossaries}
-% Provide the option |glossaries| able to turn of the use of the \software{glossaries} package \cite{glossaries}.
+% Provide the |glossaries| option able to turn of the use of the \software{glossaries} package \cite{glossaries}.
 %    \begin{macrocode}
 \DeclareBoolOption[true]{glossaries}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{references}
-% Provide the option |references| for preventing the \software{cleveref} package from being loaded redefinitions of reference macros.
+% Provide the |references| option for preventing the \software{cleveref} package from being loaded redefinitions of reference macros.
 %    \begin{macrocode}
 \DeclareBoolOption[true]{references}
 %    \end{macrocode}
@@ -823,44 +935,51 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \subsection{Compatibility}
 %
 % \begin{macro}{beamer}
-% Provide the option |beamer| for \software{beamer} \cite{beamer} compatibility mode.
+% Provide the |beamer| option for \software{beamer} \cite{beamer} compatibility mode.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{beamer}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{revtex}
-% Provide the option |revtex| for REV\hologo{TeX} \cite{revtex} compatibility mode.
+% Provide the |revtex| option for REV\hologo{TeX} \cite{revtex} compatibility mode.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{revtex}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{jhep}
-% Provide the option |jhep| for JHEP \cite{jhep} compatibility mode.
+% Provide the |jhep| option for JHEP \cite{jhep} compatibility mode.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{jhep}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{jcap}
-% Provide the option |jcap| for JCAP \cite{jcap} compatibility mode.
+% Provide the |jcap| option for JCAP \cite{jcap} compatibility mode.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{jcap}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{pos}
-% Provide the option |pos| for PoS compatibility mode.
+% Provide the |pos| option for PoS compatibility mode.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{pos}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{springer}
+% Provide the |springer| option for Springer compatibility mode.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{springer}
 %    \end{macrocode}
 % \end{macro}
 %
 % \subsection{Reactivation}
 %
 % \begin{macro}{eqnarray}
-% Provide the option |eqnarray| for reactivating the |eqnarray| environment.
+% Provide the |eqnarray| option for reactivating the |eqnarray| environment.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{eqnarray}
 %    \end{macrocode}
@@ -897,6 +1016,17 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % \subsection{Set compatibility}
 %
+% Set the |springer| compatibility options.
+%    \begin{macrocode}
+\@ifclassloaded{svjour}{\setkeys{hep}{springer}}{}
+\@ifclassloaded{svjour2}{\setkeys{hep}{springer}}{}
+\@ifclassloaded{svjour3}{\setkeys{hep}{springer}}{}
+\ifhep@springer
+  \setkeys{hep}{defaults, title=false}
+  \let\cl@chapter\undefined
+\fi
+%    \end{macrocode}
+%
 % Set the |pos| compatibility options.
 %    \begin{macrocode}
 \@ifclassloaded{PoS}{\setkeys{hep}{pos}}{}
@@ -912,6 +1042,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \ifhep@beamer
   \setkeys{hep}{defaults, title=false, references=false, sansserif}
   \@ifpackageloaded{beamerbasefont}{\usefonttheme{professionalfonts}}{}
+  \setbeamertemplate{navigation symbols}{}
 \fi
 %    \end{macrocode}
 %
@@ -948,6 +1079,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
     linkcolor=blue, menucolor=blue, pagecolor=blue
   }{hyperref}
   \PassOptionsToPackage{reset}{geometry}
+  \AtBeginDocument{\renewcommand{\foreignabbrfont}{}}
 \fi
 %    \end{macrocode}
 % Set the JHEP compatibility options.
@@ -993,13 +1125,19 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \fi
 \RequirePackage[\hep@encoding]{fontenc}
 %    \end{macrocode}
-% Fix the remaining \CM fonts \cite{fix-cm}, load the \software{lmodern} font \cite{lmodern}, the |textcomp| extension \cite{textcomp}, and the \software{microtype} font optimization \cite{microtype}.
+% Fix the remaining \CM fonts \cite{fix-cm}, load the \LM font via \software{cfr-lm} \cite{cfr-lm} supported also by \software{lmodern} \cite{lmodern}, the \software{textcomp} extension \cite{textcomp}, and the \software{microtype} font optimization \cite{microtype}.
+% Adjust the figures according to the |lining| option and ensure that tables always use lining, using the \software{etoolbox} package \cite{etoolbox}.
 %    \begin{macrocode}
 \RequirePackage{fix-cm}
-\RequirePackage{lmodern}
-\renewcommand{\ttdefault}{lmvtt}
-\RequirePackage{textcomp}
 \RequirePackage{microtype}
+\ifhep@lining
+  \RequirePackage[rm={lining},sf={lining},tt={lining}]{cfr-lm}
+\else
+  \RequirePackage{cfr-lm}
+\fi
+\RequirePackage{etoolbox}
+% \AtBeginEnvironment{tabular}{\tlstyle}
+\RequirePackage{textcomp}
 %    \end{macrocode}
 %
 % Define bold and sans serif small caps font shapes using the \software{fontspec} package \cite{fontspec}.
@@ -1016,6 +1154,12 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %  \item[sc] Caps and small caps font shape
 % \end{description}
 %    \begin{macrocode}
+\newcommand{\hep@sf@fontshape}[3]{%
+  \DeclareFontShape{\hep@encoding}{\sfdefault}{#1}{#2}{#3}{}%
+}
+\newcommand{\hep@rm@fontshape}[3]{%
+  \DeclareFontShape{\hep@encoding}{\rmdefault}{#1}{#2}{#3}{}%
+}
 \ifxetexorluatex
   \RequirePackage{fontspec}
   \setmainfont{Latin Modern Roman}[
@@ -1025,19 +1169,23 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
       SmallCapsFont={[cmunbx.otf]}
     }
   ]
-  \DeclareFontShape{\hep@encoding}{lmss}{bx}{sc}{<->cmssbxcsc10}{}
-  \DeclareFontShape{\hep@encoding}{lmss}{b}{sc}{<->cmssbxcsc10}{}
-  \DeclareFontShape{\hep@encoding}{lmss}{m}{sc}{%
+  \hep@sf@fontshape{bx}{sc}{<->cmssbxcsc10}{}
+  \hep@sf@fontshape{b}{sc}{<->cmssbxcsc10}{}
+  \hep@sf@fontshape{m}{scit}{<->cmsscsci10}{}
+  \hep@sf@fontshape{m}{sc}{%
     <-9>cmsscsc8<9-10>cmsscsc9<10->cmsscsc10%
   }{}
 \else
   \rmfamily
-  \DeclareFontShape{\hep@encoding}{lmr}{b}{sc}{<->ssub*cmr/bx/sc}{}
-  \DeclareFontShape{\hep@encoding}{lmr}{bx}{sc}{<->ssub*cmr/bx/sc}{}
+  \hep@rm@fontshape{b}{sc}{<->ssub*cmr/bx/sc}{}
+  \hep@rm@fontshape{bx}{sc}{<->ssub*cmr/bx/sc}{}
   \sffamily
-  \DeclareFontShape{\hep@encoding}{lmss}{bx}{sc}{<->ssub*xcmss/bx/sc}{}
-  \DeclareFontShape{\hep@encoding}{lmss}{b}{sc}{<->ssub*xcmss/bx/sc}{}
-  \DeclareFontShape{\hep@encoding}{lmss}{m}{sc}{<->ssub*xcmss/m/sc}{}
+  \hep@sf@fontshape{m}{sc}{<->ssub*xcmss/m/sc}{}
+  \hep@sf@fontshape{b}{sc}{<->ssub*xcmss/bx/sc}{}
+  \hep@sf@fontshape{bx}{sc}{<->ssub*xcmss/bx/sc}{}
+  \hep@sf@fontshape{m}{scit}{<->ssub*xcmss/m/scit}{}
+  \hep@sf@fontshape{b}{scit}{<->ssub*xcmss/bx/scit}{}
+  \hep@sf@fontshape{bx}{scit}{<->ssub*xcmss/bx/scit}{}
 \fi
 %    \end{macrocode}
 %
@@ -1051,7 +1199,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % Load the \software{babel} package \cite{babel} for hyphenation and the recommended \software{csquotes} package \cite{csquotes}.
 %    \begin{macrocode}
 \RequirePackage[\hep@lang]{babel}
-\RequirePackage{csquotes}
+\RequirePackage[autostyle]{csquotes}
 %    \end{macrocode}
 %
 % \begin{macro}{\underline}
@@ -1120,7 +1268,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \begin{macrocode}
 \RequirePackage{relsize}
 \newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
-  {\smaller\textsc{#2}~#1}%
+  {\smaller[.5]\textsc{#2}~#1}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1131,7 +1279,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % Define a macro for typesetting emails.
 %    \begin{macrocode}
 \newcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}
-\newcommand{\email}[1]{\online{mailto:#1}{#1}}
+\providecommand{\email}[1]{\online{mailto:#1}{#1}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1183,13 +1331,14 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \begin{macrocode}
 \ifhep@defaults\else
   \RequirePackage{geometry}
-  \geometry{%
-    \hep@paper paper,
-    hscale=.75,
-    vscale=.8,
-    vmarginratio=3:4,
-    includeheadfoot
-  }
+  \geometry{\hep@paper paper, includeheadfoot}
+  \if@twocolumn
+    \geometry{hscale=.85, vscale=.925, vmarginratio=1:1}
+    \geometry{headsep=2ex, footskip=6ex}
+    \setlength{\columnsep}{1.1em}
+  \else
+    \geometry{hscale=.75, vscale=.8, vmarginratio=3:4}
+  \fi
 \fi
 %    \end{macrocode}
 %
@@ -1304,10 +1453,23 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \end{macrocode}
 %
 % Load the \software{fixmath} \cite{fixmath} and \software{alphabeta} \cite{alphabeta} packages ensuring that upper Greek letters in math mode are italic and providing upright Greek letters in text mode, respectively.
+% Ensure that this works also after loading other fonts packages such as \software{cfr-lm} using \software{substitutefont} \cite{substitutefont}.
 %    \begin{macrocode}
 \ifhep@symbols
-  \RequirePackage{alphabeta}
   \RequirePackage{fixmath}
+  \RequirePackage{alphabeta}
+  \RequirePackage{substitutefont}
+  \substitutefont{LGR}{\rmdefault}{lmr}
+  \DeclareFontFamily{LGR}{\rmdefault}{}
+  \DeclareFontShape{LGR}{\rmdefault}{b}{n}{<->ssub*lmr/bx/n}{}
+  \DeclareFontShape{LGR}{\rmdefault}{b}{sc}{<->ssub*lmr/bx/sc}{}
+  \substitutefont{LGR}{\ttdefault}{lmtt}
+  \DeclareFontFamily{LGR}{\ttdefault}{}
+  \DeclareFontShape{LGR}{\ttdefault}{b}{n}{<->ssub*cmtt/bx/n}{}
+  \substitutefont{LGR}{\sfdefault}{lmss}
+  \DeclareFontFamily{LGR}{\sfdefault}{}
+  \DeclareFontShape{LGR}{\sfdefault}{b}{n}{<->ssub*lmss/bx/n}{}
+  \DeclareFontShape{LGR}{\sfdefault}{b}{sc}{<->ssub*lmss/bx/sc}{}
 %    \end{macrocode}
 %
 % Either load the \software{MnSymbol} package \cite{MnSymbol} or the the \software{exscale} package in order to fix Latin Modern |lmex| fonts.
@@ -1450,10 +1612,12 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % Additionally, load the \software{cancel} \cite{cancel} and \software{slashed} \cite{slashed} packages which provide the |\cancel| and |\slashed| macros.
 % Finally, load the \software{units} package \cite{units} which provides the |\units| and |\nicefrac| macros.
 %    \begin{macrocode}
+\ifhep@physics
 \RequirePackage{physics}
 \RequirePackage{cancel}
 \RequirePackage{slashed}
 \RequirePackage{units}
+\newcommand{\textfrac}[2]{\ensuremath{\nicefrac{\text{#1}}{\text{#2}}}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1477,9 +1641,9 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % Define a new overset macro |\oset|\oarg{offset}\marg{over}\marg{base}
 %    \begin{macrocode}
 \newcommand{\oset}[3][-1pt]{%
-  \raisebox{1pt}{\ensuremath{\mathop{#3}\limits^{%
-        \vbox to#1{\kern-2\ex@\hbox{$\scriptscriptstyle#2$}\vss}%
-  }}}%
+  \text{\raisebox{.2ex}{$\mathop{#3}\limits^{%
+    \vbox to#1{\kern-2\ex@\hbox{$\scriptscriptstyle#2$}\vss}%
+  }$}}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1487,6 +1651,10 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % Define a over left right arrow |\overleftright|\marg{base}.
 %    \begin{macrocode}
 \newcommand{\overleftright}[1]{\oset{\leftrightarrow}{#1}}
+%    \end{macrocode}
+% End of |physics| conditional.
+%    \begin{macrocode}
+\fi
 %    \end{macrocode}
 % \end{macro}
 
@@ -1542,7 +1710,10 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   \ifhep@revtex\hep@journaltrue
   \else
     \ifhep@pos\hep@journaltrue
-    \else\hep@journalfalse
+    \else
+      \ifhep@springer\hep@journaltrue
+      \else\hep@journalfalse
+      \fi
     \fi
   \fi
 \fi
@@ -1719,9 +1890,11 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % Set standard values mostly taken from the \software{titling} package, add the font hook, and reduce the |date| font size.
 %    \begin{macrocode}
+\titlefont{\ifhep@serif\tistyle\else\qtstyle\fi}
 \pretitle{\begin{center}\LARGE\hep@title@font}
 \posttitle{\par\end{center}}
-\presubtitle{\begin{center}\large\hep@subtitle@font}
+\subtitlefont{\ifhep@serif\tistyle\else\qtstyle\fi}
+\presubtitle{\begin{center}\Large\hep@subtitle@font}
 \postsubtitle{\par\end{center}}
 \preauthor{%
   \begin{center}\large\hep@author@font\lineskip.5em\begin{tabular}[t]{c}%
@@ -1758,7 +1931,8 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \begin{macro}{\affiliation}
 % Define the |\affiliation| macro, ensure that linebreaks happen after a comma.
 %    \begin{macrocode}
-\newcommand\hep@active@comma{,\penalty-5\relax}
+\newcommand\hep@penalty{\if@twocolumn85\else50\fi}
+\newcommand\hep@active@comma{,\penalty-\hep@penalty\relax}
 \newcommand\hep@cat@comma@active{\catcode`\,\active}
 {\hep@cat@comma@active\gdef,{\hep@active@comma}}
 \newcommand\hep@affil[1]{%
@@ -1786,10 +1960,10 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \RequirePackage{varwidth}
 \newcommand{\hep@preprint@box}{%
   \begin{varwidth}{\textwidth}%
-    \small\hep@preprint@font\hep@preprint%
+    \smaller[.5]\hep@preprint@font\hep@preprint%
   \end{varwidth}%
 }
-\preprintfont{\sc}
+\preprintfont{\scshape}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1819,6 +1993,23 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   \let\hep@abstract\abstract%
   \renewcommand\abstract{\hep@abstract\noindent\ignorespaces}%
 }
+%    \end{macrocode}
+% \end{environment}
+% \begin{environment}{abstract*}
+% Add a |abstract*| environment for two column mode taking also care of placing the title using the \software{environ} \cite{environ} and \software{abstract} \cite{abstract} packages.
+%    \begin{macrocode}
+\if@twocolumn
+  \RequirePackage{environ}
+  \RequirePackage{abstract}
+  \renewcommand{\abstitleskip}{-3ex}
+  \NewEnviron{abstract*}{%
+    \twocolumn[\maketitle\vspace{-1.5cm}%
+    \begin{onecolabstract}\noindent\BODY\end{onecolabstract}%
+    \vspace{.5cm}]\saythanks%
+  }
+\else
+  \newenvironment{abstract*}{\maketitle\begin{abstract}}{\end{abstract}}
+\fi
 %    \end{macrocode}
 % \end{environment}
 % End of |title| conditional.
@@ -1861,8 +2052,20 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \begin{macrocode}
 \ExecuteBibliographyOptions{
   sorting=hep-paper,
+  safeinputenc,
   giveninits=true
 }
+%    \end{macrocode}
+%
+%
+% Shrink the biblography in two column mode.
+%    \begin{macrocode}
+\ifhep@journal\else
+  \if@twocolumn
+    \AtBeginBibliography{\small}
+    \setlength\biblabelsep{\labelsep}
+  \fi
+\fi
 %    \end{macrocode}
 %
 % \begin{macro}{erratum}
@@ -2044,7 +2247,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   }{\printfield{pmc}\newunit}
   \iffieldundef{reportnumber}{}{%
     \newunitpunct\textnumero\intitlepunct%
-    \textsc{\small\printfield{reportnumber}}%
+    \textsc{\smaller[.5]\printfield{reportnumber}}%
     \newunit%
   }%
 }

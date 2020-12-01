@@ -15,7 +15,7 @@
 %% and version 1.3c or later is part of all distributions of
 %% LaTeX version 2005/12/01 or later.
 
-\ProvidesFile{hep-paper.dbx}[2020/10/01 v1.5 HEP-Paper biblatex data model]
+\ProvidesFile{hep-paper.dbx}[2020/12/01 v1.6 HEP-Paper biblatex data model]
 
 \DeclareDatamodelFields[type=field, datatype=literal]{
   collaboration, reportnumber, pmid, pmcid, pmc,

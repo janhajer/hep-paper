@@ -1,0 +1,25 @@
+\documentclass{article}
+
+\usepackage[sansserif]{../hep-paper}
+
+\usepackage{fancyvrb}\DefineShortVerb{\|}
+\newenvironment{vrb}{\begin{tabular}{@{}p{6cm}l@{}}}{\end{tabular}}
+
+\begin{document}
+
+\begin{vrb}
+|| & $Ab\Gamma\delta123$ \\
+|\mathbf | & $\mathbf{Ab\Gamma\delta123}$ \\
+|\text | & $\text{Ab\Gamma\delta}$ \\
+|   \textbf | & $\textbf{\text{Ab\Gamma\delta}}$ \\
+|\mathsf | & $\mathsf{Ab\Gamma\delta}$ \\
+|   \mathbf | & $\mathbf{\mathsf{Ab\Gamma\delta}}$ \\
+|\mathtt | & $\mathtt{Ab\Gamma}$ \\
+|   \mathbf | & $\mathbf{\mathtt{Ab\Gamma}}$ \\
+|\mathcal | & $\mathcal{ABC}$ \\
+|\mathscr | & $\mathscr{ABC}$ \\
+|\mathbb | & $\mathbb{ABC1}$ \\
+|\mathfrak | & $\mathfrak{ABC123}$ \\
+\end{vrb}
+
+\end{document}

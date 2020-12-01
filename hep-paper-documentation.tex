@@ -15,7 +15,7 @@
 %% and version 1.3c or later is part of all distributions of
 %% LaTeX version 2005/12/01 or later.
 
-\ProvidesFile{hep-paper-documentation.tex}[2020/10/01 v1.5 HEP-Paper documentation]
+\ProvidesFile{hep-paper-documentation.tex}[2020/12/01 v1.6 HEP-Paper documentation]
 
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltxdoc}
@@ -23,7 +23,6 @@
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
-\def\MacroFont{\fontencoding\encodingdefault\fontfamily{lmtt}\fontseries\mddefault\fontshape\shapedefault\small}
 
 \MacroIndent=1.5em
 
@@ -37,6 +36,7 @@
 \acronym{LM}{latin modern}
 
 \usepackage{hologo}
+\usepackage{fonttable}
 
 \newenvironment{columns}[1][.5]{%
   \par\vspace{-\bigskipamount}%
@@ -49,10 +49,11 @@
 }{\end{minipage}\end{minipage}\par}
 
 \setlength{\fboxsep}{1pt}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
 
 \GetFileInfo{hep-paper.sty}
 
-\title{The \software{hep-paper} package\thanks{This document corresponds to \software{hep-paper}~\fileversion.}}
+\title{The \textsmaller[1.5]{HEP\raisebox{.25ex}{--}PAPER} package\thanks{This document corresponds to \software{hep-paper}~\fileversion.}}
 \subtitle{Publications in high energy physics}
 \author{Jan Hajer \email{jan.hajer@uclouvain.be}}
 \affiliation{Centre for Cosmology, Particle Physics and Phenomenology, Université catholique de Louvain, Louvain-la-Neuve B-1348, Belgium}
@@ -82,7 +83,7 @@ For usual publications it is enough to load additionally to the |article| class 
 The most notable changes after loading the \software{hep-paper} package is the change of some \hologo{LaTeX} defaults.
 The paper and font sizes are set to A4 and \unit[11]{pt}, respectively.
 Additionally, the paper geometry is adjusted using the \software{geometry} package \cite{geometry}.
-Furthermore, the font is changed to \LM using the \software{lmodern} package \cite{lmodern} with \software{microtype} \cite{microtype} optimizations.
+Furthermore, the font is changed to \LM using the \software{cfr-lm} package \cite{cfr-lm} with \software{microtype} \cite{microtype} optimizations.
 Finally, \PDF hyperlinks are implemented with the \software{hyperref} package \cite{hyperref}.
 
 \subsection{Options}
@@ -117,18 +118,21 @@ The \hologo{LaTeX} default is separation via indentation the |parskip| option sw
 
 \DescribeMacro{symbols}
 The |symbols|=\meta{family} set the family of the symbol fonts.
-|symbols=ams| loads two \hologo{AmS} fonts \cite{amsfonts} and the \software{bm} bold fonts.
-The default setting replaces additionally the blackboard font with the \software{dsfont} \cite{dsfont}.
+|symbols=ams| loads the two \hologo{AmS} fonts \cite{amsfonts} and the \software{bm} bold fonts.
+The default |symbols=true| replaces additionally the blackboard font with the \software{dsfont} \cite{dsfont}.
 |symbols=minion| switches the symbol fonts to the Adobe MinionPro companion font from the \software{MnSymbol} package \cite{MnSymbol}.
-|symbols=false| deactivates additional symbol fonts.
+|symbols=false| deactivates loading any additional symbol fonts.
 
 \subsubsection{Deactivation}
 
 The \software{hep-paper} package loads few bigger packages which have a large impact on the document.
-The deactivation options prevent such adjustments.
+The deactivation options can prevent such and other adjustments.
 
 \DescribeMacro{defaults}
 The |defaults| option prevents the adjustment of the page geometry and the font size set by the document class.
+
+\DescribeMacro{lining}
+The |lining| option deactivates the use of text- (\texto{123}) in favour of lining- (\textl{123}) figures in text mode.
 
 \DescribeMacro{title}
 The |title=false| option deactivates the title page adjustments.
@@ -164,6 +168,9 @@ The |revtex| option activates the REV\hologo{TeX} \cite{revtex} compatibility mo
 \DescribeMacro{pos}
 The |pos| option activates the \software{PoS} compatibility mode.
 
+\DescribeMacro{springer}
+The |springer| option activates the compatibility mode the |svjour| class \cite{svjour}.
+
 \subsubsection{Reactivation}
 
 The \software{hep-paper} package deactivates unrecommended macros, which can be reactivated manually.
@@ -175,6 +182,11 @@ The |manualplacement| option reactivates manual float placement.
 The |eqnarray| option reactivates the depreciated |eqnarray| environment.
 
 \section{Macros and environments}
+
+\DescribeMacro{twocolumn}
+\DescribeMacro{abstract*}
+If the global |twocolumn| option is present the page geometry is changed to cover almost the entire page.
+Additionally the |abstract*| environment is defined that generates a one column abstract and takes care of placing the title information.
 
 \subsection{Title page}
 
@@ -211,7 +223,7 @@ Various title font macros are defined, allowing to change the appearance of the 
 
 \subsection{Text}
 
-Hyphenation is provided by the \software{babel} package \cite{babel} and quotation commands are provided by the \software{csquotes} package \cite{csquotes} recommended by the \software{babel} package.
+Hyphenation is provided by the \software{babel} package \cite{babel} and quotation commands are provided by the \software{csquotes} package \cite{csquotes}.
 \DescribeMacro{\enquote}
 \DescribeMacro{\MakeOuterQuote}
 The latter package provides the convenient macros |\enquote|\marg{text} and |\MakeOuterQuote{"}| allowing to leave the choice of quotation marks to \hologo{LaTeX} and use |"| instead of the pair |``| and |''|, respectively.
@@ -227,7 +239,7 @@ The |\no|\marg{number} macro is typeset as \no{123}.
 The |\software|\oarg{version}\marg{name} macro is typeset as \software[\fileversion]{HEP-Paper}.
 
 \DescribeMacro{\online}
-The |\online|\marg{url}\marg{text} macro combines the features of the |\href|\marg{url} \marg{text} \cite{hyperref} and the |\url|\marg{text} \cite{url} macros, resulting in \eg \online{https://ctan.org/pkg/hep-paper}{ctan.org/pkg/hep-paper}.
+The |\online|\marg{url}\marg{text} macro combines the features of the |\href|\marg{url}\allowbreak\marg{text}\allowbreak \cite{hyperref} and the |\url|\marg{text} \cite{url} macros, resulting in \eg \online{https://ctan.org/pkg/hep-paper}{ctan.org/pkg/hep-paper}.
 
 \DescribeMacro{inlinelist}
 \DescribeMacro{enumdescript}
@@ -267,7 +279,7 @@ The three main points are
 \end{columns}
 
 \DescribeMacro{\textsc}
-A bold versions \textbf{\textsc{Small Caps}} and a sans serif version of \textsf{\textsc{Small Caps}} based on the \CM font is provided, the latter using the \software{sansmathfonts} package \cite{sansmathfonts}.
+A bold versions \textbf{\textsc{Small Caps}} and a sans serif version of \textsf{\textsc{Small Caps}} based on the \CM font \cite{cm} is provided, the latter using the \software{sansmathfonts} package \cite{sansmathfonts}.
 
 \DescribeMacro{\underline}
 \DescribeMacro{\overline}
@@ -276,7 +288,7 @@ The |\overline| macro is extended to also \overline{overline} text outside of ma
 
 \DescribeMacro{\useparskip}
 \DescribeMacro{\useparindent}
-If the |parskip| option is activated the |\useparindent| macro switches back the usual parindent mode, while the |\useparskip| macro switches to the parskip mode.
+If the |parskip| option is activated the |\useparindent| macro switches to the usual parindent mode, while the |\useparskip| macro switches to the parskip mode.
 
 \subsubsection{References and footnotes}
 
@@ -304,7 +316,8 @@ The |\acronym|\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\meta{*}\mar
 The first star prevents the addition of an \enquote{s} to the abbreviation plural.
 The second star restores the \hologo{TeX} default of swallowing subsequent white space.
 The long form is only shown at the first appearance of these macros, later appearances generate the abbreviation with a hyperlink to the long form.
-Capitalization at the beginning of paragraphs and sentences is ensured.
+The long form is never used in math mode.
+Capitalization at the beginning of paragraphs and sentences is (mostly) ensured.
 The |\shortacronym| and |\longacronym| macros are drop-in replacements of the |\acronym| macro showing only the short or long form of their acronym.
 \DescribeMacro{\resetacronym}
 \DescribeMacro{\dummyacronym}
@@ -319,10 +332,8 @@ They in turn load the \hologo{AmSLaTeX} \software{amsmath} \cite{amsmath} and \s
 \DescribeMacro{\mathbf}
 Bold math, via |\mathbf| is improved by the \software{bm} package \cite{bm}, \ie ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
 Macros switching to |bfseries| such as |\section|\marg{text} are ensured to also typeset math in bold.
-This may cause trouble if bold symbols carry an additional non-implicit meaning.
 \DescribeMacro{\text}
 The |\text|\marg{text} macro makes it possible to write text within math mode, \ie ($ \text A  \text b  \text \Gamma \text \delta \text{\textbf A} \text{\textbf b} \text{\textbf \Gamma} \text{\textbf \delta}$).
-This behaviour conflicts \eg with the \software{sansserif} package option.
 \DescribeMacro{\mathsf}
 The math sans serif alphabet is redefined to be italic sans serif if the main text is serif and italic serif if the main text is sans serif, \ie ($\mathsf A \mathsf b \mathsf \Gamma \mathsf \delta \mathbf{\mathsf A} \mathbf{\mathsf b} \mathbf{\mathsf \Gamma} \mathbf{\mathsf \delta}$).
 \DescribeMacro{\mathscr}
@@ -335,7 +346,8 @@ Details about the font handling in \hologo{TeX} can be found in \ccite{fntguide}
 
 \DescribeMacro{\nicefrac}
 \DescribeMacro{\flatfrac}
-The |\frac|\marg{number}\marg{number} macro is accompanied by |\nicefrac|\linebreak[1]\marg{number}\linebreak[1]\marg{number} and |\flatfrac|\marg{number}\marg{number} leading to $\frac12$, $\nicefrac 12$, and $\flatfrac 12$.
+\DescribeMacro{\textfrac}
+The |\frac|\marg{number}\marg{number} macro is accompanied by |\nicefrac|\linebreak[1]\marg{number}\linebreak[1]\marg{number}, |\textfrac|\marg{number}\marg{number}, and |\flatfrac|\marg{number}\marg{number} leading to $\frac12$, $\nicefrac12$, \textfrac12, and $\flatfrac12$.
 \DescribeMacro{\diag}
 \DescribeMacro{\sgn}
 Diagonal matrix |\diag| and signum |\sgn| operators are defined.
@@ -482,13 +494,19 @@ As a rule of thumb if you have to use |\notag|, |\nonumber|, or perform manual s
 
 \subsubsection{Physics}
 
+\DescribeMacro{\unit}
+\DescribeMacro{\inv}
+The correct spacing for units, \cf \cref{eq:greek}, is provided by the macro |\unit|\oarg{value} \marg{unit} from the \software{units} package \cite{units} which can also be used in text mode.
+The macro |\inv|\oarg{power}\marg{text} allows to avoid math mode also for inverse units such as \unit[5]{\inv{fb}} typeset via |\unit[5]{\inv{fb}}|.
+
 Greek letters are adjusted to always be italic and upright in math and text mode, respectively, using the \software{fixmath} \cite{fixmath} and \software{alphabeta} \cite{alphabeta} packages.
 This allows differentiations like
 \begin{align}
-\sigma &= \unit[5]{fb} \ , & &\text{at \unit[5]{\sigma} C.L.} \ , & \mu &= \unit[5]{cm} \ , & l &= \text{\unit[5]{\mu m}} \ ,
+\sigma &= \unit[5]{fb} \ , & &\text{at \unit[5]{\sigma} C.L.} \ , & \mu &= \unit[5]{cm} \ , & l &= \unit[5]{\text \mu m} \ ,
 \label{eq:greek}
 \end{align}
 and \eg to distinguish gauge $\nu$ and mass \nu\ eigenstates in models with massive neutrinos.
+Note that |\mathrm| and therefore |\unit| transform italic greek character to seemingly random upright characters, this can be avoided by using |\unit{\text\mu m}|.
 Additionally, Greek letters can also be directly typed using Unicode.
 
 \DescribeMacro{\ev}
@@ -511,11 +529,6 @@ The |\cancel|\marg{characters} macro from the \software{cancel} package \cite{ca
 
 \DescribeMacro{\overleftright}
 A better looking over left right arrow is defined \ie $\overleftright{\partial}$.
-
-\DescribeMacro{\unit}
-\DescribeMacro{\inv}
-The correct spacing for units, \cf \cref{eq:greek}, is provided by the macro |\unit|\oarg{value} \marg{unit} from the \software{units} package \cite{units} which can also be used in text mode.
-The macro |\inv|\oarg{power}\marg{text} allows to avoid math mode also for inverse units such as \unit[5]{\inv{fb}} typeset via |\unit[5]{\inv{fb}}|.
 
 \subsection{Floats}
 

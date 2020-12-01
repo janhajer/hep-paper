@@ -1,0 +1,92 @@
+\documentclass{article}
+
+\usepackage{../hep-paper}
+
+\usepackage{fancyvrb}\DefineShortVerb{\|}
+\newenvironment{vrb}{\begin{tabular}{@{}p{6cm}l@{}}}{\end{tabular}}
+
+\begin{document}
+
+\subsection*{Roman}
+
+\rmfamily
+\begin{vrb}
+|\rmfamily| & {Latin Modern Roman 123} \\
+|   \itshape| & {\itshape Latin Modern Roman Italic 123} \\
+|   \slshape| & {\slshape Latin Modern Roman Oblique 123} \\
+|   \scshape| & {\scshape Latin Modern Roman Small Caps 123} \\
+|     \slshape| & {\scshape\slshape Latin Modern Roman Oblique Small Caps 123} \\
+|     \bfseries| & {\bfseries\scshape Computer Modern Roman Small Caps 123} \\
+|   \bfseries| & {\bfseries Latin Modern Roman Bold Extended 123} \\
+|      \itshape| & {\bfseries\itshape Latin Modern Roman Bold Italic Extended 123} \\
+|      \slshape| & {\bfseries\slshape Latin Modern Roman Bold Oblique Extended 123} \\
+|   \fontseries{b}\selectfont| & {\fontseries{b}\selectfont Latin Modern Roman Bold 123} \\
+|      \slshape| & {\fontseries{b}\slshape Latin Modern Roman Bold Oblique 123} \\
+\end{vrb}
+
+\subsubsection*{Dunhill}
+
+\tistyle
+\begin{vrb}
+|\tistyle | & {Latin Modern Dunhill 123} \\
+|   \slshape| & {\slshape Latin Modern Dunhill Oblique 123} \\
+\end{vrb}
+
+\subsection*{Sans}
+
+\sffamily
+\begin{vrb}
+|\sffamily| & {Latin Modern Sans 123} \\
+|   \slshape| & {\slshape Latin Modern Sans Oblique 123} \\
+|   \scshape| & {\scshape Computer Modern Roman Small Caps 123} \\
+|      \bfseries| & {\bfseries\scshape Computer Modern Roman Small Caps 123} \\
+|         \itshape| & {\itshape\bfseries\scshape Computer Modern Roman Small Caps 123} \\
+|   \bfseries| & {\bfseries Latin Modern Sans Bold 123} \\
+|      \slshape| & {\bfseries\slshape Latin Modern Sans Bold Oblique 123} \\
+|   \fontseries{sbc}\selectfont| & {\fontseries{sbc}\selectfont Latin Modern Sans Demi Condensed 123} \\
+|      \slshape| & {\fontseries{sbc}\selectfont\slshape Latin Modern Sans Demi Condensed Oblique 123} \\
+\end{vrb}
+
+\subsubsection*{Quotation}
+
+\qtstyle
+\begin{vrb}
+|\qtstyle | & {Latin Modern Sans Extended 123} \\
+|   \slshape | & {\slshape Latin Modern Sans Extended Oblique 123} \\
+|   \bfseries | & {\bfseries Latin Modern Sans Bold Extended 123} \\
+|      \slshape | & {\bfseries\slshape Latin Modern Sans Bold Extended Oblique 123} \\
+\end{vrb}
+
+\subsection*{Typewriter}
+
+\ttfamily
+\tvstyle
+\begin{vrb}
+|\ttfamily | & {Latin Modern Typewriter Proportional 123} \\
+|   \slshape | & {\slshape Latin Modern Typewriter Proportional Oblique 123} \\
+|   \lgweight | & {\lgweight Latin Modern Typewriter Proportional Light 123} \\
+|   \lgweight\slshape | & {\lgweight Latin Modern Typewriter Proportional Light Oblique 123} \\
+|   \fontseries{b}\selectfont | & {\fontseries{b}\selectfont Latin Modern Typewriter Proportional Dark 123} \\
+|      \slshape | & {\fontseries{b}\slshape Latin Modern Typewriter Proportional Dark Oblique 123} \\
+\end{vrb}
+
+\subsubsection*{Fixed-width}
+
+\tmstyle
+\begin{vrb}
+|\tmstyle | & {Latin Modern Typewriter 123} \\
+|   \itshape | & {\itshape Latin Modern Typewriter Italic 123} \\
+|   \slshape | & {\slshape Latin Modern Typewriter Oblique 123} \\
+|   \scshape | & {\scshape Latin Modern Typewriter Small Caps 123} \\
+|   \scshape\slshape | & {\scshape\slshape Latin Modern Typewriter Oblique Small Caps 123} \\
+|   \bfseries | & {\bfseries Latin Modern Typewriter Dark 123} \\
+|      \slshape | & {\bfseries\slshape Latin Modern Typewriter Dark Oblique 123} \\
+|   \fontseries{b}\selectfont | & {\fontseries{b}\selectfont Latin Modern Typewriter Dark 123} \\
+|      \slshape | & {\fontseries{b}\slshape Latin Modern Typewriter Dark Oblique 123} \\
+|   \lgweight | & {\lgweight Latin Modern Typewriter Light 123} \\
+|   \lgweight\slshape | & {\lgweight\slshape Latin Modern Typewriter Light Oblique 123} \\
+|   \fontseries{lc}\selectfont | & {\fontseries{lc}\selectfont Latin Modern Typewriter Light Condensed 123} \\
+|      \slshape | & {\fontseries{lc}\slshape Latin Modern Typewriter Light Condensed Oblique 123} \\
+\end{vrb}
+
+\end{document}
