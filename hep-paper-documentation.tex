@@ -105,7 +105,7 @@ The possible \meta{sizes} are:
 The default is \unit[11]{pt}.
 
 \DescribeMacro{lang}
-The |lang|=\meta{name} option switches the document language to one of the values values provided by the \software{babel} package \cite{babel}.
+The |lang|=\meta{name} option switches the document language to one of the values provided by the \software{babel} package \cite{babel}.
 The default is |british|.
 
 \DescribeMacro{sansserif}
@@ -501,12 +501,11 @@ The macro |\inv|\oarg{power}\marg{text} allows to avoid math mode also for inver
 
 Greek letters are adjusted to always be italic and upright in math and text mode, respectively, using the \software{fixmath} \cite{fixmath} and \software{alphabeta} \cite{alphabeta} packages.
 This allows differentiations like
-\begin{align}
+\begin{align} \label{eq:greek}
 \sigma &= \unit[5]{fb} \ , & &\text{at \unit[5]{\sigma} C.L.} \ , & \mu &= \unit[5]{cm} \ , & l &= \unit[5]{\text \mu m} \ ,
-\label{eq:greek}
 \end{align}
 and \eg to distinguish gauge $\nu$ and mass \nu\ eigenstates in models with massive neutrinos.
-Note that |\mathrm| and therefore |\unit| transform italic greek character to seemingly random upright characters, this can be avoided by using |\unit{\text\mu m}|.
+Note that |\mathrm| and therefore |\unit| transform italic Greek character to seemingly random upright characters, this can be avoided by using |\unit{\text\mu m}|.
 Additionally, Greek letters can also be directly typed using Unicode.
 
 \DescribeMacro{\ev}

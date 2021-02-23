@@ -158,8 +158,13 @@
   }{}
 \else
   \rmfamily
+  \RequirePackage{slantsc}
   \hep@rm@fontshape{b}{sc}{<->ssub*cmr/bx/sc}{}
   \hep@rm@fontshape{bx}{sc}{<->ssub*cmr/bx/sc}{}
+  \hep@rm@fontshape{b}{scsl}{<->ssub*cmr/bx/scsl}{}
+  \hep@rm@fontshape{bx}{scsl}{<->ssub*cmr/bx/scit}{}
+  \hep@rm@fontshape{b}{scit}{<->ssub*cmr/bx/scsl}{}
+  \hep@rm@fontshape{bx}{scit}{<->ssub*cmr/bx/scit}{}
   \sffamily
   \hep@sf@fontshape{m}{sc}{<->ssub*xcmss/m/sc}{}
   \hep@sf@fontshape{b}{sc}{<->ssub*xcmss/bx/sc}{}
@@ -167,6 +172,10 @@
   \hep@sf@fontshape{m}{scit}{<->ssub*xcmss/m/scit}{}
   \hep@sf@fontshape{b}{scit}{<->ssub*xcmss/bx/scit}{}
   \hep@sf@fontshape{bx}{scit}{<->ssub*xcmss/bx/scit}{}
+  \hep@sf@fontshape{m}{scsl}{<->ssub*xcmss/m/scit}{}
+  \hep@sf@fontshape{b}{scsl}{<->ssub*xcmss/bx/scit}{}
+  \hep@sf@fontshape{bx}{scsl}{<->ssub*xcmss/bx/scit}{}
+  \hep@sf@fontshape{m}{ui}{<->cmssu10}{}
 \fi
 \ifxetexorluatex\else
   \RequirePackage[utf8]{inputenc}
@@ -255,6 +264,8 @@
 
 \RequirePackage{mathtools}
 \allowdisplaybreaks[1]
+\thickmuskip=5mu plus 3mu minus 1mu
+\medmuskip=4mu plus 2mu minus 3mu
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\sgn}{sgn}
 \RequirePackage{xparse}
@@ -276,6 +287,7 @@
 \mathdef{\overline}{\over@line}
 \RequirePackage{mleftright}
 \mleftright
+\RequirePackage{subdepth}
 \ifhep@eqnarray\else
   \let\eqnarray\@undefined
   \let\endeqnarray\@undefined
@@ -378,7 +390,20 @@
 \RequirePackage{physics}
 \RequirePackage{cancel}
 \RequirePackage{slashed}
+
 \RequirePackage{units}
+\DeclareRobustCommand*{\unit}[2][]{%
+  \begingroup
+    \def\0{#1}%
+    \expandafter
+  \endgroup
+  \ifx\0\@empty
+  \else%
+    \ensuremath{#1}%
+    \ifthenelse{\boolean{B@UnitsLoose}}{~}{\,}%
+  \fi
+  \ifthenelse{\boolean{mmode}}{\mathrm{#2}}{#2}%
+}
 \newcommand{\textfrac}[2]{\ensuremath{\nicefrac{\text{#1}}{\text{#2}}}}
 \newcommand{\inv}[2][1]{#2\ensuremath{^{-#1}}}
 \AtBeginDocument{\mathdef{\d}{\dd}}
@@ -510,10 +535,8 @@
     \hep@pre@sub@title\sub@title\hep@post@sub@title%
   }%
 }
-\titlefont{\ifhep@serif\tistyle\else\qtstyle\fi}
 \pretitle{\begin{center}\LARGE\hep@title@font}
 \posttitle{\par\end{center}}
-\subtitlefont{\ifhep@serif\tistyle\else\qtstyle\fi}
 \presubtitle{\begin{center}\Large\hep@subtitle@font}
 \postsubtitle{\par\end{center}}
 \preauthor{%
@@ -726,6 +749,7 @@
   pdfcreator={}, pdfproducer={}
 }
 \pdfstringdefDisableCommands{\def\varepsilon{\textepsilon}}
+\pdfstringdefDisableCommands{\def\to{\textrightarrow}}
 \AtBeginDocument{
   \pdfstringdefDisableCommands{\let\ensuremath\@gobble}
   \pdfstringdefDisableCommands{\let\mathsurround\@gobble}

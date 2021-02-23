@@ -69,7 +69,7 @@
 %
 % \fi
 %
-% \CheckSum{1673}
+% \CheckSum{0}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -155,7 +155,7 @@ The possible \meta{sizes} are:
 The default is \unit[11]{pt}.
 
 \DescribeMacro{lang}
-The |lang|=\meta{name} option switches the document language to one of the values values provided by the \software{babel} package \cite{babel}.
+The |lang|=\meta{name} option switches the document language to one of the values provided by the \software{babel} package \cite{babel}.
 The default is |british|.
 
 \DescribeMacro{sansserif}
@@ -552,12 +552,11 @@ The macro |\inv|\oarg{power}\marg{text} allows to avoid math mode also for inver
 
 Greek letters are adjusted to always be italic and upright in math and text mode, respectively, using the \software{fixmath} \cite{fixmath} and \software{alphabeta} \cite{alphabeta} packages.
 This allows differentiations like
-\begin{align}
+\begin{align} \label{eq:greek}
 \sigma &= \unit[5]{fb} \ , & &\text{at \unit[5]{\sigma} C.L.} \ , & \mu &= \unit[5]{cm} \ , & l &= \unit[5]{\text \mu m} \ ,
-\label{eq:greek}
 \end{align}
 and \eg to distinguish gauge $\nu$ and mass \nu\ eigenstates in models with massive neutrinos.
-Note that |\mathrm| and therefore |\unit| transform italic greek character to seemingly random upright characters, this can be avoided by using |\unit{\text\mu m}|.
+Note that |\mathrm| and therefore |\unit| transform italic Greek character to seemingly random upright characters, this can be avoided by using |\unit{\text\mu m}|.
 Additionally, Greek letters can also be directly typed using Unicode.
 
 \DescribeMacro{\ev}
@@ -1177,8 +1176,13 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   }{}
 \else
   \rmfamily
+  \RequirePackage{slantsc}
   \hep@rm@fontshape{b}{sc}{<->ssub*cmr/bx/sc}{}
   \hep@rm@fontshape{bx}{sc}{<->ssub*cmr/bx/sc}{}
+  \hep@rm@fontshape{b}{scsl}{<->ssub*cmr/bx/scsl}{}
+  \hep@rm@fontshape{bx}{scsl}{<->ssub*cmr/bx/scit}{}
+  \hep@rm@fontshape{b}{scit}{<->ssub*cmr/bx/scsl}{}
+  \hep@rm@fontshape{bx}{scit}{<->ssub*cmr/bx/scit}{}
   \sffamily
   \hep@sf@fontshape{m}{sc}{<->ssub*xcmss/m/sc}{}
   \hep@sf@fontshape{b}{sc}{<->ssub*xcmss/bx/sc}{}
@@ -1186,6 +1190,10 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   \hep@sf@fontshape{m}{scit}{<->ssub*xcmss/m/scit}{}
   \hep@sf@fontshape{b}{scit}{<->ssub*xcmss/bx/scit}{}
   \hep@sf@fontshape{bx}{scit}{<->ssub*xcmss/bx/scit}{}
+  \hep@sf@fontshape{m}{scsl}{<->ssub*xcmss/m/scit}{}
+  \hep@sf@fontshape{b}{scsl}{<->ssub*xcmss/bx/scit}{}
+  \hep@sf@fontshape{bx}{scsl}{<->ssub*xcmss/bx/scit}{}
+  \hep@sf@fontshape{m}{ui}{<->cmssu10}{}
 \fi
 %    \end{macrocode}
 %
@@ -1368,9 +1376,12 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % Load the \software{mathtools} package \cite{mathtools} which loads the \software{amsmath} package \cite{amsmath}.
 % Allow page breaks within equations if necessary.
+% Adjust the thick and med mu skips slightly.
 %    \begin{macrocode}
 \RequirePackage{mathtools}
 \allowdisplaybreaks[1]
+\thickmuskip=5mu plus 3mu minus 1mu
+\medmuskip=4mu plus 2mu minus 3mu
 %    \end{macrocode}
 %
 % \begin{macro}{\diag}
@@ -1429,6 +1440,11 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
+%
+% Load the \software{subdepth} package \cite{subdepth} ensuring that indices are mostly lined up.
+%    \begin{macrocode}
+\RequirePackage{subdepth}
+%    \end{macrocode}
 %
 % \begin{macro}{eqnarray}
 % Undefine the |eqnarray| environment if not prevented by package option.
@@ -1607,7 +1623,6 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % \begin{macro}{\cancel}
 % \begin{macro}{\slashed}
-% \begin{macro}{\unit}
 % Load the \software{physics} package \cite{physics} which provides macros useful for publications in physics.
 % Additionally, load the \software{cancel} \cite{cancel} and \software{slashed} \cite{slashed} packages which provide the |\cancel| and |\slashed| macros.
 % Finally, load the \software{units} package \cite{units} which provides the |\units| and |\nicefrac| macros.
@@ -1616,11 +1631,36 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \RequirePackage{physics}
 \RequirePackage{cancel}
 \RequirePackage{slashed}
-\RequirePackage{units}
-\newcommand{\textfrac}[2]{\ensuremath{\nicefrac{\text{#1}}{\text{#2}}}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
+
+% \begin{macro}{\unit}
+% Patch the |\unit| macro
+%    \begin{macrocode}
+\RequirePackage{units}
+\DeclareRobustCommand*{\unit}[2][]{%
+  \begingroup
+    \def\0{#1}%
+    \expandafter
+  \endgroup
+  \ifx\0\@empty
+  \else%
+%     \ensuremath{#1}% % not a good idea
+    \ifthenelse{\boolean{mmode}}{#1}{\textln{#2}}%
+%   does not work with sans serif \textl should work but cause problems
+    \ifthenelse{\boolean{B@UnitsLoose}}{~}{\,}%
+  \fi
+  \ifthenelse{\boolean{mmode}}{\mathrm{#2}}{#2}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\inv}
+% Provide the |\textfrac| macro.
+%    \begin{macrocode}
+\newcommand{\textfrac}[2]{\ensuremath{\nicefrac{\text{#1}}{\text{#2}}}}
+%    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\inv}
@@ -1890,10 +1930,10 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % Set standard values mostly taken from the \software{titling} package, add the font hook, and reduce the |date| font size.
 %    \begin{macrocode}
-\titlefont{\ifhep@serif\tistyle\else\qtstyle\fi}
+% \titlefont{\ifhep@serif\tistyle\else\qtstyle\fi}
 \pretitle{\begin{center}\LARGE\hep@title@font}
 \posttitle{\par\end{center}}
-\subtitlefont{\ifhep@serif\tistyle\else\qtstyle\fi}
+% \subtitlefont{\ifhep@serif\tistyle\else\qtstyle\fi}
 \presubtitle{\begin{center}\Large\hep@subtitle@font}
 \postsubtitle{\par\end{center}}
 \preauthor{%
@@ -2350,6 +2390,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 %    \begin{macrocode}
 \pdfstringdefDisableCommands{\def\varepsilon{\textepsilon}}
+\pdfstringdefDisableCommands{\def\to{\textrightarrow}}
 \AtBeginDocument{
   \pdfstringdefDisableCommands{\let\ensuremath\@gobble}
   \pdfstringdefDisableCommands{\let\mathsurround\@gobble}
