@@ -1,0 +1,184 @@
+%%
+%% This is file `hep-bibliography.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% hep-paper-implementation.dtx  (with options: `bibliography')
+%% This is a generated file.
+%% Copyright (C) 2019-2020 by Jan Hajer
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version. The latest version of this license is in:
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2005/12/01 or later.
+
+\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+\ProvidesPackage{hep-bibliography}[2021/06/01 v1.7 Bibliography macros for publications in High Energy Physics]
+
+\providecommand{\online}[2]{\ttfamily{#2}}%
+\providecommand{\email}[1]{\online{mailto:#1}{#1}}
+\AtEndOfPackage{\@ifpackageloaded{hyperref}{%
+    \renewcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
+  }{}
+}
+\RequirePackage{xparse}
+\ExplSyntaxOn
+\NewDocumentEnvironment{commalist}{O{\space}+b}{
+  \hep@comma@list:n{#2}
+}{#1}
+\seq_new:N \hep@items@sequence
+\cs_new_protected:Npn \hep@comma@list:n #1{
+  \seq_set_split:Nnn \hep@items@sequence{\item}{#1}
+  \seq_pop_left:NN \hep@items@sequence \l_tmpa_tl
+  \seq_use:Nnnn \hep@items@sequence{~and~}{,~}{,~and~}
+}
+\ExplSyntaxOff
+\def\hep@bibliography{numeric-comp}
+\newif\ifhep@journal\hep@journalfalse
+\RequirePackage[style=\hep@bibliography, datamodel=hep-paper]{biblatex}
+\providecommand{\DeclareSortingTemplate}{\DeclareSortingScheme}
+\DeclareSortingTemplate{hep-paper}{
+  \sort{\citeorder}
+  \sort[final]{\field{sortkey}}
+  \sort{\field{sortyear} \field{year} \literal{9999}}
+  \sort{\field{month}}
+  \sort{\field{eprint} \field{doi}}
+  \sort{\field{sorttitle} \field{title}}
+  \sort{\field{subtitle} \field{volume}}
+}
+\ExecuteBibliographyOptions{
+  sorting=hep-paper,
+  safeinputenc,
+  giveninits=true,
+  maxbibnames=7
+}
+\ifhep@journal\else
+  \if@twocolumn
+    \AtBeginBibliography{\small}
+    \setlength\biblabelsep{\labelsep}
+  \fi
+\fi
+\DefineBibliographyStrings{english}{translationof={Original}}
+\NewBibliographyString{erratum,erratums}
+\DefineBibliographyStrings{english}{erratum={Erratum},erratums={Errata}}
+\providecommand{\relateddelimerratum}{\addsemicolon\space}
+\DefineBibliographyExtras{british}{\def\finalandcomma{\addcomma}}
+\renewcommand{\subtitlepunct}{\addcolon\addspace}
+\let\hep@printbibliography\printbibliography
+\renewcommand{\printbibliography}{\sloppy\hep@printbibliography}
+
+\newcommand{\reg@exp@one}{\regexp{\A(\p{L}+)?\d+(\p{L}+)?\Z}}
+\newcommand{\reg@exp@two}{\regexp{\A(\p{L}+)?(\d+)(\p{L}+)?\Z}}
+\newcommand{\reg@exp@url}{\regexp{\A(ht|f)tp(s)?:\/\/}}
+\newcommand{\reg@exp@pmc}{\regexp{\A(PMC)?}}
+\DeclareSourcemap{%
+  \maps[datatype=bibtex, overwrite=true]{%
+    \map{%
+      \step[fieldsource=Collaboration, final=true]%
+      \step[fieldset=collaboration, origfieldval, final=true]
+    }%
+    \map{%
+      \step[fieldsource=reportNumber, final=true]%
+      \step[fieldset=reportnumber, origfieldval, final=true]
+    }%
+    \map[overwrite]{
+      \pertype{article}
+      \step[fieldsource=volume, match=\reg@exp@one, final]
+      \step[fieldsource=volume, match=\reg@exp@two, replace={$2}]
+      \step[fieldsource=journal, fieldtarget=journaltitle]
+      \step[fieldset=journaltitle, fieldvalue={\space$1$2}, append=true]
+    }
+    \map{
+      \step[fieldsource=url, final=true]
+      \step[fieldset=protocollessurl, origfieldval, final=true]
+      \step[fieldsource=protocollessurl, match=\reg@exp@url, replace={}]
+    }
+    \map{
+      \step[fieldsource=pmcid, final=true]
+      \step[fieldset=pmc, origfieldval, final=true]
+      \step[fieldsource=pmc, match=\reg@exp@pmc, replace={}]
+    }
+  }%
+}
+\providecommand{\letbibmacro}[2]{\csletcs{abx@macro@#1}{abx@macro@#2}}
+\renewbibmacro*{author/translator+others}{%
+  \ifboolexpr{
+    test \ifuseauthor and (
+      not test {\ifnameundef{author}} or
+      not test {\iffieldundef{collaboration}}
+    )
+  }
+  {\usebibmacro{author}}
+  {\usebibmacro{translator+others}}
+}
+\letbibmacro{hep@bib@author}{author}
+\renewbibmacro*{author}{%
+  \iffieldundef{collaboration}{%
+    \usebibmacro{hep@bib@author}}{\textit{\printfield{collaboration}}%
+  }%
+}
+\renewbibmacro*{in:}{%
+  \iffieldundef{journaltitle}{}{\printtext{\bibstring{in}\intitlepunct}}%
+}
+\RequirePackage{relsize}
+\DeclareFieldFormat{reportnumber}{%
+  \edef\commalistbody{\forcsvfield{%
+    \egroup\noexpand\item\unexpanded{\bgroup\smaller[.5]\textsc}
+  }{reportnumber}}%
+  \expandafter\commalist\commalistbody\egroup\endcommalist%
+}
+\DeclareFieldFormat{url}{%
+  \mkbibacro{URL}\addcolon\space\online{#1}{\thefield{protocollessurl}}%
+}
+\newcommand{\bib@online}[2]{%
+  \ifhyperref{\online{#1}{#2}}{\nolinkurl{#2}}%
+}
+\DeclareFieldFormat{pmid}{%
+  \mkbibacro{PM}\addcolon\space%
+  \bib@online{https://www.ncbi.nlm.nih.gov/pubmed/#1}{#1}%
+}
+\DeclareFieldFormat{pmc}{%
+  \mkbibacro{PMC}\addcolon\space%
+  \bib@online{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC#1}{#1}%
+}
+\letbibmacro{hep-doi+eprint+url}{doi+eprint+url}
+\renewbibmacro*{doi+eprint+url}{%
+  \usebibmacro{hep-doi+eprint+url}
+  \iffieldundef{pmc}{%
+    \iffieldundef{pmid}{}{\printfield{pmid}\newunit}%
+  }{\printfield{pmc}\newunit}
+  \iffieldundef{reportnumber}{}{%
+    \newunitpunct\textnumero\intitlepunct%
+    \printfield{reportnumber}\newunit%
+  }%
+}
+
+\NewDocumentCommand{\new@eprint}{smm}{
+  \DeclareFieldFormat{eprint:#2}{%
+    \newcommand{\@path}{\IfBooleanT{#1}{\thefield{eprintclass}/}##1}%
+    #2\addcolon\space\bib@online{#3/\@path}{\@path}%
+  }%
+}
+\new@eprint{CTAN}{https://ctan.org/pkg}
+\DeclareFieldAlias{eprint:ctan}{eprint:CTAN}
+\new@eprint*{GitHub}{https://github.com}
+\DeclareFieldAlias{eprint:github}{eprint:GitHub}
+\new@eprint*{GitLab}{https://gitlab.com}
+\DeclareFieldAlias{eprint:gitlab}{eprint:GitLab}
+\new@eprint*{Bitbucket}{https://bitbucket.org}
+\DeclareFieldAlias{eprint:bitbucket}{eprint:Bitbucket}
+\new@eprint{Launchpad}{https://launchpad.net}
+\DeclareFieldAlias{eprint:launchpad}{eprint:Launchpad}
+\new@eprint{SourceForge}{https://sourceforge.net/projects}
+\DeclareFieldAlias{eprint:launchpad}{eprint:SourceForge}
+\DeclareFieldFormat{eprint:hepforge}{%
+  HEPForge\addcolon\space\bib@online{https://#1/hepforge.org}{#1}%
+}
+\DeclareFieldAlias{eprint:HEPForge}{eprint:hepforge}
+
+\endinput
+%%
+%% End of file `hep-bibliography.sty'.

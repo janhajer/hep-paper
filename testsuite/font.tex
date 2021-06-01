@@ -1,6 +1,6 @@
 \documentclass{article}
 
-\usepackage{../hep-paper}
+\usepackage[oldstyle]{../hep-paper}
 
 \usepackage{fancyvrb}\DefineShortVerb{\|}
 \newenvironment{vrb}{\begin{tabular}{@{}p{5cm}l@{}}}{\end{tabular}}
@@ -32,6 +32,22 @@
 \begin{vrb}
 |\tistyle | & {Latin Modern Dunhill 123} \\
 |  \slshape| & {\slshape Latin Modern Dunhill Oblique 123} \\
+\end{vrb}
+
+\subsubsection*{Funny}
+
+\fontfamily{cmfr}\selectfont
+\begin{vrb}
+|\fontfamily{cmfr}\selectfont | & {Computer Modern Funny 123} \\
+|  \itshape| & {\itshape Computer Modern Funny Oblique 123} \\
+\end{vrb}
+
+\subsubsection*{Fib}
+
+\fontfamily{cmfib}\selectfont
+\begin{vrb}
+|\fontfamily{cmfib}\selectfont | & {Computer Modern Fibonacci 123} \\
+|  \slshape| & {\slshape Computer Modern Fibonacci Oblique 123} \\
 \end{vrb}
 
 \subsection*{Sans}

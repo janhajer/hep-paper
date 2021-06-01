@@ -15,7 +15,7 @@
 %% and version 1.3c or later is part of all distributions of
 %% LaTeX version 2005/12/01 or later.
 
-\ProvidesFile{hep-paper-documentation.tex}[2020/12/01 v1.6 HEP-Paper documentation]
+\ProvidesFile{hep-paper-documentation.tex}[2021/06/01 v1.7 HEP-Paper documentation]
 
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltxdoc}
@@ -56,7 +56,7 @@
 \title{The \textsmaller[1.5]{HEP\raisebox{.25ex}{--}PAPER} package\thanks{This document corresponds to \software{hep-paper}~\fileversion.}}
 \subtitle{Publications in high energy physics}
 \author{Jan Hajer \email{jan.hajer@uclouvain.be}}
-\affiliation{Centre for Cosmology, Particle Physics and Phenomenology, Université catholique de Louvain, Louvain-la-Neuve B-1348, Belgium}
+\affiliation{Department of Physics, University of Basel, Klingelbergstraße 82, 4056 Basel, Switzerland}
 \preprint{Preprint-Number}
 \date{\filedate}
 
@@ -85,6 +85,10 @@ The paper and font sizes are set to A4 and \unit[11]{pt}, respectively.
 Additionally, the paper geometry is adjusted using the \software{geometry} package \cite{geometry}.
 Furthermore, the font is changed to \LM using the \software{cfr-lm} package \cite{cfr-lm} with \software{microtype} \cite{microtype} optimizations.
 Finally, \PDF hyperlinks are implemented with the \software{hyperref} package \cite{hyperref}.
+\DescribeMacro{hep-title}
+\DescribeMacro{hep-bibliography}
+\DescribeMacro{hep-acronyms}
+If only subset of the functionality is needed one of the smaller style files \software{hep-title}, \software{hep-acronyms}, and \software{hep-bibliography} containing only the macros relevant to \cref{sec:title,sec:bibliography,sec:acronyms}, respectively.
 
 \subsection{Options}
 
@@ -111,6 +115,9 @@ The default is |british|.
 \DescribeMacro{sansserif}
 The |sansserif| option switches the document including math to sans serif font shape.
 
+\DescribeMacro{oldstyle}
+The |oldstyle| option activates the use of oldstyle text- (\texto{123}) in favour of lining- (\textl{123}) figures in text mode.
+
 \DescribeMacro{parskip}
 The |parskip| option changes how paragraphs are separated from each other using the \software{parskip} package \cite{parskip}.
 The \hologo{LaTeX} default is separation via indentation the |parskip| option switches to separation via vertical space.
@@ -130,9 +137,6 @@ The deactivation options can prevent such and other adjustments.
 
 \DescribeMacro{defaults}
 The |defaults| option prevents the adjustment of the page geometry and the font size set by the document class.
-
-\DescribeMacro{lining}
-The |lining| option deactivates the use of text- (\texto{123}) in favour of lining- (\textl{123}) figures in text mode.
 
 \DescribeMacro{title}
 The |title=false| option deactivates the title page adjustments.
@@ -188,14 +192,18 @@ The |eqnarray| option reactivates the depreciated |eqnarray| environment.
 If the global |twocolumn| option is present the page geometry is changed to cover almost the entire page.
 Additionally the |abstract*| environment is defined that generates a one column abstract and takes care of placing the title information.
 
-\subsection{Title page}
+\subsection{Title page} \label{sec:title}
+
+\DescribeMacro{\series}
+The |\series|\marg{series} macro is defined using the \software{titling} package \cite{titling}.
 
 \DescribeMacro{\title}
 The \PDF meta information is set according to the |\title|\marg{text} and |\author| \marg{text} information.
 
 \DescribeMacro{\subtitle}
-The |\subtitle|\marg{subtitle} macro is defined using the \software{titling} package \cite{titling}.
+The |\subtitle|\marg{subtitle} macro is defined.
 
+\DescribeMacro{\editor}
 \DescribeMacro{\author}
 \DescribeMacro{\affiliation}
 \DescribeMacro{\email}
@@ -307,7 +315,7 @@ References are also adjusted to not start on a new line.
 \DescribeMacro{\footnote}
 Footnotes are adjusted to swallow white space before the footnote mark and at the beginning of the footnote text.
 
-\subsubsection{Acronyms}
+\subsubsection{Acronyms} \label{sec:acronyms}
 
 \DescribeMacro{\acronym}
 \DescribeMacro{\shortacronym}
@@ -502,7 +510,7 @@ The macro |\inv|\oarg{power}\marg{text} allows to avoid math mode also for inver
 Greek letters are adjusted to always be italic and upright in math and text mode, respectively, using the \software{fixmath} \cite{fixmath} and \software{alphabeta} \cite{alphabeta} packages.
 This allows differentiations like
 \begin{align} \label{eq:greek}
-\sigma &= \unit[5]{fb} \ , & &\text{at \unit[5]{\sigma} C.L.} \ , & \mu &= \unit[5]{cm} \ , & l &= \unit[5]{\text \mu m} \ ,
+\sigma &= \unit[5]{fb} \ , & &\mbox{at \unit[5]{\sigma} C.L.} \ , & \mu &= \unit[5]{cm} \ , & l &= \unit[5]{\text \mu m} \ ,
 \end{align}
 and \eg to distinguish gauge $\nu$ and mass \nu\ eigenstates in models with massive neutrinos.
 Note that |\mathrm| and therefore |\unit| transform italic Greek character to seemingly random upright characters, this can be avoided by using |\unit{\text\mu m}|.
@@ -551,17 +559,17 @@ The float environments have been adjusted to center their content.
 The usual behaviour can be reactivated using |\raggedright|.
 
 \begin{table}
-\begin{panels}{.6}
+\begin{panels}{2}
 \begin{verbatim}
-\begin{panels}{.6}
+\begin{panels}{2}
   code
-\panel{.4}
+\panel
   \begin{tabular}...\end{tabular}
 \end{panels}
 \end{verbatim}
 \caption{Code for this panel environment.}
 \label{tab:panels}
-\panel{.4}
+\panel
 \begin{tabular}{cccc}
 \toprule
 \multicolumn{2}{c}{one}& \multicolumn{2}{c}{two} \\ \cmidrule(r){1-2} \cmidrule(l){3-4}
@@ -592,7 +600,7 @@ The \software{booktabs} \cite{booktabs} and \software{multirow} \cite{multirow} 
 The \software{graphicx} package \cite{graphicx} is loaded and the |\graphic|\oarg{width}\marg{figure} macro is defined, which is a wrapper for the |\includegraphics|\marg{figure} macro and takes the figure width as fraction of the |\linewidth| as optional argument (default~1).
 If the graphics are located in a sub-folder its path can be indicated by |\graphics|\marg{subfolder}.
 
-\subsection{Bibliography}
+\subsection{Bibliography} \label{sec:bibliography}
 
 \DescribeMacro{\bibliography}
 \DescribeMacro{\printbibliography}

@@ -16,7 +16,7 @@
 %% LaTeX version 2005/12/01 or later.
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesPackage{hep-paper}[2020/12/01 v1.6 Publications in High Energy Physics]
+\ProvidesPackage{hep-paper}[2021/06/01 v1.7 Publications in High Energy Physics]
 
 \RequirePackage{pdftexcmds}
 \RequirePackage{kvoptions}
@@ -29,11 +29,12 @@
 \DeclareStringOption[british]{lang}
 \DeclareBoolOption[true]{serif}
 \DeclareComplementaryOption{sansserif}{serif}
+\DeclareBoolOption[true]{lining}
+\DeclareComplementaryOption{oldstyle}{lining}
 \DeclareBoolOption[true]{parindent}
 \DeclareComplementaryOption{parskip}{parindent}
 \DeclareStringOption[true]{symbols}
 \DeclareBoolOption[false]{defaults}
-\DeclareBoolOption[false]{lining}
 \DeclareBoolOption[true]{title}
 \DeclareBoolOption[true]{physics}
 \DeclareStringOption[numeric-comp]{bibliography}
@@ -128,10 +129,15 @@
 \RequirePackage[\hep@encoding]{fontenc}
 \RequirePackage{fix-cm}
 \RequirePackage{microtype}
-\ifhep@lining
-  \RequirePackage[rm={lining},sf={lining},tt={lining}]{cfr-lm}
+\ifxetexorluatex
+  \RequirePackage{nfssext-cfr}
+  \RequirePackage{lmodern}
 \else
-  \RequirePackage{cfr-lm}
+  \ifhep@lining
+    \RequirePackage[rm={lining},sf={lining},tt={lining}]{cfr-lm}
+  \else
+    \RequirePackage{cfr-lm}
+  \fi
 \fi
 \RequirePackage{etoolbox}
 \RequirePackage{textcomp}
@@ -216,8 +222,12 @@
 \newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
   {\smaller[.5]\textsc{#2}~#1}%
 }
-\newcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}
+\providecommand{\online}[2]{\ttfamily{#2}}%
 \providecommand{\email}[1]{\online{mailto:#1}{#1}}
+\AtEndOfPackage{\@ifpackageloaded{hyperref}{%
+    \renewcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
+  }{}
+}
 \newcommand{\prefix}[2]{(#1\mbox{-)}\allowbreak #2}
 
 \RequirePackage[inline]{enumitem}
@@ -235,6 +245,18 @@
     \textbf{##2}\ifx##2\empty\else~\fi\@ifnextchar\par\@gobble\relax
   }
 }{\end{enum@descript}}
+\RequirePackage{xparse}
+\ExplSyntaxOn
+\NewDocumentEnvironment{commalist}{O{\space}+b}{
+  \hep@comma@list:n{#2}
+}{#1}
+\seq_new:N \hep@items@sequence
+\cs_new_protected:Npn \hep@comma@list:n #1{
+  \seq_set_split:Nnn \hep@items@sequence{\item}{#1}
+  \seq_pop_left:NN \hep@items@sequence \l_tmpa_tl
+  \seq_use:Nnnn \hep@items@sequence{~and~}{,~}{,~and~}
+}
+\ExplSyntaxOff
 
 \ifhep@defaults\else
   \RequirePackage{geometry}
@@ -287,7 +309,6 @@
 \mathdef{\overline}{\over@line}
 \RequirePackage{mleftright}
 \mleftright
-\RequirePackage{subdepth}
 \ifhep@eqnarray\else
   \let\eqnarray\@undefined
   \let\endeqnarray\@undefined
@@ -302,17 +323,21 @@
   \RequirePackage{fixmath}
   \RequirePackage{alphabeta}
   \RequirePackage{substitutefont}
-  \substitutefont{LGR}{\rmdefault}{lmr}
-  \DeclareFontFamily{LGR}{\rmdefault}{}
-  \DeclareFontShape{LGR}{\rmdefault}{b}{n}{<->ssub*lmr/bx/n}{}
-  \DeclareFontShape{LGR}{\rmdefault}{b}{sc}{<->ssub*lmr/bx/sc}{}
-  \substitutefont{LGR}{\ttdefault}{lmtt}
-  \DeclareFontFamily{LGR}{\ttdefault}{}
-  \DeclareFontShape{LGR}{\ttdefault}{b}{n}{<->ssub*cmtt/bx/n}{}
-  \substitutefont{LGR}{\sfdefault}{lmss}
-  \DeclareFontFamily{LGR}{\sfdefault}{}
-  \DeclareFontShape{LGR}{\sfdefault}{b}{n}{<->ssub*lmss/bx/n}{}
-  \DeclareFontShape{LGR}{\sfdefault}{b}{sc}{<->ssub*lmss/bx/sc}{}
+  \ifxetexorluatex
+    % missing code
+  \else
+    \substitutefont{LGR}{\rmdefault}{lmr}
+    \DeclareFontFamily{LGR}{\rmdefault}{}
+    \DeclareFontShape{LGR}{\rmdefault}{b}{n}{<->ssub*lmr/bx/n}{}
+    \DeclareFontShape{LGR}{\rmdefault}{b}{sc}{<->ssub*lmr/bx/sc}{}
+    \substitutefont{LGR}{\ttdefault}{lmtt}
+    \DeclareFontFamily{LGR}{\ttdefault}{}
+    \DeclareFontShape{LGR}{\ttdefault}{b}{n}{<->ssub*cmtt/bx/n}{}
+    \substitutefont{LGR}{\sfdefault}{lmss}
+    \DeclareFontFamily{LGR}{\sfdefault}{}
+    \DeclareFontShape{LGR}{\sfdefault}{b}{n}{<->ssub*lmss/bx/n}{}
+    \DeclareFontShape{LGR}{\sfdefault}{b}{sc}{<->ssub*lmss/bx/sc}{}
+  \fi
   \ifhep@minion
     \RequirePackage{MnSymbol}
   \else
@@ -390,20 +415,35 @@
 \RequirePackage{physics}
 \RequirePackage{cancel}
 \RequirePackage{slashed}
+\DeclareDocumentCommand\evaluated{sgd[|d(|}{%
+  \IfNoValueTF{#2}{%
+    \IfNoValueTF{#3}{%
+      \IfNoValueTF{#4}{\argopen.\argclose\rvert}{%
+        \IfBooleanTF{#1}{\vphantom{#4}}{}%
+        \left(\IfBooleanTF{#1}{\smash{#4}}{#4}\right\rvert%
+      }%
+    }{%
+      \IfBooleanTF{#1}{\vphantom{#3}}{}%
+      \left[\IfBooleanTF{#1}{\smash{#3}}{#3}\right\rvert%
+      \IfNoValueTF{#4}{}{(#4|}%
+     }%
+  }{%
+    \IfBooleanTF{#1}{\vphantom{#2}}{}%
+    \left.\IfBooleanTF{#1}{\smash{#2}}{#2}\right\rvert%
+    \IfNoValueTF{#3}{}{[#3|}\IfNoValueTF{#4}{}{(#4|}%
+  }%
+}
 
 \RequirePackage{units}
-\DeclareRobustCommand*{\unit}[2][]{%
-  \begingroup
-    \def\0{#1}%
-    \expandafter
-  \endgroup
-  \ifx\0\@empty
-  \else%
-    \ensuremath{#1}%
-    \ifthenelse{\boolean{B@UnitsLoose}}{~}{\,}%
-  \fi
-  \ifthenelse{\boolean{mmode}}{\mathrm{#2}}{#2}%
-}
+\RequirePackage{xpatch}
+\ifhep@lining\else
+  \xpatchcmd{\unit}{\else#1}{%
+    \else\ifthenelse{\boolean{mmode}}{#1}{\textl{#1}}%
+  }{}{}
+  \xpatchcmd{\unitfrac}{\else#1}{%
+    \else\ifthenelse{\boolean{mmode}}{#1}{\textl{#1}}%
+  }{}{}
+\fi
 \newcommand{\textfrac}[2]{\ensuremath{\nicefrac{\text{#1}}{\text{#2}}}}
 \newcommand{\inv}[2][1]{#2\ensuremath{^{-#1}}}
 \AtBeginDocument{\mathdef{\d}{\dd}}
@@ -476,16 +516,22 @@
 \providecommand*\subcaption@minipage[2]{%
   \minipage#1{#2}\setcaptionsubtype\relax%
 }
+\newcommand{\hep@panels@space}{20}
 \newenvironment{panels}[2][b]{%
   \newcommand{\begin@subcaption@minipage}[2][b]{%
     \caption@withoptargs\subcaption@minipage[##1]{##2}%
     \centering\vskip 0pt%
   }
   \ifdim#2pt>1pt%
-    \newcommand{\panel}[1][b]{%
-      \endminipage\hfill\begin@subcaption@minipage[#1]{\linewidth/#2}%
+    \newcommand{\hep@panel@space}{%
+      (1-#2+\hep@panels@space)/\hep@panels@space%
     }%
-    \begin@subcaption@minipage[#1]{\linewidth/#2}%
+    \newcommand{\panel}[1][b]{%
+      \endminipage\hfill\begin@subcaption@minipage[#1]{%
+        \linewidth/#2*\hep@panel@space%
+      }%
+    }%
+    \begin@subcaption@minipage[#1]{\linewidth/#2*\hep@panel@space}%
   \else%
     \newcommand{\panel}[2][b]{%
       \endminipage\hfill\begin@subcaption@minipage[#1]{##2\linewidth}%
@@ -512,29 +558,36 @@
 }}
 \newcommand{\graphics}[1]{\graphicspath{{./#1/}}}
 
+\newif\ifhep@first%
+\newif\ifnewaffil%
 \ifhep@title
-\date{}
+\date{\vspace{-4ex}}
 \RequirePackage{titling}
+\setlength{\thanksmarkwidth}{1.5em}
 \let\hep@preprint@font\relax
 \newcommand{\preprintfont}[1]{\def\hep@preprint@font{#1}}
+\let\hep@series@font\relax
+\newcommand{\seriesfont}[1]{\def\hep@series@font{#1}}
 \let\hep@title@font\relax
 \newcommand{\titlefont}[1]{\def\hep@title@font{#1}}
 \let\hep@subtitle@font\relax
 \newcommand{\subtitlefont}[1]{\def\hep@subtitle@font{#1}}
+\let\hep@editor@font\relax
+\newcommand{\editorfont}[1]{\def\hep@editor@font{#1}}
 \let\hep@author@font\relax
 \newcommand{\authorfont}[1]{\def\hep@author@font{#1}}
 \let\hep@affiliation@font\relax
 \newcommand{\affiliationfont}[1]{\def\hep@affiliation@font{#1}}
 \let\hep@date@font\relax
 \newcommand{\datefont}[1]{\def\hep@date@font{#1}}
+\newcommand{\preseries}[1]{\def\hep@pre@series{#1}}
+\newcommand{\series}[1]{\def\hep@series{#1}}
+\newcommand{\postseries}[1]{\def\hep@post@series{#1}}
 \newcommand{\presubtitle}[1]{\def\hep@pre@sub@title{#1}}
-\newcommand{\subtitle}[1]{\def\sub@title{#1}}
+\newcommand{\subtitle}[1]{\def\hep@sub@title{#1}}
 \newcommand{\postsubtitle}[1]{\def\hep@post@sub@title{#1}}
-\renewcommand{\maketitlehookb}{%
-  \@ifundefined{sub@title}{}{%
-    \hep@pre@sub@title\sub@title\hep@post@sub@title%
-  }%
-}
+\preseries{\begin{center}\Large\hep@series@font}
+\postseries{\par\end{center}}
 \pretitle{\begin{center}\LARGE\hep@title@font}
 \posttitle{\par\end{center}}
 \presubtitle{\begin{center}\Large\hep@subtitle@font}
@@ -545,10 +598,101 @@
 \postauthor{\end{tabular}\par\end{center}}
 \predate{\begin{center}\hep@date@font}
 \postdate{\par\end{center}}
-\author{}
+\newcounter{editors}
+\newcommand\hep@editorlist{}
+\newcommand\hep@editors{}
+\newcommand{\hep@multi@ref}[1]{%
+  \hep@firsttrue%
+  \forcsvlist{%
+    \ifhep@first\hep@firstfalse\else\textsuperscript,\fi\ref%
+  }{#1}%
+}
 \RequirePackage{authblk}
-\renewcommand{\Affilfont}{\small\hep@affiliation@font}
+\newcommand\editor[2][]{%
+  \renewcommand{\email}[1]{\unskip\thanks{\online{mailto:##1}{##1}}}%
+  \ifnewaffil%
+    \addtocounter{affil}{1}%
+    \edef\AB@thenote{\arabic{affil}}%
+  \fi%
+  \if\relax#1\relax%
+    \def\AB@note{\AB@thenote}%
+  \else%
+    \def\AB@note{#1}\setcounter{Maxaffil}{0}%
+  \fi%
+  \ifnum\value{editors}>1\relax%
+    \@namedef{@sep\number\c@editors}{\Authsep}%
+  \fi%
+  \addtocounter{editors}{1}%
+  \begingroup%
+    \let\protect\@unexpandable@protect \let\and\AB@pand%
+    \def\thanks{\protect\thanks}\def\footnote{\protect\footnote}%
+    \@temptokena=\expandafter{\hep@editors}{%
+      \def\\{%
+        \protect\\[\@affilsep]\protect\Affilfont\protect\AB@resetsep%
+      }%
+      \xdef\hep@editor{\AB@blk@and#2}%
+      \ifnewaffil%
+        \gdef\AB@las{}\gdef\AB@lasx{\protect\Authand}\gdef\AB@as{}%
+        \xdef\hep@editors{\the\@temptokena\AB@blk@and}%
+      \else%
+        \xdef\hep@editors{\the\@temptokena\AB@as\AB@au@str}%
+        \global\let\AB@las\AB@lasx\gdef\AB@lasx{\protect\Authands}%
+        \gdef\AB@as{\Authsep}%
+      \fi%
+      \gdef\AB@au@str{#2}%
+    }%
+    \@temptokena=\expandafter{\hep@editorlist}%
+    \let\\=\editorcr%
+    \xdef\hep@editorlist{%
+      \the\@temptokena%
+      \protect\@nameuse{@sep\number\c@editors}%
+      \protect\Authfont#2%
+      \if\relax#1\relax\else%
+        \ \protect\hep@multi@ref{\AB@note}%
+      \fi%
+    }%
+  \endgroup%
+  \ifnum\value{editors}>2\relax%
+    \@namedef{@sep\number\c@editors}{\Authands}%
+  \fi%
+  \newaffilfalse%
+}
+\newcommand{\preeditor}[1]{\def\hep@pre@editor{#1}}
+\newcommand{\posteditor}[1]{\def\hep@post@editor{#1}}
+\preeditor{\begin{center}\large\hep@editor@font\lineskip.5em
+  \ifnum\value{editors}>1\relax Editors\else Editor\fi:
+}
+\posteditor{\par\end{center}}
+\renewcommand{\maketitlehookb}{%
+  \@ifundefined{hep@sub@title}{}{%
+    \hep@pre@sub@title\hep@sub@title\hep@post@sub@title%
+  }%
+  \ifx\hep@editorlist\AB@empty\else%
+    \hep@pre@editor\hep@editorlist\hep@post@editor%
+  \fi
+}
+\ifhep@lining
+  \renewcommand{\Affilfont}{\small\hep@affiliation@font}
+\else
+  \renewcommand{\Affilfont}{\small\ostyle\hep@affiliation@font}
+\fi
 \renewcommand\Authfont{\hep@author@font}
+\newcounter{affiliation}
+\renewcommand{\theaffiliation}{%
+  \textsuperscript{\normalfont\arabic{affiliation}}%
+}
+\xpatchcmd{\author}{%
+  \protect\Authfont#2\AB@authnote{\AB@note}%
+}{%
+  \protect\Authfont#2%
+  \if\relax#1\relax\else\protect\hep@multi@ref{\AB@note}\fi%
+}{}{}
+\xpatchcmd{\affil}{%
+  \AB@affilnote{\AB@note}%
+}{%
+  \protect\refstepcounter{affiliation}\protect\label{\AB@note}%
+  \if\relax#1\relax\else\protect\ref{\AB@note}\fi%
+}{}{}
 \let\hep@author\author
 \def\author{%
   \renewcommand{\email}[1]{\unskip\thanks{\online{mailto:##1}{##1}}}%
@@ -570,7 +714,6 @@
 \newcommand{\affiliation}{%
   \begingroup\hep@cat@comma@active\hep@affiliation%
 }
-
 \let\hep@preprint\relax
 \newcommand\preprint[1]{\def\hep@preprint{#1}}
 \RequirePackage{varwidth}
@@ -590,7 +733,12 @@
     ){\normalfont\hep@preprint@box}
   }
 }
-\renewcommand{\maketitlehooka}{\placepreprint\vspace{-\bigskipamount}}
+\renewcommand{\maketitlehooka}{%
+  \placepreprint\vspace{-\bigskipamount}%
+  \@ifundefined{hep@series}{}{%
+    \hep@pre@series\hep@series\hep@post@series%
+  }%
+}
 
 \@ifundefined{abstract}{}{%
   \let\hep@abstract\abstract%
@@ -601,7 +749,7 @@
   \RequirePackage{abstract}
   \renewcommand{\abstitleskip}{-3ex}
   \NewEnviron{abstract*}{%
-    \twocolumn[\maketitle\vspace{-1.5cm}%
+    \twocolumn[\maketitle\vspace{-5ex}%
     \begin{onecolabstract}\noindent\BODY\end{onecolabstract}%
     \vspace{.5cm}]\saythanks%
   }
@@ -625,7 +773,8 @@
 \ExecuteBibliographyOptions{
   sorting=hep-paper,
   safeinputenc,
-  giveninits=true
+  giveninits=true,
+  maxbibnames=7
 }
 \ifhep@journal\else
   \if@twocolumn
@@ -633,9 +782,12 @@
     \setlength\biblabelsep{\labelsep}
   \fi
 \fi
+\DefineBibliographyStrings{english}{translationof={Original}}
 \NewBibliographyString{erratum,erratums}
 \DefineBibliographyStrings{english}{erratum={Erratum},erratums={Errata}}
 \providecommand{\relateddelimerratum}{\addsemicolon\space}
+\DefineBibliographyExtras{british}{\def\finalandcomma{\addcomma}}
+\renewcommand{\subtitlepunct}{\addcolon\addspace}
 \let\hep@printbibliography\printbibliography
 \renewcommand{\printbibliography}{\sloppy\hep@printbibliography}
 
@@ -654,6 +806,7 @@
       \step[fieldset=reportnumber, origfieldval, final=true]
     }%
     \map[overwrite]{
+      \pertype{article}
       \step[fieldsource=volume, match=\reg@exp@one, final]
       \step[fieldsource=volume, match=\reg@exp@two, replace={$2}]
       \step[fieldsource=journal, fieldtarget=journaltitle]
@@ -691,6 +844,12 @@
 \renewbibmacro*{in:}{%
   \iffieldundef{journaltitle}{}{\printtext{\bibstring{in}\intitlepunct}}%
 }
+\DeclareFieldFormat{reportnumber}{%
+  \edef\commalistbody{\forcsvfield{%
+    \egroup\noexpand\item\unexpanded{\bgroup\smaller[.5]\textsc}
+  }{reportnumber}}%
+  \expandafter\commalist\commalistbody\egroup\endcommalist%
+}
 \DeclareFieldFormat{url}{%
   \mkbibacro{URL}\addcolon\space\online{#1}{\thefield{protocollessurl}}%
 }
@@ -713,8 +872,7 @@
   }{\printfield{pmc}\newunit}
   \iffieldundef{reportnumber}{}{%
     \newunitpunct\textnumero\intitlepunct%
-    \textsc{\smaller[.5]\printfield{reportnumber}}%
-    \newunit%
+    \printfield{reportnumber}\newunit%
   }%
 }
 
@@ -769,7 +927,7 @@
   \AtBeginDocument{\hypersetup{pdfauthor=\AB@authlist}}
 \else
   \ifhep@beamer\else
-    \AtBeginDocument{\hypersetup{pdfauthor={\@author}}}
+    \ifhep@pos\else\AtBeginDocument{\hypersetup{pdfauthor={\@author}}}\fi
   \fi
 \fi
 
@@ -809,6 +967,14 @@
 \DeclareRobustCommand{\labelcrefrange}[2]{%
   \@crefrangenostar{labelcref}{#1}{#2}%
 }
+\ifhep@title
+  \labelcrefmultiformat{affiliation}{#2#1#3}{%
+    \textsuperscript,#2#1#3}{\textsuperscript,#2#1#3%
+  }{%
+    \textsuperscript,#2#1#3%
+  }
+  \labelcrefrangeformat{affiliation}{#3#1#4\textsuperscript{--}#5#2#6}
+\fi
 \fi
 
 \let\hep@cite\cite
@@ -838,25 +1004,30 @@
 
 \ifhep@glossaries
 \RequirePackage[nostyles]{glossaries-extra}
+\setabbreviationstyle{long-hyphen-short-hyphen}
 \glsenableentrycount
 \glssetcategoryattribute{abbreviation}{entrycount}{1}
-\providecommand{\glsxtrusefield}[2]{\@gls@entry@field{#1}{#2}}
-\providecommand{\glsxtrsetfieldifexists}[3]{\glsdoifexists{#1}{#3}}
-\providecommand{\gGlsXtrSetField}[3]{%
-  \glsxtrsetfieldifexists{#1}{#2}{%
-    \csgdef{glo@\glsdetoklabel{#1}@#2}{#3}%
-  }%
+\AtEndOfPackage{
+  \@ifpackageloaded{hyperref}{
+    \providecommand{\glsxtrusefield}[2]{\@gls@entry@field{#1}{#2}}
+    \providecommand{\glsxtrsetfieldifexists}[3]{\glsdoifexists{#1}{#3}}
+    \providecommand{\gGlsXtrSetField}[3]{%
+      \glsxtrsetfieldifexists{#1}{#2}{%
+        \csgdef{glo@\glsdetoklabel{#1}@#2}{#3}%
+      }%
+    }
+    \glssetcategoryattribute{abbreviation}{nohyperfirst}{true}
+    \renewcommand*{\glsdonohyperlink}[2]{{%
+      \glsxtrprotectlinks\edef\fieldvalue{%
+        \glsxtrusefield{\glslabel}{hastarget}%
+      }%
+      \ifdefstring\fieldvalue{true}{#2}{%
+        \gGlsXtrSetField{\glslabel}{hastarget}{true}%
+        \glsdohypertarget{#1}{#2}%
+      }%
+    }}
+  }{\providecommand{\pdfstringdefDisableCommands}[1]{}}
 }
-\glssetcategoryattribute{abbreviation}{nohyperfirst}{true}
-\renewcommand*{\glsdonohyperlink}[2]{{%
-  \glsxtrprotectlinks\edef\fieldvalue{%
-    \glsxtrusefield{\glslabel}{hastarget}%
-  }%
-  \ifdefstring\fieldvalue{true}{#2}{%
-    \gGlsXtrSetField{\glslabel}{hastarget}{true}%
-    \glsdohypertarget{#1}{#2}%
-  }%
-}}
 \RequirePackage[excludeor]{everyhook}
 \newcommand{\begin@sentence}{1001}
 \PushPostHook{par}{{\spacefactor=\begin@sentence}}
@@ -878,10 +1049,10 @@
     \glsshortpluralkey=\IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}},
     longplural=\IfNoValueTF{#6}{#5s}{#6}
   ]{#3}{\IfNoValueTF{#2}{#3}{#2}}{#5}
-  \expandafter\newcommand\csname#3\endcsname{%
+  \expandafter\newcommand\csname#3\endcsname[1][]{%
     \if@begin@of@sentence{%
-      \ifglsused{#3}{\cgls{#3}}{\cGls{#3}}%
-    }{\cgls{#3}}%
+      \ifglsused{#3}{\cgls{#3}[##1]}{\cGls{#3}[##1]}%
+    }{\cgls{#3}[##1]}%
     \ifnum\glsentrycurrcount{#3}>1\relax
       \IfBooleanTF{#4}{}{\@\xspace}%
     \else\@\xspace\fi
@@ -892,8 +1063,8 @@
   \expandafter\mathdef\csname#3\endcsname{%
     \text{\glsxtrshort{#3}}\@gls@increment@currcount{#3}%
   }
-  \expandafter\newcommand\csname#3s\endcsname{%
-    \if@begin@of@sentence{\cGlspl{#3}}{\cglspl{#3}}%
+  \expandafter\newcommand\csname#3s\endcsname[1][]{%
+    \if@begin@of@sentence{\cGlspl{#3}[##1]}{\cglspl{#3}[##1]}%
     \IfBooleanTF{#4}{}{\@\xspace}%
   }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3s\endcsname{%
@@ -904,8 +1075,8 @@
   }
 }
 \NewDocumentCommand{\shortacronym}{somsmo}{
-  \expandafter\newcommand\csname#3\endcsname{%
-    \IfNoValueTF{#2}{#3}{#2}\IfBooleanTF{#4}{}{\@\xspace}%
+  \expandafter\newcommand\csname#3\endcsname[1][]{%
+    \IfNoValueTF{#2}{#3}{#2}\IfBooleanTF{#4}{}{\@\xspace}##1%
   }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3\endcsname{%
     \IfNoValueTF{#2}{#3}{#2} }%
@@ -913,9 +1084,9 @@
   \expandafter\mathdef\csname#3\endcsname{%
     \text{\IfNoValueTF{#2}{#3}{#2}}%
   }
-  \expandafter\newcommand\csname#3s\endcsname{%
+  \expandafter\newcommand\csname#3s\endcsname[1][]{%
     \IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}}%
-    \IfBooleanTF{#4}{}{\@\xspace}%
+    \IfBooleanTF{#4}{}{\@\xspace}##1%
   }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3s\endcsname{%
     \IfBooleanTF{#1}{#3}{\IfNoValueTF{#2}{#3s}{#2s}} }%
@@ -925,16 +1096,16 @@
   }%
 }
 \NewDocumentCommand{\longacronym}{somsmo}{
-  \expandafter\newcommand\csname#3\endcsname{%
+  \expandafter\newcommand\csname#3\endcsname[1][]{%
     \if@begin@of@sentence{\MakeUppercase#5}{#5}%
-    \IfBooleanTF{#4}{}{\@\xspace}%
+    \IfBooleanTF{#4}{}{\@\xspace}##1%
   }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3\endcsname{#5 }}
-  \expandafter\newcommand\csname#3s\endcsname{%
+  \expandafter\newcommand\csname#3s\endcsname[1][]{%
     \if@begin@of@sentence{%
       \IfNoValueTF{#6}{\MakeUppercase#5s}{\MakeUppercase#6}%
     }{%
-      \IfNoValueTF{#6}{#5s}{#6}}\IfBooleanTF{#4}{}{\@\xspace}%
+      \IfNoValueTF{#6}{#5s}{#6}}\IfBooleanTF{#4}{}{\@\xspace}##1%
   }
   \pdfstringdefDisableCommands{\expandafter\def\csname#3s\endcsname{%
     \IfNoValueTF{#6}{#5s}{#6} }%

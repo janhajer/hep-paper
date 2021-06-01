@@ -27,9 +27,12 @@ LaTeX version 2005/12/01 or later.
 \endpreamble
 
 \generate{
-  \file{hep-paper.sty}{\from{hep-paper-implementation.dtx}{package}}
-  \file{hep-paper.dbx}{\from{hep-paper-implementation.dtx}{datamodel}}
   \file{hep-paper-documentation.tex}{\from{hep-paper-implementation.dtx}{documentation}}
+  \file{hep-paper.dbx}{\from{hep-paper-implementation.dtx}{datamodel}}
+  \file{hep-paper.sty}{\from{hep-paper-implementation.dtx}{package}}
+  \file{hep-title.sty}{\from{hep-paper-implementation.dtx}{title}}
+  \file{hep-bibliography.sty}{\from{hep-paper-implementation.dtx}{bibliography}}
+  \file{hep-acronyms.sty}{\from{hep-paper-implementation.dtx}{acronyms}}
 }
 
 \Msg{*********************************************************}
@@ -39,8 +42,8 @@ LaTeX version 2005/12/01 or later.
 \Msg{*}
 \Msg{* \space\space hep-paper.sty}
 \Msg{*}
-\Msg{* To produce the documentation run the file hep-paper.dtx}
-\Msg{* through LaTeX.}
+\Msg{* To produce the documentation run the file}
+\Msg{* hep-paper-documentation.dtx through LaTeX.}
 \Msg{*}
 \Msg{* Happy TeXing!}
 \Msg{*********************************************************}

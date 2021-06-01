@@ -1415,7 +1415,8 @@
 \onecolumn
 
 % FOR REQUESTED FRONTMATTER ...
-\AtBeginDocument{\bgroup%		SOME NICE (LOCAL) MESSAGES...
+\RequirePackage{etoolbox}
+\AfterEndPreamble{\bgroup%		SOME NICE (LOCAL) MESSAGES...
 	\def\@APPwarn#1{\PoS@warnl{\protect#1 should appear
 					before \protect\begin{document}}}%
 	\def\@APPerr#1{\ClassError{PoS}{\protect#1 should appear
