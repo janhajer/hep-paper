@@ -1,9 +1,32 @@
-\documentclass{article}
+\documentclass[a4paper]{article}
 
-\usepackage[oldstyle]{../hep-paper}
+\usepackage[]{../hep-font}
+% \usepackage[oldstyle]{../hep-paper}
+
+\usepackage{fullpage}
 
 \usepackage{fancyvrb}\DefineShortVerb{\|}
-\newenvironment{vrb}{\begin{tabular}{@{}p{5cm}l@{}}}{\end{tabular}}
+\newenvironment{vrb}{\begin{tabular}{@{}p{5cm}ll@{}}}{\end{tabular}}
+
+\def\samplefont{\edef\savedname{\fontname\font}{\normalfont\ttfamily\savedname}}
+\def\samplefont{}
+
+% \newcommand\storefont{}
+% \newlength{\myLength}
+% \newcommand{\renewfont}[2]{%
+%   \global\def\storefont{\csname#1\endcsname}
+%   \global\setlength{\myLength}{0pt}
+%   \parbox{\myLength}{}{\ttfamily \textbackslash #1} & {\storefont #2} & {\storefont\samplefont} \\
+% }
+% \newcommand{\addfont}[2]{%
+%   \global\let\oldstorfont\storefont%
+%   \global\def\temptest{\csname#1\endcsname}
+%   \global\def\storefont{\oldstorfont\temptest}
+%   \global\def\oldstorfont{}
+%   \global\addtolength{\myLength}{2.5mm}
+%   \parbox{\myLength}{\ }{\ttfamily \textbackslash #1} & {\storefont #2} & {\storefont\samplefont}
+%   \\
+% }
 
 \begin{document}
 
@@ -11,19 +34,19 @@
 
 \rmfamily
 \begin{vrb}
-|\rmfamily| & {Latin Modern Roman 123} \\
-|  \sbweight| & {\sbweight Latin Modern Roman Semi Bold 123} \\
-|  \bfseries| & {\bfseries Latin Modern Roman Bold Extended 123} \\
-|\slshape| & {\slshape Latin Modern Roman Oblique 123} \\
-|  \sbweight| & {\sbweight\slshape Latin Modern Roman Semi Bold Oblique 123} \\
-|  \bfseries| & {\bfseries\slshape Latin Modern Roman Bold Oblique Extended 123} \\
-|\itshape| & {\itshape Latin Modern Roman Italic 123} \\
-|  \bfseries| & {\bfseries\itshape Latin Modern Roman Bold Italic Extended 123} \\
-|\uishape| & {\uishape Latin Modern Roman Upright Italic 123} \\
-|\scshape| & {\scshape Latin Modern Roman Small Caps 123} \\
-|  \bfseries| & {\bfseries\scshape Computer Modern Roman Bold Small Caps 123} \\
-|  \sishape| & {\scshape\slshape Latin Modern Roman Oblique Small Caps 123} \\
-|    \bfseries| & {\slshape\bfseries\scshape Computer Modern Roman Bold Small Caps 123} \\
+|\rmfamily| & {Latin Modern Roman 123} & {\samplefont} \\
+|  \sbweight| & {\sbweight Latin Modern Roman Semi Bold 123} & {\sbweight\samplefont} \\
+|  \bfseries| & {\bfseries Latin Modern Roman Bold Extended 123} & {\bfseries\samplefont} \\
+|\slshape| & {\slshape Latin Modern Roman Oblique 123} & {\slshape\samplefont} \\
+|  \sbweight| & {\sbweight\slshape Latin Modern Roman Semi Bold Oblique 123} & {\sbweight\slshape\samplefont} \\
+|  \bfseries| & {\bfseries\slshape Latin Modern Roman Bold Oblique Extended 123} & {\bfseries\slshape\samplefont} \\
+|\itshape| & {\itshape Latin Modern Roman Italic 123} & {\itshape\samplefont} \\
+|  \bfseries| & {\bfseries\itshape Latin Modern Roman Bold Italic Extended 123} & {\bfseries\itshape\samplefont} \\
+|\uishape| & {\uishape Latin Modern Roman Upright Italic 123} & {\uishape\samplefont} \\
+|\scshape| & {\scshape Latin Modern Roman Small Caps 123} & {\scshape\samplefont} \\
+|  \bfseries| & {\bfseries\scshape Computer Modern Roman Bold Small Caps 123} & {\bfseries\scshape\samplefont} \\
+|  \sishape| & {\scshape\slshape Latin Modern Roman Oblique Small Caps 123} & {\scshape\slshape\samplefont} \\
+|    \bfseries| & {\slshape\bfseries\scshape Computer Modern Roman Bold Small Caps 123} & {\slshape\bfseries\scshape\samplefont} \\
 \end{vrb}
 
 \subsubsection*{Dunhill}

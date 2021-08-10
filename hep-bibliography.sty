@@ -16,10 +16,11 @@
 %% LaTeX version 2005/12/01 or later.
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesPackage{hep-bibliography}[2021/06/01 v1.7 Bibliography macros for publications in High Energy Physics]
+\ProvidesPackage{hep-bibliography}[2021/08/01 v1.8 Bibliography macros for publications in High Energy Physics]
 
 \providecommand{\online}[2]{\ttfamily{#2}}%
-\providecommand{\email}[1]{\online{mailto:#1}{#1}}
+\newcommand{\hep@email}[1]{\online{mailto:#1}{#1}}
+\providecommand\email{\hep@email}
 \AtEndOfPackage{\@ifpackageloaded{hyperref}{%
     \renewcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
   }{}

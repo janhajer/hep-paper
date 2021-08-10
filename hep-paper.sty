@@ -16,7 +16,7 @@
 %% LaTeX version 2005/12/01 or later.
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesPackage{hep-paper}[2021/06/01 v1.7 Publications in High Energy Physics]
+\ProvidesPackage{hep-paper}[2021/08/01 v1.8 Publications in High Energy Physics]
 
 \RequirePackage{pdftexcmds}
 \RequirePackage{kvoptions}
@@ -46,7 +46,8 @@
 \DeclareBoolOption[false]{jcap}
 \DeclareBoolOption[false]{pos}
 \DeclareBoolOption[false]{springer}
-\DeclareBoolOption[false]{eqnarray}
+\DeclareBoolOption[false]{amsart}
+\DeclareBoolOption[true]{eqnarray}
 \DeclareBoolOption[false]{manualplacement}
 \ProcessKeyvalOptions*
 \def\hep@get@class#1.cls#2\relax{\def\hep@class{#1}}
@@ -61,6 +62,12 @@
 \@ifclasswith{\hep@class}{executivepaper}{%
   \setkeys{hep}{paper=executive}%
 }{}
+\@ifclassloaded{amsart}{\setkeys{hep}{amsart}}{}
+\ifhep@amsart
+  \setkeys{hep}{defaults, title=false}
+  \RequirePackage{xpatch}
+  \xpretocmd{\@adminfootnotes}{\let\@makefntext\BHFN@OldMakefntext}{}{}
+\fi
 \@ifclassloaded{svjour}{\setkeys{hep}{springer}}{}
 \@ifclassloaded{svjour2}{\setkeys{hep}{springer}}{}
 \@ifclassloaded{svjour3}{\setkeys{hep}{springer}}{}
@@ -108,7 +115,6 @@
   \voffset 0in
   \hoffset 0in
 \fi
-
 \ifhep@serif\else
   \renewcommand{\familydefault}{\sfdefault}
 \fi
@@ -164,13 +170,31 @@
   }{}
 \else
   \rmfamily
-  \RequirePackage{slantsc}
-  \hep@rm@fontshape{b}{sc}{<->ssub*cmr/bx/sc}{}
-  \hep@rm@fontshape{bx}{sc}{<->ssub*cmr/bx/sc}{}
-  \hep@rm@fontshape{b}{scsl}{<->ssub*cmr/bx/scsl}{}
-  \hep@rm@fontshape{bx}{scsl}{<->ssub*cmr/bx/scit}{}
-  \hep@rm@fontshape{b}{scit}{<->ssub*cmr/bx/scsl}{}
-  \hep@rm@fontshape{bx}{scit}{<->ssub*cmr/bx/scit}{}
+  \ifhep@lining
+    \RequirePackage{slantsc}
+    \hep@rm@fontshape{b}{sc}{<->ssub*cmr/bx/sc}{}
+    \hep@rm@fontshape{bx}{sc}{<->ssub*cmr/bx/sc}{}
+    \hep@rm@fontshape{b}{scsl}{<->ssub*cmr/bx/scsl}{}
+    \hep@rm@fontshape{bx}{scsl}{<->ssub*cmr/bx/scit}{}
+    \hep@rm@fontshape{b}{scit}{<->ssub*cmr/bx/scsl}{}
+    \hep@rm@fontshape{bx}{scit}{<->ssub*cmr/bx/scit}{}
+  \else
+    \DeclareFontFamily{\hep@encoding}{hfor}{}
+    \DeclareFontShape{\hep@encoding}{hfor}{bx}{sc}{
+      <-6>hfoxc0500<6-7>hfoxc0600<7-8>hfoxc0700<8-9>hfoxc0800
+      <9-10>hfoxc0900<10-12>hfoxc1000<12-17>hfoxc1200<17->hfoxc1728
+    }{}
+    \DeclareFontShape{\hep@encoding}{hfor}{bx}{scsl}{
+      <-6>hfooc0500<6-7>hfooc0600<7-8>hfooc0700<8-9>hfooc0800
+      <9-10>hfooc0900<10-12>hfooc1000<12-17>hfooc1200<17->hfooc1728
+    }{}
+    \hep@rm@fontshape{b}{sc}{<->ssub*hfor/bx/sc}{}
+    \hep@rm@fontshape{bx}{sc}{<->ssub*hfor/bx/sc}{}
+    \hep@rm@fontshape{bx}{scsl}{<->ssub*hfor/bx/scsl}{}
+    \hep@rm@fontshape{b}{scit}{<->ssub*hfor/bx/scsl}{}
+    \hep@rm@fontshape{bx}{scit}{<->ssub*hfor/bx/scsl}{}
+    \hep@rm@fontshape{b}{scsl}{<->ssub*hfor/bx/scsl}{}
+  \fi
   \sffamily
   \hep@sf@fontshape{m}{sc}{<->ssub*xcmss/m/sc}{}
   \hep@sf@fontshape{b}{sc}{<->ssub*xcmss/bx/sc}{}
@@ -186,133 +210,6 @@
 \ifxetexorluatex\else
   \RequirePackage[utf8]{inputenc}
 \fi
-\RequirePackage[\hep@lang]{babel}
-\RequirePackage[autostyle]{csquotes}
-\RequirePackage[normalem]{ulem}
-\let\underline\uline
-\ifhep@defaults\else
-  \def\hep@remove@pt#1pt{#1}
-  \edef\hep@pt@size{\expandafter\hep@remove@pt\hep@font}
-  \let\small\relax
-  \let\footnotesize\relax
-  \let\scriptsize\relax
-  \let\tiny\relax
-  \let\large\relax
-  \let\Large\relax
-  \let\LARGE\relax
-  \let\huge\relax
-  \let\Huge\relax
-  \input{size\hep@pt@size.clo}
-\fi
-
-\ifnum\pdf@strcmp{\hep@lang}{american}=0
-  \newcommand{\hep@lang@foreign}{USenglish}
-\else
-  \ifnum\pdf@strcmp{\hep@lang}{USenglish}=0
-    \newcommand{\hep@lang@foreign}{USenglish}
-  \else
-    \newcommand{\hep@lang@foreign}{british}
-  \fi
-\fi
-\RequirePackage[all, \hep@lang@foreign]{foreign}
-\DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
-\xspaceaddexceptions{\csq@qclose@i}
-\newcommand{\no}[1]{\textnumero~#1}
-\RequirePackage{relsize}
-\newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
-  {\smaller[.5]\textsc{#2}~#1}%
-}
-\providecommand{\online}[2]{\ttfamily{#2}}%
-\providecommand{\email}[1]{\online{mailto:#1}{#1}}
-\AtEndOfPackage{\@ifpackageloaded{hyperref}{%
-    \renewcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
-  }{}
-}
-\newcommand{\prefix}[2]{(#1\mbox{-)}\allowbreak #2}
-
-\RequirePackage[inline]{enumitem}
-\newlist{inlinelist}{enumerate*}{1}
-\setlist*[inlinelist,1]{%
-  label=\roman*), itemjoin={,\ }, itemjoin*={, and\ }, after=.%
-}
-\newlist{enum@descript}{enumerate}{2}
-\setlist[enum@descript]{label=\arabic*.}
-\newenvironment{enumdescript}[1][]{
-\begin{enum@descript}[#1]
-  \let\hep@item\item
-  \renewcommand{\item}[2][]{
-    \ifx&##1&\hep@item\else\hep@item[##1]\fi
-    \textbf{##2}\ifx##2\empty\else~\fi\@ifnextchar\par\@gobble\relax
-  }
-}{\end{enum@descript}}
-\RequirePackage{xparse}
-\ExplSyntaxOn
-\NewDocumentEnvironment{commalist}{O{\space}+b}{
-  \hep@comma@list:n{#2}
-}{#1}
-\seq_new:N \hep@items@sequence
-\cs_new_protected:Npn \hep@comma@list:n #1{
-  \seq_set_split:Nnn \hep@items@sequence{\item}{#1}
-  \seq_pop_left:NN \hep@items@sequence \l_tmpa_tl
-  \seq_use:Nnnn \hep@items@sequence{~and~}{,~}{,~and~}
-}
-\ExplSyntaxOff
-
-\ifhep@defaults\else
-  \RequirePackage{geometry}
-  \geometry{\hep@paper paper, includeheadfoot}
-  \if@twocolumn
-    \geometry{hscale=.85, vscale=.925, vmarginratio=1:1}
-    \geometry{headsep=2ex, footskip=6ex}
-    \setlength{\columnsep}{1.1em}
-  \else
-    \geometry{hscale=.75, vscale=.8, vmarginratio=3:4}
-  \fi
-\fi
-\ifhep@parindent\else
-\RequirePackage{parskip}
-\newcommand{\useparskip}{%
-  \setlength{\parskip}{.5\baselineskip plus 2pt}%
-  \setlength{\parindent}{0pt}%
-}
-\newcommand{\useparindent}{%
-  \setlength{\parskip}{0pt}%
-  \setlength{\parindent}{15pt}%
-  \if@twocolumn\setlength\parindent{1em}
-  \else\setlength\parindent{1.5em}
-  \fi
-}
-\fi
-
-\RequirePackage{mathtools}
-\allowdisplaybreaks[1]
-\thickmuskip=5mu plus 3mu minus 1mu
-\medmuskip=4mu plus 2mu minus 3mu
-\DeclareMathOperator{\diag}{diag}
-\DeclareMathOperator{\sgn}{sgn}
-\RequirePackage{xparse}
-\DeclareDocumentCommand{\mathdef}{mO{0}m}{%
-  \expandafter\let\csname text\string#1\endcsname=#1
-  \expandafter\newcommand\csname math\string#1\endcsname[#2]{#3}
-  \DeclareRobustCommand#1{%
-    \ifmmode
-      \expandafter\let\expandafter\next\csname math\string#1\endcsname
-    \else
-      \expandafter\let\expandafter\next\csname text\string#1\endcsname
-    \fi
-    \next
-  }%
-}
-\AtBeginDocument{\mathdef{\i}{\operatorname{i}}}
-\def\overline#1{{\renewcommand{\ULdepth}{-1.9ex}{}\uline{#1}}}
-\DeclareRobustCommand{\over@line}[1]{\@@overline{#1}}
-\mathdef{\overline}{\over@line}
-\RequirePackage{mleftright}
-\mleftright
-\ifhep@eqnarray\else
-  \let\eqnarray\@undefined
-  \let\endeqnarray\@undefined
-\fi
 \newif\ifhep@symbols
 \ifnum\pdf@strcmp{\hep@symbols}{false}=0\else\hep@symbolstrue\fi
 \newif\ifhep@ams
@@ -321,18 +218,50 @@
 \ifnum\pdf@strcmp{\hep@symbols}{minion}=0 \hep@miniontrue\fi
 \ifhep@symbols
   \RequirePackage{fixmath}
-  \RequirePackage{alphabeta}
-  \RequirePackage{substitutefont}
+  \RequirePackage{textalpha}
+  \def\hep@greek#1{%
+    \expandafter\let\csname math%
+    \expandafter\@gobble\string#1\endcsname=#1%
+    \edef#1{%
+      \noexpand\TextOrMath{%
+        \expandafter\noexpand\csname text%
+        \expandafter\@gobble\string#1\endcsname%
+      }{%
+        \noexpand\ifnum\noexpand\fam=0
+          \noexpand\text{%
+            \expandafter\noexpand\csname text%
+            \expandafter\@gobble\string#1\endcsname%
+          }%
+        \noexpand\else
+          \expandafter\noexpand\csname math%
+          \expandafter\@gobble\string#1\endcsname%
+        \noexpand\fi
+      }%
+    }%
+  }
+  \hep@greek\alpha   \hep@greek\beta    \hep@greek\gamma
+  \hep@greek\delta   \hep@greek\epsilon \hep@greek\zeta
+  \hep@greek\eta     \hep@greek\theta   \hep@greek\iota
+  \hep@greek\kappa   \hep@greek\lambda  \hep@greek\mu
+  \hep@greek\nu      \hep@greek\xi      \hep@greek\pi
+  \hep@greek\rho     \hep@greek\sigma   \hep@greek\tau
+  \hep@greek\upsilon \hep@greek\phi     \hep@greek\chi
+  \hep@greek\psi     \hep@greek\omega
+  \hep@greek\Gamma   \hep@greek\Delta   \hep@greek\Theta
+  \hep@greek\Lambda  \hep@greek\Xi      \hep@greek\Pi
+  \hep@greek\Sigma   \hep@greek\Upsilon \hep@greek\Phi
+  \hep@greek\Psi     \hep@greek\Omega
   \ifxetexorluatex
     % missing code
   \else
+    \RequirePackage{substitutefont}
     \substitutefont{LGR}{\rmdefault}{lmr}
     \DeclareFontFamily{LGR}{\rmdefault}{}
     \DeclareFontShape{LGR}{\rmdefault}{b}{n}{<->ssub*lmr/bx/n}{}
     \DeclareFontShape{LGR}{\rmdefault}{b}{sc}{<->ssub*lmr/bx/sc}{}
     \substitutefont{LGR}{\ttdefault}{lmtt}
     \DeclareFontFamily{LGR}{\ttdefault}{}
-    \DeclareFontShape{LGR}{\ttdefault}{b}{n}{<->ssub*cmtt/bx/n}{}
+    \DeclareFontShape{LGR}{\ttdefault}{b}{n}{<->ssub*lmtt/bx/n}{}
     \substitutefont{LGR}{\sfdefault}{lmss}
     \DeclareFontFamily{LGR}{\sfdefault}{}
     \DeclareFontShape{LGR}{\sfdefault}{b}{n}{<->ssub*lmss/bx/n}{}
@@ -389,7 +318,6 @@
   \fi
   \DeclareMathAlphabet{\mathit}{OML}{\hep@font@text}{m}{it}
   \SetMathAlphabet\mathit{bold}{OML}{\hep@font@text}{bx}{it}
-  \DeclareMathAlphabet{\mathtt}{OT1}{cmtl}{m}{n}
   \DeclareMathAlphabet{\mathsf}{OML}{\hep@font@sf}{m}{it}
   \SetMathAlphabet{\mathsf}{bold}{OML}{\hep@font@sf}{bx}{it}
 \fi
@@ -397,6 +325,8 @@
   \RequirePackage{bm}
   \AtBeginDocument{\let\mathbf\bm}
   \g@addto@macro\bfseries{\boldmath}
+  \DeclareMathAlphabet{\mathtt}{OT1}{lmtt}{m}{n}
+  \SetMathAlphabet{\mathtt}{bold}{OT1}{lmtt}{bx}{n}
   \DeclareMathAlphabet{\mathscr}{U}{rsfs}{m}{n}
   \ifhep@minion
     \DeclareMathAlphabet{\mathbb}{U}{%
@@ -410,30 +340,160 @@
     \fi
   \fi
 \fi
-
+\ifhep@defaults\else
+  \def\hep@remove@pt#1pt{#1}
+  \edef\hep@pt@size{\expandafter\hep@remove@pt\hep@font}
+  \let\small\relax
+  \let\footnotesize\relax
+  \let\scriptsize\relax
+  \let\tiny\relax
+  \let\large\relax
+  \let\Large\relax
+  \let\LARGE\relax
+  \let\huge\relax
+  \let\Huge\relax
+  \input{size\hep@pt@size.clo}
+\fi
+\RequirePackage[\hep@lang]{babel}
+\RequirePackage[autostyle]{csquotes}
+\RequirePackage[normalem]{ulem}
+\let\underline\uline
+\ifnum\pdf@strcmp{\hep@lang}{american}=0
+  \newcommand{\hep@lang@foreign}{USenglish}
+\else
+  \ifnum\pdf@strcmp{\hep@lang}{USenglish}=0
+    \newcommand{\hep@lang@foreign}{USenglish}
+  \else
+    \newcommand{\hep@lang@foreign}{british}
+  \fi
+\fi
+\RequirePackage[all, \hep@lang@foreign]{foreign}
+\DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
+\xspaceaddexceptions{\csq@qclose@i}
+\newcommand{\no}[1]{\textnumero~#1}
+\RequirePackage{relsize}
+\newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
+  {\smaller[.5]\textsc{#2}~#1}%
+}
+\providecommand{\online}[2]{\ttfamily{#2}}%
+\newcommand{\hep@email}[1]{\online{mailto:#1}{#1}}
+\providecommand\email{\hep@email}
+\AtEndOfPackage{\@ifpackageloaded{hyperref}{%
+    \renewcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
+  }{}
+}
+\newcommand{\prefix}[2]{(#1\mbox{-)}\allowbreak #2}
+\RequirePackage[inline]{enumitem}
+\newlist{inlinelist}{enumerate*}{1}
+\setlist*[inlinelist,1]{%
+  label=\roman*), itemjoin={,\ }, itemjoin*={, and\ }, after=.%
+}
+\newlist{enum@descript}{enumerate}{2}
+\setlist[enum@descript]{label=\arabic*.}
+\newenvironment{enumdescript}[1][]{
+\begin{enum@descript}[#1]
+  \let\hep@item\item
+  \renewcommand{\item}[2][]{
+    \ifx&##1&\hep@item\else\hep@item[##1]\fi
+    \textbf{##2}\ifx##2\empty\else~\fi\@ifnextchar\par\@gobble\relax
+  }
+}{\end{enum@descript}}
+\RequirePackage{xparse}
+\ExplSyntaxOn
+\NewDocumentEnvironment{commalist}{O{\space}+b}{
+  \hep@comma@list:n{#2}
+}{#1}
+\seq_new:N \hep@items@sequence
+\cs_new_protected:Npn \hep@comma@list:n #1{
+  \seq_set_split:Nnn \hep@items@sequence{\item}{#1}
+  \seq_pop_left:NN \hep@items@sequence \l_tmpa_tl
+  \seq_use:Nnnn \hep@items@sequence{~and~}{,~}{,~and~}
+}
+\ExplSyntaxOff
+\ifhep@defaults\else
+  \RequirePackage{geometry}
+  \geometry{\hep@paper paper, includeheadfoot}
+  \if@twocolumn
+    \geometry{hscale=.85, vscale=.925, vmarginratio=1:1}
+    \geometry{headsep=2ex, footskip=6ex}
+    \setlength{\columnsep}{1.1em}
+  \else
+    \geometry{hscale=.75, vscale=.8, vmarginratio=3:4}
+  \fi
+\fi
+\ifhep@parindent\else
+\RequirePackage{parskip}
+\newcommand{\useparskip}{%
+  \setlength{\parskip}{.5\baselineskip plus 2pt}%
+  \setlength{\parindent}{0pt}%
+}
+\newcommand{\useparindent}{%
+  \setlength{\parskip}{0pt}%
+  \setlength{\parindent}{15pt}%
+  \if@twocolumn\setlength\parindent{1em}
+  \else\setlength\parindent{1.5em}
+  \fi
+}
+\fi
 \ifhep@physics
-\RequirePackage{physics}
-\RequirePackage{cancel}
-\RequirePackage{slashed}
-\DeclareDocumentCommand\evaluated{sgd[|d(|}{%
-  \IfNoValueTF{#2}{%
-    \IfNoValueTF{#3}{%
-      \IfNoValueTF{#4}{\argopen.\argclose\rvert}{%
-        \IfBooleanTF{#1}{\vphantom{#4}}{}%
-        \left(\IfBooleanTF{#1}{\smash{#4}}{#4}\right\rvert%
-      }%
-    }{%
-      \IfBooleanTF{#1}{\vphantom{#3}}{}%
-      \left[\IfBooleanTF{#1}{\smash{#3}}{#3}\right\rvert%
-      \IfNoValueTF{#4}{}{(#4|}%
-     }%
-  }{%
-    \IfBooleanTF{#1}{\vphantom{#2}}{}%
-    \left.\IfBooleanTF{#1}{\smash{#2}}{#2}\right\rvert%
-    \IfNoValueTF{#3}{}{[#3|}\IfNoValueTF{#4}{}{(#4|}%
+\RequirePackage{mathtools}
+\allowdisplaybreaks[1]
+\thickmuskip=5mu plus 3mu minus 1mu
+\medmuskip=4mu plus 2mu minus 3mu
+\RequirePackage{xparse}
+\DeclareDocumentCommand{\mathdef}{mO{0}m}{%
+  \expandafter\let\csname hep@text\string#1\endcsname=#1
+  \expandafter\newcommand\csname hep@math\string#1\endcsname[#2]{#3}
+  \DeclareRobustCommand#1{%
+    \ifmmode
+      \expandafter\let\expandafter\next\csname%
+      hep@math\string#1\endcsname%
+    \else
+      \expandafter\let\expandafter\next\csname%
+      hep@text\string#1\endcsname%
+    \fi
+    \next
   }%
 }
+\AtBeginDocument{\mathdef{\i}{\operatorname{i}}}
+\RequirePackage{ulem}
+\def\overline#1{{\renewcommand{\ULdepth}{-1.9ex}{}\uline{#1}}}
+\DeclareRobustCommand{\over@line}[1]{\@@overline{#1}}
+\mathdef{\overline}{\over@line}
+\newcommand{\oset}[3][-1pt]{%
+  \text{\raisebox{.2ex}{$\mathop{#3}\limits^{%
+    \vbox to#1{\kern-2\ex@\hbox{$\scriptscriptstyle#2$}\vss}%
+  }$}}%
+}
+\newcommand{\overleftright}[1]{\oset{\leftrightarrow}{#1}}
+\ifhep@eqnarray\else
+  \let\eqnarray\@undefined
+  \let\endeqnarray\@undefined
+\fi
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\erf}{erf}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\diag}{diag}
 
+\let\Re\relax\DeclareMathOperator{\Re}{Re}
+\let\Im\relax\DeclareMathOperator{\Im}{Im}
+
+\let\cos\undefined\DeclareMathOperator{\cos}{cos\vphantom{i}}
+\let\tan\undefined\DeclareMathOperator{\tan}{tan\vphantom{i}}
+\DeclareMathOperator{\arccsc}{arccsc}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\asin}{asin}
+\DeclareMathOperator{\acos}{acos}
+\DeclareMathOperator{\atan}{atan}
+\DeclareMathOperator{\acsc}{acsc}
+\DeclareMathOperator{\asec}{asec}
+\DeclareMathOperator{\acot}{acot}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\sech}{sech}
 \RequirePackage{units}
 \RequirePackage{xpatch}
 \ifhep@lining\else
@@ -444,17 +504,197 @@
     \else\ifthenelse{\boolean{mmode}}{#1}{\textl{#1}}%
   }{}{}
 \fi
-\newcommand{\textfrac}[2]{\ensuremath{\nicefrac{\text{#1}}{\text{#2}}}}
 \newcommand{\inv}[2][1]{#2\ensuremath{^{-#1}}}
-\AtBeginDocument{\mathdef{\d}{\dd}}
-\newcommand{\oset}[3][-1pt]{%
-  \text{\raisebox{.2ex}{$\mathop{#3}\limits^{%
-    \vbox to#1{\kern-2\ex@\hbox{$\scriptscriptstyle#2$}\vss}%
-  }$}}%
+\DeclarePairedDelimiterX{\hep@flatfrac}[2]{.}{.}{%
+  #1\delimsize/\makeleftdelim#2%
 }
-\newcommand{\overleftright}[1]{\oset{\leftrightarrow}{#1}}
-\fi
+\NewDocumentCommand{\flatfrac}{somm}{%
+  \IfBooleanTF{#1}{%
+    \hep@flatfrac*{#3}{#4}%
+  }{%
+    \IfNoValueTF{#2}{\,\makeleftdelim#3/\makeleftdelim#4\,%
+    }{%
+      \hep@flatfrac[#2]{#3}{#4}%
+    }%
+  }%
+}
+\newcommand{\textfrac}[2]{\ensuremath{\nicefrac{\text{#1}}{\text{#2}}}}
+\newcommand{\makedifferential}[1]{\mathop{}\!#1}
+\providecommand{\differentialsymbol}{d}
+\newcommand{\differential}{\makedifferential\differentialsymbol}
+\AtBeginDocument{\mathdef{\d}{\differential}}
 
+\newcommand\makederivative[2]{
+  \NewDocumentCommand{#1}{somso}{%
+    \IfBooleanTF{##4}{%
+      \IfBooleanTF{##1}{\nicefrac}{\frac}%
+    }{%
+      \IfBooleanTF{##1}{\flatfrac}{\dfrac}%
+    }{%
+      \makedifferential#2\IfValueT{##2}{^{##2}}\IfValueT{##5}{##5}%
+    }{%
+      \makedifferential#2{##3}\IfValueT{##2}{^{##2}}%
+    }%
+  }
+}
+\makederivative{\derivative}{d}
+\newcommand\dv{\derivative}
+
+\newcommand\variation{\makedifferential\delta}
+\newcommand\var{\variation}
+
+\makederivative{\functionalderivative}{\delta}
+\newcommand\fdv{\functionalderivative}
+
+\RequirePackage{etoolbox}
+\newcommand\makepartialderivative[2]{
+  \NewDocumentCommand{#1}{sO{}O{}msoo}{%
+    \IfBooleanTF{##5}{%
+      \IfBooleanTF{##1}{\nicefrac}{\frac}%
+    }{%
+      \IfBooleanTF{##1}{\flatfrac}{\dfrac}%
+    }{%
+      \makedifferential#2\IfValueTF{##7}{%
+      \ifblank{##2}{
+        \ifblank{##3}{^2}{^{\the\numexpr##3+1\relax}}%
+        }{%
+        \ifblank{##3}{%
+          ^{\the\numexpr##2+1\relax}}{^{{\the\numexpr##2+##3\relax}}%
+        }%
+        }%
+      }{\IfValueT{##2}{^{##2}}}\IfValueT{##6}{##6}%
+    }{%
+      \makedifferential#2{##4}\IfValueT{##2}{^{##2}}%
+      \IfValueT{##7}{#2##7\IfValueT{##3}{^{##3}}}%
+    }%
+  }
+}
+
+\makepartialderivative{\partialderivative}{\partial}
+\newcommand\pdv{\partialderivative}
+\RequirePackage{cancel}
+\RequirePackage{slashed}
+\RequirePackage{mleftright}
+\mleftright
+\newcommand{\noargumentsymbol}{\:\cdot\:}
+\newcommand{\optionalargument}[1]{\ifblank{#1}{\noargumentsymbol}{#1}}
+\DeclarePairedDelimiterX\abs[1]\lvert\rvert{\optionalargument{#1}}
+\DeclarePairedDelimiterX\norm[1]\lVert\rVert{\optionalargument{#1}}
+\DeclarePairedDelimiterXPP\hep@pnorm[2]{}\lVert\rVert{_{#1}}{#2}
+\NewDocumentCommand{\pnorm}{som}{%
+  \IfValueTF{#2}{%
+    \IfBooleanTF{#1}{\hep@pnorm*}{\hep@pnorm}{#2}%
+  }{%
+    \IfBooleanTF{#1}{\norm*}{\norm}%
+  }{\optionalargument{#3}}%
+}
+
+\providecommand{\ordersymbol}{\mathcal{O}}
+\DeclarePairedDelimiterXPP\order[1]{\ordersymbol}(){}{#1}
+
+\DeclarePairedDelimiter{\hep@evaluated}{.}{\rvert}
+\NewDocumentCommand{\evaluated}{som}{%
+  \IfBooleanTF{#1}{%
+    \hep@evaluated*{#3}%
+  }{%
+    \IfNoValueTF{#2}{#3\rvert}{\hep@evaluated[#2]{#3}}%
+  }%
+}
+\newcommand\eval{\evaluated}
+
+\newcommand\makeleftdelim{\mathopen{}}
+\providecommand{\midbar}[1][]{%
+  \nonscript\:#1\vert\allowbreak\nonscript\:\makeleftdelim%
+}
+
+\providecommand\suchthat{\midbar}
+\DeclarePairedDelimiterX\set[1]\{\}{%
+  \renewcommand\suchthat{\midbar[\delimsize]}#1%
+}
+
+\providecommand{\probabilitysymbol}{\operatorname{Pr}}
+\providecommand\given{\midbar}
+\DeclarePairedDelimiterXPP\hep@Pr[1]{%
+  \probabilitysymbol}(){}{%
+  \renewcommand\given{\midbar[\delimsize]}#1%
+}
+\let\Pr\relax
+\NewDocumentCommand{\Pr}{so}{%
+  \IfValueTF{#2}{%
+    \IfBooleanTF{#1}{\hep@Pr*}{\hep@Pr}{#2}%
+  }{%
+    \probabilitysymbol%
+  }%
+}
+
+\DeclarePairedDelimiterX\innerproduct[2]{%
+  \langle}{\rangle}{\optionalargument{#1},\optionalargument{#2}%
+}
+\DeclarePairedDelimiterX\poissonbracket[2]{%
+  \lbrace}{\rbrace}{\optionalargument{#1},\optionalargument{#2}%
+}
+\newcommand\pb{\poissonbracket}
+\DeclarePairedDelimiterX\commutator[2]{%
+  \lbrack}{\rbrack}{\optionalargument{#1},\optionalargument{#2}%
+}
+\newcommand\comm{\commutator}
+\DeclarePairedDelimiterX\anticommutator[2]{%
+  \lbrace}{\rbrace}{\optionalargument{#1},\optionalargument{#2}%
+}
+\newcommand\acomm{\anticommutator}
+\providecommand\braketspace{\mskip1mu}
+\newcommand\hep@midvert{%
+  \braketspace\delimsize\vert\braketspace\makeleftdelim%
+}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{\braketspace#1\hep@midvert#2\braketspace}
+
+\DeclarePairedDelimiterXPP\hep@bra[1]{%
+  }{\langle}{\rvert}{\braketspace}{\braketspace#1\braketspace%
+}
+\NewDocumentCommand{\bra}{smt\ket sgt\ketbra sgg}{%
+  \IfBooleanTF{#6}{%
+    \IfBooleanTF{#1}{\braket*{#2}{#8}}{\braket{#2}{#8}}%
+    \IfBooleanTF{#7}{\bra*{#9}}{\bra{#9}}%
+  }{
+    \IfBooleanTF{#3}{%
+      \IfBooleanTF{#1}{\braket*}{%
+        \IfBooleanTF{#4}{\braket*}{\braket}}{#2}{#5%
+      }%
+    }{%
+      \IfBooleanTF{#1}{\hep@bra*}{\hep@bra}{#2}%
+    }%
+  }%
+}
+
+\DeclarePairedDelimiterXPP\ket[1]{%
+  \braketspace}{\lvert}{\rangle}{}{\braketspace\makeleftdelim#1\braketspace%
+}
+
+\NewDocumentCommand{\ketbra}{smm}{%
+  \IfBooleanTF{#1}{%
+    \ket*{#2}\bra*{#3}%
+  }{%
+    \ket{#2}\bra{#3}%
+  }%
+}
+
+\DeclarePairedDelimiterX\matrixelement[3]{%
+  \langle}{\rangle}{\braketspace#1\hep@midvert#2\hep@midvert#3\braketspace%
+}
+\newcommand\matrixel{\matrixelement}
+\newcommand\mel{\matrixelement}
+
+\DeclarePairedDelimiterX\hep@expvalue[1]{\langle}{\rangle}{\braketspace#1\braketspace}
+\NewDocumentCommand{\expectationvalue}{som}{%
+  \IfNoValueTF{#2}{%
+    \IfBooleanTF{#1}{\hep@expvalue*}{\hep@expvalue}{#3}%
+  }{%
+    \IfBooleanTF{#1}{\matrixelement*}{\matrixelement}{#2}{#3}{#2}%
+  }%
+}
+\newcommand\ev{\expectationvalue}
+\newcommand\vev[1]{\expectationvalue[0]{#1}}
+\fi
 \setcounter{bottomnumber}{0} % 1
 \setcounter{topnumber}{1} % 2
 \setcounter{dbltopnumber}{1} % 2
@@ -462,26 +702,25 @@
 \renewcommand{\dbltopfraction}{.9} % .7
 \renewcommand{\textfraction}{.1} % .2
 \renewcommand{\floatpagefraction}{.8} % .5
-\let\@figure@\figure%
-\let\@end@figure@\endfigure%
-\let\@table@\table%
-\let\@end@table@\endtable%
+\let\hep@figure\figure%
+\let\end@hep@figure\endfigure%
+\let\hep@table\table%
+\let\end@hep@table\endtable%
 \ifhep@manualplacement%
   \renewenvironment{figure}[1][tbp]{%
-    \@figure@[#1]\centering%
-    }{\@end@figure@}%
+    \hep@figure[#1]\centering%
+    }{\end@hep@figure}%
   \renewenvironment{table}[1][tbp]{%
-    \@table@[#1]\centering%
-  }{\@end@table@}%
+    \hep@table[#1]\centering%
+  }{\end@hep@table}%
 \else%
   \renewenvironment{figure}[1][]{%
-    \@figure@\centering%
-  }{\@end@figure@}%
+    \hep@figure\centering%
+  }{\end@hep@figure}%
   \renewenvironment{table}[1][]{%
-    \@table@\centering%
-  }{\@end@table@}
+    \hep@table\centering%
+  }{\end@hep@table}
 \fi%
-
 \newif\ifhep@journal
 \ifhep@sissa\hep@journaltrue
 \else
@@ -547,7 +786,6 @@
   \renewcommand{\figurename}{Figure}
   \renewcommand{\tablename}{Table}
 \fi
-
 \RequirePackage{booktabs}
 \RequirePackage{multirow}
 
@@ -557,59 +795,75 @@
   \centering\includegraphics[width=#1\linewidth]{#2}\par%
 }}
 \newcommand{\graphics}[1]{\graphicspath{{./#1/}}}
-
 \newif\ifhep@first%
 \newif\ifnewaffil%
 \ifhep@title
-\date{\vspace{-4ex}}
-\RequirePackage{titling}
-\setlength{\thanksmarkwidth}{1.5em}
-\let\hep@preprint@font\relax
-\newcommand{\preprintfont}[1]{\def\hep@preprint@font{#1}}
-\let\hep@series@font\relax
-\newcommand{\seriesfont}[1]{\def\hep@series@font{#1}}
-\let\hep@title@font\relax
-\newcommand{\titlefont}[1]{\def\hep@title@font{#1}}
-\let\hep@subtitle@font\relax
-\newcommand{\subtitlefont}[1]{\def\hep@subtitle@font{#1}}
-\let\hep@editor@font\relax
-\newcommand{\editorfont}[1]{\def\hep@editor@font{#1}}
-\let\hep@author@font\relax
-\newcommand{\authorfont}[1]{\def\hep@author@font{#1}}
-\let\hep@affiliation@font\relax
-\newcommand{\affiliationfont}[1]{\def\hep@affiliation@font{#1}}
-\let\hep@date@font\relax
-\newcommand{\datefont}[1]{\def\hep@date@font{#1}}
-\newcommand{\preseries}[1]{\def\hep@pre@series{#1}}
-\newcommand{\series}[1]{\def\hep@series{#1}}
-\newcommand{\postseries}[1]{\def\hep@post@series{#1}}
-\newcommand{\presubtitle}[1]{\def\hep@pre@sub@title{#1}}
-\newcommand{\subtitle}[1]{\def\hep@sub@title{#1}}
-\newcommand{\postsubtitle}[1]{\def\hep@post@sub@title{#1}}
-\preseries{\begin{center}\Large\hep@series@font}
-\postseries{\par\end{center}}
-\pretitle{\begin{center}\LARGE\hep@title@font}
-\posttitle{\par\end{center}}
-\presubtitle{\begin{center}\Large\hep@subtitle@font}
-\postsubtitle{\par\end{center}}
-\preauthor{%
-  \begin{center}\large\hep@author@font\lineskip.5em\begin{tabular}[t]{c}%
-}
-\postauthor{\end{tabular}\par\end{center}}
-\predate{\begin{center}\hep@date@font}
-\postdate{\par\end{center}}
-\newcounter{editors}
-\newcommand\hep@editorlist{}
-\newcommand\hep@editors{}
 \newcommand{\hep@multi@ref}[1]{%
   \hep@firsttrue%
   \forcsvlist{%
     \ifhep@first\hep@firstfalse\else\textsuperscript,\fi\ref%
   }{#1}%
 }
+\renewcommand{\email}[2][]{\unskip\thanks[#1]{\hep@email{#2}}}%
+\AtBeginDocument{
+  \let\hep@maketitle\maketitle
+  \renewcommand\maketitle{\hep@maketitle\let\email\hep@email}
+}
+\let\hep@preprint@font\relax
+\newcommand{\preprintfont}[1]{\def\hep@preprint@font{#1}}
+\preprintfont{\scshape\small}
+\let\hep@preprint\relax
+\newcommand\preprint[1]{\def\hep@preprint{#1}}
+\RequirePackage{varwidth}
+\newcommand{\hep@preprint@box}{%
+  \begin{varwidth}{\textwidth}%
+    \hep@preprint@font\hep@preprint%
+  \end{varwidth}%
+}
+\RequirePackage{atbegshi}
+\RequirePackage{picture}
+\newcommand{\placepreprint}{%
+  \AtBeginShipoutFirst{%
+    \put(
+      \textwidth+\oddsidemargin-\widthof{\hep@preprint@box},
+      -2pt-\topmargin-\heightof{\hep@preprint@box}
+    ){\normalfont\hep@preprint@box}
+  }
+}
+\newcommand{\preseries}[1]{\def\hep@pre@series{#1}}
+\newcommand{\series}[1]{\def\hep@series{#1}}
+\newcommand{\postseries}[1]{\def\hep@post@series{#1}}
+\let\hep@series@font\relax
+\newcommand{\seriesfont}[1]{\def\hep@series@font{#1}}
+\preseries{\begin{center}\Large\hep@series@font}
+\postseries{\par\end{center}}
+\RequirePackage{titling}
+\setlength{\thanksmarkwidth}{1.5em}
+\renewcommand{\maketitlehooka}{%
+  \placepreprint\vspace{-\bigskipamount}%
+  \@ifundefined{hep@series}{}{%
+    \hep@pre@series\hep@series\hep@post@series%
+  }%
+  \vspace{-\bigskipamount}%
+}
+\let\hep@title@font\relax
+\newcommand{\titlefont}[1]{\def\hep@title@font{#1}}
+\pretitle{\begin{center}\LARGE\hep@title@font}
+\posttitle{\par\end{center}}
+
+\newcommand{\presubtitle}[1]{\def\hep@pre@sub@title{#1}}
+\newcommand{\subtitle}[1]{\def\hep@sub@title{#1}}
+\newcommand{\postsubtitle}[1]{\def\hep@post@sub@title{#1}}
+
+\let\hep@subtitle@font\relax
+\newcommand{\subtitlefont}[1]{\def\hep@subtitle@font{#1}}
+\presubtitle{\begin{center}\Large\hep@subtitle@font}
+\postsubtitle{\par\end{center}}
 \RequirePackage{authblk}
+\newcounter{editors}
+\newcommand\hep@editorlist{}
+\newcommand\hep@editors{}
 \newcommand\editor[2][]{%
-  \renewcommand{\email}[1]{\unskip\thanks{\online{mailto:##1}{##1}}}%
   \ifnewaffil%
     \addtocounter{affil}{1}%
     \edef\AB@thenote{\arabic{affil}}%
@@ -648,7 +902,7 @@
       \protect\@nameuse{@sep\number\c@editors}%
       \protect\Authfont#2%
       \if\relax#1\relax\else%
-        \ \protect\hep@multi@ref{\AB@note}%
+        \protect\hep@multi@ref{\AB@note}%
       \fi%
     }%
   \endgroup%
@@ -657,47 +911,94 @@
   \fi%
   \newaffilfalse%
 }
+\let\hep@editor@font\relax
+\newcommand{\editorfont}[1]{\def\hep@editor@font{#1}}
 \newcommand{\preeditor}[1]{\def\hep@pre@editor{#1}}
 \newcommand{\posteditor}[1]{\def\hep@post@editor{#1}}
-\preeditor{\begin{center}\large\hep@editor@font\lineskip.5em
-  \ifnum\value{editors}>1\relax Editors\else Editor\fi:
+\newcommand{\editortitle}[2]{
+  \def\hep@editor@title{#1}
+  \def\hep@editor@title@pl{#2}
 }
-\posteditor{\par\end{center}}
+\newcommand{\editortitlefont}[1]{\def\hep@editor@title@font{#1}}
+\newcommand{\preeditortitle}[1]{\def\hep@pre@editor@title{#1}}
+\newcommand{\posteditortitle}[1]{\def\hep@post@editor@title{#1}}
+\editortitle{Editor}{Editors}
+\editortitlefont{\itshape}
+\preeditortitle{\hep@editor@title@font}
+\posteditortitle{: }
+\preeditor{%
+  \begin{center}%
+    \large\hep@editor@font\lineskip.5em%
+    \begin{tabular}[t]{c}{%
+      \hep@pre@editor@title%
+      \ifnum\value{editors}>1\relax%
+        \hep@editor@title@pl%
+      \else%
+        \hep@editor@title%
+      \fi%
+      \hep@post@editor@title%
+    }%
+}
+\posteditor{\end{tabular}\par\end{center}}
 \renewcommand{\maketitlehookb}{%
   \@ifundefined{hep@sub@title}{}{%
     \hep@pre@sub@title\hep@sub@title\hep@post@sub@title%
   }%
+  \smallskip%
   \ifx\hep@editorlist\AB@empty\else%
     \hep@pre@editor\hep@editorlist\hep@post@editor%
   \fi
-}
-\ifhep@lining
-  \renewcommand{\Affilfont}{\small\hep@affiliation@font}
-\else
-  \renewcommand{\Affilfont}{\small\ostyle\hep@affiliation@font}
-\fi
-\renewcommand\Authfont{\hep@author@font}
-\newcounter{affiliation}
-\renewcommand{\theaffiliation}{%
-  \textsuperscript{\normalfont\arabic{affiliation}}%
 }
 \xpatchcmd{\author}{%
   \protect\Authfont#2\AB@authnote{\AB@note}%
 }{%
   \protect\Authfont#2%
-  \if\relax#1\relax\else\protect\hep@multi@ref{\AB@note}\fi%
+  \if\relax#1\relax\else\unskip\protect\hep@multi@ref{\AB@note}\fi%
 }{}{}
+\let\hep@author@font\relax
+\newcommand{\authorfont}[1]{\def\hep@author@font{#1}}
+\renewcommand\Authfont{\hep@author@font}
+\newcommand{\authortitle}[2]{
+  \def\hep@author@title{#1}
+  \def\hep@author@title@pl{#2}
+}
+\newcommand{\authortitlefont}[1]{\def\hep@author@title@font{#1}}
+\newcommand{\preauthortitle}[1]{\def\hep@pre@author@title{#1}}
+\newcommand{\postauthortitle}[1]{\def\hep@post@author@title{#1}}
+\authortitle{Author}{Authors}
+\authortitlefont{\itshape}
+\preauthortitle{\hep@author@title@font}
+\postauthortitle{: }
+\preauthor{%
+  \begin{center}%
+    \large\hep@author@font\lineskip.5em%
+    \begin{tabular}[t]{c}{%
+      \ifnum\value{editors}>0\relax%
+        \hep@pre@author@title%
+        \ifnum\value{authors}>1\relax%
+          \hep@author@title@pl\else\hep@author@title%
+        \fi\hep@post@author@title%
+      \fi%
+    }%
+}
+\postauthor{\end{tabular}\par\end{center}}
+\newcounter{affiliation}
+\renewcommand{\theaffiliation}{%
+  \textsuperscript{\normalfont\alph{affiliation}}%
+}
 \xpatchcmd{\affil}{%
   \AB@affilnote{\AB@note}%
 }{%
   \protect\refstepcounter{affiliation}\protect\label{\AB@note}%
   \if\relax#1\relax\else\protect\ref{\AB@note}\fi%
 }{}{}
-\let\hep@author\author
-\def\author{%
-  \renewcommand{\email}[1]{\unskip\thanks{\online{mailto:##1}{##1}}}%
-  \hep@author
-}
+\let\hep@affiliation@font\relax
+\newcommand{\affiliationfont}[1]{\def\hep@affiliation@font{#1}}
+\ifhep@lining
+  \renewcommand{\Affilfont}{\small\hep@affiliation@font}
+\else
+  \renewcommand{\Affilfont}{\small\ostyle\hep@affiliation@font}
+\fi
 \newcommand\hep@penalty{\if@twocolumn85\else50\fi}
 \newcommand\hep@active@comma{,\penalty-\hep@penalty\relax}
 \newcommand\hep@cat@comma@active{\catcode`\,\active}
@@ -714,48 +1015,52 @@
 \newcommand{\affiliation}{%
   \begingroup\hep@cat@comma@active\hep@affiliation%
 }
-\let\hep@preprint\relax
-\newcommand\preprint[1]{\def\hep@preprint{#1}}
-\RequirePackage{varwidth}
-\newcommand{\hep@preprint@box}{%
-  \begin{varwidth}{\textwidth}%
-    \smaller[.5]\hep@preprint@font\hep@preprint%
-  \end{varwidth}%
-}
-\preprintfont{\scshape}
-\RequirePackage{atbegshi}
-\RequirePackage{picture}
-\newcommand{\placepreprint}{%
-  \AtBeginShipoutFirst{%
-    \put(
-      \textwidth+\oddsidemargin-\widthof{\hep@preprint@box},
-      -2pt-\topmargin-\heightof{\hep@preprint@box}
-    ){\normalfont\hep@preprint@box}
-  }
-}
-\renewcommand{\maketitlehooka}{%
-  \placepreprint\vspace{-\bigskipamount}%
-  \@ifundefined{hep@series}{}{%
-    \hep@pre@series\hep@series\hep@post@series%
-  }%
-}
-
+\date{\vspace{-4ex}}
+\let\hep@date@font\relax
+\newcommand{\datefont}[1]{\def\hep@date@font{#1}}
+\predate{\begin{center}\hep@date@font}
+\postdate{\par\end{center}}
 \@ifundefined{abstract}{}{%
   \let\hep@abstract\abstract%
   \renewcommand\abstract{\hep@abstract\noindent\ignorespaces}%
+  \if@twocolumn
+    \RequirePackage{environ}
+    \RequirePackage{abstract}
+    \renewcommand{\abstitleskip}{-3ex}
+    \NewEnviron{abstract*}{%
+      \twocolumn[\maketitle\vspace{-5ex}%
+      \begin{onecolabstract}\noindent\BODY\end{onecolabstract}%
+      \vspace{.5cm}]\saythanks%
+    }%
+  \else
+    \newenvironment{abstract*}{%
+      \maketitle\begin{abstract}%
+    }{%
+      \end{abstract}%
+    }
+  \fi
 }
-\if@twocolumn
-  \RequirePackage{environ}
-  \RequirePackage{abstract}
-  \renewcommand{\abstitleskip}{-3ex}
-  \NewEnviron{abstract*}{%
-    \twocolumn[\maketitle\vspace{-5ex}%
-    \begin{onecolabstract}\noindent\BODY\end{onecolabstract}%
-    \vspace{.5cm}]\saythanks%
-  }
-\else
-  \newenvironment{abstract*}{\maketitle\begin{abstract}}{\end{abstract}}
-\fi
+\let\hep@thanks\thanks
+\AtEndDocument{\let\thanks\hep@thanks}
+\DeclareRobustCommand\thanks[2][]{%
+  \AfterEndPreamble{%
+    \if\relax#1\relax%
+      \footnotemark%
+    \else%
+      \renewcommand\thefootnote{\textsuperscript{\@fnsymbol\c@footnote}}%
+      \protect\refstepcounter{footnote}\protect\label{#1}%
+      \renewcommand\thefootnote{\@arabic\c@footnote}%
+    \fi%
+    \protected@xdef\@thanks{%
+      \@thanks\protect\footnotetext[\the\c@footnote]{#2}%
+    }
+    \if@twocolumn
+      \protected@xdef\@bs@thanks{%
+        \@bs@thanks\protect\footnotetext[\the\c@footnote]{#2}%
+      }%
+    \fi%
+  }%
+}
 \fi
 
 \ifnum\pdf@strcmp{\hep@bibliography}{false}=0\else

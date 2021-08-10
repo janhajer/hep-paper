@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019-2020 by Jan Hajer
+% Copyright (C) 2019 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -17,18 +17,24 @@
 %
 % \iffalse
 
-%<package|title|bibliography|acronyms>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-paper}[2021/06/01 v1.7 Publications in High Energy Physics]
-%<title>\ProvidesPackage{hep-title}[2021/06/01 v1.7 Title macros for publications in High Energy Physics]
-%<bibliography>\ProvidesPackage{hep-bibliography}[2021/06/01 v1.7 Bibliography macros for publications in High Energy Physics]
-%<acronyms>\ProvidesPackage{hep-acronyms}[2021/06/01 v1.7 Acronym macros for publications in High Energy Physics]
-%<datamodel>\ProvidesFile{hep-paper.dbx}[2021/06/01 v1.7 HEP-Paper biblatex data model]
-%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2021/06/01 v1.7 HEP-Paper documentation]
+%<package|title|font|math|bibliography|acronyms>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{hep-paper}[2021/08/01 v1.8 Publications in High Energy Physics]
+%<title>\ProvidesPackage{hep-title}[2021/08/01 v1.8 Title macros for publications in High Energy Physics]
+%<font>\ProvidesPackage{hep-font}[2021/08/01 v1.8 Font adjustments for publications in High Energy Physics]
+%<math>\ProvidesPackage{hep-math}[2021/08/01 v1.8 Font adjustments for publications in High Energy Physics]
+%<floats>\ProvidesPackage{hep-floats}[2021/08/01 v1.8 Float adjustments for publications in High Energy Physics]
+%<bibliography>\ProvidesPackage{hep-bibliography}[2021/08/01 v1.8 Bibliography macros for publications in High Energy Physics]
+%<acronyms>\ProvidesPackage{hep-acronyms}[2021/08/01 v1.8 Acronym macros for publications in High Energy Physics]
+%<datamodel>\ProvidesFile{hep-paper.dbx}[2021/08/01 v1.8 HEP-Paper biblatex data model]
+%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2021/08/01 v1.8 HEP-Paper documentation]
 %
 %<*documentation>
 
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltxdoc}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+\setcounter{tocdepth}{2}
 
 \EnableCrossrefs
 \CodelineIndex
@@ -36,7 +42,7 @@
 
 \MacroIndent=1.5em
 
-\usepackage[parskip]{hep-paper}
+\usepackage[parskip, oldstyle]{hep-paper}
 
 \bibliography{bibliography}
 
@@ -72,7 +78,7 @@
 %
 % \fi
 %
-% \CheckSum{2095}
+% \CheckSum{0}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -97,7 +103,8 @@
 % \changes{v1.4}{2020/09/01}{If possible the compatibility options are selected automatically. Inclusion of PubMed IDs in bibliography.}
 % \changes{v1.5}{2020/10/01}{Reduce the numer of math alphabets used in sans serif mode. Add more title options such as a subtitle. Use standard class options.}
 % \changes{v1.6}{2020/12/01}{Implementation of the twocolumn mode.}
-% \changes{v1.7}{2021/16/01}{Introduction of dedicated style file for the title, acronyms and bibliography macros. Extension of the title macros.}
+% \changes{v1.7}{2021/06/01}{Introduction of dedicated style file for the title, acronyms and bibliography macros. Extension of the title macros.}
+% \changes{v1.8}{2021/08/01}{Expand thanks to allow for reference label and fine tune the title page. Reimplement the must relevant macros from the physics package. Make mathrm produce upright Greek.}
 %
 % \ifshort
 %<*documentation>
@@ -107,7 +114,7 @@
 
 \title{The \textsmaller[1.5]{HEP\raisebox{.25ex}{--}PAPER} package\thanks{This document corresponds to \software{hep-paper}~\fileversion.}}
 \subtitle{Publications in high energy physics}
-\author{Jan Hajer \email{jan.hajer@uclouvain.be}}
+\author{Jan Hajer \email{jan.hajer@unibas.ch}}
 \affiliation{Department of Physics, University of Basel, Klingelbergstraße 82, 4056 Basel, Switzerland}
 \preprint{Preprint-Number}
 \date{\filedate}
@@ -129,7 +136,7 @@ Instead of reinventing the wheel by introducing newly created macros \software{h
 
 \section{Introduction}
 
-For usual publications it is enough to load additionally to the |article| class without optional arguments only the \software{hep-paper} package \cite{hep-paper}.
+For usual publications it is enough to load additionally to the "article" class without optional arguments only the \software{hep-paper} package \cite{hep-paper}.
 \begin{verbatim}
 \documentclass{article}
 \usepackage{hep-paper}
@@ -147,42 +154,42 @@ If only subset of the functionality is needed one of the smaller style files \so
 \subsection{Options}
 
 \DescribeMacro{paper}
-The |paper=|\meta{format} option loads the specified paper format.
+The "paper="\meta{format} option loads the specified paper format.
 The possible \meta{formats} are:
-|a0|, |a1|, |a2|, |a3|, |a4|, |a5|, |a6|,
-|b0|, |b1|, |b2|, |b3|, |b4|, |b5|, |b6|,
-|c0|, |c1|, |c2|, |c3|, |c4|, |c5|, |c6|,
-|ansia|, |ansib|, |ansic|, |ansid|, |ansie|,
-|letter|, |executive|, |legal|.
-The default is |a4|.
+"a0", "a1", "a2", "a3", "a4", "a5", "a6",
+"b0", "b1", "b2", "b3", "b4", "b5", "b6",
+"c0", "c1", "c2", "c3", "c4", "c5", "c6",
+"ansia", "ansib", "ansic", "ansid", "ansie",
+"letter", "executive", "legal".
+The default is "a4".
 
 \DescribeMacro{font}
-The |font=|\meta{size} option loads the specified font size.
+The "font="\meta{size} option loads the specified font size.
 The possible \meta{sizes} are:
-|8pt|, |9pt|, |10pt|, |11pt|, |12pt|, |14pt|, |17pt|, |20pt|.
+"8pt", "9pt", "10pt", "11pt", "12pt", "14pt", "17pt", "20pt".
 The default is \unit[11]{pt}.
 
 \DescribeMacro{lang}
-The |lang|=\meta{name} option switches the document language to one of the values provided by the \software{babel} package \cite{babel}.
-The default is |british|.
+The "lang"=\meta{name} option switches the document language to one of the values provided by the \software{babel} package \cite{babel}.
+The default is "british".
 
 \DescribeMacro{sansserif}
-The |sansserif| option switches the document including math to sans serif font shape.
+The "sansserif" option switches the document including math to sans serif font shape.
 
 \DescribeMacro{oldstyle}
-The |oldstyle| option activates the use of oldstyle text- (\texto{123}) in favour of lining- (\textl{123}) figures in text mode.
+The "oldstyle" option activates the use of oldstyle text- (\texto{123}) in favour of lining- (\textl{123}) figures in text mode.
 
 \DescribeMacro{parskip}
-The |parskip| option changes how paragraphs are separated from each other using the \software{parskip} package \cite{parskip}.
-The \hologo{LaTeX} default is separation via indentation the |parskip| option switches to separation via vertical space.
-\footnote{Although the |parskip| option is used for this document, it is recommended only for very few document types such as technical manuals or answers to referees.}
+The "parskip" option changes how paragraphs are separated from each other using the \software{parskip} package \cite{parskip}.
+The \hologo{LaTeX} default is separation via indentation the "parskip" option switches to separation via vertical space.
+\footnote{Although the "parskip" option is used for this document, it is recommended only for very few document types such as technical manuals or answers to referees.}
 
 \DescribeMacro{symbols}
-The |symbols|=\meta{family} set the family of the symbol fonts.
-|symbols=ams| loads the two \hologo{AmS} fonts \cite{amsfonts} and the \software{bm} bold fonts.
-The default |symbols=true| replaces additionally the blackboard font with the \software{dsfont} \cite{dsfont}.
-|symbols=minion| switches the symbol fonts to the Adobe MinionPro companion font from the \software{MnSymbol} package \cite{MnSymbol}.
-|symbols=false| deactivates loading any additional symbol fonts.
+The "symbols"=\meta{family} set the family of the symbol fonts.
+"symbols=ams" loads the two \hologo{AmS} fonts \cite{amsfonts} and the \software{bm} bold fonts.
+The default "symbols=true" replaces additionally the blackboard font with the \software{dsfont} \cite{dsfont}.
+"symbols=minion" switches the symbol fonts to the Adobe MinionPro companion font from the \software{MnSymbol} package \cite{MnSymbol}.
+"symbols=false" deactivates loading any additional symbol fonts.
 
 \subsubsection{Deactivation}
 
@@ -190,20 +197,20 @@ The \software{hep-paper} package loads few bigger packages which have a large im
 The deactivation options can prevent such and other adjustments.
 
 \DescribeMacro{defaults}
-The |defaults| option prevents the adjustment of the page geometry and the font size set by the document class.
+The "defaults" option prevents the adjustment of the page geometry and the font size set by the document class.
 
 \DescribeMacro{title}
-The |title=false| option deactivates the title page adjustments.
+The "title=false" option deactivates the title page adjustments.
 
 \DescribeMacro{bibliography}
-The |bibliography|=\meta{key} option prevents the automatic loading of the \software{biblatex} package \cite{biblatex} if \meta{key}=|false|.
-Otherwise the \meta{key} is passed as |style| string to the \software{biblatex} package.
+The "bibliography"=\meta{key} option prevents the automatic loading of the \software{biblatex} package \cite{biblatex} if \meta{key}="false".
+Otherwise the \meta{key} is passed as "style" string to the \software{biblatex} package.
 
 \DescribeMacro{glossaries}
-The |glossaries=false| option deactives acronyms and the use of the \software{glossaries} package \cite{glossaries}.
+The "glossaries=false" option deactives acronyms and the use of the \software{glossaries} package \cite{glossaries}.
 
 \DescribeMacro{references}
-The |references=false| option prevents the \software{cleveref} package \cite{cleveref} from being loaded and deactivates further redefinitions of reference macros.
+The "references=false" option prevents the \software{cleveref} package \cite{cleveref} from being loaded and deactivates further redefinitions of reference macros.
 
 \subsubsection{Compatibility}
 
@@ -212,50 +219,50 @@ They are mostly suitable combinations of options described in the previous secti
 If \software{hep-paper} is able to detect the presence of such a class or package, \ie if it is loaded before the \software{hep-paper} package, the compatibility mode is activated automatically.
 
 \DescribeMacro{beamer}
-The |beamer| option activates the \software{beamer} \cite{beamer} compatibility mode.
+The "beamer" option activates the \software{beamer} \cite{beamer} compatibility mode.
 
 \DescribeMacro{jhep}
-The |jhep| option activates the \software{JHEP} \cite{jhep} compatibility mode.
+The "jhep" option activates the \software{JHEP} \cite{jhep} compatibility mode.
 
 \DescribeMacro{jcap}
-The |jcap| option activates the \software{JCAP} \cite{jcap} compatibility mode.
+The "jcap" option activates the \software{JCAP} \cite{jcap} compatibility mode.
 
 \DescribeMacro{revtex}
-The |revtex| option activates the REV\hologo{TeX} \cite{revtex} compatibility mode.
+The "revtex" option activates the REV\hologo{TeX} \cite{revtex} compatibility mode.
 
 \DescribeMacro{pos}
-The |pos| option activates the \software{PoS} compatibility mode.
+The "pos" option activates the \software{PoS} compatibility mode.
 
 \DescribeMacro{springer}
-The |springer| option activates the compatibility mode the |svjour| class \cite{svjour}.
+The "springer" option activates the compatibility mode the "svjour" class \cite{svjour}.
 
 \subsubsection{Reactivation}
 
 The \software{hep-paper} package deactivates unrecommended macros, which can be reactivated manually.
 
 \DescribeMacro{manualplacement}
-The |manualplacement| option reactivates manual float placement.
+The "manualplacement" option reactivates manual float placement.
 
 \DescribeMacro{eqnarray}
-The |eqnarray| option reactivates the depreciated |eqnarray| environment.
+The "eqnarray" option reactivates the depreciated "eqnarray" environment.
 
 \section{Macros and environments}
 
 \DescribeMacro{twocolumn}
 \DescribeMacro{abstract*}
-If the global |twocolumn| option is present the page geometry is changed to cover almost the entire page.
-Additionally the |abstract*| environment is defined that generates a one column abstract and takes care of placing the title information.
+If the global "twocolumn" option is present the page geometry is changed to cover almost the entire page.
+Additionally the "abstract*" environment is defined that generates a one column abstract and takes care of placing the title information.
 
 \subsection{Title page} \label{sec:title}
 
 \DescribeMacro{\series}
-The |\series|\marg{series} macro is defined using the \software{titling} package \cite{titling}.
+The "\series"\marg{series} macro is defined using the \software{titling} package \cite{titling}.
 
 \DescribeMacro{\title}
-The \PDF meta information is set according to the |\title|\marg{text} and |\author| \marg{text} information.
+The \PDF meta information is set according to the "\title"\marg{text} and "\author"\marg{text} information.
 
 \DescribeMacro{\subtitle}
-The |\subtitle|\marg{subtitle} macro is defined.
+The "\subtitle"\marg{subtitle} macro is defined.
 
 \DescribeMacro{\editor}
 \DescribeMacro{\author}
@@ -271,42 +278,42 @@ The following lines add \eg two authors with different affiliations
 \end{verbatim}
 
 \DescribeMacro{\preprint}
-The |\preprint|\marg{numer} macro places a pre-print number in the upper right corner of the title page.
+The "\preprint"\marg{numer} macro places a pre-print number in the upper right corner of the title page.
 
 \DescribeEnv{abstract}
-The |abstract| environment is adjusted to not start with an indentation.
+The "abstract" environment is adjusted to not start with an indentation.
 
 \DescribeMacro{\titlefont}
 \DescribeMacro{\subtitlefont}
 \DescribeMacro{\authorfont}
 \DescribeMacro{\affiliationfont}
 \DescribeMacro{\preprintfont}
-Various title font macros are defined, allowing to change the appearance of the |\maketitle| output.
+Various title font macros are defined, allowing to change the appearance of the "\maketitle" output.
 
 \subsection{Text}
 
 Hyphenation is provided by the \software{babel} package \cite{babel} and quotation commands are provided by the \software{csquotes} package \cite{csquotes}.
 \DescribeMacro{\enquote}
 \DescribeMacro{\MakeOuterQuote}
-The latter package provides the convenient macros |\enquote|\marg{text} and |\MakeOuterQuote{"}| allowing to leave the choice of quotation marks to \hologo{LaTeX} and use |"| instead of the pair |``| and |''|, respectively.
+The latter package provides the convenient macros "\enquote"\marg{text} and "\MakeOuterQuote{}" allowing to leave the choice of quotation marks to \hologo{LaTeX} and use \dots instead of the pair \dots and \dots, respectively.
 
 \DescribeMacro{\eg}
 \DescribeMacro{\vs}
-The \software{foreign} package \cite{foreign} defines macros such as |\eg|, |\ie|, |\cf|, and |\vs| which are typeset as \eg, \ie, \cf, and \vs.
+The \software{foreign} package \cite{foreign} defines macros such as "\eg", "\ie", "\cf", and "\vs" which are typeset as \eg, \ie, \cf, and \vs.
 
 \DescribeMacro{\no}
-The |\no|\marg{number} macro is typeset as \no{123}.
+The "\no"\marg{number} macro is typeset as \no{123}.
 
 \DescribeMacro{\software}
-The |\software|\oarg{version}\marg{name} macro is typeset as \software[\fileversion]{HEP-Paper}.
+The "\software"\oarg{version}\marg{name} macro is typeset as \software[\fileversion]{HEP-Paper}.
 
 \DescribeMacro{\online}
-The |\online|\marg{url}\marg{text} macro combines the features of the |\href|\marg{url}\allowbreak\marg{text}\allowbreak \cite{hyperref} and the |\url|\marg{text} \cite{url} macros, resulting in \eg \online{https://ctan.org/pkg/hep-paper}{ctan.org/pkg/hep-paper}.
+The "\online"\marg{url}\marg{text} macro combines the features of the "\href"\marg{url}\allowbreak\marg{text}\allowbreak \cite{hyperref} and the "\url"\marg{text} \cite{url} macros, resulting in \eg \online{https://ctan.org/pkg/hep-paper}{ctan.org/pkg/hep-paper}.
 
 
 \DescribeMacro{inlinelist}
 \DescribeMacro{enumdescript}
-The |inlinelist| and |enumdescript| environments are defined using the \software{enumitem} package \cite{enumitem}.
+The "inlinelist" and "enumdescript" environments are defined using the \software{enumitem} package \cite{enumitem}.
 \begin{columns}
 \begin{verbatim}
 The three main points are
@@ -346,21 +353,21 @@ A bold versions \textbf{\textsc{Small Caps}} and a sans serif version of \textsf
 
 \DescribeMacro{\underline}
 \DescribeMacro{\overline}
-The |\underline| macro is redefined to allow line-breaks using the \software{ulem} package \cite{ulem}.
-The |\overline| macro is extended to also \overline{overline} text outside of math environments.
+The "\underline" macro is redefined to allow line-breaks using the \software{ulem} package \cite{ulem}.
+The "\overline" macro is extended to also \overline{overline} text outside of math environments.
 
 \DescribeMacro{\useparskip}
 \DescribeMacro{\useparindent}
-If the |parskip| option is activated the |\useparindent| macro switches to the usual parindent mode, while the |\useparskip| macro switches to the parskip mode.
+If the "parskip" option is activated the "\useparindent" macro switches to the usual parindent mode, while the "\useparskip" macro switches to the parskip mode.
 
 \subsubsection{References and footnotes}
 
 \DescribeMacro{\cref}
-References are extended with the \software{cleveref} package \cite{cleveref}, which allows to \eg just type |\cref|\marg{key}  in order to write \enquote{figure 1}.
-Furthermore, the \software{cleveref} package allows to reference multiple objects within one |\cref|\marg{key1,key2}.
+References are extended with the \software{cleveref} package \cite{cleveref}, which allows to \eg just type "\cref"\marg{key}  in order to write \enquote{figure 1}.
+Furthermore, the \software{cleveref} package allows to reference multiple objects within one "\cref"\marg{key1,key2}.
 
 \DescribeMacro{\cite}
-Citations are adjusted to not start on a new line in order to avoid the repeated use of |~\cite|\marg{key}.
+Citations are adjusted to not start on a new line in order to avoid the repeated use of "~\cite"\marg{key}.
 
 \DescribeMacro{\ref}
 \DescribeMacro{\eqref}
@@ -375,65 +382,65 @@ Footnotes are adjusted to swallow white space before the footnote mark and at th
 \DescribeMacro{\acronym}
 \DescribeMacro{\shortacronym}
 \DescribeMacro{\longacronym}
-The |\acronym|\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\meta{*}\marg{definition}\oarg{plural\linebreak[4]definition} macro generates the singular |\|\meta{abbreviation} and plural |\|\meta{abbreviation}|s| macros.
+The "\acronym"\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\meta{*}\marg{definition}\oarg{plural\linebreak[4]definition} macro generates the singular "\"\meta{abbreviation} and plural "\"\meta{abbreviation}"s" macros.
 The first star prevents the addition of an \enquote{s} to the abbreviation plural.
 The second star restores the \hologo{TeX} default of swallowing subsequent white space.
 The long form is only shown at the first appearance of these macros, later appearances generate the abbreviation with a hyperlink to the long form.
 The long form is never used in math mode.
 Capitalization at the beginning of paragraphs and sentences is (mostly) ensured.
-The |\shortacronym| and |\longacronym| macros are drop-in replacements of the |\acronym| macro showing only the short or long form of their acronym.
+The "\shortacronym" and "\longacronym" macros are drop-in replacements of the "\acronym" macro showing only the short or long form of their acronym.
 \DescribeMacro{\resetacronym}
 \DescribeMacro{\dummyacronym}
-The first use form of the acronym can be enforced by resetting the acronym counter with |\resetacronym|\marg{key}.
+The first use form of the acronym can be enforced by resetting the acronym counter with "\resetacronym"\marg{key}.
 If the acronym counter equals one at the end of the document the short form of the acronym is not introduced.
-Placing a |\dummyacronym|\marg{key} at the end of the document ensures that the short form is introduced.
+Placing a "\dummyacronym"\marg{key} at the end of the document ensures that the short form is introduced.
 
 \subsection{Math}
 
 The \software{mathtools} \cite{mathtools} and \software{amssymb} \cite{amsfonts} packages are loaded.
 They in turn load the \hologo{AmSLaTeX} \software{amsmath} \cite{amsmath} and \software{amsfonts} \cite{amsfonts} packages.
 \DescribeMacro{\mathbf}
-Bold math, via |\mathbf| is improved by the \software{bm} package \cite{bm}, \ie ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
-Macros switching to |bfseries| such as |\section|\marg{text} are ensured to also typeset math in bold.
+Bold math, via "\mathbf" is improved by the \software{bm} package \cite{bm}, \ie ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
+Macros switching to "bfseries" such as "\section"\marg{text} are ensured to also typeset math in bold.
 \DescribeMacro{\text}
-The |\text|\marg{text} macro makes it possible to write text within math mode, \ie ($ \text A  \text b  \text \Gamma \text \delta \text{\textbf A} \text{\textbf b} \text{\textbf \Gamma} \text{\textbf \delta}$).
+The "\text"\marg{text} macro makes it possible to write text within math mode, \ie ($ \text A  \text b  \text \Gamma \text \delta \text{\textbf A} \text{\textbf b} \text{\textbf \Gamma} \text{\textbf \delta}$).
 \DescribeMacro{\mathsf}
 The math sans serif alphabet is redefined to be italic sans serif if the main text is serif and italic serif if the main text is sans serif, \ie ($\mathsf A \mathsf b \mathsf \Gamma \mathsf \delta \mathbf{\mathsf A} \mathbf{\mathsf b} \mathbf{\mathsf \Gamma} \mathbf{\mathsf \delta}$).
 \DescribeMacro{\mathscr}
-The |\mathcal| font \ie ($\mathcal{ABCD}$) is accompanied by the |\mathscr| font \ie ($\mathscr{ABCD}$).
+The "\mathcal" font \ie ($\mathcal{ABCD}$) is accompanied by the "\mathscr" font \ie ($\mathscr{ABCD}$).
 \DescribeMacro{\mathbb}
-The |\mathbb| font is improved by the \software{doublestroke} package \cite{dsfont} and adjusted depending on the |sansserif| option \ie ($\mathbb{Ah1}$).
+The "\mathbb" font is improved by the \software{doublestroke} package \cite{dsfont} and adjusted depending on the "sansserif" option \ie ($\mathbb{Ah1}$).
 \DescribeMacro{\mathfrak}
-Finally, the |\mathfrak| font is also available \ie ($\mathfrak{AaBb12}$).
+Finally, the "\mathfrak" font is also available \ie ($\mathfrak{AaBb12}$).
 Details about the font handling in \hologo{TeX} can be found in \ccite{fntguide}.
 
 \DescribeMacro{\nicefrac}
 \DescribeMacro{\flatfrac}
 \DescribeMacro{\textfrac}
-The |\frac|\marg{number}\marg{number} macro is accompanied by |\nicefrac|\linebreak[1]\marg{number}\linebreak[1]\marg{number}, |\textfrac|\marg{number}\marg{number}, and |\flatfrac|\marg{number}\marg{number} leading to $\frac12$, $\nicefrac12$, \textfrac12, and $\flatfrac12$.
+The "\frac"\marg{number}\marg{number} macro is accompanied by "\nicefrac"\linebreak[1]\marg{number}\linebreak[1]\marg{number}, "\textfrac"\marg{number}\marg{number}, and "\flatfrac"\marg{number}\marg{number} leading to $\frac12$, $\nicefrac12$, \textfrac12, and $\flatfrac12$.
 \DescribeMacro{\diag}
 \DescribeMacro{\sgn}
-Diagonal matrix |\diag| and signum |\sgn| operators are defined.
+Diagonal matrix "\diag" and signum "\sgn" operators are defined.
 
 \DescribeMacro{\mathdef}
-The |\mathdef|\marg{name}\oarg{arguments}\marg{code} macro \prefix{re}{defines} macros only within math mode without changing the text mode definition.
+The "\mathdef"\marg{name}\oarg{arguments}\marg{code} macro \prefix{re}{defines} macros only within math mode without changing the text mode definition.
 
 \DescribeMacro{\i}
 \DescribeMacro{\d}
 The imaginary unit $\i$ and the differential $\d$ are defined using this functionality.
 
 \DescribeMacro{\numberwithin}
-For longer paper it can be useful to re-number the equation in accordance with the section numbering |\numberwithin{equation}{section}|.
+For longer paper it can be useful to re-number the equation in accordance with the section numbering "\numberwithin{equation}{section}".
 \DescribeMacro{subequations}
-In order to further reduce the size the of equation counter it can be useful to wrap |align| environments with multiple rows in a |subequations| environment.
+In order to further reduce the size the of equation counter it can be useful to wrap "align" environments with multiple rows in a "subequations" environment.
 Both macros are provided by the \software{amsmath} package.
 
 \DescribeMacro{eqnarray}
-The depreciated |eqnarray| environment is undefined as long this behaviour is not prevented by the |eqnarray| package option.
-The |split|, |multline|, |align|, |multlined|, |aligned|, |alignedat|, and |cases| environments of the \software{amsmath} and \software{mathtools} packages should be used instead.
+The depreciated "eqnarray" environment is undefined as long this behaviour is not prevented by the "eqnarray" package option.
+The "split", "multline", "align", "multlined", "aligned", "alignedat", and "cases" environments of the \software{amsmath} and \software{mathtools} packages should be used instead.
 
 \DescribeMacro{equation}
-Use the |equation| environment for short equations.
+Use the "equation" environment for short equations.
 \begin{columns}
 \begin{verbatim}
 \begin{equation}
@@ -447,7 +454,7 @@ Use the |equation| environment for short equations.
 \end{columns}
 
 \DescribeMacro{multline}
-Use the |multline| environment for longer equations.
+Use the "multline" environment for longer equations.
 \begin{columns}
 \begin{verbatim}
 \begin{multline}
@@ -463,7 +470,7 @@ Use the |multline| environment for longer equations.
 \end{columns}
 
 \DescribeMacro{split}
-Use the |split| sub environment for equations in which multiple equal signs should be aligned.
+Use the "split" sub environment for equations in which multiple equal signs should be aligned.
 \begin{columns}
 \begin{verbatim}
 \begin{equation} \begin{split}
@@ -481,7 +488,7 @@ Use the |split| sub environment for equations in which multiple equal signs shou
 \end{columns}
 
 \DescribeMacro{align}
-Use the |align| environment for the vertical alignment and horizontal distribution of multiple equations.
+Use the "align" environment for the vertical alignment and horizontal distribution of multiple equations.
 \begin{columns}
 \begin{verbatim}
 \begin{subequations} \begin{align}
@@ -503,10 +510,10 @@ Use the |align| environment for the vertical alignment and horizontal distributi
 \end{columns}
 
 \DescribeMacro{aligned}
-Use the |aligned| environment within a |equation| environment if the aligned equations should be labeled with a single equation number.
+Use the "aligned" environment within a "equation" environment if the aligned equations should be labeled with a single equation number.
 
 \DescribeMacro{multlined}
-Use the |multlined| environment if either |split| or |align| contain very long lines.
+Use the "multlined" environment if either "split" or "align" contain very long lines.
 \begin{columns}
 \begin{verbatim}
 \begin{equation} \begin{split}
@@ -529,7 +536,7 @@ Use the |multlined| environment if either |split| or |align| contain very long l
 \end{columns}
 
 \DescribeMacro{alignat}
-Use the |alignat| environment together with the |\mathllap| macro for the alignment of multiple equations with vastly different lengths.
+Use the "alignat" environment together with the "\mathllap" macro for the alignment of multiple equations with vastly different lengths.
 \begin{columns}
 \begin{verbatim}
 \begin{subequations}
@@ -553,22 +560,20 @@ Use the |alignat| environment together with the |\mathllap| macro for the alignm
 \end{subequations}
 \end{columns}
 
-As a rule of thumb if you have to use |\notag|, |\nonumber|, or perform manual spacing via |\quad| you are probably using the wrong environment.
+As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual spacing via "\quad" you are probably using the wrong environment.
 
 \subsubsection{Physics}
 
 \DescribeMacro{\unit}
 \DescribeMacro{\inv}
-The correct spacing for units, \cf \cref{eq:greek}, is provided by the macro |\unit|\oarg{value} \marg{unit} from the \software{units} package \cite{units} which can also be used in text mode.
-The macro |\inv|\oarg{power}\marg{text} allows to avoid math mode also for inverse units such as \unit[5]{\inv{fb}} typeset via |\unit[5]{\inv{fb}}|.
+The correct spacing for units, \cf \cref{eq:greek}, is provided by the macro "\unit"\oarg{value} \marg{unit} from the \software{units} package \cite{units} which can also be used in text mode.
+The macro "\inv"\oarg{power}\marg{text} allows to avoid math mode also for inverse units such as \unit[5]{\inv{fb}} typeset via "\unit[5]{\inv{fb}}".
 
 Greek letters are adjusted to always be italic and upright in math and text mode, respectively, using the \software{fixmath} \cite{fixmath} and \software{alphabeta} \cite{alphabeta} packages.
 This allows differentiations like
 \begin{align} \label{eq:greek}
-\sigma &= \unit[5]{fb} \ , & &\mbox{at \unit[5]{\sigma} C.L.} \ , & \mu &= \unit[5]{cm} \ , & l &= \unit[5]{\text \mu m} \ ,
+\sigma &= \unit[5]{fb} \ , & &\mbox{at \unit[5]{\sigma} C.L.} \ , & \mu &= \unit[5]{cm} \ , & l &= \unit[5]{\mu m} \ .
 \end{align}
-and \eg to distinguish gauge $\nu$ and mass \nu\ eigenstates in models with massive neutrinos.
-Note that |\mathrm| and therefore |\unit| transform italic Greek character to seemingly random upright characters, this can be avoided by using |\unit{\text\mu m}|.
 Additionally, Greek letters can also be directly typed using Unicode.
 
 \DescribeMacro{\ev}
@@ -578,7 +583,7 @@ Additionally, Greek letters can also be directly typed using Unicode.
 The \software{physics} package \cite{physics} provides additional macros such as
 \begin{align}
 &\ev{\phi} \ ,
-&&\pdv[n]{f}{x} \ ,
+&&\pdv[n]{x}[f] \ ,
 &&\comm{A}{B} \ ,
 &&\order{x^2} \ ,
 &&\eval{x}_0^\infty \ ,
@@ -587,7 +592,7 @@ The \software{physics} package \cite{physics} provides additional macros such as
 
 \DescribeMacro{\cancel}
 \DescribeMacro{\slashed}
-The |\cancel|\marg{characters} macro from the \software{cancel} package \cite{cancel} and the |\slashed| \marg{character} macro from the \software{slashed} package \cite{slashed} allow to $\cancel{\text{cancel}}$ math and use the Dirac slash notation \ie $\slashed \partial$, respectively.
+The "\cancel"\marg{characters} macro from the \software{cancel} package \cite{cancel} and the "\slashed" \marg{character} macro from the \software{slashed} package \cite{slashed} allow to $\cancel{\text{cancel}}$ math and use the Dirac slash notation \ie $\slashed \partial$, respectively.
 
 \DescribeMacro{\overleftright}
 A better looking over left right arrow is defined \ie $\overleftright{\partial}$.
@@ -598,20 +603,20 @@ A better looking over left right arrow is defined \ie $\overleftright{\partial}$
 \DescribeEnv{table}
 Automatic float placement is adjusted to place a single float at the top of pages and to reduce the number of float pages, using the \hologo{LaTeX} macros.
 
-|\setcounter{bottomnumber}{0}| \hfill no floats at the bottom of a page (default 1) \\
-|\setcounter{topnumber}{1}| \hfill a single float at the top of a page (default 2) \\
-|\setcounter{dbltopnumber}{1}| \hfill same for full widths floats in two-column mode \\
-|\renewcommand{\textfraction}{.1}| \hfill large floats are allowed (default 0.2)\\
-|\renewcommand{\topfraction}{.9}| \hfill (default 0.7) \\
-|\renewcommand{\dbltopfraction}{.9}| \hfill (default 0.7) \\
-|\renewcommand{\floatpagefraction}{.8}| \hfill float pages must be full (default 0.5)
+"\setcounter{bottomnumber}{0}" \hfill no floats at the bottom of a page (default 1) \\
+"\setcounter{topnumber}{1}" \hfill a single float at the top of a page (default 2) \\
+"\setcounter{dbltopnumber}{1}" \hfill same for full widths floats in two-column mode \\
+"\renewcommand{\textfraction}{.1}" \hfill large floats are allowed (default 0.2)\\
+"\renewcommand{\topfraction}{.9}" \hfill (default 0.7) \\
+"\renewcommand{\dbltopfraction}{.9}" \hfill (default 0.7) \\
+"\renewcommand{\floatpagefraction}{.8}" \hfill float pages must be full (default 0.5)
 
-Additionally, manual float placement is deactivated but can be reactivated using the |manualplacement| package option.
+Additionally, manual float placement is deactivated but can be reactivated using the "manualplacement" package option.
 It is however recommended to archive the desired design by adjusting above macros.
 The most useful float placement is usually archived by placing the float \emph{in front} of the paragraph it is referenced in first.
 \DescribeMacro{\raggedright}
 The float environments have been adjusted to center their content.
-The usual behaviour can be reactivated using |\raggedright|.
+The usual behaviour can be reactivated using "\raggedright".
 
 \begin{table}
 \begin{panels}{2}
@@ -632,19 +637,19 @@ The usual behaviour can be reactivated using |\raggedright|.
  & b & c & d \\
 \bottomrule
 \end{tabular}
-\caption{The \protecting{|booktabs|} and \protecting{|multirow|} features.}
+\caption{The \protecting{"booktabs"} and \protecting{"multirow"} features.}
 \label{tab:booktabs}
 \end{panels}
-\caption{Example use of the \protecting{|panels|} environment in Panel \subref{tab:panels} and the features from the \software{booktabs} and \software{multirow} packages in Panel \subref{tab:booktabs}.
+\caption{Example use of the \protecting{"panels"} environment in Panel \subref{tab:panels} and the features from the \software{booktabs} and \software{multirow} packages in Panel \subref{tab:booktabs}.
 } \label{tab:table}
 \end{table}
 
 \DescribeEnv{panels}
 \DescribeMacro{\panel}
-The |panels| environment makes use of the \software{subcaption} package \cite{subcaption}.
-It provides sub-floats and takes as mandatory argument either the number of sub-floats (default~2) or the width of the first sub-float as fraction of the |\linewidth|.
-Within the |\begin{panels}|\oarg{vertical alignment}\marg{width} environment the |\panel| macro initiates a new sub-float.
-In the case that the width of the first sub-float has been given as an optional argument to the |panels| environment the |\panel|\marg{width} macro takes the width of the next sub-float as mandatory argument.
+The "panels" environment makes use of the \software{subcaption} package \cite{subcaption}.
+It provides sub-floats and takes as mandatory argument either the number of sub-floats (default~2) or the width of the first sub-float as fraction of the "\linewidth".
+Within the "\begin{panels}"\oarg{vertical alignment}\marg{width} environment the "\panel" macro initiates a new sub-float.
+In the case that the width of the first sub-float has been given as an optional argument to the "panels" environment the "\panel"\marg{width} macro takes the width of the next sub-float as mandatory argument.
 The example code is presented in \cref{tab:panels}.
 
 \DescribeEnv{tabular}
@@ -652,20 +657,20 @@ The \software{booktabs} \cite{booktabs} and \software{multirow} \cite{multirow} 
 
 \DescribeMacro{\graphic}
 \DescribeMacro{\graphics}
-The \software{graphicx} package \cite{graphicx} is loaded and the |\graphic|\oarg{width}\marg{figure} macro is defined, which is a wrapper for the |\includegraphics|\marg{figure} macro and takes the figure width as fraction of the |\linewidth| as optional argument (default~1).
-If the graphics are located in a sub-folder its path can be indicated by |\graphics|\marg{subfolder}.
+The \software{graphicx} package \cite{graphicx} is loaded and the "\graphic"\oarg{width}\marg{figure} macro is defined, which is a wrapper for the "\includegraphics"\marg{figure} macro and takes the figure width as fraction of the "\linewidth" as optional argument (default~1).
+If the graphics are located in a sub-folder its path can be indicated by "\graphics"\marg{subfolder}.
 
 \subsection{Bibliography} \label{sec:bibliography}
 
 \DescribeMacro{\bibliography}
 \DescribeMacro{\printbibliography}
 The \software{biblatex} package \cite{biblatex} is loaded for bibliography management.
-The user has to add the line |\bibliography|\marg{my.bib} to the preamble of the document and |\printbibliography| at the end of the document.
+The user has to add the line "\bibliography"\marg{my.bib} to the preamble of the document and "\printbibliography" at the end of the document.
 The bibliography is generated by \software{Biber} \cite{biber}.
-|biblatex| is extended to be able to cope with the |collaboration| and |reportNumber| fields provided by \online{https://inspirehep.net}{inspirehep.net} and a bug in the volume number is fixed.
-Additionally, the PubMed IDs are recognized and \online{https://ctan.org}{ctan.org}, \online{https://github.com}{github.com}, \online{https://gitlab.com}{gitlab.com}, \online{https://bitbucket.org}{bitbucket.org}, \online{https://www.launchpad.net}{launchpad.net}, \online{https://sourceforge.net}{sourceforge.net}, and \online{https://hepforge.org}{hepforge.org} are valid |eprinttype|s.
+"biblatex" is extended to be able to cope with the "collaboration" and "reportNumber" fields provided by \online{https://inspirehep.net}{inspirehep.net} and a bug in the volume number is fixed.
+Additionally, the PubMed IDs are recognized and \online{https://ctan.org}{ctan.org}, \online{https://github.com}{github.com}, \online{https://gitlab.com}{gitlab.com}, \online{https://bitbucket.org}{bitbucket.org}, \online{https://www.launchpad.net}{launchpad.net}, \online{https://sourceforge.net}{sourceforge.net}, and \online{https://hepforge.org}{hepforge.org} are valid "eprinttype"s.
 \DescribeMacro{erratum}
-Errata can be included using the |related| feature.
+Errata can be included using the "related" feature.
 \begin{verbatim}
 \article{key1,
   ...,
@@ -683,7 +688,7 @@ The \software{hep-paper} package provides a matching selection of preloaded pack
 The majority of the loaded packages are fairly lightweight, the others can be deactivated with package options.
 
 \DescribeMacro{arxiv-collector}
-\nolinkurl{arxiv.org} \cite{arxiv} requires the setup dependent |bbl| files instead of the original |bib| files, which causes trouble if the local \hologo{LaTeX} version differs from the one used by arXiv.
+\nolinkurl{arxiv.org} \cite{arxiv} requires the setup dependent "bbl" files instead of the original "bib" files, which causes trouble if the local \hologo{LaTeX} version differs from the one used by arXiv.
 The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates this problem by collecting all files necessary for publication on arXiv (including figures).
 
 % \ifshort
@@ -702,11 +707,6 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \addtocontents{toc}{\protect\clearpage}
 % \clearpage
 % \appendix
-%
-% \ifshort
-%<*package|title|bibliography|acronyms>
-%<*package>
-% \fi
 %
 % \section{Math alphabet allocation}
 %
@@ -799,45 +799,48 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \begin{enumdescript}[start=0,label=\arabic*)]
 % \item{OT1} \label{it:math text} Text (latin, upper case greek, numerals, text symbols)
 % \item{OML} \label{it:math italic} Math Italic (latin, greek, numerals, text symbols)
-% \item{OMS} \label{it:math symbol} Symbol (|\mathcal|, operators)
+% \item{OMS} \label{it:math symbol} Symbol ("\mathcal", operators)
 % \item{OMX} \label{it:math extension} Math Extension (big operators, delimiters)
 % \end{enumdescript}
-% The text font \ref{it:math text}\strut\ of \CM is \textbf{cmr10} |\OT1/cmr/m/n/10|, which is replaced by \LM to be \textbf{rm-lmr10} |\OT1/lmr/m/n/10|, the |sansserif| option uses \textbf{rm-lmss10} |\OT1/lmss/m/n/10|.
-% The italic math font \ref{it:math italic} of \CM is \textbf{cmmi10} |\OML/cmm/m/it/|\allowbreak|10|, and is replaced by \LM to be \textbf{lmmi10} |\OML/lmm/m/it/10|, the |sansserif| options uses \textbf{cmbrmi10} |\OML/cmbrm/m/it/10| from the \software{cmbright} package \cite{cmbright}.
-% The symbol font \ref{it:math symbol}\strut\ of \CM is \textbf{cmsy10} |\OMS/cmsy/m/n/10|, and is replaced by \LM to be \textbf{lmsy10} |\OMS/lmsy/m/n/10|, the |sansserif| options uses \textbf{cmsssy10} |\OMS/cmsssy/m/n/10| from the \software{sansmathfonts} package \cite{sansmathfonts}.
-% The extension font \ref{it:math extension}\strut\ of \CM is \textbf{cmex10} |\OMX/cmex/m/n/5|, and is replaced by the \software{exscale} package \cite{exscale} to be \textbf{cmex10} |\OMX/cmex/m/n/10|, the |sansserif| option loads \textbf{cmssex10} |\OMX/cmssex/m/n/10|.
+% The text font \ref{it:math text}\strut\ of \CM is \textbf{cmr10} "\OT1/cmr/m/n/10", which is replaced by \LM to be \textbf{rm-lmr10} "\OT1/lmr/m/n/10", the "sansserif" option uses \textbf{rm-lmss10} "\OT1/lmss/m/n/10".
+% The italic math font \ref{it:math italic} of \CM is \textbf{cmmi10} "\OML/cmm/m/it/"\allowbreak"10", and is replaced by \LM to be \textbf{lmmi10} "\OML/lmm/m/it/10", the "sansserif" options uses \textbf{cmbrmi10} "\OML/cmbrm/m/it/10" from the \software{cmbright} package \cite{cmbright}.
+% The symbol font \ref{it:math symbol}\strut\ of \CM is \textbf{cmsy10} "\OMS/cmsy/m/n/10", and is replaced by \LM to be \textbf{lmsy10} "\OMS/lmsy/m/n/10", the "sansserif" options uses \textbf{cmsssy10} "\OMS/cmsssy/m/n/10" from the \software{sansmathfonts} package \cite{sansmathfonts}.
+% The extension font \ref{it:math extension}\strut\ of \CM is \textbf{cmex10} "\OMX/cmex/m/n/5", and is replaced by the \software{exscale} package \cite{exscale} to be \textbf{cmex10} "\OMX/cmex/m/n/10", the "sansserif" option loads \textbf{cmssex10} "\OMX/cmssex/m/n/10".
 % The \software{amssymb} (\software{amsfonts}) packages \cite{amssymb} load two more symbol fonts
 % \begin{enumdescript}[start=4,label=\arabic*)]
-% \item{msam10} \label{it:math ams a} |\U/msa/m/n/10| AMS symbol font A (special math operators)
-% \item{msbm10} \label{it:math ams b} |\U/msb/m/n/10| AMS symbol font B (|\mathbb|, negated operators)
+% \item{msam10} \label{it:math ams a} "\U/msa/m/n/10" AMS symbol font A (special math operators)
+% \item{msbm10} \label{it:math ams b} "\U/msb/m/n/10" AMS symbol font B ("\mathbb", negated operators)
 % \end{enumdescript}
-% The |sansserif| option replaces them with \textbf{ssmsam10} |\U/ssmsa/m/n/10| and \textbf{ssmsbm10} |\U/ssmsb/m/n/10| from the \software{sansmathfonts} package \cite{sansmathfonts}, respectively.
+% The "sansserif" option replaces them with \textbf{ssmsam10} "\U/ssmsa/m/n/10" and \textbf{ssmsbm10} "\U/ssmsb/m/n/10" from the \software{sansmathfonts} package \cite{sansmathfonts}, respectively.
 % The \software{bm} package \cite{bm} loads the bold version for the fonts \labelcref{it:math text,it:math italic,it:math symbol}.
 %
-% Other math alphabets are only loaded on demand, \eg |\mathsf| uses a sans serif font and |\mathbf| without the \software{bm} package uses a bold font.
-% The |\mathscr| macro uses the script font from the \software{mathrsfs} package \cite{mathrsfs}
+% Other math alphabets are only loaded on demand, \eg "\mathsf" uses a sans serif font and "\mathbf" without the \software{bm} package uses a bold font.
+% The "\mathscr" macro uses the script font from the \software{mathrsfs} package \cite{mathrsfs}
 % \begin{enumdescript}[start=9,label=\arabic*)]
-% \item{rsfs10} |\U/rsfs/m/n/10| Math script font (capital letters)
+% \item{rsfs10} "\U/rsfs/m/n/10" Math script font (capital letters)
 % \end{enumdescript}
-% The |\mathbb| macro loads the double stroke font from the \software{dsfont} package \cite{dsfont}, this can be prevented with the |symbols=ams| option.
+% The "\mathbb" macro loads the double stroke font from the \software{dsfont} package \cite{dsfont}, this can be prevented with the "symbols=ams" option.
 % \begin{enumdescript}[start=10,label=\arabic*)]
-% \item{dsrom10} |\U/dsrom/m/n/10| Double stroke font
+% \item{dsrom10} "\U/dsrom/m/n/10" Double stroke font
 % \end{enumdescript}
-% The |\mathfrak| macro loads the fractur font from the \software{amssymb} package \cite{amssymb}
+% The "\mathfrak" macro loads the fractur font from the \software{amssymb} package \cite{amssymb}
 % \begin{enumdescript}[start=11,label=\arabic*)]
-% \item{eufm10} |\U/euf/m/n/10| Math fraktur (Basic Latin)
+% \item{eufm10} "\U/euf/m/n/10" Math fraktur (Basic Latin)
 % \end{enumdescript}
 %
 % The \software{hep-paper} package uses nine of the available 16 math alphabets.
-% This number can be reduced by three using |\newcommand{\bmmax}{0}| from the \software{bm} package \cite{bm} and brought down to the default of four with the option |symbols=false|.
+% This number can be reduced by three using "\newcommand{\bmmax}{0}" from the \software{bm} package \cite{bm} and brought down to the default of four with the option "symbols=false".
 %
-% The |symbols=minion| options replaces the fonts \labelcref{it:math symbol,it:math extension,it:math ams a,it:math ams b} with corresponding fonts from the \software{MnSymbol} package \cite{MnSymbol}.
-% Additionally, two more symbol alphabets are allocated, the \software{bm} package \cite{bm} loads one more font and now |\mathcal| triggers the use of one additional alphabet.
+% The "symbols=minion" options replaces the fonts \labelcref{it:math symbol,it:math extension,it:math ams a,it:math ams b} with corresponding fonts from the \software{MnSymbol} package \cite{MnSymbol}.
+% Additionally, two more symbol alphabets are allocated, the \software{bm} package \cite{bm} loads one more font and now "\mathcal" triggers the use of one additional alphabet.
 % Hence, the minion option uses three to four more math alphabets than a usual setup.
 %
 % \section{Options}
 %
-% Load the \software{pdftexcmds} \cite{pdftexcmds} and \software{kvoptions} \cite{kvoptions} packages and define a |hep| namespace.
+%<*package|title|font|math|floats|acronyms|bibliography>
+%<*package>
+%
+% Load the \software{pdftexcmds} \cite{pdftexcmds} and \software{kvoptions} \cite{kvoptions} packages and define a "hep" namespace.
 %    \begin{macrocode}
 \RequirePackage{pdftexcmds}
 \RequirePackage{kvoptions}
@@ -848,7 +851,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \end{macrocode}
 %
 % \begin{macro}{paper}
-% Define a |paper=|\meta{size} option.
+% Define a "paper="\meta{size} option.
 % Make A4 paper the default.
 %    \begin{macrocode}
 \DeclareStringOption[a4]{paper}
@@ -856,7 +859,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{font}
-% Define a |figures=|\meta{size} option.
+% Define a "figures="\meta{size} option.
 % Make \unit[11]{pt} the default font size.
 %    \begin{macrocode}
 \DeclareStringOption[11pt]{font}
@@ -864,15 +867,15 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{lang}
-% Define the |lang| option, which takes the values provided by the \software{babel} package \cite{babel}.
-% Make |british| the default language.
+% Define the "lang" option, which takes the values provided by the \software{babel} package \cite{babel}.
+% Make "british" the default language.
 %    \begin{macrocode}
 \DeclareStringOption[british]{lang}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{sansserif}
-% Define the option pair |serif| and |sansserif| controling the font shape of the whole document.
+% Define the option pair "serif" and "sansserif" controling the font shape of the whole document.
 %    \begin{macrocode}
 \DeclareBoolOption[true]{serif}
 \DeclareComplementaryOption{sansserif}{serif}
@@ -880,7 +883,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{lining}
-% Define the |lining| option deactivating the use of text figures in text mode.
+% Define the "lining" option deactivating the use of text figures in text mode.
 %    \begin{macrocode}
 \DeclareBoolOption[true]{lining}
 \DeclareComplementaryOption{oldstyle}{lining}
@@ -888,7 +891,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{parskip}
-% Define the option pair |parindent| and |parskip| controlling the separation of paragraphs.
+% Define the option pair "parindent" and "parskip" controlling the separation of paragraphs.
 %    \begin{macrocode}
 \DeclareBoolOption[true]{parindent}
 \DeclareComplementaryOption{parskip}{parindent}
@@ -896,7 +899,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{symbols}
-% Provide the |symbols| option allowing to switch the symbol font.
+% Provide the "symbols" option allowing to switch the symbol font.
 %    \begin{macrocode}
 \DeclareStringOption[true]{symbols}
 %    \end{macrocode}
@@ -905,42 +908,42 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \subsection{Deactivation}
 %
 % \begin{macro}{defaults}
-% Define the |defaults| option which deactivates the |paper| and |font| options and prevents the change of the class defaults by this package.
+% Define the "defaults" option which deactivates the "paper" and "font" options and prevents the change of the class defaults by this package.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{defaults}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{title}
-% Provide the |title| option deactivating redefinitions of title macros.
+% Provide the "title" option deactivating redefinitions of title macros.
 %    \begin{macrocode}
 \DeclareBoolOption[true]{title}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{physics}
-% Provide the |physics| option for deactivating redefinition of physics macros.
+% Provide the "physics" option for deactivating redefinition of physics macros.
 %    \begin{macrocode}
 \DeclareBoolOption[true]{physics}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{bibliography}
-% Provide the |bibliography| option for passing a |style| string to the \software{biblatex} package \cite{biblatex} or disabling the automatic loading of |biblatex|.
+% Provide the "bibliography" option for passing a "style" string to the \software{biblatex} package \cite{biblatex} or disabling the automatic loading of "biblatex".
 %    \begin{macrocode}
 \DeclareStringOption[numeric-comp]{bibliography}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{glossaries}
-% Provide the |glossaries| option able to turn of the use of the \software{glossaries} package \cite{glossaries}.
+% Provide the "glossaries" option able to turn of the use of the \software{glossaries} package \cite{glossaries}.
 %    \begin{macrocode}
 \DeclareBoolOption[true]{glossaries}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{references}
-% Provide the |references| option for preventing the \software{cleveref} package from being loaded redefinitions of reference macros.
+% Provide the "references" option for preventing the \software{cleveref} package from being loaded redefinitions of reference macros.
 %    \begin{macrocode}
 \DeclareBoolOption[true]{references}
 %    \end{macrocode}
@@ -949,58 +952,65 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \subsection{Compatibility}
 %
 % \begin{macro}{beamer}
-% Provide the |beamer| option for \software{beamer} \cite{beamer} compatibility mode.
+% Provide the "beamer" option for \software{beamer} \cite{beamer} compatibility mode.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{beamer}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{revtex}
-% Provide the |revtex| option for REV\hologo{TeX} \cite{revtex} compatibility mode.
+% Provide the "revtex" option for REV\hologo{TeX} \cite{revtex} compatibility mode.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{revtex}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{jhep}
-% Provide the |jhep| option for JHEP \cite{jhep} compatibility mode.
+% Provide the "jhep" option for JHEP \cite{jhep} compatibility mode.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{jhep}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{jcap}
-% Provide the |jcap| option for JCAP \cite{jcap} compatibility mode.
+% Provide the "jcap" option for JCAP \cite{jcap} compatibility mode.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{jcap}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{pos}
-% Provide the |pos| option for PoS compatibility mode.
+% Provide the "pos" option for PoS compatibility mode.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{pos}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{springer}
-% Provide the |springer| option for Springer compatibility mode.
+% Provide the "springer" option for Springer compatibility mode.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{springer}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{amsart}
+% Provide the "amsart" option for AMS article compatibility mode.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{amsart}
 %    \end{macrocode}
 % \end{macro}
 %
 % \subsection{Reactivation}
 %
 % \begin{macro}{eqnarray}
-% Provide the |eqnarray| option for reactivating the |eqnarray| environment.
+% Provide the "eqnarray" option for reactivating the "eqnarray" environment.
 %    \begin{macrocode}
-\DeclareBoolOption[false]{eqnarray}
+\DeclareBoolOption[true]{eqnarray}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{manualplacement}
-% Provide the |manualplacement| option for reactivating the manual placement of floats.
+% Provide the "manualplacement" option for reactivating the manual placement of floats.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{manualplacement}
 %    \end{macrocode}
@@ -1030,7 +1040,17 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % \subsection{Set compatibility}
 %
-% Set the |springer| compatibility options.
+% Set the "amsart" compatibility options.
+%    \begin{macrocode}
+\@ifclassloaded{amsart}{\setkeys{hep}{amsart}}{}
+\ifhep@amsart
+  \setkeys{hep}{defaults, title=false}
+  \RequirePackage{xpatch}
+  \xpretocmd{\@adminfootnotes}{\let\@makefntext\BHFN@OldMakefntext}{}{}
+\fi
+%    \end{macrocode}
+%
+% Set the "springer" compatibility options.
 %    \begin{macrocode}
 \@ifclassloaded{svjour}{\setkeys{hep}{springer}}{}
 \@ifclassloaded{svjour2}{\setkeys{hep}{springer}}{}
@@ -1041,7 +1061,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \fi
 %    \end{macrocode}
 %
-% Set the |pos| compatibility options.
+% Set the "pos" compatibility options.
 %    \begin{macrocode}
 \@ifclassloaded{PoS}{\setkeys{hep}{pos}}{}
 \ifhep@pos
@@ -1050,7 +1070,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \fi
 %    \end{macrocode}
 %
-% Set the |beamer| compatibility options.
+% Set the "beamer" compatibility options.
 %    \begin{macrocode}
 \@ifclassloaded{beamer}{\setkeys{hep}{beamer}}{}
 \ifhep@beamer
@@ -1060,7 +1080,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \fi
 %    \end{macrocode}
 %
-% Set the |revtex| compatibility options.
+% Set the "revtex" compatibility options.
 %    \begin{macrocode}
 \@ifclassloaded{revtex4}{\setkeys{hep}{revtex}}{}
 \@ifclassloaded{revtex4-1}{\setkeys{hep}{revtex}}{}
@@ -1103,11 +1123,16 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   \hoffset 0in
 \fi
 %    \end{macrocode}
-
-% \section{Text}
+%
+%</package>
+%
+% \section{Font}
+%
+%<*package|font>
 %
 % Set the whole text to sans serif if requested.
 %    \begin{macrocode}
+%<font>\newif\ifhep@serif\hep@seriftrue
 \ifhep@serif\else
   \renewcommand{\familydefault}{\sfdefault}
 \fi
@@ -1115,7 +1140,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % \begin{macro}{\ifxetexorluatex}
 % Load the \software{ifluatex} \cite{ifluatex} and \software{ifxetex} \cite{ifxetex} packages.
-% Define the |\ifxetexorluatex| conditional checking if the package is executed by \hologo{LuaLaTeX} or \hologo{XeLaTeX}.
+% Define the "\ifxetexorluatex" conditional checking if the package is executed by \hologo{LuaLaTeX} or \hologo{XeLaTeX}.
 %    \begin{macrocode}
 \RequirePackage{ifluatex}
 \RequirePackage{ifxetex}
@@ -1140,14 +1165,14 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \RequirePackage[\hep@encoding]{fontenc}
 %    \end{macrocode}
 % Fix the remaining \CM fonts \cite{fix-cm}, load the \LM font via \software{cfr-lm} \cite{cfr-lm} supported also by \software{lmodern} \cite{lmodern}, the \software{textcomp} extension \cite{textcomp}, and the \software{microtype} font optimization \cite{microtype}.
-% Adjust the figures according to the |lining| option and ensure that tables always use lining, using the \software{etoolbox} package \cite{etoolbox}.
+% Adjust the figures according to the "lining" option and ensure that tables always use lining, using the \software{etoolbox} package \cite{etoolbox}.
 %    \begin{macrocode}
 \RequirePackage{fix-cm}
 \RequirePackage{microtype}
+%<font>\newif\ifhep@lining
 \ifxetexorluatex
   \RequirePackage{nfssext-cfr}
   \RequirePackage{lmodern}
-%   \RequirePackage{fontsetup} % problmatic
 \else
   \ifhep@lining
     \RequirePackage[rm={lining},sf={lining},tt={lining}]{cfr-lm}
@@ -1197,13 +1222,31 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   }{}
 \else
   \rmfamily
-  \RequirePackage{slantsc}
-  \hep@rm@fontshape{b}{sc}{<->ssub*cmr/bx/sc}{}
-  \hep@rm@fontshape{bx}{sc}{<->ssub*cmr/bx/sc}{}
-  \hep@rm@fontshape{b}{scsl}{<->ssub*cmr/bx/scsl}{}
-  \hep@rm@fontshape{bx}{scsl}{<->ssub*cmr/bx/scit}{}
-  \hep@rm@fontshape{b}{scit}{<->ssub*cmr/bx/scsl}{}
-  \hep@rm@fontshape{bx}{scit}{<->ssub*cmr/bx/scit}{}
+  \ifhep@lining
+    \RequirePackage{slantsc}
+    \hep@rm@fontshape{b}{sc}{<->ssub*cmr/bx/sc}{}
+    \hep@rm@fontshape{bx}{sc}{<->ssub*cmr/bx/sc}{}
+    \hep@rm@fontshape{b}{scsl}{<->ssub*cmr/bx/scsl}{}
+    \hep@rm@fontshape{bx}{scsl}{<->ssub*cmr/bx/scit}{}
+    \hep@rm@fontshape{b}{scit}{<->ssub*cmr/bx/scsl}{}
+    \hep@rm@fontshape{bx}{scit}{<->ssub*cmr/bx/scit}{}
+  \else
+    \DeclareFontFamily{\hep@encoding}{hfor}{}
+    \DeclareFontShape{\hep@encoding}{hfor}{bx}{sc}{
+      <-6>hfoxc0500<6-7>hfoxc0600<7-8>hfoxc0700<8-9>hfoxc0800
+      <9-10>hfoxc0900<10-12>hfoxc1000<12-17>hfoxc1200<17->hfoxc1728
+    }{}
+    \DeclareFontShape{\hep@encoding}{hfor}{bx}{scsl}{
+      <-6>hfooc0500<6-7>hfooc0600<7-8>hfooc0700<8-9>hfooc0800
+      <9-10>hfooc0900<10-12>hfooc1000<12-17>hfooc1200<17->hfooc1728
+    }{}
+    \hep@rm@fontshape{b}{sc}{<->ssub*hfor/bx/sc}{}
+    \hep@rm@fontshape{bx}{sc}{<->ssub*hfor/bx/sc}{}
+    \hep@rm@fontshape{bx}{scsl}{<->ssub*hfor/bx/scsl}{}
+    \hep@rm@fontshape{b}{scit}{<->ssub*hfor/bx/scsl}{}
+    \hep@rm@fontshape{bx}{scit}{<->ssub*hfor/bx/scsl}{}
+    \hep@rm@fontshape{b}{scsl}{<->ssub*hfor/bx/scsl}{}
+  \fi
   \sffamily
   \hep@sf@fontshape{m}{sc}{<->ssub*xcmss/m/sc}{}
   \hep@sf@fontshape{b}{sc}{<->ssub*xcmss/bx/sc}{}
@@ -1225,290 +1268,19 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \fi
 %    \end{macrocode}
 %
-% Load the \software{babel} package \cite{babel} for hyphenation and the recommended \software{csquotes} package \cite{csquotes}.
-%    \begin{macrocode}
-\RequirePackage[\hep@lang]{babel}
-\RequirePackage[autostyle]{csquotes}
-%    \end{macrocode}
-%
-% \begin{macro}{\underline}
-% Load the \software{ulem} package \cite{ulem} for hyphenable underlined text.
-%    \begin{macrocode}
-\RequirePackage[normalem]{ulem}
-\let\underline\uline
-%    \end{macrocode}
-% \end{macro}
-%
-% \subsection{Font size} \label{sec:font size}
-%
-% Undefine previously defined font sizes and load the \hologo{LaTeX} font size file corresponding to the font size option.
-%    \begin{macrocode}
-\ifhep@defaults\else
-  \def\hep@remove@pt#1pt{#1}
-  \edef\hep@pt@size{\expandafter\hep@remove@pt\hep@font}
-  \let\small\relax
-  \let\footnotesize\relax
-  \let\scriptsize\relax
-  \let\tiny\relax
-  \let\large\relax
-  \let\Large\relax
-  \let\LARGE\relax
-  \let\huge\relax
-  \let\Huge\relax
-  \input{size\hep@pt@size.clo}
-\fi
-%    \end{macrocode}
-
-% \subsection{Text macros}
-%
-%\begin{macro}{\vs}
-% Load the \software{foreign} package \cite{foreign} in order to highlight abbreviations and vocabularies from foreign languages.
-% Add the missing |\vs| command.
-%    \begin{macrocode}
-\ifnum\pdf@strcmp{\hep@lang}{american}=0
-  \newcommand{\hep@lang@foreign}{USenglish}
-\else
-  \ifnum\pdf@strcmp{\hep@lang}{USenglish}=0
-    \newcommand{\hep@lang@foreign}{USenglish}
-  \else
-    \newcommand{\hep@lang@foreign}{british}
-  \fi
-\fi
-\RequirePackage[all, \hep@lang@foreign]{foreign}
-\DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
-%    \end{macrocode}
-% \end{macro}
-%
-% The \software{foreign} package relies on the \software{xspace} package \cite{xspace}.
-% Ensure that |\xspace| is compatible with the |\enquote| macro from the \software{csquote} package.
-%    \begin{macrocode}
-\xspaceaddexceptions{\csq@qclose@i}
-%    \end{macrocode}
-%
-%\begin{macro}{\no}
-% Define the macro |\no|\marg{number} for the use of \textnumero\ with appropriate spacing.
-%    \begin{macrocode}
-\newcommand{\no}[1]{\textnumero~#1}
-%    \end{macrocode}
-% \end{macro}
-%
-%\begin{macro}{\software}
-% Define a macro for software with optional version information |\software|\linebreak[1]\oarg{version}\linebreak[1]\marg{name}, using the \software{relsize} package \cite{relsize}.
-%    \begin{macrocode}
-\RequirePackage{relsize}
-\newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
-  {\smaller[.5]\textsc{#2}~#1}%
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\online}
-% \begin{macro}{\email}
-% Define the |\online|\marg{text}\marg{url} macro combining the features of the |\href| and the |\url| macros.
-% Define a macro for typesetting emails.
-%    \begin{macrocode}
-%</package>
-%<*package|title|bibliography>
-\providecommand{\online}[2]{\ttfamily{#2}}%
-\providecommand{\email}[1]{\online{mailto:#1}{#1}}
-\AtEndOfPackage{\@ifpackageloaded{hyperref}{%
-    \renewcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
-  }{}
-}
-%</package|title|bibliography>
-%<*package>
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-%
-% \begin{macro}{\prefix}
-% Define the |\prefix|\marg{prefix}\marg{word} macro ensuring the correct linebreak in \prefix{prefix}{word}.
-%    \begin{macrocode}
-\newcommand{\prefix}[2]{(#1\mbox{-)}\allowbreak #2}
-%    \end{macrocode}
-% \end{macro}
-
-% \subsection{Lists}
-%
-% Load the \software{enumitem} package \cite{enumitem}.
-%    \begin{macrocode}
-\RequirePackage[inline]{enumitem}
-%    \end{macrocode}
-%
-% \begin{environment}{inlinelist}
-% Define an inline list environment.
-%    \begin{macrocode}
-\newlist{inlinelist}{enumerate*}{1}
-\setlist*[inlinelist,1]{%
-  label=\roman*), itemjoin={,\ }, itemjoin*={, and\ }, after=.%
-}
-%    \end{macrocode}
-% \end{environment}
-%
-% \begin{environment}{enumdescript}
-% Define an enumdescript list environment.
-%    \begin{macrocode}
-\newlist{enum@descript}{enumerate}{2}
-\setlist[enum@descript]{label=\arabic*.}
-\newenvironment{enumdescript}[1][]{
-\begin{enum@descript}[#1]
-  \let\hep@item\item
-  \renewcommand{\item}[2][]{
-    \ifx&##1&\hep@item\else\hep@item[##1]\fi
-    \textbf{##2}\ifx##2\empty\else~\fi\@ifnextchar\par\@gobble\relax
-  }
-}{\end{enum@descript}}
-%    \end{macrocode}
-% \end{environment}
-%
-% \begin{environment}{commalist}
-% Define a commalist environment.
-%    \begin{macrocode}
-%</package>
-%<*package|bibliography>
-\RequirePackage{xparse}
-\ExplSyntaxOn
-\NewDocumentEnvironment{commalist}{O{\space}+b}{
-  \hep@comma@list:n{#2}
-}{#1}
-\seq_new:N \hep@items@sequence
-\cs_new_protected:Npn \hep@comma@list:n #1{
-  \seq_set_split:Nnn \hep@items@sequence{\item}{#1}
-  \seq_pop_left:NN \hep@items@sequence \l_tmpa_tl
-  \seq_use:Nnnn \hep@items@sequence{~and~}{,~}{,~and~}
-}
-\ExplSyntaxOff
-%</package|bibliography>
-%<*package>
-%    \end{macrocode}
-% \end{environment}
-
-% \section{Geometry}
-%
-% Load the \software{geometry} package \cite{geometry} and adjust the text width and height.
-% This step must happen after readjusting the font size in \cref{sec:font size}.
-%    \begin{macrocode}
-\ifhep@defaults\else
-  \RequirePackage{geometry}
-  \geometry{\hep@paper paper, includeheadfoot}
-  \if@twocolumn
-    \geometry{hscale=.85, vscale=.925, vmarginratio=1:1}
-    \geometry{headsep=2ex, footskip=6ex}
-    \setlength{\columnsep}{1.1em}
-  \else
-    \geometry{hscale=.75, vscale=.8, vmarginratio=3:4}
-  \fi
-\fi
-%    \end{macrocode}
-%
-%\begin{macro}{\useparskip}
-%\begin{macro}{\useparindent}
-% Load the \software{parskip} package \cite{parskip} if requested and provide two commands switching between the two paragraph modes.
-%    \begin{macrocode}
-\ifhep@parindent\else
-\RequirePackage{parskip}
-\newcommand{\useparskip}{%
-  \setlength{\parskip}{.5\baselineskip plus 2pt}%
-  \setlength{\parindent}{0pt}%
-}
-\newcommand{\useparindent}{%
-  \setlength{\parskip}{0pt}%
-  \setlength{\parindent}{15pt}%
-  \if@twocolumn\setlength\parindent{1em}
-  \else\setlength\parindent{1.5em}
-  \fi
-}
-\fi
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-
-% \section{Math}
-%
-% Load the \software{mathtools} package \cite{mathtools} which loads the \software{amsmath} package \cite{amsmath}.
-% Allow page breaks within equations if necessary.
-% Adjust the thick and med mu skips slightly.
-%    \begin{macrocode}
-\RequirePackage{mathtools}
-\allowdisplaybreaks[1]
-\thickmuskip=5mu plus 3mu minus 1mu
-\medmuskip=4mu plus 2mu minus 3mu
-%    \end{macrocode}
-%
-% \begin{macro}{\diag}
-% \begin{macro}{\sgn}
-% Provide the |\diag| and |\sgn| operators
-%    \begin{macrocode}
-\DeclareMathOperator{\diag}{diag}
-\DeclareMathOperator{\sgn}{sgn}
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-%
-% \begin{macro}{\mathdef}
-% Define the |\mathdef|\marg{name}\oarg{arguments}\marg{macro} macro which \prefix{re}{defines} macros in math mode only.
-% This macro is implemented using the \software{xparse} package \cite{xparse}.
-%    \begin{macrocode}
-%</package>
-%<*package|acronyms>
-\RequirePackage{xparse}
-\DeclareDocumentCommand{\mathdef}{mO{0}m}{%
-  \expandafter\let\csname text\string#1\endcsname=#1
-  \expandafter\newcommand\csname math\string#1\endcsname[#2]{#3}
-  \DeclareRobustCommand#1{%
-    \ifmmode
-      \expandafter\let\expandafter\next\csname math\string#1\endcsname
-    \else
-      \expandafter\let\expandafter\next\csname text\string#1\endcsname
-    \fi
-    \next
-  }%
-}
-%</package|acronyms>
-%<*package>
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\i}
-% Provide an upright imaginary unit in math mode.
-%    \begin{macrocode}
-\AtBeginDocument{\mathdef{\i}{\operatorname{i}}}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\overline}
-% Redefine |\overline| to be a text macro using the \software{ulem} package \cite{ulem}.
-% Extend it as a math macro with the original definition from the \software{amsmath} package \cite{amsmath}.
-%    \begin{macrocode}
-\def\overline#1{{\renewcommand{\ULdepth}{-1.9ex}{}\uline{#1}}}
-\DeclareRobustCommand{\over@line}[1]{\@@overline{#1}}
-\mathdef{\overline}{\over@line}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\left}
-% \begin{macro}{\right}
-% Load the \software{mleftright} package \cite{mleftright} and adjust the spacing around |\left| and |\right|.
-%    \begin{macrocode}
-\RequirePackage{mleftright}
-\mleftright
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-%
-% \begin{macro}{eqnarray}
-% Undefine the |eqnarray| environment if not prevented by package option.
-%    \begin{macrocode}
-\ifhep@eqnarray\else
-  \let\eqnarray\@undefined
-  \let\endeqnarray\@undefined
-\fi
-%    \end{macrocode}
-% \end{macro}
+%</package|font>
 %
 % \subsection{Math fonts}
 %
-% Define conditionals based on the |symbols| package option.
+%<*package|font>
+%
+%    \begin{macrocode}
+%<font>\RequirePackage{pdftexcmds}
+%<font>\def\hep@symbols{true}
+%<font>\RequirePackage{amstext}
+%    \end{macrocode}
+%
+% Define conditionals based on the "symbols" package option.
 %    \begin{macrocode}
 \newif\ifhep@symbols
 \ifnum\pdf@strcmp{\hep@symbols}{false}=0\else\hep@symbolstrue\fi
@@ -1518,23 +1290,58 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \ifnum\pdf@strcmp{\hep@symbols}{minion}=0 \hep@miniontrue\fi
 %    \end{macrocode}
 %
-% Load the \software{fixmath} \cite{fixmath} and \software{alphabeta} \cite{alphabeta} packages ensuring that upper Greek letters in math mode are italic and providing upright Greek letters in text mode, respectively.
-% Ensure that this works also after loading other fonts packages such as \software{cfr-lm} using \software{substitutefont} \cite{substitutefont}.
+% Load the \software{fixmath} \cite{fixmath} and \software{textalpha} \cite{textalpha} packages ensuring that upper Greek letters in math mode are italic and providing upright Greek letters in text mode, respectively.
+% Ensure that both "\text" and "\mathrm" produce upright Greek letters.
 %    \begin{macrocode}
 \ifhep@symbols
   \RequirePackage{fixmath}
-  \RequirePackage{alphabeta}
-  \RequirePackage{substitutefont}
+  \RequirePackage{textalpha}
+  \def\hep@greek#1{%
+    \expandafter\let\csname math%
+    \expandafter\@gobble\string#1\endcsname=#1%
+    \edef#1{%
+      \noexpand\TextOrMath{%
+        \expandafter\noexpand\csname text%
+        \expandafter\@gobble\string#1\endcsname%
+      }{%
+        \noexpand\ifnum\noexpand\fam=0
+          \noexpand\text{%
+            \expandafter\noexpand\csname text%
+            \expandafter\@gobble\string#1\endcsname%
+          }%
+        \noexpand\else
+          \expandafter\noexpand\csname math%
+          \expandafter\@gobble\string#1\endcsname%
+        \noexpand\fi
+      }%
+    }%
+  }
+  \hep@greek\alpha   \hep@greek\beta    \hep@greek\gamma
+  \hep@greek\delta   \hep@greek\epsilon \hep@greek\zeta
+  \hep@greek\eta     \hep@greek\theta   \hep@greek\iota
+  \hep@greek\kappa   \hep@greek\lambda  \hep@greek\mu
+  \hep@greek\nu      \hep@greek\xi      \hep@greek\pi
+  \hep@greek\rho     \hep@greek\sigma   \hep@greek\tau
+  \hep@greek\upsilon \hep@greek\phi     \hep@greek\chi
+  \hep@greek\psi     \hep@greek\omega
+  \hep@greek\Gamma   \hep@greek\Delta   \hep@greek\Theta
+  \hep@greek\Lambda  \hep@greek\Xi      \hep@greek\Pi
+  \hep@greek\Sigma   \hep@greek\Upsilon \hep@greek\Phi
+  \hep@greek\Psi     \hep@greek\Omega
+%    \end{macrocode}
+% Ensure that this works also after loading other fonts packages such as \software{cfr-lm} using \software{substitutefont} \cite{substitutefont}.
+%    \begin{macrocode}
   \ifxetexorluatex
     % missing code
   \else
+    \RequirePackage{substitutefont}
     \substitutefont{LGR}{\rmdefault}{lmr}
     \DeclareFontFamily{LGR}{\rmdefault}{}
     \DeclareFontShape{LGR}{\rmdefault}{b}{n}{<->ssub*lmr/bx/n}{}
     \DeclareFontShape{LGR}{\rmdefault}{b}{sc}{<->ssub*lmr/bx/sc}{}
     \substitutefont{LGR}{\ttdefault}{lmtt}
     \DeclareFontFamily{LGR}{\ttdefault}{}
-    \DeclareFontShape{LGR}{\ttdefault}{b}{n}{<->ssub*cmtt/bx/n}{}
+    \DeclareFontShape{LGR}{\ttdefault}{b}{n}{<->ssub*lmtt/bx/n}{}
     \substitutefont{LGR}{\sfdefault}{lmss}
     \DeclareFontFamily{LGR}{\sfdefault}{}
     \DeclareFontShape{LGR}{\sfdefault}{b}{n}{<->ssub*lmss/bx/n}{}
@@ -1542,7 +1349,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   \fi
 %    \end{macrocode}
 %
-% Either load the \software{MnSymbol} package \cite{MnSymbol} or the the \software{exscale} package in order to fix Latin Modern |lmex| fonts.
+% Either load the \software{MnSymbol} package \cite{MnSymbol} or the the \software{exscale} package in order to fix Latin Modern "lmex" fonts.
 % Additionally, load the \software{amssymb} package \cite{amsfonts} which provides further math symbols and also loads the \software{amsfonts} package \cite{amsfonts}.
 %    \begin{macrocode}
   \ifhep@minion
@@ -1555,8 +1362,8 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \end{macrocode}
 %
 % \begin{macro}{\mathsf}
-% If the |sansserif| package option is active use the \software{cmbright} font \cite{cmbright} and code adjusted from the \software{sansmathfonts} package \cite{sansmathfonts}.
-% Ensure that |\mathsf| is italic as well as sans serif and sans for sans and sans serif documents, respectively.
+% If the "sansserif" package option is active use the \software{cmbright} font \cite{cmbright} and code adjusted from the \software{sansmathfonts} package \cite{sansmathfonts}.
+% Ensure that "\mathsf" is italic as well as sans serif and sans for sans and sans serif documents, respectively.
 %    \begin{macrocode}
 \ifhep@serif
   \newcommand\hep@font@sf{cmbrm}
@@ -1616,31 +1423,31 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
     \DeclareSymbolFontAlphabet{\mathcal}{symbols}
   \fi
 %    \end{macrocode}
-% Declare |\mathit|.
+% Declare "\mathit".
 %    \begin{macrocode}
   \DeclareMathAlphabet{\mathit}{OML}{\hep@font@text}{m}{it}
   \SetMathAlphabet\mathit{bold}{OML}{\hep@font@text}{bx}{it}
 %    \end{macrocode}
-% Declare |\mathtt|.
+% Declare "\mathtt".
 %    \begin{macrocode}
-  \DeclareMathAlphabet{\mathtt}{OT1}{cmtl}{m}{n}
+%   \DeclareMathAlphabet{\mathtt}{OT1}{cmtl}{m}{n}
 %    \end{macrocode}
 %    \begin{macrocode}
 %    \end{macrocode}
-% Declare |\mathsf|.
+% Declare "\mathsf".
 %    \begin{macrocode}
   \DeclareMathAlphabet{\mathsf}{OML}{\hep@font@sf}{m}{it}
   \SetMathAlphabet{\mathsf}{bold}{OML}{\hep@font@sf}{bx}{it}
 %    \end{macrocode}
 % \end{macro}
-% End of |sansserif|.
+% End of "sansserif".
 %    \begin{macrocode}
 \fi
 %    \end{macrocode}
 %
 % \begin{macro}{\mathbf}
 % Load the \software{bm} package \cite{bm} for superior boldmath.
-% Make math symbols bold whenever they appear in bold macros such as |\section|\marg{text}.
+% Make math symbols bold whenever they appear in bold macros such as "\section"\marg{text}.
 %    \begin{macrocode}
 \ifhep@symbols
   \RequirePackage{bm}
@@ -1649,14 +1456,21 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\mathtt}
+%    \begin{macrocode}
+  \DeclareMathAlphabet{\mathtt}{OT1}{lmtt}{m}{n}
+  \SetMathAlphabet{\mathtt}{bold}{OT1}{lmtt}{bx}{n}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\mathscr}
-% Provid the |\mathscr| math script font from the \software{mathrsfs} package \cite{mathrsfs}.
+% Provid the "\mathscr" math script font from the \software{mathrsfs} package \cite{mathrsfs}.
 %    \begin{macrocode}
   \DeclareMathAlphabet{\mathscr}{U}{rsfs}{m}{n}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\mathbb}
-% Redefine the the |\mathbb| math blackboard style font according to the \prefix{sans}{serif} option with the font from the \software{dsfont} package \cite{dsfont}.
+% Redefine the the "\mathbb" math blackboard style font according to the \prefix{sans}{serif} option with the font from the \software{dsfont} package \cite{dsfont}.
 %    \begin{macrocode}
   \ifhep@minion
     \DeclareMathAlphabet{\mathbb}{U}{%
@@ -1672,44 +1486,375 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \fi
 %    \end{macrocode}
 % \end{macro}
-
-% \subsection{Physics notation}
 %
-% \begin{macro}{\cancel}
-% \begin{macro}{\slashed}
-% Load the \software{physics} package \cite{physics} which provides macros useful for publications in physics.
-% Fix the |\eval| macro.
-% Additionally, load the \software{cancel} \cite{cancel} and \software{slashed} \cite{slashed} packages which provide the |\cancel| and |\slashed| macros.
+%</package|font>
+%
+% \subsection{Font size} \label{sec:font size}
+%
+%<*package>
+%
+% Undefine previously defined font sizes and load the \hologo{LaTeX} font size file corresponding to the font size option.
 %    \begin{macrocode}
-\ifhep@physics
-\RequirePackage{physics}
-\RequirePackage{cancel}
-\RequirePackage{slashed}
-\DeclareDocumentCommand\evaluated{sgd[|d(|}{%
-  \IfNoValueTF{#2}{%
-    \IfNoValueTF{#3}{%
-      \IfNoValueTF{#4}{\argopen.\argclose\rvert}{%
-        \IfBooleanTF{#1}{\vphantom{#4}}{}%
-        \left(\IfBooleanTF{#1}{\smash{#4}}{#4}\right\rvert%
-      }%
-    }{%
-      \IfBooleanTF{#1}{\vphantom{#3}}{}%
-      \left[\IfBooleanTF{#1}{\smash{#3}}{#3}\right\rvert%
-      \IfNoValueTF{#4}{}{(#4|}%
-     }%
-  }{%
-    \IfBooleanTF{#1}{\vphantom{#2}}{}%
-    \left.\IfBooleanTF{#1}{\smash{#2}}{#2}\right\rvert%
-    \IfNoValueTF{#3}{}{[#3|}\IfNoValueTF{#4}{}{(#4|}%
-  }%
+\ifhep@defaults\else
+  \def\hep@remove@pt#1pt{#1}
+  \edef\hep@pt@size{\expandafter\hep@remove@pt\hep@font}
+  \let\small\relax
+  \let\footnotesize\relax
+  \let\scriptsize\relax
+  \let\tiny\relax
+  \let\large\relax
+  \let\Large\relax
+  \let\LARGE\relax
+  \let\huge\relax
+  \let\Huge\relax
+  \input{size\hep@pt@size.clo}
+\fi
+%    \end{macrocode}
+%
+% \section{Text}
+%
+% Load the \software{babel} package \cite{babel} for hyphenation and the recommended \software{csquotes} package \cite{csquotes}.
+%    \begin{macrocode}
+\RequirePackage[\hep@lang]{babel}
+\RequirePackage[autostyle]{csquotes}
+%    \end{macrocode}
+%
+% \begin{macro}{\underline}
+% Load the \software{ulem} package \cite{ulem} for hyphenable underlined text.
+%    \begin{macrocode}
+\RequirePackage[normalem]{ulem}
+\let\underline\uline
+%    \end{macrocode}
+% \end{macro}
+%
+%\begin{macro}{\vs}
+% Load the \software{foreign} package \cite{foreign} in order to highlight abbreviations and vocabularies from foreign languages.
+% Add the missing "\vs" command.
+%    \begin{macrocode}
+\ifnum\pdf@strcmp{\hep@lang}{american}=0
+  \newcommand{\hep@lang@foreign}{USenglish}
+\else
+  \ifnum\pdf@strcmp{\hep@lang}{USenglish}=0
+    \newcommand{\hep@lang@foreign}{USenglish}
+  \else
+    \newcommand{\hep@lang@foreign}{british}
+  \fi
+\fi
+\RequirePackage[all, \hep@lang@foreign]{foreign}
+\DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
+%    \end{macrocode}
+% \end{macro}
+%
+% The \software{foreign} package relies on the \software{xspace} package \cite{xspace}.
+% Ensure that "\xspace" is compatible with the "\enquote" macro from the \software{csquote} package.
+%    \begin{macrocode}
+\xspaceaddexceptions{\csq@qclose@i}
+%    \end{macrocode}
+%
+%\begin{macro}{\no}
+% Define the macro "\no"\marg{number} for the use of \textnumero\ with appropriate spacing.
+%    \begin{macrocode}
+\newcommand{\no}[1]{\textnumero~#1}
+%    \end{macrocode}
+% \end{macro}
+%
+%\begin{macro}{\software}
+% Define a macro for software with optional version information "\software"\linebreak[1]\oarg{version}\linebreak[1]\marg{name}, using the \software{relsize} package \cite{relsize}.
+%    \begin{macrocode}
+\RequirePackage{relsize}
+\newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
+  {\smaller[.5]\textsc{#2}~#1}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%</package>
+%<*package|title|bibliography>
+%
+% \begin{macro}{\online}
+% \begin{macro}{\email}
+% Define the "\online"\marg{text}\marg{url} macro combining the features of the "\href" and the "\url" macros.
+% Define a macro for typesetting emails.
+%    \begin{macrocode}
+\providecommand{\online}[2]{\ttfamily{#2}}%
+\newcommand{\hep@email}[1]{\online{mailto:#1}{#1}}
+\providecommand\email{\hep@email}
+\AtEndOfPackage{\@ifpackageloaded{hyperref}{%
+    \renewcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
+  }{}
 }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
+%
+%</package|title|bibliography>
+%<*package>
+%
+% \begin{macro}{\prefix}
+% Define the "\prefix"\marg{prefix}\marg{word} macro ensuring the correct linebreak in \prefix{prefix}{word}.
+%    \begin{macrocode}
+\newcommand{\prefix}[2]{(#1\mbox{-)}\allowbreak #2}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Lists}
+%
+% Load the \software{enumitem} package \cite{enumitem}.
+%    \begin{macrocode}
+\RequirePackage[inline]{enumitem}
+%    \end{macrocode}
+%
+% \begin{environment}{inlinelist}
+% Define an inline list environment.
+%    \begin{macrocode}
+\newlist{inlinelist}{enumerate*}{1}
+\setlist*[inlinelist,1]{%
+  label=\roman*), itemjoin={,\ }, itemjoin*={, and\ }, after=.%
+}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{environment}{enumdescript}
+% Define an enumdescript list environment.
+%    \begin{macrocode}
+\newlist{enum@descript}{enumerate}{2}
+\setlist[enum@descript]{label=\arabic*.}
+\newenvironment{enumdescript}[1][]{
+\begin{enum@descript}[#1]
+  \let\hep@item\item
+  \renewcommand{\item}[2][]{
+    \ifx&##1&\hep@item\else\hep@item[##1]\fi
+    \textbf{##2}\ifx##2\empty\else~\fi\@ifnextchar\par\@gobble\relax
+  }
+}{\end{enum@descript}}
+%    \end{macrocode}
+% \end{environment}
+%
+%</package>
+%<*package|bibliography>
+%
+% \begin{environment}{commalist}
+% Define a commalist environment.
+%    \begin{macrocode}
+\RequirePackage{xparse}
+\ExplSyntaxOn
+\NewDocumentEnvironment{commalist}{O{\space}+b}{
+  \hep@comma@list:n{#2}
+}{#1}
+\seq_new:N \hep@items@sequence
+\cs_new_protected:Npn \hep@comma@list:n #1{
+  \seq_set_split:Nnn \hep@items@sequence{\item}{#1}
+  \seq_pop_left:NN \hep@items@sequence \l_tmpa_tl
+  \seq_use:Nnnn \hep@items@sequence{~and~}{,~}{,~and~}
+}
+\ExplSyntaxOff
+%    \end{macrocode}
+% \end{environment}
+%
+%</package|bibliography>
+%
+% \section{Geometry}
+%
+%<*package>
+%
+% Load the \software{geometry} package \cite{geometry} and adjust the text width and height.
+% This step must happen after readjusting the font size in \cref{sec:font size}.
+%    \begin{macrocode}
+\ifhep@defaults\else
+  \RequirePackage{geometry}
+  \geometry{\hep@paper paper, includeheadfoot}
+  \if@twocolumn
+    \geometry{hscale=.85, vscale=.925, vmarginratio=1:1}
+    \geometry{headsep=2ex, footskip=6ex}
+    \setlength{\columnsep}{1.1em}
+  \else
+    \geometry{hscale=.75, vscale=.8, vmarginratio=3:4}
+  \fi
+\fi
+%    \end{macrocode}
+%
+%\begin{macro}{\useparskip}
+%\begin{macro}{\useparindent}
+% Load the \software{parskip} package \cite{parskip} if requested and provide two commands switching between the two paragraph modes.
+%    \begin{macrocode}
+\ifhep@parindent\else
+\RequirePackage{parskip}
+\newcommand{\useparskip}{%
+  \setlength{\parskip}{.5\baselineskip plus 2pt}%
+  \setlength{\parindent}{0pt}%
+}
+\newcommand{\useparindent}{%
+  \setlength{\parskip}{0pt}%
+  \setlength{\parindent}{15pt}%
+  \if@twocolumn\setlength\parindent{1em}
+  \else\setlength\parindent{1.5em}
+  \fi
+}
+\fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+%</package>
+%
+% \section{Math}
+%
+%<*package|math>
+%
+% Load the \software{mathtools} package \cite{mathtools} which loads the \software{amsmath} package \cite{amsmath}.
+% Allow page breaks within equations if necessary.
+% Adjust the thick and med mu skips slightly.
+%    \begin{macrocode}
+%<package>\ifhep@physics
+%<math>\newif\ifhep@lining\hep@liningtrue
+%<math>\newif\ifhep@eqnarray\hep@eqnarraytrue
+\RequirePackage{mathtools}
+\allowdisplaybreaks[1]
+\thickmuskip=5mu plus 3mu minus 1mu
+\medmuskip=4mu plus 2mu minus 3mu
+%    \end{macrocode}
+%
+%</package|math>
+%<*package|math|acronyms>
+%
+% \begin{macro}{\mathdef}
+% Define the "\mathdef"\marg{name}\oarg{arguments}\marg{macro} macro which \prefix{re}{defines} macros in math mode only.
+% This macro is implemented using the \software{xparse} package \cite{xparse}.
+%    \begin{macrocode}
+\RequirePackage{xparse}
+\DeclareDocumentCommand{\mathdef}{mO{0}m}{%
+  \expandafter\let\csname hep@text\string#1\endcsname=#1
+  \expandafter\newcommand\csname hep@math\string#1\endcsname[#2]{#3}
+  \DeclareRobustCommand#1{%
+    \ifmmode
+      \expandafter\let\expandafter\next\csname%
+      hep@math\string#1\endcsname%
+    \else
+      \expandafter\let\expandafter\next\csname%
+      hep@text\string#1\endcsname%
+    \fi
+    \next
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%</package|math|acronyms>
+%<*package|math>
+%
+% \begin{macro}{\i}
+% Provide an upright imaginary unit in math mode.
+%    \begin{macrocode}
+\AtBeginDocument{\mathdef{\i}{\operatorname{i}}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\overline}
+% Redefine "\overline" to be a text macro using the \software{ulem} package \cite{ulem}.
+% Extend it as a math macro with the original definition from the \software{amsmath} package \cite{amsmath}.
+%    \begin{macrocode}
+\RequirePackage{ulem}
+\def\overline#1{{\renewcommand{\ULdepth}{-1.9ex}{}\uline{#1}}}
+\DeclareRobustCommand{\over@line}[1]{\@@overline{#1}}
+\mathdef{\overline}{\over@line}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\oset}
+% Define a new overset macro "\oset"\oarg{offset}\marg{over}\marg{base}
+%    \begin{macrocode}
+\newcommand{\oset}[3][-1pt]{%
+  \text{\raisebox{.2ex}{$\mathop{#3}\limits^{%
+    \vbox to#1{\kern-2\ex@\hbox{$\scriptscriptstyle#2$}\vss}%
+  }$}}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\overleftright}
+% Define a over left right arrow "\overleftright"\marg{base}.
+%    \begin{macrocode}
+\newcommand{\overleftright}[1]{\oset{\leftrightarrow}{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{eqnarray}
+% Undefine the "eqnarray" environment if not prevented by package option.
+%    \begin{macrocode}
+\ifhep@eqnarray\else
+  \let\eqnarray\@undefined
+  \let\endeqnarray\@undefined
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Operators}
+%
+% \begin{macro}{\tr}
+% \begin{macro}{\Tr}
+% \begin{macro}{\rank}
+% \begin{macro}{\erf}
+% \begin{macro}{\Res}
+% \begin{macro}{\sgn}
+% \begin{macro}{\sgn}
+% \begin{macro}{\diag}
+% Provide the "\diag", "\sgn", and other operators.
+%    \begin{macrocode}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\erf}{erf}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\diag}{diag}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 
+% \begin{macro}{\Re}
+% \begin{macro}{\Im}
+% Redefine the real and imaginary projectors.
+%    \begin{macrocode}
+\let\Re\relax\DeclareMathOperator{\Re}{Re}
+\let\Im\relax\DeclareMathOperator{\Im}{Im}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+
+% \subsubsection{Trigonometric functions}
+%
+%    \begin{macrocode}
+\let\cos\undefined\DeclareMathOperator{\cos}{cos\vphantom{i}}
+\let\tan\undefined\DeclareMathOperator{\tan}{tan\vphantom{i}}
+%    \end{macrocode}
+%    \begin{macrocode}
+\DeclareMathOperator{\arccsc}{arccsc}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+%    \end{macrocode}
+%    \begin{macrocode}
+\DeclareMathOperator{\asin}{asin}
+\DeclareMathOperator{\acos}{acos}
+\DeclareMathOperator{\atan}{atan}
+\DeclareMathOperator{\acsc}{acsc}
+\DeclareMathOperator{\asec}{asec}
+\DeclareMathOperator{\acot}{acot}
+%    \end{macrocode}
+%    \begin{macrocode}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\sech}{sech}
+%    \end{macrocode}
+%
+% \subsection{Units and fractions}
+%
 % \begin{macro}{\unit}
-% Load the \software{units} package \cite{units} which provides the |\units| and |\nicefrac| macros.
-% Patch the |\unit| and |\unitfrac| macros to work with lining numerals using the \software{xpatch} package \cite{xpatch}.
+% Load the \software{units} package \cite{units} which provides the "\units" and "\nicefrac" macros.
+% Patch the "\unit" and "\unitfrac" macros to work with lining numerals using the \software{xpatch} package \cite{xpatch}.
 %    \begin{macrocode}
 \RequirePackage{units}
 \RequirePackage{xpatch}
@@ -1725,48 +1870,364 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{\inv}
-% Provide the |\textfrac| macro.
-%    \begin{macrocode}
-\newcommand{\textfrac}[2]{\ensuremath{\nicefrac{\text{#1}}{\text{#2}}}}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\inv}
 % Provide a macro for the inverse, useful in combination with the unit macro in text mode.
 %    \begin{macrocode}
 \newcommand{\inv}[2][1]{#2\ensuremath{^{-#1}}}
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\d}
-% Provide a differential |\d|.
+% \begin{macro}{\flatfrac}
+% Flat fraction.
 %    \begin{macrocode}
-\AtBeginDocument{\mathdef{\d}{\dd}}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\oset}
-% Define a new overset macro |\oset|\oarg{offset}\marg{over}\marg{base}
-%    \begin{macrocode}
-\newcommand{\oset}[3][-1pt]{%
-  \text{\raisebox{.2ex}{$\mathop{#3}\limits^{%
-    \vbox to#1{\kern-2\ex@\hbox{$\scriptscriptstyle#2$}\vss}%
-  }$}}%
+\DeclarePairedDelimiterX{\hep@flatfrac}[2]{.}{.}{%
+  #1\delimsize/\makeleftdelim#2%
+}
+\NewDocumentCommand{\flatfrac}{somm}{%
+  \IfBooleanTF{#1}{%
+    \hep@flatfrac*{#3}{#4}%
+  }{%
+    \IfNoValueTF{#2}{\,\makeleftdelim#3/\makeleftdelim#4\,%
+    }{%
+      \hep@flatfrac[#2]{#3}{#4}%
+    }%
+  }%
 }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\overleftright}
-% Define a over left right arrow |\overleftright|\marg{base}.
+%
+% \begin{macro}{\textfrac}
+% Provide the "\textfrac" macro.
 %    \begin{macrocode}
-\newcommand{\overleftright}[1]{\oset{\leftrightarrow}{#1}}
+\newcommand{\textfrac}[2]{\ensuremath{\nicefrac{\text{#1}}{\text{#2}}}}
 %    \end{macrocode}
-% End of |physics| conditional.
+% \end{macro}
+%
+% \subsubsection{Differentials and derivatives}
+%
+% \begin{macro}{\differential}
+% \begin{macro}{\d}
+% Provide a differential "\d".
 %    \begin{macrocode}
-\fi
+\newcommand{\makedifferential}[1]{\mathop{}\!#1}
+\providecommand{\differentialsymbol}{d}
+\newcommand{\differential}{\makedifferential\differentialsymbol}
+\AtBeginDocument{\mathdef{\d}{\differential}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+
+% \begin{macro}{\makederivative}
+%    \begin{macrocode}
+\newcommand\makederivative[2]{
+  \NewDocumentCommand{#1}{somso}{%
+    \IfBooleanTF{##4}{%
+      \IfBooleanTF{##1}{\nicefrac}{\frac}%
+    }{%
+      \IfBooleanTF{##1}{\flatfrac}{\dfrac}%
+    }{%
+      \makedifferential#2\IfValueT{##2}{^{##2}}\IfValueT{##5}{##5}%
+    }{%
+      \makedifferential#2{##3}\IfValueT{##2}{^{##2}}%
+    }%
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\derivative}
+%    \begin{macrocode}
+\makederivative{\derivative}{d}
+\newcommand\dv{\derivative}
 %    \end{macrocode}
 % \end{macro}
 
+% \begin{macro}{\variation}
+%    \begin{macrocode}
+\newcommand\variation{\makedifferential\delta}
+\newcommand\var{\variation}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\functionalderivative}
+%    \begin{macrocode}
+\makederivative{\functionalderivative}{\delta}
+\newcommand\fdv{\functionalderivative}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\makepartialderivative}
+%    \begin{macrocode}
+\RequirePackage{etoolbox}
+\newcommand\makepartialderivative[2]{
+  \NewDocumentCommand{#1}{sO{}O{}msoo}{%
+    \IfBooleanTF{##5}{%
+      \IfBooleanTF{##1}{\nicefrac}{\frac}%
+    }{%
+      \IfBooleanTF{##1}{\flatfrac}{\dfrac}%
+    }{%
+      \makedifferential#2\IfValueTF{##7}{%
+      \ifblank{##2}{
+        \ifblank{##3}{^2}{^{\the\numexpr##3+1\relax}}%
+        }{%
+        \ifblank{##3}{%
+          ^{\the\numexpr##2+1\relax}}{^{{\the\numexpr##2+##3\relax}}%
+        }%
+        }%
+      }{\IfValueT{##2}{^{##2}}}\IfValueT{##6}{##6}%
+    }{%
+      \makedifferential#2{##4}\IfValueT{##2}{^{##2}}%
+      \IfValueT{##7}{#2##7\IfValueT{##3}{^{##3}}}%
+    }%
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\partialderivative}
+%    \begin{macrocode}
+\makepartialderivative{\partialderivative}{\partial}
+\newcommand\pdv{\partialderivative}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\cancel}
+% \begin{macro}{\slashed}
+% Additionally, load the \software{cancel} \cite{cancel} and \software{slashed} \cite{slashed} packages which provide the "\cancel" and "\slashed" macros.
+%    \begin{macrocode}
+\RequirePackage{cancel}
+\RequirePackage{slashed}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \subsection{Paired delimiters}
+%
+% \begin{macro}{\left}
+% \begin{macro}{\right}
+% Load the \software{mleftright} package \cite{mleftright} and adjust the spacing around "\left" and "\right".
+%    \begin{macrocode}
+\RequirePackage{mleftright}
+\mleftright
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\abs}
+% \begin{macro}{\norm}
+% \begin{macro}{\pnorm}
+% Absolute value and norm.
+%    \begin{macrocode}
+\newcommand{\noargumentsymbol}{\:\cdot\:}
+\newcommand{\optionalargument}[1]{\ifblank{#1}{\noargumentsymbol}{#1}}
+\DeclarePairedDelimiterX\abs[1]\lvert\rvert{\optionalargument{#1}}
+\DeclarePairedDelimiterX\norm[1]\lVert\rVert{\optionalargument{#1}}
+\DeclarePairedDelimiterXPP\hep@pnorm[2]{}\lVert\rVert{_{#1}}{#2}
+\NewDocumentCommand{\pnorm}{som}{%
+  \IfValueTF{#2}{%
+    \IfBooleanTF{#1}{\hep@pnorm*}{\hep@pnorm}{#2}%
+  }{%
+    \IfBooleanTF{#1}{\norm*}{\norm}%
+  }{\optionalargument{#3}}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+
+% \begin{macro}{\order}
+% Order symbol and macro.
+%    \begin{macrocode}
+\providecommand{\ordersymbol}{\mathcal{O}}
+\DeclarePairedDelimiterXPP\order[1]{\ordersymbol}(){}{#1}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\evaluated}
+% \begin{macro}{\eval}
+% Vertical evaluation bar
+%    \begin{macrocode}
+\DeclarePairedDelimiter{\hep@evaluated}{.}{\rvert}
+\NewDocumentCommand{\evaluated}{som}{%
+  \IfBooleanTF{#1}{%
+    \hep@evaluated*{#3}%
+  }{%
+    \IfNoValueTF{#2}{#3\rvert}{\hep@evaluated[#2]{#3}}%
+  }%
+}
+\newcommand\eval{\evaluated}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+
+% \subsubsection{Set and Probability}
+%
+% \begin{macro}{\midbar}
+%    \begin{macrocode}
+\newcommand\makeleftdelim{\mathopen{}}
+\providecommand{\midbar}[1][]{%
+  \nonscript\:#1\vert\allowbreak\nonscript\:\makeleftdelim%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\suchthat}
+% \begin{macro}{\set}
+%    \begin{macrocode}
+\providecommand\suchthat{\midbar}
+\DeclarePairedDelimiterX\set[1]\{\}{%
+  \renewcommand\suchthat{\midbar[\delimsize]}#1%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+
+% \begin{macro}{\probabilitysymbol}
+% \begin{macro}{\given}
+% \begin{macro}{\Pr}
+%    \begin{macrocode}
+\providecommand{\probabilitysymbol}{\operatorname{Pr}}
+\providecommand\given{\midbar}
+\DeclarePairedDelimiterXPP\hep@Pr[1]{%
+  \probabilitysymbol}(){}{%
+  \renewcommand\given{\midbar[\delimsize]}#1%
+}
+\let\Pr\relax
+\NewDocumentCommand{\Pr}{so}{%
+  \IfValueTF{#2}{%
+    \IfBooleanTF{#1}{\hep@Pr*}{\hep@Pr}{#2}%
+  }{%
+    \probabilitysymbol%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+
+% \subsubsection{Commutators}
+%
+% \begin{macro}{\innerproduct}
+% \begin{macro}{\poissonbracket}
+% \begin{macro}{\commutator}
+% \begin{macro}{\anticommutator}
+% Poissonbracket, commutator and anti-commutator.
+%    \begin{macrocode}
+\DeclarePairedDelimiterX\innerproduct[2]{%
+  \langle}{\rangle}{\optionalargument{#1},\optionalargument{#2}%
+}
+\DeclarePairedDelimiterX\poissonbracket[2]{%
+  \lbrace}{\rbrace}{\optionalargument{#1},\optionalargument{#2}%
+}
+\newcommand\pb{\poissonbracket}
+\DeclarePairedDelimiterX\commutator[2]{%
+  \lbrack}{\rbrack}{\optionalargument{#1},\optionalargument{#2}%
+}
+\newcommand\comm{\commutator}
+\DeclarePairedDelimiterX\anticommutator[2]{%
+  \lbrace}{\rbrace}{\optionalargument{#1},\optionalargument{#2}%
+}
+\newcommand\acomm{\anticommutator}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \subsubsection{Bra-ket notation}
+%
+%    \begin{macrocode}
+\providecommand\braketspace{\mskip1mu}
+\newcommand\hep@midvert{%
+  \braketspace\delimsize\vert\braketspace\makeleftdelim%
+}
+%    \end{macrocode}
+%
+% \begin{macro}{\braket}
+%    \begin{macrocode}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{\braketspace#1\hep@midvert#2\braketspace}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\bra}
+%    \begin{macrocode}
+\DeclarePairedDelimiterXPP\hep@bra[1]{%
+  }{\langle}{\rvert}{\braketspace}{\braketspace#1\braketspace%
+}
+\NewDocumentCommand{\bra}{smt\ket sgt\ketbra sgg}{%
+  \IfBooleanTF{#6}{%
+    \IfBooleanTF{#1}{\braket*{#2}{#8}}{\braket{#2}{#8}}%
+    \IfBooleanTF{#7}{\bra*{#9}}{\bra{#9}}%
+  }{
+    \IfBooleanTF{#3}{%
+      \IfBooleanTF{#1}{\braket*}{%
+        \IfBooleanTF{#4}{\braket*}{\braket}}{#2}{#5%
+      }%
+    }{%
+      \IfBooleanTF{#1}{\hep@bra*}{\hep@bra}{#2}%
+    }%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\ket}
+%    \begin{macrocode}
+\DeclarePairedDelimiterXPP\ket[1]{%
+  \braketspace}{\lvert}{\rangle}{}{\braketspace\makeleftdelim#1\braketspace%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\ketbra}
+%    \begin{macrocode}
+\NewDocumentCommand{\ketbra}{smm}{%
+  \IfBooleanTF{#1}{%
+    \ket*{#2}\bra*{#3}%
+  }{%
+    \ket{#2}\bra{#3}%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\matrixelement}
+%    \begin{macrocode}
+\DeclarePairedDelimiterX\matrixelement[3]{%
+  \langle}{\rangle}{\braketspace#1\hep@midvert#2\hep@midvert#3\braketspace%
+}
+\newcommand\matrixel{\matrixelement}
+\newcommand\mel{\matrixelement}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\expectationvalue}
+%    \begin{macrocode}
+\DeclarePairedDelimiterX\hep@expvalue[1]{\langle}{\rangle}{\braketspace#1\braketspace}
+\NewDocumentCommand{\expectationvalue}{som}{%
+  \IfNoValueTF{#2}{%
+    \IfBooleanTF{#1}{\hep@expvalue*}{\hep@expvalue}{#3}%
+  }{%
+    \IfBooleanTF{#1}{\matrixelement*}{\matrixelement}{#2}{#3}{#2}%
+  }%
+}
+\newcommand\ev{\expectationvalue}
+\newcommand\vev[1]{\expectationvalue[0]{#1}}
+%    \end{macrocode}
+% \end{macro}
+% End of "physics" conditional.
+%    \begin{macrocode}
+%<package>\fi
+%    \end{macrocode}
+%
+%</package|math>
+%
 % \section{Floats}
+%
+%<*package|floats>
+%
+%    \begin{macrocode}
+%<floats>\newif\ifhep@manualplacement\hep@manualplacementfalse
+%    \end{macrocode}
 %
 % Adjust the \hologo{LaTeX} float placement defaults
 %    \begin{macrocode}
@@ -1781,33 +2242,37 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % \begin{environment}{figure}
 % \begin{environment}{table}
-% Center the content of |figure| and |table| environments.
-% Ignore the manual placement if the |manualplacement| option is set to false.
+% Center the content of "figure" and "table" environments.
+% Ignore the manual placement if the "manualplacement" option is set to false.
 %    \begin{macrocode}
-\let\@figure@\figure%
-\let\@end@figure@\endfigure%
-\let\@table@\table%
-\let\@end@table@\endtable%
+\let\hep@figure\figure%
+\let\end@hep@figure\endfigure%
+\let\hep@table\table%
+\let\end@hep@table\endtable%
 \ifhep@manualplacement%
   \renewenvironment{figure}[1][tbp]{%
-    \@figure@[#1]\centering%
-    }{\@end@figure@}%
+    \hep@figure[#1]\centering%
+    }{\end@hep@figure}%
   \renewenvironment{table}[1][tbp]{%
-    \@table@[#1]\centering%
-  }{\@end@table@}%
+    \hep@table[#1]\centering%
+  }{\end@hep@table}%
 \else%
   \renewenvironment{figure}[1][]{%
-    \@figure@\centering%
-  }{\@end@figure@}%
+    \hep@figure\centering%
+  }{\end@hep@figure}%
   \renewenvironment{table}[1][]{%
-    \@table@\centering%
-  }{\@end@table@}
+    \hep@table\centering%
+  }{\end@hep@table}
 \fi%
 %    \end{macrocode}
 % \end{environment}
 % \end{environment}
-
+%
+%</package|floats>
+%
 % \subsection{Sub-floats}
+%
+%<*package>
 %
 % \begin{macro}{\ifhep@journal}
 % Define a new journal conditional.
@@ -1847,8 +2312,11 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \fi
 %    \end{macrocode}
 %
+%</package>
+%<*package|floats>
+%
 % Load the \software{subcaption} package \cite{subcaption}.
-% Provide the old |\subcaption@minipage| macro.
+% Provide the old "\subcaption@minipage" macro.
 %    \begin{macrocode}
 \RequirePackage[subrefformat=parens]{subcaption}
 \captionsetup{font=small}
@@ -1859,7 +2327,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \end{macrocode}
 % \begin{environment}{panels}
 % \begin{macro}{\panel}
-% Define the |panels| environment and the |\panel| macro.
+% Define the "panels" environment and the "\panel" macro.
 %    \begin{macrocode}
 \newcommand{\hep@panels@space}{20}
 \newenvironment{panels}[2][b]{%
@@ -1871,7 +2339,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
     \centering\vskip 0pt%
   }
 %    \end{macrocode}
-% Define the |\panel| macro for the case that the number of panels is given.
+% Define the "\panel" macro for the case that the number of panels is given.
 %    \begin{macrocode}
   \ifdim#2pt>1pt%
     \newcommand{\hep@panel@space}{%
@@ -1884,7 +2352,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
     }%
     \begin@subcaption@minipage[#1]{\linewidth/#2*\hep@panel@space}%
 %    \end{macrocode}
-% Define the |\panel| macro for the case that the width of the panel is given.
+% Define the "\panel" macro for the case that the width of the panel is given.
 %    \begin{macrocode}
   \else%
     \newcommand{\panel}[2][b]{%
@@ -1897,6 +2365,9 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 % \end{environment}
 %
+%</package|floats>
+%<*package>
+%
 % Reajust the captions to the revtex class using the \software{ragged2e} package \cite{ragged2e}.
 %    \begin{macrocode}
 \ifhep@revtex
@@ -1908,8 +2379,12 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   \renewcommand{\tablename}{Table}
 \fi
 %    \end{macrocode}
-
+%
+%</package>
+%
 % \subsection{Tables}
+%
+%<*package|floats>
 %
 % \begin{environment}{tabular}
 % Enhance tabulars with the \software{booktabs} and \software{multirow} packages \cite{booktabs, multirow}.
@@ -1922,7 +2397,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \subsection{Figures}
 %
 % \begin{macro}{\graphic}
-% Provide the |\graphic| macro for the inclusion of figures using the \software{graphicx} package \cite{graphicx}.
+% Provide the "\graphic" macro for the inclusion of figures using the \software{graphicx} package \cite{graphicx}.
 %    \begin{macrocode}
 \RequirePackage{graphicx}
 \providecommand{\tikzsetnextfilename}[1]{}
@@ -1933,122 +2408,36 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{\graphics}
-% Provide the |\graphics| macro for the inclusion of figures located in a subfolder.
+% Provide the "\graphics" macro for the inclusion of figures located in a subfolder.
 %    \begin{macrocode}
 \newcommand{\graphics}[1]{\graphicspath{{./#1/}}}
 %    \end{macrocode}
 % \end{macro}
-
+%
+%</package|floats>
+%
 % \section{Title page}
 %
-% Begin of |title| conditional. Define internal conditionals outside. TODO: replace this hack
+%<*package|title>
+%
+% Redefine previous macros just for the title package.
 %    \begin{macrocode}
 \newif\ifhep@first%
+%    \end{macrocode}
+%
+%</package|title>
+%<*package>
+%
+% Define title internal conditionals outside of main conditional.
+% TODO: replace this hack
+% Begin of "title" conditional.
+%    \begin{macrocode}
 \newif\ifnewaffil%
 \ifhep@title
 %    \end{macrocode}
 %
 %</package>
-%
-%
-% Redefine previous macros just for the title package.
-%    \begin{macrocode}
 %<*package|title>
-%<title>\newif\ifhep@first%
-%    \end{macrocode}
-%
-% \begin{macro}{\date}
-% Allow absent date field.
-%    \begin{macrocode}
-\date{\vspace{-4ex}}
-%    \end{macrocode}
-% \end{macro}
-%
-% \subsection{Titles}
-%
-% Extend the title using the \software{titling} package \cite{titling}.
-%    \begin{macrocode}
-\RequirePackage{titling}
-\setlength{\thanksmarkwidth}{1.5em}
-%    \end{macrocode}
-%
-% \begin{macro}{\preprintfont}
-% \begin{macro}{\seriesfont}
-% \begin{macro}{\titlefont}
-% \begin{macro}{\subtitlefont}
-% \begin{macro}{\editorfont}
-% \begin{macro}{\authorfont}
-% \begin{macro}{\affiliationfont}
-% \begin{macro}{\datefont}
-% Allow to change the fontface of the individual parts of the title.
-%    \begin{macrocode}
-\let\hep@preprint@font\relax
-\newcommand{\preprintfont}[1]{\def\hep@preprint@font{#1}}
-\let\hep@series@font\relax
-\newcommand{\seriesfont}[1]{\def\hep@series@font{#1}}
-\let\hep@title@font\relax
-\newcommand{\titlefont}[1]{\def\hep@title@font{#1}}
-\let\hep@subtitle@font\relax
-\newcommand{\subtitlefont}[1]{\def\hep@subtitle@font{#1}}
-\let\hep@editor@font\relax
-\newcommand{\editorfont}[1]{\def\hep@editor@font{#1}}
-\let\hep@author@font\relax
-\newcommand{\authorfont}[1]{\def\hep@author@font{#1}}
-\let\hep@affiliation@font\relax
-\newcommand{\affiliationfont}[1]{\def\hep@affiliation@font{#1}}
-\let\hep@date@font\relax
-\newcommand{\datefont}[1]{\def\hep@date@font{#1}}
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-%
-% \begin{macro}{\series}
-% Define a series.
-%    \begin{macrocode}
-\newcommand{\preseries}[1]{\def\hep@pre@series{#1}}
-\newcommand{\series}[1]{\def\hep@series{#1}}
-\newcommand{\postseries}[1]{\def\hep@post@series{#1}}
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-%
-% \begin{macro}{\subtitle}
-% Define a subtitle.
-%    \begin{macrocode}
-\newcommand{\presubtitle}[1]{\def\hep@pre@sub@title{#1}}
-\newcommand{\subtitle}[1]{\def\hep@sub@title{#1}}
-\newcommand{\postsubtitle}[1]{\def\hep@post@sub@title{#1}}
-%    \end{macrocode}
-% \end{macro}
-%
-% Set standard values mostly taken from the \software{titling} package, add the font hook, and reduce the |date| font size.
-%    \begin{macrocode}
-\preseries{\begin{center}\Large\hep@series@font}
-\postseries{\par\end{center}}
-\pretitle{\begin{center}\LARGE\hep@title@font}
-\posttitle{\par\end{center}}
-\presubtitle{\begin{center}\Large\hep@subtitle@font}
-\postsubtitle{\par\end{center}}
-\preauthor{%
-  \begin{center}\large\hep@author@font\lineskip.5em\begin{tabular}[t]{c}%
-}
-\postauthor{\end{tabular}\par\end{center}}
-\predate{\begin{center}\hep@date@font}
-\postdate{\par\end{center}}
-%    \end{macrocode}
-%
-% \subsection{Editors}
-%
-%    \begin{macrocode}
-\newcounter{editors}
-\newcommand\hep@editorlist{}
-\newcommand\hep@editors{}
-%    \end{macrocode}
 %
 % \begin{macro}{\hep@multi@ref}
 % Transform reference list to list of references.
@@ -2062,12 +2451,161 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\editor}
-% Copy of the |authblk| author code adjusted for editors.
+% Redefine the email macro for the title page.
+%    \begin{macrocode}
+\renewcommand{\email}[2][]{\unskip\thanks[#1]{\hep@email{#2}}}%
+\AtBeginDocument{
+  \let\hep@maketitle\maketitle
+  \renewcommand\maketitle{\hep@maketitle\let\email\hep@email}
+}
+%    \end{macrocode}
+%
+% \subsection{Preprint and title}
+%
+% \subsubsection{Preprint}
+%
+% \begin{macro}{\preprintfont}
+% Define the "\preprintfont" macro.
+%    \begin{macrocode}
+\let\hep@preprint@font\relax
+\newcommand{\preprintfont}[1]{\def\hep@preprint@font{#1}}
+\preprintfont{\scshape\small}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\preprint}
+% Define the "\preprint" macro using the \software{varwidth} package \cite{varwidth}.
+%    \begin{macrocode}
+\let\hep@preprint\relax
+\newcommand\preprint[1]{\def\hep@preprint{#1}}
+\RequirePackage{varwidth}
+\newcommand{\hep@preprint@box}{%
+  \begin{varwidth}{\textwidth}%
+    \hep@preprint@font\hep@preprint%
+  \end{varwidth}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\placepreprint}
+% Places a preprint number in the top right corner of the title page using the \software{atbegshi} \cite{atbegshi} and \software{picture} \cite{picture} packages.
+%    \begin{macrocode}
+%<title>\RequirePackage{calc}
+\RequirePackage{atbegshi}
+\RequirePackage{picture}
+\newcommand{\placepreprint}{%
+  \AtBeginShipoutFirst{%
+    \put(
+      \textwidth+\oddsidemargin-\widthof{\hep@preprint@box},
+      -2pt-\topmargin-\heightof{\hep@preprint@box}
+    ){\normalfont\hep@preprint@box}
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsubsection{Series}
+%
+% \begin{macro}{\series}
+% Define a series title.
+%    \begin{macrocode}
+\newcommand{\preseries}[1]{\def\hep@pre@series{#1}}
+\newcommand{\series}[1]{\def\hep@series{#1}}
+\newcommand{\postseries}[1]{\def\hep@post@series{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\seriesfont}
+% Allow to change the fontface of the series title.
+%    \begin{macrocode}
+\let\hep@series@font\relax
+\newcommand{\seriesfont}[1]{\def\hep@series@font{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% Set the default series title layout.
+%    \begin{macrocode}
+\preseries{\begin{center}\Large\hep@series@font}
+\postseries{\par\end{center}}
+%    \end{macrocode}
+%
+% \subsubsection{Title}
+%
+% Extend the title using the \software{titling} package \cite{titling}.
+% Fix the footnote indent.
+%    \begin{macrocode}
+\RequirePackage{titling}
+\setlength{\thanksmarkwidth}{1.5em}
+%    \end{macrocode}
+%
+% \begin{macro}{\maketitlehooka}
+% Place the preprint and the series title using "\maketitlehooka".
+%    \begin{macrocode}
+\renewcommand{\maketitlehooka}{%
+  \placepreprint\vspace{-\bigskipamount}%
+  \@ifundefined{hep@series}{}{%
+    \hep@pre@series\hep@series\hep@post@series%
+  }%
+  \vspace{-\bigskipamount}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\titlefont}
+% Allow to change the fontface of the the title.
+%    \begin{macrocode}
+\let\hep@title@font\relax
+\newcommand{\titlefont}[1]{\def\hep@title@font{#1}}
+%    \end{macrocode}
+% \end{macro}
+% Set default title layout.
+%    \begin{macrocode}
+\pretitle{\begin{center}\LARGE\hep@title@font}
+\posttitle{\par\end{center}}
+%    \end{macrocode}
+
+% \subsubsection{Subtitle}
+%
+% \begin{macro}{\subtitle}
+% Define a subtitle.
+%    \begin{macrocode}
+\newcommand{\presubtitle}[1]{\def\hep@pre@sub@title{#1}}
+\newcommand{\subtitle}[1]{\def\hep@sub@title{#1}}
+\newcommand{\postsubtitle}[1]{\def\hep@post@sub@title{#1}}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\subtitlefont}
+% Allow to change the fontface of the subtitle.
+%    \begin{macrocode}
+\let\hep@subtitle@font\relax
+\newcommand{\subtitlefont}[1]{\def\hep@subtitle@font{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% Set default subtitle layout.
+%    \begin{macrocode}
+\presubtitle{\begin{center}\Large\hep@subtitle@font}
+\postsubtitle{\par\end{center}}
+%    \end{macrocode}
+%
+% \subsection{Authors and Editors}
+%
+% \subsubsection{Editors}
+%
+% Define editors, similar to authors using the \software{authblk} package.
+% Enable the handling of multiple authors with different affiliations using the \software{authblk} package \cite{authblk}.
 %    \begin{macrocode}
 \RequirePackage{authblk}
+\newcounter{editors}
+\newcommand\hep@editorlist{}
+\newcommand\hep@editors{}
+%    \end{macrocode}
+%
+% \begin{macro}{\editor}
+% Copy of the "authblk" author code adjusted for editors.
+%    \begin{macrocode}
 \newcommand\editor[2][]{%
-  \renewcommand{\email}[1]{\unskip\thanks{\online{mailto:##1}{##1}}}%
   \ifnewaffil%
     \addtocounter{affil}{1}%
     \edef\AB@thenote{\arabic{affil}}%
@@ -2106,7 +2644,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
       \protect\@nameuse{@sep\number\c@editors}%
       \protect\Authfont#2%
       \if\relax#1\relax\else%
-        \ \protect\hep@multi@ref{\AB@note}%
+        \protect\hep@multi@ref{\AB@note}%
       \fi%
     }%
   \endgroup%
@@ -2118,62 +2656,129 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\editorfont}
+% Allow to change the fontface of the editors.
+%    \begin{macrocode}
+\let\hep@editor@font\relax
+\newcommand{\editorfont}[1]{\def\hep@editor@font{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\preditor}
 % \begin{macro}{\postditor}
-% Set editor style
+% Set editor style.
 %    \begin{macrocode}
 \newcommand{\preeditor}[1]{\def\hep@pre@editor{#1}}
 \newcommand{\posteditor}[1]{\def\hep@post@editor{#1}}
-\preeditor{\begin{center}\large\hep@editor@font\lineskip.5em
-  \ifnum\value{editors}>1\relax Editors\else Editor\fi:
+\newcommand{\editortitle}[2]{
+  \def\hep@editor@title{#1}
+  \def\hep@editor@title@pl{#2}
 }
-\posteditor{\par\end{center}}
+\newcommand{\editortitlefont}[1]{\def\hep@editor@title@font{#1}}
+\newcommand{\preeditortitle}[1]{\def\hep@pre@editor@title{#1}}
+\newcommand{\posteditortitle}[1]{\def\hep@post@editor@title{#1}}
+\editortitle{Editor}{Editors}
+\editortitlefont{\itshape}
+\preeditortitle{\hep@editor@title@font}
+\posteditortitle{: }
+\preeditor{%
+  \begin{center}%
+    \large\hep@editor@font\lineskip.5em%
+    \begin{tabular}[t]{c}{%
+      \hep@pre@editor@title%
+      \ifnum\value{editors}>1\relax%
+        \hep@editor@title@pl%
+      \else%
+        \hep@editor@title%
+      \fi%
+      \hep@post@editor@title%
+    }%
+}
+\posteditor{\end{tabular}\par\end{center}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
 %
+% \begin{macro}{\maketitlehookb}
 % Show subtitle and editor.
 %    \begin{macrocode}
 \renewcommand{\maketitlehookb}{%
   \@ifundefined{hep@sub@title}{}{%
     \hep@pre@sub@title\hep@sub@title\hep@post@sub@title%
   }%
+  \smallskip%
   \ifx\hep@editorlist\AB@empty\else%
     \hep@pre@editor\hep@editorlist\hep@post@editor%
   \fi
 }
 %    \end{macrocode}
+% \end{macro}
 %
-% \subsection{Authors}
+% \subsubsection{Authors}
 %
 % \begin{macro}{\author}
 % Allow absent author field.
-% Enable the handling of multiple authors with different affiliations using the \software{authblk} package \cite{authblk}.
 %    \begin{macrocode}
 % \author{}
-%<title>\newif\ifhep@lining\hep@liningtrue
-\ifhep@lining
-  \renewcommand{\Affilfont}{\small\hep@affiliation@font}
-\else
-  \renewcommand{\Affilfont}{\small\ostyle\hep@affiliation@font}
-\fi
-\renewcommand\Authfont{\hep@author@font}
 %    \end{macrocode}
 % \end{macro}
 %
 % Switch authblk to a label ref system for affiliations.
 %    \begin{macrocode}
-\newcounter{affiliation}
-\renewcommand{\theaffiliation}{%
-  \textsuperscript{\normalfont\arabic{affiliation}}%
-}
 %<title>\RequirePackage{xpatch}
 \xpatchcmd{\author}{%
   \protect\Authfont#2\AB@authnote{\AB@note}%
 }{%
   \protect\Authfont#2%
-  \if\relax#1\relax\else\protect\hep@multi@ref{\AB@note}\fi%
+  \if\relax#1\relax\else\unskip\protect\hep@multi@ref{\AB@note}\fi%
 }{}{}
+%    \end{macrocode}
+%
+% \begin{macro}{\authorfont}
+% Allow to change the fontface of the individual parts of the title.
+%    \begin{macrocode}
+\let\hep@author@font\relax
+\newcommand{\authorfont}[1]{\def\hep@author@font{#1}}
+\renewcommand\Authfont{\hep@author@font}
+%    \end{macrocode}
+% \end{macro}
+%
+% Set default author fontface.
+%    \begin{macrocode}
+\newcommand{\authortitle}[2]{
+  \def\hep@author@title{#1}
+  \def\hep@author@title@pl{#2}
+}
+\newcommand{\authortitlefont}[1]{\def\hep@author@title@font{#1}}
+\newcommand{\preauthortitle}[1]{\def\hep@pre@author@title{#1}}
+\newcommand{\postauthortitle}[1]{\def\hep@post@author@title{#1}}
+\authortitle{Author}{Authors}
+\authortitlefont{\itshape}
+\preauthortitle{\hep@author@title@font}
+\postauthortitle{: }
+\preauthor{%
+  \begin{center}%
+    \large\hep@author@font\lineskip.5em%
+    \begin{tabular}[t]{c}{%
+      \ifnum\value{editors}>0\relax%
+        \hep@pre@author@title%
+        \ifnum\value{authors}>1\relax%
+          \hep@author@title@pl\else\hep@author@title%
+        \fi\hep@post@author@title%
+      \fi%
+    }%
+}
+\postauthor{\end{tabular}\par\end{center}}
+%    \end{macrocode}
+%
+% \subsubsection{Affiliation}
+%
+% Patch the "\affiliation" macro to comply with the label ref system.
+%    \begin{macrocode}
+\newcounter{affiliation}
+\renewcommand{\theaffiliation}{%
+  \textsuperscript{\normalfont\alph{affiliation}}%
+}
 \xpatchcmd{\affil}{%
   \AB@affilnote{\AB@note}%
 }{%
@@ -2182,19 +2787,22 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 }{}{}
 %    \end{macrocode}
 %
-% \begin{macro}{\email}
-% Redefine the email macro to place the email address in a footnote if called from within the |\author| macro |\author{|$\langle name\rangle$ |\email{|$\langle email\rangle$|}}|.
+% \begin{macro}{\affiliationfont}
+% Allow to change the fontface of affiliation.
 %    \begin{macrocode}
-\let\hep@author\author
-\def\author{%
-  \renewcommand{\email}[1]{\unskip\thanks{\online{mailto:##1}{##1}}}%
-  \hep@author
-}
+\let\hep@affiliation@font\relax
+\newcommand{\affiliationfont}[1]{\def\hep@affiliation@font{#1}}
+%<title>\newif\ifhep@lining\hep@liningtrue
+\ifhep@lining
+  \renewcommand{\Affilfont}{\small\hep@affiliation@font}
+\else
+  \renewcommand{\Affilfont}{\small\ostyle\hep@affiliation@font}
+\fi
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\affiliation}
-% Define the |\affiliation| macro, ensure that linebreaks happen after a comma.
+% Define the "\affiliation" macro, ensure that linebreaks happen after a comma.
 %    \begin{macrocode}
 \newcommand\hep@penalty{\if@twocolumn85\else50\fi}
 \newcommand\hep@active@comma{,\penalty-\hep@penalty\relax}
@@ -2215,80 +2823,98 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{Preprint}
+% \subsection{Date and Abstract}
 %
-% \begin{macro}{\preprint}
-% Define the |\preprint| macro using the \software{varwidth} package \cite{varwidth}.
+% \subsubsection{Date}
+%
+% \begin{macro}{\date}
+% Allow absent date field.
 %    \begin{macrocode}
-\let\hep@preprint\relax
-\newcommand\preprint[1]{\def\hep@preprint{#1}}
-\RequirePackage{varwidth}
-%<title>\RequirePackage{relsize}
-\newcommand{\hep@preprint@box}{%
-  \begin{varwidth}{\textwidth}%
-    \smaller[.5]\hep@preprint@font\hep@preprint%
-  \end{varwidth}%
-}
-\preprintfont{\scshape}
+\date{\vspace{-4ex}}
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\placepreprint}
-% Places a preprint number in the top right corner of the title page using the \software{atbegshi} \cite{atbegshi} and \software{picture} \cite{picture} packages.
+% \begin{macro}{\datefont}
+% Allow to change the fontface of the individual parts of the title.
 %    \begin{macrocode}
-%<title>\RequirePackage{calc}
-\RequirePackage{atbegshi}
-\RequirePackage{picture}
-\newcommand{\placepreprint}{%
-  \AtBeginShipoutFirst{%
-    \put(
-      \textwidth+\oddsidemargin-\widthof{\hep@preprint@box},
-      -2pt-\topmargin-\heightof{\hep@preprint@box}
-    ){\normalfont\hep@preprint@box}
-  }
-}
-\renewcommand{\maketitlehooka}{%
-  \placepreprint\vspace{-\bigskipamount}%
-  \@ifundefined{hep@series}{}{%
-    \hep@pre@series\hep@series\hep@post@series%
-  }%
-}
+\let\hep@date@font\relax
+\newcommand{\datefont}[1]{\def\hep@date@font{#1}}
 %    \end{macrocode}
 % \end{macro}
-
-% \subsection{Abstract}
+%
+% Set the default "date" fontface.
+%    \begin{macrocode}
+\predate{\begin{center}\hep@date@font}
+\postdate{\par\end{center}}
+%    \end{macrocode}
+%
+% \subsubsection{Abstract}
 %
 % \begin{environment}{abstract}
-% Adjust the |abstract| environment to not start with indentation.
+% Adjust the "abstract" environment to not start with indentation.
 %    \begin{macrocode}
 \@ifundefined{abstract}{}{%
   \let\hep@abstract\abstract%
   \renewcommand\abstract{\hep@abstract\noindent\ignorespaces}%
-}
 %    \end{macrocode}
 % \end{environment}
 % \begin{environment}{abstract*}
-% Add a |abstract*| environment for two column mode taking also care of placing the title using the \software{environ} \cite{environ} and \software{abstract} \cite{abstract} packages.
+% Add a "abstract*" environment for two column mode taking also care of placing the title using the \software{environ} \cite{environ} and \software{abstract} \cite{abstract} packages.
 %    \begin{macrocode}
-\if@twocolumn
-  \RequirePackage{environ}
-  \RequirePackage{abstract}
-  \renewcommand{\abstitleskip}{-3ex}
-  \NewEnviron{abstract*}{%
-    \twocolumn[\maketitle\vspace{-5ex}%
-    \begin{onecolabstract}\noindent\BODY\end{onecolabstract}%
-    \vspace{.5cm}]\saythanks%
-  }
-\else
-  \newenvironment{abstract*}{\maketitle\begin{abstract}}{\end{abstract}}
-\fi
-%</package|title>
+  \if@twocolumn
+    \RequirePackage{environ}
+    \RequirePackage{abstract}
+    \renewcommand{\abstitleskip}{-3ex}
+    \NewEnviron{abstract*}{%
+      \twocolumn[\maketitle\vspace{-5ex}%
+      \begin{onecolabstract}\noindent\BODY\end{onecolabstract}%
+      \vspace{.5cm}]\saythanks%
+    }%
+  \else
+    \newenvironment{abstract*}{%
+      \maketitle\begin{abstract}%
+    }{%
+      \end{abstract}%
+    }
+  \fi
+}
 %    \end{macrocode}
 % \end{environment}
 %
+% \subsection{Thanks}
+%
+% \begin{macro}{\thanks} Redefine thank to have a optional argument for a reference label.
+%    \begin{macrocode}
+\let\hep@thanks\thanks
+\AtEndDocument{\let\thanks\hep@thanks}
+% \AddToHook{begindocument/begin}{\let\thanks\hep@thanks}
+\DeclareRobustCommand\thanks[2][]{%
+  \AfterEndPreamble{%
+%   \AddToHook{begindocument/end}{%
+    \if\relax#1\relax%
+      \footnotemark%
+    \else%
+      \renewcommand\thefootnote{\textsuperscript{\@fnsymbol\c@footnote}}%
+      \protect\refstepcounter{footnote}\protect\label{#1}%
+      \renewcommand\thefootnote{\@arabic\c@footnote}%
+    \fi%
+    \protected@xdef\@thanks{%
+      \@thanks\protect\footnotetext[\the\c@footnote]{#2}%
+    }
+    \if@twocolumn
+      \protected@xdef\@bs@thanks{%
+        \@bs@thanks\protect\footnotetext[\the\c@footnote]{#2}%
+      }%
+    \fi%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%</package|title>
 %<*package>
 %
-% End of |title| conditional.
+% End of "title" conditional.
 %    \begin{macrocode}
 \fi
 %    \end{macrocode}
@@ -2301,9 +2927,9 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \end{macrocode}
 %
 %</package>
+%<*package|bibliography>
 %
 %    \begin{macrocode}
-%<*package|bibliography>
 %<bibliography>\def\hep@bibliography{numeric-comp}
 %<bibliography>\newif\ifhep@journal\hep@journalfalse
 %    \end{macrocode}
@@ -2316,8 +2942,8 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{hep-paper}
-% Provide the |\DeclareSortingTemplate| macro for older |biblatex| installations.
-% Define a new sorting template that sorts only multi key |\cite| entries according to their date and leaves the rest of the bibliography entries in the order they appear in the text.
+% Provide the "\DeclareSortingTemplate" macro for older "biblatex" installations.
+% Define a new sorting template that sorts only multi key "\cite" entries according to their date and leaves the rest of the bibliography entries in the order they appear in the text.
 %    \begin{macrocode}
 \providecommand{\DeclareSortingTemplate}{\DeclareSortingScheme}
 \DeclareSortingTemplate{hep-paper}{
@@ -2352,15 +2978,15 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \fi
 %    \end{macrocode}
 %
-% \begin{macro}{erratum}
-% Redefine the |translationof| string to fit better to documents without a original title.
+% \begin{macro}{translationof}
+% Redefine the "translationof" string to fit better to documents without a original title.
 %    \begin{macrocode}
 \DefineBibliographyStrings{english}{translationof={Original}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{erratum}
-% Add new bibliography string \enquote{Erratum} for the use in the |relatedtype| field.
+% Add new bibliography string \enquote{Erratum} for the use in the "relatedtype" field.
 %    \begin{macrocode}
 \NewBibliographyString{erratum,erratums}
 \DefineBibliographyStrings{english}{erratum={Erratum},erratums={Errata}}
@@ -2368,7 +2994,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \end{macrocode}
 % \end{macro}
 %
-% Activate the Oxford comma when using |british| and separate title and subtitle with a colon.
+% Activate the Oxford comma when using "british" and separate title and subtitle with a colon.
 %    \begin{macrocode}
 \DefineBibliographyExtras{british}{\def\finalandcomma{\addcomma}}
 \renewcommand{\subtitlepunct}{\addcolon\addspace}
@@ -2401,7 +3027,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{\DeclareSourcemap}
-% Use the |\DeclareSourcemap| feature.
+% Use the "\DeclareSourcemap" feature.
 %    \begin{macrocode}
 \DeclareSourcemap{%
   \maps[datatype=bibtex, overwrite=true]{%
@@ -2461,7 +3087,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{\letbibmacro}
-% Provide the |\letbibmacro| macro for old |biblatex| installations.
+% Provide the "\letbibmacro" macro for old "biblatex" installations.
 %    \begin{macrocode}
 \providecommand{\letbibmacro}[2]{\csletcs{abx@macro@#1}{abx@macro@#2}}
 %    \end{macrocode}
@@ -2499,7 +3125,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{reportnumber}
-% Print the |reportnumber| as commalist
+% Print the "reportnumber" as commalist
 %    \begin{macrocode}
 %<bibliography>\RequirePackage{relsize}
 \DeclareFieldFormat{reportnumber}{%
@@ -2521,7 +3147,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{\bib@online}
-% Private |\bib@online| macro
+% Private "\bib@online" macro
 %    \begin{macrocode}
 \newcommand{\bib@online}[2]{%
   \ifhyperref{\online{#1}{#2}}{\nolinkurl{#2}}%
@@ -2569,7 +3195,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \subsection{Eprints}
 %
 % \begin{macro}{\new@eprint}
-% Private |\new@eprint| macro
+% Private "\new@eprint" macro
 %    \begin{macrocode}
 \NewDocumentCommand{\new@eprint}{smm}{
   \DeclareFieldFormat{eprint:#2}{%
@@ -2635,10 +3261,10 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   HEPForge\addcolon\space\bib@online{https://#1/hepforge.org}{#1}%
 }
 \DeclareFieldAlias{eprint:HEPForge}{eprint:hepforge}
-%</package|bibliography>
 %    \end{macrocode}
 % \end{macro}
 %
+%</package|bibliography>
 %<*package>
 %
 % End check for bibliography option.
@@ -2705,7 +3331,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 
 % \subsection{References}
 %
-% Begin of |references| conditional
+% Begin of "references" conditional
 %    \begin{macrocode}
 \ifhep@references
 %    \end{macrocode}
@@ -2737,7 +3363,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{\ref}
-% Adjust |\ref|\marg{key} in order to prevent preceding line breaks.
+% Adjust "\ref"\marg{key} in order to prevent preceding line breaks.
 %    \begin{macrocode}
 \let\hep@ref\ref
 \AtBeginDocument{\renewcommand\ref{\no@break@before\hep@ref}}
@@ -2745,14 +3371,14 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{\eqref}
-% Adjust |\eqref|\marg{key} in order to prevent preceding line breaks.
+% Adjust "\eqref"\marg{key} in order to prevent preceding line breaks.
 %    \begin{macrocode}
 \renewcommand\eqref{\no@break@before\labelcref}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\subref}
-% Adjust |\subref|\marg{key} in order to prevent preceding line breaks.
+% Adjust "\subref"\marg{key} in order to prevent preceding line breaks.
 %    \begin{macrocode}
 \let\hep@subref\subref
 \renewcommand\subref{\no@break@before\hep@subref}
@@ -2764,14 +3390,14 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{\subcref}
-% Provide the |\subcref| macro.
+% Provide the "\subcref" macro.
 %    \begin{macrocode}
 \newcommand{\subcref}[1]{\cref{sub@#1}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\eqcrefname}
-% Define the |\eqcrefname| macro for named equation types.
+% Define the "\eqcrefname" macro for named equation types.
 %    \begin{macrocode}
 \NewDocumentCommand{\eqcrefname}{mmo}{
   \crefname{#1}{#2}{\IfValueTF{#3}{#3}{#2s}}
@@ -2781,7 +3407,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{\labelcrefrange}
-% Define the missing |\labelcrefrange|\marg{key1}\marg{key2} macro.
+% Define the missing "\labelcrefrange"\marg{key1}\marg{key2} macro.
 %    \begin{macrocode}
 \DeclareRobustCommand{\labelcrefrange}[2]{%
   \@crefrangenostar{labelcref}{#1}{#2}%
@@ -2802,7 +3428,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \fi
 %    \end{macrocode}
 %
-% End of |references| conditional
+% End of "references" conditional
 %    \begin{macrocode}
 \fi
 %    \end{macrocode}
@@ -2810,7 +3436,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \subsection{Citations}
 %
 % \begin{macro}{\cite}
-% Adjust |\cite|\marg{key} in order to prevent preceding line breaks.
+% Adjust "\cite"\marg{key} in order to prevent preceding line breaks.
 %    \begin{macrocode}
 \let\hep@cite\cite
 \renewcommand\cite{\no@break@before\hep@cite}
@@ -2858,12 +3484,17 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 
 % \section{Acronyms}
 %
+% Define acronyms if not deactivated.
+%    \begin{macrocode}
+\ifhep@glossaries
+%    \end{macrocode}
+%
+%</package>
+%<*package|acronyms>
+%
 % Acronyms are implemented with the \software{glossaries-extra} package \cite{glossaries-extra} which is an extension of the \software{glossaries} package \cite{glossaries} and must be loaded after the \software{hyperref} package in \cref{sec:hyperlinks}.
 % Set the abbreviation style.
 %    \begin{macrocode}
-\ifhep@glossaries
-%</package>
-%<*package|acronyms>
 \RequirePackage[nostyles]{glossaries-extra}
 \setabbreviationstyle{long-hyphen-short-hyphen}
 %    \end{macrocode}
@@ -2872,7 +3503,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \glsenableentrycount
 \glssetcategoryattribute{abbreviation}{entrycount}{1}
 %    \end{macrocode}
-% Provide macros for older |glossaries-extra| installations.
+% Provide macros for older "glossaries-extra" installations.
 %    \begin{macrocode}
 \AtEndOfPackage{
   \@ifpackageloaded{hyperref}{
@@ -2910,7 +3541,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{\frenchspacing}
-% Adjust the |\frenchspacing| macro to be compatibel with this idea.
+% Adjust the "\frenchspacing" macro to be compatibel with this idea.
 %    \begin{macrocode}
 \def\frenchspacing{%
   \sfcode`\.\begin@sentence \sfcode`\?\begin@sentence
@@ -2933,7 +3564,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{\acronym}
-% The |\acronym|\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\meta{*}\marg{definition}\oarg{plural\linebreak[4] definition} macro is defined.
+% The "\acronym"\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\meta{*}\marg{definition}\oarg{plural\linebreak[4] definition} macro is defined.
 % \begin{enumerate}[nosep, label=\#\arabic*]
 % \item star for omitting the \enquote{s} in the short plural
 % \item optional typeset abbreviation
@@ -2943,7 +3574,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \item optional plural long form
 % \end{enumerate}
 %    \begin{macrocode}
-%<acronyms>\usepackage{xspace}
+%<acronyms>\RequirePackage{xspace}
 \NewDocumentCommand{\acronym}{somsmo}{
   \newabbreviation[
     type=\acronymtype,
@@ -2998,7 +3629,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{\shortacronym}
-% The |\shortacronym| never expands into the long form.
+% The "\shortacronym" never expands into the long form.
 %    \begin{macrocode}
 \NewDocumentCommand{\shortacronym}{somsmo}{
 %    \end{macrocode}
@@ -3043,7 +3674,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{\longacronym}
-% The |\longacronym| never shows the abbreviated form.
+% The "\longacronym" never shows the abbreviated form.
 %    \begin{macrocode}
 \NewDocumentCommand{\longacronym}{somsmo}{
 %    \end{macrocode}
@@ -3106,7 +3737,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{abstract}
-% Adjust the |abstract| environment to reset all acronym counters.
+% Adjust the "abstract" environment to reset all acronym counters.
 %    \begin{macrocode}
 \@ifundefined{endabstract}{}{%
   \let\end@hep@abstract\endabstract%
@@ -3118,7 +3749,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \begin{macro}{\tableofcontents}
 % \begin{macro}{\listoffigures}
 % \begin{macro}{\listoftables}
-% Adjust the |\tableofcontents| macro to never show the long form of acronyms.
+% Adjust the "\tableofcontents" macro to never show the long form of acronyms.
 %    \begin{macrocode}
 \let\hep@table@of@contents\tableofcontents
 \renewcommand\tableofcontents{%
@@ -3152,20 +3783,20 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \end{macrocode}
 % \end{macro}
 %
-% End of glossaries if.
-%    \begin{macrocode}
 %</package|acronyms>
 %<*package>
+%
+% End of glossaries if.
+%    \begin{macrocode}
 \fi
 %    \end{macrocode}
 %
-% \ifshort
 %</package>
-%</package|title|bibliography|acronyms>
-%<*datamodel>
-% \fi
+%</package|title|font|math|floats|acronyms|bibliography>
 %
 % \section{Biblatex datamodel file} \label{sec:data model}
+%
+%<*datamodel>
 %
 % \begin{macro}{collaboration}
 % \begin{macro}{pmid}
@@ -3173,7 +3804,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \begin{macro}{pmc}
 % \begin{macro}{reportnumber}
 % \begin{macro}{protocollessurl}
-% Define the |dbx| file containing the |hep-paper| datamodel.
+% Define the "dbx" file containing the "hep-paper" datamodel.
 %    \begin{macrocode}
 \DeclareDatamodelFields[type=field, datatype=literal]{
   collaboration, pmid, pmcid, pmc,
@@ -3193,9 +3824,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 % \end{macro}
 %
-% \ifshort
 %</datamodel>
-% \fi
 %
 % \Finale
 
@@ -3206,7 +3835,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % makeindex -s gglo.ist -o hep-paper-implementation.ind hep-paper-implementation.idx
 
 % \begin{macro}{\refstepcounter@...}
-% Adjust the |cleveref| |\refstepcounter@noarg| and |\refstepcounter@optarg| to use the |\@currentlabel| in order to fix problems with |\subref|.
+% Adjust the "cleveref" "\refstepcounter@noarg" and "\refstepcounter@optarg" to use the "\@currentlabel" in order to fix problems with "\subref".
 %    \begin{macrocode}
 % \def\refstepcounter@noarg#1{%
 %   \cref@old@refstepcounter{#1}%
@@ -3235,7 +3864,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % % \end{macro}
 %
 %
-% \usepackage{contour}
+% \RequirePackage{contour}
 % \renewcommand{\ULdepth}{1.8pt}
 % \contourlength{0.8pt}
 % \newcommand{\myuline}[1]{%
@@ -3243,7 +3872,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % }
 
 % \begin{macro}{\mathpzc}
-% Define the |\mathpzc| math script font based on the Zapf Chancery PostScript font.
+% Define the "\mathpzc" math script font based on the Zapf Chancery PostScript font.
 %    \begin{macrocode}
 % \DeclareFontFamily{OT1}{pzc}{}
 % \DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.15] pzcmi7t}{}

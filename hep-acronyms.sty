@@ -16,17 +16,19 @@
 %% LaTeX version 2005/12/01 or later.
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesPackage{hep-acronyms}[2021/06/01 v1.7 Acronym macros for publications in High Energy Physics]
+\ProvidesPackage{hep-acronyms}[2021/08/01 v1.8 Acronym macros for publications in High Energy Physics]
 
 \RequirePackage{xparse}
 \DeclareDocumentCommand{\mathdef}{mO{0}m}{%
-  \expandafter\let\csname text\string#1\endcsname=#1
-  \expandafter\newcommand\csname math\string#1\endcsname[#2]{#3}
+  \expandafter\let\csname hep@text\string#1\endcsname=#1
+  \expandafter\newcommand\csname hep@math\string#1\endcsname[#2]{#3}
   \DeclareRobustCommand#1{%
     \ifmmode
-      \expandafter\let\expandafter\next\csname math\string#1\endcsname
+      \expandafter\let\expandafter\next\csname%
+      hep@math\string#1\endcsname%
     \else
-      \expandafter\let\expandafter\next\csname text\string#1\endcsname
+      \expandafter\let\expandafter\next\csname%
+      hep@text\string#1\endcsname%
     \fi
     \next
   }%
@@ -70,7 +72,7 @@
                test {\ifnumcomp{\spacefactor}{=}{\begin@sentence}}%
   }{#1}{#2}%
 }}
-\usepackage{xspace}
+\RequirePackage{xspace}
 \NewDocumentCommand{\acronym}{somsmo}{
   \newabbreviation[
     type=\acronymtype,
