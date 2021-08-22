@@ -1,0 +1,875 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Jan Hajer
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{hep-title}[2021/09/01 v1.0 Extend title page macros]
+%<documentation>\ProvidesFile{hep-title-documentation.tex}[2021/09/01 v1.0 hep-title documentation]
+%
+%<*documentation>
+
+\RequirePackage[l2tabu, orthodox]{nag}
+
+\documentclass{ltxdoc}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+\usepackage[parskip, oldstyle]{hep-paper}
+
+\bibliography{bibliography}
+
+\acronym{PDF}{portable document format}
+
+\usepackage{hologo}
+
+\MacroIndent=1.5em
+\setlength{\fboxsep}{1pt}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+
+%</documentation>
+
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
+\begin{document}
+\DocInput{hep-title-implementation.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.0}{2021/09/01}{Initial version of the style file.}
+%
+% \ifshort
+%<*documentation>
+% \fi
+%
+\GetFileInfo{hep-title.sty}
+
+\title{The \software{hep-title} package\thanks{This document corresponds to \software{hep-title}~\fileversion.}}
+\author{Jan Hajer \email{jan.hajer@unibas.ch}}
+\date{\filedate}
+
+% \ifshort
+\begin{document}
+% \fi
+
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+
+\maketitle
+
+\begin{abstract}
+The \software{hep-title} package extends the title macros of the standard classes with macros for a preprint, affiliation, editors, and endorsers.
+\end{abstract}
+
+To use the \software{hep-title} package include it with "\usepackage{hep-title}".
+
+Most macros are intended for the use in the preamble.
+The are implemented using the \software{titling} \cite{titling} and \software{authblk} \cite{authblk} packages.
+
+\section{Title}
+
+\DescribeMacro{\series}
+\DescribeMacro{\title}
+\DescribeMacro{\subtitle}
+\DescribeMacro{\seriesfont}
+\DescribeMacro{\titlefont}
+\DescribeMacro{\subtitlefont}
+The PDF meta information is set according to the "\title"\marg{text} and "\author"\marg{text} information.
+The "\series"\marg{series} places a series title above the usual title.
+The "\subtitle"\marg{subtitle} macro places a subtitle below the usual title.
+The fonts and their size can be adjusted using the "\seriesfont", "\titlefont", and "\subtitlefont" macros.
+
+\section{Authors}
+
+\DescribeMacro{\author}
+\DescribeMacro{\affiliation}
+\DescribeMacro{\editor}
+\DescribeMacro{\endorser}
+\DescribeMacro{\email}
+\DescribeMacro{\authorfont}
+\DescribeMacro{\editorfont}
+\DescribeMacro{\endorserfont}
+\DescribeMacro{\affiliationfont}
+In order to facilitate multiple authors with different affiliations the \software{authblk} package \cite{authblk} is extended.
+The following lines add \eg two authors with different affiliations
+\begin{verbatim}
+\author[affil1]{Author one \email{email one}}
+\affiliation[affil1]{Affiliation one}
+\author[affil2]{Author two \email{email two}}
+\affiliation[affil1,affil2]{Affiliation two}
+\end{verbatim}
+Additionally the "\editor" and "\endorser" macros are provided.
+
+\section{Abstract}
+
+\DescribeEnv{abstract}
+\DescribeEnv{abstract*}
+The "abstract" environment is adjusted to not start with an indentation.
+The "abstract*" environment takes care of placing the title as well.
+This is used in "twocolumn" documents if the abstract should span both columns.
+
+\section{Preprint}
+
+\DescribeMacro{\preprint}
+\DescribeMacro{\preprintfont}
+The "\preprint"\marg{numer} macro places a pre-print number in the upper right corner of the title page.
+The "\preprintfont" macro can be used to change the font of the preprint.
+
+% \ifshort
+\printbibliography
+
+\end{document}
+%
+%</documentation>
+% \fi
+%
+% \StopEventually{
+% \printbibliography
+% \PrintChanges
+% }
+%
+% \appendix
+%
+% \section{Implementation}
+%
+%<*package>
+%
+% \begin{macro}{\online}
+% \begin{macro}{\email}
+% Provide the "\online"\marg{text}\marg{url} macro combining the features of the "\href" and the "\url" macros.
+% Define a macro for typesetting emails.
+%    \begin{macrocode}
+\providecommand{\online}[2]{\texttt{#2}}%
+\providecommand{\hep@email}[1]{\online{mailto:#1}{#1}}
+\providecommand\email{\hep@email}
+\AtBeginDocument{\@ifpackageloaded{hyperref}{%
+    \renewcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
+  }{}
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\hep@multi@ref}
+% Transform reference list to list of references.
+%    \begin{macrocode}
+\newif\ifhep@first%
+\newcommand{\hep@multi@ref}[1]{%
+  \hep@firsttrue%
+  \forcsvlist{%
+    \ifhep@first\hep@firstfalse\else\textsuperscript,\fi\ref%
+  }{#1}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% Redefine the email macro for the title page.
+%    \begin{macrocode}
+\renewcommand{\email}[2][]{\unskip\thanks[#1]{\hep@email{#2}}}%
+\AtBeginDocument{
+  \let\hep@maketitle\maketitle
+  \renewcommand\maketitle{\hep@maketitle\let\email\hep@email}
+}
+%    \end{macrocode}
+%
+% \subsection{Preprint and title}
+%
+% \subsubsection{Preprint}
+%
+% \begin{macro}{\preprintfont}
+% Define the "\preprintfont" macro.
+%    \begin{macrocode}
+\let\hep@preprint@font\relax
+\newcommand{\preprintfont}[1]{\def\hep@preprint@font{#1}}
+\preprintfont{\scshape\small}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\preprint}
+% Define the "\preprint" macro using the \software{varwidth} package \cite{varwidth}.
+%    \begin{macrocode}
+\let\hep@preprint\relax
+\newcommand\preprint[1]{\def\hep@preprint{#1}}
+\RequirePackage{varwidth}
+\newcommand{\hep@preprint@box}{%
+  \begin{varwidth}{\textwidth}%
+    \hep@preprint@font\hep@preprint%
+  \end{varwidth}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\placepreprint}
+% Places a preprint number in the top right corner of the title page using the \software{atbegshi} \cite{atbegshi} and \software{picture} \cite{picture} packages.
+%    \begin{macrocode}
+\RequirePackage{calc}
+\RequirePackage{atbegshi}
+\RequirePackage{picture}
+\newcommand{\placepreprint}{%
+  \AtBeginShipoutFirst{%
+    \put(
+      \textwidth+\oddsidemargin-\widthof{\hep@preprint@box},
+      -2pt-\topmargin-\heightof{\hep@preprint@box}
+    ){\normalfont\hep@preprint@box}
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsubsection{Series}
+%
+% \begin{macro}{\series}
+% Define a series title.
+%    \begin{macrocode}
+\newcommand{\preseries}[1]{\def\hep@pre@series{#1}}
+\newcommand{\series}[1]{\def\hep@series{#1}}
+\newcommand{\postseries}[1]{\def\hep@post@series{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\seriesfont}
+% Allow to change the fontface of the series title.
+%    \begin{macrocode}
+\let\hep@series@font\relax
+\newcommand{\seriesfont}[1]{\def\hep@series@font{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% Set the default series title layout.
+%    \begin{macrocode}
+\preseries{\begin{center}\Large\hep@series@font}
+\postseries{\par\end{center}}
+%    \end{macrocode}
+%
+% \subsubsection{Title}
+%
+% Extend the title using the \software{titling} package \cite{titling}.
+% Fix the footnote indent.
+%    \begin{macrocode}
+\RequirePackage{titling}
+\setlength{\thanksmarkwidth}{1.5em}
+%    \end{macrocode}
+%
+% \begin{macro}{\maketitlehooka}
+% Place the preprint and the series title using "\maketitlehooka".
+%    \begin{macrocode}
+\renewcommand{\maketitlehooka}{%
+  \placepreprint\vspace{-\bigskipamount}%
+  \@ifundefined{hep@series}{}{%
+    \hep@pre@series\hep@series\hep@post@series%
+  }%
+  \vspace{-\bigskipamount}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\titlefont}
+% Allow to change the fontface of the the title.
+%    \begin{macrocode}
+\let\hep@title@font\relax
+\newcommand{\titlefont}[1]{\def\hep@title@font{#1}}
+%    \end{macrocode}
+% \end{macro}
+% Set default title layout.
+%    \begin{macrocode}
+\pretitle{\begin{center}\LARGE\hep@title@font}
+\posttitle{\par\end{center}}
+%    \end{macrocode}
+
+% \subsubsection{Subtitle}
+%
+% \begin{macro}{\subtitle}
+% Define a subtitle.
+%    \begin{macrocode}
+\newcommand{\presubtitle}[1]{\def\hep@pre@sub@title{#1}}
+\newcommand{\subtitle}[1]{\def\hep@sub@title{#1}}
+\newcommand{\postsubtitle}[1]{\def\hep@post@sub@title{#1}}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\subtitlefont}
+% Allow to change the fontface of the subtitle.
+%    \begin{macrocode}
+\let\hep@subtitle@font\relax
+\newcommand{\subtitlefont}[1]{\def\hep@subtitle@font{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% Set default subtitle layout.
+%    \begin{macrocode}
+\presubtitle{\begin{center}\Large\hep@subtitle@font}
+\postsubtitle{\par\end{center}}
+%    \end{macrocode}
+%
+% \subsection{Authors and Editors}
+%
+% \subsubsection{Editors}
+%
+% Define editors, similar to authors using the \software{authblk} package.
+% Enable the handling of multiple authors with different affiliations using the \software{authblk} package \cite{authblk}.
+%    \begin{macrocode}
+\RequirePackage{authblk}
+\newcounter{editors}
+\newcommand\hep@editorlist{}
+\newcommand\hep@editors{}
+%    \end{macrocode}
+%
+% \begin{macro}{\editor}
+% Copy of the "authblk" author code adjusted for editors.
+%    \begin{macrocode}
+\newcommand\editor[2][]{%
+  \ifnewaffil%
+    \addtocounter{affil}{1}%
+    \edef\AB@thenote{\arabic{affil}}%
+  \fi%
+  \if\relax#1\relax%
+    \def\AB@note{\AB@thenote}%
+  \else%
+    \def\AB@note{#1}\setcounter{Maxaffil}{0}%
+  \fi%
+  \ifnum\value{editors}>1\relax%
+    \@namedef{@sep\number\c@editors}{\Authsep}%
+  \fi%
+  \addtocounter{editors}{1}%
+  \begingroup%
+    \let\protect\@unexpandable@protect \let\and\AB@pand%
+    \def\thanks{\protect\thanks}\def\footnote{\protect\footnote}%
+    \@temptokena=\expandafter{\hep@editors}{%
+      \def\\{%
+        \protect\\[\@affilsep]\protect\Affilfont\protect\AB@resetsep%
+      }%
+      \xdef\hep@editor{\AB@blk@and#2}%
+      \ifnewaffil%
+        \gdef\AB@las{}\gdef\AB@lasx{\protect\Authand}\gdef\AB@as{}%
+        \xdef\hep@editors{\the\@temptokena\AB@blk@and}%
+      \else%
+        \xdef\hep@editors{\the\@temptokena\AB@as\AB@au@str}%
+        \global\let\AB@las\AB@lasx\gdef\AB@lasx{\protect\Authands}%
+        \gdef\AB@as{\Authsep}%
+      \fi%
+      \gdef\AB@au@str{#2}%
+    }%
+    \@temptokena=\expandafter{\hep@editorlist}%
+    \let\\=\editorcr%
+    \xdef\hep@editorlist{%
+      \the\@temptokena%
+      \protect\@nameuse{@sep\number\c@editors}%
+      \protect\Authfont#2%
+      \if\relax#1\relax\else%
+        \protect\hep@multi@ref{\AB@note}%
+      \fi%
+    }%
+  \endgroup%
+  \ifnum\value{editors}>2\relax%
+    \@namedef{@sep\number\c@editors}{\Authands}%
+  \fi%
+  \newaffilfalse%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\editorfont}
+% Allow to change the fontface of the editors.
+%    \begin{macrocode}
+\let\hep@editor@font\relax
+\newcommand{\editorfont}[1]{\def\hep@editor@font{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\preditor}
+% \begin{macro}{\postditor}
+% Set editor style.
+%    \begin{macrocode}
+\newcommand{\preeditor}[1]{\def\hep@pre@editor{#1}}
+\newcommand{\posteditor}[1]{\def\hep@post@editor{#1}}
+\newcommand{\editortitle}[2]{
+  \def\hep@editor@title{#1}
+  \def\hep@editor@title@pl{#2}
+}
+\newcommand{\editortitlefont}[1]{\def\hep@editor@title@font{#1}}
+\newcommand{\preeditortitle}[1]{\def\hep@pre@editor@title{#1}}
+\newcommand{\posteditortitle}[1]{\def\hep@post@editor@title{#1}}
+\editortitle{Editor}{Editors}
+\editortitlefont{\itshape}
+\preeditortitle{\hep@editor@title@font}
+\posteditortitle{: }
+\preeditor{%
+  \begin{center}%
+    \large\hep@editor@font\lineskip.5em%
+    \begin{tabular}[t]{c}{%
+      \hep@pre@editor@title%
+      \ifnum\value{editors}>1\relax%
+        \hep@editor@title@pl%
+      \else%
+        \hep@editor@title%
+      \fi%
+      \hep@post@editor@title%
+    }%
+}
+\posteditor{\end{tabular}\par\end{center}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\maketitlehookb}
+% Show subtitle and editor.
+%    \begin{macrocode}
+\renewcommand{\maketitlehookb}{%
+  \@ifundefined{hep@sub@title}{}{%
+    \hep@pre@sub@title\hep@sub@title\hep@post@sub@title%
+  }%
+  \smallskip%
+  \ifx\hep@editorlist\AB@empty\else%
+    \hep@pre@editor\hep@editorlist\hep@post@editor%
+  \fi
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsubsection{Authors}
+%
+% \begin{macro}{\author}
+% Allow absent author field.
+%    \begin{macrocode}
+% \author{}
+%    \end{macrocode}
+% \end{macro}
+%
+% Switch authblk to a label ref system for affiliations.
+%    \begin{macrocode}
+\RequirePackage{xpatch}
+\xpatchcmd{\author}{%
+  \protect\Authfont#2\AB@authnote{\AB@note}%
+}{%
+  \protect\Authfont#2%
+  \if\relax#1\relax\else\unskip\protect\hep@multi@ref{\AB@note}\fi%
+}{}{}
+%    \end{macrocode}
+%
+% \begin{macro}{\authorfont}
+% Allow to change the fontface of the individual parts of the title.
+%    \begin{macrocode}
+\let\hep@author@font\relax
+\newcommand{\authorfont}[1]{\def\hep@author@font{#1}}
+\renewcommand\Authfont{\hep@author@font}
+%    \end{macrocode}
+% \end{macro}
+%
+% Set default author fontface.
+%    \begin{macrocode}
+\newcommand{\authortitle}[2]{
+  \def\hep@author@title{#1}
+  \def\hep@author@title@pl{#2}
+}
+\newcommand{\authortitlefont}[1]{\def\hep@author@title@font{#1}}
+\newcommand{\preauthortitle}[1]{\def\hep@pre@author@title{#1}}
+\newcommand{\postauthortitle}[1]{\def\hep@post@author@title{#1}}
+\authortitle{Author}{Authors}
+\authortitlefont{\itshape}
+\preauthortitle{\hep@author@title@font}
+\postauthortitle{: }
+\preauthor{%
+  \begin{center}%
+    \large\hep@author@font\lineskip.5em%
+    \begin{tabular}[t]{c}{%
+      \ifnum\value{editors}>0\relax%
+        \hep@pre@author@title%
+        \ifnum\value{authors}>1\relax%
+          \hep@author@title@pl\else\hep@author@title%
+        \fi\hep@post@author@title%
+      \fi%
+    }%
+}
+\postauthor{\end{tabular}\par\end{center}}
+%    \end{macrocode}
+%
+% \subsubsection{Endorser}
+%
+%    \begin{macrocode}
+\newcounter{endorsers}
+\newcommand\hep@endorserlist{}
+\newcommand\hep@endorsers{}
+%    \end{macrocode}
+%
+% \begin{macro}{\endorser}
+% Copy of the "authblk" author code adjusted for endorsers.
+%    \begin{macrocode}
+\DeclareRobustCommand\endorser{\@ifnextchar[{\hep@@endorser}{\hep@@@endorser}}
+\def\hep@@endorser[#1]#2{\hep@@@@endorser[#1]{#2}}
+\def\hep@@@endorser#1{\hep@@@@endorser{#1}}
+\newcommand\hep@@@@endorser[2][]{%
+  \ifnewaffil%
+    \addtocounter{affil}{1}%
+    \edef\AB@thenote{\arabic{affil}}%
+  \fi%
+  \if\relax#1\relax%
+    \def\AB@note{\AB@thenote}%
+  \else%
+    \def\AB@note{#1}\setcounter{Maxaffil}{0}%
+  \fi%
+  \ifnum\value{endorsers}>1\relax%
+    \@namedef{@sep\number\c@endorsers}{\Authsep}%
+  \fi%
+  \addtocounter{endorsers}{1}%
+  \begingroup%
+    \let\protect\@unexpandable@protect \let\and\AB@pand%
+    \def\thanks{\protect\thanks}\def\footnote{\protect\footnote}%
+    \@temptokena=\expandafter{\hep@endorsers}{%
+      \def\\{%
+        \protect\\[\@affilsep]\protect\Affilfont\protect\AB@resetsep%
+      }%
+      \xdef\hep@endorser{\AB@blk@and#2}%
+      \ifnewaffil%
+        \gdef\AB@las{}\gdef\AB@lasx{\protect\Authand}\gdef\AB@as{}%
+        \xdef\hep@endorsers{\the\@temptokena\AB@blk@and}%
+      \else%
+        \xdef\hep@endorsers{\the\@temptokena\AB@as\AB@au@str}%
+        \global\let\AB@las\AB@lasx\gdef\AB@lasx{\protect\Authands}%
+        \gdef\AB@as{\Authsep}%
+      \fi%
+      \gdef\AB@au@str{#2}%
+    }%
+    \@temptokena=\expandafter{\hep@endorserlist}%
+    \let\\=\endorsercr%
+    \xdef\hep@endorserlist{%
+      \the\@temptokena%
+      \protect\@nameuse{@sep\number\c@endorsers}%
+      \protect\Authfont#2%
+      \if\relax#1\relax\else%
+        \protect\hep@multi@ref{\AB@note}%
+      \fi%
+    }%
+  \endgroup%
+  \ifnum\value{endorsers}>2\relax%
+    \@namedef{@sep\number\c@endorsers}{\Authands}%
+  \fi%
+  \newaffilfalse%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\endorserfont}
+% \begin{macro}{\preendorser}
+% \begin{macro}{\postendorser}
+%    \begin{macrocode}
+\let\hep@endorser@font\relax
+\def\endorserfont#1{\def\hep@endorser@font{#1}}
+\newcommand{\preendorser}[1]{\def\hep@pre@endorser{#1}}
+\newcommand{\postendorser}[1]{\def\hep@post@endorser{#1}}
+\def\endorsertitle#1#2{
+  \def\hep@endorser@title{#1}
+  \def\hep@endorser@title@pl{#2}
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\endorsertitlefont}
+% \begin{macro}{\preendorsertitle}
+% \begin{macro}{\postendorsertitle}
+%    \begin{macrocode}
+\def\endorsertitlefont#1{\def\hep@endorser@title@font{#1}}
+\newcommand{\preendorsertitle}[1]{\def\hep@pre@endorser@title{#1}}
+\newcommand{\postendorsertitle}[1]{\def\hep@post@endorser@title{#1}}
+\endorsertitle{Endorser}{Endorsers}
+\endorsertitlefont{\itshape}
+\preendorsertitle{\hep@endorser@title@font}
+\postendorsertitle{: }
+\preendorser{%
+  \begin{center}%
+    \large\hep@endorser@font\lineskip.5em%
+    \begin{tabular}[t]{c}{%
+      \hep@pre@endorser@title%
+      \ifnum\value{endorsers}>1\relax%
+        \hep@endorser@title@pl%
+      \else%
+        \hep@endorser@title%
+      \fi%
+      \hep@post@endorser@title%
+    }%
+}
+\postendorser{\end{tabular}\par\end{center}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \subsubsection{Affiliation}
+%
+% Patch the "\affiliation" macro to comply with the label ref system.
+%    \begin{macrocode}
+\newcounter{affiliation}
+\renewcommand{\theaffiliation}{%
+  \textsuperscript{\normalfont\alph{affiliation}}%
+}
+\xpatchcmd{\affil}{%
+  \AB@affilnote{\AB@note}%
+}{%
+  \protect\refstepcounter{affiliation}\protect\label{\AB@note}%
+  \if\relax#1\relax\else\protect\ref{\AB@note}\fi%
+}{}{}
+%    \end{macrocode}
+%
+% \begin{macro}{\affiliationfont}
+% Allow to change the fontface of affiliation.
+%    \begin{macrocode}
+\let\hep@affiliation@font\relax
+\newcommand{\affiliationfont}[1]{\def\hep@affiliation@font{#1}}
+% \newif\ifhep@lining\hep@liningtrue
+% \ifhep@lining
+  \renewcommand{\Affilfont}{\small\hep@affiliation@font}
+% \else
+%   \renewcommand{\Affilfont}{\small\ostyle\hep@affiliation@font}
+% \fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\affiliation}
+% Define the "\affiliation" macro, ensure that linebreaks happen after a comma.
+%    \begin{macrocode}
+\newcommand\hep@penalty{\if@twocolumn85\else50\fi}
+\newcommand\hep@active@comma{,\penalty-\hep@penalty\relax}
+\newcommand\hep@cat@comma@active{\catcode`\,\active}
+{\hep@cat@comma@active\gdef,{\hep@active@comma}}
+\newcommand\hep@affil[1]{%
+  \endgroup\@flushglue=0pt plus .5\linewidth\affil{#1}%
+}
+\def\hep@affil@opt[#1]#2{%
+  \endgroup\@flushglue=0pt plus .5\linewidth\affil[#1]{#2}%
+}
+\DeclareRobustCommand\hep@affiliation{%
+  \@ifnextchar[{\hep@affil@opt}{\hep@affil}%
+}
+\newcommand{\affiliation}{%
+  \begingroup\hep@cat@comma@active\hep@affiliation%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% Place endorser and affiliation
+%    \begin{macrocode}
+\renewcommand{\maketitlehookc}{%
+  \ifx\hep@endorserlist\AB@empty\else%
+    \hep@pre@endorser\hep@endorserlist\hep@post@endorser%
+  \fi
+%       \\[\affilsep]
+  \ifx\AB@affillist\AB@empty\else%
+    \begin{center}\AB@affillist\end{center}%
+  \fi%
+}
+%    \end{macrocode}
+%
+% \begin{macro}{\@author}
+% Ensure that affiliation is not set directly below author
+%    \begin{macrocode}
+\def\@author{}
+\renewcommand\@author{%
+  \ifx\AB@affillist\AB@empty%
+    \AB@author%
+  \else%
+    \ifnum\value{affil}>\value{Maxaffil}
+      \def\rlap##1{##1}%
+      \AB@authlist%
+%       \\[\affilsep]\AB@affillist%
+    \else%
+      \AB@authors%
+    \fi%
+  \fi%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Date and Abstract}
+%
+% \subsubsection{Date}
+%
+% \begin{macro}{\date}
+% Allow absent date field.
+%    \begin{macrocode}
+\date{\vspace{-4ex}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\datefont}
+% Allow to change the fontface of the individual parts of the title.
+%    \begin{macrocode}
+\let\hep@date@font\relax
+\newcommand{\datefont}[1]{\def\hep@date@font{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% Set the default "date" fontface.
+%    \begin{macrocode}
+\predate{\begin{center}\hep@date@font}
+\postdate{\par\end{center}}
+%    \end{macrocode}
+%
+% \subsubsection{Abstract}
+%
+% \begin{environment}{abstract}
+% Adjust the "abstract" environment to not start with indentation.
+%    \begin{macrocode}
+\@ifundefined{abstract}{}{%
+  \let\hep@abstract\abstract%
+  \renewcommand\abstract{\hep@abstract\noindent\ignorespaces}%
+%    \end{macrocode}
+% \end{environment}
+% \begin{environment}{abstract*}
+% Add a "abstract*" environment for two column mode taking also care of placing the title using the \software{environ} \cite{environ} and \software{abstract} \cite{abstract} packages.
+%    \begin{macrocode}
+  \if@twocolumn
+    \RequirePackage{environ}
+    \RequirePackage{abstract}
+    \renewcommand{\abstitleskip}{-3ex}
+    \NewEnviron{abstract*}{%
+      \twocolumn[\maketitle\vspace{-5ex}%
+      \begin{onecolabstract}\noindent\BODY\end{onecolabstract}%
+      \vspace{.5cm}]\saythanks%
+    }%
+  \else
+    \newenvironment{abstract*}{%
+      \maketitle\begin{abstract}%
+    }{%
+      \end{abstract}%
+    }
+  \fi
+}
+%    \end{macrocode}
+% \end{environment}
+%
+% \subsection{Thanks}
+%
+% \begin{macro}{\thanks} Redefine thank to have a optional argument for a reference label.
+%    \begin{macrocode}
+\let\hep@thanks\thanks
+\AtEndDocument{\let\thanks\hep@thanks}
+\DeclareRobustCommand\thanks[2][]{%
+  \AfterEndPreamble{%
+    \if\relax#1\relax%
+      \footnotemark%
+    \else%
+      \renewcommand\thefootnote{\textsuperscript{\@fnsymbol\c@footnote}}%
+      \protect\refstepcounter{footnote}\protect\label{#1}%
+      \renewcommand\thefootnote{\@arabic\c@footnote}%
+    \fi%
+    \protected@xdef\@thanks{%
+      \@thanks\protect\footnotetext[\the\c@footnote]{#2}%
+    }
+    \if@twocolumn
+      \protected@xdef\@bs@thanks{%
+        \@bs@thanks\protect\footnotetext[\the\c@footnote]{#2}%
+      }%
+    \fi%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%</package>
+%
+% \section{Test}
+%
+%<*test>
+%     \begin{macrocode}
+\documentclass[twocolumn]{article}
+
+%% \usepackage[lang=english]{hep-paper}
+\usepackage[math]{blindtext}
+\usepackage{hep-title}
+\usepackage[]{hyperref}
+\def\BackrefFootnoteTag{}\usepackage{footnotebackref}
+
+\preprint{Preprint}
+
+\series{Series}
+
+\title{Title}
+
+\subtitle{Subtitle}
+
+\editor[one]{First Editor}
+\editor[one,two,second]{Second Editor}
+\email[second]{second@mail.com}
+\editor[one,two,three]{Third Editor \email{third@mail.com}}
+
+\author[three,four]{First Author}
+\author[fourth, two,four,thanks]{Second Author}
+\email[fourth]{fifth@mail.com}
+\thanks[thanks]{Thanks}
+\author[two,three,four]{Third Author \email{sixth@mail.com}}
+\author{Fourth Author}
+
+\endorser[four]{First Endorser}
+\endorser[five]{Second Endorser}
+\endorser{Third Endorser}
+
+\affiliation[one]{First Affiliation}
+\affiliation[two]{Second Affiliation}
+\affiliation[three]{Third Affiliation}
+\affiliation[four]{Fourth Affiliation}
+\affiliation[five]{Fifth Affiliation}
+
+\date{Date}
+
+\begin{document}
+
+%% \maketitle % for one column mode
+
+\begin{abstract*}
+\blindtext
+\end{abstract*}
+
+First page footnote.\footnote{Footnote}
+
+\blinddocument
+
+\end{document}
+%    \end{macrocode}
+%
+%</test>
+%
+% \Finale
+
+\endinput
+
+% \PrintIndex
+% makeindex -s gglo.ist -o hep-title-implementation.gls hep-title-implementation.glo
+% makeindex -s gglo.ist -o hep-title-implementation.ind hep-title-implementation.idx

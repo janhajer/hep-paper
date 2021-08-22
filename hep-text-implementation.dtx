@@ -1,0 +1,336 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Jan Hajer
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{hep-text}[2021/08/01 v1.8 Publications in High Energy Physics]
+%<documentation>\ProvidesFile{hep-text-documentation.tex}[2021/08/01 v1.8 HEP-Paper documentation]
+%
+%<*documentation>
+
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass{ltxdoc}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+\setcounter{tocdepth}{2}
+
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+\MacroIndent=1.5em
+
+\usepackage[parskip, oldstyle]{hep-paper}
+
+\bibliography{bibliography}
+
+\acronym{PDF}{portable document format}
+\acronym{URL}{uniform resource locator}
+\acronym{CM}{computer modern}
+\acronym{LM}{latin modern}
+
+\usepackage{hologo}
+\usepackage{fonttable}
+
+\newenvironment{columns}[1][.5]{%
+  \par\vspace{-\bigskipamount}%
+  \begin{minipage}[t]{\linewidth}%
+  \begin{minipage}[t]{#1\linewidth}%
+  \newcommand{\column}{%
+    \end{minipage}%
+    \begin{minipage}[t]{\linewidth-#1\linewidth}%
+  }%
+}{\end{minipage}\end{minipage}\par}
+
+\setlength{\fboxsep}{1pt}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+%</documentation>
+
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
+\begin{document}
+\DocInput{hep-text-implementation.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.0}{2019/01/01}{Initial version of the style file.}
+%
+% \ifshort
+%<*documentation>
+% \fi
+%
+\GetFileInfo{hep-text.sty}
+
+\title{The \software{hep-text} package\thanks{This document corresponds to \software{hep-text}~\fileversion.}}
+\author{Jan Hajer \email{jan.hajer@unibas.ch}}
+\date{\filedate}
+
+% \ifshort
+\begin{document}
+% \fi
+
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+
+\maketitle
+
+Hyphenation is provided by the \software{babel} package \cite{babel} and quotation commands are provided by the \software{csquotes} package \cite{csquotes}.
+\DescribeMacro{\enquote}
+\DescribeMacro{\MakeOuterQuote}
+The latter package provides the convenient macros "\enquote"\marg{text} and "\MakeOuterQuote{}" allowing to leave the choice of quotation marks to \hologo{LaTeX} and use \dots instead of the pair \dots and \dots, respectively.
+
+\DescribeMacro{\eg}
+\DescribeMacro{\vs}
+The \software{foreign} package \cite{foreign} defines macros such as "\eg", "\ie", "\cf", and "\vs" which are typeset as \eg, \ie, \cf, and \vs.
+
+\DescribeMacro{\no}
+The "\no"\marg{number} macro is typeset as \no{123}.
+
+\DescribeMacro{\software}
+The "\software"\oarg{version}\marg{name} macro is typeset as \software[\fileversion]{HEP-Paper}.
+
+\DescribeMacro{\online}
+The "\online"\marg{url}\marg{text} macro combines the features of the "\href"\marg{url}\allowbreak\marg{text}\allowbreak \cite{hyperref} and the "\url"\marg{text} \cite{url} macros, resulting in \eg \online{https://ctan.org/pkg/hep-text}{ctan.org/pkg/hep-text}.
+
+
+\DescribeMacro{inlinelist}
+\DescribeMacro{enumdescript}
+The "inlinelist" and "enumdescript" environments are defined using the \software{enumitem} package \cite{enumitem}.
+\begin{columns}
+\begin{verbatim}
+The three main points are
+\begin{inlinelist}
+  \item one
+  \item two
+  \item three
+\end{inlinelist}
+\end{verbatim}
+\column
+The three main points are
+\begin{inlinelist}
+ \item one
+ \item two
+ \item three
+\end{inlinelist}
+\end{columns}
+\vspace{4ex}
+\begin{columns}[.6]
+\begin{verbatim}
+\begin{enumdescript}[label=\Roman*)]
+  \item{First} one
+  \item{Second} two
+  \item{Third} three
+\end{enumdescript}
+\end{verbatim}
+\column
+\begin{enumdescript}[label=\Roman*)]
+ \item{First} one
+ \item{Second} two
+ \item{Third} three
+\end{enumdescript}
+\end{columns}
+
+\DescribeMacro{\textsc}
+A bold versions \textbf{\textsc{Small Caps}} and a sans serif version of \textsf{\textsc{Small Caps}} based on the \CM font \cite{cm} is provided, the latter using the \software{sansmathfonts} package \cite{sansmathfonts}.
+
+\DescribeMacro{\underline}
+\DescribeMacro{\overline}
+The "\underline" macro is redefined to allow line-breaks using the \software{ulem} package \cite{ulem}.
+The "\overline" macro is extended to also \overline{overline} text outside of math environments.
+
+% \ifshort
+\printbibliography
+
+\end{document}
+%
+%</documentation>
+% \fi
+%
+% \StopEventually{
+% \printbibliography
+% \PrintChanges
+% }
+%
+% \clearpage
+% \appendix
+%
+% \section{Implementation}
+%
+%<*package>
+%
+% Load the \software{kvoptions} package \cite{kvoptions} and define a "heptext" namespace.
+%    \begin{macrocode}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=heptext,
+  prefix=heptext@
+}
+%    \end{macrocode}
+%
+% \begin{macro}{lang}
+% Define the "lang" option, which takes the values provided by the \software{babel} package \cite{babel}.
+% Make "british" the default language.
+%    \begin{macrocode}
+\DeclareStringOption[british]{lang}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+%    \end{macrocode}
+%
+% Load the \software{babel} package \cite{babel} for hyphenation and the recommended \software{csquotes} package \cite{csquotes}.
+%    \begin{macrocode}
+\RequirePackage[\hep@lang]{babel}
+\RequirePackage[autostyle]{csquotes}
+%    \end{macrocode}
+%
+% \begin{macro}{\underline}
+% Load the \software{ulem} package \cite{ulem} for hyphenable underlined text.
+%    \begin{macrocode}
+\RequirePackage[normalem]{ulem}
+\let\underline\uline
+%    \end{macrocode}
+% \end{macro}
+%
+%\begin{macro}{\vs}
+% Load the \software{foreign} package \cite{foreign} in order to highlight abbreviations and vocabularies from foreign languages.
+% Add the missing "\vs" command.
+%    \begin{macrocode}
+\ifnum\pdf@strcmp{\heptext@lang}{american}=0
+  \newcommand{\hep@lang@foreign}{USenglish}
+\else
+  \ifnum\pdf@strcmp{\heptext@lang}{USenglish}=0
+    \newcommand{\hep@lang@foreign}{USenglish}
+  \else
+    \newcommand{\hep@lang@foreign}{british}
+  \fi
+\fi
+\RequirePackage[all, \hep@lang@foreign]{foreign}
+\DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
+%    \end{macrocode}
+% \end{macro}
+%
+% The \software{foreign} package relies on the \software{xspace} package \cite{xspace}.
+% Ensure that "\xspace" is compatible with the "\enquote" macro from the \software{csquote} package.
+%    \begin{macrocode}
+\xspaceaddexceptions{\csq@qclose@i}
+%    \end{macrocode}
+%
+%\begin{macro}{\no}
+% Define the macro "\no"\marg{number} for the use of \textnumero\ with appropriate spacing.
+%    \begin{macrocode}
+\newcommand{\no}[1]{\textnumero~#1}
+%    \end{macrocode}
+% \end{macro}
+%
+%\begin{macro}{\software}
+% Define a macro for software with optional version information "\software"\linebreak[1]\oarg{version}\linebreak[1]\marg{name}, using the \software{relsize} package \cite{relsize}.
+%    \begin{macrocode}
+\RequirePackage{relsize}
+\newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
+  {\smaller[.5]\textsc{#2}~#1}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\online}
+% \begin{macro}{\email}
+% Define the "\online"\marg{text}\marg{url} macro combining the features of the "\href" and the "\url" macros.
+% Define a macro for typesetting emails.
+%    \begin{macrocode}
+\providecommand{\online}[2]{\texttt{#2}}%
+\providecommand{\hep@email}[1]{\online{mailto:#1}{#1}}
+\providecommand\email{\hep@email}
+\AtBeginDocument{\@ifpackageloaded{hyperref}{%
+    \renewcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
+  }{}
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\prefix}
+% Define the "\prefix"\marg{prefix}\marg{word} macro ensuring the correct linebreak in \prefix{prefix}{word}.
+%    \begin{macrocode}
+\newcommand{\prefix}[2]{(#1\mbox{-)}\allowbreak #2}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Lists}
+%
+% Load the \software{enumitem} package \cite{enumitem}.
+%    \begin{macrocode}
+\RequirePackage[inline]{enumitem}
+%    \end{macrocode}
+%
+% \begin{environment}{inlinelist}
+% Define an inline list environment.
+%    \begin{macrocode}
+\newlist{inlinelist}{enumerate*}{1}
+\setlist*[inlinelist,1]{%
+  label=\roman*), itemjoin={,\ }, itemjoin*={, and\ }, after=.%
+}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{environment}{enumdescript}
+% Define an enumdescript list environment.
+%    \begin{macrocode}
+\newlist{enum@descript}{enumerate}{2}
+\setlist[enum@descript]{label=\arabic*.}
+\newenvironment{enumdescript}[1][]{
+\begin{enum@descript}[#1]
+  \let\hep@item\item
+  \renewcommand{\item}[2][]{
+    \ifx&##1&\hep@item\else\hep@item[##1]\fi
+    \textbf{##2}\ifx##2\empty\else~\fi\@ifnextchar\par\@gobble\relax
+  }
+}{\end{enum@descript}}
+%    \end{macrocode}
+% \end{environment}
+%
+%</package>
+%
+% \Finale
+
+\endinput
+
+% \PrintIndex
+% makeindex -s gglo.ist -o hep-text-implementation.gls hep-text-implementation.glo
+% makeindex -s gglo.ist -o hep-text-implementation.ind hep-text-implementation.idx

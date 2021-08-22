@@ -1,0 +1,326 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Jan Hajer
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{hep-floats}[2021/08/01 v1.0 Float adjustments ]
+%<documentation>\ProvidesFile{hep-floats-documentation.tex}[2021/08/01 v1.0 hep-float documentation]
+%
+%<*documentation>
+
+\RequirePackage[l2tabu, orthodox]{nag}
+
+\documentclass{ltxdoc}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+\usepackage[parskip, oldstyle]{hep-paper}
+
+\bibliography{bibliography}
+
+\usepackage{hologo}
+
+\MacroIndent=1.5em
+\setlength{\fboxsep}{1pt}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+%</documentation>
+
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
+\begin{document}
+\DocInput{hep-floats-implementation.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.0}{2021/09/01}{Initial version of the style file.}
+%
+% \ifshort
+%<*documentation>
+% \fi
+%
+\GetFileInfo{hep-floats.sty}
+
+\title{The \software{hep-floats} package\thanks{This document corresponds to \software{hep-floats}~\fileversion.}}
+\author{Jan Hajer \email{jan.hajer@unibas.ch}}
+\date{\filedate}
+
+% \ifshort
+\begin{document}
+% \fi
+
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+
+\maketitle
+
+\DescribeEnv{figure}
+\DescribeEnv{table}
+Automatic float placement is adjusted to place a single float at the top of pages and to reduce the number of float pages, using the \hologo{LaTeX} macros.
+
+"\setcounter{bottomnumber}{0}" \hfill no floats at the bottom of a page (default 1) \\
+"\setcounter{topnumber}{1}" \hfill a single float at the top of a page (default 2) \\
+"\setcounter{dbltopnumber}{1}" \hfill same for full widths floats in two-column mode \\
+"\renewcommand{\textfraction}{.1}" \hfill large floats are allowed (default 0.2)\\
+"\renewcommand{\topfraction}{.9}" \hfill (default 0.7) \\
+"\renewcommand{\dbltopfraction}{.9}" \hfill (default 0.7) \\
+"\renewcommand{\floatpagefraction}{.8}" \hfill float pages must be full (default 0.5)
+
+Additionally, manual float placement is deactivated but can be reactivated using the "manualplacement" package option.
+It is however recommended to archive the desired design by adjusting above macros.
+The most useful float placement is usually archived by placing the float \emph{in front} of the paragraph it is referenced in first.
+\DescribeMacro{\raggedright}
+The float environments have been adjusted to center their content.
+The usual behaviour can be reactivated using "\raggedright".
+
+\begin{table}
+\begin{panels}{2}
+\begin{verbatim}
+\begin{panels}{2}
+  code
+\panel
+  \begin{tabular}...\end{tabular}
+\end{panels}
+\end{verbatim}
+\caption{Code for this panel environment.}
+\label{tab:panels}
+\panel
+\begin{tabular}{cccc}
+\toprule
+\multicolumn{2}{c}{one}& \multicolumn{2}{c}{two} \\ \cmidrule(r){1-2} \cmidrule(l){3-4}
+\multirow{2}{*}{a} & b & c & d \\
+ & b & c & d \\
+\bottomrule
+\end{tabular}
+\caption{The \protecting{"booktabs"} and \protecting{"multirow"} features.}
+\label{tab:booktabs}
+\end{panels}
+\caption{Example use of the \protecting{"panels"} environment in Panel \subref{tab:panels} and the features from the \software{booktabs} and \software{multirow} packages in Panel \subref{tab:booktabs}.
+} \label{tab:table}
+\end{table}
+
+\DescribeEnv{panels}
+\DescribeMacro{\panel}
+The "panels" environment makes use of the \software{subcaption} package \cite{subcaption}.
+It provides sub-floats and takes as mandatory argument either the number of sub-floats (default~2) or the width of the first sub-float as fraction of the "\linewidth".
+Within the "\begin{panels}"\oarg{vertical alignment}\marg{width} environment the "\panel" macro initiates a new sub-float.
+In the case that the width of the first sub-float has been given as an optional argument to the "panels" environment the "\panel"\marg{width} macro takes the width of the next sub-float as mandatory argument.
+The example code is presented in \cref{tab:panels}.
+
+\DescribeEnv{tabular}
+The \software{booktabs} \cite{booktabs} and \software{multirow} \cite{multirow} packages are loaded enabling publication quality tabulars such as in \cref{tab:booktabs}.
+
+\DescribeMacro{\graphic}
+\DescribeMacro{\graphics}
+The \software{graphicx} package \cite{graphicx} is loaded and the "\graphic"\oarg{width}\marg{figure} macro is defined, which is a wrapper for the "\includegraphics"\marg{figure} macro and takes the figure width as fraction of the "\linewidth" as optional argument (default~1).
+If the graphics are located in a sub-folder its path can be indicated by "\graphics"\marg{subfolder}.
+
+% \ifshort
+\printbibliography
+
+\end{document}
+%
+%</documentation>
+% \fi
+%
+% \StopEventually{
+% \printbibliography
+% \PrintChanges
+% }
+%
+% \appendix
+% \section{Implementation}
+%
+%<*package>
+%
+% Load the \software{kvoptions} package \cite{kvoptions} and define a "hepfloat" namespace.
+%    \begin{macrocode}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=hepfloat,
+  prefix=hepfloat@
+}
+%    \end{macrocode}
+%
+% \begin{macro}{manualplacement}
+% Provide the "manualplacement" option for reactivating the manual placement of floats.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{manualplacement}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+%    \end{macrocode}
+%
+% Adjust the \hologo{LaTeX} float placement defaults
+%    \begin{macrocode}
+\setcounter{bottomnumber}{0} % 1
+\setcounter{topnumber}{1} % 2
+\setcounter{dbltopnumber}{1} % 2
+\renewcommand{\topfraction}{.9} % .7
+\renewcommand{\dbltopfraction}{.9} % .7
+\renewcommand{\textfraction}{.1} % .2
+\renewcommand{\floatpagefraction}{.8} % .5
+%    \end{macrocode}
+%
+% \begin{environment}{figure}
+% \begin{environment}{table}
+% Center the content of "figure" and "table" environments.
+% Ignore the manual placement if the "manualplacement" option is set to false.
+%    \begin{macrocode}
+\let\hep@figure\figure%
+\let\end@hep@figure\endfigure%
+\let\hep@table\table%
+\let\end@hep@table\endtable%
+\ifhepfloat@manualplacement%
+  \renewenvironment{figure}[1][tbp]{%
+    \hep@figure[#1]\centering%
+    }{\end@hep@figure}%
+  \renewenvironment{table}[1][tbp]{%
+    \hep@table[#1]\centering%
+  }{\end@hep@table}%
+\else%
+  \renewenvironment{figure}[1][]{%
+    \hep@figure\centering%
+  }{\end@hep@figure}%
+  \renewenvironment{table}[1][]{%
+    \hep@table\centering%
+  }{\end@hep@table}
+\fi%
+%    \end{macrocode}
+% \end{environment}
+% \end{environment}
+%
+%
+% \subsection{Sub-floats}
+%
+% \begin{macro}{\subfigure}
+% \begin{macro}{\subtable}
+% Load the \software{subcaption} package \cite{subcaption}.
+% Provide the old "\subcaption@minipage" macro.
+%    \begin{macrocode}
+\RequirePackage[subrefformat=parens]{subcaption}
+\captionsetup{font=small}
+\captionsetup[sub]{font=small}
+\providecommand*\subcaption@minipage[2]{%
+  \minipage#1{#2}\setcaptionsubtype\relax%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \begin{environment}{panels}
+% \begin{macro}{\panel}
+% Define the "panels" environment and the "\panel" macro.
+%    \begin{macrocode}
+\newcommand{\hep@panels@space}{20}
+\newenvironment{panels}[2][b]{%
+%    \end{macrocode}
+% Define an internal macro for global behaviour.
+%    \begin{macrocode}
+  \newcommand{\begin@subcaption@minipage}[2][b]{%
+    \caption@withoptargs\subcaption@minipage[##1]{##2}%
+    \centering\vskip 0pt%
+  }
+%    \end{macrocode}
+% Define the "\panel" macro for the case that the number of panels is given.
+%    \begin{macrocode}
+  \ifdim#2pt>1pt%
+    \newcommand{\hep@panel@space}{%
+      (1-#2+\hep@panels@space)/\hep@panels@space%
+    }%
+    \newcommand{\panel}[1][b]{%
+      \endminipage\hfill\begin@subcaption@minipage[#1]{%
+        \linewidth/#2*\hep@panel@space%
+      }%
+    }%
+    \begin@subcaption@minipage[#1]{\linewidth/#2*\hep@panel@space}%
+%    \end{macrocode}
+% Define the "\panel" macro for the case that the width of the panel is given.
+%    \begin{macrocode}
+  \else%
+    \newcommand{\panel}[2][b]{%
+      \endminipage\hfill\begin@subcaption@minipage[#1]{##2\linewidth}%
+    }%
+    \begin@subcaption@minipage[#1]{#2\linewidth}%
+  \fi%
+}{\endminipage}
+%    \end{macrocode}
+% \end{macro}
+% \end{environment}
+%
+% \subsection{Tables}
+%
+% \begin{environment}{tabular}
+% Enhance tabulars with the \software{booktabs} and \software{multirow} packages \cite{booktabs, multirow}.
+%    \begin{macrocode}
+\RequirePackage{booktabs}
+\RequirePackage{multirow}
+%    \end{macrocode}
+% \end{environment}
+
+% \subsection{Figures}
+%
+% \begin{macro}{\graphic}
+% Provide the "\graphic" macro for the inclusion of figures using the \software{graphicx} package \cite{graphicx}.
+%    \begin{macrocode}
+\RequirePackage{graphicx}
+\providecommand{\tikzsetnextfilename}[1]{}
+\newcommand{\graphic}[2][1]{\tikzsetnextfilename{#2}{%
+  \centering\includegraphics[width=#1\linewidth]{#2}\par%
+}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\graphics}
+% Provide the "\graphics" macro for the inclusion of figures located in a subfolder.
+%    \begin{macrocode}
+\newcommand{\graphics}[1]{\graphicspath{{./#1/}}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \Finale
+
+\endinput
+
+% \PrintIndex
+% makeindex -s gglo.ist -o hep-floats-implementation.gls hep-floats-implementation.glo
+% makeindex -s gglo.ist -o hep-floats-implementation.ind hep-floats-implementation.idx

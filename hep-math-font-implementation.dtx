@@ -1,0 +1,846 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Jan Hajer
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{hep-math-font}[2021/09/01 v1.0 selection of math fonts for latin modern]
+%<documentation>\ProvidesFile{hep-math-font-documentation.tex}[2021/09/01 v1.0 hep-math-Font documentation]
+%
+%<*documentation>
+
+\RequirePackage[l2tabu, orthodox]{nag}
+
+\documentclass{ltxdoc}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+
+\usepackage[parskip, oldstyle]{hep-paper}
+
+\bibliography{bibliography}
+
+\acronym{CM}{computer modern}
+\acronym{LM}{latin modern}
+
+\usepackage{hologo}
+\usepackage{fonttable}
+
+\MacroIndent=1.5em
+\setlength{\fboxsep}{1pt}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+%</documentation>
+
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
+\begin{document}
+\DocInput{hep-math-font-implementation.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.0}{2021/09/01}{Initial version of the style file.}
+%
+% \ifshort
+%<*documentation>
+% \fi
+%
+\GetFileInfo{hep-math-font.sty}
+
+\title{The \software{hep-math-font} package\thanks{This document corresponds to \software{hep-math-font}~\fileversion.}}
+\author{Jan Hajer \email{jan.hajer@unibas.ch}}
+\date{\filedate}
+
+% \ifshort
+\begin{document}
+% \fi
+
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+
+\maketitle
+
+\begin{abstract}
+The \software{hep-math-font} package adjust the math fonts to be sans serif if the document is sans serif.
+Additionally Greek letters are redefined to be always italic and upright in math and text mode respectively.
+Some math font macros are adjusted to give more consistently the naively expected results.
+\end{abstract}
+
+The package is loaded using "\usepackage{hep-math-font}".
+
+\DescribeMacro{symbols}
+The "symbols" options defines how many symbol fonts are being loaded and defaults to "true".
+With "false" no additional symbol fonts are being loaded.
+With "ams" only the usual \hologo{AmSLaTeX} symbols \software{amssymb} \cite{amsfonts} and fonts \software{amsfonts} \cite{amsfonts} are loaded.
+With "minion" the "Minion" symbol fonts from the \software{MnSymbol} package \cite{MnSymbol} are loaded instead.
+
+If the document "\familydefault" font is switched to the sansserif "\sfdefault" font the math font is adjusted accordingly using fonts compatible to \LM and \CM.
+
+Using the \software{fixmath} \cite{fixmath} and \software{textalpha} \cite{textalpha} packages Greek letter are adjusted so that they are always italic and upright in math and text mode, respectively.
+Greek letters can be written by using their unicode characters.
+
+\section{Macros}
+
+\DescribeMacro{\text}
+\DescribeMacro{\mathrm}
+The "\mathrm"\marg{math}  macro and the "\text"\marg{text} macro from \software{amstext} \cite{amstext} are adjusted to produce upright Greek letters, \ie ($ \text A  \text b  \text \Gamma \text \delta \text{\textbf A} \text{\textbf b} \text{\textbf \Gamma} \text{\textbf \delta}$), by adjusting the code from the \software{alphabeta} \cite{alphabeta} package.
+
+\DescribeMacro{\mathbf}
+Bold math, via "\mathbf" is improved with the \software{bm} package \cite{bm}, \ie ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
+Macros switching to "bfseries" such as "\section"\marg{text} are ensured to also typeset math in bold.
+
+\DescribeMacro{\mathsf}
+The math sans serif alphabet is redefined to be italic sans serif if the main text is serif and italic serif if the main text is sans serif, \ie ($\mathsf A \mathsf b \mathsf \Gamma \mathsf \delta \mathbf{\mathsf A} \mathbf{\mathsf b} \mathbf{\mathsf \Gamma} \mathbf{\mathsf \delta}$).
+Ensuring that the distinction between these fonts is also kept if the \prefix{sans}{serif} option of the document is switched.
+
+\DescribeMacro{\mathscr}
+The "\mathcal" font \ie ($\mathcal{ABCD}$) is accompanied by the "\mathscr" font \ie ($\mathscr{ABCD}$).
+
+\DescribeMacro{\mathbb}
+The "\mathbb" font is improved by the \software{doublestroke} package \cite{dsfont} and adjusted depending on the \prefix{sans}{serif} option of the document \ie ($\mathbb{Ah1}$).
+
+\DescribeMacro{\mathtt}
+The "\mathtt" macro switches to \LM typewriter font \ie ($\mathtt A \mathtt b \mathtt \Gamma \mathbf{\mathtt A} \mathbf{\mathtt b} \mathbf{\mathtt \Gamma}$).
+
+\DescribeMacro{\mathfrak}
+Finally, the "\mathfrak" font is also available \ie ($\mathfrak{AaBb12}$).
+
+Details about the font handling in \hologo{TeX} can be found in \ccite{fntguide}.
+\hologo{pdfLaTeX} allows only 16 math fonts.
+The font allocation of this package is explained in \cref{sec:allocation}.
+
+\section{Math alphabet allocation} \label{sec:allocation}
+
+\bgroup
+\makeatletter
+\renewcommand{\arraystretch}{0}
+\setlength{\tabcolsep}{0pt}
+\nodecimals
+\nohexoct
+\fntcolwidth=0pt
+\setlength\arrayrulewidth{0pt}
+
+\begin{figure}
+\begin{panels}[t]{.22}
+\fonttable{rm-\ifhepmathfont@serif lmr\else lmss\fi10}
+\caption{Text}
+\panel{.22}
+\fontrange{0}{127}
+\fonttable{\ifhepmathfont@serif lm\else cmss\fi mi10}
+\caption{Math}\vspace{2ex}
+\fonttable{\ifhepmathfont@serif lm\else cmss\fi sy10}
+\caption{Symbol}
+\panel{.352}
+\fontrange{0}{127}
+\fonttable{\ifhepmathfont@serif\else ss\fi msam10}
+\caption{AMS a}\vspace{2ex}
+\fonttable{\ifhepmathfont@serif\else ss\fi msbm10}
+\caption{AMS b}
+\panel{.19}
+\fontrange{0}{127}
+\fonttable{eufm10}
+\caption{Euler fraktur}\vspace{2ex}
+\fontrange{64}{95}
+\fonttable{eusm10}
+\caption{Euler caligraphy}\vspace{2ex}
+\fonttable{MnSymbolS10}
+\caption{Minion caligraphy}\vspace{2ex}
+\fonttable{ds\ifhepmathfont@serif rom\else ss\fi10}
+\caption{Doublestroke}
+\end{panels}
+\caption{Basic math fonts}
+\end{figure}
+
+\begin{figure}
+\hspace*{-2cm}%
+\begin{panels}[t]{.3}
+\fontrange{0}{127}
+\fonttable{cm\ifhepmathfont@serif\else ss\fi ex10}
+\caption{Computer modern}
+\panel{.22}
+\fontrange{0}{143}
+\fonttable{MnSymbolE5}
+\caption{Mn Symbol E 1}
+\panel{.6}
+\fontrange{144}{215}
+\fonttable{MnSymbolE5}
+\caption{Mn Symbol E 2}\vspace{2ex}
+\begin{minipage}{.48\linewidth}
+\fontrange{0}{127}\fonttable{MnSymbolF10}
+\caption{Mn Symbols F}
+\end{minipage}%
+\begin{minipage}{.5\linewidth}
+\fontrange{0}{47}\fonttable{\ifhepmathfont@serif\else ss\fi esint10}
+\caption{Extended set of integrals}
+\end{minipage}
+\end{panels}
+\caption{Math extension fonts}
+\end{figure}
+
+\begin{figure}
+\begin{panels}[t]{.26}
+\fonttable{MnSymbolA10}
+\caption{Mn Symbol A}
+\panel{.26}
+\fonttable{MnSymbolB10}
+\caption{Mn Symbol B}
+\panel{.26}
+\fonttable{MnSymbolC10}
+\caption{Mn Symbol C}
+\panel{.2}
+\fonttable{MnSymbolD10}
+\caption{Mn Symbol D}
+\end{panels}
+\makeatother
+\caption{Minion symbol fonts}
+\end{figure}
+\egroup
+
+Of the 16 available math alphabets, \hologo{TeX} loads four by default
+\begin{enumdescript}[start=0,label=\arabic*)]
+\item{OT1} \label{it:math text} Text (latin, upper case greek, numerals, text symbols)
+\item{OML} \label{it:math italic} Math Italic (latin, greek, numerals, text symbols)
+\item{OMS} \label{it:math symbol} Symbol ("\mathcal", operators)
+\item{OMX} \label{it:math extension} Math Extension (big operators, delimiters)
+\end{enumdescript}
+The text font \ref{it:math text}\strut\ of \CM is \textbf{cmr10} "\OT1/cmr/m/n/10", which is replaced by \LM to be \textbf{rm-lmr10} "\OT1/lmr/m/n/10", the "sansserif" option uses \textbf{rm-lmss10} "\OT1/lmss/m/n/10".
+The italic math font \ref{it:math italic} of \CM is \textbf{cmmi10} "\OML/cmm/m/it/"\allowbreak"10", and is replaced by \LM to be \textbf{lmmi10} "\OML/lmm/m/it/10", the "sansserif" options uses \textbf{cmssmi10} "\OML/cmssrm/m/it/10" from the \software{sansmathfonts} package \cite{sansmathfonts}.
+The symbol font \ref{it:math symbol}\strut\ of \CM is \textbf{cmsy10} "\OMS/cmsy/m/n/10", and is replaced by \LM to be \textbf{lmsy10} "\OMS/lmsy/m/n/10", the "sansserif" options uses \textbf{cmsssy10} "\OMS/cmsssy/m/n/10" from the \software{sansmathfonts} package \cite{sansmathfonts}.
+The extension font \ref{it:math extension}\strut\ of \CM is \textbf{cmex10} "\OMX/cmex/m/n/5", and is replaced by the \software{exscale} package \cite{exscale} to be \textbf{cmex10} "\OMX/cmex/m/n/10", the "sansserif" option loads \textbf{cmssex10} "\OMX/cmssex/m/n/10".
+The \software{amssymb} (\software{amsfonts}) packages \cite{amssymb} load two more symbol fonts
+\begin{enumdescript}[start=4,label=\arabic*)]
+\item{msam10} \label{it:math ams a} "\U/msa/m/n/10" AMS symbol font A (special math operators)
+\item{msbm10} \label{it:math ams b} "\U/msb/m/n/10" AMS symbol font B ("\mathbb", negated operators)
+\end{enumdescript}
+The "sansserif" option replaces them with \textbf{ssmsam10} "\U/ssmsa/m/n/10" and \textbf{ssmsbm10} "\U/ssmsb/m/n/10" from the \software{sansmathfonts} package \cite{sansmathfonts}, respectively.
+The \software{bm} package \cite{bm} loads the bold version for the fonts \labelcref{it:math text,it:math italic,it:math symbol}.
+
+Other math alphabets are only loaded on demand, \eg "\mathsf" uses a sans serif font and "\mathbf" without the \software{bm} package uses a bold font.
+The "\mathscr" macro uses the script font from the \software{mathrsfs} package \cite{mathrsfs}
+\begin{enumdescript}[start=9,label=\arabic*)]
+\item{rsfs10} "\U/rsfs/m/n/10" Math script font (capital letters)
+\end{enumdescript}
+The "\mathbb" macro loads the double stroke font from the \software{dsfont} package \cite{dsfont}, this can be prevented with the "symbols=ams" option.
+\begin{enumdescript}[start=10,label=\arabic*)]
+\item{dsrom10} "\U/dsrom/m/n/10" Double stroke font
+\end{enumdescript}
+The "\mathfrak" macro loads the fractur font from the \software{amssymb} package \cite{amssymb}
+\begin{enumdescript}[start=11,label=\arabic*)]
+\item{eufm10} "\U/euf/m/n/10" Math fraktur (Basic Latin)
+\end{enumdescript}
+
+The \software{hep-math-font} package uses nine of the available 16 math alphabets.
+This number can be reduced by three using "\newcommand{\bmmax}{0}" from the \software{bm} package \cite{bm} and brought down to the default of four with the option "symbols=false".
+
+The "symbols=minion" options replaces the fonts \labelcref{it:math symbol,it:math extension,it:math ams a,it:math ams b} with corresponding fonts from the \software{MnSymbol} package \cite{MnSymbol}.
+Additionally, two more symbol alphabets are allocated, the \software{bm} package \cite{bm} loads one more font and now "\mathcal" triggers the use of one additional alphabet.
+Hence, the minion option uses three to four more math alphabets than a usual setup.
+
+% \ifshort
+\printbibliography
+
+\end{document}
+%
+%</documentation>
+% \fi
+%
+% \StopEventually{
+% \printbibliography
+% \PrintChanges
+% }
+%
+% \appendix
+%
+% \section{Implementation}
+%
+%<*package>
+%
+% Use the \software{kvoptions} package \cite{kvoptions}.
+%    \begin{macrocode}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=hepmathfont,
+  prefix=hepmathfont@
+}
+%    \end{macrocode}
+%
+% \begin{macro}{symbols}
+% Provide the "symbols" option allowing to switch the symbol font.
+%    \begin{macrocode}
+\DeclareStringOption[true]{symbols}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+%    \end{macrocode}
+%
+% \begin{macro}{\ifxetexorluatex}
+% Load the \software{ifluatex} \cite{ifluatex} and \software{ifxetex} \cite{ifxetex} packages.
+% Define the "\ifxetexorluatex" conditional checking if the package is executed by \hologo{LuaLaTeX} or \hologo{XeLaTeX}.
+%    \begin{macrocode}
+\RequirePackage{ifluatex}
+\RequirePackage{ifxetex}
+\newif\ifxetexorluatex
+\ifxetex\xetexorluatextrue
+\else\ifluatex\xetexorluatextrue
+  \else\xetexorluatexfalse\fi
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% Define conditionals based on the "symbols" package option.
+%    \begin{macrocode}
+\RequirePackage{pdftexcmds}
+\newif\ifhepmathfont@symbols
+\ifnum\pdf@strcmp{\hepmathfont@symbols}{false}=0\else\hepmathfont@symbolstrue\fi
+\newif\ifhep@ams
+\ifnum\pdf@strcmp{\hepmathfont@symbols}{ams}=0 \hep@amstrue\fi
+\newif\ifhep@minion
+\ifnum\pdf@strcmp{\hepmathfont@symbols}{minion}=0 \hep@miniontrue\fi
+%    \end{macrocode}
+%
+% \subsection{Sans serif}
+%
+% Check if document is set to sans serif.
+%    \begin{macrocode}
+\newif\ifhepmathfont@serif
+\RequirePackage{xstring}
+\IfStrEq{\familydefault}{\sfdefault}{%
+  \hepmathfont@seriffalse}{\hepmathfont@seriftrue%
+}
+%    \end{macrocode}
+% If the "sansserif" package option is active use code adjusted from the \software{sansmathfonts} package \cite{sansmathfonts}.
+% Ensure that "\mathsf" is italic as well as sans serif and sans for sans and sans serif documents, respectively.
+%    \begin{macrocode}
+\ifhepmathfont@serif
+%    \end{macrocode}
+% \begin{macro}{\mathsf}
+% Declare "\mathsf" for serif documents.
+%    \begin{macrocode}
+  \newcommand\hep@font@sf{cmssm}
+  \DeclareMathAlphabet{\mathsf}{OML}{\hep@font@sf}{m}{it}
+  \SetMathAlphabet{\mathsf}{bold}{OML}{\hep@font@sf}{b}{it}
+%    \end{macrocode}
+% \end{macro}
+% Define fonts for sans serif documents.
+%    \begin{macrocode}
+\else
+  \newcommand\hep@font@sf{lmr}
+  \newcommand\hep@font@text{lmss}
+  \newcommand\hep@font@math{cmssm}
+  \newcommand\hep@font@symbol{cmsssy}
+  \newcommand\hep@font@extra{cmssex}
+%    \end{macrocode}
+% Declare font substitutions.
+%    \begin{macrocode}
+  \DeclareFontSubstitution{OML}{\hep@font@math}{m}{it}
+  \ifhepmathfont@symbols\ifhep@minion\else
+    \DeclareFontSubstitution{OMS}{\hep@font@symbol}{m}{n}
+    \DeclareFontSubstitution{OMX}{\hep@font@extra}{m}{n}
+  \fi\fi
+%    \end{macrocode}
+% Declare the symbol fonts.
+%    \begin{macrocode}
+  \DeclareSymbolFont{operators}{OT1}{\hep@font@text}{m}{n}
+  \DeclareSymbolFont{letters}{OML}{\hep@font@math}{m}{it}
+  \ifhepmathfont@symbols\ifhep@minion\else
+    \DeclareSymbolFont{symbols}{OMS}{\hep@font@symbol}{m}{n}
+    \DeclareSymbolFont{largesymbols}{OMX}{\hep@font@extra}{m}{n}
+  \fi\fi
+%    \end{macrocode}
+% Set bold symbol fonts.
+%    \begin{macrocode}
+  \SetSymbolFont{operators}{bold}{OT1}{\hep@font@text}{b}{n}
+  \SetSymbolFont{letters}{bold}{OML}{\hep@font@math}{b}{it}
+  \ifhepmathfont@symbols\ifhep@minion\else
+    \SetSymbolFont{symbols}{bold}{OMS}{\hep@font@symbol}{b}{n}
+  \fi\fi
+%    \end{macrocode}
+% Adjust the fonts loaded by the \software{amsfonts} \cite{amsfonts} and \software{esint} \cite{esint} packages.
+%    \begin{macrocode}
+  \ifhepmathfont@symbols\ifhep@minion\else
+    \DeclareSymbolFont{AMSa}{U}{ssmsa}{m}{n}
+    \DeclareSymbolFont{AMSb}{U}{ssmsb}{m}{n}
+  \fi\fi
+  \AtBeginDocument{%
+    \@ifpackageloaded{esint}{%
+      \DeclareSymbolFont{largesymbolsA}{U}{ssesint}{m}{n}
+    }{}
+  }
+%    \end{macrocode}
+% \begin{macro}{\mathrm}
+% \begin{macro}{\mathnormal}
+% \begin{macro}{\mathcal}
+% Declare the symbol font alphabets.
+%    \begin{macrocode}
+  \DeclareSymbolFontAlphabet{\mathrm}{operators}
+  \DeclareSymbolFontAlphabet{\mathnormal}{letters}
+  \ifhep@minion\else
+    \DeclareSymbolFontAlphabet{\mathcal}{symbols}
+  \fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\mathit}
+% Declare "\mathit".
+%    \begin{macrocode}
+  \DeclareMathAlphabet{\mathit}{OML}{\hep@font@text}{m}{it}
+  \SetMathAlphabet\mathit{bold}{OML}{\hep@font@text}{bx}{it}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\mathsf}
+% Declare "\mathsf" for sans serif documents to produce serif.
+%    \begin{macrocode}
+  \DeclareMathAlphabet{\mathsf}{OML}{\hep@font@sf}{m}{it}
+  \SetMathAlphabet{\mathsf}{bold}{OML}{\hep@font@sf}{bx}{it}
+%    \end{macrocode}
+% \end{macro}
+% End of "sansserif".
+%    \begin{macrocode}
+\fi
+%    \end{macrocode}
+%
+% \subsection{Greek letters}
+%
+% Load the \software{fixmath} \cite{fixmath} and \software{textalpha} \cite{textalpha} packages ensuring that upper Greek letters in math mode are italic and providing upright Greek letters in text mode, respectively.
+% Define tge "hep@greek" macro ensuring that both "\text" and "\mathrm" produce upright Greek letters.
+%    \begin{macrocode}
+\ifhepmathfont@symbols
+  \RequirePackage{amssymb}
+  \RequirePackage{amstext}
+  \RequirePackage{fixmath}
+  \RequirePackage{textalpha}
+  \def\hep@Greek#1#2#3{
+    \def#1{\TextOrMath{#3}{\ifnum\fam=0 \text{#3}\else#2\fi}}%
+  }
+  \def\hep@greek#1#2#3{\let#2=#1\hep@Greek#1#2#3}
+%    \end{macrocode}
+% The following code follows closely the \software{alphabeta} package \cite{alphabeta}.
+%
+% \subsection{Commands to access Greek letters by name}
+%
+% For letters defined in math mode, the commands work in both, text and math.
+% Some Greek letters look identical to Latin letters and can therefore not be used as variable symbols in math formulas.
+% These letters are not defined in TeX's math mode, we provide an alias to the corrsponding "\text..."  command.
+%
+% Mathematical notation distinguishes `variant shape symbols` for pi, phi, rho, theta (small and capital), beta, and kappa (characters for the latter three symbols are not included in TeX’s math fonts).
+% These variations have no syntactic meaning in Greek text and are not given code-points in the LGR encoding while Unicode defines separate code points for the symbol variants.
+%
+% \subsection{Greek Alphabet}
+%
+% Macros keep their meaning in mathematical mode (\ie use the same shape as without this package) and refer to "greek letter ..." in text.
+% For "\epsilon" and "\phi", this means that the selected symbol variant differs in text \vs math mode.
+% Use "\varepsilon" and "\varphi" (see section `variant shape symbols` below) to select the "greek letter ..." in both, text and math mode.
+%    \begin{macrocode}
+  \providecommand*{\Alpha}{\textAlpha}
+  \providecommand*{\Beta}{\textBeta}
+  \hep@greek\Gamma\mathGamma\textGamma
+  \hep@greek\Delta\mathDelta\textDelta
+  \providecommand*{\Epsilon}{\textEpsilon}
+  \providecommand*{\Zeta}{\textZeta}
+  \providecommand*{\Eta}{\textEta}
+  \hep@greek\Theta\mathTheta\textTheta
+  \providecommand*{\Iota}{\textIota}
+  \providecommand*{\Kappa}{\textKappa}
+  \hep@greek\Lambda\mathLambda\textLambda
+  \providecommand*{\Mu}{\textMu}
+  \providecommand*{\Nu}{\textNu}
+  \hep@greek\Xi\mathXi\textXi
+  \providecommand*{\Omicron}{\textOmicron}
+  \hep@greek\Pi\mathPi\textPi
+  \providecommand*{\Rho}{\textRho}
+  \hep@greek\Sigma\mathSigma\textSigma
+  \providecommand*{\Tau}{\textTau}
+  \hep@greek\Upsilon\mathUpsilon\textUpsilon
+  \hep@greek\Phi\mathPhi\textPhi
+  \providecommand*{\Chi}{\textChi}
+  \hep@greek\Psi\mathPsi\textPsi
+  \hep@greek\Omega\mathOmega\textOmega
+%    \end{macrocode}
+% Apply to minuscule Greek letters.
+%    \begin{macrocode}
+  \hep@greek\alpha\mathalpha\textalpha
+  \hep@greek\beta\mathbeta\textbeta
+  \hep@greek\gamma\mathgamma\textgamma
+  \hep@greek\delta\mathdelta\textdelta
+  \hep@greek\epsilon\mathepsilon\textepsilon
+  \hep@greek\zeta\mathzeta\textzeta
+  \hep@greek\eta\matheta\texteta
+  \hep@greek\theta\maththeta\texttheta
+  \hep@greek\iota\mathiota\textiota
+  \hep@greek\kappa\mathkappa\textkappa
+  \hep@greek\lambda\mathlambda\textlambda
+  \hep@greek\mu\mathmu\textmu
+  \hep@greek\nu\mathnu\textnu
+  \hep@greek\xi\mathxi\textxi
+  \providecommand*{\omicron}{\textomicron}
+  \hep@greek\pi\mathpi\textpi
+  \hep@greek\rho\mathrho\textrho
+  \hep@greek\sigma\mathsigma\textsigma
+  \hep@greek\varsigma\mathvarsigma\textvarsigma
+  \providecommand*{\finalsigma}{\varsigma}
+  \hep@greek\tau\mathtau\texttau
+  \hep@greek\upsilon\mathupsilon\textupsilon
+  \hep@greek\phi\mathphi\textphi
+  \hep@greek\chi\mathchi\textchi
+  \hep@greek\psi\mathpsi\textpsi
+  \hep@greek\omega\mathomega\textomega
+%    \end{macrocode}
+% Archaic letters
+%    \begin{macrocode}
+  \hep@greek\digamma\mathdigamma\textdigamma
+  \providecommand*{\Digamma}{\textDigamma}
+  \providecommand*{\stigma}{\textstigma}
+  \providecommand*{\varstigma}{\textvarstigma}
+  \providecommand*{\koppa}{\textkoppa}
+  \providecommand*{\Koppa}{\textKoppa}
+  \providecommand*{\qoppa}{\textqoppa}
+  \providecommand*{\Qoppa}{\textQoppa}
+  \providecommand*{\Stigma}{\textStigma}
+  \providecommand*{\Sampi}{\textSampi}
+  \providecommand*{\sampi}{\textsampi}
+%    \end{macrocode}
+%
+% \subsection{Variant shape symbols}
+%
+% TeX’s concept of “standard” \vs “variant” math symbols does not map to the
+% distinction between "greek letter ..." \vs "greek ... symbol" in the Unicode standard (see "test-tuenc-greek.pdf").
+%
+% The "\...symbol"  macros select the "greek ... symbol" in both, text and math mode.
+% For "\epsilonsymbol" and "\phisymbol" this is the default shape in math mode.
+% The "\var..." macros select the shape used by TeX math (or, if not supported, the "symbol" shape)
+%
+% "...symbol == var..."
+%
+%    \begin{macrocode}
+  \hep@greek\varpi\mathvarpi\textpisymbol
+  \providecommand*{\pisymbol}{\varpi}
+  \hep@greek\varrho\mathvarrho\textrhosymbol
+  \hep@greek\rhosymbol\mathvarrho\textrhosymbol
+  \hep@greek\vartheta\mathvartheta\textthetasymbol
+  \providecommand*{\thetasymbol}{\vartheta}
+%    \end{macrocode}
+% "...symbol != var..."
+%    \begin{macrocode}
+  \hep@greek\varepsilon\mathvarepsilon\textepsilon
+  \hep@Greek\epsilonsymbol\mathepsilon\textepsilonsymbol
+  \hep@greek\varphi\mathvarphi\textphi
+  \hep@Greek\phisymbol\mathphi\textphisymbol
+%    \end{macrocode}
+% only text (in standard 8-bit TeX, may be defined with additional packages):
+%    \begin{macrocode}
+  \ifdefined\varbeta
+    \hep@greek\varbeta\mathvarbeta\textbetasymbol
+  \else
+    \providecommand*{\varbeta}{\textbetasymbol}
+  \fi
+  \providecommand*{\betasymbol}{\varbeta}
+  \ifdefined\varkappa
+    \hep@greek\varkappa\mathvarkappa\textkappasymbol
+  \else
+    \providecommand*{\varkappa}{\textkappasymbol}
+  \fi
+  \providecommand*{\kappasymbol}{\varkappa}
+%    \end{macrocode}
+% "\Theta/\varTheta" are not a symbol variants but upright/italic shape of Theta
+%    \begin{macrocode}
+  \providecommand*{\Thetasymbol}{\textThetasymbol}
+%    \end{macrocode}
+%
+% \subsection{TextCompositeCommands for the generic macros}
+%
+% The NFSS TextComposite mechanism looks for the next token without expanding it.
+% In order to let compositions like "\ensuregreek{\'\Alpha}" or "\ensuregreek{\>''\alpha}" work as expected we define TextComposites with the `letter name commands`.
+% (Composition only works if the active font encoding is LGR).
+%    \begin{macrocode}
+  \@ifl@aded{def}{tuenc-greek}{\input{alphabeta-tuenc.def}}{}
+  \@ifl@aded{def}{lgrenc}{\input{alphabeta-lgr.def}}{}
+%    \end{macrocode}
+%
+% \subsection{Re-definition for Greek Unicode input in math mode}
+%
+% Check with "\ifdefined" for the definition of
+% "\DeclareUnicodeCharacter". In contrast to "\@ifdefined", this works
+% without side-effects. It makes the package dependent on the \hologo{eTeX}
+% extensions but these are standard in all current TeX distributions anyway.
+% Map Greek characters that are also defined in math mode to the generic macros.
+%    \begin{macrocode}
+  \ifdefined\DeclareUnicodeCharacter
+    \DeclareUnicodeCharacter{0393}{\Gamma}
+    \DeclareUnicodeCharacter{0394}{\Delta}
+    \DeclareUnicodeCharacter{0398}{\Theta}
+    \DeclareUnicodeCharacter{039B}{\Lambda}
+    \DeclareUnicodeCharacter{039E}{\Xi}
+    \DeclareUnicodeCharacter{03A0}{\Pi}
+    \DeclareUnicodeCharacter{03A3}{\Sigma}
+    \DeclareUnicodeCharacter{03A5}{\Upsilon}
+    \DeclareUnicodeCharacter{03A6}{\Phi}
+    \DeclareUnicodeCharacter{03A8}{\Psi}
+    \DeclareUnicodeCharacter{03A9}{\Omega}
+    \DeclareUnicodeCharacter{03B1}{\alpha}
+    \DeclareUnicodeCharacter{03B2}{\beta}
+    \DeclareUnicodeCharacter{03B3}{\gamma}
+    \DeclareUnicodeCharacter{03B4}{\delta}
+    \DeclareUnicodeCharacter{03B5}{\varepsilon}
+    \DeclareUnicodeCharacter{03B6}{\zeta}
+    \DeclareUnicodeCharacter{03B7}{\eta}
+    \DeclareUnicodeCharacter{03B8}{\theta}
+    \DeclareUnicodeCharacter{03B9}{\iota}
+    \DeclareUnicodeCharacter{03BA}{\kappa}
+    \DeclareUnicodeCharacter{03BB}{\lambda}
+    \DeclareUnicodeCharacter{03BC}{\mu}
+    \DeclareUnicodeCharacter{03BD}{\nu}
+    \DeclareUnicodeCharacter{03BE}{\xi}
+    \DeclareUnicodeCharacter{03C0}{\pi}
+    \DeclareUnicodeCharacter{03C1}{\rho}
+    \DeclareUnicodeCharacter{03C2}{\varsigma}
+    \DeclareUnicodeCharacter{03C3}{\sigma}
+    \DeclareUnicodeCharacter{03C4}{\tau}
+    \DeclareUnicodeCharacter{03C5}{\upsilon}
+    \DeclareUnicodeCharacter{03C6}{\varphi}
+    \DeclareUnicodeCharacter{03C7}{\chi}
+    \DeclareUnicodeCharacter{03C8}{\psi}
+    \DeclareUnicodeCharacter{03C9}{\omega}
+    \DeclareUnicodeCharacter{03D1}{\thetasymbol}
+    \DeclareUnicodeCharacter{03D5}{\phisymbol}
+    \DeclareUnicodeCharacter{03D6}{\pisymbol}
+    \DeclareUnicodeCharacter{03DD}{\digamma}
+    \DeclareUnicodeCharacter{03F1}{\rhosymbol}
+    \DeclareUnicodeCharacter{03F5}{\epsilonsymbol}
+  \fi
+%    \end{macrocode}
+
+% Ensure that this works also after loading other fonts packages such as \software{cfr-lm} using \software{substitutefont} \cite{substitutefont}.
+%    \begin{macrocode}
+  \ifxetexorluatex
+    % missing code
+  \else
+    \RequirePackage{substitutefont}
+    \substitutefont{LGR}{\rmdefault}{lmr}
+    \DeclareFontFamily{LGR}{\rmdefault}{}
+    \DeclareFontShape{LGR}{\rmdefault}{b}{n}{<->ssub*lmr/bx/n}{}
+    \DeclareFontShape{LGR}{\rmdefault}{b}{sc}{<->ssub*lmr/bx/sc}{}
+    \substitutefont{LGR}{\ttdefault}{lmtt}
+    \DeclareFontFamily{LGR}{\ttdefault}{}
+    \DeclareFontShape{LGR}{\ttdefault}{b}{n}{<->ssub*lmtt/bx/n}{}
+    \substitutefont{LGR}{\sfdefault}{lmss}
+    \DeclareFontFamily{LGR}{\sfdefault}{}
+    \DeclareFontShape{LGR}{\sfdefault}{b}{n}{<->ssub*lmss/bx/n}{}
+    \DeclareFontShape{LGR}{\sfdefault}{b}{sc}{<->ssub*lmss/bx/sc}{}
+  \fi
+%    \end{macrocode}
+%
+% Either load the \software{MnSymbol} package \cite{MnSymbol} or the the \software{exscale} package in order to fix Latin Modern "lmex" fonts.
+% Additionally, load the \software{amssymb} package \cite{amsfonts} which provides further math symbols and also loads the \software{amsfonts} package \cite{amsfonts}.
+%    \begin{macrocode}
+  \ifhep@minion
+    \RequirePackage{MnSymbol}
+  \else
+    \RequirePackage{exscale}
+    \RequirePackage{amssymb}
+  \fi
+%    \end{macrocode}
+%
+% \subsection{Additional math fonts}
+%
+% \begin{macro}{\mathbf}
+% Load the \software{bm} package \cite{bm} for superior boldmath.
+% Make math symbols bold whenever they appear in bold macros such as "\section"\marg{text}.
+%    \begin{macrocode}
+  \RequirePackage{bm}
+  \AtBeginDocument{\let\mathbf\bm}
+  \g@addto@macro\bfseries{\boldmath}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\mathtt}
+% Typewriter math font
+%    \begin{macrocode}
+  \DeclareMathAlphabet{\mathtt}{OT1}{lmtt}{m}{n}
+  \SetMathAlphabet{\mathtt}{bold}{OT1}{lmtt}{bx}{n}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\mathscr}
+% Provid the "\mathscr" math script font from the \software{mathrsfs} package \cite{mathrsfs}.
+%    \begin{macrocode}
+  \DeclareMathAlphabet{\mathscr}{U}{rsfs}{m}{n}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\mathbb}
+% Redefine the the "\mathbb" math blackboard style font according to the \prefix{sans}{serif} option with the font from the \software{dsfont} package \cite{dsfont}.
+%    \begin{macrocode}
+  \ifhep@minion
+    \DeclareMathAlphabet{\mathbb}{U}{%
+      \ifhepmathfont@serif dsrom\else dsss\fi%
+    }{m}{n}
+  \else
+    \ifhep@ams\else
+      \SetMathAlphabet{\mathbb}{normal}{U}{%
+        \ifhepmathfont@serif dsrom\else dsss\fi%
+      }{m}{n}
+    \fi
+  \fi
+%    \end{macrocode}
+% End of symbols conditional.
+%    \begin{macrocode}
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+%</package>
+%
+% \section{Tests}
+%
+% \subsection{Serif}
+%
+%<*testserif>
+%
+%    \begin{macrocode}
+\documentclass{article}
+
+\usepackage[oldstyle]{hep-font}
+\usepackage{hep-math-font}
+
+\usepackage{fancyvrb}\DefineShortVerb{\|}
+\newenvironment{vrb}{\begin{tabular}{@{}p{6cm}l@{}}}{\end{tabular}}
+
+\begin{document}
+
+\begin{vrb}
+|| & $Ab\Gamma\delta123$ \\
+|\mathbf | & $\mathbf{Ab\Gamma\delta123}$ \\
+|\mathrm | & $\mathrm{Ab\Gamma\delta123}$ \\
+|   \mathbf | & $\mathbf{\mathrm{Ab\Gamma\delta123}}$ !! \\
+|\text | & $\text{Ab\Gamma\delta123}$ \\
+|   \textbf | & $\textbf{\text{Ab\Gamma\delta123}}$ \\
+|\mathsf | & $\mathsf{Ab\Gamma\delta123}$ \\
+|   \mathbf | & $\mathbf{\mathsf{Ab\Gamma\delta123}}$ \\
+|\mathtt | & $\mathtt{Ab\Gamma123}$ \\
+|   \mathbf | & $\mathbf{\mathtt{Ab\Gamma123}}$ \\
+|\mathcal | & $\mathcal{ABC}$ \\
+|\mathscr | & $\mathscr{ABC123}$ \\
+|\mathbb | & $\mathbb{ABC1}$ \\
+|\mathfrak | & $\mathfrak{ABC123}$ \\
+\end{vrb}
+
+$\Gamma\Delta\Lambda\Phi\Pi\Psi\Sigma\Theta\Upsilon\Xi\Omega$
+
+$\rm\Gamma\Delta\Lambda\Phi\Pi\Psi\Sigma\Theta\Upsilon\Xi\Omega$
+
+\Gamma\Delta\Lambda\Phi\Pi\Psi\Sigma\Theta\Upsilon\Xi\Omega
+
+$\alpha\beta\gamma\delta\epsilon\zeta\eta\theta\iota\kappa\lambda
+\mu\nu\xi\pi\rho\sigma\varsigma\tau\upsilon\phi\chi\psi\omega$
+
+$\rm\alpha\beta\gamma\delta\epsilon\zeta\eta\theta\iota\kappa\lambda
+\mu\nu\xi\pi\rho\sigma\varsigma\tau\upsilon\phi\chi\psi\omega$
+
+\alpha\beta\gamma\delta\epsilon\zeta\eta\theta\iota\kappa\lambda
+\mu\nu\xi\pi\rho\sigma\varsigma\tau\upsilon\phi\chi\psi\omega
+
+\end{document}
+%    \end{macrocode}
+%
+%</testserif>
+%
+% \subsection{Sanserif}
+%
+%<*testsans>
+%
+%    \begin{macrocode}
+\documentclass{article}
+
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[oldstyle]{hep-font}
+\usepackage{hep-math-font}
+
+\usepackage{fancyvrb}\DefineShortVerb{\|}
+\newenvironment{vrb}{\begin{tabular}{@{}p{6cm}l@{}}}{\end{tabular}}
+
+\begin{document}
+
+\begin{vrb}
+|| & $Ab\Gamma\delta123$ \\
+|\mathbf | & $\mathbf{Ab\Gamma\delta123}$ \\
+|\mathrm | & $\mathrm{Ab\Gamma\delta123}$ \\
+|   \mathbf | & $\mathbf{\mathrm{Ab\Gamma\delta123}}$ !! \\
+|\text | & $\text{Ab\Gamma\delta123}$ \\
+|   \textbf | & $\textbf{\text{Ab\Gamma\delta123}}$ \\
+|\mathsf | & $\mathsf{Ab\Gamma\delta123}$ \\
+|   \mathbf | & $\mathbf{\mathsf{Ab\Gamma\delta123}}$ \\
+|\mathtt | & $\mathtt{Ab\Gamma123}$ \\
+|   \mathbf | & $\mathbf{\mathtt{Ab\Gamma123}}$ \\
+|\mathcal | & $\mathcal{ABC}$ \\
+|\mathscr | & $\mathscr{ABC123}$ \\
+|\mathbb | & $\mathbb{ABC1}$ \\
+|\mathfrak | & $\mathfrak{ABC123}$ \\
+\end{vrb}
+
+
+$\Gamma\Delta\Lambda\Phi\Pi\Psi\Sigma\Theta\Upsilon\Xi\Omega$
+
+$\rm\Gamma\Delta\Lambda\Phi\Pi\Psi\Sigma\Theta\Upsilon\Xi\Omega$
+
+\Gamma\Delta\Lambda\Phi\Pi\Psi\Sigma\Theta\Upsilon\Xi\Omega
+
+$\alpha\beta\gamma\delta\epsilon\zeta\eta\theta\iota\kappa\lambda
+\mu\nu\xi\pi\rho\sigma\varsigma\tau\upsilon\phi\chi\psi\omega$
+
+$\rm\alpha\beta\gamma\delta\epsilon\zeta\eta\theta\iota\kappa\lambda
+\mu\nu\xi\pi\rho\sigma\varsigma\tau\upsilon\phi\chi\psi\omega$
+
+\alpha\beta\gamma\delta\epsilon\zeta\eta\theta\iota\kappa\lambda
+\mu\nu\xi\pi\rho\sigma\varsigma\tau\upsilon\phi\chi\psi\omega
+
+\end{document}
+%    \end{macrocode}
+%
+%</testsans>
+%
+% \Finale
+
+\endinput
+
+% \PrintIndex
+% makeindex -s gglo.ist -o hep-math-font-implementation.gls hep-math-font-implementation.glo
+% makeindex -s gglo.ist -o hep-math-font-implementation.ind hep-math-font-implementation.idx
