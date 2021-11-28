@@ -33,13 +33,13 @@
 \CodelineIndex
 \RecordChanges
 
-\usepackage[parskip, oldstyle]{hep-paper}
+\usepackage[parskip]{hep-paper}
 
 \newenvironment{columns}[1][.5]{%
   \par\vspace{-\bigskipamount}%
   \begin{minipage}[t]{\linewidth}%
   \begin{minipage}[t]{#1\linewidth}%
-  \newcommand{\column}{%
+  \def\column{%
     \end{minipage}%
     \begin{minipage}[t]{\linewidth-#1\linewidth}%
   }%
@@ -64,7 +64,7 @@
 %
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{610}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -91,6 +91,7 @@
 \GetFileInfo{hep-math.sty}
 
 \title{The \software{hep-math} package\thanks{This document corresponds to \software{hep-math}~\fileversion.}}
+\subtitle{Extended math macros}
 \author{Jan Hajer \email{jan.hajer@unibas.ch}}
 \date{\filedate}
 
@@ -103,17 +104,18 @@
 \maketitle
 
 \begin{abstract}
-The \software{hep-math} package provides some additional features beyond the \software{amsmath} package.
+The \software{hep-math} package provides some additional features beyond the \software{mathtools} and \software{amsmath} packages.
 \end{abstract}
 
 To use the package place "\usepackage{hep-math}" in the preamble.
 
 The \software{mathtools} \cite{mathtools} package is loaded, which in turn loads the \hologo{AmSLaTeX} \software{amsmath} \cite{amsmath} package.
-Horizontal spacing and pagebreaks are marginally adjusted.
+Horizontal spacing in inline equations and page breaks in block equations are marginally adjusted.
 \DescribeMacro{\left}
 \DescribeMacro{\right}
 Spacing around "\left" and "\right" is fixed with the \software{mleftright} package \cite{mleftright}.
 
+\section{Macros}
 
 \DescribeMacro{\mathdef}
 The "\mathdef"\marg{name}\oarg{arguments}\marg{code} macro \prefix{re}{defines} macros only within math mode without changing the text mode definition.
@@ -123,10 +125,12 @@ The "\mathdef"\marg{name}\oarg{arguments}\marg{code} macro \prefix{re}{defines} 
 The imaginary unit "\i" and the differential "\d" are defined using this functionality.
 
 \DescribeMacro{\overline}
-The "\overline" macros is adjusted to work also outside of math mode using the \software{ulem} \cite{ulem} package.
+The "\overline" macro is adjusted to \overline{work also outside} of math mode using the \software{soulutf8} \cite{soulutf8} package.
 
-\DescribeMacro{\overleftright}
 \DescribeMacro{\oset}
+\DescribeMacro{\overleft}
+\DescribeMacro{\overright}
+\DescribeMacro{\overleftright}
 A better looking over left right arrow is defined \ie $\overleftright{\partial}$ using a new "\oset"\marg{over}\marg{math} functionality.
 
 \DescribeMacro{\diag}
@@ -145,93 +149,94 @@ The real and imaginary projectors are redefined to look like ordinary operators.
 \DescribeMacro{\accsc}
 "\arccsc" and other inverse trigonometric functions are defined.
 
+\subsection{Fractions and units}
+
 \DescribeMacro{\unit}
 \DescribeMacro{\inv}
-The correct spacing for units is provided by the macro "\unit"\oarg{value} \marg{unit} from the \software{units} package \cite{units} which can also be used in text mode.
+The correct spacing for units is provided by the macro "\unit"\oarg{value}\marg{unit} from the \software{units} package \cite{units} which can also be used in text mode.
 The macro "\inv"\oarg{power}\marg{text} allows to avoid math mode also for inverse units such as \unit[5]{\inv{fb}} typeset via "\unit[5]{\inv{fb}}".
 
 \DescribeMacro{\nicefrac}
 \DescribeMacro{\flatfrac}
 \DescribeMacro{\textfrac}
 The "\frac"\marg{number}\marg{number} macro is accompanied by "\nicefrac"\linebreak[1]\marg{number}\linebreak[1]\marg{number}, "\textfrac"\marg{number}\marg{number}, and "\flatfrac"\marg{number}\marg{number} leading to $\frac12$, $\nicefrac12$, \textfrac12, and $\flatfrac12$.
+The "\textfrac" macro is mostly intended if a font with oldstyle numerals is used.
 
-Some macros of the \software{physics} package \cite{physics} are reimplemented with a more conventional typesetting in mind
+Some macros of the \software{physics} package \cite{physics} are reimplemented with a more conventional typesetting in mind.
+Finer details about mathematical typesetting can be found in \cite{gregorio:2020}.
 
+\subsection{Differentials and derivatives}
 
-\DescribeMacro{\makedifferential}
-\DescribeMacro{\makederivative}
-\DescribeMacro{\makepartialderivative}
-The three macros "\makedifferential", "\makederivative", and "\makepartialderivative" allow to define a differential with correct spacing, a derivative based on said differential, and if necessary a partial derivative that can handle two dimensional derivatives.
+\DescribeMacro{\differential}
+\DescribeMacro{\newderivative}
+\DescribeMacro{\newpartialderivative}
+The three macros "\differential"\marg{symbol}, "\newderivative""{\name}"\marg{symbol}, and "\newpartialderivative""{\name}"\marg{symbol} allow to define a differential with correct spacing, a derivative using this differential, and if necessary a partial derivative that can handle three dimensional derivatives.
 
 \DescribeMacro{\d}
 \DescribeMacro{\dv}
 These macros are used for the usual differential and derivative, producing $\d x$ via "\d x" and
 \begin{center}
-\begin{tabular}{*4l}
-"\dv x[f]" & "\dv*[n]x[f]" & "\dv[n]x*[f]" & "\dv*[n]x*[f]" \\
-$\dv x[f]$ & $\dv*[n]x[f]$ & $\dv[n]x*[f]$ & $\dv*[n]x*[f]$ \\
+\begin{tabular}{*4c}
+"\dv[f]x" & "\dv*[f]x^n" & "\dv[f]x*^n" & "\dv*[f]x*^n" \\
+$\dv[f]x$ & $\dv*[f]x^n$ & $\dv[f]x*^n$ & $\dv*[f]x*^n$ \\
 "\dv xf" & "\dv*xf" & "\dv x*f" & "\dv*x*f" \\
 $\dv xf$ & $\dv*xf$ & $\dv x*f$ & $\dv*x*f$
 \end{tabular}
 \end{center}
-via "\dv*"\oarg{n}\marg{x}"*"\oarg{f}.
-Upright differential can be produced via "\renewcommand" "{\differentialsymbol}""{\mathrm d}".
+via "\dv*"\oarg{f}\marg{x}"*""^"\marg{n}.
+Upright differential can be produced via "\renewcommand" "{\diffsymbol}""{\mathrm d}".
 
 \DescribeMacro{\pd}
 \DescribeMacro{\pdv}
-Similarly a partial differential and derivative are defined that can be used according to "\pdv*\oarg{n}\oarg{m}"\marg{x}"*"\oarg{f}\oarg{y}.
+Similarly a partial differential and derivative are defined that can be used according to "\pdv*"\oarg{f}\marg{x}"*""^"\marg{a}\oarg{y}"^"\marg{b}\oarg{z}"^"\marg{c}.
 \begin{center}
-\begin{tabular}{*8r}
-"\pdv x[f]" & "\pdv x[f][y]" & "\pdv[3]x[f]" & "\pdv[2]x[f][y]" & "\pdv[2][3]x[f][y]" & "\pdv x[][y] f"\\
-$\pdv x[f]$ & $\pdv x[f][y]$ & $\pdv[3]x[f]$ & $\pdv[2]x[f][y]$ & $\pdv[2][3]x[f][y]$ & $\pdv x[][y] f$
+\begin{tabular}{*4c}
+"\pdv[f]x" & "\pdv[f]x[y]" & "\pdv[f]x^3" & "\pdv[f]x^2[y]" \\
+$\pdv[f]x$ & $\pdv[f]x[y]$ & $\pdv[f]x^3$ & $\pdv[f]x^2[y]$ \\
+"\pdv[f]x^2[y]^3" & "\pdv[f]x[y]^3" & "\pdv x[y]f"\\
+$\pdv[f]x^2[y]^3$ & $\pdv[f]x[y]^3$ & $\pdv x[y]f$
 \end{tabular}
 \end{center}
+
+\DescribeMacro{\var}
+\DescribeMacro{\fdv}
+Similarly a functional variation and functional derivative are defined.
 
 \DescribeMacro{\cancel}
 \DescribeMacro{\slashed}
 The "\cancel"\marg{characters} macro from the \software{cancel} package \cite{cancel} and the "\slashed" \marg{character} macro from the \software{slashed} package \cite{slashed} allow to $\cancel{\text{cancel}}$ math and use the Dirac slash notation \ie $\slashed \pd$, respectively.
 
+\subsection{Paired delimiters}
+
 \DescribeMacro{\abs}
 \DescribeMacro{\norm}
-
 \begin{center}
 \begin{tabular}{*8r}
-"\abs x" & "\norm x" & "\norm[2]x" \\
-$\abs x$ & $\norm x$ & $\norm[2]x$
+"\abs x" & "\norm x" & "\norm[2]x" & "\norm*[2]x" \\
+$\abs x$ & $\norm x$ & $\norm[2]x$ & $\norm*[2]x$
 \end{tabular}
 \end{center}
-
-
 
 \DescribeMacro{\eval}
 \DescribeMacro{\order}
-
 \begin{center}
 \begin{tabular}{*8r}
-"\order x" & "\eval x_0^\infty" \\
-$\order x$ & $\eval x_0^\infty$
+"\order x" & "\eval x_0^\infty" & "\eval* x_0^\infty" \\
+$\order x$ & $\eval x_0^\infty$ & $\eval* x_0^\infty$
 \end{tabular}
 \end{center}
 
-\DescribeMacro{\set}
-\DescribeMacro{\order}
-
-\begin{center}
-\begin{tabular}{*8r}
-"\set{x \suchthat x > 0}" & "\Pr(x\given y)" \\
-$\set{x \suchthat x > 0}$ & $\Pr(x\given y)$
-\end{tabular}
-\end{center}
-
+\DescribeMacro{\newpair}
 \DescribeMacro{\comm}
 \DescribeMacro{\acomm}
-
+The "\newpair"\marg{name}\marg{left delim} \marg{right delim}"_"\marg{subscript}"^"\marg{superscript} macro is defined and used for the definition of \prefix{anti}{commutators} and Poisson brackets.
 \begin{center}
 \begin{tabular}{*8r}
 "\pb xy" & "\comm xy" & "\acomm xy" \\
 $\pb xy$ & $\comm xy$ & $\acomm xy$
 \end{tabular}
 \end{center}
+They can easily be redefined using \eg "\newpair\comm\lbrack\rbrack_-".
 
 \DescribeMacro{\bra}
 \DescribeMacro{\ket}
@@ -240,11 +245,22 @@ $\pb xy$ & $\comm xy$ & $\acomm xy$
 \DescribeMacro{\mel}
 \DescribeMacro{\ev}
 \DescribeMacro{\vev}
-
+Macros for the bra-ket notation are introduced.
 \begin{center}
-\begin{tabular}{*8r}
-"\bra x" & "\ket x" & "\braket xy" & "\ketbra xy" & "\mel xyz" & "\ev x" & "\ev[\Omega] x" & "\vev x" \\
-$\bra x$ & $\ket x$ & $\braket xy$ & $\ketbra xy$ & $\mel xyz$ & $\ev x$ & $\ev[\Omega] x$ & $\vev x$
+\begin{tabular}{*4c}
+"\bra x" & "\ket x" & "\braket xy" & "\ketbra xy" \\
+$\bra x$ & $\ket x$ & $\braket xy$ & $\ketbra xy$ \\
+"\mel xyz" & "\ev x" & "\ev[\Omega] x" & "\vev x" \\
+$\mel xyz$ & $\ev x$ & $\ev[\Omega] x$ & $\vev x$
+\end{tabular}
+\end{center}
+
+\DescribeMacro{\column}
+\DescribeMacro{\row}
+\begin{center}
+\begin{tabular}{*4c}
+"\column{x,y,z}" & "\row{x,y,z}" \\
+$\column{x,y,z}$ & $\row{x,y,z}$ \\
 \end{tabular}
 \end{center}
 
@@ -435,11 +451,13 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % \end{macro}
 %
 % \begin{macro}{\overline}
-% Redefine "\overline" to be a text macro using the \software{ulem} package \cite{ulem}.
+% Redefine "\overline" to be a text macro using the \software{soulutf8} package \cite{soulutf8}.
 % Extend it as a math macro with the original definition from the \software{amsmath} package \cite{amsmath}.
 %    \begin{macrocode}
-\RequirePackage{ulem}
-\def\overline#1{{\renewcommand{\ULdepth}{-1.9ex}{}\uline{#1}}}
+\RequirePackage{soulutf8}
+% \def\overline#1{{\renewcommand{\ULdepth}{-1.9ex}{}\uline{#1}}}
+\newcommand\textoverline[1]{{\setul{-1.9ex}{}\ul{#1}}}
+\let\overline\textoverline
 \DeclareRobustCommand{\over@line}[1]{\@@overline{#1}}
 \mathdef{\overline}{\over@line}
 %    \end{macrocode}
@@ -458,6 +476,8 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % \begin{macro}{\overleftright}
 % Define a over left right arrow "\overleftright"\marg{base}.
 %    \begin{macrocode}
+\newcommand{\overleft}[1]{\oset{\leftarrow}{#1}}
+\newcommand{\overright}[1]{\oset{\rightarrow}{#1}}
 \newcommand{\overleftright}[1]{\oset{\leftrightarrow}{#1}}
 %    \end{macrocode}
 % \end{macro}
@@ -492,6 +512,7 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 \DeclareMathOperator{\Res}{Res}
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\diag}{diag}
+\let\det\relax\DeclareMathOperator{\det}{det}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -511,6 +532,19 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
+
+% \begin{macro}{\transpose}
+% \begin{macro}{\trans}
+% Define a transpose symbol.
+%    \begin{macrocode}
+\newcommand*{\hep@transpose}[2]{\raisebox{\depth}{$\m@th#1\intercal$}}
+\newcommand*{\transpose}{{\mathpalette\hep@transpose{}}}
+\let\trans\transpose
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+
+
 
 % \subsubsection{Trigonometric functions}
 %
@@ -610,72 +644,68 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 %
 % \subsubsection{Differentials and derivatives}
 %
-% \begin{macro}{\makedifferential}
-% Define a generic differential "\makedifferential".
+% \begin{macro}{\differential}
+% Define a generic differential "\differential".
 %    \begin{macrocode}
-\newcommand{\makedifferential}[1]{\mathop{}\!#1}
+\newcommand{\differential}[1]{\mathop{}\!#1}
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\makederivative}
+% \begin{macro}{\newderivative}
 % Define a generic derivative.
 %    \begin{macrocode}
-\newcommand\makederivative[2]{
-  \NewDocumentCommand{#1}{somso}{%
+\newcommand\newderivative[2]{
+  \NewDocumentCommand{#1}{somse{^}}{%
     \IfBooleanTF{##4}{%
       \IfBooleanTF{##1}{\nicefrac}{\frac}%
     }{%
       \IfBooleanTF{##1}{\flatfrac}{\dfrac}%
     }{%
-      \makedifferential#2\IfValueT{##2}{^{##2}}\IfValueT{##5}{##5}%
+      \differential#2\IfValueT{##5}{^{##5\!}}\IfValueT{##2}{##2}%
     }{%
-      \makedifferential#2{##3}\IfValueT{##2}{^{##2}}%
+      \differential#2{##3}\IfValueT{##5}{^{##5}}%
     }%
   }
 }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\makepartialderivative}
-% Define a generic partial derivative using the \software{etoolbox} package \cite{etoolbox}.
+% \begin{macro}{\newpartialderivative}
+% Define a generic partial derivative
 %    \begin{macrocode}
-\RequirePackage{etoolbox}
-\newcommand\makepartialderivative[2]{
-  \NewDocumentCommand{#1}{sO{}O{}msoo}{%
-    \IfBooleanTF{##5}{%
+\newcommand\newpartialderivative[2]{
+  \NewDocumentCommand{#1}{somsE{^}{1}oE{^}{1}oE{^}{1}}{%
+    \def\hep@one{\IfValueTF{##6}{##7}{0}}
+    \def\hep@two{\IfValueTF{##8}{##9}{0}}
+    \def\hep@sum{\the\numexpr##5+\hep@one+\hep@two\relax}
+    \IfBooleanTF{##4}{%
       \IfBooleanTF{##1}{\nicefrac}{\frac}%
     }{%
       \IfBooleanTF{##1}{\flatfrac}{\dfrac}%
     }{%
-      \makedifferential#2\IfValueTF{##7}{%
-      \ifblank{##2}{%
-        \ifblank{##3}{^2}{^{\the\numexpr##3+1\relax}}%
-        }{%
-        \ifblank{##3}{%
-          ^{\the\numexpr##2+1\relax}}{^{{\the\numexpr##2+##3\relax}}%
-        }%
-        }%
-      }{\ifblank{##2}{}{^{##2}}}\IfValueT{##6}{##6}%
+      \differential#2\ifnum\hep@sum=1\relax\else{^{\hep@sum\!}}\fi
+      \IfValueT{##2}{##2}%
     }{%
-      \makedifferential#2{##4}\IfValueT{##2}{^{##2}}%
-      \IfValueT{##7}{#2##7\ifblank{##3}{}{^{##3}}}%
+      \differential#2{##3}\ifnum##5=1\relax\else{^{##5}}\fi%
+      \IfValueT{##6}{#2##6\ifnum##7=1\relax\else{^{##7}}\fi}%
+      \IfValueT{##8}{#2##8\ifnum##9=1\relax\else{^{##9}}\fi}%
     }%
   }
 }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\differentialsymbol}
-% \begin{macro}{\differential}
+% \begin{macro}{\diffsymbol}
+% \begin{macro}{\diff}
 % \begin{macro}{\d}
 % \begin{macro}{\derivative}
 % \begin{macro}{\dv}
 % Define the differential "\d" and the usual derivative.
 %    \begin{macrocode}
-\providecommand{\differentialsymbol}{d}
-\newcommand{\differential}{\makedifferential\differentialsymbol}
-\AtBeginDocument{\mathdef{\d}{\differential}}
-\makederivative{\derivative}{\differentialsymbol}
+\providecommand{\diffsymbol}{d}
+\newcommand{\diff}{\differential\diffsymbol}
+\AtBeginDocument{\mathdef{\d}{\diff}}
+\newderivative{\derivative}{\diffsymbol}
 \newcommand\dv{\derivative}
 %    \end{macrocode}
 % \end{macro}
@@ -690,9 +720,9 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % \begin{macro}{\pdv}
 % Define the partial differential and derivative.
 %    \begin{macrocode}
-\newcommand\partialdifferential{\makedifferential\partial}
+\newcommand\partialdifferential{\differential\partial}
 \newcommand\pd{\partialdifferential}
-\makepartialderivative{\partialderivative}{\partial}
+\newpartialderivative{\partialderivative}{\partial}
 \newcommand\pdv{\partialderivative}
 %    \end{macrocode}
 % \end{macro}
@@ -700,25 +730,25 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % \end{macro}
 % \end{macro}
 %
-% \begin{macro}{\gaugedifferentialsymbol}
-% \begin{macro}{\gaugedifferential}
+% \begin{macro}{\gaugediffsymbol}
+% \begin{macro}{\gaugediff}
 % \begin{macro}{\D}
 % Define the gauge covariant differential "\D".
 %    \begin{macrocode}
-\providecommand{\gaugedifferentialsymbol}{D}
-\newcommand{\gaugedifferential}{\makedifferential\gaugedifferentialsymbol}
-\newcommand{\D}{\gaugedifferential}
+\providecommand{\gaugediffsymbol}{D}
+\newcommand{\gaugediff}{\differential\gaugediffsymbol}
+\newcommand{\D}{\gaugediff}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
 % \end{macro}
 %
-% \begin{macro}{\covariantdifferential}
+% \begin{macro}{\covariantdiff}
 % \begin{macro}{\cd}
 % Define the covariant differential "\cd".
 %    \begin{macrocode}
-\newcommand{\covariantdifferential}{\makedifferential\nabla}
-\newcommand{\cd}{\covariantdifferential}
+\newcommand{\covariantdiff}{\differential\nabla}
+\newcommand{\cd}{\covariantdiff}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -729,9 +759,9 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % \begin{macro}{\fdv}
 % Define the functional variation and derivative.
 %    \begin{macrocode}
-\newcommand\variation{\makedifferential\delta}
+\newcommand\variation{\differential\delta}
 \newcommand\var{\variation}
-\makepartialderivative{\functionalderivative}{\delta}
+\newpartialderivative{\functionalderivative}{\delta}
 \newcommand\fdv{\functionalderivative}
 %    \end{macrocode}
 % \end{macro}
@@ -746,6 +776,7 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 \RequirePackage{cancel}
 \RequirePackage{slashed}
 \declareslashed{}{/}{.06}{0}{\D}
+\declareslashed{}{/}{.055}{0}{\pd}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -819,6 +850,29 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % \end{macro}
 % \end{macro}
 
+% \begin{macro}{\row}
+% \begin{macro}{\column}
+% Shortcuts for rows and columns
+%    \begin{macrocode}
+\newcommand*{\rowseperator}{,\,}
+\ExplSyntaxOn
+\newcommand*{\hep@row}[1]{
+ \seq_set_split:Nnn\hep@seq{,}{#1}
+ \begin{matrix}\seq_use:Nn\hep@seq{\rowseperator}\end{matrix}
+}
+\newcommand*{\hep@column}[1]{%
+ \seq_set_split:Nnn\hep@seq{,}{#1}%
+ \begin{matrix}\seq_use:Nn\hep@seq{\\}\end{matrix}%
+}
+\ExplSyntaxOff
+\DeclarePairedDelimiterX{\row}[1]{(}{)}{\hep@row{#1}}
+\NewDocumentCommand{\column}{me{^}e{_}}{%
+  \left(\hep@column{#1}\right)\IfValueT{#2}{^{\!\!\!#2}}\IfValueT{#3}{_{\!\!\!#3}}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+
 % \subsubsection{Set and Probability}
 %
 % \begin{macro}{\midbar}
@@ -869,6 +923,25 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 
 % \subsubsection{Commutators}
 %
+% \begin{macro}{\newpair}
+% Define the "\newpair" macro that generates pairs surrounded by brackets.
+%    \begin{macrocode}
+\NewDocumentCommand{\newpair}{mmme{_}e{^}}{%
+  \IfNoValueTF{#4}{%
+    \IfNoValueTF{#5}{%
+      \DeclarePairedDelimiterX{#1}[2]{#2}{#3}%
+    }{%
+      \DeclarePairedDelimiterXPP{#1}[2]{}{#2}{#3}{^{#5}}%
+    }%
+  }{%
+    \DeclarePairedDelimiterXPP{#1}[2]{}{#2}{#3}{_{#4}}%
+  }{%
+    \optionalargument{##1},\optionalargument{##2}%
+  }%
+}
+%    \end{macrocode}
+%\end{macro}
+%
 % \begin{macro}{\innerproduct}
 % \begin{macro}{\poissonbracket}
 % \begin{macro}{\pb}
@@ -878,21 +951,12 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % \begin{macro}{\acomm}
 % Poissonbracket, commutator and anti-commutator.
 %    \begin{macrocode}
-\DeclarePairedDelimiterX\innerproduct[2]{%
-  \langle}{\rangle}{\optionalargument{#1},\optionalargument{#2}%
-}
-\DeclarePairedDelimiterX\poissonbracket[2]{%
-  \lbrace}{\rbrace}{\optionalargument{#1},\optionalargument{#2}%
-}
+\newpair\innerproduct\langle\rangle
+\newpair\poissonbracket\lbrace\rbrace
+\newpair\commutator\lbrack\rbrack
 \newcommand\pb{\poissonbracket}
-\DeclarePairedDelimiterX\commutator[2]{%
-  \lbrack}{\rbrack}{\optionalargument{#1},\optionalargument{#2}%
-}
 \newcommand\comm{\commutator}
-\DeclarePairedDelimiterX\anticommutator[2]{%
-  \lbrace}{\rbrace}{\optionalargument{#1},\optionalargument{#2}%
-}
-\newcommand\acomm{\anticommutator}
+\newcommand\acomm{\poissonbracket}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1007,21 +1071,59 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % \end{macro}
 % \end{macro}
 %
+%</package>
+%
 % \section{Test}
 %
 %<*test>
 %
 %    \begin{macrocode}
+\documentclass{article}
+
+\usepackage{hep-math}
+
+\begin{document}
+
 \begin{gather}
   \bra{x}\ket{y}
   \braket*{x}{y}\\
-  \dv[3]{x}[f]
-  \pdv[3][2]{x}[f][y]
-  \fdv[3]{x}[f]\\
+  \dv[f]{x}^3
+  \pdv[f]{x}[y]^2[z]^3
+  \fdv[f]{x}^3[y]\\
   \set{x \suchthat x \in X}
 \end{gather}
+
+\end{document}
+
 %    \end{macrocode}
 %</test>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-math` package
+
+Extended math macros
+
+## Introduction
+
+The `hep-math` package provides some additional features beyond the `mathtools` and `amsmath` packages.
+
+To use the package place `\usepackage{hep-math}` in the preamble.
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the `LaTeX` Project Public License, either version 1.3c of this license or (at your option) any later version.
+The latest version of this license is in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
 %
 % \Finale
 

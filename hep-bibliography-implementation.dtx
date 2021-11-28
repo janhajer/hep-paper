@@ -17,7 +17,7 @@
 %
 % \iffalse
 
-%<package|title|font|math|bibliography|acronyms>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
 %<package>\ProvidesPackage{hep-bibliography}[2021/09/01 v1.0 HEP-Bibliography]
 %<datamodel>\ProvidesFile{hep-bibliography.dbx}[2021/08/01 v1.8 HEP-Bibliography biblatex data model]
 %<documentation>\ProvidesFile{hep-bibliography-documentation.tex}[2021/08/01 v1.8 HEP-Bibliography documentation]
@@ -28,37 +28,20 @@
 \documentclass{ltxdoc}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
-\setcounter{tocdepth}{2}
 
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
 
-\MacroIndent=1.5em
-
-\usepackage[parskip, oldstyle]{hep-paper}
+\usepackage[parskip]{hep-paper}
 
 \bibliography{bibliography}
 
-\acronym{PDF}{portable document format}
 \acronym{URL}{uniform resource locator}
-\acronym{CM}{computer modern}
-\acronym{LM}{latin modern}
 
 \usepackage{hologo}
-\usepackage{fonttable}
 
-\newenvironment{columns}[1][.5]{%
-  \par\vspace{-\bigskipamount}%
-  \begin{minipage}[t]{\linewidth}%
-  \begin{minipage}[t]{#1\linewidth}%
-  \newcommand{\column}{%
-    \end{minipage}%
-    \begin{minipage}[t]{\linewidth-#1\linewidth}%
-  }%
-}{\end{minipage}\end{minipage}\par}
-
-\setlength{\fboxsep}{1pt}
+\MacroIndent=1.5em
 \AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
 %</documentation>
 
@@ -72,7 +55,7 @@
 %
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{315}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -90,15 +73,7 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2019/01/01}{Initial version of the style file.}
-% \changes{v1.1}{2020/01/01}{Transition to documented \hologo{LaTeX} source file.}
-% \changes{v1.2}{2020/03/01}{Introduction of package options.}
-% \changes{v1.3}{2020/05/01}{Inclusion of JHEP and JCAP package options. Fix of incompatibility with recent subcaption package version. Move of biblatex datamodel into its own file}
-% \changes{v1.4}{2020/09/01}{If possible the compatibility options are selected automatically. Inclusion of PubMed IDs in bibliography.}
-% \changes{v1.5}{2020/10/01}{Reduce the numer of math alphabets used in sans serif mode. Add more title options such as a subtitle. Use standard class options.}
-% \changes{v1.6}{2020/12/01}{Implementation of the twocolumn mode.}
-% \changes{v1.7}{2021/06/01}{Introduction of dedicated style file for the title, acronyms and bibliography macros. Extension of the title macros.}
-% \changes{v1.8}{2021/08/01}{Expand thanks to allow for reference label and fine tune the title page. Reimplement the must relevant macros from the physics package. Make mathrm produce upright Greek.}
+% \changes{v1.0}{2021/09/01}{Initial version of the style file.}
 %
 % \ifshort
 %<*documentation>
@@ -107,6 +82,7 @@
 \GetFileInfo{hep-bibliography.sty}
 
 \title{The \software{hep-bibliography} package\thanks{This document corresponds to \software{hep-bibliography}~\fileversion.}}
+\subtitle{Bibliographies for high energy physics}
 \author{Jan Hajer \email{jan.hajer@unibas.ch}}
 \date{\filedate}
 
@@ -117,6 +93,13 @@
 \newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
 
 \maketitle
+
+\begin{abstract}
+The \software{hep-bibliography} package extends the \software{biblatex} package with some functionality mostly useful for high energy physics.
+In particular it makes full use of all "bibtex" fields provided by "inspirehep.net".
+\end{abstract}
+
+The package can be loaded via "\usepackage{hep-bibliography}".
 
 \DescribeMacro{\bibliography}
 \DescribeMacro{\printbibliography}
@@ -151,7 +134,7 @@ Errata can be included using the "related" feature.
 % \PrintChanges
 % }
 %
-% \clearpage \appendix
+% \appendix
 %
 % \section{Implementation}
 %
@@ -242,7 +225,28 @@ Errata can be included using the "related" feature.
   sorting=hep-bibliography,
   safeinputenc,
   giveninits=true,
-  maxbibnames=7
+  maxbibnames=7,
+  backref=true
+}
+%    \end{macrocode}
+%
+% Hide the backrefs but use the information to link the index to the page of first citation.
+%    \begin{macrocode}
+\renewbibmacro*{pageref}{}%
+\def\blxjk@grabfirslisttitem#1#2\@nil{#1}
+\DeclareFieldFormat{labelnumberwidth}{%
+  \iflistundef{pageref}{%
+    \mkbibbrackets{#1}%
+  }{%
+    \edef\blxjk@firstpage{%
+      \expandafter\blxjk@grabfirslisttitem\abx@list@pageref{}\@nil%
+    }%
+    \ifhyperref{%
+      \hyperlink{page.\blxjk@firstpage}{\mkbibbrackets{#1}}%
+    }{%
+      \mkbibbrackets{#1}%
+    }%
+  }%
 }
 %    \end{macrocode}
 %
@@ -948,6 +952,34 @@ Errata can be included using the "related" feature.
 \end{document}
 %    \end{macrocode}
 %</test>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-bibliography` package
+
+Bibliographies for high energy physics
+
+## Introduction
+
+The `hep-bibliography` package extends the `biblatex` package with some functionality mostly useful for high energy physics.
+In particular it makes full use of all `bibtex` fields provided by `inspirehep.net`.
+
+The package can be loaded via `\usepackage{hep-bibliography}`.
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the `LaTeX` Project Public License, either version 1.3c of this license or (at your option) any later version.
+The latest version of this license is in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
 %
 % \Finale
 

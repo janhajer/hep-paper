@@ -18,9 +18,8 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-paper}[2021/08/01 v1.8 Publications in High Energy Physics]
-%<title>\ProvidesPackage{hep-title}[2021/08/01 v1.8 Title macros for publications in High Energy Physics]
-%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2021/08/01 v1.8 HEP-Paper documentation]
+%<package>\ProvidesPackage{hep-paper}[2021/09/01 v2.0 Publications in High Energy Physics]
+%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2021/09/01 v2.0 HEP-Paper documentation]
 %
 %<*documentation>
 %
@@ -28,37 +27,21 @@
 \documentclass{ltxdoc}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
-\setcounter{tocdepth}{2}
 
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
 
-\MacroIndent=1.5em
-
-\usepackage[parskip, oldstyle]{hep-paper}
+\usepackage[parskip]{hep-paper}
 
 \bibliography{bibliography}
 
 \acronym{PDF}{portable document format}
-\acronym{URL}{uniform resource locator}
-\acronym{CM}{computer modern}
 \acronym{LM}{latin modern}
 
 \usepackage{hologo}
-\usepackage{fonttable}
 
-\newenvironment{columns}[1][.5]{%
-  \par\vspace{-\bigskipamount}%
-  \begin{minipage}[t]{\linewidth}%
-  \begin{minipage}[t]{#1\linewidth}%
-  \newcommand{\column}{%
-    \end{minipage}%
-    \begin{minipage}[t]{\linewidth-#1\linewidth}%
-  }%
-}{\end{minipage}\end{minipage}\par}
-
-\setlength{\fboxsep}{1pt}
+\MacroIndent=1.5em
 \AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
 %</documentation>
 
@@ -72,7 +55,7 @@
 %
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{609}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -99,7 +82,7 @@
 % \changes{v1.6}{2020/12/01}{Implementation of the twocolumn mode.}
 % \changes{v1.7}{2021/06/01}{Introduction of dedicated style file for the title, acronyms and bibliography macros. Extension of the title macros.}
 % \changes{v1.8}{2021/08/01}{Expand thanks to allow for reference label and fine tune the title page. Reimplement the must relevant macros from the physics package. Make mathrm produce upright Greek.}
-% \changes{v1.8}{2021/09/01}{Move parts of the package into extra packages.}
+% \changes{v2.0}{2021/09/01}{Move independent logic into dedicated packages.}
 %
 % \ifshort
 %<*documentation>
@@ -120,7 +103,7 @@
 
 \begin{abstract}
 The \software{hep-paper} package aims to provide a single style file containing most configurations and macros necessary to write appealing publications in High Energy Physics.
-Instead of reinventing the wheel by introducing newly created macros \software{hep-paper} preferably loads third party packages as long as they are lightweight enough.
+Instead of reinventing the wheel by introducing newly created macros \software{hep-paper} preferably loads third party packages.
 \end{abstract}
 
 \tableofcontents\clearpage
@@ -159,7 +142,7 @@ The possible \meta{sizes} are:
 The default is \unit[11]{pt}.
 
 \DescribeMacro{lang}
-The "lang"=\meta{name} option switches the document language to one of the values provided by the \software{babel} package \cite{babel}.
+The "lang"=\meta{name} option switches the document language.
 The default is "british".
 
 \DescribeMacro{sansserif}
@@ -175,9 +158,6 @@ The \hologo{LaTeX} default is separation via indentation the "parskip" option sw
 
 \DescribeMacro{symbols}
 The "symbols"=\meta{family} is passed to the \software{hep-math-font} package \cite{hep-math-font} and sets the family of the symbol fonts.
-"symbols=ams" loads the two \hologo{AmS} fonts \cite{amsfonts} and the \software{bm} bold fonts.
-The default "symbols=true" replaces additionally the blackboard font with the \software{dsfont} \cite{dsfont}.
-"symbols=minion" switches the symbol fonts to the Adobe MinionPro companion font from the \software{MnSymbol} package \cite{MnSymbol}.
 "symbols=false" deactivates loading any additional symbol fonts.
 
 \subsubsection{Deactivation}
@@ -192,11 +172,10 @@ The "defaults" option prevents the adjustment of the page geometry and the font 
 The "title=false" option deactivates the title page adjustments.
 
 \DescribeMacro{bibliography}
-The "bibliography"=\meta{key} option prevents the automatic loading of the \software{biblatex} package \cite{biblatex} if \meta{key}="false".
-Otherwise the \meta{key} is passed as "style" string to the \software{biblatex} package.
+The "bibliography"=\meta{key} option prevents the automatic loading of the \software{hep-bibliography} package \cite{hep-bibliography} if \meta{key}="false".
 
 \DescribeMacro{glossaries}
-The "glossaries=false" option deactives acronyms and the use of the \software{glossaries} package \cite{glossaries}.
+The "glossaries=false" option deactivates acronyms and the use of the \software{hep-acronym} package \cite{hep-acronym}.
 
 \DescribeMacro{references}
 The "references=false" option prevents the \software{cleveref} package \cite{cleveref} from being loaded and deactivates further redefinitions of reference macros.
@@ -280,68 +259,16 @@ Various title font macros are defined, allowing to change the appearance of the 
 
 \subsection{Text}
 
-Hyphenation is provided by the \software{babel} package \cite{babel} and quotation commands are provided by the \software{csquotes} package \cite{csquotes}.
-\DescribeMacro{\enquote}
-\DescribeMacro{\MakeOuterQuote}
-The latter package provides the convenient macros "\enquote"\marg{text} and "\MakeOuterQuote{}" allowing to leave the choice of quotation marks to \hologo{LaTeX} and use \dots instead of the pair \dots and \dots, respectively.
-
-\DescribeMacro{\eg}
-\DescribeMacro{\vs}
-The \software{foreign} package \cite{foreign} defines macros such as "\eg", "\ie", "\cf", and "\vs" which are typeset as \eg, \ie, \cf, and \vs.
-
-\DescribeMacro{\no}
-The "\no"\marg{number} macro is typeset as \no{123}.
-
-\DescribeMacro{\software}
-The "\software"\oarg{version}\marg{name} macro is typeset as \software[\fileversion]{HEP-Paper}.
-
-\DescribeMacro{\online}
-The "\online"\marg{url}\marg{text} macro combines the features of the "\href"\marg{url}\allowbreak\marg{text}\allowbreak \cite{hyperref} and the "\url"\marg{text} \cite{url} macros, resulting in \eg \online{https://ctan.org/pkg/hep-paper}{ctan.org/pkg/hep-paper}.
-
-
 \DescribeMacro{inlinelist}
 \DescribeMacro{enumdescript}
-The "inlinelist" and "enumdescript" environments are defined using the \software{enumitem} package \cite{enumitem}.
-\begin{columns}
-\begin{verbatim}
-The three main points are
-\begin{inlinelist}
-  \item one
-  \item two
-  \item three
-\end{inlinelist}
-\end{verbatim}
-\column
-The three main points are
-\begin{inlinelist}
- \item one
- \item two
- \item three
-\end{inlinelist}
-\end{columns}
-\vspace{4ex}
-\begin{columns}[.6]
-\begin{verbatim}
-\begin{enumdescript}[label=\Roman*)]
-  \item{First} one
-  \item{Second} two
-  \item{Third} three
-\end{enumdescript}
-\end{verbatim}
-\column
-\begin{enumdescript}[label=\Roman*)]
- \item{First} one
- \item{Second} two
- \item{Third} three
-\end{enumdescript}
-\end{columns}
+The "inlinelist" and "enumdescript" environments are defined.
 
 \DescribeMacro{\textsc}
-A bold versions \textbf{\textsc{Small Caps}} and a sans serif version of \textsf{\textsc{Small Caps}} based on the \CM font \cite{cm} is provided, the latter using the \software{sansmathfonts} package \cite{sansmathfonts}.
+A bold versions \textbf{\textsc{Small Caps}} and a sans serif version of \textsf{\textsc{Small Caps}} is provided.
 
 \DescribeMacro{\underline}
 \DescribeMacro{\overline}
-The "\underline" macro is redefined to allow line-breaks using the \software{ulem} package \cite{ulem}.
+The "\underline" macro is redefined to allow line-breaks.
 The "\overline" macro is extended to also \overline{overline} text outside of math environments.
 
 \DescribeMacro{\useparskip}
@@ -367,28 +294,23 @@ Footnotes are adjusted to swallow white space before the footnote mark and at th
 
 \subsubsection{Acronyms} \label{sec:acronyms}
 
+The \software{hep-acronym} package \cite{hep-acronym} is loaded.
 \DescribeMacro{\acronym}
 \DescribeMacro{\shortacronym}
 \DescribeMacro{\longacronym}
-The "\acronym"\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\meta{*}\marg{definition}\oarg{plural\linebreak[4]definition} macro generates the singular "\"\meta{abbreviation} and plural "\"\meta{abbreviation}"s" macros.
+The "\acronym"\meta{*}\oarg{typeset abbreviation} \marg{abbreviation}\meta{*}\marg{definition}\oarg{plural definition} macro generates the singular "\"\meta{abbreviation} and plural "\"\meta{abbreviation}"s" macros.
 The first star prevents the addition of an \enquote{s} to the abbreviation plural.
 The second star restores the \hologo{TeX} default of swallowing subsequent white space.
 The long form is only shown at the first appearance of these macros, later appearances generate the abbreviation with a hyperlink to the long form.
 The long form is never used in math mode.
 Capitalization at the beginning of paragraphs and sentences is (mostly) ensured.
 The "\shortacronym" and "\longacronym" macros are drop-in replacements of the "\acronym" macro showing only the short or long form of their acronym.
-\DescribeMacro{\resetacronym}
-\DescribeMacro{\dummyacronym}
-The first use form of the acronym can be enforced by resetting the acronym counter with "\resetacronym"\marg{key}.
-If the acronym counter equals one at the end of the document the short form of the acronym is not introduced.
-Placing a "\dummyacronym"\marg{key} at the end of the document ensures that the short form is introduced.
 
 \subsection{Math}
 
-The \software{mathtools} \cite{mathtools} and \software{amssymb} \cite{amsfonts} packages are loaded.
-They in turn load the \hologo{AmSLaTeX} \software{amsmath} \cite{amsmath} and \software{amsfonts} \cite{amsfonts} packages.
+The \software{hep-math} \cite{hep-math} and \software{hep-math-font} \cite{hep-math-font} packages are loaded.
 \DescribeMacro{\mathbf}
-Bold math, via "\mathbf" is improved by the \software{bm} package \cite{bm}, \ie ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
+Bold math, via "\mathbf" is improved, \ie ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
 Macros switching to "bfseries" such as "\section"\marg{text} are ensured to also typeset math in bold.
 \DescribeMacro{\text}
 The "\text"\marg{text} macro makes it possible to write text within math mode, \ie ($ \text A  \text b  \text \Gamma \text \delta \text{\textbf A} \text{\textbf b} \text{\textbf \Gamma} \text{\textbf \delta}$).
@@ -397,10 +319,9 @@ The math sans serif alphabet is redefined to be italic sans serif if the main te
 \DescribeMacro{\mathscr}
 The "\mathcal" font \ie ($\mathcal{ABCD}$) is accompanied by the "\mathscr" font \ie ($\mathscr{ABCD}$).
 \DescribeMacro{\mathbb}
-The "\mathbb" font is improved by the \software{doublestroke} package \cite{dsfont} and adjusted depending on the "sansserif" option \ie ($\mathbb{Ah1}$).
+The "\mathbb" font is adjusted depending on the "sansserif" option \ie ($\mathbb{Ah1}$).
 \DescribeMacro{\mathfrak}
 Finally, the "\mathfrak" font is also available \ie ($\mathfrak{AaBb12}$).
-Details about the font handling in \hologo{TeX} can be found in \ccite{fntguide}.
 
 \DescribeMacro{\nicefrac}
 \DescribeMacro{\flatfrac}
@@ -421,143 +342,13 @@ The imaginary unit $\i$ and the differential $\d$ are defined using this functio
 For longer paper it can be useful to re-number the equation in accordance with the section numbering "\numberwithin{equation}{section}".
 \DescribeMacro{subequations}
 In order to further reduce the size the of equation counter it can be useful to wrap "align" environments with multiple rows in a "subequations" environment.
-Both macros are provided by the \software{amsmath} package.
-
-\DescribeMacro{eqnarray}
-The depreciated "eqnarray" environment is undefined as long this behaviour is not prevented by the "eqnarray" package option.
-The "split", "multline", "align", "multlined", "aligned", "alignedat", and "cases" environments of the \software{amsmath} and \software{mathtools} packages should be used instead.
-
-\DescribeMacro{equation}
-Use the "equation" environment for short equations.
-\begin{columns}
-\begin{verbatim}
-\begin{equation}
-  left = right \ .
-\end{equation}
-\end{verbatim}
-\column
-\begin{equation}
-\framebox[2em]{left\strut} = \framebox[7em]{right\strut} \ .
-\end{equation}
-\end{columns}
-
-\DescribeMacro{multline}
-Use the "multline" environment for longer equations.
-\begin{columns}
-\begin{verbatim}
-\begin{multline}
-  left = right 1 \\
-  + right 2 \ .
-\end{multline}
-\end{verbatim}
-\column
-\begin{multline}
-\framebox[2em]{left\strut} = \framebox[7em]{right 1\strut} \\
-\framebox[7em]{+ right 2\strut} \ .
-\end{multline}
-\end{columns}
-
-\DescribeMacro{split}
-Use the "split" sub environment for equations in which multiple equal signs should be aligned.
-\begin{columns}
-\begin{verbatim}
-\begin{equation} \begin{split}
-  left &= right 1 \\
-  &= right 2 \ .
-\end{split} \end{equation}
-\end{verbatim}
-\column
-\begin{equation}
-\begin{split}
-\framebox[2em]{left\strut} &= \framebox[7em]{right 1\strut} \\
-&= \framebox[7em]{right 2\strut} \ .
-\end{split}
-\end{equation}
-\end{columns}
-
-\DescribeMacro{align}
-Use the "align" environment for the vertical alignment and horizontal distribution of multiple equations.
-\begin{columns}
-\begin{verbatim}
-\begin{subequations} \begin{align}
-  left &= right \ , &
-  left &= right \ , \\
-  left &= right \ , &
-  left &= right \ .
-\end{align} \end{subequations}
-\end{verbatim}
-\column
-\begin{subequations}
-\begin{align}
-\framebox[2em]{left\strut} &= \framebox[3em]{right\strut} \ , &
-\framebox[2em]{left\strut} &= \framebox[3em]{right\strut} \ , \\
-\framebox[2em]{left\strut} &= \framebox[3em]{right\strut} \ , &
-\framebox[2em]{left\strut} &= \framebox[3em]{right\strut} \ .
-\end{align}
-\end{subequations}
-\end{columns}
-
-\DescribeMacro{aligned}
-Use the "aligned" environment within a "equation" environment if the aligned equations should be labeled with a single equation number.
-
-\DescribeMacro{multlined}
-Use the "multlined" environment if either "split" or "align" contain very long lines.
-\begin{columns}
-\begin{verbatim}
-\begin{equation} \begin{split}
-  left &= right 1 \\ &=
-  \begin{multlined}[t]
-     right 2 \\ + right 3 \ .
-  \end{multlined}
-\end{split} \end{equation}
-\end{verbatim}
-\column
-\begin{equation}
-\begin{split}
-\framebox[2em]{left\strut} &= \framebox[7em]{right 1\strut} \\ &=
- \begin{multlined}[t]
-  \framebox[7em]{right 2\strut} \\
-  \framebox[7em]{+ right 3\strut} \ .
-\end{multlined}
-\end{split}
-\end{equation}
-\end{columns}
-
-\DescribeMacro{alignat}
-Use the "alignat" environment together with the "\mathllap" macro for the alignment of multiple equations with vastly different lengths.
-\begin{columns}
-\begin{verbatim}
-\begin{subequations}
-\begin{alignat}{2}
-  left &= long right && \ , \\
-  le. 2 &= ri. 2 \ , &
-  \mathllap{le. 3 = ri. 3} & \ .
-\end{alignat}
-\end{subequations}
-\end{verbatim}
-\column
-\begin{subequations}
-\begin{alignat}{2}
-\framebox[2em]{left\strut} &=
-\framebox[11em]{long right\strut} && \ , \\
-\framebox[2em]{le.\ 2\strut}
-&= \framebox[2.5em]{ri.\ 2\strut} \ , &
-\mathllap{\framebox[2em]{le.\ 3\strut}
-= \framebox[2.5em]{ri.\ 3\strut}} & \ .
-\end{alignat}
-\end{subequations}
-\end{columns}
-
-As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual spacing via "\quad" you are probably using the wrong environment.
-
-\subsubsection{Physics}
 
 \DescribeMacro{\unit}
 \DescribeMacro{\inv}
-The correct spacing for units, \cf \cref{eq:greek}, is provided by the macro "\unit"\oarg{value} \marg{unit} from the \software{units} package \cite{units} which can also be used in text mode.
+The correct spacing for units, \cf \cref{eq:greek}, is provided by the macro "\unit"\oarg{value} \marg{unit} which can also be used in text mode.
 The macro "\inv"\oarg{power}\marg{text} allows to avoid math mode also for inverse units such as \unit[5]{\inv{fb}} typeset via "\unit[5]{\inv{fb}}".
 
-Greek letters are adjusted to always be italic and upright in math and text mode, respectively, using the \software{fixmath} \cite{fixmath} and \software{alphabeta} \cite{alphabeta} packages.
+Greek letters are adjusted to always be italic and upright in math and text mode, respectively, using the \software{hep-math-font} \cite{hep-math-font} package.
 This allows differentiations like
 \begin{align} \label{eq:greek}
 \sigma &= \unit[5]{fb} \ , & &\mbox{at \unit[5]{\sigma} C.L.} \ , & \mu &= \unit[5]{cm} \ , & l &= \unit[5]{\mu m} \ .
@@ -571,7 +362,7 @@ Additionally, Greek letters can also be directly typed using Unicode.
 The \software{hep-math} package \cite{hep-math} provides additional macros such as
 \begin{align}
 &\ev{\phi} \ ,
-&&\pdv[n]{x}[f] \ ,
+&&\pdv[f]{x}[y]^2 \ ,
 &&\comm{A}{B} \ ,
 &&\order{x^2} \ ,
 &&\eval{x}_0^\infty \ ,
@@ -580,7 +371,7 @@ The \software{hep-math} package \cite{hep-math} provides additional macros such 
 
 \DescribeMacro{\cancel}
 \DescribeMacro{\slashed}
-The "\cancel"\marg{characters} macro from the \software{cancel} package \cite{cancel} and the "\slashed" \marg{character} macro from the \software{slashed} package \cite{slashed} allow to $\cancel{\text{cancel}}$ math and use the Dirac slash notation \ie $\slashed \partial$, respectively.
+The "\cancel"\marg{characters} macro and the "\slashed" \marg{character} macro allow to $\cancel{\text{cancel}}$ math and use the Dirac slash notation \ie $\slashed \partial$, respectively.
 
 \DescribeMacro{\overleftright}
 A better looking over left right arrow is defined \ie $\overleftright{\partial}$.
@@ -592,46 +383,15 @@ A better looking over left right arrow is defined \ie $\overleftright{\partial}$
 Automatic float placement is adjusted to place a single float at the top of pages and to reduce the number of float pages, using the \software{hep-float} package \cite{hep-float}.
 The most useful float placement is usually archived by placing the float \emph{in front} of the paragraph it is referenced in first.
 
-\begin{table}
-\begin{panels}{2}
-\begin{verbatim}
-\begin{panels}{2}
-  code
-\panel
-  \begin{tabular}...\end{tabular}
-\end{panels}
-\end{verbatim}
-\caption{Code for this panel environment.}
-\label{tab:panels}
-\panel
-\begin{tabular}{cccc}
-\toprule
-\multicolumn{2}{c}{one}& \multicolumn{2}{c}{two} \\ \cmidrule(r){1-2} \cmidrule(l){3-4}
-\multirow{2}{*}{a} & b & c & d \\
- & b & c & d \\
-\bottomrule
-\end{tabular}
-\caption{The \protecting{"booktabs"} and \protecting{"multirow"} features.}
-\label{tab:booktabs}
-\end{panels}
-\caption{Example use of the \protecting{"panels"} environment in Panel \subref{tab:panels} and the features from the \software{booktabs} and \software{multirow} packages in Panel \subref{tab:booktabs}.
-} \label{tab:table}
-\end{table}
-
 \DescribeEnv{panels}
 \DescribeMacro{\panel}
-The "panels" environment makes use of the \software{subcaption} package \cite{subcaption}.
-It provides sub-floats and takes as mandatory argument either the number of sub-floats (default~2) or the width of the first sub-float as fraction of the "\linewidth".
+The "panels" environment provides sub-floats and takes as mandatory argument either the number of sub-floats (default~2) or the width of the first sub-float as fraction of the "\linewidth".
 Within the "\begin{panels}"\oarg{vertical alignment}\marg{width} environment the "\panel" macro initiates a new sub-float.
 In the case that the width of the first sub-float has been given as an optional argument to the "panels" environment the "\panel"\marg{width} macro takes the width of the next sub-float as mandatory argument.
-The example code is presented in \cref{tab:panels}.
-
-\DescribeEnv{tabular}
-The \software{booktabs} \cite{booktabs} and \software{multirow} \cite{multirow} packages are loaded enabling publication quality tabulars such as in \cref{tab:booktabs}.
 
 \DescribeMacro{\graphic}
 \DescribeMacro{\graphics}
-The \software{graphicx} package \cite{graphicx} is loaded and the "\graphic"\oarg{width}\marg{figure} macro is defined, which is a wrapper for the "\includegraphics"\marg{figure} macro and takes the figure width as fraction of the "\linewidth" as optional argument (default~1).
+The "\graphic"\oarg{width}\marg{figure} macro is defined, which is a wrapper for the "\includegraphics"\marg{figure} macro and takes the figure width as fraction of the "\linewidth" as optional argument (default~1).
 If the graphics are located in a sub-folder its path can be indicated by "\graphics"\marg{subfolder}.
 
 \subsection{Bibliography} \label{sec:bibliography}
@@ -641,7 +401,7 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 The \software{biblatex} package \cite{biblatex} is loaded for bibliography management.
 The user has to add the line "\bibliography"\marg{my.bib} to the preamble of the document and "\printbibliography" at the end of the document.
 The bibliography is generated by \software{Biber} \cite{biber}.
-"biblatex" is extended by the \software{hep-bibliography} package \cite{hep-bibliography} to be able to cope with the "collaboration" and "reportNumber" fields provided by \online{https://inspirehep.net}{inspirehep.net} and a bug in the volume number is fixed.
+\software{biblatex} is extended by the \software{hep-bibliography} package \cite{hep-bibliography} to be able to cope with the "collaboration" and "reportNumber" fields provided by \online{https://inspirehep.net}{inspirehep.net} and a bug in the volume number is fixed.
 Additionally, the PubMed IDs are recognized and \online{https://ctan.org}{ctan.org}, \online{https://github.com}{github.com}, \online{https://gitlab.com}{gitlab.com}, \online{https://bitbucket.org}{bitbucket.org}, \online{https://www.launchpad.net}{launchpad.net}, \online{https://sourceforge.net}{sourceforge.net}, and \online{https://hepforge.org}{hepforge.org} are valid "eprinttype"s.
 \DescribeMacro{erratum}
 Errata can be included using the "related" feature.
@@ -781,7 +541,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \end{macro}
 %
 % \begin{macro}{glossaries}
-% Provide the "glossaries" option able to turn of the use of the \software{glossaries} package \cite{glossaries}.
+% Provide the "glossaries" option able to turn of the use of the \software{hep-acronym} package \cite{hep-acronym}.
 %    \begin{macrocode}
 \DeclareBoolOption[true]{glossaries}
 %    \end{macrocode}
@@ -951,23 +711,14 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % Set the SISSA compatibility options.
 %    \begin{macrocode}
 \ifhep@sissa
-  \setkeys{hep}{title=false, bibliography=false}
+  \setkeys{hep}{defaults, title=false, bibliography=false}
   \PassOptionsToPackage{
     colorlinks=true, linktocpage=true, pdfproducer=medialab, pdfa=true,
     urlcolor=blue, anchorcolor=blue, citecolor=blue, filecolor=blue,
     linkcolor=blue, menucolor=blue, pagecolor=blue
   }{hyperref}
-  \PassOptionsToPackage{reset}{geometry}
   \AtBeginDocument{\renewcommand{\foreignabbrfont}{}}
 \fi
-%    \end{macrocode}
-% Set the JHEP compatibility options.
-%    \begin{macrocode}
-\ifhep@jhep
-  \voffset 0in
-  \hoffset 0in
-\fi
-%    \end{macrocode}
 %
 % \section{Font}
 %
@@ -1052,7 +803,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % \section{Text}
 %
-% Load the \software{babel} package \cite{babel} for hyphenation and the recommended \software{csquotes} package \cite{csquotes}.
+% Load the \software{hep-text} package \cite{hep-text}.
 %    \begin{macrocode}
 \RequirePackage[lang=\hep@lang]{hep-text}
 %    \end{macrocode}
@@ -1069,7 +820,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \begin{macrocode}
 \RequirePackage[
   manualplacement=\ifhep@manualplacement true\else false \fi
-]{hep-floats}
+]{hep-float}
 %    \end{macrocode}
 %
 % \begin{macro}{\ifhep@journal}
@@ -1313,7 +1064,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \begin{macrocode}
 %    \end{macrocode}
 %
-% Acronyms are implemented with the \software{glossaries-extra} package \cite{glossaries-extra} which is an extension of the \software{glossaries} package \cite{glossaries} and must be loaded after the \software{hyperref} package in \cref{sec:hyperlinks}.
+% Acronyms are implemented in the \software{hep-acronym} package \cite{hep-acronym} and must be loaded after the \software{hyperref} package in \cref{sec:hyperlinks}.
 % Set the abbreviation style.
 %    \begin{macrocode}
 \ifhep@glossaries\RequirePackage{hep-acronym}\fi
@@ -1328,7 +1079,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %<*testJHEP>
 %
 %    \begin{macrocode}
-\documentclass{article}
+\documentclass[a4paper, 11pt]{article}
 
 \usepackage{jheppub}
 \usepackage[lang=english]{hep-paper}
@@ -1345,9 +1096,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \affiliation[a]{First affiliation}
 \affiliation[b]{Second affiliation}
 
-\begin{abstract}
-\blindtext
-\end{abstract}
+\abstract{\blindtext}
 
 \maketitle
 
@@ -1363,7 +1112,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %<*testJCAP>
 %
 %    \begin{macrocode}
-\documentclass{article}
+\documentclass[a4paper, 11pt]{article}
 
 \usepackage{jcappub}
 \usepackage[lang=english]{hep-paper}
@@ -1380,9 +1129,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \affiliation[a]{First affiliation}
 \affiliation[b]{Second affiliation}
 
-\begin{abstract}
-\blindtext
-\end{abstract}
+\abstract{\blindtext}
 
 \maketitle
 
@@ -1591,6 +1338,37 @@ E-mail: \email{second@email.com}
 %    \end{macrocode}
 %
 %</testSpringer>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-paper` package
+
+A `LaTeX` package for publications in High Energy Physics.
+
+## Introduction
+
+The `hep-paper` package aims to provide a single style file containing most configurations and macros necessary to write appealing publications in High Energy Physics.
+Instead of reinventing the wheel by introducing newly created macros `hep-paper` preferably loads third party packages as long as they are lightweight enough.
+
+For usual publications it is enough to load additionally to the `article` class without optional arguments only the `hep-paper` package.
+
+    \documentclass{article}
+    \usepackage{hep-paper}
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the `LaTeX` Project Public License, either version 1.3c of this license or (at your option) any later version.
+The latest version of this license is in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
 %
 % \Finale
 

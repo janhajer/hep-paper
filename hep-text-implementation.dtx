@@ -18,46 +18,41 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-text}[2021/08/01 v1.8 Publications in High Energy Physics]
-%<documentation>\ProvidesFile{hep-text-documentation.tex}[2021/08/01 v1.8 HEP-Paper documentation]
+%<package>\ProvidesPackage{hep-text}[2021/09/01 v1.0 Some text macros]
+%<documentation>\ProvidesFile{hep-text-documentation.tex}[2021/09/01 v1.0 HEP-Text documentation]
 %
 %<*documentation>
 
 \RequirePackage[l2tabu, orthodox]{nag}
+
 \documentclass{ltxdoc}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
-\setcounter{tocdepth}{2}
 
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
 
-\MacroIndent=1.5em
-
-\usepackage[parskip, oldstyle]{hep-paper}
+\usepackage[parskip]{hep-paper}
 
 \bibliography{bibliography}
 
-\acronym{PDF}{portable document format}
-\acronym{URL}{uniform resource locator}
 \acronym{CM}{computer modern}
 \acronym{LM}{latin modern}
 
 \usepackage{hologo}
-\usepackage{fonttable}
 
 \newenvironment{columns}[1][.5]{%
   \par\vspace{-\bigskipamount}%
   \begin{minipage}[t]{\linewidth}%
   \begin{minipage}[t]{#1\linewidth}%
-  \newcommand{\column}{%
+  \def\column{%
     \end{minipage}%
     \begin{minipage}[t]{\linewidth-#1\linewidth}%
   }%
 }{\end{minipage}\end{minipage}\par}
 
-\setlength{\fboxsep}{1pt}
+\MacroIndent=1.5em
 \AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
 %</documentation>
 
@@ -71,7 +66,7 @@
 %
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{98}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -98,6 +93,7 @@
 \GetFileInfo{hep-text.sty}
 
 \title{The \software{hep-text} package\thanks{This document corresponds to \software{hep-text}~\fileversion.}}
+\subtitle{List and text extensions}
 \author{Jan Hajer \email{jan.hajer@unibas.ch}}
 \date{\filedate}
 
@@ -109,10 +105,19 @@
 
 \maketitle
 
-Hyphenation is provided by the \software{babel} package \cite{babel} and quotation commands are provided by the \software{csquotes} package \cite{csquotes}.
+\begin{abstract}
+The \software{hep-text} package extends \hologo{LaTeX} lists using the \software{enumitem} package and provides some text macros.
+\end{abstract}
+
+The package can be loaded by "\usepackage{hep-text}".
+
+\DescribeMacro{lang}
+The "lang" option sets the used language and takes the values allowed by the \software{babel} package \cite{babel}, that is loaded for its hyphenation support.
+
+Quotation commands are provided by the \software{csquotes} package \cite{csquotes}.
 \DescribeMacro{\enquote}
 \DescribeMacro{\MakeOuterQuote}
-The latter package provides the convenient macros "\enquote"\marg{text} and "\MakeOuterQuote{}" allowing to leave the choice of quotation marks to \hologo{LaTeX} and use \dots instead of the pair \dots and \dots, respectively.
+It provides the convenient macros "\enquote"\marg{text} and "\MakeOuterQuote{}" allowing to leave the choice of quotation marks to \hologo{LaTeX} and use \verb|"| instead of the pair \verb|``| and \verb|''|, respectively.
 
 \DescribeMacro{\eg}
 \DescribeMacro{\vs}
@@ -165,13 +170,8 @@ The three main points are
 \end{enumdescript}
 \end{columns}
 
-\DescribeMacro{\textsc}
-A bold versions \textbf{\textsc{Small Caps}} and a sans serif version of \textsf{\textsc{Small Caps}} based on the \CM font \cite{cm} is provided, the latter using the \software{sansmathfonts} package \cite{sansmathfonts}.
-
 \DescribeMacro{\underline}
-\DescribeMacro{\overline}
-The "\underline" macro is redefined to allow line-breaks using the \software{ulem} package \cite{ulem}.
-The "\overline" macro is extended to also \overline{overline} text outside of math environments.
+The "\underline" macro is redefined to allow line-breaks using the \software{soulutf8} package \cite{soulutf8}.
 
 % \ifshort
 \printbibliography
@@ -186,7 +186,6 @@ The "\overline" macro is extended to also \overline{overline} text outside of ma
 % \PrintChanges
 % }
 %
-% \clearpage
 % \appendix
 %
 % \section{Implementation}
@@ -216,15 +215,15 @@ The "\overline" macro is extended to also \overline{overline} text outside of ma
 %
 % Load the \software{babel} package \cite{babel} for hyphenation and the recommended \software{csquotes} package \cite{csquotes}.
 %    \begin{macrocode}
-\RequirePackage[\hep@lang]{babel}
+\RequirePackage[\heptext@lang]{babel}
 \RequirePackage[autostyle]{csquotes}
 %    \end{macrocode}
 %
 % \begin{macro}{\underline}
-% Load the \software{ulem} package \cite{ulem} for hyphenable underlined text.
+% Load the \software{soulutf8} package \cite{soulutf8} for hyphenable underlined text.
 %    \begin{macrocode}
-\RequirePackage[normalem]{ulem}
-\let\underline\uline
+\RequirePackage{soulutf8}
+\let\underline\textul
 %    \end{macrocode}
 % \end{macro}
 %
@@ -232,16 +231,17 @@ The "\overline" macro is extended to also \overline{overline} text outside of ma
 % Load the \software{foreign} package \cite{foreign} in order to highlight abbreviations and vocabularies from foreign languages.
 % Add the missing "\vs" command.
 %    \begin{macrocode}
+\RequirePackage{pdftexcmds}
 \ifnum\pdf@strcmp{\heptext@lang}{american}=0
-  \newcommand{\hep@lang@foreign}{USenglish}
+  \newcommand{\heptext@lang@foreign}{USenglish}
 \else
   \ifnum\pdf@strcmp{\heptext@lang}{USenglish}=0
-    \newcommand{\hep@lang@foreign}{USenglish}
+    \newcommand{\heptext@lang@foreign}{USenglish}
   \else
-    \newcommand{\hep@lang@foreign}{british}
+    \newcommand{\heptext@lang@foreign}{british}
   \fi
 \fi
-\RequirePackage[all, \hep@lang@foreign]{foreign}
+\RequirePackage[all, \heptext@lang@foreign]{foreign}
 \DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
 %    \end{macrocode}
 % \end{macro}
@@ -326,6 +326,33 @@ The "\overline" macro is extended to also \overline{overline} text outside of ma
 % \end{environment}
 %
 %</package>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-text` package
+
+List and text extensions
+
+## Introduction
+
+The `hep-text` package extends `LaTeX` lists using the `enumitem package and provides some text macros.
+
+The package can be loaded by `\usepackage{hep-text}`.
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the `LaTeX` Project Public License, either version 1.3c of this license or (at your option) any later version.
+The latest version of this license is in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
 %
 % \Finale
 

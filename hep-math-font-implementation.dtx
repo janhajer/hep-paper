@@ -33,8 +33,7 @@
 \CodelineIndex
 \RecordChanges
 
-
-\usepackage[parskip, oldstyle]{hep-paper}
+\usepackage[parskip]{hep-paper}
 
 \bibliography{bibliography}
 
@@ -45,7 +44,6 @@
 \usepackage{fonttable}
 
 \MacroIndent=1.5em
-\setlength{\fboxsep}{1pt}
 \AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
 %</documentation>
 
@@ -59,7 +57,7 @@
 %
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{793}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -86,6 +84,7 @@
 \GetFileInfo{hep-math-font.sty}
 
 \title{The \software{hep-math-font} package\thanks{This document corresponds to \software{hep-math-font}~\fileversion.}}
+\subtitle{Extended Greek and sans-serif math}
 \author{Jan Hajer \email{jan.hajer@unibas.ch}}
 \date{\filedate}
 
@@ -98,23 +97,28 @@
 \maketitle
 
 \begin{abstract}
-The \software{hep-math-font} package adjust the math fonts to be sans serif if the document is sans serif.
-Additionally Greek letters are redefined to be always italic and upright in math and text mode respectively.
+The \software{hep-math-font} package adjust the math fonts to be italic sans-serif if the document is sans-serif.
+Additionally Greek letters are redefined to be always italic and upright in math and text mode, respectively.
 Some math font macros are adjusted to give more consistently the naively expected results.
 \end{abstract}
 
 The package is loaded using "\usepackage{hep-math-font}".
 
-\DescribeMacro{symbols}
-The "symbols" options defines how many symbol fonts are being loaded and defaults to "true".
-With "false" no additional symbol fonts are being loaded.
-With "ams" only the usual \hologo{AmSLaTeX} symbols \software{amssymb} \cite{amsfonts} and fonts \software{amsfonts} \cite{amsfonts} are loaded.
-With "minion" the "Minion" symbol fonts from the \software{MnSymbol} package \cite{MnSymbol} are loaded instead.
-
 If the document "\familydefault" font is switched to the sansserif "\sfdefault" font the math font is adjusted accordingly using fonts compatible to \LM and \CM.
+\DescribeMacro{warning}
+In order to be able to easily switch large chucks of math from serif to sans-serif documents the meaning of "\mathrm" and "\mathsf" is adjusted so that the first generates upright sans-serif math and the second serif math.
+This is is neither the literal meaning of the macros nor the best behaviour if a single large document is written in sans-serif.
+However, it simplifies working in an environment where one copies pieces of math between serif and sans-serif documents \eg publications \vs talks and funding applications.
 
 Using the \software{fixmath} \cite{fixmath} and \software{textalpha} \cite{textalpha} packages Greek letter are adjusted so that they are always italic and upright in math and text mode, respectively.
 Greek letters can be written by using their unicode characters.
+
+\DescribeMacro{symbols}
+The "symbols"=\meta{family} sets the family of the symbol fonts.
+"symbols=ams" loads the two \hologo{AmS} fonts \cite{amsfonts} and the \software{bm} bold fonts.
+The default "symbols=true" replaces additionally the blackboard font with the \software{dsfont} \cite{dsfont}.
+"symbols=minion" switches the symbol fonts to the Adobe MinionPro companion font from the \software{MnSymbol} package \cite{MnSymbol}.
+"symbols=false" deactivates loading any additional symbol fonts, effectively restricting the package to only switch the math font according to the sans-serif property of the main text.
 
 \section{Macros}
 
@@ -127,7 +131,7 @@ Bold math, via "\mathbf" is improved with the \software{bm} package \cite{bm}, \
 Macros switching to "bfseries" such as "\section"\marg{text} are ensured to also typeset math in bold.
 
 \DescribeMacro{\mathsf}
-The math sans serif alphabet is redefined to be italic sans serif if the main text is serif and italic serif if the main text is sans serif, \ie ($\mathsf A \mathsf b \mathsf \Gamma \mathsf \delta \mathbf{\mathsf A} \mathbf{\mathsf b} \mathbf{\mathsf \Gamma} \mathbf{\mathsf \delta}$).
+The math sans-serif alphabet is redefined to be italic sans-serif if the main text is serif and italic serif if the main text is sans-serif, \ie ($\mathsf A \mathsf b \mathsf \Gamma \mathsf \delta \mathbf{\mathsf A} \mathbf{\mathsf b} \mathbf{\mathsf \Gamma} \mathbf{\mathsf \delta}$).
 Ensuring that the distinction between these fonts is also kept if the \prefix{sans}{serif} option of the document is switched.
 
 \DescribeMacro{\mathscr}
@@ -143,8 +147,6 @@ The "\mathtt" macro switches to \LM typewriter font \ie ($\mathtt A \mathtt b \m
 Finally, the "\mathfrak" font is also available \ie ($\mathfrak{AaBb12}$).
 
 Details about the font handling in \hologo{TeX} can be found in \ccite{fntguide}.
-\hologo{pdfLaTeX} allows only 16 math fonts.
-The font allocation of this package is explained in \cref{sec:allocation}.
 
 \section{Math alphabet allocation} \label{sec:allocation}
 
@@ -158,23 +160,28 @@ The font allocation of this package is explained in \cref{sec:allocation}.
 \setlength\arrayrulewidth{0pt}
 
 \begin{figure}
-\begin{panels}[t]{.22}
+\begin{panels}[t]{4}
 \fonttable{rm-\ifhepmathfont@serif lmr\else lmss\fi10}
 \caption{Text}
-\panel{.22}
+\panel
 \fontrange{0}{127}
 \fonttable{\ifhepmathfont@serif lm\else cmss\fi mi10}
 \caption{Math}\vspace{2ex}
 \fonttable{\ifhepmathfont@serif lm\else cmss\fi sy10}
 \caption{Symbol}
-\panel{.352}
+\panel
 \fontrange{0}{127}
 \fonttable{\ifhepmathfont@serif\else ss\fi msam10}
 \caption{AMS a}\vspace{2ex}
+\fontrange{0}{79}
+\fonttable{\ifhepmathfont@serif\else ss\fi msbm10}
+\fontrange{96}{127}
 \fonttable{\ifhepmathfont@serif\else ss\fi msbm10}
 \caption{AMS b}
-\panel{.19}
-\fontrange{0}{127}
+\panel
+\fontrange{0}{8}
+\fonttable{eufm10}
+\fontrange{32}{127}
 \fonttable{eufm10}
 \caption{Euler fraktur}\vspace{2ex}
 \fontrange{64}{95}
@@ -252,7 +259,7 @@ The \software{amssymb} (\software{amsfonts}) packages \cite{amssymb} load two mo
 The "sansserif" option replaces them with \textbf{ssmsam10} "\U/ssmsa/m/n/10" and \textbf{ssmsbm10} "\U/ssmsb/m/n/10" from the \software{sansmathfonts} package \cite{sansmathfonts}, respectively.
 The \software{bm} package \cite{bm} loads the bold version for the fonts \labelcref{it:math text,it:math italic,it:math symbol}.
 
-Other math alphabets are only loaded on demand, \eg "\mathsf" uses a sans serif font and "\mathbf" without the \software{bm} package uses a bold font.
+Other math alphabets are only loaded on demand, \eg "\mathsf" uses a sans-serif font and "\mathbf" without the \software{bm} package uses a bold font.
 The "\mathscr" macro uses the script font from the \software{mathrsfs} package \cite{mathrsfs}
 \begin{enumdescript}[start=9,label=\arabic*)]
 \item{rsfs10} "\U/rsfs/m/n/10" Math script font (capital letters)
@@ -339,7 +346,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 %
 % \subsection{Sans serif}
 %
-% Check if document is set to sans serif.
+% Check if document is set to sans-serif using the \software{xstring} package \cite{xstring}.
 %    \begin{macrocode}
 \newif\ifhepmathfont@serif
 \RequirePackage{xstring}
@@ -348,7 +355,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 }
 %    \end{macrocode}
 % If the "sansserif" package option is active use code adjusted from the \software{sansmathfonts} package \cite{sansmathfonts}.
-% Ensure that "\mathsf" is italic as well as sans serif and sans for sans and sans serif documents, respectively.
+% Ensure that "\mathsf" is italic as well as sans-serif and sans for sans and sans-serif documents, respectively.
 %    \begin{macrocode}
 \ifhepmathfont@serif
 %    \end{macrocode}
@@ -360,7 +367,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
   \SetMathAlphabet{\mathsf}{bold}{OML}{\hep@font@sf}{b}{it}
 %    \end{macrocode}
 % \end{macro}
-% Define fonts for sans serif documents.
+% Define fonts for sans-serif documents.
 %    \begin{macrocode}
 \else
   \newcommand\hep@font@sf{lmr}
@@ -428,7 +435,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\mathsf}
-% Declare "\mathsf" for sans serif documents to produce serif.
+% Declare "\mathsf" for sans-serif documents to produce serif.
 %    \begin{macrocode}
   \DeclareMathAlphabet{\mathsf}{OML}{\hep@font@sf}{m}{it}
   \SetMathAlphabet{\mathsf}{bold}{OML}{\hep@font@sf}{bx}{it}
@@ -442,7 +449,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 % \subsection{Greek letters}
 %
 % Load the \software{fixmath} \cite{fixmath} and \software{textalpha} \cite{textalpha} packages ensuring that upper Greek letters in math mode are italic and providing upright Greek letters in text mode, respectively.
-% Define tge "hep@greek" macro ensuring that both "\text" and "\mathrm" produce upright Greek letters.
+% Define the "hep@greek" macro ensuring that both "\text" and "\mathrm" produce upright Greek letters.
 %    \begin{macrocode}
 \ifhepmathfont@symbols
   \RequirePackage{amssymb}
@@ -456,7 +463,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 %    \end{macrocode}
 % The following code follows closely the \software{alphabeta} package \cite{alphabeta}.
 %
-% \subsection{Commands to access Greek letters by name}
+% \subsubsection{Commands to access Greek letters by name}
 %
 % For letters defined in math mode, the commands work in both, text and math.
 % Some Greek letters look identical to Latin letters and can therefore not be used as variable symbols in math formulas.
@@ -465,7 +472,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 % Mathematical notation distinguishes `variant shape symbols` for pi, phi, rho, theta (small and capital), beta, and kappa (characters for the latter three symbols are not included in TeX’s math fonts).
 % These variations have no syntactic meaning in Greek text and are not given code-points in the LGR encoding while Unicode defines separate code points for the symbol variants.
 %
-% \subsection{Greek Alphabet}
+% \subsubsection{Greek Alphabet}
 %
 % Macros keep their meaning in mathematical mode (\ie use the same shape as without this package) and refer to "greek letter ..." in text.
 % For "\epsilon" and "\phi", this means that the selected symbol variant differs in text \vs math mode.
@@ -540,7 +547,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
   \providecommand*{\sampi}{\textsampi}
 %    \end{macrocode}
 %
-% \subsection{Variant shape symbols}
+% \subsubsection{Variant shape symbols}
 %
 % TeX’s concept of “standard” \vs “variant” math symbols does not map to the
 % distinction between "greek letter ..." \vs "greek ... symbol" in the Unicode standard (see "test-tuenc-greek.pdf").
@@ -586,7 +593,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
   \providecommand*{\Thetasymbol}{\textThetasymbol}
 %    \end{macrocode}
 %
-% \subsection{TextCompositeCommands for the generic macros}
+% \subsubsection{TextCompositeCommands for the generic macros}
 %
 % The NFSS TextComposite mechanism looks for the next token without expanding it.
 % In order to let compositions like "\ensuregreek{\'\Alpha}" or "\ensuregreek{\>''\alpha}" work as expected we define TextComposites with the `letter name commands`.
@@ -596,7 +603,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
   \@ifl@aded{def}{lgrenc}{\input{alphabeta-lgr.def}}{}
 %    \end{macrocode}
 %
-% \subsection{Re-definition for Greek Unicode input in math mode}
+% \subsubsection{Re-definition for Greek Unicode input in math mode}
 %
 % Check with "\ifdefined" for the definition of
 % "\DeclareUnicodeCharacter". In contrast to "\@ifdefined", this works
@@ -669,6 +676,8 @@ Hence, the minion option uses three to four more math alphabets than a usual set
   \fi
 %    \end{macrocode}
 %
+% \subsection{Additional math fonts}
+%
 % Either load the \software{MnSymbol} package \cite{MnSymbol} or the the \software{exscale} package in order to fix Latin Modern "lmex" fonts.
 % Additionally, load the \software{amssymb} package \cite{amsfonts} which provides further math symbols and also loads the \software{amsfonts} package \cite{amsfonts}.
 %    \begin{macrocode}
@@ -679,8 +688,6 @@ Hence, the minion option uses three to four more math alphabets than a usual set
     \RequirePackage{amssymb}
   \fi
 %    \end{macrocode}
-%
-% \subsection{Additional math fonts}
 %
 % \begin{macro}{\mathbf}
 % Load the \software{bm} package \cite{bm} for superior boldmath.
@@ -731,13 +738,12 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 %
 % \section{Tests}
 %
-% \subsection{Serif}
-%
-%<*testserif>
+%<*testserif|testsans>
 %
 %    \begin{macrocode}
 \documentclass{article}
 
+%<testsans>\renewcommand{\familydefault}{\sfdefault}
 \usepackage[oldstyle]{hep-font}
 \usepackage{hep-math-font}
 
@@ -781,61 +787,36 @@ $\rm\alpha\beta\gamma\delta\epsilon\zeta\eta\theta\iota\kappa\lambda
 \end{document}
 %    \end{macrocode}
 %
-%</testserif>
+%</testserif|testsans>
 %
-% \subsection{Sanserif}
+% \section{Readme}
 %
-%<*testsans>
+%<*readme>
 %
 %    \begin{macrocode}
-\documentclass{article}
+# The `hep-math-font` package
 
-\renewcommand{\familydefault}{\sfdefault}
-\usepackage[oldstyle]{hep-font}
-\usepackage{hep-math-font}
+Extended Greek and sans-serif math
 
-\usepackage{fancyvrb}\DefineShortVerb{\|}
-\newenvironment{vrb}{\begin{tabular}{@{}p{6cm}l@{}}}{\end{tabular}}
+## Introduction
 
-\begin{document}
+The `hep-math-font` package adjust the math fonts to be sans-serif if the document is sans-serif.
+Additionally Greek letters are redefined to be always italic and upright in math and text mode respectively.
+Some math font macros are adjusted to give more consistently the naively expected results.
 
-\begin{vrb}
-|| & $Ab\Gamma\delta123$ \\
-|\mathbf | & $\mathbf{Ab\Gamma\delta123}$ \\
-|\mathrm | & $\mathrm{Ab\Gamma\delta123}$ \\
-|   \mathbf | & $\mathbf{\mathrm{Ab\Gamma\delta123}}$ !! \\
-|\text | & $\text{Ab\Gamma\delta123}$ \\
-|   \textbf | & $\textbf{\text{Ab\Gamma\delta123}}$ \\
-|\mathsf | & $\mathsf{Ab\Gamma\delta123}$ \\
-|   \mathbf | & $\mathbf{\mathsf{Ab\Gamma\delta123}}$ \\
-|\mathtt | & $\mathtt{Ab\Gamma123}$ \\
-|   \mathbf | & $\mathbf{\mathtt{Ab\Gamma123}}$ \\
-|\mathcal | & $\mathcal{ABC}$ \\
-|\mathscr | & $\mathscr{ABC123}$ \\
-|\mathbb | & $\mathbb{ABC1}$ \\
-|\mathfrak | & $\mathfrak{ABC123}$ \\
-\end{vrb}
+The package is loaded using `\usepackage{hep-math-font}`.
 
+## Author
 
-$\Gamma\Delta\Lambda\Phi\Pi\Psi\Sigma\Theta\Upsilon\Xi\Omega$
+Jan Hajer
 
-$\rm\Gamma\Delta\Lambda\Phi\Pi\Psi\Sigma\Theta\Upsilon\Xi\Omega$
+## License
 
-\Gamma\Delta\Lambda\Phi\Pi\Psi\Sigma\Theta\Upsilon\Xi\Omega
-
-$\alpha\beta\gamma\delta\epsilon\zeta\eta\theta\iota\kappa\lambda
-\mu\nu\xi\pi\rho\sigma\varsigma\tau\upsilon\phi\chi\psi\omega$
-
-$\rm\alpha\beta\gamma\delta\epsilon\zeta\eta\theta\iota\kappa\lambda
-\mu\nu\xi\pi\rho\sigma\varsigma\tau\upsilon\phi\chi\psi\omega$
-
-\alpha\beta\gamma\delta\epsilon\zeta\eta\theta\iota\kappa\lambda
-\mu\nu\xi\pi\rho\sigma\varsigma\tau\upsilon\phi\chi\psi\omega
-
-\end{document}
+This file may be distributed and/or modified under the conditions of the `LaTeX` Project Public License, either version 1.3c of this license or (at your option) any later version.
+The latest version of this license is in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is part of all distributions of LaTeX version 2005/12/01 or later.
 %    \end{macrocode}
 %
-%</testsans>
+%</readme>
 %
 % \Finale
 

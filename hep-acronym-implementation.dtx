@@ -19,7 +19,7 @@
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
 %<package>\ProvidesPackage{hep-acronym}[2021/08/01 v1.0 Acronyms using glossaries]
-%<documentation>\ProvidesFile{hep-acronym-documentation.tex}[2021/08/01 v1.0 HEP-Acronym documentation]
+%<documentation>\ProvidesFile{hep-acronym-documentation.tex}[2021/08/01 v1.0 hep-acronym documentation]
 %
 %<*documentation>
 
@@ -32,19 +32,14 @@
 \CodelineIndex
 \RecordChanges
 
-\MacroIndent=1.5em
-
 \usepackage{hologo}
-\usepackage[parskip, oldstyle]{hep-paper}
+\usepackage[parskip]{hep-paper}
 
 \bibliography{bibliography}
 
 \acronym{PDF}{portable document format}
-\acronym{URL}{uniform resource locator}
-\acronym{CM}{computer modern}
-\acronym{LM}{latin modern}
 
-
+\MacroIndent=1.5em
 \AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
 %</documentation>
 
@@ -58,7 +53,7 @@
 %
 % \fi
 %
-% \CheckSum{353}
+% \CheckSum{354}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -85,6 +80,7 @@
 \GetFileInfo{hep-acronym.sty}
 
 \title{The \software{hep-acronym} package\thanks{This document corresponds to \software{hep-acronym}~\fileversion.}}
+\subtitle{An acronym extension for glossaries}
 \author{Jan Hajer \email{jan.hajer@unibas.ch}}
 \date{\filedate}
 
@@ -96,7 +92,13 @@
 
 \maketitle
 
-Acronyms are implemented with the \software{glossaries-extra} package \cite{glossaries-extra} which is an extension of the \software{glossaries} package \cite{glossaries} and must be loaded after the \software{hyperref} package \cite{hyperref}.
+\begin{abstract}
+The \software{hep-acronym} package provides an acronym macro based on the \software{glossaries} package.
+\end{abstract}
+
+Acronyms are implemented using the \software{glossaries-extra} package \cite{glossaries-extra} which is an extension of the \software{glossaries} package \cite{glossaries} and must be loaded after the \software{hyperref} package \cite{hyperref}.
+It can be loaded using "\usepackage{hep-acronym}".
+
 \DescribeMacro{\acronym}
 The "\acronym"\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\meta{*}\marg{definition}\oarg{plural\linebreak[4]definition} macro generates the singular "\"\meta{abbreviation} and plural "\"\meta{abbreviation}"s" macros.
 
@@ -105,7 +107,8 @@ The second star restores the \hologo{TeX} default of swallowing subsequent white
 The long form is only shown at the first appearance of these macros, later appearances generate the abbreviation with a hyperlink to the long form.
 Capitalisation at the beginning of paragraphs and sentences is (mostly) ensured.
 The long form is never used in math mode which can be exploited to enforce the short form.
-As there can be no fixed rule whether to use the long form or the short form in section headers the user is left to their own devises \eg "\glsdesc"\meta{abbreviation}, "\Glsdesc"\meta{abbreviation}.
+In order to enforce the long form use "\glsdesc*"\marg{abbreviation}.
+As there can be no fixed rule whether to use the long form or the short form in section headers the user is left to their own devises \eg "\glsdesc"\marg{abbreviation}, "\Glsdesc"\marg{abbreviation}.
 
 \DescribeMacro{\shortacronym}
 \DescribeMacro{\longacronym}
@@ -117,6 +120,9 @@ The first use form of the acronym can be enforced by resetting the acronym count
 
 If the acronym counter equals one at the end of the document the short form of the acronym is not introduced.
 Placing a "\dummyacronym"\marg{key} at the end of the document ensures that the short form is introduced.
+
+In order to reduce the number of potentially conflicting packages the \software{glossaries} package is loaded without any glossary style.
+In the case that the glossary should be printed additional packages must be loaded via \eg "\usepackage{glossary-list}".
 
 % \ifshort
 \printbibliography
@@ -131,7 +137,6 @@ Placing a "\dummyacronym"\marg{key} at the end of the document ensures that the 
 % \PrintChanges
 % }
 %
-% \clearpage
 % \appendix
 %
 % \section{Implementation}
@@ -477,11 +482,39 @@ $\URL$ \emph{(Second appearance is forced to be always short)}
 \LM \emph{(Second appearance is shorted)}.
 $\CM$ \emph{(Enforce short form)}
 \CM \emph{(then extend second appearance)}
-\glsdesc{CM} \emph{(enforce long form)}
+\glsdesc*{CM} \emph{(enforce long form)}
 
 \end{document}
 %    \end{macrocode}
+%
 %</test>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-acronym` package
+
+An acronym extension for glossaries
+
+## Introduction
+
+The `hep-acronym` package provides an acronym macro based on the `glossaries` package.
+It can be loaded using `\usepackage{hep-acronym}`.
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the `LaTeX` Project Public License, either version 1.3c of this license or (at your option) any later version.
+The latest version of this license is in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
+%
 % \Finale
 
 \endinput

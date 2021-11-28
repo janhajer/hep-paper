@@ -33,7 +33,7 @@
 \CodelineIndex
 \RecordChanges
 
-\usepackage[parskip, oldstyle]{hep-paper}
+\usepackage[parskip]{hep-paper}
 
 \bibliography{bibliography}
 
@@ -44,7 +44,6 @@
 \usepackage{hologo}
 
 \MacroIndent=1.5em
-\setlength{\fboxsep}{1pt}
 \AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
 %</documentation>
 
@@ -58,7 +57,7 @@
 %
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{392}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -85,6 +84,7 @@
 \GetFileInfo{hep-font.sty}
 
 \title{The \software{hep-font} package\thanks{This document corresponds to \software{hep-font}~\fileversion.}}
+\subtitle{Latin modern extended by computer modern}
 \author{Jan Hajer \email{jan.hajer@unibas.ch}}
 \date{\filedate}
 
@@ -138,7 +138,6 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 % \PrintChanges
 % }
 %
-% \clearpage
 % \appendix
 %
 % \section{Implementation}
@@ -206,7 +205,7 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
   \fi
 \fi
 %    \end{macrocode}
-% Adjust the figures according to the "lining" option and ensure that tables always use lining, using the \software{etoolbox} package \cite{etoolbox}.
+% Adjust the figures according to the "lining" option and ensure that tables always use lining.
 %    \begin{macrocode}
 % \RequirePackage{etoolbox}
 % \AtBeginEnvironment{tabular}{\tlstyle}
@@ -249,6 +248,7 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 %    \begin{macrocode}
   \rmfamily
 %    \end{macrocode}
+%\begin{macro}{\textsc}
 %For lining numerals add \CM roman small caps (italic and bold) from the \software{slantsc} package \cite{slantsc}.
 %    \begin{macrocode}
   \ifhepfont@lining
@@ -260,6 +260,8 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
     \hep@rm@fontshape{b}{scit}{<->ssub*cmr/bx/scsl}{}
     \hep@rm@fontshape{bx}{scit}{<->ssub*cmr/bx/scit}{}
 %    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\textsc}
 %For oldstyle numerals use the fonts from the \software{hfoldsty} package \cite{hfoldsty}.
 %    \begin{macrocode}
   \else
@@ -280,7 +282,9 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
     \hep@rm@fontshape{b}{scsl}{<->ssub*hfor/bx/scsl}{}
   \fi
 %    \end{macrocode}
-%Extended \CM sans serif font using the \software{sansmathfonts} package \cite{sansmathfonts}.
+%\end{macro}
+%\begin{macro}{\textsc}
+%Provide the sans serif small caps font shape using the extended \CM from the \software{sansmathfonts} package \cite{sansmathfonts}.
 %    \begin{macrocode}
   \sffamily
   \hep@sf@fontshape{m}{sc}{<->ssub*xcmss/m/sc}{}
@@ -293,11 +297,14 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
   \hep@sf@fontshape{b}{scsl}{<->ssub*xcmss/bx/scit}{}
   \hep@sf@fontshape{bx}{scsl}{<->ssub*xcmss/bx/scit}{}
 %    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\textui}
 %Provide a sans upright italic font.
 %    \begin{macrocode}
   \hep@sf@fontshape{m}{ui}{<->cmssu10}{}
 \fi
 %    \end{macrocode}
+%\end{macro}
 %
 % Load the \software{inputenc} package \cite{inputenc} whe using \hologo{pdfLaTeX}.
 %    \begin{macrocode}
@@ -448,6 +455,33 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 %    \end{macrocode}
 %
 %</test>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-font` package
+
+Latin modern extended by computer modern.
+
+## Introduction
+
+The `hep-font` package loads standard font packages and extends the usual Latin Modern implementations by replacing missing fonts with Computer Modern counterparts.
+
+The package is loaded with `\usepackage{hep-font}`.
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the `LaTeX` Project Public License, either version 1.3c of this license or (at your option) any later version.
+The latest version of this license is in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
 %
 % \Finale
 

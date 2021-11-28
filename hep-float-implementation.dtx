@@ -18,8 +18,8 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-floats}[2021/08/01 v1.0 Float adjustments ]
-%<documentation>\ProvidesFile{hep-floats-documentation.tex}[2021/08/01 v1.0 hep-float documentation]
+%<package>\ProvidesPackage{hep-float}[2021/08/01 v1.0 Float adjustments ]
+%<documentation>\ProvidesFile{hep-float-documentation.tex}[2021/08/01 v1.0 hep-float documentation]
 %
 %<*documentation>
 
@@ -40,7 +40,6 @@
 \usepackage{hologo}
 
 \MacroIndent=1.5em
-\setlength{\fboxsep}{1pt}
 \AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
 %</documentation>
 
@@ -48,13 +47,13 @@
 \expandafter\newif\csname ifshort\endcsname
 \shortfalse
 \begin{document}
-\DocInput{hep-floats-implementation.dtx}
+\DocInput{hep-float-implementation.dtx}
 \end{document}
 %</driver>
 %
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{105}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -78,9 +77,10 @@
 %<*documentation>
 % \fi
 %
-\GetFileInfo{hep-floats.sty}
+\GetFileInfo{hep-float.sty}
 
-\title{The \software{hep-floats} package\thanks{This document corresponds to \software{hep-floats}~\fileversion.}}
+\title{The \software{hep-float} package\thanks{This document corresponds to \software{hep-float}~\fileversion.}}
+\subtitle{Convenience package for float placement}
 \author{Jan Hajer \email{jan.hajer@unibas.ch}}
 \date{\filedate}
 
@@ -91,6 +91,12 @@
 \newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
 
 \maketitle
+
+\begin{abstract}
+The \software{hep-float} package redefines some \hologo{LaTeX} float placement defaults and defines convenience wrappers for floats.
+\end{abstract}
+
+The \software{hep-float} package can be loaded with "\usepackage{hep-float}".
 
 \DescribeEnv{figure}
 \DescribeEnv{table}
@@ -104,9 +110,9 @@ Automatic float placement is adjusted to place a single float at the top of page
 "\renewcommand{\dbltopfraction}{.9}" \hfill (default 0.7) \\
 "\renewcommand{\floatpagefraction}{.8}" \hfill float pages must be full (default 0.5)
 
-Additionally, manual float placement is deactivated but can be reactivated using the "manualplacement" package option.
-It is however recommended to archive the desired design by adjusting above macros.
 The most useful float placement is usually archived by placing the float \emph{in front} of the paragraph it is referenced in first.
+Additionally, manual float placement can be deactivated using the "manualplacement" package option.
+
 \DescribeMacro{\raggedright}
 The float environments have been adjusted to center their content.
 The usual behaviour can be reactivated using "\raggedright".
@@ -317,10 +323,39 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 %    \end{macrocode}
 % \end{macro}
 %
+%</package>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-float` package
+
+Convenience package for float placement
+
+## Introduction
+
+The `hep-float` package redefines some `LaTeX` float placement defaults and defines convenience wrappers for floats.
+
+The `hep-float` package can be loaded with `\usepackage{hep-float}`.
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the `LaTeX` Project Public License, either version 1.3c of this license or (at your option) any later version.
+The latest version of this license is in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
+%
 % \Finale
 
 \endinput
 
 % \PrintIndex
-% makeindex -s gglo.ist -o hep-floats-implementation.gls hep-floats-implementation.glo
-% makeindex -s gglo.ist -o hep-floats-implementation.ind hep-floats-implementation.idx
+% makeindex -s gglo.ist -o hep-float-implementation.gls hep-float-implementation.glo
+% makeindex -s gglo.ist -o hep-float-implementation.ind hep-float-implementation.idx

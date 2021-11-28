@@ -33,7 +33,7 @@
 \CodelineIndex
 \RecordChanges
 
-\usepackage[parskip, oldstyle]{hep-paper}
+\usepackage[parskip]{hep-paper}
 
 \bibliography{bibliography}
 
@@ -42,7 +42,6 @@
 \usepackage{hologo}
 
 \MacroIndent=1.5em
-\setlength{\fboxsep}{1pt}
 \AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
 
 %</documentation>
@@ -57,7 +56,7 @@
 %
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{922}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -84,6 +83,7 @@
 \GetFileInfo{hep-title.sty}
 
 \title{The \software{hep-title} package\thanks{This document corresponds to \software{hep-title}~\fileversion.}}
+\subtitle{Extensions for the title page}
 \author{Jan Hajer \email{jan.hajer@unibas.ch}}
 \date{\filedate}
 
@@ -102,9 +102,11 @@ The \software{hep-title} package extends the title macros of the standard classe
 To use the \software{hep-title} package include it with "\usepackage{hep-title}".
 
 Most macros are intended for the use in the preamble.
-The are implemented using the \software{titling} \cite{titling} and \software{authblk} \cite{authblk} packages.
+They are implemented using the \software{titling} \cite{titling} and \software{authblk} \cite{authblk} packages.
 
-\section{Title}
+\section{Macros}
+
+\subsection{Title}
 
 \DescribeMacro{\series}
 \DescribeMacro{\title}
@@ -117,7 +119,7 @@ The "\series"\marg{series} places a series title above the usual title.
 The "\subtitle"\marg{subtitle} macro places a subtitle below the usual title.
 The fonts and their size can be adjusted using the "\seriesfont", "\titlefont", and "\subtitlefont" macros.
 
-\section{Authors}
+\subsection{Authors}
 
 \DescribeMacro{\author}
 \DescribeMacro{\affiliation}
@@ -138,7 +140,7 @@ The following lines add \eg two authors with different affiliations
 \end{verbatim}
 Additionally the "\editor" and "\endorser" macros are provided.
 
-\section{Abstract}
+\subsection{Abstract}
 
 \DescribeEnv{abstract}
 \DescribeEnv{abstract*}
@@ -146,7 +148,7 @@ The "abstract" environment is adjusted to not start with an indentation.
 The "abstract*" environment takes care of placing the title as well.
 This is used in "twocolumn" documents if the abstract should span both columns.
 
-\section{Preprint}
+\subsection{Preprint}
 
 \DescribeMacro{\preprint}
 \DescribeMacro{\preprintfont}
@@ -350,6 +352,8 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 \newcounter{editors}
 \newcommand\hep@editorlist{}
 \newcommand\hep@editors{}
+\@namedef{hep@editor@sep1}{}
+\@namedef{hep@editor@sep2}{\Authand}
 %    \end{macrocode}
 %
 % \begin{macro}{\editor}
@@ -366,7 +370,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
     \def\AB@note{#1}\setcounter{Maxaffil}{0}%
   \fi%
   \ifnum\value{editors}>1\relax%
-    \@namedef{@sep\number\c@editors}{\Authsep}%
+    \@namedef{hep@editor@sep\number\c@editors}{\Authsep}%
   \fi%
   \addtocounter{editors}{1}%
   \begingroup%
@@ -391,7 +395,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
     \let\\=\editorcr%
     \xdef\hep@editorlist{%
       \the\@temptokena%
-      \protect\@nameuse{@sep\number\c@editors}%
+      \protect\@nameuse{hep@editor@sep\number\c@editors}%
       \protect\Authfont#2%
       \if\relax#1\relax\else%
         \protect\hep@multi@ref{\AB@note}%
@@ -399,7 +403,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
     }%
   \endgroup%
   \ifnum\value{editors}>2\relax%
-    \@namedef{@sep\number\c@editors}{\Authands}%
+    \@namedef{hep@editor@sep\number\c@editors}{\Authands}%
   \fi%
   \newaffilfalse%
 }
@@ -527,6 +531,8 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 \newcounter{endorsers}
 \newcommand\hep@endorserlist{}
 \newcommand\hep@endorsers{}
+\@namedef{hep@editor@sep1}{}
+\@namedef{hep@editor@sep2}{\Authand}
 %    \end{macrocode}
 %
 % \begin{macro}{\endorser}
@@ -546,7 +552,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
     \def\AB@note{#1}\setcounter{Maxaffil}{0}%
   \fi%
   \ifnum\value{endorsers}>1\relax%
-    \@namedef{@sep\number\c@endorsers}{\Authsep}%
+    \@namedef{hep@endorser@sep\number\c@endorsers}{\Authsep}%
   \fi%
   \addtocounter{endorsers}{1}%
   \begingroup%
@@ -571,7 +577,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
     \let\\=\endorsercr%
     \xdef\hep@endorserlist{%
       \the\@temptokena%
-      \protect\@nameuse{@sep\number\c@endorsers}%
+      \protect\@nameuse{hep@endorser@sep\number\c@endorsers}%
       \protect\Authfont#2%
       \if\relax#1\relax\else%
         \protect\hep@multi@ref{\AB@note}%
@@ -579,7 +585,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
     }%
   \endgroup%
   \ifnum\value{endorsers}>2\relax%
-    \@namedef{@sep\number\c@endorsers}{\Authands}%
+    \@namedef{hep@endorser@sep\number\c@endorsers}{\Authands}%
   \fi%
   \newaffilfalse%
 }
@@ -807,14 +813,16 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 %
 % \section{Test}
 %
-%<*test>
+%<*testone|testtwo>
+%
 %     \begin{macrocode}
-\documentclass[twocolumn]{article}
+%<testone>\documentclass{article}
+%<testtwo>\documentclass[twocolumn]{article}
 
 %% \usepackage[lang=english]{hep-paper}
 \usepackage[math]{blindtext}
 \usepackage{hep-title}
-\usepackage[]{hyperref}
+\usepackage{hyperref}
 \def\BackrefFootnoteTag{}\usepackage{footnotebackref}
 
 \preprint{Preprint}
@@ -851,11 +859,13 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 
 \begin{document}
 
-%% \maketitle % for one column mode
+%<testone> \maketitle
 
-\begin{abstract*}
+%<testone> \begin{abstract}
+%<testtwo> \begin{abstract*}
 \blindtext
-\end{abstract*}
+%<testone> \end{abstract}
+%<testtwo> \end{abstract*}
 
 First page footnote.\footnote{Footnote}
 
@@ -864,7 +874,34 @@ First page footnote.\footnote{Footnote}
 \end{document}
 %    \end{macrocode}
 %
-%</test>
+%</testone|testtwo>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-title` package
+
+Extensions for the title page
+
+## Introduction
+
+The `hep-title` package extends the title macros of the standard classes with macros for a preprint, affiliation, editors, and endorsers.
+
+To use the `hep-title` package include it with `\usepackage{hep-title}`.
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the `LaTeX` Project Public License, either version 1.3c of this license or (at your option) any later version.
+The latest version of this license is in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
 %
 % \Finale
 
