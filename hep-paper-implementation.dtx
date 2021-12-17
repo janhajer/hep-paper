@@ -55,7 +55,7 @@
 %
 % \fi
 %
-% \CheckSum{609}
+% \CheckSum{0}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -63,7 +63,7 @@
 %   Digits        \0\1\2\3\4\5\6\7\8\9
 %   Exclamation   \!     Double quote  \"     Hash (number) \#
 %   Dollar        \$     Percent       \%     Ampersand     \&
-%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Acute accent  \'     Left parenk    \(     Right paren   \)
 %   Asterisk      \*     Plus          \+     Comma         \,
 %   Minus         \-     Point         \.     Solidus       \/
 %   Colon         \:     Semicolon     \;     Less than     \<
@@ -645,7 +645,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % \subsection{Set compatibility}
 %
-% Set the "amsart" compatibility options.
+% Set the "amsart" compatibility options using the \software{xpatch} package \cite{xpatch}.
 %    \begin{macrocode}
 \@ifclassloaded{amsart}{\setkeys{hep}{amsart}}{}
 \ifhep@amsart
@@ -719,52 +719,32 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   }{hyperref}
   \AtBeginDocument{\renewcommand{\foreignabbrfont}{}}
 \fi
-%
-% \section{Font}
-%
-% Set the whole text to sans serif if requested.
-%    \begin{macrocode}
-\ifhep@serif\else
-  \renewcommand{\familydefault}{\sfdefault}
-\fi
 %    \end{macrocode}
 %
-% Load the hep-font package.
+% \section{Font} \label{sec:font}
+%
+% Load the \software{hep-font} package \cite{hep-font}.
 %    \begin{macrocode}
-\RequirePackage[lining=\ifhep@lining true\else false \fi]{hep-font}
+\PassOptionsToPackage{
+  size=\hep@font,
+  sans=\ifhep@serif false\else true\fi,
+  lining=\ifhep@lining true\else false\fi
+}{hep-font}
+\RequirePackage{hep-font}
 %    \end{macrocode}
 %
 % \subsection{Math fonts}
 %
-% Load the hep-math-font package.
+% Load the \software{hep-math-font} package \cite{hep-math-font}.
 %    \begin{macrocode}
-\RequirePackage[symbols=\hep@symbols]{hep-math-font}
-%    \end{macrocode}
-%
-% \subsection{Font size} \label{sec:font size}
-%
-% Undefine previously defined font sizes and load the \hologo{LaTeX} font size file corresponding to the font size option.
-%    \begin{macrocode}
-\ifhep@defaults\else
-  \def\hep@remove@pt#1pt{#1}
-  \edef\hep@pt@size{\expandafter\hep@remove@pt\hep@font}
-  \let\small\relax
-  \let\footnotesize\relax
-  \let\scriptsize\relax
-  \let\tiny\relax
-  \let\large\relax
-  \let\Large\relax
-  \let\LARGE\relax
-  \let\huge\relax
-  \let\Huge\relax
-  \input{size\hep@pt@size.clo}
-\fi
+\PassOptionsToPackage{symbols=\hep@symbols}{hep-math-font}
+\RequirePackage{hep-math-font}
 %    \end{macrocode}
 %
 % \section{Geometry}
 %
 % Load the \software{geometry} package \cite{geometry} and adjust the text width and height.
-% This step must happen after readjusting the font size in \cref{sec:font size}.
+% This step must happen after readjusting the font size in \cref{sec:font}.
 %    \begin{macrocode}
 \ifhep@defaults\else
   \RequirePackage{geometry}
@@ -805,22 +785,25 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % Load the \software{hep-text} package \cite{hep-text}.
 %    \begin{macrocode}
-\RequirePackage[lang=\hep@lang]{hep-text}
+\PassOptionsToPackage{lang=\hep@lang}{hep-text}
+\RequirePackage{hep-text}
 %    \end{macrocode}
 %
 % \section{Math}
 %
+% Load the \software{hep-math} package \cite{hep-math}.
 %    \begin{macrocode}
 \ifhep@physics\RequirePackage{hep-math}\fi
 %    \end{macrocode}
 %
 % \section{Floats}
 %
-% Adjust the \hologo{LaTeX} float placement defaults
+% Adjust the \hologo{LaTeX} float placement defaults using the \software{hep-float} package \cite{hep-float}.
 %    \begin{macrocode}
-\RequirePackage[
+\PassOptionsToPackage{
   manualplacement=\ifhep@manualplacement true\else false \fi
-]{hep-float}
+}{hep-float}
+\RequirePackage{hep-float}
 %    \end{macrocode}
 %
 % \begin{macro}{\ifhep@journal}
@@ -872,7 +855,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % \section{Title page}
 %
-% Begin of "title" conditional.
+% Adjust the title page using the \software{hep-title} package \cite{hep-title}.
 %    \begin{macrocode}
 \ifhep@title\RequirePackage{hep-title}\fi
 %    \end{macrocode}
@@ -880,38 +863,42 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \section{Bibliography}
 %
 % Check if bibliography management is requested using the \software{pdftexcmds} package \cite{pdftexcmds}.
+% And load the \software{hep-bibliography} package \cite{hep-bibliography}
 %    \begin{macrocode}
 \RequirePackage{pdftexcmds}
 \ifnum\pdf@strcmp{\hep@bibliography}{false}=0\else
-  \RequirePackage[style=\hep@bibliography]{hep-bibliography}
+  \PassOptionsToPackage{style=\hep@bibliography}{hep-bibliography}
+  \RequirePackage{hep-bibliography}
 \fi
 %    \end{macrocode}
 
 % \section{Hyperlinks, Footnotes and References} \label{sec:hyperlinks}
 %
-% Load the \software{hyperref} package \cite{hyperref} enable Unicode encoding and hide links.
+% Load the \software{hep-reference} package \cite{hep-reference}.
 %
 %    \begin{macrocode}
-\RequirePackage{hyperref}
-\hypersetup{
-  pdfencoding=auto, psdextra,
-  hidelinks, linktoc=all, breaklinks=true,
-  pdfcreator={}, pdfproducer={}
-}
+\ifhep@references
+\RequirePackage{hep-reference}
+% \RequirePackage{hyperref}
+% \hypersetup{
+%   pdfencoding=auto, psdextra,
+%   hidelinks, linktoc=all, breaklinks=true,
+%   pdfcreator={}, pdfproducer={}
+% }
 %    \end{macrocode}
 % Set the \PDF meta data according to the paper information and ensure that unnecessary information is suppressed.
 %
 %    \begin{macrocode}
-\pdfstringdefDisableCommands{\def\varepsilon{\textepsilon}}
-\pdfstringdefDisableCommands{\def\to{\textrightarrow}}
-\AtBeginDocument{
-  \pdfstringdefDisableCommands{\let\ensuremath\@gobble}
-  \pdfstringdefDisableCommands{\let\mathsurround\@gobble}
-  \pdfstringdefDisableCommands{\let\unskip\@gobble}
-  \pdfstringdefDisableCommands{\let\thanks\@gobble}
-  \pdfstringdefDisableCommands{\let\footnote\@gobble}
-  \pdfstringdefDisableCommands{\let\\\@gobble}
-}
+% \pdfstringdefDisableCommands{\def\varepsilon{\textepsilon}}
+% \pdfstringdefDisableCommands{\def\to{\textrightarrow}}
+% \AtBeginDocument{
+%   \pdfstringdefDisableCommands{\let\ensuremath\@gobble}
+%   \pdfstringdefDisableCommands{\let\mathsurround\@gobble}
+%   \pdfstringdefDisableCommands{\let\unskip\@gobble}
+%   \pdfstringdefDisableCommands{\let\thanks\@gobble}
+%   \pdfstringdefDisableCommands{\let\footnote\@gobble}
+%   \pdfstringdefDisableCommands{\let\\\@gobble}
+% }
 \ifhep@revtex
   \AtBeginShipout{\hypersetup{pdftitle={\@title}}}
 \else
@@ -932,15 +919,15 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % Place a hyperlink from the footnote back to its referencing label using the \software{footnotebackref} package \cite{footnotebackref}.
 %    \begin{macrocode}
-\def\BackrefFootnoteTag{}
-\RequirePackage{footnotebackref}
+% \def\BackrefFootnoteTag{}
+% \RequirePackage{footnotebackref}
 %    \end{macrocode}
 %
 % \begin{macro}{\footnote}
 % Ensure that no spaces appear before the footmark or at the beginning of the footnote.
 %    \begin{macrocode}
-\let\@foot@note\footnote
-\renewcommand{\footnote}[1]{\unskip\@foot@note{\ignorespaces#1}}
+% \let\@foot@note\footnote
+% \renewcommand{\footnote}[1]{\unskip\@foot@note{\ignorespaces#1}}
 %    \end{macrocode}
 % \end{macro}
 
@@ -948,85 +935,86 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % Begin of "references" conditional
 %    \begin{macrocode}
-\ifhep@references
+% \ifhep@references
 %    \end{macrocode}
 %
 % \begin{macro}{\cref}
 % Improve reference using the \software{cleveref} package \cite{cleveref}.
 %
 %    \begin{macrocode}
-\RequirePackage[noabbrev, nameinlink]{cleveref}
-\newcommand{\creflastconjunction}{, and\nobreakspace}
-\crefname{enumi}{point}{points}
-\crefname{inlinelisti}{point}{points}
+% \PassOptionsToPackage{noabbrev, nameinlink}{cleveref}
+% \RequirePackage{cleveref}
+% \newcommand{\creflastconjunction}{, and\nobreakspace}
+% \crefname{enumi}{point}{points}
+% \crefname{inlinelisti}{point}{points}
 %    \end{macrocode}
 % \end{macro}
 %
 %\begin{macro}{\no@break@before}
 % Define a macro able to prevent line breaks.
 %    \begin{macrocode}
-\newcommand\no@break@before{%
-  \relax\ifvmode\else%
-    \ifhmode%
-      \ifdim\lastskip > 0pt%
-        \relax\unskip\nobreakspace%
-      \fi%
-    \fi%
-  \fi%
-}
+% \newcommand\no@break@before{%
+%   \relax\ifvmode\else%
+%     \ifhmode%
+%       \ifdim\lastskip > 0pt%
+%         \relax\unskip\nobreakspace%
+%       \fi%
+%     \fi%
+%   \fi%
+% }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\ref}
 % Adjust "\ref"\marg{key} in order to prevent preceding line breaks.
 %    \begin{macrocode}
-\let\hep@ref\ref
-\AtBeginDocument{\renewcommand\ref{\no@break@before\hep@ref}}
+% \let\hep@ref\ref
+% \AtBeginDocument{\renewcommand\ref{\no@break@before\hep@ref}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\eqref}
 % Adjust "\eqref"\marg{key} in order to prevent preceding line breaks.
 %    \begin{macrocode}
-\renewcommand\eqref{\no@break@before\labelcref}
+% \renewcommand\eqref{\no@break@before\labelcref}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\subref}
 % Adjust "\subref"\marg{key} in order to prevent preceding line breaks.
 %    \begin{macrocode}
-\let\hep@subref\subref
-\renewcommand\subref{\no@break@before\hep@subref}
-\renewcommand*\subcaption@ref[2]{\begingroup%
-  \caption@setoptions{sub}%
-  \subcaption@reffmt\p@subref{\hep@ref#1{sub@#2}}%
-\endgroup}
+% \let\hep@subref\subref
+% \renewcommand\subref{\no@break@before\hep@subref}
+% \renewcommand*\subcaption@ref[2]{\begingroup%
+%   \caption@setoptions{sub}%
+%   \subcaption@reffmt\p@subref{\hep@ref#1{sub@#2}}%
+% \endgroup}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\subcref}
 % Provide the "\subcref" macro.
 %    \begin{macrocode}
-\newcommand{\subcref}[1]{\cref{sub@#1}}
+% \newcommand{\subcref}[1]{\cref{sub@#1}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\eqcrefname}
 % Define the "\eqcrefname" macro for named equation types.
 %    \begin{macrocode}
-\NewDocumentCommand{\eqcrefname}{mmo}{
-  \crefname{#1}{#2}{\IfValueTF{#3}{#3}{#2s}}
-  \creflabelformat{#1}{(##2##1##3)}
-}
+% \NewDocumentCommand{\eqcrefname}{mmo}{
+%   \crefname{#1}{#2}{\IfValueTF{#3}{#3}{#2s}}
+%   \creflabelformat{#1}{(##2##1##3)}
+% }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\labelcrefrange}
 % Define the missing "\labelcrefrange"\marg{key1}\marg{key2} macro.
 %    \begin{macrocode}
-\DeclareRobustCommand{\labelcrefrange}[2]{%
-  \@crefrangenostar{labelcref}{#1}{#2}%
-}
+% \DeclareRobustCommand{\labelcrefrange}[2]{%
+%   \@crefrangenostar{labelcref}{#1}{#2}%
+% }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1053,8 +1041,8 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % \begin{macro}{\cite}
 % Adjust "\cite"\marg{key} in order to prevent preceding line breaks.
 %    \begin{macrocode}
-\let\hep@cite\cite
-\renewcommand\cite{\no@break@before\hep@cite}
+% \let\hep@cite\cite
+% \renewcommand\cite{\no@break@before\hep@cite}
 %    \end{macrocode}
 % \end{macro}
 %

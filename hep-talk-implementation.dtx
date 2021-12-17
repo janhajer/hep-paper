@@ -1,0 +1,729 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019-2020 by Jan Hajer
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{hep-talk}[2020/03/01 v1 Talks in High Energy Physics]
+%<dark>\ProvidesPackage{dark}[2020/03/01 v1 Dark color scheme]
+%<ligt>\ProvidesPackage{light}[2020/03/01 v1 Light color scheme]
+%<blue>\ProvidesPackage{blue}[2020/03/01 v1 Blue color scheme]
+%<metropolis>\ProvidesPackage{metropolis}[2020/03/01 v1 Metropolis color scheme]
+
+%<*driver>
+\documentclass{ltxdoc}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+
+\usepackage[parskip]{hep-paper}
+
+\bibliography{bibliography}
+
+\usepackage{hologo}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+
+\author{Jan Hajer}
+
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+\begin{document}
+\DocInput{hep-talk-implementation.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.0}{2019/01/01}{Initial version of the style file}
+%
+% \GetFileInfo{hep-talk.sty}
+%
+% \title{The \textsmaller[1.5]{HEP\raisebox{.25ex}{--}TALK} package}
+% \affiliation{CP3, IRMP, Université catholique de Louvain, Louvain-la-Neuve B-1348, Belgium}
+% \date{\filedate}
+%
+% \maketitle
+%
+% \begin{abstract}
+% The \software{hep-talk} package aims to provide a single style file for \dots
+% \end{abstract}
+%
+% \clearpage\tableofcontents\clearpage
+%
+% \section{Introduction}
+%
+% \section{Macros and environments}
+%
+% \section{Conclusion}
+%
+% \StopEventually{
+% \printbibliography
+% \PrintChanges
+% }
+%
+% \appendix
+% \newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+%
+%<*package>
+%
+% \section{Options}
+%
+% Load the \software{kvoptions} package \cite{kvoptions} and define a "heptalk" namespace.
+%    \begin{macrocode}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=heptalk,
+  prefix=heptalk@
+}
+%    \end{macrocode}
+%
+% \begin{macro}{paperwidth}
+% Define a "paperwidth="\meta{dimension} option.
+% Default to \unit[16]{cm}.
+% \DoNotIndex{\DeclareStringOption}
+%    \begin{macrocode}
+\DeclareStringOption[16cm]{paperwidth}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{ratio}
+% Define a "ratio="\meta{fraction} option.
+% Default to 3/4.
+%    \begin{macrocode}
+\DeclareStringOption[3/4]{ratio}
+%    \end{macrocode}
+% \end{macro}
+
+% \subsection{Process options}
+%
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+%    \end{macrocode}
+%
+% Load the \software{hep-paper} package \cite{hep-paper} and reset the paper geometry.
+%    \begin{macrocode}
+\RequirePackage[sansserif, bibliography=authoryear]{hep-paper}
+\geometry{
+  reset,
+  paperwidth=\heptalk@paperwidth,
+  paperheight=\heptalk@paperwidth*\heptalk@ratio,
+  margin=0pt,
+  ignoreheadfoot,
+  bottom=.02\paperwidth
+}
+%    \end{macrocode}
+
+% \section{Lengths}
+%
+% Set internal lengths.
+% Horizontal lengths.
+%    \begin{macrocode}
+\newlength{\hmargin}
+\setlength{\hmargin}{.0125\paperwidth}
+\setlength{\leftskip}{\hmargin}
+\setlength{\parindent}{0pt}
+%    \end{macrocode}
+% Vertical lengths
+%    \begin{macrocode}
+\newlength{\vmargin}
+\setlength{\vmargin}{.01\paperheight plus .1\paperheight minus .005\paperheight}
+\setlength{\parskip}{\vmargin}
+%    \end{macrocode}
+% Adjust spacing around equations.
+%    \begin{macrocode}
+\g@addto@macro\normalsize{
+  \setlength\abovedisplayskip{0pt}
+  \setlength\abovedisplayshortskip{0pt}
+  \setlength\belowdisplayskip{1ex}
+  \setlength\belowdisplayshortskip{1ex}
+}
+%    \end{macrocode}
+
+% \section{Colors}
+%
+% Colors managment is implemented using the \software{xcolor} package \cite{xcolor}.
+% Make the \software{overlays} package \cite{overlays} compatible.
+%    \begin{macrocode}
+\RequirePackage{xcolor}
+\newcommand{\globalcolor}[1]{%
+  \color{#1}\global\let\default@color\current@color%
+}
+\AtBeginDocument{
+  \pagecolor{PageBg}
+  \globalcolor{PageFg}
+  \colorlet{background}{PageBg}
+}
+%    \end{macrocode}
+
+% \section{Generic macros}
+
+% \begin{macro}{\calc}
+% \begin{macro}{\IfNoValueOrEmptyTF}
+% Internal macros
+%    \begin{macrocode}
+\ExplSyntaxOn
+  \cs_new_eq:NN \calc \fp_eval:n
+  \long\def\IfNoValueOrEmptyTF#1#2#3{%
+    \IfNoValueTF{#1}{#2}{\tl_if_empty:nTF{#1}{#2}{#3}}%
+  }
+\ExplSyntaxOff
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+
+% \section{Overlays}
+
+%
+% Overlay managment is provided by the "overlays" package \cite{overlays}.
+%    \begin{macrocode}
+\RequirePackage{overlays}
+%    \end{macrocode}
+%
+% \begin{macro}{\ifinoverl@yspec}
+% Pactch the internal "\ifinoverl@yspec" macro to adjust the global "\maxoverl@y" counter to the maximal overlay specifier found within its loop.
+%    \begin{macrocode}
+\def\ifinoverl@yspec#1#2{%
+  \global\let\inoverl@yspec\@secondoftwo
+  \foreach \i in {#2}{%
+    \afterassignment\getoverl@yspecb
+    \overl@yspeca=0\i\relax
+    \ifnum\maxoverl@y<\overl@yspeca%
+      \global\maxoverl@y=\overl@yspeca\else%
+    \fi%
+    \pgfmathtruncatemacro\result{%
+      (#1>=\overl@yspeca) && (#1<=\overl@yspecb)%
+    }%
+    \ifnum\result=1\relax
+      \breakforeach
+      \global\let\inoverl@yspec\@firstoftwo
+    \fi%
+  }%
+  \inoverl@yspec%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{overlays}
+% Remove the mandatory argument from the "overlays" environment.
+%    \begin{macrocode}
+\RenewEnviron{overlays}{%
+  \s@vecounters
+  \s@veseries
+  \maxoverl@y=1%
+  \curoverl@y=0%
+  \loop
+    \advance\curoverl@y by 1%
+    \begingroup
+    \BODY
+    \endgroup
+  \ifnum\curoverl@y<\maxoverl@y%
+    \clearpage
+    \restores@vedcounters
+    \restores@vedseries
+    \repeat
+}
+%    \end{macrocode}
+% \end{macro}
+% redefine "only"
+%    \begin{macrocode}
+\let\hep@only\only
+\RenewDocumentCommand{\only}{d<>m}{%
+  \IfNoValueOrEmptyTF{#1}{#2}{\hep@only{#1}{#2}}%
+}
+\let\hep@visible\visible
+\RenewDocumentCommand{\visible}{d<>m}{%
+  \IfNoValueOrEmptyTF{#1}{#2}{\hep@visible{#1}{#2}}%
+}
+%    \end{macrocode}
+
+
+% \section{Blocks}
+%
+% \begin{macro}{\hep@block@width}
+% The internal block width
+%    \begin{macrocode}
+\newcommand{\hep@block@width}[1]{%
+  \dimexpr#1\linewidth-2\fboxsep-2\leftskip\relax%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\hep@block}
+% The internal "\hep@block" macro.
+% \begin{enumerate}[nosep, label=\#\arabic*]
+%  \item mandatory star boolean switching between "visible" and "only"
+%  \item overlay number
+%  \item optional background color
+%  \item optional forground color
+%  \item optional width of the block
+%  \item mandatory text
+% \end{enumerate}
+%    \begin{macrocode}
+\NewDocumentCommand{\hep@block}{md<>O{BlockBg}O{BlockFg}O{1}m}{%
+  \IfNoValueOrEmptyTF{#2}{}{\IfBooleanTF{#1}{\visible<#2>}{\only<#2>}}%
+  \bgroup\textcolor{#4}{\colorbox{#3}{%
+  \begin{minipage}[t]{\hep@block@width{#5}}%
+    #6\strut%
+  \end{minipage}%
+  }}\egroup%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{hep@block@env}
+% The internal "hep@block@env" environment.
+% \begin{enumerate}[nosep, label=\#\arabic*]
+%  \item mandatory star boolean switching between "visible" and "only"
+%  \item overlay number
+%  \item optional background color
+%  \item optional forground color
+%  \item optional width of the block
+% \end{enumerate}
+%    \begin{macrocode}
+\newsavebox{\hep@saved@box}
+\NewDocumentEnvironment{hep@block@env}{%
+  md<>O{BlockBg}O{BlockFg}O{1}%
+}{%
+  \IfNoValueOrEmptyTF{#2}{}{%
+    \IfBooleanTF{#1}{\visible<#2>}{\only<#2>}%
+  }%
+  \bgroup\color{#4}%
+  \begin{lrbox}{\hep@saved@box}%
+  \begin{minipage}{\hep@block@width{#5}}%
+}{%
+  \end{minipage}\end{lrbox}%
+  \colorbox{#3}{\usebox{\hep@saved@box}}%
+  \egroup%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \subsection{Public Blocks}
+%
+% \begin{macro}{block}
+% The basic "block" environment.
+% \begin{enumerate}[nosep, label=\#\arabic*]
+%  \item star switching the "overlay" from "only" to "visible"
+%  \item overlay number
+%  \item optional name of the block
+%  \item optional width of the block
+% \end{enumerate}
+%    \begin{macrocode}
+\NewDocumentEnvironment{block}{sd<>oO{1}}{%
+  \NewDocumentCommand{\hep@begin@block@env}{md<>oO{1}}{%
+    \IfNoValueOrEmptyTF{##3}{}{%
+      \hep@block##1<##2>[CaptionBg][CaptionFg][##4]{##3}%
+      \setlength{\parskip}{0pt}\par\vspace{-1pt}%
+    }%
+    \begin{hep@block@env}##1<##2>[BlockBg][BlockFg][##4]%
+  }%
+  \NewDocumentCommand{\row}{sd<>oO{1}}{%
+    \hep@end@block@env%
+    \hep@begin@block@env##1<##2>[##3][##4]%
+  }%
+  \hep@begin@block@env#1<#2>[#3][#4]%
+}{\hep@end@block@env}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\hep@end@block@env}
+% The internal "\hep@end@block@env" macro.
+%    \begin{macrocode}
+\newcommand{\hep@end@block@env}{%
+  \end{hep@block@env}\setlength{\parskip}{\vmargin}\par%\par%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{columns}
+% The "columns" environment.
+% \begin{enumerate}[nosep, label=\#\arabic*]
+%  \item star switching the "overaly" from "only" to "visible"
+%  \item overlay number
+%  \item optional name of the first column
+%  \item optional width of the first column
+% \end{enumerate}
+%    \begin{macrocode}
+\NewDocumentEnvironment{columns}{sd<>oO{2}}{%
+  \begin{minipage}{\linewidth-2\leftskip}%
+  \def\needs@space{}%
+%    \end{macrocode}
+%
+% \begin{macro}{\hep@mini@page}
+% The private "\hep@mini@page" macro.
+% \begin{enumerate}[nosep, label=\#\#\arabic*]
+%  \item mandatory star argument
+%  \item overlay number
+%  \item optional width of the minipage
+%  \item mandatory name of the minipage
+% \end{enumerate}
+%    \begin{macrocode}
+  \NewDocumentCommand{\hep@mini@page}{md<>O{#4}m}{%
+    \begin{minipage}[t]{%
+      \dimexpr##3\linewidth+##3\hmargin-\hmargin-.01pt\relax%
+    }%
+    \vspace{0pt}%
+    \IfBooleanTF{##1}{\begin{block}*<##2>[##4][1]}{%
+      \IfNoValueOrEmptyTF{##2}{}{\gdef\needs@space{##2}}%
+      \begin{block}<##2>[##4][1]%
+    }%
+  }%
+%    \end{macrocode}
+% \end{macro}
+%
+% check if the column width is larger than 1.
+%    \begin{macrocode}
+  \ifdim#4pt>1pt%
+    \def\hep@inverse{\calc{1/#4}}%
+%    \end{macrocode}
+%
+% \begin{macro}{\column}
+% The public "\column" macro.
+% \begin{enumerate}[nosep, label=\#\#\arabic*]
+%  \item star switching the "overlay" from "only" to "visible"
+%  \item overlay number
+%  \item optional name
+% \end{enumerate}
+%    \begin{macrocode}
+    \NewDocumentCommand{\column}{sd<>oo}{%
+      \end{block}\end{minipage}%
+      \ifdefempty{\needs@space}{\hspace{\hmargin}}{%
+        \only<\needs@space>{\hspace{\hmargin}}%
+      }%
+      \gdef\needs@space{}%
+      \hep@mini@page##1<##2>[%
+        \IfNoValueOrEmptyTF{##4}{\hep@inverse}{\calc{1/##4}}%
+      ]{##3}%
+    }%
+%    \end{macrocode}
+% \end{macro}
+%
+% start a new minipage.
+% The case that column width is smaller than 1.
+%    \begin{macrocode}
+    \hep@mini@page#1<#2>[\hep@inverse]{#3}%
+  \else%
+%    \end{macrocode}
+%
+% \begin{macro}{\column}
+% The public "\column" macro.
+% \begin{enumerate}[nosep, label=\#\#\arabic*]
+%  \item star switching the "overlay" from "only" to "visible"
+%  \item overlay number
+%  \item optional name
+%  \item mandatory width
+% \end{enumerate}
+%    \begin{macrocode}
+    \NewDocumentCommand{\column}{sd<>oo}{%
+      \end{block}\end{minipage}%
+      \ifdefempty{\needs@space}{\hspace{\hmargin}}{%
+        \only<\needs@space>{\hspace{\hmargin}}%
+      }%
+      \gdef\needs@space{}%
+      \hep@mini@page##1<##2>[%
+        \IfNoValueOrEmptyTF{##4}{#4}{##4}%
+      ]{##3}%
+    }%
+%    \end{macrocode}
+% \end{macro}
+%
+% start a new minipage; end of check for argument size and end of the columns environment.
+%    \begin{macrocode}
+    \hep@mini@page#1<#2>[#4]{#3}%
+  \fi%
+}{\end{block}\end{minipage}\end{minipage}\par}%
+%    \end{macrocode}
+% \end{macro}
+
+% \section{Frames}
+%
+% \begin{macro}{\newframe}
+% The "\newframe" macro
+%    \begin{macrocode}
+\NewDocumentCommand{\newframe}{o}{%
+  \clearpage%
+  \IfNoValueF{#1}{%
+    \leftskip=0pt%
+    \hep@block\BooleanFalse[TitleBg][TitleFg][1]{%
+      \hspace{\dimexpr\hmargin\relax}\LARGE\strut\Large#1\hspace{\hmargin}%
+    }%
+  }\par\leftskip=\hmargin%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{slide}
+% Define a "slide" macro that starts a new frame with overlays.
+%    \begin{macrocode}
+\newenvironment{slide}[1][]{%
+  \overlays%
+  \newframe[#1]%
+}{%
+  \endoverlays%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{robustslide}
+% Define a "slide" macro that starts a new frame with overlays.
+% TODO redefine the "robustoverlays" macro.
+%    \begin{macrocode}
+\newenvironment{robustslide}[1][]{%
+  \robustoverlays%
+  \newframe[#1]%
+}{%
+  \endrobustoverlays%
+}
+%    \end{macrocode}
+% \end{macro}
+
+
+% \begin{macro}{\maketitle}
+% The "\maketitle" macro
+%    \begin{macrocode}
+\renewcommand\Affilfont{\normalsize}
+\renewcommand{\maketitle}{%
+  \newcommand{\titlemargin}{.05\paperwidth}
+  \newframe%
+  \strut\par\vspace{10ex}\bgroup%
+    \leftskip=\titlemargin
+    \rightskip=\titlemargin
+    {\Huge\hep@title@font\thetitle\par}%
+    \vspace{.5ex}%
+    \@ifundefined{sub@title}{}{\Large\hep@subtitle@font\sub@title}\par%
+    \vspace{3ex}%
+    {\huge\hep@author@font\@author\vspace{1ex}\par}
+    \vspace{3ex}%
+    \normalsize\hep@date@font\@date\par%
+  \egroup%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\section}
+% The "\section" macro is adjusted using the "titlesec" package \cite{titlesec}
+%    \begin{macrocode}
+\RequirePackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage}
+\titleformat{\section}{\huge}{}{0pt}{%
+  \strut\vfill\centering\color{PageFg}%
+}[\vfill\strut\clearpage]
+%    \end{macrocode}
+% \end{macro}
+
+% \section{Content}
+%
+% The pagenumber is implemented using the "picture" \cite{picture} and "atbegshi" \cite{atbegshi} packages.
+%    \begin{macrocode}
+\RequirePackage{picture}
+\RequirePackage{atbegshi}
+\AtBeginShipout{\AtBeginShipoutUpperLeftForeground{%
+  \ifnum\thepage>1%
+    \put(\paperwidth-\widthof{\footnotesize\thepage}-\hmargin,%
+        -\paperheight+\hmargin){%
+      \footnotesize\color{Structure}\thepage%
+    }%
+  \fi%
+}}
+%    \end{macrocode}
+%
+% \begin{macro}{itemize}
+% \begin{macro}{description}
+% Lists
+%    \begin{macrocode}
+\setlist[itemize]{nosep, left=0pt, label=\color{Structure}\textbullet}
+\setlist[description]{nosep, font=\color{Structure}\normalfont}
+\setlist[enumerate]{nosep, font=\color{Structure}\arabic*}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+
+% \begin{macro}{\emph}
+% Empheses
+%    \begin{macrocode}
+\renewcommand{\emph}[1]{\textcolor{Structure}{#1}}
+%    \end{macrocode}
+% \end{macro}
+% Equations
+%    \begin{macrocode}
+\mathtoolsset{showonlyrefs}
+%    \end{macrocode}
+
+% \section{Bibliography}
+%
+% Prepare the bibliography
+%    \begin{macrocode}
+\ExecuteBibliographyOptions{
+  maxcitenames=1,
+  maxbibnames=5,
+  dashed=false,
+  uniquename=false,
+  uniquelist=false
+}
+\DeclareNameAlias{sortname}{given-family}
+%    \end{macrocode}
+% \begin{macro}{cite}
+% Add the collaboration field to the citation macro.
+%    \begin{macrocode}
+\renewbibmacro*{cite}{%
+  \iffieldundef{shorthand}{%
+    \ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}{%
+      \usebibmacro{cite:label}%
+      \setunit{\printdelim{nonameyeardelim}}}{%
+        \iffieldundef{collaboration}{%
+          \printnames{labelname}%
+        }{%
+          \printfield{collaboration}%
+        }%
+        \setunit{\printdelim{nameyeardelim}}%
+      }%
+     \usebibmacro{cite:labeldate+extradate}%
+  }{\usebibmacro{cite:shorthand}}%
+}
+%    \end{macrocode}
+% \end{macro}
+% clickable parencite
+%    \begin{macrocode}
+\DeclareCiteCommand{\parencite}[\mkbibbrackets]{\usebibmacro{prenote}}{%
+  \usebibmacro{citeindex}%
+  \printtext[bibhyperref]{\usebibmacro{cite}}%
+}{\multicitedelim}{\usebibmacro{postnote}}
+%    \end{macrocode}
+% small rightaligned Structure colored citations
+%    \begin{macrocode}
+\renewcommand{\cite}[1]{%
+  \hfill{\scriptsize\normalfont\color{Structure}\autocite{#1}}%
+}
+%    \end{macrocode}
+% do not color the titles
+%    \begin{macrocode}
+\DeclareFieldFormat{title}{\enquote{#1}\isdot}
+\DeclareFieldFormat{booktitle}{\textit{#1}\isdot}
+\DeclareFieldFormat{journaltitle}{\textit{#1}\isdot}
+%    \end{macrocode}
+% put references in blocks
+%    \begin{macrocode}
+\renewbibmacro{begentry}{%
+  \vspace{-.3ex}%
+  \block\relax%
+  \setlength{\leftskip}{1.25em}%
+  \setlength{\parindent}{-1.25em}%
+}
+%    \end{macrocode}
+% close the blocks
+%    \begin{macrocode}
+\renewbibmacro{finentry}{\endblock}
+%    \end{macrocode}
+%
+%</package>
+
+% \section{Themes}
+%
+% \subsection{Dark colors}
+%
+%<*dark>
+%
+%    \begin{macrocode}
+\definecolor{PageBg}{gray}{.3}
+\definecolor{PageFg}{gray}{.9}
+\definecolor{TitleBg}{gray}{.5}
+\definecolor{TitleFg}{gray}{1}
+\definecolor{CaptionBg}{gray}{.8}
+\definecolor{CaptionFg}{gray}{.2}
+\definecolor{BlockBg}{gray}{1}
+\definecolor{BlockFg}{gray}{0}
+\definecolor{seven}{HTML}{2980b9}
+\colorlet{Structure}{seven!70!white}
+\definecolor{Highlight}{red}
+%    \end{macrocode}
+%</dark>
+%
+% \subsection{Light colors}
+%
+%<*light>
+%    \begin{macrocode}
+\definecolor{PageBg}{gray}{1}
+\definecolor{PageFg}{gray}{0}
+\definecolor{TitleBg}{gray}{.8}
+\definecolor{TitleFg}{gray}{.1}
+\definecolor{CaptionBg}{gray}{.9}
+\definecolor{CaptionFg}{gray}{.2}
+\definecolor{BlockBg}{gray}{1}
+\definecolor{BlockFg}{gray}{0}
+\definecolor{seven}{HTML}{ff0000}
+\colorlet{Structure}{seven!70!white}
+\definecolor{Highlight}{red}
+%    \end{macrocode}
+%</light>
+%
+% \subsection{Blue}
+%
+%<*blue>
+%    \begin{macrocode}
+\definecolor{PageBg}{gray}{1}
+\definecolor{PageFg}{gray}{0}
+\definecolor{TitleBg}{gray}{1}
+\definecolor{TitleFg}{HTML}{3333b2}
+\definecolor{CaptionBg}{HTML}{262686}
+\definecolor{CaptionFg}{gray}{1}
+\definecolor{BlockBg}{HTML}{E9E9F3}
+\definecolor{BlockFg}{gray}{0}
+\definecolor{Structure}{HTML}{3333b2}
+\definecolor{Highlight}{red}
+%    \end{macrocode}
+%</blue>
+%
+% \subsection{Metropolis}
+%
+%<*metropolis>
+%    \begin{macrocode}
+\definecolor{mDarkTeal}{HTML}{23373b}
+\definecolor{mLightBrown}{HTML}{EB811B}
+
+\colorlet{PageBg}{black!2}
+\colorlet{PageFg}{mDarkTeal}
+\colorlet{TitleBg}{mDarkTeal}
+\colorlet{TitleFg}{black!2}
+\colorlet{CaptionFg}{mDarkTeal}
+\colorlet{CaptionBg}{PageBg!80!CaptionFg}
+\colorlet{BlockBg}{CaptionBg!50!PageBg}
+\colorlet{BlockFg}{mDarkTeal}
+\colorlet{Structure}{mLightBrown}
+\colorlet{Highlight}{mLightBrown}
+%    \end{macrocode}
+%</metropolis>
+
+% \Finale
+%
+\endinput

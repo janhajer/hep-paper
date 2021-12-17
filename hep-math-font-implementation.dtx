@@ -333,7 +333,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 %    \end{macrocode}
 % \end{macro}
 %
-% Define conditionals based on the "symbols" package option.
+% Define conditionals based on the "symbols" package option using the \software{pdftexcmds} package \cite{pdftexcmds}.
 %    \begin{macrocode}
 \RequirePackage{pdftexcmds}
 \newif\ifhepmathfont@symbols
@@ -449,7 +449,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 % \subsection{Greek letters}
 %
 % Load the \software{fixmath} \cite{fixmath} and \software{textalpha} \cite{textalpha} packages ensuring that upper Greek letters in math mode are italic and providing upright Greek letters in text mode, respectively.
-% Define the "hep@greek" macro ensuring that both "\text" and "\mathrm" produce upright Greek letters.
+% Define the "hep@greek" macro ensuring that both "\text" and "\mathrm" produce upright Greek letters using the \software{amssymb} \cite{amssymb} and \software{amstext} \cite{amstext} packages.
 %    \begin{macrocode}
 \ifhepmathfont@symbols
   \RequirePackage{amssymb}
@@ -678,7 +678,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 %
 % \subsection{Additional math fonts}
 %
-% Either load the \software{MnSymbol} package \cite{MnSymbol} or the the \software{exscale} package in order to fix Latin Modern "lmex" fonts.
+% Either load the \software{MnSymbol} package \cite{MnSymbol} or the the \software{exscale} package \cite{exscale} in order to fix Latin Modern "lmex" fonts.
 % Additionally, load the \software{amssymb} package \cite{amsfonts} which provides further math symbols and also loads the \software{amsfonts} package \cite{amsfonts}.
 %    \begin{macrocode}
   \ifhep@minion

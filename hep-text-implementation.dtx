@@ -66,7 +66,7 @@
 %
 % \fi
 %
-% \CheckSum{98}
+% \CheckSum{0}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -215,8 +215,10 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
 %
 % Load the \software{babel} package \cite{babel} for hyphenation and the recommended \software{csquotes} package \cite{csquotes}.
 %    \begin{macrocode}
-\RequirePackage[\heptext@lang]{babel}
-\RequirePackage[autostyle]{csquotes}
+\PassOptionsToPackage{\heptext@lang}{babel}
+\RequirePackage{babel}
+\PassOptionsToPackage{autostyle}{csquotes}
+\RequirePackage{csquotes}
 %    \end{macrocode}
 %
 % \begin{macro}{\underline}
@@ -227,9 +229,7 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
 %    \end{macrocode}
 % \end{macro}
 %
-%\begin{macro}{\vs}
-% Load the \software{foreign} package \cite{foreign} in order to highlight abbreviations and vocabularies from foreign languages.
-% Add the missing "\vs" command.
+% Check the "lang" option using the \software{pdftexcmds} package \cite{pdftexcmds}.
 %    \begin{macrocode}
 \RequirePackage{pdftexcmds}
 \ifnum\pdf@strcmp{\heptext@lang}{american}=0
@@ -241,7 +241,14 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
     \newcommand{\heptext@lang@foreign}{british}
   \fi
 \fi
-\RequirePackage[all, \heptext@lang@foreign]{foreign}
+%    \end{macrocode}
+%
+%\begin{macro}{\vs}
+% Load the \software{foreign} package \cite{foreign} in order to highlight abbreviations and vocabularies from foreign languages.
+% Add the missing "\vs" command.
+%    \begin{macrocode}
+\PassOptionsToPackage{all, \heptext@lang@foreign}{foreign}
+\RequirePackage{foreign}
 \DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
 %    \end{macrocode}
 % \end{macro}
@@ -296,7 +303,8 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
 %
 % Load the \software{enumitem} package \cite{enumitem}.
 %    \begin{macrocode}
-\RequirePackage[inline]{enumitem}
+\PassOptionsToPackage{inline}{enumitem}
+\RequirePackage{enumitem}
 %    \end{macrocode}
 %
 % \begin{environment}{inlinelist}

@@ -64,7 +64,7 @@
 %
 % \fi
 %
-% \CheckSum{610}
+% \CheckSum{627}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -460,6 +460,13 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 \let\overline\textoverline
 \DeclareRobustCommand{\over@line}[1]{\@@overline{#1}}
 \mathdef{\overline}{\over@line}
+\newcommand\hep@overbar[1]{%
+  \mkern 2.5mu\overline{\mkern-2.5mu#1\mkern-1.5mu}\mkern 1.5mu%
+}
+\newcommand\overbar[1]{%
+  \settowidth{\dimen0}{#1}%
+  \ifdim\dimen0>.3em\hep@overbar{#1}\else\bar{#1}\fi%
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -867,7 +874,8 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 \ExplSyntaxOff
 \DeclarePairedDelimiterX{\row}[1]{(}{)}{\hep@row{#1}}
 \NewDocumentCommand{\column}{me{^}e{_}}{%
-  \left(\hep@column{#1}\right)\IfValueT{#2}{^{\!\!\!#2}}\IfValueT{#3}{_{\!\!\!#3}}%
+  \left(\hep@column{#1}\right)%
+  \IfValueT{#2}{^{\!\!\!#2}}\IfValueT{#3}{_{\!\!\!#3}}%
 }
 %    \end{macrocode}
 % \end{macro}

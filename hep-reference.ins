@@ -1,0 +1,49 @@
+%% Copyright (C) 2019-2020 by Jan Hajer
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version. The latest version of this license is in:
+%%
+%% http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2005/12/01 or later.
+
+\input docstrip.tex
+\keepsilent
+\usedir{tex/latex/hep-reference}
+
+\preamble
+This is a generated file.
+Copyright (C) 2019-2020 by Jan Hajer
+This file may be distributed and/or modified under the
+conditions of the LaTeX Project Public License, either
+version 1.3c of this license or (at your option) any later
+version. The latest version of this license is in:
+http://www.latex-project.org/lppl.txt
+and version 1.3c or later is part of all distributions of
+LaTeX version 2005/12/01 or later.
+\endpreamble
+
+\generate{
+  \file{hep-reference-documentation.tex}{\from{hep-reference-implementation.dtx}{documentation}}
+  \file{hep-reference.sty}{\from{hep-reference-implementation.dtx}{package}}
+  \file{hep-reference-test.tex}{\from{hep-reference-implementation.dtx}{test}}
+  \nopreamble\nopostamble\file{README-hep-reference.md}{\from{hep-reference-implementation.dtx}{readme}}
+}
+
+\Msg{*********************************************************}
+\Msg{*}
+\Msg{* To finish the installation you have to move the}
+\Msg{* following file into a directory searched by TeX:}
+\Msg{*}
+\Msg{* \space\space hep-reference.sty}
+\Msg{*}
+\Msg{* To produce the documentation run the file}
+\Msg{* hep-reference-documentation.dtx through LaTeX.}
+\Msg{*}
+\Msg{* Happy TeXing!}
+\Msg{*********************************************************}
+
+\endbatchfile

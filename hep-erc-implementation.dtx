@@ -1,0 +1,513 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Jan Hajer
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{hep-erc}[2021/09/01 v1.0 Extend title page macros]
+%<documentation>\ProvidesFile{hep-erc-documentation.tex}[2021/09/01 v1.0 hep-erc documentation]
+%
+%<*documentation>
+
+\RequirePackage[l2tabu, orthodox]{nag}
+
+\documentclass{ltxdoc}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+\usepackage[parskip]{hep-paper}
+
+\bibliography{bibliography}
+
+\acronym{PDF}{portable document format}
+
+\usepackage{hologo}
+
+\MacroIndent=1.5em
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+
+%</documentation>
+
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
+\begin{document}
+\DocInput{hep-erc-implementation.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.0}{2021/09/01}{Initial version of the style file.}
+%
+% \ifshort
+%<*documentation>
+% \fi
+%
+\GetFileInfo{hep-erc.sty}
+
+\title{The \software{hep-erc} package\thanks{This document corresponds to \software{hep-erc}~\fileversion.}}
+\subtitle{Extensions for the title page}
+\author{Jan Hajer \email{jan.hajer@unibas.ch}}
+\date{\filedate}
+
+% \ifshort
+\begin{document}
+% \fi
+
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+
+\maketitle
+
+\begin{abstract}
+The \software{hep-erc} package prepares
+\end{abstract}
+
+To use the \software{hep-erc} package include it with "\usepackage{hep-erc}".
+
+
+% \ifshort
+\printbibliography
+
+\end{document}
+%
+%</documentation>
+% \fi
+%
+% \StopEventually{
+% \printbibliography
+% \PrintChanges
+% }
+%
+% \appendix
+%
+%<*package>
+%
+% \section{Implementation}
+%
+% Load the \software{hep-paper} packages \cite{hep-font, hep-math-font, hep-text, hep-bibliography, hep-acronym, hep-reference, hep-title}.
+%    \begin{macrocode}
+\PassOptionsToPackage{oldstyle}{hep-font}
+\RequirePackage{hep-font}
+\RequirePackage{hep-math-font}
+\RequirePackage{hep-text}
+\RequirePackage{hep-bibliography}
+\RequirePackage{hep-acronym}
+\RequirePackage{hep-reference}
+\RequirePackage{hep-title}
+%    \end{macrocode}
+% Define the geometry using the \software{geometry} package \cite{geometry}.
+%    \begin{macrocode}
+\RequirePackage{geometry}
+\geometry{reset}
+\geometry{
+  a4paper, marginparsep=0pt,
+  left=2cm, right=2cm, top=1.5cm, bottom=1.5cm,
+  headsep=1ex, headheight=12pt,
+  footskip=24pt,
+}
+%    \end{macrocode}
+%
+% \subsection{Titlepage}
+%
+% Define the proposal counter.
+%    \begin{macrocode}
+\newcounter{proposal}
+\newcommand{\proposalpart}{Part B\theproposal}
+%    \end{macrocode}
+% Redfine the meaning of the date macro.
+%    \begin{macrocode}
+\newcommand{\months}{60}
+\date{\months\ months}
+%    \end{macrocode}
+% Rename the abstract.
+%    \begin{macrocode}
+\AtBeginDocument{\renewcommand{\abstractname}{Proposal summary}}
+%    \end{macrocode}
+% Do some bookkeeping after the end of the abstract.
+%    \begin{macrocode}
+\let\heperc@endabstract\endabstract
+\renewcommand\endabstract{
+  \heperc@endabstract
+  \thispagestyle{main}
+  \clearpage
+}
+%    \end{macrocode}
+% Redefine the maketitle macro using the \software{xparse} package \cite{xparse}.
+%    \begin{macrocode}
+\RequirePackage{xparse}
+\AtBeginDocument{
+  \let\heperc@make@title\maketitle
+  \DeclareDocumentCommand{\maketitle}{o}{%
+    \heperc@make@title
+    \IfNoValueF{#1}{\begin{abstract}#1\end{abstract}}%
+  }
+}
+%    \end{macrocode}
+%
+% \subsection{Section header}
+%
+% Redfine the section titles using the \software{titlesec} package \cite{titlesec} and rename the section counter.
+%    \begin{macrocode}
+\PassOptionsToPackage{compact, tiny, pagestyles}{titlesec}
+\RequirePackage{titlesec}
+\renewcommand\thesection{Section \alph{section}:}
+\renewcommand\thesubsection{\alph{section}.\arabic{subsection}}
+%    \end{macrocode}
+%
+% \subsection{Page Header and footer}
+%
+% Define the tail helper function
+%    \begin{macrocode}
+\newcommand\heperc@tail[1]{%
+  \expandafter\@hep@tail\expandafter\expandafter#1 \@nil%
+}%
+\newcommand\@hep@tail{}%
+\def\@hep@tail#1 #2\@nil{#2\unskip}%
+%    \end{macrocode}
+% Use \software{titleps} and \software{lastpage} packages \cite{lastpage} to define the page headers and footers.
+%    \begin{macrocode}
+\RequirePackage{lastpage}
+\newpagestyle{main}{
+   \sethead{\heperc@tail{\AB@author}}{\proposalpart}{\hep@sub@title}
+   \setfoot{}{\thepage\ of \pageref{LastPage}}{}
+}
+\pagestyle{main}
+%    \end{macrocode}
+%
+% \subsection{Lists}
+%
+% Compact lists with \software{enumitem} \cite{enumitem}.
+%    \begin{macrocode}
+\RequirePackage{enumitem}
+\setlist{noitemsep,nosep,leftmargin=*}
+%    \end{macrocode}
+%
+% \subsection{Curriculum Vitae}
+%
+% Load the \software{hep-cv} package \cite{hep-cv}.
+%    \begin{macrocode}
+\PassOptionsToPackage{standalone=false,bibliography=false}{hep-cv}
+\RequirePackage{hep-cv}
+%    \end{macrocode}
+%
+% Enable variable width table using the \software{tabulary} \cite{tabulary} package.
+%    \begin{macrocode}
+\RequirePackage{tabulary}
+\setlength{\tymin}{4.5em}
+%    \end{macrocode}
+%
+% \subsection{Dates in CV}
+%
+%    \begin{macrocode}
+\newlength{\heperc@longest@month}
+\setlength{\heperc@longest@month}{\widthof{May}}
+\newcommand{\heperc@spread@even}[1]{\@tfor\next:=#1\do{\hfil\next}}
+\newcommand{\heperc@month}[1]{%
+  \makebox[\heperc@longest@month][c]{\heperc@spread@even{#1}}%
+}
+%    \end{macrocode}
+%
+% Apply macros of equally distributed month names.
+%    \begin{macrocode}
+\newcommand{\Jan}{\heperc@month{Jan}}
+\newcommand{\Feb}{\heperc@month{Feb}}
+\newcommand{\Mar}{\heperc@month{Mar}}
+\newcommand{\Apr}{\heperc@month{Apr}}
+\newcommand{\May}{\heperc@month{May}}
+\newcommand{\Jun}{\heperc@month{Jun}}
+\newcommand{\Jul}{\heperc@month{Jul}}
+\newcommand{\Aug}{\heperc@month{Aug}}
+\newcommand{\Sep}{\heperc@month{Sep}}
+\newcommand{\Oct}{\heperc@month{Oct}}
+\newcommand{\Nov}{\heperc@month{Nov}}
+\newcommand{\Dec}{\heperc@month{Dec}}
+%    \end{macrocode}
+%
+% \subsection{tikz}
+%
+% Load the \software{tikz} and \software{standalone} packages \cite{tikz,standalone}.
+%    \begin{macrocode}
+\RequirePackage{tikz}
+\RequirePackage{standalone}
+\usetikzlibrary{positioning}
+\usetikzlibrary{fit}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.pathreplacing}
+%    \end{macrocode}
+%
+%</package>
+%
+% \section{Old}
+%
+%    \begin{macrocode}
+% \RequirePackage{pgfgantt}
+% \RequirePackage{bigdelim}
+% \RequirePackage{xspace}
+%
+% \RequirePackage{suffix}
+%
+% \RequirePackage{titletoc}
+% \RequirePackage{titlesec}
+%
+% \titlecontents{section}[0em]{\smallskip}{\bfseries\thecontentslabel\hspace{.5em}\bfseries}{}{\hfill\bfseries\contentspage}
+% \dottedcontents{subsection}[4em]{}{3em}{1pc}
+% \dottedcontents{subsubsection}[7em]{}{4em}{1pc}
+%
+% \newcommand{\newparskip}{3.25ex}
+%
+% \RequirePackage{zref-abspage}
+%
+%
+% \AtBeginDocument{%
+%   \newcommand*{\mainpages}{}%
+%   \edef\mainpages{%
+%     \zref@ifrefundefined{afterlastmain}{??}{%
+%       \the\numexpr\zref@extractdefault{afterlastmain}{abspage}{1}-1\relax
+%     }%
+%   }%
+%   \zref@refused{afterlastmain}%
+% }
+% \AtBeginDocument{%
+%   \newcommand*{\mainpagesfake}{}%
+%   \edef\mainpagesfake{%
+%     \zref@ifrefundefined{afterlastmain}{??}{%
+%       \the\numexpr\zref@extractdefault{afterlastmain}{abspage}{1}-2\relax
+%     }%
+%   }%
+%   \zref@refused{afterlastmain}%
+% }
+% \RequirePackage{etoolbox}
+% \pretocmd\appendix{%
+%   \clearpage % or \cleardoublepage depending on counting an empty page before the appendix
+%   \zref@labelbyprops{afterlastmain}{abspage}%
+%    \pagenumbering{roman}
+%     \setcounter{page}{1}
+%   \cfoot{\thepage}
+% }{}{}
+%
+%
+% \hypersetup{hypertexnames=false}
+%
+% \def\title#1{\gdef\@title{#1}\gdef\thetitle{#1}}
+% \RequirePackage{authoraftertitle}
+%    \end{macrocode}
+%
+% \section{Test}
+%
+% \subsection{Common header}
+%
+%<*header>
+%
+%    \begin{macrocode}
+\usepackage{hep-erc}
+\usepackage[math]{blindtext}
+
+\series{ERC TOPIC Grant YEAR --- Research proposal [\proposalpart]}
+
+\title{Title}
+
+\subtitle{Acronym}
+
+\author{{First name} {Last name}}
+
+\affiliation{Affiliation}
+
+\renewcommand{\months}{60}
+
+\newcommand{\abstracttext}{
+\blindtext
+}
+%    \end{macrocode}
+%
+%</header>
+%
+% \subsection{B1}
+%
+%<*B1>
+%
+%    \begin{macrocode}
+\documentclass{article}
+
+\input{hep-erc-header}
+
+\setcounter{proposal}{1}
+
+\begin{document}
+
+\maketitle[\abstracttext]
+
+\section{Extended Synopsis of the scientific proposal}
+
+\clearpage
+
+\section{Curriculum Vitæ}
+
+\setleftwidth{13em}
+\cvline[Family name, First name]{Name}
+\cvline[Researcher unique identifier]{Number}
+\cvline[Date of birth]{Date}
+\cvline[Nationality]{\dots}
+
+\setleftwidth{5em}
+
+\subsection*{Education}
+
+\cventry[200?]{PhD}[Name of Faculty/Department][Name of University/Institution][Country][Name of PhD Supervisor]
+\cventry[199?]{Master}[Name of Faculty/Department][Name of University/Institution][Country]
+
+\subsection*{Current Position(s)}
+
+\cventry[2021?]{Current Position}[Name of Faculty/Department][Name of University/Institution][Country]
+\cventry[2020?]{Current Position}[Name of Faculty/Department][Name of University/Institution][Country]
+
+\subsection*{Previous Positions}
+
+\cventry[200?--200?]{Position held}[Name of Faculty/Department][Name of University/Institution][Country]
+\cventry[200?--200?]{Position held}[Name of Faculty/Department][Name of University/Institution][Country]
+
+\subsection*{Fellowships and Awards}
+
+\cventry[200?--200?]{Scholarship}[Name of Faculty/Department][Name of University/Institution][Country]
+\cventry[200?]{Award}[Name of Institution][Country]
+\cventry[199?--199?]{Scholarship}[Name of Faculty/Department][Name of University/Institution][Country]
+
+\subsection*{Supervision of Graduate Students and Postdoctoral Fellows}
+
+\cventry[200?--200?]{Number of Postdocs/Ph.D./Master Students}[Name of Faculty/Department][Name of University/Institution][Country]
+
+\subsection*{Teaching activities}
+
+\cventry[200?--200?]{Teaching position}[Topic][Name of University/Institution][Country]
+\cventry[200?--200?]{Teaching position}[Topic][Name of University/Institution][Country]
+
+\subsection*{Organisation of Scientific Meetings}
+
+\cventry[201?]{Please specify your role and name of event}[Country]
+\cventry[200?]{Please specify type of event}[number of participants][Country]
+
+\subsection*{Institutional Responsibilities}
+
+\cventry[201?]{Faculty member}[Name of University/Institution][Country]
+\cventry[201?--201?]{Graduate Student Advisor}[Name of University/Institution][Country]
+\cventry[201?--201?]{Member of the Faculty Committee}[Name of University/Institution][Country]
+\cventry[201?--201?]{Organizer of the Internal Seminar}[Name of University/Institution][Country]
+\cventry[201?--201?]{Member of a Committee}[Name of University/Institution][Country]
+
+\subsection*{Reviewing Activities}
+
+\cventry[201?]{Scientific Advisory Board}[Name of University/Institution][Country]
+\cventry[201?]{Review Board}[Name of University/Institution][Country]
+\cventry[201?]{Review panel member}[Name of University/Institution][Country]
+\cventry[201?]{Editorial board}[Name of University/Institution][Country]
+\cventry[201?]{Scientific Advisory Board}[Name of University/Institution][Country]
+\cventry[201?]{Reviewer}[Name of University/Institution][Country]
+\cventry[201?]{Scientific Evaluation}[Name of University/Institution][Country]
+\cventry[201?]{Scientific Evaluator}[Name of University/Institution][Country]
+
+\subsection*{Membership of Scientific Societies}
+
+\cventry[201?]{Member}[Research Network][``Name of Research Network'']
+\cventry[200?]{Associated Member}[Name of Faculty/Department/Centre][Name of University/Institution][Country]
+\cventry[200?]{Founding Member}[Name of Faculty/Department/Centre][Name of University/Institution][Country]
+
+\subsection*{Major Collaborations}
+
+\cventry{Name of the collaborators}[Topic][Name of Faculty/Department/Centre][Name of University/Institution][Country]
+
+\subsection*{Career Breaks}
+
+\cventry[Exact breaks]{Please indicate the reason and the duration in months}
+
+\subsection*{All current grants and on-going and submitted grant applications of the PI (Funding ID)}
+
+\subsubsection*{Current grants}
+
+\begin{tabulary}{\linewidth}{JLLLLJ} \toprule
+Project Title & Funding source & Amount & Period & Role of the PI & Relation to current ERC proposal \\ \midrule
+Text \\
+\bottomrule \end{tabulary}
+
+\subsubsection*{On-going and submitted grant applications}
+
+\begin{tabulary}{\linewidth}{LJllLJ}\toprule
+Project Title & Funding source & Amount & Period & Role of the PI & Relation to current ERC proposal \\ \midrule
+Text \\
+\bottomrule \end{tabulary}
+
+\clearpage
+
+\section{Early achievements track-record}
+
+\end{document}
+%    \end{macrocode}
+%
+%</B1>
+%
+% \subsection{B2}
+%
+%<*B2>
+%
+%    \begin{macrocode}
+\documentclass{article}
+
+\input{hep-erc-header}
+
+\setcounter{proposal}{2}
+
+\begin{document}
+
+\maketitle[\abstracttext]
+
+\section{State-of-the-art and objectives}
+
+\section{Methodology}
+
+\end{document}
+%    \end{macrocode}
+%
+%</B2>
+%
+% \Finale
+
+\endinput
+
+% \PrintIndex
+% makeindex -s gglo.ist -o hep-erc-implementation.gls hep-erc-implementation.glo
+% makeindex -s gglo.ist -o hep-erc-implementation.ind hep-erc-implementation.idx

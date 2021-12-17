@@ -57,7 +57,7 @@
 %
 % \fi
 %
-% \CheckSum{392}
+% \CheckSum{0}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -101,6 +101,15 @@ The \software{hep-font} package loads standard font packages and extends the usu
 \end{abstract}
 
 The package is loaded using "\usepackage{hep-font}".
+
+\DescribeMacro{size}
+The "size="\meta{size} option loads the specified font size.
+The possible \meta{sizes} are:
+"8pt", "9pt", "10pt", "11pt", "12pt", "14pt", "17pt", "20pt" and "default" deactivates this switch.
+The default value is \unit[11]{pt}.
+
+\DescribeMacro{sans}
+The "sans" option switches to sans-serif font instead of serif font.
 
 \DescribeMacro{oldstyle}
 The "oldstyle" option switches to oldstyle numerals such as 123 in text mode instead of lining numerals such as \textl{123}.
@@ -153,6 +162,21 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 }
 %    \end{macrocode}
 %
+% \begin{macro}{size}
+% Define the "size" switching taking the font size as an argument.
+%    \begin{macrocode}
+\DeclareStringOption[11pt]{size}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{sans}
+% Define the "sans" switching to sans serif font.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{sans}
+\DeclareComplementaryOption{serif}{sans}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{lining}
 % Define the "lining" option deactivating the use of text figures in text mode.
 %    \begin{macrocode}
@@ -161,10 +185,20 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 %    \end{macrocode}
 % \end{macro}
 %
+% Process options.
 %    \begin{macrocode}
 \ProcessKeyvalOptions*
 %    \end{macrocode}
 %
+% Read font argument from class call.
+%    \begin{macrocode}
+\def\hepfont@get@class#1.cls#2\relax{\def\hepfont@class{#1}}
+\def\hepfont@getclass{\expandafter\hepfont@get@class\@filelist\relax}
+\hepfont@getclass
+\@ifclasswith{\hepfont@class}{10pt}{\setkeys{hepfont}{size=10pt}}{}
+\@ifclasswith{\hepfont@class}{11pt}{\setkeys{hepfont}{size=11pt}}{}
+\@ifclasswith{\hepfont@class}{12pt}{\setkeys{hepfont}{size=12pt}}{}
+%    \end{macrocode}
 %
 % \begin{macro}{\ifxetexorluatex}
 % Load the \software{ifluatex} \cite{ifluatex} and \software{ifxetex} \cite{ifxetex} packages.
@@ -183,8 +217,33 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 % Pick the correct font encoding depending on the engine used and load the \software{fontenc} package \cite{fontenc} with this encoding.
 % For details of the font encoding see \cite{encguide}.
 %    \begin{macrocode}
-\def\hep@encoding{T\ifxetexorluatex U\else 1\fi}
-\RequirePackage[\hep@encoding]{fontenc}
+\def\hepfont@encoding{T\ifxetexorluatex U\else 1\fi}
+\PassOptionsToPackage{\hepfont@encoding}{fontenc}
+\RequirePackage{fontenc}
+%    \end{macrocode}
+% Switch document to sans-serif font if requested using the \software{pdftexcmds} package \cite{pdftexcmds}.
+%    \begin{macrocode}
+\RequirePackage{pdftexcmds}
+\ifnum\pdf@strcmp{\hepfont@size}{default}=0\else
+  \def\hepfont@remove@pt#1pt{#1}
+  \edef\hepfont@pt@size{\expandafter\hepfont@remove@pt\hepfont@size}
+  \let\small\relax
+  \let\footnotesize\relax
+  \let\scriptsize\relax
+  \let\tiny\relax
+  \let\large\relax
+  \let\Large\relax
+  \let\LARGE\relax
+  \let\huge\relax
+  \let\Huge\relax
+  \input{size\hepfont@pt@size.clo}
+\fi
+%    \end{macrocode}
+% Switch document to sans-serif font if requested.
+%    \begin{macrocode}
+\ifhepfont@sans
+  \renewcommand{\familydefault}{\sfdefault}
+\fi
 %    \end{macrocode}
 % Fix the remaining \CM \cite{cm} fonts using the \software{fix-cm} package \cite{fix-cm} and load the \software{microtype} font optimizations \cite{microtype}.
 %    \begin{macrocode}
@@ -199,10 +258,9 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
   \RequirePackage{lmodern}
 \else
   \ifhepfont@lining
-    \RequirePackage[rm={lining},sf={lining},tt={lining}]{cfr-lm}
-  \else
-    \RequirePackage{cfr-lm}
+    \PassOptionsToPackage{rm={lining},sf={lining},tt={lining}}{cfr-lm}
   \fi
+  \RequirePackage{cfr-lm}
 \fi
 %    \end{macrocode}
 % Adjust the figures according to the "lining" option and ensure that tables always use lining.
@@ -214,11 +272,11 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 % Load the \software{textcomp} extension \cite{textcomp} and define helper functions.
 %    \begin{macrocode}
 \RequirePackage{textcomp}
-\newcommand{\hep@sf@fontshape}[3]{%
-  \DeclareFontShape{\hep@encoding}{\sfdefault}{#1}{#2}{#3}{}%
+\newcommand{\hepfont@sf@shape}[3]{%
+  \DeclareFontShape{\hepfont@encoding}{\sfdefault}{#1}{#2}{#3}{}%
 }
-\newcommand{\hep@rm@fontshape}[3]{%
-  \DeclareFontShape{\hep@encoding}{\rmdefault}{#1}{#2}{#3}{}%
+\newcommand{\hepfont@rm@shape}[3]{%
+  \DeclareFontShape{\hepfont@encoding}{\rmdefault}{#1}{#2}{#3}{}%
 }
 %    \end{macrocode}
 %
@@ -233,10 +291,10 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
       SmallCapsFont={[cmunbx.otf]}
     }
   ]
-  \hep@sf@fontshape{bx}{sc}{<->cmssbxcsc10}{}
-  \hep@sf@fontshape{b}{sc}{<->cmssbxcsc10}{}
-  \hep@sf@fontshape{m}{scit}{<->cmsscsci10}{}
-  \hep@sf@fontshape{m}{sc}{%
+  \hepfont@sf@shape{bx}{sc}{<->cmssbxcsc10}{}
+  \hepfont@sf@shape{b}{sc}{<->cmssbxcsc10}{}
+  \hepfont@sf@shape{m}{scit}{<->cmsscsci10}{}
+  \hepfont@sf@shape{m}{sc}{%
     <-9>cmsscsc8<9-10>cmsscsc9<10->cmsscsc10%
   }{}
 %    \end{macrocode}
@@ -253,33 +311,33 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 %    \begin{macrocode}
   \ifhepfont@lining
     \RequirePackage{slantsc}
-    \hep@rm@fontshape{b}{sc}{<->ssub*cmr/bx/sc}{}
-    \hep@rm@fontshape{bx}{sc}{<->ssub*cmr/bx/sc}{}
-    \hep@rm@fontshape{b}{scsl}{<->ssub*cmr/bx/scsl}{}
-    \hep@rm@fontshape{bx}{scsl}{<->ssub*cmr/bx/scit}{}
-    \hep@rm@fontshape{b}{scit}{<->ssub*cmr/bx/scsl}{}
-    \hep@rm@fontshape{bx}{scit}{<->ssub*cmr/bx/scit}{}
+    \hepfont@rm@shape{b}{sc}{<->ssub*cmr/bx/sc}{}
+    \hepfont@rm@shape{bx}{sc}{<->ssub*cmr/bx/sc}{}
+    \hepfont@rm@shape{b}{scsl}{<->ssub*cmr/bx/scsl}{}
+    \hepfont@rm@shape{bx}{scsl}{<->ssub*cmr/bx/scit}{}
+    \hepfont@rm@shape{b}{scit}{<->ssub*cmr/bx/scsl}{}
+    \hepfont@rm@shape{bx}{scit}{<->ssub*cmr/bx/scit}{}
 %    \end{macrocode}
 %\end{macro}
 %\begin{macro}{\textsc}
 %For oldstyle numerals use the fonts from the \software{hfoldsty} package \cite{hfoldsty}.
 %    \begin{macrocode}
   \else
-    \DeclareFontFamily{\hep@encoding}{hfor}{}
-    \DeclareFontShape{\hep@encoding}{hfor}{bx}{sc}{
+    \DeclareFontFamily{\hepfont@encoding}{hfor}{}
+    \DeclareFontShape{\hepfont@encoding}{hfor}{bx}{sc}{
       <-6>hfoxc0500<6-7>hfoxc0600<7-8>hfoxc0700<8-9>hfoxc0800
       <9-10>hfoxc0900<10-12>hfoxc1000<12-17>hfoxc1200<17->hfoxc1728
     }{}
-    \DeclareFontShape{\hep@encoding}{hfor}{bx}{scsl}{
+    \DeclareFontShape{\hepfont@encoding}{hfor}{bx}{scsl}{
       <-6>hfooc0500<6-7>hfooc0600<7-8>hfooc0700<8-9>hfooc0800
       <9-10>hfooc0900<10-12>hfooc1000<12-17>hfooc1200<17->hfooc1728
     }{}
-    \hep@rm@fontshape{b}{sc}{<->ssub*hfor/bx/sc}{}
-    \hep@rm@fontshape{bx}{sc}{<->ssub*hfor/bx/sc}{}
-    \hep@rm@fontshape{bx}{scsl}{<->ssub*hfor/bx/scsl}{}
-    \hep@rm@fontshape{b}{scit}{<->ssub*hfor/bx/scsl}{}
-    \hep@rm@fontshape{bx}{scit}{<->ssub*hfor/bx/scsl}{}
-    \hep@rm@fontshape{b}{scsl}{<->ssub*hfor/bx/scsl}{}
+    \hepfont@rm@shape{b}{sc}{<->ssub*hfor/bx/sc}{}
+    \hepfont@rm@shape{bx}{sc}{<->ssub*hfor/bx/sc}{}
+    \hepfont@rm@shape{bx}{scsl}{<->ssub*hfor/bx/scsl}{}
+    \hepfont@rm@shape{b}{scit}{<->ssub*hfor/bx/scsl}{}
+    \hepfont@rm@shape{bx}{scit}{<->ssub*hfor/bx/scsl}{}
+    \hepfont@rm@shape{b}{scsl}{<->ssub*hfor/bx/scsl}{}
   \fi
 %    \end{macrocode}
 %\end{macro}
@@ -287,28 +345,31 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 %Provide the sans serif small caps font shape using the extended \CM from the \software{sansmathfonts} package \cite{sansmathfonts}.
 %    \begin{macrocode}
   \sffamily
-  \hep@sf@fontshape{m}{sc}{<->ssub*xcmss/m/sc}{}
-  \hep@sf@fontshape{b}{sc}{<->ssub*xcmss/bx/sc}{}
-  \hep@sf@fontshape{bx}{sc}{<->ssub*xcmss/bx/sc}{}
-  \hep@sf@fontshape{m}{scit}{<->ssub*xcmss/m/scit}{}
-  \hep@sf@fontshape{b}{scit}{<->ssub*xcmss/bx/scit}{}
-  \hep@sf@fontshape{bx}{scit}{<->ssub*xcmss/bx/scit}{}
-  \hep@sf@fontshape{m}{scsl}{<->ssub*xcmss/m/scit}{}
-  \hep@sf@fontshape{b}{scsl}{<->ssub*xcmss/bx/scit}{}
-  \hep@sf@fontshape{bx}{scsl}{<->ssub*xcmss/bx/scit}{}
+  \hepfont@sf@shape{m}{sc}{<->ssub*xcmss/m/sc}{}
+  \hepfont@sf@shape{b}{sc}{<->ssub*xcmss/bx/sc}{}
+  \hepfont@sf@shape{bx}{sc}{<->ssub*xcmss/bx/sc}{}
+  \hepfont@sf@shape{m}{scit}{<->ssub*xcmss/m/scit}{}
+  \hepfont@sf@shape{b}{scit}{<->ssub*xcmss/bx/scit}{}
+  \hepfont@sf@shape{bx}{scit}{<->ssub*xcmss/bx/scit}{}
+  \hepfont@sf@shape{m}{scsl}{<->ssub*xcmss/m/scit}{}
+  \hepfont@sf@shape{b}{scsl}{<->ssub*xcmss/bx/scit}{}
+  \hepfont@sf@shape{bx}{scsl}{<->ssub*xcmss/bx/scit}{}
 %    \end{macrocode}
 %\end{macro}
 %\begin{macro}{\textui}
 %Provide a sans upright italic font.
 %    \begin{macrocode}
-  \hep@sf@fontshape{m}{ui}{<->cmssu10}{}
+  \hepfont@sf@shape{m}{ui}{<->cmssu10}{}
 \fi
 %    \end{macrocode}
 %\end{macro}
 %
 % Load the \software{inputenc} package \cite{inputenc} whe using \hologo{pdfLaTeX}.
 %    \begin{macrocode}
-\ifxetexorluatex\else\RequirePackage[utf8]{inputenc}\fi
+\ifxetexorluatex\else
+  \PassOptionsToPackage{utf8}{inputenc}
+  \RequirePackage{inputenc}
+\fi
 %    \end{macrocode}
 %
 % \begin{macro}{\unit}
@@ -317,7 +378,7 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 %    \begin{macrocode}
 \ifhepfont@lining\else
 % \AtBeginDocument{
-%   \@ifpackageloaded{
+%   \@ifpackageloaded{units}{
     \RequirePackage{units}
     \RequirePackage{xpatch}
     \xpatchcmd{\unit}{\else#1}{%
@@ -344,10 +405,10 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 \usepackage[oldstyle]{hep-font}
 %% \usepackage[oldstyle]{hep-paper}
 
-\usepackage{fullpage}
+\usepackage[cm]{fullpage}
 
 \usepackage{fancyvrb}\DefineShortVerb{\|}
-\newenvironment{vrb}{\begin{tabular}{@{}p{5cm}ll@{}}}{\end{tabular}}
+\newenvironment{vrb}{\begin{tabular}{@{}p{5.4cm}ll@{}}}{\end{tabular}}
 
 \begin{document}
 

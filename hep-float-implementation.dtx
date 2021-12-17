@@ -53,7 +53,7 @@
 %
 % \fi
 %
-% \CheckSum{105}
+% \CheckSum{0}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -244,7 +244,8 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 % Load the \software{subcaption} package \cite{subcaption}.
 % Provide the old "\subcaption@minipage" macro.
 %    \begin{macrocode}
-\RequirePackage[subrefformat=parens]{subcaption}
+\PassOptionsToPackage{subrefformat=parens}{subcaption}
+\RequirePackage{subcaption}
 \captionsetup{font=small}
 \captionsetup[sub]{font=small}
 \providecommand*\subcaption@minipage[2]{%

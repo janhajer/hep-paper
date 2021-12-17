@@ -55,7 +55,7 @@
 %
 % \fi
 %
-% \CheckSum{315}
+% \CheckSum{0}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -198,7 +198,8 @@ Errata can be included using the "related" feature.
 % \begin{macro}{\bibliography}
 % Load the \software{biblatex} package \cite{biblatex} with the datamodel defined in \cref{sec:data model}.
 %    \begin{macrocode}
-\RequirePackage[style=\hepbib@style, datamodel=hep-bibliography]{biblatex}
+\PassOptionsToPackage{style=\hepbib@style, datamodel=hep-bibliography}{biblatex}
+\RequirePackage{biblatex}
 %    \end{macrocode}
 % \end{macro}
 %

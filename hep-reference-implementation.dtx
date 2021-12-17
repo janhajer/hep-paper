@@ -1,0 +1,402 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Jan Hajer
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{hep-reference}[2021/09/01 v2.0 Publications in High Energy Physics]
+%<documentation>\ProvidesFile{hep-reference-documentation.tex}[2021/09/01 v2.0 HEP-Paper documentation]
+%
+%<*documentation>
+%
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass{ltxdoc}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+\usepackage[parskip]{hep-paper}
+
+\bibliography{bibliography}
+
+\acronym{PDF}{portable document format}
+\acronym{LM}{latin modern}
+
+\usepackage{hologo}
+
+\MacroIndent=1.5em
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+%</documentation>
+
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
+\begin{document}
+\DocInput{hep-reference-implementation.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.0}{2019/01/01}{Initial version of the style file.}
+%
+% \ifshort
+%<*documentation>
+% \fi
+%
+\GetFileInfo{hep-reference.sty}
+
+\title{The \software{hep-reference} package\thanks{This document corresponds to \software{hep-reference}~\fileversion.}}
+\subtitle{Publications in high energy physics}
+\author{Jan Hajer \email{jan.hajer@unibas.ch}}
+\date{\filedate}
+
+% \ifshort
+\begin{document}
+% \fi
+
+\maketitle
+
+\begin{abstract}
+The \software{hep-reference} package aims to provide a single style file containing most configurations and macros necessary to write appealing publications in High Energy Physics.
+Instead of reinventing the wheel by introducing newly created macros \software{hep-reference} preferably loads third party packages.
+\end{abstract}
+
+\tableofcontents\clearpage
+
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+
+\section{Introduction}
+
+\DescribeMacro{\cref}
+References are extended with the \software{cleveref} package \cite{cleveref}, which allows to \eg just type "\cref"\marg{key}  in order to write \enquote{figure 1}.
+Furthermore, the \software{cleveref} package allows to reference multiple objects within one "\cref"\marg{key1,key2}.
+
+\DescribeMacro{\cite}
+Citations are adjusted to not start on a new line in order to avoid the repeated use of "~\cite"\marg{key}.
+
+\DescribeMacro{\ref}
+\DescribeMacro{\eqref}
+\DescribeMacro{\subref}
+References are also adjusted to not start on a new line.
+
+\DescribeMacro{\footnote}
+Footnotes are adjusted to swallow white space before the footnote mark and at the beginning of the footnote text.
+
+% \ifshort
+\printbibliography
+
+\end{document}
+%
+%</documentation>
+% \fi
+%
+% \StopEventually{
+% \printbibliography
+% \PrintChanges
+% }
+%
+% \addtocontents{toc}{\protect\clearpage}
+% \clearpage
+% \appendix
+%
+% \section{Options}
+%
+%<*package>
+%
+% \section{Implementation}
+%
+% Load the \software{hyperref} package \cite{hyperref} enable Unicode encoding and hide links.
+%    \begin{macrocode}
+\RequirePackage{hyperref}
+\hypersetup{
+  pdfencoding=auto, psdextra,
+  hidelinks, linktoc=all, breaklinks=true,
+  pdfcreator={}, pdfproducer={}
+}
+%    \end{macrocode}
+% Set the \PDF meta data according to the paper information and ensure that unnecessary information is suppressed.
+%
+%    \begin{macrocode}
+\pdfstringdefDisableCommands{\def\varepsilon{\textepsilon}}
+\pdfstringdefDisableCommands{\def\to{\textrightarrow}}
+\AtBeginDocument{
+  \pdfstringdefDisableCommands{\let\ensuremath\@gobble}
+  \pdfstringdefDisableCommands{\let\mathsurround\@gobble}
+  \pdfstringdefDisableCommands{\let\unskip\@gobble}
+  \pdfstringdefDisableCommands{\let\thanks\@gobble}
+  \pdfstringdefDisableCommands{\let\footnote\@gobble}
+  \pdfstringdefDisableCommands{\let\\\@gobble}
+}
+% \ifhep@revtex
+%   \AtBeginShipout{\hypersetup{pdftitle={\@title}}}
+% \else
+%   \ifhep@beamer\else
+    \AtBeginDocument{\hypersetup{pdftitle={\@title}}}
+%   \fi
+% \fi
+% \ifhep@title
+%   \AtBeginDocument{\hypersetup{pdfauthor=\AB@authlist}}
+% \else
+%   \ifhep@beamer\else
+%     \ifhep@pos\else
+    \AtBeginDocument{\hypersetup{pdfauthor={\@author}}}
+%     \fi
+%   \fi
+% \fi
+%    \end{macrocode}
+
+% \subsection{Footnotes}
+%
+% Place a hyperlink from the footnote back to its referencing label using the \software{footnotebackref} package \cite{footnotebackref}.
+%    \begin{macrocode}
+\def\BackrefFootnoteTag{}
+\RequirePackage{footnotebackref}
+%    \end{macrocode}
+%
+% \begin{macro}{\footnote}
+% Ensure that no spaces appear before the footmark or at the beginning of the footnote.
+%    \begin{macrocode}
+\let\@foot@note\footnote
+\renewcommand{\footnote}[1]{\unskip\@foot@note{\ignorespaces#1}}
+%    \end{macrocode}
+% \end{macro}
+
+% \subsection{References}
+%
+% Begin of "references" conditional
+%    \begin{macrocode}
+% \ifhep@references
+%    \end{macrocode}
+%
+% \begin{macro}{\ref}
+% Adjust "\ref"\marg{key} in order to prevent preceding line breaks.
+%    \begin{macrocode}
+\AtBeginDocument{
+  \let\hep@ref\ref
+  \renewcommand\ref{\no@break@before\hep@ref}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\eqref}
+% Adjust "\eqref"\marg{key} from the \software{amsmath} pacakge \cite{amsmath} in order to prevent preceding line breaks.
+%    \begin{macrocode}
+% \RequirePackage{amsmath}
+\@ifpackageloaded{amsmath}{%
+  \renewcommand\eqref{\no@break@before\labelcref}%
+}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\cref}
+% Improve reference using the \software{cleveref} package \cite{cleveref}.
+%    \begin{macrocode}
+\PassOptionsToPackage{noabbrev, nameinlink}{cleveref}
+\RequirePackage{cleveref}
+\newcommand{\creflastconjunction}{, and\nobreakspace}
+\crefname{enumi}{point}{points}
+\crefname{inlinelisti}{point}{points}
+%    \end{macrocode}
+% \end{macro}
+%
+%\begin{macro}{\no@break@before}
+% Define a macro able to prevent line breaks.
+%    \begin{macrocode}
+\newcommand\no@break@before{%
+  \relax\ifvmode\else%
+    \ifhmode%
+      \ifdim\lastskip > 0pt%
+        \relax\unskip\nobreakspace%
+      \fi%
+    \fi%
+  \fi%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\subref}
+% Adjust "\subref"\marg{key} from the \software{subcaption} package \cite{subcaption} in order to prevent preceding line breaks.
+%    \begin{macrocode}
+\RequirePackage{subcaption}
+\let\hep@subref\subref
+\renewcommand\subref{\no@break@before\hep@subref}
+\renewcommand*\subcaption@ref[2]{\begingroup%
+  \caption@setoptions{sub}%
+  \subcaption@reffmt\p@subref{\hep@ref#1{sub@#2}}%
+\endgroup}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\subcref}
+% Provide the "\subcref" macro.
+%    \begin{macrocode}
+\newcommand{\subcref}[1]{\cref{sub@#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\eqcrefname}
+% Define the "\eqcrefname" macro for named equation types.
+%    \begin{macrocode}
+\NewDocumentCommand{\eqcrefname}{mmo}{
+  \crefname{#1}{#2}{\IfValueTF{#3}{#3}{#2s}}
+  \creflabelformat{#1}{(##2##1##3)}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\labelcrefrange}
+% Define the missing "\labelcrefrange"\marg{key1}\marg{key2} macro.
+%    \begin{macrocode}
+\DeclareRobustCommand{\labelcrefrange}[2]{%
+  \@crefrangenostar{labelcref}{#1}{#2}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% Adjust the title page
+%    \begin{macrocode}
+% \ifhep@title
+  \labelcrefmultiformat{affiliation}{#2#1#3}{%
+    \textsuperscript,#2#1#3}{\textsuperscript,#2#1#3%
+  }{%
+    \textsuperscript,#2#1#3%
+  }
+  \labelcrefrangeformat{affiliation}{#3#1#4\textsuperscript{--}#5#2#6}
+%   \thanksmarkseries{alph}
+% \fi
+%    \end{macrocode}
+%
+% End of "references" conditional
+%    \begin{macrocode}
+% \fi
+%    \end{macrocode}
+
+% \subsection{Citations}
+%
+% \begin{macro}{\cite}
+% Adjust "\cite"\marg{key} in order to prevent preceding line breaks.
+%    \begin{macrocode}
+\let\hep@cite\cite
+\renewcommand\cite{\no@break@before\hep@cite}
+%    \end{macrocode}
+% \end{macro}
+%
+%</package>
+%
+% \section{Tests}
+%
+%<*test>
+%
+%    \begin{macrocode}
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{hep-reference}
+\usepackage{parskip}
+\providecommand{\cref}{section \ref}
+
+\begin{document}
+
+\section{Section} \label{sec:Section}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam lobortis section \ref{sec:Section}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam lobortis \cref{sec:Section}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam loborti equation \eqref{eq:Equation}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam loborti reference \cite{cite}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+\footnote{
+ Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+}
+
+\begin{equation} \label{eq:Equation}
+E=mc^2
+\end{equation}
+
+
+\begin{thebibliography}{1}
+\bibitem{cite} reference
+\end{thebibliography}
+
+\end{document}
+%    \end{macrocode}
+%
+%</test>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-reference` package
+
+A `LaTeX` package for publications in High Energy Physics.
+
+## Introduction
+
+The `hep-reference` package aims to provide a single style file containing most configurations and macros necessary to write appealing publications in High Energy Physics.
+Instead of reinventing the wheel by introducing newly created macros `hep-reference` preferably loads third party packages as long as they are lightweight enough.
+
+For usual publications it is enough to load additionally to the `article` class without optional arguments only the `hep-reference` package.
+
+    \documentclass{article}
+    \usepackage{hep-reference}
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the `LaTeX` Project Public License, either version 1.3c of this license or (at your option) any later version.
+The latest version of this license is in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
+%
+% \Finale
+
+\endinput
+
+% \PrintIndex
+% makeindex -s gglo.ist -o hep-reference-implementation.gls hep-reference-implementation.glo
+% makeindex -s gglo.ist -o hep-reference-implementation.ind hep-reference-implementation.idx

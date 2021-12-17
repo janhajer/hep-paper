@@ -56,7 +56,7 @@
 %
 % \fi
 %
-% \CheckSum{922}
+% \CheckSum{925}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -240,7 +240,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % \end{macro}
 %
 % \begin{macro}{\placepreprint}
-% Places a preprint number in the top right corner of the title page using the \software{atbegshi} \cite{atbegshi} and \software{picture} \cite{picture} packages.
+% Places a preprint number in the top right corner of the title page using the \software{calc} \cite{calc}, \software{atbegshi} \cite{atbegshi}, and \software{picture} \cite{picture} packages.
 %    \begin{macrocode}
 \RequirePackage{calc}
 \RequirePackage{atbegshi}
@@ -298,7 +298,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
   \@ifundefined{hep@series}{}{%
     \hep@pre@series\hep@series\hep@post@series%
   }%
-  \vspace{-\bigskipamount}%
+%   \vspace{-\bigskipamount}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -477,7 +477,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 %    \end{macrocode}
 % \end{macro}
 %
-% Switch authblk to a label ref system for affiliations.
+% Switch authblk to a label ref system for affiliations using the \software{xpatch} package \cite{xpatch}.
 %    \begin{macrocode}
 \RequirePackage{xpatch}
 \xpatchcmd{\author}{%
@@ -651,7 +651,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
   \AB@affilnote{\AB@note}%
 }{%
   \protect\refstepcounter{affiliation}\protect\label{\AB@note}%
-  \if\relax#1\relax\else\protect\ref{\AB@note}\fi%
+  \if\relax#1\relax\else\protect\theaffiliation\fi%
 }{}{}
 %    \end{macrocode}
 %
@@ -699,7 +699,9 @@ The "\preprintfont" macro can be used to change the font of the preprint.
   \fi
 %       \\[\affilsep]
   \ifx\AB@affillist\AB@empty\else%
-    \begin{center}\AB@affillist\end{center}%
+    \ifnum\value{affil}>\value{Maxaffil}
+      \begin{center}\AB@affillist\end{center}%
+    \fi%
   \fi%
 }
 %    \end{macrocode}
@@ -858,14 +860,14 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 \date{Date}
 
 \begin{document}
-
+%<testone>
 %<testone> \maketitle
 
-%<testone> \begin{abstract}
-%<testtwo> \begin{abstract*}
+%<testone>\begin{abstract}
+%<testtwo>\begin{abstract*}
 \blindtext
-%<testone> \end{abstract}
-%<testtwo> \end{abstract*}
+%<testone>\end{abstract}
+%<testtwo>\end{abstract*}
 
 First page footnote.\footnote{Footnote}
 
