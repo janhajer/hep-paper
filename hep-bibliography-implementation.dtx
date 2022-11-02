@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019 by Jan Hajer
+% Copyright (C) 2019-2022 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,9 +18,9 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-bibliography}[2021/09/01 v1.0 HEP-Bibliography]
-%<datamodel>\ProvidesFile{hep-bibliography.dbx}[2021/08/01 v1.8 HEP-Bibliography biblatex data model]
-%<documentation>\ProvidesFile{hep-bibliography-documentation.tex}[2021/08/01 v1.8 HEP-Bibliography documentation]
+%<package>\ProvidesPackage{hep-bibliography}[2022/11/01 v1.1 HEP-Bibliography]
+%<datamodel>\ProvidesFile{hep-bibliography.dbx}[2022/11/01 v1.1 HEP-Bibliography biblatex data model]
+%<documentation>\ProvidesFile{hep-bibliography-documentation.tex}[2022/11/01 v1.1 HEP-Bibliography documentation]
 %
 %<*documentation>
 
@@ -74,6 +74,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2021/09/01}{Initial version of the style file.}
+% \changes{v1.1}{2022/11/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -83,7 +84,7 @@
 
 \title{The \software{hep-bibliography} package\thanks{This document corresponds to \software{hep-bibliography}~\fileversion.}}
 \subtitle{Bibliographies for high energy physics}
-\author{Jan Hajer \email{jan.hajer@unibas.ch}}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
 \date{\filedate}
 
 % \ifshort
@@ -534,7 +535,7 @@ Errata can be included using the "related" feature.
 % Add SourceForge as a eprint option
 %    \begin{macrocode}
 \new@eprint{SourceForge}{https://sourceforge.net/projects}
-\DeclareFieldAlias{eprint:launchpad}{eprint:SourceForge}
+\DeclareFieldAlias{eprint:sourceforge}{eprint:SourceForge}
 %    \end{macrocode}
 % \end{macro}
 %

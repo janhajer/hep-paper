@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019 by Jan Hajer
+% Copyright (C) 2019-2022 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,8 +18,8 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-text}[2021/09/01 v1.0 Some text macros]
-%<documentation>\ProvidesFile{hep-text-documentation.tex}[2021/09/01 v1.0 HEP-Text documentation]
+%<package>\ProvidesPackage{hep-text}[2022/11/01 v1.1 Some text macros]
+%<documentation>\ProvidesFile{hep-text-documentation.tex}[2022/11/01 v1.1 HEP-Text documentation]
 %
 %<*documentation>
 
@@ -66,7 +66,7 @@
 %
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{129}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -85,6 +85,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2019/01/01}{Initial version of the style file.}
+% \changes{v1.1}{2022/11/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -94,7 +95,7 @@
 
 \title{The \software{hep-text} package\thanks{This document corresponds to \software{hep-text}~\fileversion.}}
 \subtitle{List and text extensions}
-\author{Jan Hajer \email{jan.hajer@unibas.ch}}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
 \date{\filedate}
 
 % \ifshort
@@ -121,7 +122,8 @@ It provides the convenient macros "\enquote"\marg{text} and "\MakeOuterQuote{}" 
 
 \DescribeMacro{\eg}
 \DescribeMacro{\vs}
-The \software{foreign} package \cite{foreign} defines macros such as "\eg", "\ie", "\cf", and "\vs" which are typeset as \eg, \ie, \cf, and \vs.
+The \software{foreign} package \cite{foreign} defines macros such as "\eg", "\ie", "\cf", and "\vs" which are typeset as \eg, \ie, \cf, and \vs with the appropriate spacing.
+Issuing "\renewcommand\foreignabbrfont{\itshape}" these abbreviations are typeset in italic.
 
 \DescribeMacro{\no}
 The "\no"\marg{number} macro is typeset as \no{123}.
@@ -249,6 +251,7 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
 %    \begin{macrocode}
 \PassOptionsToPackage{all, \heptext@lang@foreign}{foreign}
 \RequirePackage{foreign}
+\renewcommand\foreignabbrfont{}
 \DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
 %    \end{macrocode}
 % \end{macro}
@@ -267,12 +270,17 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
 % \end{macro}
 %
 %\begin{macro}{\software}
-% Define a macro for software with optional version information "\software"\linebreak[1]\oarg{version}\linebreak[1]\marg{name}, using the \software{relsize} package \cite{relsize}.
+% Define a macro for software with optional version information "\software"\linebreak[1]\oarg{version}\linebreak[1]\marg{name}, using the \software{relsize} \cite{relsize} and \software{xparse} \cite{xparse} packages.
 %    \begin{macrocode}
 \RequirePackage{relsize}
 \newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
   {\smaller[.5]\textsc{#2}~#1}%
 }
+\RequirePackage{xparse}
+\NewExpandableDocumentCommand\hep@gobble@opt@arg{om}{#2}
+\AtBeginDocument{\@ifpackageloaded{hyperref}{%
+  \pdfstringdefDisableCommands{\let\software\hep@gobble@opt@arg}%
+}{}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -285,9 +293,8 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
 \providecommand{\hep@email}[1]{\online{mailto:#1}{#1}}
 \providecommand\email{\hep@email}
 \AtBeginDocument{\@ifpackageloaded{hyperref}{%
-    \renewcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
-  }{}
-}
+  \renewcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
+}{}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -296,6 +303,17 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
 % Define the "\prefix"\marg{prefix}\marg{word} macro ensuring the correct linebreak in \prefix{prefix}{word}.
 %    \begin{macrocode}
 \newcommand{\prefix}[2]{(#1\mbox{-)}\allowbreak #2}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\subsubparagraph}
+% Define the "\subsubparagraph" macro starting a new paragraph with the same spacing as the paragraph macro but without title.
+%    \begin{macrocode}
+\newcommand\subsubparagraph{%
+  \@tempskipa 3.25ex \@plus 1ex \@minus .2ex\relax%
+  \addpenalty\@secpenalty\addvspace\@tempskipa%
+  \everypar{\setbox\z@\lastbox\everypar{}}%
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -320,16 +338,17 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
 % \begin{environment}{enumdescript}
 % Define an enumdescript list environment.
 %    \begin{macrocode}
-\newlist{enum@descript}{enumerate}{2}
-\setlist[enum@descript]{label=\arabic*.}
+\newlist{enumdesc}{enumerate}{2}
+\setlist[enumdesc]{label=\arabic*.}
 \newenvironment{enumdescript}[1][]{
-\begin{enum@descript}[#1]
+\begin{enumdesc}[#1]
   \let\hep@item\item
-  \renewcommand{\item}[2][]{
-    \ifx&##1&\hep@item\else\hep@item[##1]\fi
-    \textbf{##2}\ifx##2\empty\else~\fi\@ifnextchar\par\@gobble\relax
+  \renewcommand{\item}[2][]{%
+    \ifx&##1&\hep@item\else\hep@item[##1]\fi%
+    \textbf{##2}\ifx##2\empty\else\hspace{1em}\fi%
+    \@ifnextchar\par\@gobble\relax%
   }
-}{\end{enum@descript}}
+}{\end{enumdesc}}
 %    \end{macrocode}
 % \end{environment}
 %

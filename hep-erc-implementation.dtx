@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019 by Jan Hajer
+% Copyright (C) 2019-2022 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -131,6 +131,7 @@ To use the \software{hep-erc} package include it with "\usepackage{hep-erc}".
 \RequirePackage{hep-acronym}
 \RequirePackage{hep-reference}
 \RequirePackage{hep-title}
+\RequirePackage{hep-float}
 %    \end{macrocode}
 % Define the geometry using the \software{geometry} package \cite{geometry}.
 %    \begin{macrocode}
@@ -149,7 +150,8 @@ To use the \software{hep-erc} package include it with "\usepackage{hep-erc}".
 % Define the proposal counter.
 %    \begin{macrocode}
 \newcounter{proposal}
-\newcommand{\proposalpart}{Part B\theproposal}
+\renewcommand{\theproposal}{B\arabic{proposal}}
+\crefname{proposal}{part}{parts}
 %    \end{macrocode}
 % Redfine the meaning of the date macro.
 %    \begin{macrocode}
@@ -166,18 +168,18 @@ To use the \software{hep-erc} package include it with "\usepackage{hep-erc}".
 \renewcommand\endabstract{
   \heperc@endabstract
   \thispagestyle{main}
-  \clearpage
+%   \clearpage
 }
 %    \end{macrocode}
 % Redefine the maketitle macro using the \software{xparse} package \cite{xparse}.
 %    \begin{macrocode}
-\RequirePackage{xparse}
-\AtBeginDocument{
-  \let\heperc@make@title\maketitle
-  \DeclareDocumentCommand{\maketitle}{o}{%
-    \heperc@make@title
-    \IfNoValueF{#1}{\begin{abstract}#1\end{abstract}}%
-  }
+% \RequirePackage{xparse}
+% \AtBeginDocument{
+%   \let\heperc@make@title\maketitle
+%   \DeclareDocumentCommand{\maketitle}{o}{%
+%     \heperc@make@title
+%     \IfNoValueF{#1}{\begin{abstract}#1\end{abstract}}%
+%   }
 }
 %    \end{macrocode}
 %
@@ -205,7 +207,7 @@ To use the \software{hep-erc} package include it with "\usepackage{hep-erc}".
 %    \begin{macrocode}
 \RequirePackage{lastpage}
 \newpagestyle{main}{
-   \sethead{\heperc@tail{\AB@author}}{\proposalpart}{\hep@sub@title}
+   \sethead{\heperc@tail{\AB@author}}{Part \theproposal}{\hep@sub@title}
    \setfoot{}{\thepage\ of \pageref{LastPage}}{}
 }
 \pagestyle{main}
@@ -339,7 +341,9 @@ To use the \software{hep-erc} package include it with "\usepackage{hep-erc}".
 \usepackage{hep-erc}
 \usepackage[math]{blindtext}
 
-\series{ERC TOPIC Grant YEAR --- Research proposal [\proposalpart]}
+\setcounter{proposal}{1}
+
+\series{ERC TOPIC Grant YEAR --- Research proposal [Part \theproposal]}
 
 \title{Title}
 

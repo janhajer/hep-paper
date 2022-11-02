@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019 by Jan Hajer
+% Copyright (C) 2019-2022 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,8 +18,8 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-reference}[2021/09/01 v2.0 Publications in High Energy Physics]
-%<documentation>\ProvidesFile{hep-reference-documentation.tex}[2021/09/01 v2.0 HEP-Paper documentation]
+%<package>\ProvidesPackage{hep-reference}[2022/11/01 v1.1 Publications in High Energy Physics]
+%<documentation>\ProvidesFile{hep-reference-documentation.tex}[2022/11/01 v1.1 HEP-Paper documentation]
 %
 %<*documentation>
 %
@@ -36,8 +36,7 @@
 
 \bibliography{bibliography}
 
-\acronym{PDF}{portable document format}
-\acronym{LM}{latin modern}
+\shortacronym{PDF}{portable document format}
 
 \usepackage{hologo}
 
@@ -55,7 +54,7 @@
 %
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{179}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -73,7 +72,8 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2019/01/01}{Initial version of the style file.}
+% \changes{v1.0}{2011/08/01}{Initial version of the style file.}
+% \changes{v1.1}{2022/11/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -82,26 +82,25 @@
 \GetFileInfo{hep-reference.sty}
 
 \title{The \software{hep-reference} package\thanks{This document corresponds to \software{hep-reference}~\fileversion.}}
-\subtitle{Publications in high energy physics}
-\author{Jan Hajer \email{jan.hajer@unibas.ch}}
+\subtitle{Adjustments of standard references, footnote, and citations}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
 \date{\filedate}
 
 % \ifshort
 \begin{document}
 % \fi
 
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+
 \maketitle
 
 \begin{abstract}
-The \software{hep-reference} package aims to provide a single style file containing most configurations and macros necessary to write appealing publications in High Energy Physics.
-Instead of reinventing the wheel by introducing newly created macros \software{hep-reference} preferably loads third party packages.
+The \software{hep-reference} package applies some light convenience modifications to the reference, citation and footnote macros after loading standard classes improving on the default \hologo{LaTeX} behaviour.
 \end{abstract}
 
-\tableofcontents\clearpage
-
-\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
-
 \section{Introduction}
+
+The \software{hyperref} package is loaded and the links are hidden.
 
 \DescribeMacro{\cref}
 References are extended with the \software{cleveref} package \cite{cleveref}, which allows to \eg just type "\cref"\marg{key}  in order to write \enquote{figure 1}.
@@ -117,6 +116,7 @@ References are also adjusted to not start on a new line.
 
 \DescribeMacro{\footnote}
 Footnotes are adjusted to swallow white space before the footnote mark and at the beginning of the footnote text.
+Additionally the reference back to the text where they are called from.
 
 % \ifshort
 \printbibliography
@@ -131,11 +131,7 @@ Footnotes are adjusted to swallow white space before the footnote mark and at th
 % \PrintChanges
 % }
 %
-% \addtocontents{toc}{\protect\clearpage}
-% \clearpage
 % \appendix
-%
-% \section{Options}
 %
 %<*package>
 %
@@ -146,9 +142,10 @@ Footnotes are adjusted to swallow white space before the footnote mark and at th
 \RequirePackage{hyperref}
 \hypersetup{
   pdfencoding=auto, psdextra,
-  hidelinks, linktoc=all, breaklinks=true,
+  linktoc=all, hidelinks, breaklinks=true,
   pdfcreator={}, pdfproducer={}
 }
+\AtBeginDocument{\@ifpackageloaded{doc}{\hypersetup{hidelinks}}{}}
 %    \end{macrocode}
 % Set the \PDF meta data according to the paper information and ensure that unnecessary information is suppressed.
 %
@@ -163,22 +160,11 @@ Footnotes are adjusted to swallow white space before the footnote mark and at th
   \pdfstringdefDisableCommands{\let\footnote\@gobble}
   \pdfstringdefDisableCommands{\let\\\@gobble}
 }
-% \ifhep@revtex
-%   \AtBeginShipout{\hypersetup{pdftitle={\@title}}}
-% \else
-%   \ifhep@beamer\else
-    \AtBeginDocument{\hypersetup{pdftitle={\@title}}}
-%   \fi
-% \fi
-% \ifhep@title
-%   \AtBeginDocument{\hypersetup{pdfauthor=\AB@authlist}}
-% \else
-%   \ifhep@beamer\else
-%     \ifhep@pos\else
-    \AtBeginDocument{\hypersetup{pdfauthor={\@author}}}
-%     \fi
-%   \fi
-% \fi
+\AtBeginDocument{\hypersetup{pdftitle={\@title}}}
+\AtBeginDocument{\hypersetup{pdfauthor={\@author}}}
+\AtBeginDocument{\@ifundefined{hep@key@words}{}{%
+  \hypersetup{pdfkeywords={\hep@key@words}}%
+}}
 %    \end{macrocode}
 
 % \subsection{Footnotes}
@@ -199,11 +185,6 @@ Footnotes are adjusted to swallow white space before the footnote mark and at th
 
 % \subsection{References}
 %
-% Begin of "references" conditional
-%    \begin{macrocode}
-% \ifhep@references
-%    \end{macrocode}
-%
 % \begin{macro}{\ref}
 % Adjust "\ref"\marg{key} in order to prevent preceding line breaks.
 %    \begin{macrocode}
@@ -215,12 +196,36 @@ Footnotes are adjusted to swallow white space before the footnote mark and at th
 % \end{macro}
 %
 % \begin{macro}{\eqref}
-% Adjust "\eqref"\marg{key} from the \software{amsmath} pacakge \cite{amsmath} in order to prevent preceding line breaks.
+% Adjust "\eqref"\marg{key} from the \software{amsmath} package in order to prevent preceding line breaks.
 %    \begin{macrocode}
-% \RequirePackage{amsmath}
-\@ifpackageloaded{amsmath}{%
+\AtBeginDocument{\@ifpackageloaded{amsmath}{%
   \renewcommand\eqref{\no@break@before\labelcref}%
-}{}
+}{}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\usecommand}
+% Define the "\usecommand" macro providing an anonymous function.
+%    \begin{macrocode}
+\providecommand\use@command{}
+\newcommand\usecommand[2][1]{%
+  \renewcommand\use@command[#1]{#2}\use@command%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\textlabel}
+% Define the "\textlabel" macro allowing to link to a piece of text.
+%    \begin{macrocode}
+\NewDocumentCommand\textlabel{O{}mO{}m}{%
+  \protected@write\@auxout{}{%
+    \string\newlabel{#2}{%
+      {\hspace{-4pt}\protecting{#1{#4}}}{\thepage}{#4}{#2}{}%
+    }%
+  }%
+  \hypertarget{#2}{}%
+  {#3{#4}}%
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -251,22 +256,23 @@ Footnotes are adjusted to swallow white space before the footnote mark and at th
 % \end{macro}
 %
 % \begin{macro}{\subref}
-% Adjust "\subref"\marg{key} from the \software{subcaption} package \cite{subcaption} in order to prevent preceding line breaks.
+% Adjust "\subref"\marg{key} from the \software{subcaption} package in order to prevent preceding line breaks.
 %    \begin{macrocode}
-\RequirePackage{subcaption}
-\let\hep@subref\subref
-\renewcommand\subref{\no@break@before\hep@subref}
-\renewcommand*\subcaption@ref[2]{\begingroup%
-  \caption@setoptions{sub}%
-  \subcaption@reffmt\p@subref{\hep@ref#1{sub@#2}}%
-\endgroup}
+\AtBeginDocument{\@ifpackageloaded{subcaption}{%
+  \let\hep@subref\subref
+  \renewcommand\subref{\no@break@before\hep@subref}
+  \renewcommand*\subcaption@ref[2]{\begingroup%
+    \caption@setoptions{sub}%
+    \subcaption@reffmt\p@subref{\hep@ref#1{sub@#2}}%
+  \endgroup}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\subcref}
 % Provide the "\subcref" macro.
 %    \begin{macrocode}
-\newcommand{\subcref}[1]{\cref{sub@#1}}
+  \newcommand{\subcref}[1]{\cref{sub@#1}}
+}{}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -291,20 +297,14 @@ Footnotes are adjusted to swallow white space before the footnote mark and at th
 %
 % Adjust the title page
 %    \begin{macrocode}
-% \ifhep@title
+\AtBeginDocument{\@ifpackageloaded{hep-title}{%
   \labelcrefmultiformat{affiliation}{#2#1#3}{%
     \textsuperscript,#2#1#3}{\textsuperscript,#2#1#3%
   }{%
     \textsuperscript,#2#1#3%
   }
   \labelcrefrangeformat{affiliation}{#3#1#4\textsuperscript{--}#5#2#6}
-%   \thanksmarkseries{alph}
-% \fi
-%    \end{macrocode}
-%
-% End of "references" conditional
-%    \begin{macrocode}
-% \fi
+}{}}
 %    \end{macrocode}
 
 % \subsection{Citations}

@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019 by Jan Hajer
+% Copyright (C) 2019-2022 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,8 +18,8 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-float}[2021/08/01 v1.0 Float adjustments ]
-%<documentation>\ProvidesFile{hep-float-documentation.tex}[2021/08/01 v1.0 hep-float documentation]
+%<package>\ProvidesPackage{hep-float}[2022/11/01 v1.1 Float adjustments ]
+%<documentation>\ProvidesFile{hep-float-documentation.tex}[2022/11/01 v1.1 hep-float documentation]
 %
 %<*documentation>
 
@@ -72,6 +72,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2021/09/01}{Initial version of the style file.}
+% \changes{v1.1}{2022/11/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -81,7 +82,7 @@
 
 \title{The \software{hep-float} package\thanks{This document corresponds to \software{hep-float}~\fileversion.}}
 \subtitle{Convenience package for float placement}
-\author{Jan Hajer \email{jan.hajer@unibas.ch}}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
 \date{\filedate}
 
 % \ifshort
@@ -111,6 +112,7 @@ Automatic float placement is adjusted to place a single float at the top of page
 "\renewcommand{\floatpagefraction}{.8}" \hfill float pages must be full (default 0.5)
 
 The most useful float placement is usually archived by placing the float \emph{in front} of the paragraph it is referenced in first.
+\DescribeMacro{manualplacement}
 Additionally, manual float placement can be deactivated using the "manualplacement" package option.
 
 \DescribeMacro{\raggedright}
@@ -150,6 +152,9 @@ It provides sub-floats and takes as mandatory argument either the number of sub-
 Within the "\begin{panels}"\oarg{vertical alignment}\marg{width} environment the "\panel" macro initiates a new sub-float.
 In the case that the width of the first sub-float has been given as an optional argument to the "panels" environment the "\panel"\marg{width} macro takes the width of the next sub-float as mandatory argument.
 The example code is presented in \cref{tab:panels}.
+\DescribeMacro{\panelhspace}
+\DescribeMacro{\panelvspace}
+The spacing between the panels can be adjusted by adjusting the "\panelvspace" in terms of a "\linewidth" fraction "\renewcommand{\panelhspace}"{fraction} and the "\panelvspace" in terms of a length "\renewcommand{\panelvspace}"\marg{length}.
 
 \DescribeEnv{tabular}
 The \software{booktabs} \cite{booktabs} and \software{multirow} \cite{multirow} packages are loaded enabling publication quality tabulars such as in \cref{tab:booktabs}.
@@ -239,58 +244,76 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 %
 % \subsection{Sub-floats}
 %
-% \begin{macro}{\subfigure}
-% \begin{macro}{\subtable}
 % Load the \software{subcaption} package \cite{subcaption}.
-% Provide the old "\subcaption@minipage" macro.
 %    \begin{macrocode}
 \PassOptionsToPackage{subrefformat=parens}{subcaption}
 \RequirePackage{subcaption}
 \captionsetup{font=small}
 \captionsetup[sub]{font=small}
+%    \end{macrocode}
+% Provide the macros for older versions of the \software{subcaption} package using the \software{xparse} \cite{xparse} package.
+%    \begin{macrocode}
+\RequirePackage{xparse}
 \providecommand*\subcaption@minipage[2]{%
   \minipage#1{#2}\setcaptionsubtype\relax%
 }
+\ProvideDocumentEnvironment{subcaptionblock}{O{b}m}{%
+  \caption@withoptargs\subcaption@minipage[#1]{#2}%
+}{\endminipage}
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
 % \begin{environment}{panels}
+%
 % \begin{macro}{\panel}
-% Define the "panels" environment and the "\panel" macro.
+% \begin{macro}{\panelhspace}
+% \begin{macro}{\panelvspace}
+% Define the "panels" environment and the "\panel" macro using the \software{calc} \cite{calc} and \software{etoolbox} \cite{etoolbox} packages.
 %    \begin{macrocode}
-\newcommand{\hep@panels@space}{20}
+\RequirePackage{calc}
+\RequirePackage{etoolbox}
+\newcommand{\panelhspace}{0.0333}
+\newcommand{\panelvspace}{.5\baselineskip}
 \newenvironment{panels}[2][b]{%
+  \addtolength{\belowcaptionskip}{\panelvspace}%
 %    \end{macrocode}
 % Define an internal macro for global behaviour.
 %    \begin{macrocode}
   \newcommand{\begin@subcaption@minipage}[2][b]{%
-    \caption@withoptargs\subcaption@minipage[##1]{##2}%
+%     \caption@withoptargs\subcaption@minipage[##1]{##2}%
+    \subcaptionblock[##1]{##2}%
     \centering\vskip 0pt%
-  }
+%     \renewcommand{\hep@panel@vspace}{\panelvspace}%
+  }%
 %    \end{macrocode}
 % Define the "\panel" macro for the case that the number of panels is given.
 %    \begin{macrocode}
   \ifdim#2pt>1pt%
-    \newcommand{\hep@panel@space}{%
-      (1-#2+\hep@panels@space)/\hep@panels@space%
-    }%
+    \newcommand{\hep@panel@space}{\panelhspace\linewidth/#2}%
     \newcommand{\panel}[1][b]{%
       \endminipage\hfill\begin@subcaption@minipage[#1]{%
-        \linewidth/#2*\hep@panel@space%
+        \linewidth/#2-\hep@panel@space%
       }%
     }%
-    \begin@subcaption@minipage[#1]{\linewidth/#2*\hep@panel@space}%
+    \begin@subcaption@minipage[#1]{\linewidth/#2-\hep@panel@space}%
 %    \end{macrocode}
 % Define the "\panel" macro for the case that the width of the panel is given.
 %    \begin{macrocode}
   \else%
     \newcommand{\panel}[2][b]{%
-      \endminipage\hfill\begin@subcaption@minipage[#1]{##2\linewidth}%
+      \endminipage\hfill\begin@subcaption@minipage[#1]{%
+        ##2\linewidth-##2\linewidth*\real{\panelhspace}%
+      }%
     }%
-    \begin@subcaption@minipage[#1]{#2\linewidth}%
+    \begin@subcaption@minipage[#1]{%
+      #2\linewidth-#2\linewidth*\real{\panelhspace}%
+    }%
   \fi%
-}{\endminipage}
+}{
+\endsubcaptionblock
+\vspace{-\panelvspace}
+}
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
 % \end{macro}
 % \end{environment}
 %

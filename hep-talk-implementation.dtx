@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019-2020 by Jan Hajer
+% Copyright (C) 2019-2022 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -16,35 +16,42 @@
 % \fi
 %
 % \iffalse
+
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
 %<package>\ProvidesPackage{hep-talk}[2020/03/01 v1 Talks in High Energy Physics]
 %<dark>\ProvidesPackage{dark}[2020/03/01 v1 Dark color scheme]
 %<ligt>\ProvidesPackage{light}[2020/03/01 v1 Light color scheme]
 %<blue>\ProvidesPackage{blue}[2020/03/01 v1 Blue color scheme]
 %<metropolis>\ProvidesPackage{metropolis}[2020/03/01 v1 Metropolis color scheme]
+%
+%<*documentation>
 
-%<*driver>
+\RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltxdoc}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
-
-\usepackage[parskip]{hep-paper}
-
-\bibliography{bibliography}
-
-\usepackage{hologo}
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
-
-\author{Jan Hajer}
 
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
 
+\usepackage[parskip]{hep-paper}
+
+\bibliography{bibliography}
+\usepackage{hologo}
+
+\MacroIndent=1.5em
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+%</documentation>
+
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
 \begin{document}
 \DocInput{hep-talk-implementation.dtx}
 \end{document}
 %</driver>
+%
 % \fi
 %
 % \CheckSum{0}
@@ -67,25 +74,63 @@
 %
 % \changes{v1.0}{2019/01/01}{Initial version of the style file}
 %
-% \GetFileInfo{hep-talk.sty}
+% \ifshort
+%<*documentation>
+% \fi
 %
-% \title{The \textsmaller[1.5]{HEP\raisebox{.25ex}{--}TALK} package}
-% \affiliation{CP3, IRMP, Université catholique de Louvain, Louvain-la-Neuve B-1348, Belgium}
-% \date{\filedate}
+\GetFileInfo{hep-talk.sty}
+
+\title{The \software{hep-talk} package\thanks{This document corresponds to \software{hep-talk}~\fileversion.}}
+\subtitle{Easy and beautiful slides}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
+\date{\filedate}
+
+% \ifshort
+\begin{document}
+% \fi
+
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+
+\maketitle
+
+\begin{abstract}
+The \software{hep-talk} package provides macros for the simple generation of slides for talks.
+While the package provides significant fewer features than the \software{beamer} package an emphasis is placed on automatically perfect alignment of the content.
+\end{abstract}
 %
-% \maketitle
+\section{Introduction}
+
+The package can be loaded using "\usepackage{hep-talk}".
+
+\DescribeMacro{paperwidth}
+\DescribeMacro{ratio}
+The size of the slides is adjusted with the "paperwidth="\meta{dimension} option.
+The ratio can be adjusted with the "ratio="\meta{fraction} option.
+
+\section{Macros and environments}
+
+\DescribeMacro{\newframe}
+New frames can be generated using the "\newframe"\oarg{title} macro.
+
+\DescribeEnv{block}
+The basic building block is the "\begin"\marg{block}\oarg{title} environment, that generates a block with attached title stretching over the whole page.
+
+\DescribeEnv{columns}
+The "\begin"\marg{columns}\oarg{title}\oarg{column} environment, generates space for \meta{column} columns if \meta{column} is integer and a single column with width \meta{columm}"\linewidth" if \meta{column} is smaller than one.
+
+\DescribeMacro{\column}
+The  "\column"\oarg{title} and "\column"\oarg{title}\marg{size} macros generates a new column.
+
+\DescribeMacro{\row}
+The "\row"\oarg{title} macro starts a new row in a "block" or "column".
+
+% \ifshort
+\printbibliography
+
+\end{document}
 %
-% \begin{abstract}
-% The \software{hep-talk} package aims to provide a single style file for \dots
-% \end{abstract}
-%
-% \clearpage\tableofcontents\clearpage
-%
-% \section{Introduction}
-%
-% \section{Macros and environments}
-%
-% \section{Conclusion}
+%</documentation>
+% \fi
 %
 % \StopEventually{
 % \printbibliography
@@ -93,7 +138,8 @@
 % }
 %
 % \appendix
-% \newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+%
+% \section{Implementation}
 %
 %<*package>
 %
@@ -683,7 +729,7 @@
 \definecolor{BlockFg}{gray}{0}
 \definecolor{seven}{HTML}{ff0000}
 \colorlet{Structure}{seven!70!white}
-\definecolor{Highlight}{red}
+\colorlet{Highlight}{red}
 %    \end{macrocode}
 %</light>
 %
@@ -700,7 +746,7 @@
 \definecolor{BlockBg}{HTML}{E9E9F3}
 \definecolor{BlockFg}{gray}{0}
 \definecolor{Structure}{HTML}{3333b2}
-\definecolor{Highlight}{red}
+\colorlet{Highlight}{red}
 %    \end{macrocode}
 %</blue>
 %

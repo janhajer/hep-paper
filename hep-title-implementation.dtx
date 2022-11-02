@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019 by Jan Hajer
+% Copyright (C) 2019-2022 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,8 +18,8 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-title}[2021/09/01 v1.0 Extend title page macros]
-%<documentation>\ProvidesFile{hep-title-documentation.tex}[2021/09/01 v1.0 hep-title documentation]
+%<package>\ProvidesPackage{hep-title}[2022/11/01 v1.1 Extend title page macros]
+%<documentation>\ProvidesFile{hep-title-documentation.tex}[2022/11/01 v1.1 hep-title documentation]
 %
 %<*documentation>
 
@@ -56,7 +56,7 @@
 %
 % \fi
 %
-% \CheckSum{925}
+% \CheckSum{945}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -75,6 +75,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2021/09/01}{Initial version of the style file.}
+% \changes{v1.1}{2022/11/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -84,7 +85,7 @@
 
 \title{The \software{hep-title} package\thanks{This document corresponds to \software{hep-title}~\fileversion.}}
 \subtitle{Extensions for the title page}
-\author{Jan Hajer \email{jan.hajer@unibas.ch}}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
 \date{\filedate}
 
 % \ifshort
@@ -106,6 +107,8 @@ They are implemented using the \software{titling} \cite{titling} and \software{a
 
 \section{Macros}
 
+If the \software{hyperref} package is loaded the \PDF meta information is set according to the "\title"\marg{text} and "\author"\marg{text} information.
+
 \subsection{Title}
 
 \DescribeMacro{\series}
@@ -114,23 +117,22 @@ They are implemented using the \software{titling} \cite{titling} and \software{a
 \DescribeMacro{\seriesfont}
 \DescribeMacro{\titlefont}
 \DescribeMacro{\subtitlefont}
-The PDF meta information is set according to the "\title"\marg{text} and "\author"\marg{text} information.
-The "\series"\marg{series} places a series title above the usual title.
+The "\series"\marg{series} places a series title above the usual title generated via "\title"\marg{title}.
 The "\subtitle"\marg{subtitle} macro places a subtitle below the usual title.
-The fonts and their size can be adjusted using the "\seriesfont", "\titlefont", and "\subtitlefont" macros.
+The fonts and their size can be adjusted using the "\seriesfont"\marg{font}, "\titlefont"\marg{font}, and "\subtitlefont"\marg{font} macros.
 
 \subsection{Authors}
 
 \DescribeMacro{\author}
-\DescribeMacro{\affiliation}
-\DescribeMacro{\editor}
-\DescribeMacro{\endorser}
-\DescribeMacro{\email}
 \DescribeMacro{\authorfont}
-\DescribeMacro{\editorfont}
-\DescribeMacro{\endorserfont}
+\DescribeMacro{\email}
+\DescribeMacro{\affiliation}
 \DescribeMacro{\affiliationfont}
 In order to facilitate multiple authors with different affiliations the \software{authblk} package \cite{authblk} is extended.
+The author macro is extended to take a affiliation label "\author"\oarg{label}\marg{name}.
+The affiliation macro takes the corresponding label "\affiliation"\oarg{label}\marg{institution}.
+Additionally, the "\email{email}" macro places a link containing the email in typewrite font into a footnote.
+The fonts can be adjusted using the "\authorfont"\marg{font} and "\affiliationfont"\marg{font} macros.
 The following lines add \eg two authors with different affiliations
 \begin{verbatim}
 \author[affil1]{Author one \email{email one}}
@@ -138,7 +140,19 @@ The following lines add \eg two authors with different affiliations
 \author[affil2]{Author two \email{email two}}
 \affiliation[affil1,affil2]{Affiliation two}
 \end{verbatim}
-Additionally the "\editor" and "\endorser" macros are provided.
+
+\DescribeMacro{\editor}
+\DescribeMacro{\endorser}
+\DescribeMacro{\editorfont}
+\DescribeMacro{\endorserfont}
+Additionally the "\editor"\oarg{label}\marg{name} and "\endorser"\oarg{label}\marg{name} macros are provided that act similar to the "\author"\oarg{label}\marg{name} macros but place their content in a dedicated line.
+Their font can be adjusted by the "\editorfont"\marg{font} and "\endorserfont"\marg{font}.
+\DescribeMacro{\editortitle}
+\DescribeMacro{\endorsertitle}
+\DescribeMacro{\editortitlefont}
+\DescribeMacro{\endorsertitlefont}
+The titles of these lines can be adjusted using the "\editortitle"\marg{singluar}\marg{plural} and  "\endorsertitle"\marg{singluar}\marg{plural} macros.
+Their font can be adjust with the "\editortitlefont"\marg{font} and "\endorsertitlefont"\marg{font}.
 
 \subsection{Abstract}
 
@@ -709,8 +723,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % \begin{macro}{\@author}
 % Ensure that affiliation is not set directly below author
 %    \begin{macrocode}
-\def\@author{}
-\renewcommand\@author{%
+\def\@author{%
   \ifx\AB@affillist\AB@empty%
     \AB@author%
   \else%
@@ -759,6 +772,15 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 \@ifundefined{abstract}{}{%
   \let\hep@abstract\abstract%
   \renewcommand\abstract{\hep@abstract\noindent\ignorespaces}%
+  \let\hep@key@words\relax
+  \newcommand{\keywords}[1]{\def\hep@key@words{#1}}
+  \AtBeginDocument{\@ifundefined{hep@key@words}{}{%
+    \let\hep@end@abstract\endabstract%
+    \renewcommand\endabstract{
+      \par\medskip\noindent\textit{Keywords: \hep@key@words}%
+      \hep@end@abstract%
+    }%
+  }}
 %    \end{macrocode}
 % \end{environment}
 % \begin{environment}{abstract*}
@@ -859,6 +881,8 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 
 \date{Date}
 
+\keywords{Keyword 1, keyword 2, keyword 3}
+
 \begin{document}
 %<testone>
 %<testone> \maketitle
@@ -869,7 +893,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 %<testone>\end{abstract}
 %<testtwo>\end{abstract*}
 
-First page footnote.\footnote{Footnote}
+\noindent First page footnote.\footnote{Footnote}
 
 \blinddocument
 

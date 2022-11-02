@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019 by Jan Hajer
+% Copyright (C) 2019-2022 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,8 +18,8 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-math-font}[2021/09/01 v1.0 selection of math fonts for latin modern]
-%<documentation>\ProvidesFile{hep-math-font-documentation.tex}[2021/09/01 v1.0 hep-math-Font documentation]
+%<package>\ProvidesPackage{hep-math-font}[2022/11/01 v1.1 selection of math fonts for latin modern]
+%<documentation>\ProvidesFile{hep-math-font-documentation.tex}[2022/11/01 v1.1 hep-math-Font documentation]
 %
 %<*documentation>
 
@@ -57,7 +57,7 @@
 %
 % \fi
 %
-% \CheckSum{793}
+% \CheckSum{794}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -76,6 +76,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2021/09/01}{Initial version of the style file.}
+% \changes{v1.1}{2022/11/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -85,7 +86,7 @@
 
 \title{The \software{hep-math-font} package\thanks{This document corresponds to \software{hep-math-font}~\fileversion.}}
 \subtitle{Extended Greek and sans-serif math}
-\author{Jan Hajer \email{jan.hajer@unibas.ch}}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
 \date{\filedate}
 
 % \ifshort
@@ -106,7 +107,7 @@ The package is loaded using "\usepackage{hep-math-font}".
 
 If the document "\familydefault" font is switched to the sansserif "\sfdefault" font the math font is adjusted accordingly using fonts compatible to \LM and \CM.
 \DescribeMacro{warning}
-In order to be able to easily switch large chucks of math from serif to sans-serif documents the meaning of "\mathrm" and "\mathsf" is adjusted so that the first generates upright sans-serif math and the second serif math.
+In order to be able to easily switch large chucks of math from serif to sans-serif documents the meaning of "\mathrm" and "\mathsf" is adjusted in this case so that the first generates upright sans-serif math and the second serif math.
 This is is neither the literal meaning of the macros nor the best behaviour if a single large document is written in sans-serif.
 However, it simplifies working in an environment where one copies pieces of math between serif and sans-serif documents \eg publications \vs talks and funding applications.
 
@@ -114,7 +115,7 @@ Using the \software{fixmath} \cite{fixmath} and \software{textalpha} \cite{texta
 Greek letters can be written by using their unicode characters.
 
 \DescribeMacro{symbols}
-The "symbols"=\meta{family} sets the family of the symbol fonts.
+The "symbols"=\meta{family} class option sets the family of the symbol fonts.
 "symbols=ams" loads the two \hologo{AmS} fonts \cite{amsfonts} and the \software{bm} bold fonts.
 The default "symbols=true" replaces additionally the blackboard font with the \software{dsfont} \cite{dsfont}.
 "symbols=minion" switches the symbol fonts to the Adobe MinionPro companion font from the \software{MnSymbol} package \cite{MnSymbol}.
@@ -243,20 +244,26 @@ Details about the font handling in \hologo{TeX} can be found in \ccite{fntguide}
 Of the 16 available math alphabets, \hologo{TeX} loads four by default
 \begin{enumdescript}[start=0,label=\arabic*)]
 \item{OT1} \label{it:math text} Text (latin, upper case greek, numerals, text symbols)
-\item{OML} \label{it:math italic} Math Italic (latin, greek, numerals, text symbols)
-\item{OMS} \label{it:math symbol} Symbol ("\mathcal", operators)
-\item{OMX} \label{it:math extension} Math Extension (big operators, delimiters)
-\end{enumdescript}
+
 The text font \ref{it:math text}\strut\ of \CM is \textbf{cmr10} "\OT1/cmr/m/n/10", which is replaced by \LM to be \textbf{rm-lmr10} "\OT1/lmr/m/n/10", the "sansserif" option uses \textbf{rm-lmss10} "\OT1/lmss/m/n/10".
+\item{OML} \label{it:math italic} Math Italic (latin, greek, numerals, text symbols)
+
 The italic math font \ref{it:math italic} of \CM is \textbf{cmmi10} "\OML/cmm/m/it/"\allowbreak"10", and is replaced by \LM to be \textbf{lmmi10} "\OML/lmm/m/it/10", the "sansserif" options uses \textbf{cmssmi10} "\OML/cmssrm/m/it/10" from the \software{sansmathfonts} package \cite{sansmathfonts}.
+\item{OMS} \label{it:math symbol} Symbol ("\mathcal", operators)
+
 The symbol font \ref{it:math symbol}\strut\ of \CM is \textbf{cmsy10} "\OMS/cmsy/m/n/10", and is replaced by \LM to be \textbf{lmsy10} "\OMS/lmsy/m/n/10", the "sansserif" options uses \textbf{cmsssy10} "\OMS/cmsssy/m/n/10" from the \software{sansmathfonts} package \cite{sansmathfonts}.
+\item{OMX} \label{it:math extension} Math Extension (big operators, delimiters)
+
 The extension font \ref{it:math extension}\strut\ of \CM is \textbf{cmex10} "\OMX/cmex/m/n/5", and is replaced by the \software{exscale} package \cite{exscale} to be \textbf{cmex10} "\OMX/cmex/m/n/10", the "sansserif" option loads \textbf{cmssex10} "\OMX/cmssex/m/n/10".
+\end{enumdescript}
+
 The \software{amssymb} (\software{amsfonts}) packages \cite{amssymb} load two more symbol fonts
 \begin{enumdescript}[start=4,label=\arabic*)]
 \item{msam10} \label{it:math ams a} "\U/msa/m/n/10" AMS symbol font A (special math operators)
 \item{msbm10} \label{it:math ams b} "\U/msb/m/n/10" AMS symbol font B ("\mathbb", negated operators)
 \end{enumdescript}
 The "sansserif" option replaces them with \textbf{ssmsam10} "\U/ssmsa/m/n/10" and \textbf{ssmsbm10} "\U/ssmsb/m/n/10" from the \software{sansmathfonts} package \cite{sansmathfonts}, respectively.
+
 The \software{bm} package \cite{bm} loads the bold version for the fonts \labelcref{it:math text,it:math italic,it:math symbol}.
 
 Other math alphabets are only loaded on demand, \eg "\mathsf" uses a sans-serif font and "\mathbf" without the \software{bm} package uses a bold font.
@@ -457,7 +464,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
   \RequirePackage{fixmath}
   \RequirePackage{textalpha}
   \def\hep@Greek#1#2#3{
-    \def#1{\TextOrMath{#3}{\ifnum\fam=0 \text{#3}\else#2\fi}}%
+    \protected\def#1{\TextOrMath{#3}{\ifnum\fam=0 \text{#3}\else#2\fi}}%
   }
   \def\hep@greek#1#2#3{\let#2=#1\hep@Greek#1#2#3}
 %    \end{macrocode}

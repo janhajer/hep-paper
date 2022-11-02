@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019 by Jan Hajer
+% Copyright (C) 2019-2022 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,8 +18,8 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-math}[2021/09/01 v1.0 Math and physics macros]
-%<documentation>\ProvidesFile{hep-math-documentation.tex}[2021/09/01 v1.0 hep-math documentation]
+%<package>\ProvidesPackage{hep-math}[2022/11/01 v1.1 Math and physics macros]
+%<documentation>\ProvidesFile{hep-math-documentation.tex}[2022/11/01 v1.1 hep-math documentation]
 %
 %<*documentation>
 
@@ -33,7 +33,7 @@
 \CodelineIndex
 \RecordChanges
 
-\usepackage[parskip]{hep-paper}
+\usepackage[parskip,oldstyle]{hep-paper}
 
 \newenvironment{columns}[1][.5]{%
   \par\vspace{-\bigskipamount}%
@@ -64,7 +64,7 @@
 %
 % \fi
 %
-% \CheckSum{627}
+% \CheckSum{657}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -83,6 +83,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2021/09/01}{Initial version of the style file.}
+% \changes{v1.1}{2022/11/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -92,7 +93,7 @@
 
 \title{The \software{hep-math} package\thanks{This document corresponds to \software{hep-math}~\fileversion.}}
 \subtitle{Extended math macros}
-\author{Jan Hajer \email{jan.hajer@unibas.ch}}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
 \date{\filedate}
 
 % \ifshort
@@ -257,10 +258,11 @@ $\mel xyz$ & $\ev x$ & $\ev[\Omega] x$ & $\vev x$
 
 \DescribeMacro{\column}
 \DescribeMacro{\row}
+Macros for row and column vectors are introduced together with a symbol for transpose vectors.
 \begin{center}
 \begin{tabular}{*4c}
-"\column{x,y,z}" & "\row{x,y,z}" \\
-$\column{x,y,z}$ & $\row{x,y,z}$ \\
+"\column{x,y,z}" & "\row{x,y,z}^\trans" \\
+$\column{x,y,z}$ & $\row{x,y,z}^\trans$ \\
 \end{tabular}
 \end{center}
 
@@ -416,6 +418,7 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % Adjust the thick and med mu skips slightly.
 %    \begin{macrocode}
 \RequirePackage{mathtools}
+\mathtoolsset{centercolon}
 \allowdisplaybreaks[1]
 \thickmuskip=5mu plus 3mu minus 1mu
 \medmuskip=4mu plus 2mu minus 3mu
@@ -426,9 +429,10 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % This macro is implemented using the \software{xparse} package \cite{xparse}.
 %    \begin{macrocode}
 \RequirePackage{xparse}
-\DeclareDocumentCommand{\mathdef}{mO{0}m}{%
+\DeclareDocumentCommand{\mathdef}{mO{0}om}{%
   \expandafter\let\csname hep@text\string#1\endcsname=#1
-  \expandafter\newcommand\csname hep@math\string#1\endcsname[#2]{#3}
+  \expandafter\newcommand\csname hep@math\string#1%
+  \IfNoValueTF{#3}{\endcsname[#2]}{\endcsname[#2][#3]}{#4}
   \DeclareRobustCommand#1{%
     \ifmmode
       \expandafter\let\expandafter\next\csname%
@@ -460,12 +464,12 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 \let\overline\textoverline
 \DeclareRobustCommand{\over@line}[1]{\@@overline{#1}}
 \mathdef{\overline}{\over@line}
-\newcommand\hep@overbar[1]{%
-  \mkern 2.5mu\overline{\mkern-2.5mu#1\mkern-1.5mu}\mkern 1.5mu%
+\newcommand\hep@widebar[1]{%
+  \mkern2.5mu\overline{\mkern-2.5mu#1\mkern-.5mu}\mkern.5mu%
 }
-\newcommand\overbar[1]{%
-  \settowidth{\dimen0}{#1}%
-  \ifdim\dimen0>.3em\hep@overbar{#1}\else\bar{#1}\fi%
+\newcommand\widebar[1]{%
+  \settowidth{\dimen0}{\ensuremath{#1}}%
+  \ifdim\dimen0>.475em\hep@widebar{#1}\else\bar{#1}\fi%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -544,6 +548,7 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % \begin{macro}{\trans}
 % Define a transpose symbol.
 %    \begin{macrocode}
+\RequirePackage{amssymb}
 \newcommand*{\hep@transpose}[2]{\raisebox{\depth}{$\m@th#1\intercal$}}
 \newcommand*{\transpose}{{\mathpalette\hep@transpose{}}}
 \let\trans\transpose
@@ -634,15 +639,17 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % Provide a flat fraction.
 %    \begin{macrocode}
 \DeclarePairedDelimiterX{\hep@flatfrac}[2]{.}{.}{%
-  #1\delimsize/\hep@left@delim#2%
+  \kern-\nulldelimiterspace#1\delimsize/\hep@left@delim#2\kern-\nulldelimiterspace%
 }
 \NewDocumentCommand{\flatfrac}{somm}{%
-  \IfBooleanTF{#1}{%
-    \hep@flatfrac*{#3}{#4}%
-  }{%
-    \IfNoValueTF{#2}{\,\hep@left@delim#3/\hep@left@delim#4\,%
+  \mathop{
+    \IfBooleanTF{#1}{%
+      \hep@flatfrac*{#3}{#4}%
     }{%
-      \hep@flatfrac[#2]{#3}{#4}%
+      \IfNoValueTF{#2}{\hep@left@delim#3/\hep@left@delim#4%
+      }{%
+       \hep@flatfrac[#2]{#3}{#4}%
+      }%
     }%
   }%
 }
@@ -782,6 +789,7 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 %    \begin{macrocode}
 \RequirePackage{cancel}
 \RequirePackage{slashed}
+\declareslashed{}{/}{.14}{0}{L}
 \declareslashed{}{/}{.06}{0}{\D}
 \declareslashed{}{/}{.055}{0}{\pd}
 %    \end{macrocode}
@@ -802,8 +810,9 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 %
 % \begin{macro}{\noargumentsymbol}
 % \begin{macro}{\optionalargument}
-% Allow for macros to have an empty argument.
+% Allow for macros to have an empty argument using the \software{etoolbox} package \cite{etoolbox}.
 %    \begin{macrocode}
+\RequirePackage{etoolbox}
 \newcommand{\noargumentsymbol}{\:\cdot\:}
 \newcommand{\optionalargument}[1]{\ifblank{#1}{\noargumentsymbol}{#1}}
 %    \end{macrocode}
@@ -812,7 +821,6 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 %
 % \begin{macro}{\abs}
 % \begin{macro}{\norm}
-% \begin{macro}{\pnorm}
 % Absolute value and norm.
 %    \begin{macrocode}
 \DeclarePairedDelimiterX\abs[1]\lvert\rvert{\optionalargument{#1}}
@@ -826,7 +834,6 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
   }{\optionalargument{#3}}%
 }
 %    \end{macrocode}
-% \end{macro}
 % \end{macro}
 % \end{macro}
 
@@ -893,6 +900,15 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 %    \end{macrocode}
 % \end{macro}
 
+% Check if "nfssect-cfr" is loaeded and patch the global "\set" macro into the "cfr" namespace
+%    \begin{macrocode}
+\RequirePackage{xpatch}
+\@ifundefined{exfs@merge@families}{}{%
+  \xpatchcmd{\exfs@merge@families}{\set}{\cfr@set}{}{}%
+  \xpatchcmd{\exfs@merge@families}{\set}{\cfr@set}{}{}%
+  \xpatchcmd{\exfs@merge@families}{\set}{\cfr@set}{}{}%
+}%
+%    \end{macrocode}
 % \begin{macro}{\suchthat}
 % \begin{macro}{\set}
 % Define a "\set" macro that allows a midbar via "\suchthat".
@@ -979,9 +995,11 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % \begin{macro}{\braketspace}
 % Define the space within braket notation.
 %    \begin{macrocode}
-\providecommand\braketspace{\mskip1mu}
+% \providecommand\braketspace{\mskip1mu}
+\providecommand\braketouterspace{\mskip1mu}
+\providecommand\braketinnerspace{\mskip3mu}
 \newcommand\hep@midvert{%
-  \braketspace\delimsize\vert\braketspace\hep@left@delim%
+  \braketinnerspace\delimsize\vert\braketinnerspace\hep@left@delim%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -990,7 +1008,7 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % Define the braket macro.
 %    \begin{macrocode}
 \DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{%
-  \braketspace#1\hep@midvert#2\braketspace%
+  \braketouterspace#1\hep@midvert#2\braketouterspace%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -999,7 +1017,7 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % Define the bra macro.
 %    \begin{macrocode}
 \DeclarePairedDelimiterXPP\hep@bra[1]{%
-  }{\langle}{\rvert}{\braketspace}{\braketspace#1\braketspace%
+  }{\langle}{\rvert}{\braketinnerspace}{\braketouterspace#1\braketinnerspace%
 }
 \NewDocumentCommand{\bra}{smt\ket sgt\ketbra sgg}{%
   \IfBooleanTF{#6}{%
@@ -1022,9 +1040,9 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % Define the ket macro.
 %    \begin{macrocode}
 \DeclarePairedDelimiterXPP\ket[1]{%
-  \braketspace}{\lvert}{\rangle}{%
+  \braketinnerspace}{\lvert}{\rangle}{%
 }{%
-  \braketspace\hep@left@delim#1\braketspace%
+  \braketinnerspace\hep@left@delim#1\braketouterspace%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1049,7 +1067,7 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 \DeclarePairedDelimiterX\matrixelement[3]{%
   \langle}{\rangle
 }{%
-  \braketspace#1\hep@midvert#2\hep@midvert#3\braketspace%
+  \braketouterspace#1\hep@midvert#2\hep@midvert#3\braketouterspace%
 }
 \newcommand\matrixel{\matrixelement}
 \newcommand\mel{\matrixelement}
@@ -1063,7 +1081,7 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % Define the expectationvalue and vev macros.
 %    \begin{macrocode}
 \DeclarePairedDelimiterX\hep@expvalue[1]{\langle}{\rangle}{%
-  \braketspace#1\braketspace%
+  \braketouterspace#1\braketouterspace%
 }
 \NewDocumentCommand{\expectationvalue}{som}{%
   \IfNoValueTF{#2}{%

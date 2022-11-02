@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019 by Jan Hajer
+% Copyright (C) 2019-2022 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,8 +18,8 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-acronym}[2021/08/01 v1.0 Acronyms using glossaries]
-%<documentation>\ProvidesFile{hep-acronym-documentation.tex}[2021/08/01 v1.0 hep-acronym documentation]
+%<package>\ProvidesPackage{hep-acronym}[2022/11/01 v1.1 Acronyms using glossaries]
+%<documentation>\ProvidesFile{hep-acronym-documentation.tex}[2022/11/01 v1.1 hep-acronym documentation]
 %
 %<*documentation>
 
@@ -72,6 +72,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2021/09/01}{Initial version of the style file.}
+% \changes{v1.1}{2022/11/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -81,7 +82,7 @@
 
 \title{The \software{hep-acronym} package\thanks{This document corresponds to \software{hep-acronym}~\fileversion.}}
 \subtitle{An acronym extension for glossaries}
-\author{Jan Hajer \email{jan.hajer@unibas.ch}}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
 \date{\filedate}
 
 % \ifshort
@@ -107,8 +108,11 @@ The second star restores the \hologo{TeX} default of swallowing subsequent white
 The long form is only shown at the first appearance of these macros, later appearances generate the abbreviation with a hyperlink to the long form.
 Capitalisation at the beginning of paragraphs and sentences is (mostly) ensured.
 The long form is never used in math mode which can be exploited to enforce the short form.
-In order to enforce the long form use "\glsdesc*"\marg{abbreviation}.
-As there can be no fixed rule whether to use the long form or the short form in section headers the user is left to their own devises \eg "\glsdesc"\marg{abbreviation}, "\Glsdesc"\marg{abbreviation}.
+In order to enforce the long form use "\"\meta{abbreviation}"long".
+As there can be no fixed rule whether to use the long form or the short form in section headers the user is left to their own devices \eg "\glsdesc"\marg{abbreviation}, "\Glsdesc"\marg{abbreviation}.
+\DescribeMacro{\sentence}
+The "\sentence" macro ensures that the directly following abbreviation is capitalised.
+
 
 \DescribeMacro{\shortacronym}
 \DescribeMacro{\longacronym}

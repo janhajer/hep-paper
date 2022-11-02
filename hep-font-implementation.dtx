@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019 by Jan Hajer
+% Copyright (C) 2019-2022 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,8 +18,8 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-font}[2021/09/01 v1.0 hep-font]
-%<documentation>\ProvidesFile{hep-font-documentation.tex}[2021/09/01 v1.8 hep-font documentation]
+%<package>\ProvidesPackage{hep-font}[2022/11/01 v1.1 hep-font]
+%<documentation>\ProvidesFile{hep-font-documentation.tex}[2022/11/01 v1.1 hep-font documentation]
 %
 %<*documentation>
 
@@ -57,7 +57,7 @@
 %
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{496}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -76,6 +76,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2021/09/01}{Initial version of the style file.}
+% \changes{v1.1}{2022/11/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -85,7 +86,7 @@
 
 \title{The \software{hep-font} package\thanks{This document corresponds to \software{hep-font}~\fileversion.}}
 \subtitle{Latin modern extended by computer modern}
-\author{Jan Hajer \email{jan.hajer@unibas.ch}}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
 \date{\filedate}
 
 % \ifshort
@@ -262,6 +263,24 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
   \fi
   \RequirePackage{cfr-lm}
 \fi
+%    \end{macrocode}
+% Ensure that the "verbatim" environment uses proportional font and provide an inline "\code" macro.
+% Work around a bug in \software{nfssext-cfr} which defines a global "\set" macro and breaks other macros of the same name.
+%    \begin{macrocode}
+% \let\hep@verbatim\verbatim
+% \renewcommand\verbatim{\hep@verbatim\tmstyle}
+% \RequirePackage{etoolbox}
+% \AtBeginDocument{
+% \ifdefined\set
+%  \AtBeginEnvironment{verbatim}{\global\let\hep@set\set\tmstyle}
+%  \AfterEndEnvironment{verbatim}{\renewcommand\set{\hep@set}}
+% \else
+%  \AtBeginEnvironment{verbatim}{\tmstyle}
+% \fi
+% }
+\let\verbatim@font\tmstyle
+\RequirePackage{xparse}
+\ProvideDocumentCommand{\code}{v}{{\tmstyle #1}}
 %    \end{macrocode}
 % Adjust the figures according to the "lining" option and ensure that tables always use lining.
 %    \begin{macrocode}

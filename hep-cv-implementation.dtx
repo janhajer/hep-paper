@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019-2020 by Jan Hajer
+% Copyright (C) 2019-2022 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -37,8 +37,8 @@
 
 \usepackage{hep-cv-helper}
 
-\setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
 
 \bibliography{bibliography}
 
@@ -59,6 +59,8 @@
 
 \acronym{CV}{curriculum vitae}[curricula vitarum]
 \acronym{TOC}{table of contents}
+
+\MacroIndent=1.5em
 
 %</documentation>
 
@@ -98,11 +100,11 @@
 %
 \GetFileInfo{hep-cv.sty}
 
-\photo{picture}
+\photo{avatar}
 
 \renewcommand{\titlefontsize}{\Huge}
 
-\author{The "hep-cv" package}
+\author{The \software{hep-cv} package}
 
 \address{Address Line}
 
@@ -116,20 +118,23 @@
 \begin{document}
 % \fi
 
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+\setleftwidth{2.8cm}
+
 \maketitle
 
 \begin{abstract}
-The "hep-cv" package \cite{hep-cv} enables the user to write an appealing \CV.
-The style is heavily influenced by the "moderncv" package \cite{moderncv}.
+The \software{hep-cv} package \cite{hep-cv} enables the user to write an appealing \CV.
+The style is heavily influenced by the \software{moderncv} package \cite{moderncv}.
 \end{abstract}
 
 {\setlength{\parskip}{0pt}\tableofcontents\clearpage}
 
 \section{Introduction}
 
-\cvline{The "hep-cv" package \cite{hep-cv} enables the user to write an appealing \CV.
-The style is heavily influenced by the "moderncv" package \cite{moderncv}.
-In order to use this package the user has to load only the "hep-cv" package in addition to the "article" class.}
+\cvline{The \software{hep-cv} package \cite{hep-cv} enables the user to write an appealing \CV.
+The style is heavily influenced by the \software{moderncv} package \cite{moderncv}.
+In order to use this package the user has to load only the \software{hep-cv} package in addition to the "article" class.}
 \cvline{"\textbackslash documentclass\{article\}"}
 \cvline{"\textbackslash usepackage\{hep-cv\}"}
 
@@ -172,10 +177,9 @@ The "glossaries="\meta{false} option turns the use of glossaries off.
 
 \section{Macros}
 
-\DescribeMacro{\hepcv@left@width}
-
-\DescribeMacro{\hepcv@seperator@width}
-The layout can be tuned by setting the "\hepcv@left@width" and "\hepcv@seperator@width" macros.
+\DescribeMacro{\setleftwidth}
+\DescribeMacro{\setseperatorwidth}
+The layout can be tuned by setting the "\setleftwidth" and "\setseperatorwidth" macros.
 
 \DescribeMacro{\cvline}
 The "\cvline"\oarg{left}\marg{main} adds an unformatted line to the \CV.
@@ -326,7 +330,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{date}
+% \begin{macro}{standalone}
 % Provide the option "standalone" in order to use the \CV macros in other packages.
 %    \begin{macrocode}
 \DeclareBoolOption[true]{standalone}
@@ -374,6 +378,9 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 \RequirePackage{geometry}
 \geometry{a4paper, includeheadfoot}
 \geometry{hscale=.75, vscale=.8, vmarginratio=3:4}
+%    \end{macrocode}
+% \cvline{End of standalone conditional.}
+%    \begin{macrocode}
 \fi
 %    \end{macrocode}
 %
@@ -414,7 +421,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
   @{}>{\raggedleft\arraybackslash}p{\hepcv@left@width}%
   @{\hspace{\hepcv@seperator@width}}p{\hepcv@main@width}@{}%
 }\tstyle}
-\newcommand{\cv@end}{\end{tabular}\hfill}
+\newcommand{\cv@end}{\end{tabular}\hfill\par}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -474,6 +481,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \end{macro}
 % \end{macro}
 %
+% \cvline{Start of standalone conditional.}
 %    \begin{macrocode}
 \ifhepcv@standalone
 %    \end{macrocode}
@@ -877,7 +885,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{enumdescript}
 % Adjust the "enumdescript" list to the \CV format.
 %    \begin{macrocode}
-\setlist[enum@descript]{label=\arabic*}
+\setlist[enumdesc]{label=\arabic*}
 %    \end{macrocode}
 % \end{macro}
 
@@ -1192,7 +1200,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 
 %<*helper>
 %
-% \cvline{Make "hep-cv" compatible with the "doc" package.}
+% \cvline{Make \software{hep-cv} compatible with the "doc" package.}
 %    \begin{macrocode}
 \setlength{\@totalleftmargin}{\hepcv@seperator@width}
 \setlength{\MacroIndent}{\hepcv@left@width}

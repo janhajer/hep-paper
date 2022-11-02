@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019 by Jan Hajer
+% Copyright (C) 2019-2022 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,8 +18,8 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-paper}[2021/09/01 v2.0 Publications in High Energy Physics]
-%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2021/09/01 v2.0 HEP-Paper documentation]
+%<package>\ProvidesPackage{hep-paper}[2022/11/01 v2.1 Publications in High Energy Physics]
+%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2022/11/01 v2.1 HEP-Paper documentation]
 %
 %<*documentation>
 %
@@ -55,24 +55,6 @@
 %
 % \fi
 %
-% \CheckSum{0}
-%
-% \CharacterTable
-%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
-%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
-%   Digits        \0\1\2\3\4\5\6\7\8\9
-%   Exclamation   \!     Double quote  \"     Hash (number) \#
-%   Dollar        \$     Percent       \%     Ampersand     \&
-%   Acute accent  \'     Left parenk    \(     Right paren   \)
-%   Asterisk      \*     Plus          \+     Comma         \,
-%   Minus         \-     Point         \.     Solidus       \/
-%   Colon         \:     Semicolon     \;     Less than     \<
-%   Equals        \=     Greater than  \>     Question mark \?
-%   Commercial at \@     Left bracket  \[     Backslash     \\
-%   Right bracket \]     Circumflex    \^     Underscore    \_
-%   Grave accent  \`     Left brace    \{     Vertical bar  \|
-%   Right brace   \}     Tilde         \~}
-%
 % \changes{v1.0}{2019/01/01}{Initial version of the style file.}
 % \changes{v1.1}{2020/01/01}{Transition to documented \hologo{LaTeX} source file.}
 % \changes{v1.2}{2020/03/01}{Introduction of package options.}
@@ -83,6 +65,7 @@
 % \changes{v1.7}{2021/06/01}{Introduction of dedicated style file for the title, acronyms and bibliography macros. Extension of the title macros.}
 % \changes{v1.8}{2021/08/01}{Expand thanks to allow for reference label and fine tune the title page. Reimplement the must relevant macros from the physics package. Make mathrm produce upright Greek.}
 % \changes{v2.0}{2021/09/01}{Move independent logic into dedicated packages.}
+% \changes{v2.1}{2022/11/01}{Bug fixes in the underlying packages.}
 %
 % \ifshort
 %<*documentation>
@@ -92,7 +75,7 @@
 
 \title{The \software{hep-paper} package\thanks{This document corresponds to \software{hep-paper}~\fileversion.}}
 \subtitle{Publications in high energy physics}
-\author{Jan Hajer \email{jan.hajer@unibas.ch}}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
 \date{\filedate}
 
 % \ifshort
@@ -719,6 +702,15 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   }{hyperref}
   \AtBeginDocument{\renewcommand{\foreignabbrfont}{}}
 \fi
+\ifhep@jhep
+  \hoffset 0in
+  \voffset 0in
+  \RequirePackage{geometry}
+  \AtBeginDocument{\newgeometry{
+    textheight=.757\paperheight,
+    textwidth=.72\paperwidth,
+  }}
+\fi
 %    \end{macrocode}
 %
 % \section{Font} \label{sec:font}
@@ -879,26 +871,10 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \begin{macrocode}
 \ifhep@references
 \RequirePackage{hep-reference}
-% \RequirePackage{hyperref}
-% \hypersetup{
-%   pdfencoding=auto, psdextra,
-%   hidelinks, linktoc=all, breaklinks=true,
-%   pdfcreator={}, pdfproducer={}
-% }
 %    \end{macrocode}
-% Set the \PDF meta data according to the paper information and ensure that unnecessary information is suppressed.
 %
+% Set the \PDF meta data according to the paper information and ensure that unnecessary information is suppressed.
 %    \begin{macrocode}
-% \pdfstringdefDisableCommands{\def\varepsilon{\textepsilon}}
-% \pdfstringdefDisableCommands{\def\to{\textrightarrow}}
-% \AtBeginDocument{
-%   \pdfstringdefDisableCommands{\let\ensuremath\@gobble}
-%   \pdfstringdefDisableCommands{\let\mathsurround\@gobble}
-%   \pdfstringdefDisableCommands{\let\unskip\@gobble}
-%   \pdfstringdefDisableCommands{\let\thanks\@gobble}
-%   \pdfstringdefDisableCommands{\let\footnote\@gobble}
-%   \pdfstringdefDisableCommands{\let\\\@gobble}
-% }
 \ifhep@revtex
   \AtBeginShipout{\hypersetup{pdftitle={\@title}}}
 \else
@@ -914,144 +890,15 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   \fi
 \fi
 %    \end{macrocode}
-
-% \subsection{Footnotes}
-%
-% Place a hyperlink from the footnote back to its referencing label using the \software{footnotebackref} package \cite{footnotebackref}.
-%    \begin{macrocode}
-% \def\BackrefFootnoteTag{}
-% \RequirePackage{footnotebackref}
-%    \end{macrocode}
-%
-% \begin{macro}{\footnote}
-% Ensure that no spaces appear before the footmark or at the beginning of the footnote.
-%    \begin{macrocode}
-% \let\@foot@note\footnote
-% \renewcommand{\footnote}[1]{\unskip\@foot@note{\ignorespaces#1}}
-%    \end{macrocode}
-% \end{macro}
-
-% \subsection{References}
-%
-% Begin of "references" conditional
-%    \begin{macrocode}
-% \ifhep@references
-%    \end{macrocode}
-%
-% \begin{macro}{\cref}
-% Improve reference using the \software{cleveref} package \cite{cleveref}.
-%
-%    \begin{macrocode}
-% \PassOptionsToPackage{noabbrev, nameinlink}{cleveref}
-% \RequirePackage{cleveref}
-% \newcommand{\creflastconjunction}{, and\nobreakspace}
-% \crefname{enumi}{point}{points}
-% \crefname{inlinelisti}{point}{points}
-%    \end{macrocode}
-% \end{macro}
-%
-%\begin{macro}{\no@break@before}
-% Define a macro able to prevent line breaks.
-%    \begin{macrocode}
-% \newcommand\no@break@before{%
-%   \relax\ifvmode\else%
-%     \ifhmode%
-%       \ifdim\lastskip > 0pt%
-%         \relax\unskip\nobreakspace%
-%       \fi%
-%     \fi%
-%   \fi%
-% }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\ref}
-% Adjust "\ref"\marg{key} in order to prevent preceding line breaks.
-%    \begin{macrocode}
-% \let\hep@ref\ref
-% \AtBeginDocument{\renewcommand\ref{\no@break@before\hep@ref}}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\eqref}
-% Adjust "\eqref"\marg{key} in order to prevent preceding line breaks.
-%    \begin{macrocode}
-% \renewcommand\eqref{\no@break@before\labelcref}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\subref}
-% Adjust "\subref"\marg{key} in order to prevent preceding line breaks.
-%    \begin{macrocode}
-% \let\hep@subref\subref
-% \renewcommand\subref{\no@break@before\hep@subref}
-% \renewcommand*\subcaption@ref[2]{\begingroup%
-%   \caption@setoptions{sub}%
-%   \subcaption@reffmt\p@subref{\hep@ref#1{sub@#2}}%
-% \endgroup}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\subcref}
-% Provide the "\subcref" macro.
-%    \begin{macrocode}
-% \newcommand{\subcref}[1]{\cref{sub@#1}}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\eqcrefname}
-% Define the "\eqcrefname" macro for named equation types.
-%    \begin{macrocode}
-% \NewDocumentCommand{\eqcrefname}{mmo}{
-%   \crefname{#1}{#2}{\IfValueTF{#3}{#3}{#2s}}
-%   \creflabelformat{#1}{(##2##1##3)}
-% }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\labelcrefrange}
-% Define the missing "\labelcrefrange"\marg{key1}\marg{key2} macro.
-%    \begin{macrocode}
-% \DeclareRobustCommand{\labelcrefrange}[2]{%
-%   \@crefrangenostar{labelcref}{#1}{#2}%
-% }
-%    \end{macrocode}
-% \end{macro}
-%
-% Adjust the title page
-%    \begin{macrocode}
-\ifhep@title
-  \labelcrefmultiformat{affiliation}{#2#1#3}{%
-    \textsuperscript,#2#1#3}{\textsuperscript,#2#1#3%
-  }{%
-    \textsuperscript,#2#1#3%
-  }
-  \labelcrefrangeformat{affiliation}{#3#1#4\textsuperscript{--}#5#2#6}
-%   \thanksmarkseries{alph}
-\fi
-%    \end{macrocode}
 %
 % End of "references" conditional
 %    \begin{macrocode}
 \fi
 %    \end{macrocode}
 
-% \subsection{Citations}
-%
-% \begin{macro}{\cite}
-% Adjust "\cite"\marg{key} in order to prevent preceding line breaks.
-%    \begin{macrocode}
-% \let\hep@cite\cite
-% \renewcommand\cite{\no@break@before\hep@cite}
-%    \end{macrocode}
-% \end{macro}
-%
 % \section{Acronyms}
 %
 % Define acronyms if not deactivated.
-%    \begin{macrocode}
-%    \end{macrocode}
-%
 % Acronyms are implemented in the \software{hep-acronym} package \cite{hep-acronym} and must be loaded after the \software{hyperref} package in \cref{sec:hyperlinks}.
 % Set the abbreviation style.
 %    \begin{macrocode}

@@ -23,8 +23,9 @@ generate "float"
 generate "font"
 generate "math-font"
 generate "math"
-generate "paper"
+generate "reference"
 generate "text"
 generate "title"
+generate "paper"
 
 mv README-temp.md README.md
