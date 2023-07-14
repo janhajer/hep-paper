@@ -1,24 +1,10 @@
-# The `hep-paper` package
+# The `hep-paper` bundle
 
-A `LaTeX` package for publications in High Energy Physics.
+A bundle of `LaTeX` packages improving some parts of the default setup.
 
 ## Introduction
 
-The `hep-paper` package aims to provide a single style file containing most configurations and macros necessary to write appealing publications in High Energy Physics.
-Instead of reinventing the wheel by introducing newly created macros `hep-paper` preferably loads third party packages as long as they are lightweight enough.
-
-For usual publications it is enough to load additionally to the `article` class without optional arguments only the `hep-paper` package.
-
-    \documentclass{article}
-    \usepackage{hep-paper}
-
-## Installation
-
-Running `pdflatex hep-paper.ins` will generate the main style file `hep-paper.sty` together with the necessary datamodel file `hep-paper.dbx`.
-These two files must be moved into a folder the `tex` installation is aware of, e.g. the folder containing the document that should use the `hep-paper` package.
-Additionally the documentation file `hep-paper-documentation.tex` will be generated.
-Subsequently running `pdflatex hep-paper-documentation.tex` will generate the documentation `hep-paper-documentation.pdf`.
-Finally running `pdflatex hep-paper-implementation.dtx` will generate the complete documentation of the implementation `hep-paper-implementation.pdf`
+The `hep-paper` package loads most of the other packages.
 
 ## Author
 

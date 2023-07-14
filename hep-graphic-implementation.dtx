@@ -1,0 +1,559 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2023 by Jan Hajer
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{hep-graphic}[2023/07/01 v1.0 Graphics in High Energy Physics]
+%<plot>\ProvidesPackage{hep-plot}[2023/07/01 v1.0 Plots in High Energy Physics]
+%<feynman>\ProvidesPackage{hep-feynman}[2023/07/01 v1.0 Feynman diagrams in High Energy Physics]
+%<documentation>\ProvidesFile{hep-graphic-documentation.tex}[2023/07/01 v1.0 HEP-graphic documentation]
+%
+%<*documentation>
+%
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass{ltxdoc}
+
+\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+\renewcommand{\MacroFont}{\codestyle}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+\usepackage{hologo}
+
+\usepackage[parskip,oldstyle,font=10pt]{hep-paper}
+\bibliography{bibliography}
+%</documentation>
+
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
+\begin{document}
+\DocInput{hep-graphic-implementation.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \ifshort
+%<*documentation>
+% \fi
+%
+\GetFileInfo{hep-graphic.sty}
+
+% \title{The \software{hep-graphic} package\thanks{This document corresponds to \software{hep-graphic}~\fileversion.}}
+\title{The \software{hep-graphic} package\thanks{This document corresponds to \software{hep-graphic}~v1.0.}}
+\subtitle{Plot macros}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
+% \date{\filedate}
+\date{2023/07/01}
+
+% \ifshort
+\begin{document}
+% \fi
+
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+
+\maketitle
+
+\begin{abstract}
+The \software{hep-graphic} is a convenience wrapper for the \software{pgf/tikz}, \software{pgfplots}, and \software{standalone} packages.
+\end{abstract}
+
+\section{Graphic}
+
+After loading the "hep-graphic" package the \software{pgf/tikz} \cite{pgf} and \software{standalone} \cite{standalone} packages are loaded and externalisation is activated.
+The "plot" and "feynman" options load the neccessary packages for plotting and feynman diagrams.
+The macro "\includetikz"\oarg{width}\marg{name} loads "tikz" pictures.
+
+\subsection{Plot}
+
+The \software{hep-plot} package loads the \software{pgfplots} package \cite{pgfplots} and applies some optimisation.
+
+\subsection{Feynman}
+
+The \software{hep-feynman} package loads the \software{tikz-feynman} package \cite{tikz-feynman} and applies some optimisation.
+
+% \ifshort
+\printbibliography
+
+\end{document}
+%
+%</documentation>
+% \fi
+%
+% \StopEventually{
+% \printbibliography
+% \PrintChanges
+% }
+%
+% \appendix
+%
+% \section{Implementation}
+%
+% \subsection{Graphic}
+%
+%<*package>
+%
+% Define a hepgraphic namespace for the options using the \software{kvoptions} package \cite{kvoptions}.
+%    \begin{macrocode}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=hepgraphic,
+  prefix=hepgraphic@
+}
+%    \end{macrocode}
+%
+% \begin{macro}{plot}
+% Define the "plot" switch for loading plot code.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{plot}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{feynman}
+% Define the "feynman" switch for loading feynman code.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{feynman}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+%    \end{macrocode}
+%
+% Load the \software{hep-plot} and \software{hep-feynman} packages when required.
+%    \begin{macrocode}
+\ifhepgraphic@plot\RequirePackage{hep-plot}\fi
+\ifhepgraphic@feynman\RequirePackage{hep-feynman}\fi
+%    \end{macrocode}
+%
+% Load the \software{tikz} package with the \software{external} library \cite{pgf}.
+%    \begin{macrocode}
+\RequirePackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize[
+ optimize=false,
+ only named=true,
+]
+%    \end{macrocode}
+%
+% \begin{macro}{\graphicpath}
+% Load the \software{standalone} package \cite{standalone} and define the "\graphicpath" pointing to the folder with "pgf" files.
+%    \begin{macrocode}
+\RequirePackage{standalone}
+\def\hep@graphic@path{.}
+\newcommand{\graphicpath}[1]{\def\hep@graphic@path{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\includetikz}
+% Define a macro to include "tikz" figures using the \software{xparse} package \cite{xparse}.
+%    \begin{macrocode}
+\RequirePackage{xparse}
+\NewDocumentCommand{\includetikz}{sO{1}m}{%
+ \tikzsetnextfilename{#3}%
+ \IfBooleanTF{#1}{%
+  \includestandalone{\hep@graphic@path/#3}%
+ }{%
+  \linewidth=#2\linewidth
+  \includestandalone[width=\linewidth]{\hep@graphic@path/#3}%
+ }%
+}
+\newcommand{\includefeynman}[1]{%
+ \vcenter{\hbox{\includestandalone{\hep@graphic@path/#1}}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%</package>
+%
+% \subsection{Plots}
+%
+%<*plot>
+%
+% Load the \software{pgf/tikz} package \cite{pgf}.
+%    \begin{macrocode}
+\RequirePackage{tikz}
+%    \end{macrocode}
+%
+% \begin{macro}{dashdotdotdotted}
+% \begin{macro}{dashdotdotdotdotted}
+% Add new line styles.
+%    \begin{macrocode}
+\tikzset{
+ dashdotdotdotted/.style={dash pattern=on 3pt off 2pt
+  on \the\pgflinewidth off 2pt on \the\pgflinewidth off 2pt
+  on \the\pgflinewidth off 2pt
+ },
+ dashdotdotdotdotted/.style={dash pattern=on 3pt off 2pt
+  on \the\pgflinewidth off 2pt on \the\pgflinewidth off 2pt
+  on \the\pgflinewidth off 2pt on \the\pgflinewidth off 2pt
+ },
+}%
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% Change thousand separator
+%    \begin{macrocode}
+\pgfkeys{/pgf/number format/.cd,1000 sep={\,}}%
+%    \end{macrocode}
+%
+% Load the \software{pgfplots} package \cite{pgfplots} and set global options.
+%    \begin{macrocode}
+\RequirePackage{pgfplots}
+\pgfplotsset{
+ compat=newest,
+ width=\linewidth,
+ height=\linewidth,
+ enlargelimits=false,
+}
+%    \end{macrocode}
+%
+% Fix glitch.
+%    \begin{macrocode}
+\pgfplotsset{
+ every y tick scale label/.append style={
+  inner sep=1pt,
+  xshift=-1pt,
+  yshift=-1pt,
+ },
+}
+%    \end{macrocode}
+%
+% Set default font size
+%    \begin{macrocode}
+\pgfplotsset{
+  legend style={font=\footnotesize},
+  tick label style={font=\footnotesize},
+  label style={font=\small},
+  title style={font=\small},
+  max space between ticks=30,
+}
+%    \end{macrocode}
+% \begin{macro}{three panels}
+% Set font size three panel versions
+%    \begin{macrocode}
+\pgfplotsset{
+  three panels/.style={
+    legend style={font=\scriptsize},
+    tick label style={font=\scriptsize},
+    label style={font=\footnotesize},
+    title style={font=\footnotesize},
+    max space between ticks=25,
+    /tikz/mark size=1.5pt,
+    major tick length=1mm,
+    minor tick length=0.66mm,
+    every axis title shift=0pt,
+  },
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{colors}
+% \begin{macro}{line styles}
+% \begin{macro}{marks}
+% \begin{macro}{horizontal marks}
+% \begin{macro}{vertical marks}
+% Create cycle lists
+%    \begin{macrocode}
+\colorlet{darkgreen}{green!50!black}
+\pgfplotscreateplotcyclelist{colors}{
+ blue, red, darkgreen, violet, orange, yellow!25!orange,
+ brown, black
+}
+\pgfplotscreateplotcyclelist{line styles}{
+ solid, dashed, {densely dotted, semithick}, dashdotted,
+ dashdotdotted, dashdotdotdotted, dashdotdotdotdotted
+}
+\pgfplotscreateplotcyclelist{marks}{
+ -, |, Mercedes star flipped, Mercedes star, +, x, star,
+ asterisk, 10-pointed star
+}
+\pgfplotscreateplotcyclelist{vertical marks}{
+ |, Mercedes star flipped, Mercedes star, x, star,
+ asterisk, 10-pointed star
+}
+\pgfplotscreateplotcyclelist{horizontal marks}{
+ -, Mercedes star flipped, Mercedes star, x, star, %asterisk,
+ 10-pointed star
+}
+\pgfplotsset{
+ cycle multiindex* list={colors\nextlist line styles},
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\cyclelistshift}
+% Define the "\cyclelistshift" macro skiping one step in a cyclelist.
+% Must be used in combination with "\setcounter{cyclelistshift}{0}".
+%    \begin{macrocode}
+\newcounter{cyclelistshift}
+\newcommand\cyclelistshift{
+  \globaldefs=1\relax
+%   \stepcounter{cyclelistshift}
+  \addtocounter{cyclelistshift}{1}
+  \pgfplotsset{cycle list shift=\value{cyclelistshift}}
+  \globaldefs=0\relax
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{legend}
+% Set the legend style.
+%    \begin{macrocode}
+\pgfplotsset{
+ legend cell align=left,
+ legend style={
+  at={(1,1)},
+  anchor=north east,
+  inner sep=1pt,
+  outer sep=6pt,
+  draw=none,
+  fill opacity=.9,
+  draw opacity=1,
+  text opacity=1,
+  cells={align=left},
+  /tikz/every even column/.append style={column sep=.5em},
+%   fill=none,
+ },
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{contour legend}
+% Define basic contour legend
+%    \begin{macrocode}
+\pgfplotsset{
+ contour legend/.style={
+  contour prepared={labels=false},
+  colorbar sampled line,
+  colorbar style={
+   mark size=7pt,
+   mark options={semithick},
+   tickwidth=0pt,
+   subtickwidth=0pt,
+   },
+ },
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{contour legend x}
+% Define horizontal contour legend.
+%    \begin{macrocode}
+\usepgfplotslibrary{colormaps}
+\pgfplotsset{
+ contour legend x/.style={
+  colorbar horizontal,
+  colormap/jet,
+  contour legend,
+  colorbar style={
+   at={(0.5,1.025)},
+   anchor=south,
+   mark=|,
+   axis x line*=top,
+   axis y line=none,
+   xticklabel pos=upper,
+   title style={
+    at={(-0.05,1)},
+    anchor=east,
+   },
+   xlabel style={
+    at={(-0.06,1)},
+    anchor=south east,
+   },
+  },
+ },
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{contour legend y}
+% Define vertical contour legend.
+%    \begin{macrocode}
+\pgfplotsset{
+ contour legend y/.style={
+  contour legend,
+  colorbar style={
+   at={(1.025,0.5)},
+   anchor=west,
+   mark=-,
+   axis x line=none,
+   title style={
+    at={(1,-0.1)},
+    anchor=north west,
+   },
+  },
+ },
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{contour plot x}
+% \begin{macro}{contour plot y}
+% Define vertical contour legend.
+%    \begin{macrocode}
+\pgfplotsset{
+ contour plot x/.style={
+  contour legend x,
+  contour prepared={labels=false},
+ },
+ contour plot y/.style={
+  contour legend y,
+  contour prepared={labels=false},
+ },
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{error legend}
+% Define error legend.
+%    \begin{macrocode}
+\pgfplotsset{
+ error legend/.style n args={3}{
+  legend image code/.code={
+   \draw[draw=none,fill=#1,#3](0mm,-1mm)rectangle(6mm,1mm);
+   \draw[draw=#1,#2] (0mm,0mm)--(6mm,0mm);
+  }
+ },
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\addlegendtitle}
+% Define a legend title macro.
+%    \begin{macrocode}
+\newcommand{\addlegendtitle}[2][]{
+ \addlegendimage{empty legend}
+ \addlegendentry[#1]{\hspace{-7mm}#2}
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%</plot>
+%
+% \subsection{Feynman graphs}
+%
+%<*feynman>
+%
+% Load \software{tikz-feynman} package \cite{tikz-feynman} to enable the drawing of Feynman diagrams.
+% Deactivate warning
+%    \begin{macrocode}
+\RequirePackage{tikz-feynman}
+\tikzfeynmanset{
+ compat=1.1.0,
+ warn luatex=false,
+}
+\makeatletter\def\tikzfeynman@luatex@required@path{}\makeatother
+%    \end{macrocode}
+%
+% Redfine the arrow style
+%    \begin{macrocode}
+\tikzfeynmanset{
+ with arrow/.style={%
+  decoration={markings,mark=at position#1with\arrow{>}},
+  postaction=decorate
+ },
+ with reversed arrow/.style={%
+  decoration={markings,mark=at position#1with\arrow{<}},
+  postaction=decorate
+ },
+ momentum/arrow style={->},
+}
+%    \end{macrocode}
+%
+%</feynman>
+%
+% \section{Tests}
+%
+%<*test>
+%
+%    \begin{macrocode}
+\documentclass{article}
+
+\usepackage{hep-graphic}
+
+\begin{document}
+
+\end{document}
+%    \end{macrocode}
+%
+%</test>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-graphic` package
+
+A `LaTeX` package for publications in High Energy Physics.
+
+## Introduction
+
+...
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
+%
+% \Finale
+
+\endinput
+
+% \PrintIndex
+% makeindex -s gglo.ist -o hep-graphic-implementation.gls hep-graphic-implementation.glo
+% makeindex -s gglo.ist -o hep-graphic-implementation.ind hep-graphic-implementation.idx

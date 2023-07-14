@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019-2022 by Jan Hajer
+% Copyright (C) 2019-2023 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,23 +18,28 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-math}[2022/11/01 v1.1 Math and physics macros]
-%<documentation>\ProvidesFile{hep-math-documentation.tex}[2022/11/01 v1.1 hep-math documentation]
+%<package>\ProvidesPackage{hep-math}[2023/07/01 v1.2 Math and physics macros]
+%<documentation>\ProvidesFile{hep-math-documentation.tex}[2023/07/01 v1.2 hep-math documentation]
 %
 %<*documentation>
-
 \RequirePackage[l2tabu, orthodox]{nag}
-
 \documentclass{ltxdoc}
+
+\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+\renewcommand{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
-
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
 
-\usepackage[parskip,oldstyle]{hep-paper}
+\usepackage{hologo}
 
+\usepackage[parskip,oldstyle,font=10pt]{hep-paper}
+\bibliography{bibliography}
+
+\setlength{\fboxsep}{1pt}
 \newenvironment{columns}[1][.5]{%
   \par\vspace{-\bigskipamount}%
   \begin{minipage}[t]{\linewidth}%
@@ -44,14 +49,6 @@
     \begin{minipage}[t]{\linewidth-#1\linewidth}%
   }%
 }{\end{minipage}\end{minipage}\par}
-
-\bibliography{bibliography}
-
-\usepackage{hologo}
-
-\MacroIndent=1.5em
-\setlength{\fboxsep}{1pt}
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
 %</documentation>
 
 %<*driver>
@@ -64,7 +61,7 @@
 %
 % \fi
 %
-% \CheckSum{657}
+% \CheckSum{702}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -83,7 +80,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2021/09/01}{Initial version of the style file.}
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
+% \changes{v1.1}{2023/07/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -171,7 +168,7 @@ Finer details about mathematical typesetting can be found in \cite{gregorio:2020
 \DescribeMacro{\differential}
 \DescribeMacro{\newderivative}
 \DescribeMacro{\newpartialderivative}
-The three macros "\differential"\marg{symbol}, "\newderivative""{\name}"\marg{symbol}, and "\newpartialderivative""{\name}"\marg{symbol} allow to define a differential with correct spacing, a derivative using this differential, and if necessary a partial derivative that can handle three dimensional derivatives.
+The three macros "\differential"\marg{symbol}, "\newderivative" "{\name}"\marg{symbol}, and "\newpartialderivative" "{\name}"\marg{symbol} allow to define a differential with correct spacing, a derivative using this differential, and if necessary a partial derivative that can handle three dimensional derivatives.
 
 \DescribeMacro{\d}
 \DescribeMacro{\dv}
@@ -185,7 +182,9 @@ $\dv xf$ & $\dv*xf$ & $\dv x*f$ & $\dv*x*f$
 \end{tabular}
 \end{center}
 via "\dv*"\oarg{f}\marg{x}"*""^"\marg{n}.
-Upright differential can be produced via "\renewcommand" "{\diffsymbol}""{\mathrm d}".
+Upright differential can be produced via "\renewcommand""{\diffsymbol}" "{\mathrm d}".
+The differential takes care of the correct spacing as long as it is placed at the end of the integral $\int f(x)\d x$.
+In order to archive correct spacing when it is placed at the beginning of the integral it is advisable to place the whole expression in a "\mathop{\int\d x} f(x)"  such that $\mathop{\int\d x} f(x)$.
 
 \DescribeMacro{\pd}
 \DescribeMacro{\pdv}
@@ -450,7 +449,8 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % \begin{macro}{\i}
 % Provide an upright imaginary unit in math mode.
 %    \begin{macrocode}
-\AtBeginDocument{\mathdef{\i}{\operatorname{i}}}
+\newcommand{\imaginaryunit}{\text{i}}
+\AtBeginDocument{\mathdef{\i}{\imaginaryunit}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -616,8 +616,25 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 %
 % \begin{macro}{\unit}
 % Load the \software{units} package \cite{units} which provides the "\units" and "\nicefrac" macros.
+% Patch the "\unit" macros to behave like "\mathinner" within an equation
 %    \begin{macrocode}
 \RequirePackage{units}
+\let\oldunit\unit
+\renewcommand{\unit}[2][]{%
+  \ifthenelse{\boolean{mmode}}{%
+    \mathinner{\oldunit[#1]{#2}}%
+  }{%
+     \oldunit[#1]{#2}%
+  }%
+}
+\let\oldunitfrac\unitfrac
+\renewcommand{\unitfrac}[3][]{%
+  \ifthenelse{\boolean{mmode}}{%
+    \mathinner{\oldunitfrac[#1]{#2}{#3}}%
+  }{%
+    \oldunitfrac[#1]{#2}{#3}%
+  }%
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -639,10 +656,11 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % Provide a flat fraction.
 %    \begin{macrocode}
 \DeclarePairedDelimiterX{\hep@flatfrac}[2]{.}{.}{%
-  \kern-\nulldelimiterspace#1\delimsize/\hep@left@delim#2\kern-\nulldelimiterspace%
+  \kern-\nulldelimiterspace#1\delimsize/%
+  \hep@left@delim#2\kern-\nulldelimiterspace%
 }
 \NewDocumentCommand{\flatfrac}{somm}{%
-  \mathop{
+  \mathinner{%
     \IfBooleanTF{#1}{%
       \hep@flatfrac*{#3}{#4}%
     }{%
@@ -657,6 +675,17 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % \end{macro}
 %
 % \subsubsection{Differentials and derivatives}
+%
+% \begin{macro}{\int}
+% Redefine "\int".
+%    \begin{macrocode}
+\let\hep@int\int
+\RenewDocumentCommand{\int}{oe{_^}}{%
+  \def\temp{\hep@int_{\IfValueT{#2}{#2}}^{\IfValueT{#3}{#3}}}%
+  \IfValueTF{#1}{\mathop{\temp#1}}{\temp}%
+}
+%    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\differential}
 % Define a generic differential "\differential".
@@ -833,6 +862,16 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
     \IfBooleanTF{#1}{\hep@norm*}{\hep@norm}%
   }{\optionalargument{#3}}%
 }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+
+% \begin{macro}{\floor}
+% \begin{macro}{\ceil}
+% Floor and ceiling paired delimiters.
+%    \begin{macrocode}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1017,7 +1056,8 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % Define the bra macro.
 %    \begin{macrocode}
 \DeclarePairedDelimiterXPP\hep@bra[1]{%
-  }{\langle}{\rvert}{\braketinnerspace}{\braketouterspace#1\braketinnerspace%
+  }{\langle}{\rvert}{\braketinnerspace%
+  }{\braketouterspace#1\braketinnerspace%
 }
 \NewDocumentCommand{\bra}{smt\ket sgt\ketbra sgg}{%
   \IfBooleanTF{#6}{%
@@ -1135,7 +1175,8 @@ Extended math macros
 
 ## Introduction
 
-The `hep-math` package provides some additional features beyond the `mathtools` and `amsmath` packages.
+The `hep-math` package provides some additional features beyond the
+`mathtools` and `amsmath` packages.
 
 To use the package place `\usepackage{hep-math}` in the preamble.
 
@@ -1145,8 +1186,11 @@ Jan Hajer
 
 ## License
 
-This file may be distributed and/or modified under the conditions of the `LaTeX` Project Public License, either version 1.3c of this license or (at your option) any later version.
-The latest version of this license is in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is part of all distributions of LaTeX version 2005/12/01 or later.
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
 %    \end{macrocode}
 %
 %</readme>

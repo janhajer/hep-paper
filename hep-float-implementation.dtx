@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019-2022 by Jan Hajer
+% Copyright (C) 2019-2023 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,29 +18,25 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-float}[2022/11/01 v1.1 Float adjustments ]
-%<documentation>\ProvidesFile{hep-float-documentation.tex}[2022/11/01 v1.1 hep-float documentation]
+%<package>\ProvidesPackage{hep-float}[2023/07/01 v1.2 Float adjustments]
+%<documentation>\ProvidesFile{hep-float-documentation.tex}[2023/07/01 v1.2 hep-float documentation]
 %
 %<*documentation>
-
-\RequirePackage[l2tabu, orthodox]{nag}
-
 \documentclass{ltxdoc}
+
+\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+\renewcommand{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
-
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
 
-\usepackage[parskip, oldstyle]{hep-paper}
-
-\bibliography{bibliography}
-
 \usepackage{hologo}
 
-\MacroIndent=1.5em
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+\usepackage[parskip,oldstyle,font=10pt]{hep-paper}
+\bibliography{bibliography}
 %</documentation>
 
 %<*driver>
@@ -72,7 +68,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2021/09/01}{Initial version of the style file.}
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
+% \changes{v1.1}{2023/07/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -224,23 +220,96 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 \let\end@hep@table\endtable%
 \ifhepfloat@manualplacement%
   \renewenvironment{figure}[1][tbp]{%
-    \hep@figure[#1]\centering%
+    \hep@figure[#1]\centering\small%
     }{\end@hep@figure}%
   \renewenvironment{table}[1][tbp]{%
-    \hep@table[#1]\centering%
+    \hep@table[#1]\centering\small%
   }{\end@hep@table}%
 \else%
   \renewenvironment{figure}[1][]{%
-    \hep@figure\centering%
+    \hep@figure\centering\small%
   }{\end@hep@figure}%
   \renewenvironment{table}[1][]{%
-    \hep@table\centering%
+    \hep@table\centering\small%
   }{\end@hep@table}
 \fi%
 %    \end{macrocode}
 % \end{environment}
 % \end{environment}
 %
+%
+% \subsection{floats}
+%
+% \begin{environment}{figures}
+% \begin{macro}{\figure}
+% Define the "figures" environment that places figures next to each other.
+%    \begin{macrocode}
+\newcommand{\figurehspace}{0.0333}
+\newcommand{\figurevspace}{.5\baselineskip}
+\newenvironment{figures}[2][b]{%
+  \begin{figure}
+  \let\oldcaption\caption
+  \renewcommand{\caption}[1]{%
+    \renewcommand{\caption}{\oldcaption}%
+    \captionof{figure}{##1}\vspace{\figurevspace}%
+  }
+  \ifdim#2pt>1pt%
+    \newcommand{\hep@figure@space}{\figurehspace\linewidth/#2}%
+    \renewcommand{\figure}[1][b]{%
+      \end{minipage}\hfill%
+      \begin{minipage}[##1]{\linewidth/#2-\hep@figure@space}%
+    }
+    \begin{minipage}[#1]{\linewidth/#2-\hep@figure@space}
+  \else%
+    \newcommand{\hep@figure@space}[1]{##1\linewidth*\real{\figurehspace}}
+    \renewcommand{\figure}[2][b]{%
+      \end{minipage}\hfill%
+      \begin{minipage}[##1]{##2\linewidth-\hep@figure@space{##2}}%
+    }
+    \begin{minipage}[#1]{#2\linewidth-\hep@figure@space{#2}}
+  \fi%
+}{%
+\end{minipage}\end{figure}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{environment}
+% \begin{environment}{tables}
+% \begin{macro}{\table}
+% Define the "tables" environment that places tables next to each other.
+%    \begin{macrocode}
+\newcommand{\tablehspace}{0.0333}
+\newcommand{\tablevspace}{.5\baselineskip}
+\newenvironment{tables}[2][b]{%
+  \begin{table}
+  \let\oldcaption\caption
+  \renewcommand{\caption}[1]{%
+    \renewcommand{\caption}{\oldcaption}%
+    \captionof{table}{##1}\vspace{\tablevspace}%
+  }
+  \ifdim#2pt>1pt%
+    \newcommand{\hep@table@space}{\tablehspace\linewidth/#2}%
+    \renewcommand{\table}[1][b]{%
+      \end{minipage}\hfill%
+      \begin{minipage}[##1]{\linewidth/#2-\hep@table@space}\centering%
+    }
+    \begin{minipage}[#1]{\linewidth/#2-\hep@table@space}\centering
+  \else%
+    \newcommand{\hep@table@space}[1]{##1\linewidth*\real{\tablehspace}}
+    \renewcommand{\table}[2][b]{%
+      \end{minipage}\hfill%
+      \begin{minipage}[##1]{##2\linewidth-\hep@table@space{##2}}%
+      \centering%
+    }
+    \begin{minipage}[#1]{#2\linewidth-\hep@table@space{#2}}%
+    \centering
+  \fi%
+}{%
+\end{minipage}\end{table}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{environment}
 %
 % \subsection{Sub-floats}
 %
@@ -298,18 +367,19 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 % Define the "\panel" macro for the case that the width of the panel is given.
 %    \begin{macrocode}
   \else%
+    \newcommand{\hep@panel@space}[1]{##1\linewidth*\real{\panelhspace}}%
     \newcommand{\panel}[2][b]{%
       \endminipage\hfill\begin@subcaption@minipage[#1]{%
-        ##2\linewidth-##2\linewidth*\real{\panelhspace}%
+        ##2\linewidth-\hep@panel@space{##2}%
       }%
     }%
     \begin@subcaption@minipage[#1]{%
-      #2\linewidth-#2\linewidth*\real{\panelhspace}%
+      #2\linewidth-\hep@panel@space{#2}%
     }%
   \fi%
-}{
-\endsubcaptionblock
-\vspace{-\panelvspace}
+}{%
+\endsubcaptionblock%
+\vspace{-\panelvspace}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -349,6 +419,127 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 %
 %</package>
 %
+% \section{Test}
+%
+%<*test>
+%
+%    \begin{macrocode}
+\documentclass{article}
+
+\usepackage[showframe]{geometry}
+\usepackage{hep-float}
+
+\begin{document}
+
+\begin{figure}
+\graphic[.5]{example-image-4x3}
+\caption{test}
+\end{figure}
+
+\begin{figures}{.3}
+\graphic{example-image-4x3}
+\caption{one}
+\figure{.4}
+\graphic{example-image-16x9}
+\caption{two}
+\figure{.3}
+\graphic{example-image-4x3}
+\caption{three}
+\figure{.3}
+\graphic{example-image-4x3}
+\caption{one}
+\figure{.4}
+\graphic{example-image-16x9}
+\caption{two}
+\figure{.3}
+\graphic{example-image-4x3}
+\caption{three}
+\end{figures}
+
+\begin{figures}{3}
+\graphic{example-image-1x1}
+\caption{one}
+\figure
+\graphic{example-image-1x1}
+\caption{two}
+\figure
+\graphic{example-image-1x1}
+\caption{three}
+\figure
+\graphic{example-image-1x1}
+\caption{one}
+\figure
+\graphic{example-image-1x1}
+\caption{two}
+\figure
+\graphic{example-image-1x1}
+\caption{three}
+\end{figures}
+
+
+\begin{figure}
+\begin{panels}{3}
+\graphic{example-image-1x1}
+\caption{a}
+\panel
+\graphic{example-image-1x1}
+\caption{b}
+\panel
+\graphic{example-image-1x1}
+\caption{c}
+\panel
+\graphic{example-image-1x1}
+\caption{d}
+\panel
+\graphic{example-image-1x1}
+\caption{e}
+\panel
+\graphic{example-image-1x1}
+\caption{f}
+\end{panels}
+\caption{Panels}
+\end{figure}
+
+\begin{figure}
+\begin{panels}{.3}
+\graphic{example-image-4x3}
+\caption{a}
+\panel{.4}
+\graphic{example-image-16x9}
+\caption{b}
+\panel{.3}
+\graphic{example-image-4x3}
+\caption{c}
+\panel{.225}
+\graphic{example-image-1x1}
+\caption{d}
+\panel{.4}
+\graphic{example-image-16x9}
+\caption{e}
+\panel{.225}
+\graphic[.8]{example-image-1x1}
+\caption{f}
+\end{panels}
+\caption{Panels 2}
+\end{figure}
+
+\begin{tables}{2}
+\begin{tabular}{cc}\toprule
+a & b \\
+\bottomrule\end{tabular}
+\caption{a}
+\table
+\begin{tabular}{cc}\toprule
+a & b \\
+\bottomrule\end{tabular}
+\caption{b}
+\end{tables}
+
+\end{document}
+%    \end{macrocode}
+%
+%</test>
+%
 % \section{Readme}
 %
 %<*readme>
@@ -360,9 +551,9 @@ Convenience package for float placement
 
 ## Introduction
 
-The `hep-float` package redefines some `LaTeX` float placement defaults and defines convenience wrappers for floats.
-
-The `hep-float` package can be loaded with `\usepackage{hep-float}`.
+The `hep-float` package redefines some `LaTeX` float placement defaults
+and defines convenience wrappers for floats. The `hep-float` package can
+be loaded with `\usepackage{hep-float}`.
 
 ## Author
 
@@ -370,8 +561,11 @@ Jan Hajer
 
 ## License
 
-This file may be distributed and/or modified under the conditions of the `LaTeX` Project Public License, either version 1.3c of this license or (at your option) any later version.
-The latest version of this license is in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is part of all distributions of LaTeX version 2005/12/01 or later.
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
 %    \end{macrocode}
 %
 %</readme>

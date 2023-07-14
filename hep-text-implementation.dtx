@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019-2022 by Jan Hajer
+% Copyright (C) 2019-2023 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,29 +18,30 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-text}[2022/11/01 v1.1 Some text macros]
-%<documentation>\ProvidesFile{hep-text-documentation.tex}[2022/11/01 v1.1 HEP-Text documentation]
+%<package>\ProvidesPackage{hep-text}[2023/07/01 v1.2 Some text macros]
+%<documentation>\ProvidesFile{hep-text-documentation.tex}[2023/07/01 v1.2 HEP-Text documentation]
 %
 %<*documentation>
 
 \RequirePackage[l2tabu, orthodox]{nag}
-
 \documentclass{ltxdoc}
+
+\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+\renewcommand{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
-
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
 
-\usepackage[parskip]{hep-paper}
+\usepackage{hologo}
 
+\usepackage[parskip,oldstyle,font=10pt]{hep-paper}
 \bibliography{bibliography}
 
 \acronym{CM}{computer modern}
 \acronym{LM}{latin modern}
-
-\usepackage{hologo}
 
 \newenvironment{columns}[1][.5]{%
   \par\vspace{-\bigskipamount}%
@@ -51,9 +52,6 @@
     \begin{minipage}[t]{\linewidth-#1\linewidth}%
   }%
 }{\end{minipage}\end{minipage}\par}
-
-\MacroIndent=1.5em
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
 %</documentation>
 
 %<*driver>
@@ -85,7 +83,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2019/01/01}{Initial version of the style file.}
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
+% \changes{v1.1}{2023/07/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -365,7 +363,8 @@ List and text extensions
 
 ## Introduction
 
-The `hep-text` package extends `LaTeX` lists using the `enumitem package and provides some text macros.
+The `hep-text` package extends `LaTeX` lists using the `enumitem package
+and provides some text macros.
 
 The package can be loaded by `\usepackage{hep-text}`.
 
@@ -375,8 +374,11 @@ Jan Hajer
 
 ## License
 
-This file may be distributed and/or modified under the conditions of the `LaTeX` Project Public License, either version 1.3c of this license or (at your option) any later version.
-The latest version of this license is in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is part of all distributions of LaTeX version 2005/12/01 or later.
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
 %    \end{macrocode}
 %
 %</readme>

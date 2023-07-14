@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019-2022 by Jan Hajer
+% Copyright (C) 2019-2023 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,30 +18,26 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-reference}[2022/11/01 v1.1 Publications in High Energy Physics]
-%<documentation>\ProvidesFile{hep-reference-documentation.tex}[2022/11/01 v1.1 HEP-Paper documentation]
+%<package>\ProvidesPackage{hep-reference}[2023/07/01 v1.2 Convenience macros for references]
+%<documentation>\ProvidesFile{hep-reference-documentation.tex}[2023/07/01 v1.2 HEP-reference documentation]
 %
 %<*documentation>
-%
-\RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltxdoc}
+
+\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+\renewcommand{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
-
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
 
-\usepackage[parskip]{hep-paper}
-
-\bibliography{bibliography}
-
-\shortacronym{PDF}{portable document format}
-
 \usepackage{hologo}
 
-\MacroIndent=1.5em
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+\usepackage[parskip,oldstyle,font=10pt]{hep-paper}
+\bibliography{bibliography}
+\shortacronym{PDF}{portable document format}
 %</documentation>
 
 %<*driver>
@@ -54,7 +50,7 @@
 %
 % \fi
 %
-% \CheckSum{179}
+% \CheckSum{180}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -73,7 +69,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2011/08/01}{Initial version of the style file.}
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
+% \changes{v1.1}{2023/07/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -147,8 +143,8 @@ Additionally the reference back to the text where they are called from.
 }
 \AtBeginDocument{\@ifpackageloaded{doc}{\hypersetup{hidelinks}}{}}
 %    \end{macrocode}
-% Set the \PDF meta data according to the paper information and ensure that unnecessary information is suppressed.
 %
+% Ensure that unnecessary information is suppressed.
 %    \begin{macrocode}
 \pdfstringdefDisableCommands{\def\varepsilon{\textepsilon}}
 \pdfstringdefDisableCommands{\def\to{\textrightarrow}}
@@ -160,11 +156,22 @@ Additionally the reference back to the text where they are called from.
   \pdfstringdefDisableCommands{\let\footnote\@gobble}
   \pdfstringdefDisableCommands{\let\\\@gobble}
 }
-\AtBeginDocument{\hypersetup{pdftitle={\@title}}}
-\AtBeginDocument{\hypersetup{pdfauthor={\@author}}}
-\AtBeginDocument{\@ifundefined{hep@key@words}{}{%
-  \hypersetup{pdfkeywords={\hep@key@words}}%
-}}
+%    \end{macrocode}
+%
+% Set the \PDF meta data according to the paper information
+%
+%    \begin{macrocode}
+\AtBeginDocument{
+  \@ifundefined{hep@sub@title}{
+    \hypersetup{pdftitle={\@title}}
+  }{
+    \hypersetup{pdftitle={\@title: \hep@sub@title}}
+  }
+  \hypersetup{pdfauthor={\@author}}
+  \@ifundefined{hep@key@words}{}{%
+    \hypersetup{pdfkeywords={\hep@key@words}}%
+  }
+}
 %    \end{macrocode}
 
 % \subsection{Footnotes}
@@ -207,16 +214,17 @@ Additionally the reference back to the text where they are called from.
 % \begin{macro}{\usecommand}
 % Define the "\usecommand" macro providing an anonymous function.
 %    \begin{macrocode}
-\providecommand\use@command{}
+\providecommand\hep@use@command{}
 \newcommand\usecommand[2][1]{%
-  \renewcommand\use@command[#1]{#2}\use@command%
+  \renewcommand\hep@use@command[#1]{#2}\hep@use@command%
 }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\textlabel}
-% Define the "\textlabel" macro allowing to link to a piece of text.
+% Define the "\textlabel" macro allowing to link to a piece of text using the \software{etoolbox} pcakage \cite{etoolbox}.
 %    \begin{macrocode}
+\RequirePackage{etoolbox}
 \NewDocumentCommand\textlabel{O{}mO{}m}{%
   \protected@write\@auxout{}{%
     \string\newlabel{#2}{%
@@ -335,13 +343,17 @@ Additionally the reference back to the text where they are called from.
 
 \section{Section} \label{sec:Section}
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam lobortis section \ref{sec:Section}
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Etiam lobortis section \ref{sec:Section}
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam lobortis \cref{sec:Section}
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Etiam lobortis \cref{sec:Section}
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam loborti equation \eqref{eq:Equation}
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Etiam loborti equation \eqref{eq:Equation}
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam loborti reference \cite{cite}
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Etiam loborti reference \cite{cite}
 
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
 \footnote{
@@ -373,13 +385,9 @@ A `LaTeX` package for publications in High Energy Physics.
 
 ## Introduction
 
-The `hep-reference` package aims to provide a single style file containing most configurations and macros necessary to write appealing publications in High Energy Physics.
-Instead of reinventing the wheel by introducing newly created macros `hep-reference` preferably loads third party packages as long as they are lightweight enough.
-
-For usual publications it is enough to load additionally to the `article` class without optional arguments only the `hep-reference` package.
-
-    \documentclass{article}
-    \usepackage{hep-reference}
+The `hep-reference` package applies some light convenience modifications
+to the reference, citation and footnote macros after loading standard
+classes improving on the default LaTeX behaviour.
 
 ## Author
 
@@ -387,8 +395,11 @@ Jan Hajer
 
 ## License
 
-This file may be distributed and/or modified under the conditions of the `LaTeX` Project Public License, either version 1.3c of this license or (at your option) any later version.
-The latest version of this license is in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is part of all distributions of LaTeX version 2005/12/01 or later.
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
 %    \end{macrocode}
 %
 %</readme>

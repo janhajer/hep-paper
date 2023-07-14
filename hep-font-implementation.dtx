@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019-2022 by Jan Hajer
+% Copyright (C) 2019-2023 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,33 +18,28 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-font}[2022/11/01 v1.1 hep-font]
-%<documentation>\ProvidesFile{hep-font-documentation.tex}[2022/11/01 v1.1 hep-font documentation]
+%<package>\ProvidesPackage{hep-font}[2023/07/01 v1.2 hep-font]
+%<documentation>\ProvidesFile{hep-font-documentation.tex}[2023/07/01 v1.2 hep-font documentation]
 %
 %<*documentation>
-
-\RequirePackage[l2tabu, orthodox]{nag}
-
 \documentclass{ltxdoc}
+
+\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+\renewcommand{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
-
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
 
-\usepackage[parskip]{hep-paper}
+\usepackage{hologo}
 
+\usepackage[parskip,oldstyle,font=10pt]{hep-paper}
 \bibliography{bibliography}
-
 \acronym{CM}{computer modern}
 \acronym{LM}{latin modern}
 \acronym{NFSS}{new font selection scheme}
-
-\usepackage{hologo}
-
-\MacroIndent=1.5em
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
 %</documentation>
 
 %<*driver>
@@ -57,7 +52,7 @@
 %
 % \fi
 %
-% \CheckSum{496}
+% \CheckSum{498}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -76,7 +71,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2021/09/01}{Initial version of the style file.}
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
+% \changes{v1.1}{2023/07/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -164,14 +159,14 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 %    \end{macrocode}
 %
 % \begin{macro}{size}
-% Define the "size" switching taking the font size as an argument.
+% Define the "size" option switching taking the font size as an argument.
 %    \begin{macrocode}
 \DeclareStringOption[11pt]{size}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{sans}
-% Define the "sans" switching to sans serif font.
+% Define the "sans" option switching to sans serif font.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{sans}
 \DeclareComplementaryOption{serif}{sans}
@@ -199,6 +194,7 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 \@ifclasswith{\hepfont@class}{10pt}{\setkeys{hepfont}{size=10pt}}{}
 \@ifclasswith{\hepfont@class}{11pt}{\setkeys{hepfont}{size=11pt}}{}
 \@ifclasswith{\hepfont@class}{12pt}{\setkeys{hepfont}{size=12pt}}{}
+\@ifpackageloaded{jheppub}{\setkeys{hepfont}{size=default}}{}
 %    \end{macrocode}
 %
 % \begin{macro}{\ifxetexorluatex}
@@ -264,28 +260,27 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
   \RequirePackage{cfr-lm}
 \fi
 %    \end{macrocode}
+% Ensure that the table of contest uses tabular figures using the \software{xpatch} package \cite{xpatch}.
+%    \begin{macrocode}
+\RequirePackage{xpatch}
+\xpretocmd{\@dottedtocline}{\tstyle}{}{}
+\xpatchcmd{\@dottedtocline}{\normalfont}{\normalfont\tstyle}{}{}
+\xpretocmd{\l@section}{\tstyle}{}{}
+\xpretocmd{\l@chapter}{\tstyle}{}{}
+\xpretocmd{\l@part}{\tstyle}{}{}
+%    \end{macrocode}
 % Ensure that the "verbatim" environment uses proportional font and provide an inline "\code" macro.
 % Work around a bug in \software{nfssext-cfr} which defines a global "\set" macro and breaks other macros of the same name.
 %    \begin{macrocode}
-% \let\hep@verbatim\verbatim
-% \renewcommand\verbatim{\hep@verbatim\tmstyle}
-% \RequirePackage{etoolbox}
-% \AtBeginDocument{
-% \ifdefined\set
-%  \AtBeginEnvironment{verbatim}{\global\let\hep@set\set\tmstyle}
-%  \AfterEndEnvironment{verbatim}{\renewcommand\set{\hep@set}}
-% \else
-%  \AtBeginEnvironment{verbatim}{\tmstyle}
-% \fi
-% }
-\let\verbatim@font\tmstyle
+\newcommand{\codestyle}{\tmstyle\lstyle}
+\let\verbatim@font\codestyle
 \RequirePackage{xparse}
-\ProvideDocumentCommand{\code}{v}{{\tmstyle #1}}
+\ProvideDocumentCommand{\code}{v}{{\codestyle #1}}
 %    \end{macrocode}
 % Adjust the figures according to the "lining" option and ensure that tables always use lining.
 %    \begin{macrocode}
-% \RequirePackage{etoolbox}
-% \AtBeginEnvironment{tabular}{\tlstyle}
+\g@addto@macro\@floatboxreset{\tlstyle}
+% \g@addto@macro\@subfloatboxreset{\tlstyle}
 %    \end{macrocode}
 %
 % Load the \software{textcomp} extension \cite{textcomp} and define helper functions.
@@ -547,7 +542,9 @@ Latin modern extended by computer modern.
 
 ## Introduction
 
-The `hep-font` package loads standard font packages and extends the usual Latin Modern implementations by replacing missing fonts with Computer Modern counterparts.
+The `hep-font` package loads standard font packages and extends the usual
+Latin Modern implementations by replacing missing fonts with Computer
+Modern counterparts.
 
 The package is loaded with `\usepackage{hep-font}`.
 
@@ -557,8 +554,11 @@ Jan Hajer
 
 ## License
 
-This file may be distributed and/or modified under the conditions of the `LaTeX` Project Public License, either version 1.3c of this license or (at your option) any later version.
-The latest version of this license is in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is part of all distributions of LaTeX version 2005/12/01 or later.
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
 %    \end{macrocode}
 %
 %</readme>

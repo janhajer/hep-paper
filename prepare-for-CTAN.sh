@@ -1,7 +1,8 @@
 #!/bin/bash
 
 runlatex () {
-  latexmk -pdflatex -bibtex $1
+#   latexmk -pdflatex -bibtex $1
+  latexmk --pdf $1
 }
 
 generate () {
@@ -21,11 +22,12 @@ generate "acronym"
 generate "bibliography"
 generate "float"
 generate "font"
-generate "math-font"
+generate "graphic"
 generate "math"
+generate "math-font"
+generate "paper"
 generate "reference"
 generate "text"
 generate "title"
-generate "paper"
 
 mv README-temp.md README.md

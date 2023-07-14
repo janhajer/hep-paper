@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019-2022 by Jan Hajer
+% Copyright (C) 2019-2023 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,31 +18,30 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-title}[2022/11/01 v1.1 Extend title page macros]
-%<documentation>\ProvidesFile{hep-title-documentation.tex}[2022/11/01 v1.1 hep-title documentation]
+%<package>\ProvidesPackage{hep-title}[2023/07/01 v1.2 Extend title page macros]
+%<documentation>\ProvidesFile{hep-title-documentation.tex}[2023/07/01 v1.2 hep-title documentation]
 %
 %<*documentation>
 
 \RequirePackage[l2tabu, orthodox]{nag}
 
 \documentclass{ltxdoc}
+
+\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+\renewcommand{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
-
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
 
-\usepackage[parskip]{hep-paper}
+\usepackage{hologo}
 
+\usepackage[parskip,oldstyle,font=10pt]{hep-paper}
 \bibliography{bibliography}
 
 \acronym{PDF}{portable document format}
-
-\usepackage{hologo}
-
-\MacroIndent=1.5em
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
 
 %</documentation>
 
@@ -75,7 +74,7 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2021/09/01}{Initial version of the style file.}
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
+% \changes{v1.1}{2023/07/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -152,7 +151,7 @@ Their font can be adjusted by the "\editorfont"\marg{font} and "\endorserfont"\m
 \DescribeMacro{\editortitlefont}
 \DescribeMacro{\endorsertitlefont}
 The titles of these lines can be adjusted using the "\editortitle"\marg{singluar}\marg{plural} and  "\endorsertitle"\marg{singluar}\marg{plural} macros.
-Their font can be adjust with the "\editortitlefont"\marg{font} and "\endorsertitlefont"\marg{font}.
+Their font can be adjust with the "\editortitlefont"\marg{font} and "\endorsertitlefont"\allowbreak\marg{font}.
 
 \subsection{Abstract}
 
@@ -552,7 +551,9 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % \begin{macro}{\endorser}
 % Copy of the "authblk" author code adjusted for endorsers.
 %    \begin{macrocode}
-\DeclareRobustCommand\endorser{\@ifnextchar[{\hep@@endorser}{\hep@@@endorser}}
+\DeclareRobustCommand\endorser{%
+  \@ifnextchar[{\hep@@endorser}{\hep@@@endorser}%
+}
 \def\hep@@endorser[#1]#2{\hep@@@@endorser[#1]{#2}}
 \def\hep@@@endorser#1{\hep@@@@endorser{#1}}
 \newcommand\hep@@@@endorser[2][]{%
@@ -913,7 +914,8 @@ Extensions for the title page
 
 ## Introduction
 
-The `hep-title` package extends the title macros of the standard classes with macros for a preprint, affiliation, editors, and endorsers.
+The `hep-title` package extends the title macros of the standard classes
+with macros for a preprint, affiliation, editors, and endorsers.
 
 To use the `hep-title` package include it with `\usepackage{hep-title}`.
 
@@ -923,8 +925,11 @@ Jan Hajer
 
 ## License
 
-This file may be distributed and/or modified under the conditions of the `LaTeX` Project Public License, either version 1.3c of this license or (at your option) any later version.
-The latest version of this license is in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is part of all distributions of LaTeX version 2005/12/01 or later.
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
 %    \end{macrocode}
 %
 %</readme>

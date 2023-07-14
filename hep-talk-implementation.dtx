@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019-2022 by Jan Hajer
+% Copyright (C) 2019-2023 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -19,29 +19,28 @@
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
 %<package>\ProvidesPackage{hep-talk}[2020/03/01 v1 Talks in High Energy Physics]
-%<dark>\ProvidesPackage{dark}[2020/03/01 v1 Dark color scheme]
-%<ligt>\ProvidesPackage{light}[2020/03/01 v1 Light color scheme]
-%<blue>\ProvidesPackage{blue}[2020/03/01 v1 Blue color scheme]
-%<metropolis>\ProvidesPackage{metropolis}[2020/03/01 v1 Metropolis color scheme]
+%<dark>\ProvidesPackage{hep-dark}[2020/03/01 v1 Dark color scheme]
+%<ligt>\ProvidesPackage{hep-light}[2020/03/01 v1 Light color scheme]
+%<blue>\ProvidesPackage{hep-blue}[2020/03/01 v1 Blue color scheme]
+%<metropolis>\ProvidesPackage{hep-metropolis}[2020/03/01 v1 Metropolis color scheme]
 %
 %<*documentation>
-
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltxdoc}
+
+\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+\renewcommand{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
-
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
 
-\usepackage[parskip]{hep-paper}
+\RequirePackage{hologo}
 
+\RequirePackage[parskip,oldstyle,font=10pt]{hep-paper}
 \bibliography{bibliography}
-\usepackage{hologo}
-
-\MacroIndent=1.5em
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
 %</documentation>
 
 %<*driver>
@@ -100,7 +99,7 @@ While the package provides significant fewer features than the \software{beamer}
 %
 \section{Introduction}
 
-The package can be loaded using "\usepackage{hep-talk}".
+The package can be loaded using "\RequirePackage{hep-talk}".
 
 \DescribeMacro{paperwidth}
 \DescribeMacro{ratio}
@@ -179,7 +178,20 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 %
 % Load the \software{hep-paper} package \cite{hep-paper} and reset the paper geometry.
 %    \begin{macrocode}
-\RequirePackage[sansserif, bibliography=authoryear]{hep-paper}
+% \RequirePackage[sansserif, bibliography=authoryear]{hep-paper}
+\RequirePackage[oldstyle, sans]{hep-font}
+\RequirePackage{hep-math-font}
+\RequirePackage{hep-math}
+\RequirePackage[style=authoryear]{hep-bibliography}
+\RequirePackage{hep-title}
+% \RequirePackage{hep-float}
+\RequirePackage{hep-text}
+% \RequirePackage{hep-reference}
+% \RequirePackage{hep-acronym}
+%    \end{macrocode}
+% Reset the paper geometry.
+%    \begin{macrocode}
+\RequirePackage{geometry}
 \geometry{
   reset,
   paperwidth=\heptalk@paperwidth,
@@ -208,11 +220,11 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 %    \end{macrocode}
 % Adjust spacing around equations.
 %    \begin{macrocode}
-\g@addto@macro\normalsize{
-  \setlength\abovedisplayskip{0pt}
-  \setlength\abovedisplayshortskip{0pt}
-  \setlength\belowdisplayskip{1ex}
-  \setlength\belowdisplayshortskip{1ex}
+\g@addto@macro\normalsize{%
+  \setlength\abovedisplayskip{0pt}%
+  \setlength\abovedisplayshortskip{0pt}%
+  \setlength\belowdisplayskip{1ex}%
+  \setlength\belowdisplayshortskip{1ex}%
 }
 %    \end{macrocode}
 
@@ -711,7 +723,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 \definecolor{BlockFg}{gray}{0}
 \definecolor{seven}{HTML}{2980b9}
 \colorlet{Structure}{seven!70!white}
-\definecolor{Highlight}{red}
+\colorlet{Highlight}{red}
 %    \end{macrocode}
 %</dark>
 %
