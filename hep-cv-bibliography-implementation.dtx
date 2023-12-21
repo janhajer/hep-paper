@@ -1,0 +1,545 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019-2023 by Jan Hajer
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{hep-cv-bibliography}[2020/01/02 v1.2 Curricula Vitarum in High Energy Physics]
+%
+%<*documentation>
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass{ltxdoc}
+
+\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+\renewcommand{\MacroFont}{\codestyle}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+\usepackage{hologo}
+
+\usepackage[parskip,oldstyle,font=10pt]{hep-paper}
+\bibliography{bibliography}
+\acronym{CV}{curriculum vitae}[curricula vitarum]
+\acronym{TOC}{table of contents}
+
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
+\begin{document}
+\DocInput{hep-cv-bibliography-implementation.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.0}{2019/01/01}{Initial version of the style file}
+%
+% \ifshort
+%<*documentation>
+% \fi
+%
+\GetFileInfo{hep-cv.sty}
+
+\title{The \software{hep-cv-bibliography} package\thanks{This document corresponds to \software{hep-paper}~\fileversion.}}
+
+\author{Jan Hajer}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
+
+\date{\filedate}
+
+% \ifshort
+\begin{document}
+% \fi
+
+\maketitle*
+
+\begin{abstract}
+The \software{hep-cv-bibliography} package aims to provide a single style file for \dots
+\end{abstract}
+
+\tableofcontents\clearpage
+
+\section{Introduction}
+
+
+% \ifshort
+\printbibliography
+
+\end{document}
+%
+%</documentation>
+% \fi
+%
+% \StopEventually{
+% \printbibliography
+% \PrintChanges
+% }
+%
+% \appendix
+%
+% \section{Implementation}
+%
+%<*package>
+%
+% \subsection{Options}
+%
+% Load the \software{kvoptions} package \cite{kvoptions} and define a "hepcv" namespace.
+%    \begin{macrocode}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=hepcvbib,
+  prefix=hepcvbib@
+}
+%    \end{macrocode}
+%
+% \begin{macro}{bibliography}
+% Provide the option "bibliography" for passing a "style" string to the "biblatex" package \cite{biblatex} or disabling the automatic loading of "biblatex".
+%    \begin{macrocode}
+\DeclareStringOption[numeric-comp]{bibliography}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{date}
+% Provide the option "date" reverting to the usual date scheme.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{date}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+%    \end{macrocode}
+%
+% \subsection{Bibliography}
+%
+% Execute bibliography options.
+%    \begin{macrocode}
+\usepackage{biblatex}
+\ExecuteBibliographyOptions{
+  maxnames=99,
+  uniquename=init,
+  abbreviate=false,
+  useeditor=false,
+}
+\ExecuteBibliographyOptions{sorting=ymdnt, defernumbers}
+%    \end{macrocode}
+%
+% \subsection{Authoryear}
+%
+% Adjust the "authoryear" style. The sorting template is defined in \cref{sec:sorting}
+%    \begin{macrocode}
+\ifnum\pdf@strcmp{\hepcv@bibliography}{authoryear}=0
+  \ExecuteBibliographyOptions{
+    dashed=false,
+    sorting=ymdnt
+  }
+%    \end{macrocode}
+% \begin{macro}{begentry}
+% Ensure that the "date" is printed in the left column of the \CV.
+%    \begin{macrocode}
+  \renewbibmacro{begentry}{%
+    \begin{tabular}{%
+      @{}p{\hepcv@left@width}%
+      @{\hspace{\hepcv@seperator@width}}p{\hepcv@main@width}@{}%
+    }\raggedleft%
+    \ifhepcv@date
+      \printfield{month} %
+      \iffieldundef{year}{}{\printfield{year}}%
+      \iffieldundef{endyear}{}{%
+        --\printfield{endmonth} \printfield{endyear}%
+      }%
+    \else
+      \printdate%
+    \fi &%
+  }
+%    \end{macrocode}
+% \end{macro}
+% If not "authoryear", restrict the main part of the bibliography to the main column.
+%    \begin{macrocode}
+\else
+%   \ExecuteBibliographyOptions{
+%     sorting=ymdnt,
+%     defernumbers,
+%   }
+%   \nocite{*}
+%   \AtBeginDocument{
+%     \setlength{\labelnumberwidth}{\hepcv@left@width-\hepcv@seperator@width}
+%     \setlength{\biblabelsep}{\hepcv@seperator@width}
+%   }
+%    \end{macrocode}
+% End check for "authoryear".
+%    \begin{macrocode}
+\fi
+%    \end{macrocode}
+
+% \subsubsection{Dates}
+%
+% Begin of date conditionals.
+%    \begin{macrocode}
+\ifhepcv@date
+%    \end{macrocode}
+%
+% Define macros of equally distributed month names.
+%    \begin{macrocode}
+% \newlength{\hep@longest@month}
+% \setlength{\hep@longest@month}{\widthof{May}}
+% \newcommand{\hep@spread@even}[1]{\@tfor\next:=#1\do{\hfil\next}}
+% \newcommand{\hep@month}[1]{%
+%   \makebox[\hep@longest@month][c]{\hep@spread@even{#1}}%
+% }
+% %    \end{macrocode}
+% %
+% % Apply macros of equally distributed month names.
+% %    \begin{macrocode}
+% \newcommand{\Jan}{\hep@month{Jan}}
+% \newcommand{\Feb}{\hep@month{Feb}}
+% \newcommand{\Mar}{\hep@month{Mar}}
+% \newcommand{\Apr}{\hep@month{Apr}}
+% \newcommand{\May}{\hep@month{May}}
+% \newcommand{\Jun}{\hep@month{Jun}}
+% \newcommand{\Jul}{\hep@month{Jul}}
+% \newcommand{\Aug}{\hep@month{Aug}}
+% \newcommand{\Sep}{\hep@month{Sep}}
+% \newcommand{\Oct}{\hep@month{Oct}}
+% \newcommand{\Nov}{\hep@month{Nov}}
+% \newcommand{\Dec}{\hep@month{Dec}}
+%    \end{macrocode}
+%
+% Define short names for month without dots.
+%    \begin{macrocode}
+\DefineBibliographyStrings{english}{%
+  january = \Jan,
+  february = \Feb,
+  march = \Mar,
+  april = \Apr,
+  may = \May,
+  june = \Jun,
+  july = \Jul,
+  august = \Aug,
+  september = \Sep,
+  october = \Oct,
+  november = \Nov,
+  december = \Dec
+}
+%    \end{macrocode}
+%
+% Define shortyear with apostrophe.
+%    \begin{macrocode}
+\DeclareFieldFormat{shortyear}{'\mkbibshortyear#1}
+\def\mkbibshortyear#1#2#3#4{#3#4}
+%    \end{macrocode}
+%
+% Use shortyear
+%    \begin{macrocode}
+\DeclareFieldAlias{year}{shortyear}
+\DeclareFieldAlias{endyear}{shortyear}
+\DeclareFieldAlias{endmonth}{month}
+%    \end{macrocode}
+%
+% Use superscript ordinals
+%    \begin{macrocode}
+\DefineBibliographyExtras{british}{%
+  \protected\def\mkbibordinal#1{\begingroup%
+    \@tempcnta0#1\relax\number\@tempcnta
+    \@whilenum\@tempcnta>100\do{\advance\@tempcnta-100\relax}%
+    \ifnum\@tempcnta>20
+      \@whilenum\@tempcnta>9\do{\advance\@tempcnta-10\relax}%
+    \fi
+    \textsuperscript{%
+      \ifcase\@tempcnta th\or st\or nd\or rd\else th\fi%
+    }%
+  \endgroup}
+}
+%    \end{macrocode}
+%
+% End of date conditional.
+%    \begin{macrocode}
+\fi
+%    \end{macrocode}
+
+% \subsubsection{Sorting Templates} \label{sec:sorting}
+%
+% Ensure that also the first author is written as "given-name family-name"
+%    \begin{macrocode}
+\DeclareNameAlias{sortname}{given-family}
+%    \end{macrocode}
+
+% \begin{macro}{ymnt}
+% Define the year-month-name-title sorting scheme
+%    \begin{macrocode}
+\DeclareSortingTemplate{ymnt}{
+  \sort{\field{presort}}
+  \sort[final]{\field{sortkey}}
+  \sort{\field{sortyear}\field{year}\literal{9999}}
+  \sort{%
+    \field[padside=left, padwidth=2, padchar=0]{month}%
+    \literal{9999}%
+  }
+  \sort{%
+    \field[padside=left, padwidth=2, padchar=0]{day}%
+    \literal{00}%
+  }
+  \sort{%
+    \field{sortname}\field{author}\field{editor}%
+    \field{translator}\field{sorttitle}\field{title}
+  }
+  \sort{\field{sorttitle}\field{title}}
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{ymdnt}
+% Define the year-month-descending-name-title sorting scheme
+%    \begin{macrocode}
+\DeclareSortingTemplate{ymdnt}{
+  \sort{\field{presort}}
+  \sort[final]{\field{sortkey}}
+  \sort[direction=descending]{%
+    \field[strside=left, strwidth=4]{sortyear}%
+    \field[strside=left, strwidth=4]{year}\literal{9999}
+  }
+  \sort[direction=descending]{%
+    \field[padside=left, padwidth=2, padchar=0]{month}\literal{00}%
+  }
+  \sort[direction=descending]{%
+    \field[padside=left, padwidth=2, padchar=0]{day}\literal{00}%
+  }
+  \sort{%
+    \field{sortname}\field{author}\field{editor}%
+    \field{translator}\field{sorttitle}\field{title}%
+  }
+  \sort{\field{sorttitle}\field{title}}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Bibliography headings}
+%
+% \begin{macro}{bibliography}
+% Redefine the usual bibliography heading from "section" to "subsection".
+% \begin{macro}{section}
+% Define a "section" bibliography heading.
+% \begin{macro}{subsection}
+% Define a "subsection" bibliography heading.
+% \begin{macro}{subsubsection}
+% Define a "subsubsection" bibliography heading.
+%    \begin{macrocode}
+\defbibheading{bibliography}[\bibname]{\subsection{#1}}
+\defbibheading{section}[\bibname]{\section{#1}}
+\defbibheading{subsection}[\bibname]{\subsection{#1}}
+\defbibheading{subsubsection}[\bibname]{\subsubsection{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \subsection{Macros}
+%
+% \begin{macro}{Related bibliography entries}
+% related
+%    \begin{macrocode}
+\renewbibmacro*{related:default}[1]{%
+  \renewcommand*{\newunitpunct}{\addcomma\space}%
+  \entrydata{#1}{\usebibmacro{doi+eprint+url}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{titlefirst}
+% A macro that can be used to places the title at the beginning.
+%    \begin{macrocode}
+\newbibmacro*{titlefirst}{%
+  \ifboolexpr{
+    test {\iffieldundef{title}}
+    and
+    test {\iffieldundef{subtitle}}
+  }{%
+  }{\printtext[title]{%
+      \printfield[titlecase]{title}%
+      \setunit{\subtitlepunct}%
+      \printfield[titlecase]{subtitle}%
+    }\newunit%
+  }\printfield{titleaddon}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\setlengths}
+% Set bibliography length.
+%    \begin{macrocode}
+\newcommand{\setlengths}{%
+  \setlength{\labelnumberwidth}{\hepcv@left@width-\hepcv@seperator@width}%
+  \setlength{\labelwidth}{\labelnumberwidth}%
+  \setlength{\leftmargin}{\labelwidth}%
+  \setlength{\labelsep}{\biblabelsep}%
+  \addtolength{\leftmargin}{\labelsep}%
+  \setlength{\itemsep}{\bibitemsep}%
+  \setlength{\parsep}{\bibparsep}%
+  \addtolength{\leftmargin}{\separatorwidth}%
+  \addtolength{\labelwidth}{\separatorwidth}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\printcvdate}
+% Print date in the left column.
+%    \begin{macrocode}
+\newcommand{\printcvdate}{%
+  % \ifhepcv@date
+  \printtext{\hfill}%
+  \ifkeyword{ongoing}{\printtext{Since} }{}%
+  \iffieldundef{day}{}{\printfield{day}\printtext{.\space}}%
+  \smash{\vphantom{\printfield{day}}}% Why do I need this?
+  \printfield{month} %
+  \tstyle\iffieldundef{year}{}{\printfield{year}}%
+  \iffieldundef{endyear}{}{%
+    --\iffieldundef{endday}{}{\printfield{endday}. }%
+    \printfield{endmonth} \printfield{endyear}%
+  }%
+  % \else
+  % \printdate%
+  % \fi
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\printindex}
+% Print index label in the left column.
+%    \begin{macrocode}
+\newcommand{\printindex}{%
+  \printtext[labelnumberwidth]{%
+    \printfield{labelprefix}\tstyle\printfield{labelnumber}%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{given-family-bold}
+% Bold names.
+%    \begin{macrocode}
+\DeclareNameFormat{given-family-bold}{%
+  \mkbibbold{%
+    \ifgiveninits{%
+      \usebibmacro{name:given-family}{\namepartfamily}%
+      {\namepartgiveni}{\namepartprefix}{\namepartsuffix}%
+    }{%
+      \usebibmacro{name:given-family}{\namepartfamily}%
+      {\namepartgiven}{\namepartprefix}{\namepartsuffix}%
+    }%
+  \usebibmacro{name:andothers}
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\printissuedate}
+% Issue and date.
+%    \begin{macrocode}
+\newcommand{\printissuedate}{%
+  % \ifhepcv@date
+  \printtext{\hfill}%
+  \ifkeyword{ongoing}{\printtext{Since}}{}
+  \printfield{issue} %
+  \tstyle\iffieldundef{year}{}{\printfield{year}}%
+  \iffieldundef{endyear}{}{%
+    --\printfield{endmonth} \printfield{endyear}%
+  }%
+  % \else
+  % \printdate%
+  % \fi
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\printissuedate}
+% Issue and date.
+%    \begin{macrocode}
+\newcommand{\adjustOrgLocDat}{%
+  \renewbibmacro*{organization+location+date}{%
+    \printlist{organization}\setunit*{\addcomma\space}%
+    \printlist{location}\setunit*{\addcomma\space}\newunit%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Bibliography environments}
+%
+% \begin{environment}{unnumbered}
+% Unnumbered bibliography environment.
+%    \begin{macrocode}
+\defbibenvironment{unnumbered}{%
+  \toggletrue{blx@skiplab}%
+  \renewbibmacro{date}{}%
+  \list{\printcvdate}{\setlengths}%
+  \renewcommand*{\makelabel}[1]{\hss##1}%
+}{\endlist}{\item}
+%    \end{macrocode}
+%\end{environment}
+%
+% \environment{numbered}{Numbered bibliography environment.}
+%    \begin{macrocode}
+\defbibenvironment{numbered}{%
+  \renewbibmacro{date}{}%
+  \list{\printindex\printcvdate}{\setlengths}%
+  \renewcommand*{\makelabel}[1]{\hss##1}%
+}{\endlist}{\item}
+%    \end{macrocode}
+%
+% \begin{environment}{starrednumbered}
+% Starrred and numbered bibliography environment.
+%    \begin{macrocode}
+\defbibenvironment{starrednumbered}{%
+  \renewbibmacro{date}{}%
+  \list{%
+    \printindex%
+    \ifkeyword{main5}{\hfill\textborn}{}%
+    \printcvdate%
+  }{\setlengths}%
+  \renewcommand*{\makelabel}[1]{\hss##1}%
+}{\endlist}{\item}
+%    \end{macrocode}
+%\end{environment}
+%
+%</package>
+%
+% \Finale
+%
+\endinput

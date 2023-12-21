@@ -141,6 +141,13 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 %    \end{macrocode}
 %
 % \begin{macro}{plot}
+% Define the "extern" option to activate externalisation into the declared folder.
+%    \begin{macrocode}
+\DeclareStringOption{extern}[.]
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{plot}
 % Define the "plot" switch for loading plot code.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{plot}
@@ -167,11 +174,14 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 % Load the \software{tikz} package with the \software{external} library \cite{pgf}.
 %    \begin{macrocode}
 \RequirePackage{tikz}
-\usetikzlibrary{external}
-\tikzexternalize[
- optimize=false,
- only named=true,
-]
+\ifx\hepgraphic@extern\@empty\else
+ \usetikzlibrary{external}
+ \tikzexternalize[
+  optimize=false,
+  only named=true,
+ ]
+ \tikzsetexternalprefix{\hepgraphic@extern/}
+\fi
 %    \end{macrocode}
 %
 % \begin{macro}{\graphicpath}

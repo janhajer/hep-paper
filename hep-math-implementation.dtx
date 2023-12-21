@@ -61,7 +61,7 @@
 %
 % \fi
 %
-% \CheckSum{702}
+% \CheckSum{712}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -706,7 +706,7 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
     }{%
       \differential#2\IfValueT{##5}{^{##5\!}}\IfValueT{##2}{##2}%
     }{%
-      \differential#2{##3}\IfValueT{##5}{^{##5}}%
+      \differential#2{{}##3}\IfValueT{##5}{^{##5}}%
     }%
   }
 }
@@ -729,7 +729,7 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
       \differential#2\ifnum\hep@sum=1\relax\else{^{\hep@sum\!}}\fi
       \IfValueT{##2}{##2}%
     }{%
-      \differential#2{##3}\ifnum##5=1\relax\else{^{##5}}\fi%
+      \differential#2{{}##3}\ifnum##5=1\relax\else{^{##5}}\fi%
       \IfValueT{##6}{#2##6\ifnum##7=1\relax\else{^{##7}}\fi}%
       \IfValueT{##8}{#2##8\ifnum##9=1\relax\else{^{##9}}\fi}%
     }%
@@ -764,6 +764,8 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % Define the partial differential and derivative.
 %    \begin{macrocode}
 \newcommand\partialdifferential{\differential\partial}
+\newcommand\slashedpartialdifferential{\differential{\slashed\partial}}
+\newcommand\spd{\slashedpartialdifferential}
 \newcommand\pd{\partialdifferential}
 \newpartialderivative{\partialderivative}{\partial}
 \newcommand\pdv{\partialderivative}
@@ -819,8 +821,9 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 \RequirePackage{cancel}
 \RequirePackage{slashed}
 \declareslashed{}{/}{.14}{0}{L}
-\declareslashed{}{/}{.06}{0}{\D}
-\declareslashed{}{/}{.055}{0}{\pd}
+\declareslashed{}{/}{.055}{0}{\partial}
+\declareslashed{}{/}{.06}{0}{\gaugediff}
+\declareslashed{}{/}{.055}{0}{\partialdifferential}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}

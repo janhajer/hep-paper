@@ -592,18 +592,18 @@ In the case that the glossary should be printed additional packages must be load
 % \begin{macro}{\listoftables}
 % Adjust the "\tableofcontents" macro to never show the long form of acronyms.
 %    \begin{macrocode}
-\let\hep@table@of@contents\tableofcontents
-\renewcommand\tableofcontents{%
-  \glsunsetall\hep@table@of@contents\glsresetall%
-}
-\let\hep@list@of@figures\listoffigures
-\renewcommand\listoffigures{%
-  \glsunsetall\hep@list@of@figures\glsresetall%
-}
-\let\hep@list@of@tables\listoftables
-\renewcommand\listoftables{%
-  \glsunsetall\hep@list@of@tables\glsresetall%
-}
+% \let\hep@table@of@contents\tableofcontents
+% \renewcommand\tableofcontents{%
+%   \glsunsetall\hep@table@of@contents\glsresetall%
+% }
+% \let\hep@list@of@figures\listoffigures
+% \renewcommand\listoffigures{%
+%   \glsunsetall\hep@list@of@figures\glsresetall%
+% }
+% \let\hep@list@of@tables\listoftables
+% \renewcommand\listoftables{%
+%   \glsunsetall\hep@list@of@tables\glsresetall%
+% }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}

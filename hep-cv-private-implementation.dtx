@@ -1,0 +1,350 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019-2023 by Jan Hajer
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{hep-cv-private}[2020/01/02 v1.2 Curricula Vitarum in High Energy Physics]
+%
+%<*documentation>
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass{ltxdoc}
+
+\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
+\renewcommand{\MacroFont}{\codestyle}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+\usepackage{hologo}
+
+\usepackage[parskip,oldstyle,font=10pt]{hep-paper}
+\bibliography{bibliography}
+\acronym{CV}{curriculum vitae}[curricula vitarum]
+\acronym{TOC}{table of contents}
+%</documentation>
+
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
+\begin{document}
+\DocInput{hep-cv-private-implementation.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.0}{2019/01/01}{Initial version of the style file}
+%
+% \ifshort
+%<*documentation>
+% \fi
+%
+\GetFileInfo{hep-cv-private.sty}
+
+\title{The \software{hep-cv-private} package}
+
+\author{Jan Hajer}
+
+\date{\filedate}
+
+% \ifshort
+\begin{document}
+% \fi
+
+\maketitle*
+
+\begin{abstract}
+The "hep-cv-private" package aims to provide a single style file for \dots
+\end{abstract}
+
+\tableofcontents\clearpage
+
+\section{Introduction}
+
+
+% \ifshort
+\printbibliography
+
+\end{document}
+%
+%</documentation>
+% \fi
+%
+% \StopEventually{
+% \printbibliography
+% \PrintChanges
+% }
+%
+% \appendix
+%
+% \section{Implementation}
+%
+%<*package>
+% \begin{macro}{finentry}
+% Add the citation count at the end of each entry if lualatex is used.
+%    \begin{macrocode}
+%   \renewbibmacro{finentry}{%
+%     \ifluatex
+%       \ifthenelse{
+%         \ifentrytype{article}\OR
+%         \ifentrytype{unpublished}\OR
+%         \ifentrytype{thesis}\OR
+%         \ifentrytype{booklet}\OR
+%         \ifentrytype{inproceedings}\OR
+%         \ifentrytype{manual}\OR
+%         \ifentrytype{report}\OR
+%         \ifentrytype{software}
+%       }{\newunitpunct\mbox{}~\hfill%
+%         \citationcounter{\thefield{entrykey}}%
+%       }{}%
+%     \fi%
+%     \end{tabular}%
+%   }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Bibliography filters}
+%
+%    \begin{macrocode}
+\defbibfilter{work}{keyword=work}
+\defbibfilter{visit}{keyword=visit}
+\defbibfilter{education}{keyword=education}
+\defbibfilter{funding}{keyword=funding}
+\defbibfilter{organization}{keyword=organization}
+\defbibfilter{seminar}{keyword=invited and keyword=seminar}
+\defbibfilter{conference}{keyword=invited and not keyword=organization
+  and ( keyword=conference or keyword=workshop or keyword=school )}
+\defbibfilter{contributions}{not keyword=invited and not keyword=organization
+  and ( keyword=conference or keyword=workshop or keyword=school )}
+\defbibfilter{preprint}{keyword=preprint}
+\defbibfilter{journal}{keyword=article}
+\defbibfilter{proceedings}{keyword=proceedings}
+\defbibfilter{editor}{keyword=editor}
+\defbibfilter{community}{keyword=community and not keyword=editor}
+\defbibfilter{software}{keyword=software}
+\defbibfilter{thesis}{keyword=thesis}
+\defbibfilter{main}{keyword=mainrecent}
+\defbibfilter{master-supervision}{keyword=master and keyword=supervision}
+\defbibfilter{PhD}{keyword=PhD and not keyword=supervision}
+\defbibfilter{master}{keyword=master and not keyword=supervision}
+\defbibfilter{lecture}{keyword=lecture}
+\defbibfilter{tutorial}{keyword=tutorial}
+%    \end{macrocode}
+%
+% \subsection{Macros}
+%
+% \begin{macro}{presentationstyle}
+% Presentation mode.
+%    \begin{macrocode}
+\newbibmacro{presentationstyle}{%
+  \ifkeyword{lecture}{Blackboard lecture}{%
+  \ifkeyword{plenary}{Plenary talk}{%
+  \ifkeyword{parallel}{Talk}{%
+  \ifkeyword{talk}{Talk}{%
+  \ifkeyword{poster}{Poster}{%
+  \ifkeyword{seminar}{Seminar}{%
+  \ifkeyword{convener}{Session convener}{}}}}}}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Bibliography environments}
+%
+% \begin{environment}{work}
+% Work bibliography environment.
+%    \begin{macrocode}
+\defbibenvironment{work}{%
+  \toggletrue{blx@skiplab}%
+  \DeclareFieldFormat*{title}{\textbf{\sentence##1}}%
+  \adjustOrgLocDat%
+  \list{\printcvdate}{\setlengths}%
+  \renewcommand*{\makelabel}[1]{\hss##1}%
+}{\endlist}{\item}
+%    \end{macrocode}
+%\end{environment}
+%
+% \begin{environment}{visit}
+% Visit bibliography environment.
+%    \begin{macrocode}
+\defbibenvironment{visit}{%
+  \toggletrue{blx@skiplab}%
+  \DeclareListFormat{organization}{\textbf{\sentence##1}}%
+  \adjustOrgLocDat%
+  \list{\printcvdate}{\setlengths}%
+  \renewcommand*{\makelabel}[1]{\hss##1}%
+}{\endlist}{\item}
+%    \end{macrocode}
+%\end{environment}
+%
+% \begin{environment}{education}
+% Education bibliography environment.
+%    \begin{macrocode}
+\defbibenvironment{education}{%
+  \toggletrue{blx@skiplab}%
+  \DeclareFieldFormat*{title}{\textbf{\sentence##1}}%
+  \adjustOrgLocDat%
+  \list{\printcvdate}{\setlengths}%
+  \renewcommand*{\makelabel}[1]{\hss##1}%
+}{\endlist}{\item}
+%    \end{macrocode}
+%\end{environment}
+%
+% \begin{environment}{student}
+% Student bibliography environment.
+%    \begin{macrocode}
+\defbibenvironment{student}{%
+  \togglefalse{abx@bool@giveninits}%
+  \toggletrue{blx@skiplab}%
+  \DeclareNameAlias{author}{given-family-bold}%
+  \adjustOrgLocDat%
+  \letbibmacro{finentry-old}{finentry}%
+  \renewbibmacro{finentry}{\usebibmacro{annotation}}%
+  \list{\printcvdate}{\setlengths}%
+  \renewcommand*{\makelabel}[1]{\hss##1}%
+}{\endlist}{\item}
+%    \end{macrocode}
+%\end{environment}
+%
+% \begin{environment}{course}
+% Course bibliography environment.
+%    \begin{macrocode}
+\defbibenvironment{course}{%
+  \togglefalse{abx@bool@giveninits}%
+  \toggletrue{blx@skiplab}%
+  \adjustOrgLocDat%
+  \DeclareFieldFormat*{title}{\textbf{\sentence##1}\newunit}%
+  \list{\printissuedate}{\setlengths}%
+  \renewcommand*{\makelabel}[1]{\hss##1}%
+}{\endlist}{\item}
+%    \end{macrocode}
+%\end{environment}
+%
+% \begin{environment}{funding}
+% Funding bibliography environment.
+%    \begin{macrocode}
+\defbibenvironment{funding}{%
+  \letbibmacro{begentry-old}{begentry}%
+  \renewbibmacro*{begentry}{%
+    \usebibmacro{begentry-old}\usebibmacro{booktitle}\newunit%
+  }%
+  \DeclareFieldFormat*{booktitle}{\textbf{\sentence##1}}%
+  \renewbibmacro*{author}{}%
+  \renewbibmacro*{date}{}%
+  \DeclareFieldFormat*{title}{\emph{Proposal title: ##1.}}%
+  \list{\printindex\printcvdate}{\setlengths}%
+  \renewcommand*{\makelabel}[1]{\hss##1}%
+}{\endlist}{\item}
+%    \end{macrocode}
+%\end{environment}
+%
+% \begin{environment}{talk}
+% Talk bibliography environment.
+%    \begin{macrocode}
+\defbibenvironment{talk}{%
+  \toggletrue{blx@skiplab}%
+  \letbibmacro{begentry-old}{begentry}
+  \renewbibmacro*{begentry}{%
+    \usebibmacro{begentry-old}\usebibmacro{booktitle}\newunit%
+  }%
+  \adjustOrgLocDat%
+  \renewbibmacro{author}{}
+  \DeclareFieldFormat{title}{%
+    \emph{\usebibmacro{presentationstyle}: ##1}.
+  }%
+  \DeclareFieldFormat{booktitle}{\textbf{\sentence##1}}%
+  \list{\printcvdate}{\setlengths}%
+  \renewcommand*{\makelabel}[1]{\hss##1}%
+}{\endlist}{\item}
+%    \end{macrocode}
+%\end{environment}
+%
+% \begin{environment}{publication}
+% Publication bibliography environment.
+%    \begin{macrocode}
+\defbibenvironment{publication}{%
+  \DeclareFieldFormat*{title}{\textbf{\sentence##1}\newunit}%
+  \letbibmacro{begentry-old}{begentry}%
+  \renewbibmacro*{begentry}{%
+    \usebibmacro{begentry-old}\usebibmacro{titlefirst}\newunit%
+  }%
+  \renewbibmacro*{title}{}%
+  \renewbibmacro*{in:}{%
+    \setunit{\addcomma\space}%
+    \iffieldundef{journaltitle}{}{%
+      \ifkeyword{accepted}{\printtext{Accepted in}}{%
+        \ifkeyword{submitted}{\printtext{Submitted to}}{%
+          \printtext{\bibstring{in}}%
+        }%
+      }%
+    }\intitlepunct%
+  }%
+  \renewbibmacro*{date}{}%
+  \renewbibmacro{issue+date}{}%
+  \list{\printindex\printcvdate}{\setlengths}%
+  \renewcommand*{\makelabel}[1]{\hss##1}%
+}{\endlist}{\item}
+%    \end{macrocode}
+%\end{environment}
+%
+% \begin{environment}{main}
+% Key publication bibliography environment.
+%    \begin{macrocode}
+\defbibenvironment{main}{%
+  \toggletrue{blx@skiplab}%
+  \DeclareFieldFormat*{title}{\textbf{\sentence##1}\newunit}%
+  \letbibmacro{begentry-old}{begentry}%
+  \renewbibmacro*{begentry}{%
+    \usebibmacro{begentry-old}\usebibmacro{titlefirst}\newunit%
+  }%
+  \renewbibmacro*{title}{}%
+  \renewbibmacro*{issue+date}{}%
+  \DeclareFieldFormat{annotation}{\newline ##1}%
+  \letbibmacro{finentry-old}{finentry}%
+  \renewbibmacro{finentry}{\usebibmacro{annotation}}%
+  \list{\printcvdate}{\setlengths}%
+  \renewcommand*{\makelabel}[1]{\hss##1}%
+}{\endlist}{\item}
+%    \end{macrocode}
+%\end{environment}
+%
+%</package>
+
+% \Finale
+%
+\endinput
