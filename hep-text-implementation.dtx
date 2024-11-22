@@ -136,6 +136,7 @@ The "\online"\marg{url}\marg{text} macro combines the features of the "\href"\ma
 \DescribeMacro{inlinelist}
 \DescribeMacro{enumdescript}
 The "inlinelist" and "enumdescript" environments are defined using the \software{enumitem} package \cite{enumitem}.
+\\
 \begin{columns}
 \begin{verbatim}
 The three main points are
@@ -171,7 +172,7 @@ The three main points are
 \end{columns}
 
 \DescribeMacro{\underline}
-The "\underline" macro is redefined to allow line-breaks using the \software{soulutf8} package \cite{soulutf8}.
+The "\underline" macro is redefined to allow line-breaks using the \software{soul} package \cite{soul}.
 
 % \ifshort
 \printbibliography
@@ -222,9 +223,9 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
 %    \end{macrocode}
 %
 % \begin{macro}{\underline}
-% Load the \software{soulutf8} package \cite{soulutf8} for hyphenable underlined text.
+% Load the \software{soul} package \cite{soul} for hyphenable underlined text.
 %    \begin{macrocode}
-\RequirePackage{soulutf8}
+\RequirePackage{soul}
 \let\underline\textul
 %    \end{macrocode}
 % \end{macro}

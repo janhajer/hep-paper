@@ -164,7 +164,7 @@ The \software{hep-cv-bibliography} package aims to provide a single style file f
 %
 % Adjust the "authoryear" style. The sorting template is defined in \cref{sec:sorting}
 %    \begin{macrocode}
-\ifnum\pdf@strcmp{\hepcv@bibliography}{authoryear}=0
+\ifnum\pdf@strcmp{\hepv@bibliography}{authoryear}=0
   \ExecuteBibliographyOptions{
     dashed=false,
     sorting=ymdnt
@@ -175,8 +175,8 @@ The \software{hep-cv-bibliography} package aims to provide a single style file f
 %    \begin{macrocode}
   \renewbibmacro{begentry}{%
     \begin{tabular}{%
-      @{}p{\hepcv@left@width}%
-      @{\hspace{\hepcv@seperator@width}}p{\hepcv@main@width}@{}%
+      @{}p{\hep@left@width}%
+      @{\hspace{\hep@seperator@width}}p{\hep@main@width}@{}%
     }\raggedleft%
     \ifhepcv@date
       \printfield{month} %
@@ -199,8 +199,8 @@ The \software{hep-cv-bibliography} package aims to provide a single style file f
 %   }
 %   \nocite{*}
 %   \AtBeginDocument{
-%     \setlength{\labelnumberwidth}{\hepcv@left@width-\hepcv@seperator@width}
-%     \setlength{\biblabelsep}{\hepcv@seperator@width}
+%     \setlength{\labelnumberwidth}{\hep@left@width-\hep@seperator@width}
+%     \setlength{\biblabelsep}{\hep@seperator@width}
 %   }
 %    \end{macrocode}
 % End check for "authoryear".
@@ -405,7 +405,7 @@ The \software{hep-cv-bibliography} package aims to provide a single style file f
 % Set bibliography length.
 %    \begin{macrocode}
 \newcommand{\setlengths}{%
-  \setlength{\labelnumberwidth}{\hepcv@left@width-\hepcv@seperator@width}%
+  \setlength{\labelnumberwidth}{\hep@left@width-\hep@seperator@width}%
   \setlength{\labelwidth}{\labelnumberwidth}%
   \setlength{\leftmargin}{\labelwidth}%
   \setlength{\labelsep}{\biblabelsep}%
