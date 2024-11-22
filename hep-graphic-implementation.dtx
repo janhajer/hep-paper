@@ -141,6 +141,13 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 %    \end{macrocode}
 %
 % \begin{macro}{plot}
+% Define the "extern" option to activate externalisation into the declared folder.
+%    \begin{macrocode}
+\DeclareStringOption{extern}[.]
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{plot}
 % Define the "plot" switch for loading plot code.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{plot}
@@ -167,11 +174,14 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 % Load the \software{tikz} package with the \software{external} library \cite{pgf}.
 %    \begin{macrocode}
 \RequirePackage{tikz}
-\usetikzlibrary{external}
-\tikzexternalize[
- optimize=false,
- only named=true,
-]
+\ifx\hepgraphic@extern\@empty\else
+ \usetikzlibrary{external}
+ \tikzexternalize[
+  optimize=false,
+  only named=true,
+ ]
+ \tikzsetexternalprefix{\hepgraphic@extern/}
+\fi
 %    \end{macrocode}
 %
 % \begin{macro}{\graphicpath}
@@ -302,16 +312,20 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
  dashdotdotted, dashdotdotdotted, dashdotdotdotdotted
 }
 \pgfplotscreateplotcyclelist{marks}{
- -, |, Mercedes star flipped, Mercedes star, +, x, star,
- asterisk, 10-pointed star
+ mark=-, mark=|, mark=Mercedes star flipped, mark=Mercedes star, mark=+,
+ mark=x, mark=star, mark=asterisk, mark=10-pointed star
 }
 \pgfplotscreateplotcyclelist{vertical marks}{
- |, Mercedes star flipped, Mercedes star, x, star,
- asterisk, 10-pointed star
+ mark=|, mark=Mercedes star flipped, mark=Mercedes star, mark=x, mark=star,
+ mark=asterisk, mark=10-pointed star
 }
 \pgfplotscreateplotcyclelist{horizontal marks}{
- -, Mercedes star flipped, Mercedes star, x, star, %asterisk,
- 10-pointed star
+ mark=-, mark=Mercedes star flipped, mark=Mercedes star, mark=x, mark=star,
+ mark=asterisk, mark=10-pointed star
+}
+\pgfplotscreateplotcyclelist{star marks}{
+ mark=Mercedes star flipped, mark=Mercedes star, mark=x, mark=star,
+ mark=asterisk, mark=10-pointed star
 }
 \pgfplotsset{
  cycle multiindex* list={colors\nextlist line styles},
@@ -334,6 +348,18 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
   \addtocounter{cyclelistshift}{1}
   \pgfplotsset{cycle list shift=\value{cyclelistshift}}
   \globaldefs=0\relax
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{rainbow}
+% Define the "rainbow" colormap.
+%    \begin{macrocode}
+\pgfplotsset{
+  colormap={rainbow}{
+    color(0)=(violet); color(1)=(blue); color(2)=(darkgreen);
+    color(3)=(yellow); color(4)=(orange); color(5)=(red)
+  },
 }
 %    \end{macrocode}
 % \end{macro}
@@ -365,7 +391,7 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 %    \begin{macrocode}
 \pgfplotsset{
  contour legend/.style={
-  contour prepared={labels=false},
+%   contour prepared={labels=false},
   colorbar sampled line,
   colorbar style={
    mark size=7pt,
@@ -381,11 +407,12 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 % \begin{macro}{contour legend x}
 % Define horizontal contour legend.
 %    \begin{macrocode}
-\usepgfplotslibrary{colormaps}
+% \usepgfplotslibrary{colormaps}
 \pgfplotsset{
  contour legend x/.style={
   colorbar horizontal,
-  colormap/jet,
+  colormap name=rainbow,
+%   colormap/rainbow,
   contour legend,
   colorbar style={
    at={(0.5,1.025)},

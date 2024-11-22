@@ -17,9 +17,13 @@
 %
 % \iffalse
 
-%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package|class|bibliography>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
 %<package>\ProvidesPackage{hep-cv}[2020/01/02 v1.2 Curricula Vitarum in High Energy Physics]
+%<bibliography>\ProvidesPackage{hep-cv-bibliography}[2020/01/02 v1.2 Curricula Vitarum in High Energy Physics]
+%<class>\ProvidesClass{hep-cv}[2020/01/02 v1.2 Curricula Vitarum in High Energy Physics]
 %<documentation>\ProvidesFile{hep-cv-documentation.tex}[2021/09/01 v1.0 HEP-CV documentation]
+%<test-sty>\ProvidesFile{hep-cv-test-sty.tex}[2021/09/01 v1.0 HEP-CV class test]
+%<test-cls>\ProvidesFile{hep-cv-test-cls.tex}[2021/09/01 v1.0 HEP-CV class test]
 %
 %<*documentation>
 %
@@ -31,40 +35,17 @@
 \renewcommand{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
-
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
 
-\usepackage{hep-cv}
-
-\usepackage{hep-cv-helper}
-
-\setcounter{secnumdepth}{2}
-\setcounter{tocdepth}{2}
-
-\bibliography{bibliography}
-
 \usepackage{hologo}
-\usepackage{parskip}
 
-\makeatletter
-\setlist{
-  noitemsep,
-  leftmargin=\hepcv@left@width,
-  labelwidth=\hepcv@left@width,
-  listparindent=0pt,
-  itemindent=0pt,
-  labelsep=\hepcv@seperator@width,
-  align=right
-}
-\makeatother
+\usepackage[parskip,oldstyle,font=10pt]{hep-paper}
+\bibliography{bibliography}
 
 \acronym{CV}{curriculum vitae}[curricula vitarum]
 \acronym{TOC}{table of contents}
-
-\MacroIndent=1.5em
-
 %</documentation>
 
 %<*driver>
@@ -103,80 +84,41 @@
 %
 \GetFileInfo{hep-cv.sty}
 
-\photo{avatar}
-
-\renewcommand{\titlefontsize}{\Huge}
-
-\author{The \software{hep-cv} package}
-
-\address{Address Line}
-
-\addtitleline{title}{line}
-
-\date{Date does not work}
-
-\title{Title does not work}
+\title{The \software{hep-cv} package\thanks{This document corresponds to \software{hep-paper}~\fileversion.}}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
+\date{\filedate}
 
 % \ifshort
 \begin{document}
 % \fi
 
 \newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
-\setleftwidth{2.8cm}
 
 \maketitle
 
 \begin{abstract}
-The \software{hep-cv} package \cite{hep-cv} enables the user to write an appealing \CV.
+The \software{hep-cv} package enables the user to write an appealing \CV.
 The style is heavily influenced by the \software{moderncv} package \cite{moderncv}.
 \end{abstract}
 
-{\setlength{\parskip}{0pt}\tableofcontents\clearpage}
+\tableofcontents%\clearpage
+
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
 
 \section{Introduction}
 
-\cvline{The \software{hep-cv} package \cite{hep-cv} enables the user to write an appealing \CV.
+The \software{hep-cv} package enables the user to write an appealing \CV.
 The style is heavily influenced by the \software{moderncv} package \cite{moderncv}.
-In order to use this package the user has to load only the \software{hep-cv} package in addition to the "article" class.}
-\cvline{"\textbackslash documentclass\{article\}"}
-\cvline{"\textbackslash usepackage\{hep-cv\}"}
+In order to use this package the user has to load only the \software{hep-cv} package in addition to the "article" class.
+\begin{verbatim}
+\documentclass{article}
+\usepackage{hep-cv}
+\end{verbatim}
 
 \subsection{Options}
 
-\DescribeMacro{paper}
-The "paper="\meta{format} option loads the specified paper format.
-The format choices are:
-"a0", "a1", "a2", "a3", "a4", "a5", "a6",
-"b0", "b1", "b2", "b3", "b4", "b5", "b6",
-"c0", "c1", "c2", "c3", "c4", "c5", "c6",
-"ansia", "ansib", "ansic", "ansid", "ansie",
-"letter", "executive", "legal".
-
-\DescribeMacro{font}
-The "font="\meta{size} option loads the specified font size.
-The size choices are:
-"8pt", "9pt", "10pt", "11pt", "12pt", "14pt", "17pt", "20pt".
-
-\DescribeMacro{defaults}
-The "defaults" option prevents the adjustment of the page geometry and the font size set by the document class.
-
-\DescribeMacro{lang}
-The "lang"=\meta{name} option switches the document language to the chosen value.
-The possible values are given by the "babel" package \cite{babel}.
-The default is "british".
-
-\DescribeMacro{parindent}
-The "parindent" option changes how two paragraphs are separated from each other.
-The \hologo{LaTeX} default is separation via indentation the default of this package is separation via vertical space.
-
 \DescribeMacro{serif}
 The "serif" option switches the document including math to the serif font shape.
-
-\DescribeMacro{bibliography}
-The "bibliography"=\meta{key} option passes the \meta{key} as "style" string to the "biblatex" package \cite{biblatex} or for \meta{key}="false" prevents loading "biblatex".
-
-\DescribeMacro{glossaries}
-The "glossaries="\meta{false} option turns the use of glossaries off.
 
 \section{Macros}
 
@@ -187,46 +129,31 @@ The layout can be tuned by setting the "\setleftwidth" and "\setseperatorwidth" 
 \DescribeMacro{\cvline}
 The "\cvline"\oarg{left}\marg{main} adds an unformatted line to the \CV.
 
+\begin{verbatim}
 \cvline[left]{cvline example}
+\end{verbatim}
 
 \DescribeMacro{\cventry}
 The "\cventry"\oarg{left}\marg{main 1}\oarg{main 2}\meta{*}\oarg{\dots} macro adds a boldface entry to the \CV, the contents passed to the following arguments are typeset alternatic upright and italic.
 Starred optional arguments begin on a new line.
 Leading to
 
+\begin{verbatim}
 \cventry[left]{cvetry example}[one][two]*[starred three][four]
 \cventry[left]{cvetry example}[one]
 \cventry[left]{cvetry example}
+\end{verbatim}
 
 \subsection{Lists}
 
 \DescribeEnv{itemize}
 The "itemize" environment is adjusted using the "enumitem" package \cite{enumitem}.
-\begin{itemize}
-\item first
-\item second
-\end{itemize}
-
 \DescribeEnv{enumerate}
 The "enumerate" environment is adjusted.
-\begin{enumerate}
-\item first
-\item second
-  \end{enumerate}
-
 \DescribeEnv{description}
 The "description" environment is adjusted.
-\begin{description}
-\item[first] one
-\item[second] two
-\end{description}
-
 \DescribeEnv{enumdescript}
 The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adjusted.
-\begin{enumdescript}
-\item{first} one
-\item{second} two
-\end{enumdescript}
 
 % \ifshort
 \printbibliography
@@ -243,13 +170,13 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 %
 % \clearpage\appendix
 %
-% \section{Implementation}
+% \section{Package Implementation}
 %
 %<*package>
 %
 % \subsection{Options}
 %
-% \cvline{Load the \software{kvoptions} package \cite{kvoptions} and define a "hepcv" namespace.}
+% Load the \software{kvoptions} package \cite{kvoptions} and define a "hepcv" namespace.
 %    \begin{macrocode}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
@@ -258,85 +185,11 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 }
 %    \end{macrocode}
 %
-% \begin{macro}{paper}
-% Define a "paper="\meta{size} option.
-% Make A4 paper the default.
-%    \begin{macrocode}
-\DeclareStringOption[a4]{paper}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{font}
-% Define a "font="\meta{size} option.
-% Make \unit[11]{pt} the default font size.
-%    \begin{macrocode}
-\DeclareStringOption[11pt]{font}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{defaults}
-% Define the "defaults" option which deactivates the "paper" and "font" options and prevents the change of the class defaults by this package.
-%    \begin{macrocode}
-\DeclareBoolOption[false]{defaults}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{lang}
-% Define the "lang" option, which takes the values provided by the "babel" package \cite{babel}.
-% Make "british" the default language.
-%    \begin{macrocode}
-\DeclareStringOption[british]{lang}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{parskip}
-% Define the option pair "parindent" and "parskip" controlling the separation of paragraphs.
-%    \begin{macrocode}
-\DeclareBoolOption[false]{parindent}
-\DeclareComplementaryOption{parskip}{parindent}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{sansserif}
-% Define the option pair "serif" and "sansserif" controling the font shape of the whole document.
-%    \begin{macrocode}
-\DeclareBoolOption[false]{serif}
-\DeclareComplementaryOption{sansserif}{serif}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{bibliography}
-% Provide the option "bibliography" for passing a "style" string to the "biblatex" package \cite{biblatex} or disabling the automatic loading of "biblatex".
-%    \begin{macrocode}
-\DeclareStringOption[numeric-comp]{bibliography}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{glossaries}
-% Provide the option "glossaries" able to turn off the use of the acronym feature.
-%    \begin{macrocode}
-\DeclareBoolOption[true]{glossaries}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{sectioning}
-% Provide the option "sectioning" reverting to the usual section layout.
-%    \begin{macrocode}
-\DeclareBoolOption[true]{sectioning}
-%    \end{macrocode}
-% \end{macro}
-%
 % \begin{macro}{date}
 % Provide the option "date" reverting to the usual date scheme.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{date}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{standalone}
-% Provide the option "standalone" in order to use the \CV macros in other packages.
-%    \begin{macrocode}
-\DeclareBoolOption[true]{standalone}
+\DeclareBoolOption[true]{list}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -344,70 +197,45 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 \ProcessKeyvalOptions*
 %    \end{macrocode}
 %
-% \cvline{Load the \software{hep-paper} package \cite{hep-paper}.}
-%    \begin{macrocode}
-% \RequirePackage[
-%   paper=\hepcv@paper,
-%   font=\hepcv@font,
-%   \ifhepcv@defaults defaults\fi,
-%   lang=\hepcv@lang,
-%   \ifhepcv@parindent parindent\else parskip\fi,
-%   \ifhepcv@serif serif\else sansserif\fi,
-%   bibliography=\hepcv@bibliography,
-%   \ifhepcv@glossaries\else glossaries=false\fi
-% ]{hep-paper}
-%    \end{macrocode}
+% \subsection{Widths}
 %
-% \cvline{Start of "standalone" conditional.}
+% \begin{macro}{\hep@left@width}
+% \begin{macro}{\hep@seperator@width}
+% \begin{macro}{\hep@main@width}
+% Define document widths.
 %    \begin{macrocode}
-\ifhepcv@standalone
+\newlength{\hep@left@width}
+\newlength{\hep@seperator@width}
+\newlength{\hep@main@width}
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 %
-% \cvline{Load the \software{hep-paper} packages \cite{hep-font, hep-math-font, hep-text, hep-math, hep-bibliography, hep-acronym, hep-reference} and the \software{calc} \cite{calc} and \software{geometry} \cite{geometry} packages.}
+% \begin{macro}{\hep@set@main@width}
+% Define private macro for setting the main widths using the \software{calc} package \cite{calc}.
 %    \begin{macrocode}
-\PassOptionsToPackage{
-  size=\hepcv@font,
-  sans=\ifhepcv@serif false\else true\fi,
-  oldstyle
-}{hep-font}
-\RequirePackage{hep-font}
-\RequirePackage{hep-math-font}
-\RequirePackage{hep-text}
-\RequirePackage{hep-math}
-\RequirePackage{hep-bibliography}
-\RequirePackage{hep-acronym}
-\RequirePackage{hep-reference}
 \RequirePackage{calc}
-\RequirePackage{geometry}
-\geometry{a4paper, includeheadfoot}
-\geometry{hscale=.75, vscale=.8, vmarginratio=3:4}
-%    \end{macrocode}
-% \cvline{End of standalone conditional.}
-%    \begin{macrocode}
-\fi
-%    \end{macrocode}
-%
-% \subsection{\CV macros}
-%
-% \begin{macro}{\hepcv@left@width}
-% \begin{macro}{\hepcv@seperator@width}
-% Define macros for the document widths.
-%    \begin{macrocode}
-\newlength{\hepcv@left@width}
-\newlength{\hepcv@seperator@width}
-\newlength{\hepcv@main@width}
-\newcommand{\hepcv@set@main@width}{
-  \setlength{\hepcv@main@width}{%
-    \textwidth-\hepcv@left@width-\hepcv@seperator@width%
+\newcommand{\hep@set@main@width}{
+  \setlength{\hep@main@width}{%
+    \textwidth-\hep@left@width-\hep@seperator@width%
   }
 }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\setleftwidth}
+% \begin{macro}{\setseperatorwidth}
+% Define macros for setting the document widths.
+%    \begin{macrocode}
 \newcommand{\setleftwidth}[1]{
-  \setlength{\hepcv@left@width}{#1}
-  \hepcv@set@main@width
+  \setlength{\hep@left@width}{#1}
+  \hep@set@main@width
 }
 \newcommand{\setseperatorwidth}[1]{
-  \setlength{\hepcv@seperator@width}{#1}
-  \hepcv@set@main@width
+  \setlength{\hep@seperator@width}{#1}
+  \hep@set@main@width
 }
 \setleftwidth{2.8cm}
 \setseperatorwidth{4mm}
@@ -415,16 +243,19 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \end{macro}
 % \end{macro}
 %
-% \begin{macro}{\cv@begin}
-% \begin{macro}{\cv@end}
-% Define private \CV macros using the "array" package \cite{array}.
+% \subsection{Macros}
+%
+% \begin{macro}{\hep@begin}
+% \begin{macro}{\hep@end}
+% Define private \CV macros using the \software{array} and \software{hep-font} packages \cite{array,hep-font}.
 %    \begin{macrocode}
 \RequirePackage{array}
-\newcommand{\cv@begin}{\noindent\begin{tabular}{%
-  @{}>{\raggedleft\arraybackslash}p{\hepcv@left@width}%
-  @{\hspace{\hepcv@seperator@width}}p{\hepcv@main@width}@{}%
+\RequirePackage{hep-font}
+\newcommand{\hep@begin}{\noindent\begin{tabular}{%
+  @{}>{\raggedleft\arraybackslash}p{\hep@left@width}%
+  @{\hspace{\hep@seperator@width}}p{\hep@main@width}@{}%
 }\tstyle}
-\newcommand{\cv@end}{\end{tabular}\hfill\par}
+\newcommand{\hep@end}{\end{tabular}\hfill\par}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -432,22 +263,22 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\cvline}
 % Define the "\cvline" macro.
 %    \begin{macrocode}
-\newcommand{\cvline}[2][]{\cv@begin#1&#2\cv@end}
+\newcommand{\cvline}[2][]{\hep@begin#1&#2\hep@end}
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\check@for@optional@args}
-% \begin{macro}{\next@optional@arg}
+% \begin{macro}{\hep@check@for@optional@args}
+% \begin{macro}{\hep@next@optional@arg}
 % Define private recursive macros for the "\cventry" macro.
 %    \begin{macrocode}
-\newcommand{\next@optional@arg}[1][]{%
-  \em{\em{#1}}\check@for@optional@args%
+\newcommand{\hep@next@optional@arg}[1][]{%
+  \em{\em{#1}}\hep@check@for@optional@args%
 }
-\newcommand{\check@for@optional@args}{%
+\newcommand{\hep@check@for@optional@args}{%
   \@ifnextchar*{%
-    ,\newline\@firstoftwo\next@optional@arg%
+    ,\newline\@firstoftwo\hep@next@optional@arg%
   }{%
-    \@ifnextchar[{, \next@optional@arg}{.\cv@end}%
+    \@ifnextchar[{, \hep@next@optional@arg}{.\hep@end}%
   }%
 }
 %    \end{macrocode}
@@ -459,68 +290,202 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 %    \begin{macrocode}
 \newcommand{\cventry}[2][]{%
   \vspace{.5ex plus .2ex minus .2ex}%
-  \cv@begin#1&\textbf{#2}\check@for@optional@args%
+  \hep@begin#1&\textbf{#2}\hep@check@for@optional@args%
 }
 %    \end{macrocode}
 % \end{macro}
-
-% \subsection{Titles}
 %
-% \begin{macro}{\givenname}
-% \begin{macro}{\familyname}
-% Define name macros.
+% \subsubsection{Dates}
+%
+% Begin of date conditionals.
 %    \begin{macrocode}
-% \def\given@name{}
-% \def\family@name{}
-% \newcommand\givenname[1]{\long\gdef\given@name{#1}}
-% \newcommand\familyname[1]{\long\gdef\family@name{#1}}
-% \let\@old@author\author
-% \renewcommand\author[1]{
-%   \long\gdef\given@name{}
-%   \long\gdef\family@name{#1}
-% }
-% \AtBeginDocument{\@old@author{\given@name \family@name}}
+\ifhepcv@date
+%    \end{macrocode}
+%
+% Define macros of equally distributed month names.
+%    \begin{macrocode}
+\newlength{\hep@longest@month}
+\setlength{\hep@longest@month}{\widthof{May}}
+\newcommand{\hep@spread@even}[1]{\@tfor\next:=#1\do{\hfil\next}}
+\newcommand{\hep@month}[1]{%
+  \makebox[\hep@longest@month][c]{\hep@spread@even{#1}}%
+}
+%    \end{macrocode}
+%
+% Apply macros of equally distributed month names.
+%    \begin{macrocode}
+\newcommand{\Jan}{\hep@month{Jan}}
+\newcommand{\Feb}{\hep@month{Feb}}
+\newcommand{\Mar}{\hep@month{Mar}}
+\newcommand{\Apr}{\hep@month{Apr}}
+\newcommand{\May}{\hep@month{May}}
+\newcommand{\Jun}{\hep@month{Jun}}
+\newcommand{\Jul}{\hep@month{Jul}}
+\newcommand{\Aug}{\hep@month{Aug}}
+\newcommand{\Sep}{\hep@month{Sep}}
+\newcommand{\Oct}{\hep@month{Oct}}
+\newcommand{\Nov}{\hep@month{Nov}}
+\newcommand{\Dec}{\hep@month{Dec}}
+%    \end{macrocode}
+%
+% End of date conditional.
+%    \begin{macrocode}
+\fi
+%    \end{macrocode}
+%
+% \subsubsection{Lists}
+%
+% Begin of list conditionals and load the \software{hep-text} \cite{hep-text} package.
+%    \begin{macrocode}
+\ifhepcv@list
+\RequirePackage{hep-text}
+%    \end{macrocode}
+%
+% \begin{macro}{itemize}
+% Adjust lists to the \CV format.
+%    \begin{macrocode}
+\setlist{
+  nosep,
+  topsep=.5ex,
+  leftmargin=\hep@left@width+\hep@seperator@width,
+  labelwidth=\hep@left@width,
+  listparindent=0pt,
+  itemindent=0pt,
+  labelsep=\hep@seperator@width,
+  align=right
+}
 %    \end{macrocode}
 % \end{macro}
+%
+% \begin{macro}{enumerate}
+% Adjust the "enumerate" list to the \CV format.
+%    \begin{macrocode}
+\setlist[enumerate]{label=\arabic*}
+%    \end{macrocode}
 % \end{macro}
 %
-% \cvline{Start of standalone conditional.}
+% \begin{macro}{description}
+% Adjust the "description" list to the \CV format.
 %    \begin{macrocode}
-\ifhepcv@standalone
+\setlist[description]{font=\normalfont}
 %    \end{macrocode}
-
+% \end{macro}
+%
+% \begin{macro}{enumdescript}
+% Adjust the "enumdescript" list to the \CV format.
+%    \begin{macrocode}
+\setlist[enumdesc]{label=\arabic*}
+%    \end{macrocode}
+% \end{macro}
+%
+% End of lsit conditional.
+%    \begin{macrocode}
+\fi
+%    \end{macrocode}
+%
+%</package>
+%
+% \section{Class implementation}
+%
+%<*class>
+%
+% Base the \CV on the article class.
+%    \begin{macrocode}
+\PassOptionsToClass{a4paper}{article}
+\LoadClass{article}
+%    \end{macrocode}
+%
+% \subsection{Options}
+%
+% Load the \software{kvoptions} package \cite{kvoptions} and define a "hepcv" namespace.
+%    \begin{macrocode}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=hepcv,
+  prefix=hepcv@
+}
+%    \end{macrocode}
+%
+% \begin{macro}{font}
+% Define a "font="\meta{size} option.
+% Make \unit[11]{pt} the default font size.
+%    \begin{macrocode}
+\DeclareStringOption[11pt]{font}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{sansserif}
+% Define the option pair "serif" and "sansserif" controling the font shape of the whole document.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{serif}
+\DeclareComplementaryOption{sansserif}{serif}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{hyperref}
+% Provide the option "standalone" in order to use the \CV macros in other packages.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{hyperref}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+%    \end{macrocode}
+%
+% \subsection{Packages}
+%
+% Load the \software{hep-cv} and \software{fullpage} packages \cite{fullpage} and the \software{calc} \cite{calc} packages.
+%    \begin{macrocode}
+\PassOptionsToPackage{
+  size=\hepcv@font,
+  sans=\ifhepcv@serif false\else true\fi,
+  oldstyle
+}{hep-font}
+\RequirePackage{hep-cv}
+\RequirePackage{fullpage}
+\setleftwidth{2.8cm}
+\setseperatorwidth{4mm}
+%    \end{macrocode}
+%
+% \subsection{Address field}
+%
+% Load the \software{phonenumbers} package \cite{phonenumbers}.
+%    \begin{macrocode}
+\PassOptionsToPackage{foreign}{phonenumbers}
+\RequirePackage{phonenumbers}
+%    \end{macrocode}
 % \begin{macro}{\address}
 % \begin{macro}{\addressfont}
 % Define contact information macros.
 %    \begin{macrocode}
-\newcommand\address[1]{\long\gdef\@address{#1}}
+\newcommand\address[1]{\long\gdef\hep@address{#1}}
 \newcommand{\addressfont}{\itshape\small}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
-
-% \subsubsection{Cover letter}
 %
-% \begin{macro}{\address@field}
-% Define "\address@field" macro.
+% \begin{macro}{\hep@address@field}
+% Define "\hep@address@field" macro.
 %    \begin{macrocode}
-\newcommand{\address@field}{
-  \ifdef{\@address}{\@address\\}{}
-  \strut
+\newcommand{\hep@address@field}{
+  \ifdef{\hep@address}{\hep@address\\}{}\strut
 }
 %    \end{macrocode}
 % \end{macro}
+%
+% \subsection{Cover letter}
+%
 % \begin{macro}{\opening}
 % \begin{macro}{\makelettertitle}
 % Define "\lettertitle" macros.
 %    \begin{macrocode}
-\newcommand\opening[1]{\long\gdef\@opening{#1}}
+\newcommand\opening[1]{\long\gdef\hep@opening{#1}}
 \newcommand\makelettertitle{{%
     \raggedleft\addressfont
     \textbf{\@author}\\
-%     \textbf{\given@name~\family@name}\\
-    \address@field
-  }\\\raggedright\bigskip\@opening\par
+    \hep@address@field
+  }\\\raggedright\bigskip\hep@opening\par
 }
 %    \end{macrocode}
 % \end{macro}
@@ -530,10 +495,9 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\makeletterclosing}
 % Define macros for the letter closing.
 %    \begin{macrocode}
-\newcommand\closing[1]{\long\gdef\@closing{#1}}
+\newcommand\closing[1]{\long\gdef\hep@closing{#1}}
 \newcommand\makeletterclosing{%
-  \par\bigskip\@closing\par\textbf{\@author}%
-%   \par\bigskip\@closing\par\textbf{\given@name~\family@name}%
+  \par\bigskip\hep@closing\par\textbf{\@author}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -550,15 +514,16 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 %    \end{macrocode}
 % \end{macro}
 
-% \subsubsection{\CV Title}
+% \subsection{Title}
 %
 % \begin{macro}{\HUGE}
-% \begin{macro}{\titlefontsize}
+% \begin{macro}{\titlefont}
 % Define the "\HUGE" fontsize for the title using the "anyfontsize" package \cite{anyfontsize}.
 %    \begin{macrocode}
 \RequirePackage{anyfontsize}
 \newcommand\HUGE{\@setfontsize\Huge{38}{47}}
-\newcommand{\titlefontsize}{\HUGE}
+\newcommand{\titlefont}{\HUGE}
+\newcommand{\infofont}{\small}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -566,32 +531,36 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\addtitleline}
 % Define macros for further identity informations.
 %    \begin{macrocode}
-\newcommand{\hepcv@title@lines}{}
+\newcommand{\hep@title@lines}{}
 \newcommand{\addtitleline}[2]{
-  \let\@hepcv@title@lines\hepcv@title@lines
-  \expandafter\renewcommand%
-  \expandafter\hepcv@title@lines\expandafter{%
-    \@hepcv@title@lines\cvline[#1]{#2}%
+  \let\@hep@title@lines\hep@title@lines
+  \expandafter\renewcommand\expandafter\hep@title@lines\expandafter{%
+    \@hep@title@lines\cvline[#1]{#2}%
   }
 }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\contact@line}
-% Define the "\contact@line" macro.
+% \begin{macro}{\hep@contact@line}
+% \begin{macro}{\addcontactline}
+% Define the "\hep@contact@line" macro.
 %    \begin{macrocode}
-\def\contact@line{\@address\\[-1.5ex]\strut}
+\def\hep@contact@line{%
+  \ifdef{\hep@address}{\hep@address\\[-1.5ex]\strut}{}%
+}
 \newcommand{\addcontactline}[1]{
-  \let\@contact@line\contact@line
-  \expandafter\renewcommand\expandafter\contact@line\expandafter{%
-    \@contact@line\\#1%
+  \let\@hep@contact@line\hep@contact@line
+  \expandafter\renewcommand\expandafter\hep@contact@line\expandafter{%
+    \ifdef{\hep@address}{\@hep@contact@line\\}{}#1%
   }
 }
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \begin{macro}{\hep@head}
 % \begin{macro}{\hep@tail}
+% Define head and tail macros.
 %    \begin{macrocode}
 \newcommand\hep@head[1]{%
   \expandafter\@hep@head\expandafter\expandafter#1 \@nil%
@@ -623,8 +592,9 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \end{macro}
 %
 % \begin{macro}{\photo}
+% Store photo path.
 %    \begin{macrocode}
-\newcommand\photo[1]{\long\gdef\@photo{#1}}
+\newcommand\photo[1]{\long\gdef\hep@photo{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -633,87 +603,109 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 %    \begin{macrocode}
 \RequirePackage{textpos}
 \DeclareDocumentCommand{\maketitle}{}{%
-  \begin{textblock*}{\linewidth}[1,0](\linewidth,1.5ex)%
-    \raggedleft\addressfont\contact@line%
-  \end{textblock*}%
-  {\titlefontsize%
-  \@ifundefined{@photo}{%
-    \settowidth{\dimen0}{\hep@head{\@author}}%
-    \ifdim\dimen0>\hepcv@left@width\relax%
-      \@author%
-    \else%
-      \cvline[\hep@head{\@author}]{\hep@tail{\@author}}%
-    \fi%
-    {\small\hepcv@title@lines}%
-  }{%
-    \cv@begin{\hep@top@include@graphics[width=\hepcv@left@width]{\@photo}}&%
-    \@author\newline\newline\small%
-    \renewcommand{\cvline}[2][]{##1&##2\\}%
-    \noindent%
-    \begin{tabular}{@{}r@{: }l@{}}\hepcv@title@lines\end{tabular}%
-    \cv@end%
-  }}\bigskip%
+  \par\noindent{\titlefont%
+    \@ifundefined{hep@photo}{%
+      \settowidth{\dimen0}{\hep@head{\@author}}%
+      \ifdim\dimen0>\hep@left@width\relax%
+        \noindent\begin{tabular}{l}\@author\hep@end%
+      \else%
+        \cvline[\hep@head{\@author}]{\hep@tail{\@author}}%
+      \fi%
+      {\infofont\hep@title@lines}%
+    }{%
+      \hep@begin%
+        \hep@top@include@graphics[width=\hep@left@width]{\hep@photo}%
+      &%
+        \@author\newline\newline\infofont%
+        \renewcommand{\cvline}[2][]{##1&##2\\}%
+        \noindent%
+        \begin{tabular}{@{}r@{: }l@{}}\hep@title@lines\end{tabular}%
+      \hep@end\medskip%
+    }%
+    \begin{textblock*}{\linewidth}[1,0](\linewidth,-2.5ex)%
+      \raggedleft\addressfont\hep@contact@line%
+    \end{textblock*}%
+  }%
 }
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{environment}{abstract}
+% Redfine the abstract environment.
 %    \begin{macrocode}
-\renewenvironment{abstract}{\cv@begin&}{\cv@end\bigskip}
+\AtBeginDocument{\renewcommand{\abstractname}{Summary}}
+\renewenvironment{abstract}{\hep@begin\abstractname&}{\hep@end\bigskip}
+%    \end{macrocode}
+% \end{environment}
+%
+% \subsection{Hyperref}
+%
+% Begin of hyperref conditional.
+%    \begin{macrocode}
+\ifhepcv@hyperref
 %    \end{macrocode}
 %
-% \subsubsection{Hyperref}
-%
-% \cvline{Update PDF "title" and "author" information.}
+% Update PDF "title" and "author" information after loading the \software{hep-reference} package \cite{hep-reference}.
 %    \begin{macrocode}
+\RequirePackage{hep-reference}
 \AtBeginDocument{\hypersetup{
-  pdftitle={\@author~---~\cv@part},
+  pdftitle={\@author~---~\hep@part},
   pdfauthor={\@author}
 }}
 %    \end{macrocode}
-
-% \subsection{Sectioning}
 %
-% \cvline{Begin of sectioning conditional.}
+% End of hyperref conditional.
 %    \begin{macrocode}
-\ifhepcv@sectioning
+\fi
 %    \end{macrocode}
 %
-% \cvline{Load the \software{titlesec} package \cite{titlesec} and deactivate section numbering.}
+% \subsection{Sectioning}
+%
+% Begin of sectioning conditional.
+%    \begin{macrocode}
+% \ifhepcv@sectioning
+%    \end{macrocode}
+%
+% Load the \software{titlesec} package \cite{titlesec} and deactivate section numbering.
 %    \begin{macrocode}
 \PassOptionsToPackage{compact}{titlesec}
 \RequirePackage{titlesec}
 \setcounter{secnumdepth}{0}
 %    \end{macrocode}
 %
-% \begin{macro}{\dash@length}
-% \begin{macro}{\dash@height}
-% \begin{macro}{\dash@shift}
-% \begin{macro}{\dash@sep}
+% \begin{macro}{\hep@dash@length}
+% \begin{macro}{\hep@dash@height}
+% \begin{macro}{\hep@dash@shift}
+% \begin{macro}{\hep@dash@sep}
 % Load the \software{dashrule} package \cite{dashrule} and define dash properties.
 %    \begin{macrocode}
 \RequirePackage{dashrule}
-\newcommand{\dash@length}{4pt}
-\newcommand{\dash@height}{.5pt}
-\newcommand{\dash@shift}{.6ex}
-\newcommand{\dash@sep}{.5em}
-\newlength{\dash@width}
-\newlength{\dash@seperator}
+\newcommand{\hep@dash@length}{4pt}
+\newcommand{\hep@dash@height}{.5pt}
+\newcommand{\hep@dash@shift}{.6ex}
+\newcommand{\hep@dash@sep}{.5em}
+\newlength{\hep@dash@width}
+\newlength{\hep@dash@seperator}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
 %
+%    \begin{macrocode}
+\providecommand{\sentence}{}
+%    \end{macrocode}
+%
 % \begin{macro}{\section}
 % Redefine "\section".
 %    \begin{macrocode}
 \titleformat{name=\section}{\Large}{%
-  \setlength{\dash@width}{%
-    \hepcv@left@width-\widthof{\thesection}-\dash@length-\dash@sep%
+  \setlength{\hep@dash@width}{%
+    \hep@left@width-\widthof{\thesection}-\hep@dash@length-\hep@dash@sep%
   }%
-  \hdashrule[\dash@shift][x]{\dash@width}{\dash@height}{}%
-  \hspace{\dash@length+\dash@sep}\thesection%
-}{\hepcv@seperator@width}{\spacefactor=\begin@sentence}
+  \hdashrule[\hep@dash@shift][x]{\hep@dash@width}{\hep@dash@height}{}%
+  \hspace{\hep@dash@length+\hep@dash@sep}\thesection%
+}{\hep@seperator@width}{\sentence}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -722,21 +714,28 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 %    \begin{macrocode}
 \titleformat{name=\section, numberless}{\Large}{}{0em}{%
   \phantomsection%
-  \setlength{\dash@width}{\hepcv@left@width}%
-  \hdashrule[\dash@shift][x]{\dash@width}{\dash@height}{}%
-  \hspace{\hepcv@seperator@width}\spacefactor=\begin@sentence%
+  \setlength{\hep@dash@width}{\hep@left@width}%
+  \hdashrule[\hep@dash@shift][x]{\hep@dash@width}{\hep@dash@height}{}%
+  \hspace{\hep@seperator@width}\sentence%
 }
 %    \end{macrocode}
 % \end{macro}
+%
+% Spacing.
+%    \begin{macrocode}
+\titlespacing*{\section}{0pt}{*3}{*1.75}
+%    \end{macrocode}
 
 % \begin{macro}{\subsection}
 % Redefine "\subsection".
 %    \begin{macrocode}
 \titleformat{name=\subsection}{\large}{%
-  \setlength{\dash@width}{\hepcv@left@width-\widthof{\thesubsection}-\dash@sep}%
-  \hdashrule[\dash@shift][x]{\dash@width}{\dash@height}{1mm}%
-  \hspace{\dash@sep}\thesubsection%
-}{\hepcv@seperator@width}{\spacefactor=\begin@sentence}
+  \setlength{\hep@dash@width}{%
+    \hep@left@width-\widthof{\thesubsection}-\hep@dash@sep%
+  }%
+  \hdashrule[\hep@dash@shift][x]{\hep@dash@width}{\hep@dash@height}{1mm}%
+  \hspace{\hep@dash@sep}\thesubsection%
+}{\hep@seperator@width}{\sentence}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -745,26 +744,33 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 %    \begin{macrocode}
 \titleformat{name=\subsection, numberless}{\large}{}{0em}{%
   \phantomsection%
-  \setlength{\dash@width}{\hepcv@left@width+\dash@length}%
-  \setlength{\dash@seperator}{\hepcv@seperator@width-\dash@length}%
-  \hdashrule[\dash@shift][x]{\dash@width}{\dash@height}{%
-    \dash@length%
+  \setlength{\hep@dash@width}{\hep@left@width+\hep@dash@length}%
+  \setlength{\hep@dash@seperator}{\hep@seperator@width-\hep@dash@length}%
+  \hdashrule[\hep@dash@shift][x]{\hep@dash@width}{\hep@dash@height}{%
+    \hep@dash@length%
   }%
-  \hspace{\dash@seperator}\spacefactor=\begin@sentence%
+  \hspace{\hep@dash@seperator}\sentence%
 }
 %    \end{macrocode}
 % \end{macro}
+%
+% Spacing.
+%    \begin{macrocode}
+\titlespacing*{\subsection}{0pt}{*2}{*1.5}
+%    \end{macrocode}
 
 % \begin{macro}{\subsubsection}
 % Redefine "\subsubsection".
 %    \begin{macrocode}
 \titleformat{name=\subsubsection}{}{%
-  \setlength{\dash@width}{\hepcv@left@width-\widthof{\thesubsubsection}-\dash@sep}%
-  \hdashrule[\dash@shift][x]{\dash@width}{\dash@height}{%
-    .7pt \dash@length%
+  \setlength{\hep@dash@width}{%
+    \hep@left@width-\widthof{\thesubsubsection}-\hep@dash@sep%
   }%
-  \hspace{\dash@sep}\thesubsubsection%
-}{\hepcv@seperator@width}{\spacefactor=\begin@sentence}
+  \hdashrule[\hep@dash@shift][x]{\hep@dash@width}{\hep@dash@height}{%
+    .7pt \hep@dash@length%
+  }%
+  \hspace{\hep@dash@sep}\thesubsubsection%
+}{\hep@seperator@width}{\sentence}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -773,12 +779,12 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 %    \begin{macrocode}
 \titleformat{name=\subsubsection, numberless}{}{}{0em}{%
   \phantomsection%
-  \setlength{\dash@width}{\hepcv@left@width+\dash@length}%
-  \setlength{\dash@seperator}{\hepcv@seperator@width-\dash@length}%
-  \hdashrule[\dash@shift][x]{\dash@width}{\dash@height}{%
-    .7pt \dash@length%
+  \setlength{\hep@dash@width}{\hep@left@width+\hep@dash@length}%
+  \setlength{\hep@dash@seperator}{\hep@seperator@width-\hep@dash@length}%
+  \hdashrule[\hep@dash@shift][x]{\hep@dash@width}{\hep@dash@height}{%
+    .7pt \hep@dash@length%
   }%
-  \hspace{\dash@seperator}\spacefactor=\begin@sentence%
+  \hspace{\hep@dash@seperator}\sentence%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -786,9 +792,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\paragraph}
 % Redefine "\paragraph".
 %    \begin{macrocode}
-\titleformat{\paragraph}[runin]{\itshape}{}{}{%
-  \spacefactor=\begin@sentence%
-}[:]
+\titleformat{\paragraph}[runin]{\itshape}{}{}{\sentence}[:]
 %    \end{macrocode}
 % \end{macro}
 %
@@ -796,14 +800,14 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % Redefine "\subparagraph".
 %    \begin{macrocode}
 \titleformat{\subparagraph}[runin]{\itshape}{}{%
-  }{\hspace{1em}\spacefactor=\begin@sentence%
+  }{\hspace{1em}\sentence%
 }[:]
 %    \end{macrocode}
 % \end{macro}
 
-% \subsubsection{Table of contents}
+% \subsection{Table of contents}
 %
-% \cvline{Use the \software{titeltoc} package \cite{titlesec} and set the \TOC depths to 2.}
+% Use the \software{titeltoc} package \cite{titlesec} and set the \TOC depths to 2.
 %    \begin{macrocode}
 \RequirePackage{titletoc}
 \setcounter{tocdepth}{2}
@@ -813,88 +817,65 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{section}
 % Sections in \TOC.
 %    \begin{macrocode}
-\titlecontents{section}[\hepcv@left@width+\hepcv@seperator@width]{%
+\titlecontents{section}[\hep@left@width+\hep@seperator@width]{%
   \setlength{\label@width}{%
-    \widthof{\thecontentslabel}+\hepcv@seperator@width%
+    \widthof{\large\tstyle\thecontentslabel}+\hep@seperator@width%
   }%
-  \vspace{1.5ex}\large%
-}{\tstyle\contentslabel{\label@width}}{%
-}{\hfill\tstyle\contentspage}[\vspace{.5ex}]
+  \vspace{1.5ex}%
+}{%
+  \contentslabel[\large\tstyle\thecontentslabel]{\label@width}\large%
+}{%
+  \large%
+}{%
+  \hfill\contentspage[\large\tstyle\thecontentspage]%
+}[\vspace{.5ex}]
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{subsection}
 % Subsection in \TOC.
 %    \begin{macrocode}
-\titlecontents{subsection}[\hepcv@left@width+\hepcv@seperator@width]{%
+\titlecontents{subsection}[\hep@left@width+\hep@seperator@width]{%
   \setlength{\label@width}{%
-    \widthof{\thecontentslabel}+\hepcv@seperator@width+.8em%
+    \widthof{\tstyle\thecontentslabel}+\hep@seperator@width+.8em%
   }%
-}{\hspace{.8em}\tstyle\contentslabel{\label@width}%
-}{\hdashrule[\dash@shift][x]{.8em}{\dash@height}{\dash@length}%
-}{\titlerule*[1pc]{.}\tstyle\contentspage}
+}{%
+  \hspace{.8em}\contentslabel[\tstyle\thecontentslabel]{\label@width}%
+}{%
+  \hdashrule[\hep@dash@shift][x]{.8em}{\hep@dash@height}{\hep@dash@length}%
+}{%
+  \titlerule*[1pc]{.}\contentspage[\tstyle\thecontentspage]%
+}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{subsubsection}
 % Subsubsection in \TOC.
 %    \begin{macrocode}
-\titlecontents{subsubsection}[\hepcv@left@width+\hepcv@seperator@width]{%
+\titlecontents{subsubsection}[\hep@left@width+\hep@seperator@width]{%
   \setlength{\label@width}{%
-    \widthof{\thecontentslabel}+\hepcv@seperator@width+1.5em%
+    \widthof{\thecontentslabel}+\hep@seperator@width+1.5em%
   }%
-}{\hspace{1.5em}\tstyle\contentslabel{\label@width}%
-}{\hdashrule[\dash@shift][x]{1.5em}{\dash@height}{.7pt \dash@length}%
-}{\titlerule*[1pc]{.}\tstyle\contentspage}
-%    \end{macrocode}
-% \end{macro}
-%
-% \cvline{End of check for sectioning option.}
-%    \begin{macrocode}
-\fi
-%    \end{macrocode}
-
-% \subsection{Lists}
-%
-% \begin{macro}{itemize}
-% Adjust lists to the \CV format.
-%    \begin{macrocode}
-\setlist{
-  noitemsep,
-  leftmargin=\hepcv@left@width+\hepcv@seperator@width,
-  labelwidth=\hepcv@left@width,
-  listparindent=0pt,
-  itemindent=0pt,
-  labelsep=\hepcv@seperator@width,
-  align=right
+}{%
+  \hspace{1.5em}\contentslabel[\tstyle\thecontentslabel]{\label@width}%
+}{%
+  \hdashrule[\hep@dash@shift][x]{1.5em}{\hep@dash@height}{%
+    .7pt \hep@dash@length%
+  }%
+}{%
+  \titlerule*[1pc]{.}\contentspage[\tstyle\thecontentspage]%
 }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{enumerate}
-% Adjust the "enumerate" list to the \CV format.
+% End of check for sectioning option.
 %    \begin{macrocode}
-\setlist[enumerate]{label=\arabic*}
+% \fi
 %    \end{macrocode}
-% \end{macro}
 %
-% \begin{macro}{description}
-% Adjust the "description" list to the \CV format.
-%    \begin{macrocode}
-\setlist[description]{font=\normalfont}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{enumdescript}
-% Adjust the "enumdescript" list to the \CV format.
-%    \begin{macrocode}
-\setlist[enumdesc]{label=\arabic*}
-%    \end{macrocode}
-% \end{macro}
-
 % \subsection{Header and Footer}
 %
-% \cvline{Use the \software{fancyhdr} package \cite{fancyhdr}.}
+% Use the \software{fancyhdr} package \cite{fancyhdr}.
 %    \begin{macrocode}
 \RequirePackage{fancyhdr}
 \renewcommand{\headrulewidth}{0pt}
@@ -903,12 +884,12 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\cvpart}
 % Define the "\cvpart" macro.
 %    \begin{macrocode}
-\newcommand\cvpart[1]{\long\gdef\cv@part{#1}}
+\newcommand\cvpart[1]{\long\gdef\hep@part{#1}}
 \cvpart{Curriculum Vitæ}
 %    \end{macrocode}
 %  \end{macro}
 %
-% \cvline{Redefine the pagenumber using the \software{lastpage} package \cite{lastpage}.}
+% Redefine the pagenumber using the \software{lastpage} package \cite{lastpage}.
 %    \begin{macrocode}
 \RequirePackage{lastpage}
 \cfoot{\addressfont Page \thepage\ of \pageref{LastPage}}
@@ -939,7 +920,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 %    \begin{macrocode}
 \fancypagestyle{both}{%
   \rhead{\addressfont{\@author}}
-  \lhead{\addressfont{\cv@part}}
+  \lhead{\addressfont{\hep@part}}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -953,26 +934,65 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 \newcommand{\insubfile}[1]{\ifx\@onlypreamble\@notprerr\else#1\fi}
 %    \end{macrocode}
 % \end{macro}
-
-% \cvline{End of standalone conditional.}
-%    \begin{macrocode}
-\fi
-%    \end{macrocode}
-
-% \subsection{Bibliography}
 %
-% \cvline{Execute bibliography options.}
+%</class>
+%
+% \section{Bibliography implementation}
+%
+%<*bibliography>
+%
+% \subsection{Options}
+%
+% Load the \software{kvoptions} package \cite{kvoptions} and define a "hepcv" namespace.
 %    \begin{macrocode}
-\ifnum\pdf@strcmp{\hepcv@bibliography}{false}=0\else
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=hepcv,
+  prefix=hepcv@
+}
+%    \end{macrocode}
+%
+% \begin{macro}{bibliography}
+% Provide the option "bibliography" for passing a "style" string to the "biblatex" package \cite{biblatex} or disabling the automatic loading of "biblatex".
+%    \begin{macrocode}
+\DeclareStringOption[numeric-comp]{bibliography}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{date}
+% Provide the option "date" reverting to the usual date scheme.
+%    \begin{macrocode}
+% \DeclareBoolOption[false]{date}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+%    \end{macrocode}
+%
+% Laod the \software{hep-cv} package.
+%    \begin{macrocode}
+\RequirePackage{hep-cv}
+%    \end{macrocode}
+%
+% \subsection{Biblatex}
+%
+% Load the \software{biblatex} \cite{biblatex} package and execute bibliography options.
+%    \begin{macrocode}
+\PassOptionsToPackage{style=\hepcv@bibliography}{biblatex}
+\RequirePackage{biblatex}
 \ExecuteBibliographyOptions{
   maxnames=99,
   uniquename=init,
   abbreviate=false,
   useeditor=false,
 }
+\ExecuteBibliographyOptions{sorting=ymdnt, defernumbers}
 %    \end{macrocode}
 %
-% \cvline{Adjust the "authoryear" style. The sorting template is defined in \cref{sec:sorting}}
+% \subsubsection{Authoryear}
+%
+% Adjust the "authoryear" style. The sorting template is defined in \cref{sec:sorting}
 %    \begin{macrocode}
 \ifnum\pdf@strcmp{\hepcv@bibliography}{authoryear}=0
   \ExecuteBibliographyOptions{
@@ -985,8 +1005,8 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 %    \begin{macrocode}
   \renewbibmacro{begentry}{%
     \begin{tabular}{%
-      @{}p{\hepcv@left@width}%
-      @{\hspace{\hepcv@seperator@width}}p{\hepcv@main@width}@{}%
+      @{}p{\hep@left@width}%
+      @{\hspace{\hep@seperator@width}}p{\hep@main@width}@{}%
     }\raggedleft%
     \ifhepcv@date
       \printfield{month} %
@@ -998,112 +1018,49 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
       \printdate%
     \fi &%
   }
-%    \end{macrocode}
-% \end{macro}
-
-% \begin{macro}{finentry}
-% Add the citation count at the end of each entry if lualatex is used.
-%    \begin{macrocode}
-  \renewbibmacro{finentry}{%
-    \ifluatex
-      \ifthenelse{
-        \ifentrytype{article}\OR
-        \ifentrytype{unpublished}\OR
-        \ifentrytype{thesis}\OR
-        \ifentrytype{booklet}\OR
-        \ifentrytype{inproceedings}\OR
-        \ifentrytype{manual}\OR
-        \ifentrytype{report}\OR
-        \ifentrytype{software}
-      }{\newunitpunct\mbox{}~\hfill%
-        \citationcounter{\thefield{entrykey}}%
-      }{}%
-    \fi%
-    \end{tabular}%
-  }
-%    \end{macrocode}
-% \cvline{If not "authoryear", restrict the main part of the bibliography to the main column.}
-%    \begin{macrocode}
-\else
-  \ExecuteBibliographyOptions{
-    sorting=none
-  }
-  \AtBeginDocument{
-    \setlength{\labelnumberwidth}{\hepcv@left@width-\hepcv@seperator@width}
-    \setlength{\biblabelsep}{\hepcv@seperator@width}
-  }
-%    \end{macrocode}
-% \cvline{End check for "authoryear".}
-%    \begin{macrocode}
 \fi
 %    \end{macrocode}
 % \end{macro}
-
-% \subsubsection{Dates}
 %
-% \cvline{Begin of date conditionals.}
+% \subsection{Dates}
+%
+% Begin of date conditionals.
 %    \begin{macrocode}
 \ifhepcv@date
 %    \end{macrocode}
 %
-% \cvline{Define macros of equally distributed month names.}
-%    \begin{macrocode}
-\newlength{\hep@longest@month}
-\setlength{\hep@longest@month}{\widthof{May}}
-\newcommand{\hep@spread@even}[1]{\@tfor\next:=#1\do{\hfil\next}}
-\newcommand{\hep@month}[1]{%
-  \makebox[\hep@longest@month][c]{\hep@spread@even{#1}}%
-}
-%    \end{macrocode}
-%
-% \cvline{Apply macros of equally distributed month names.}
-%    \begin{macrocode}
-\newcommand{\Jan}{\hep@month{Jan}}
-\newcommand{\Feb}{\hep@month{Feb}}
-\newcommand{\Mar}{\hep@month{Mar}}
-\newcommand{\Apr}{\hep@month{Apr}}
-\newcommand{\May}{\hep@month{May}}
-\newcommand{\Jun}{\hep@month{Jun}}
-\newcommand{\Jul}{\hep@month{Jul}}
-\newcommand{\Aug}{\hep@month{Aug}}
-\newcommand{\Sep}{\hep@month{Sep}}
-\newcommand{\Oct}{\hep@month{Oct}}
-\newcommand{\Nov}{\hep@month{Nov}}
-\newcommand{\Dec}{\hep@month{Dec}}
-%    \end{macrocode}
-%
-% \cvline{Define short names for month without dots.}
+% Define short names for month without dots.
 %    \begin{macrocode}
 \DefineBibliographyStrings{english}{%
-  january = Jan,
-  february = Feb,
-  march = Mar,
-  april = Apr,
-  may = May,
-  june = Jun,
-  july = Jul,
-  august = Aug,
-  september = Sep,
-  october = Oct,
-  november = Nov,
-  december = Dec
+  january = \Jan,
+  february = \Feb,
+  march = \Mar,
+  april = \Apr,
+  may = \May,
+  june = \Jun,
+  july = \Jul,
+  august = \Aug,
+  september = \Sep,
+  october = \Oct,
+  november = \Nov,
+  december = \Dec
 }
 %    \end{macrocode}
 %
-% \cvline{Define shortyear with apostrophe.}
+% Define shortyear with apostrophe.
 %    \begin{macrocode}
 \DeclareFieldFormat{shortyear}{'\mkbibshortyear#1}
 \def\mkbibshortyear#1#2#3#4{#3#4}
 %    \end{macrocode}
 %
-% \cvline{Use shortyear}
+% Use shortyear
 %    \begin{macrocode}
 \DeclareFieldAlias{year}{shortyear}
 \DeclareFieldAlias{endyear}{shortyear}
 \DeclareFieldAlias{endmonth}{month}
 %    \end{macrocode}
 %
-% \cvline{Use superscript ordinals}
+% Use superscript ordinals
 %    \begin{macrocode}
 \DefineBibliographyExtras{british}{%
   \protected\def\mkbibordinal#1{\begingroup%
@@ -1119,14 +1076,14 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 }
 %    \end{macrocode}
 %
-% \cvline{End of date conditional.}
+% End of date conditional.
 %    \begin{macrocode}
 \fi
 %    \end{macrocode}
-
-% \subsubsection{Sorting Templates} \label{sec:sorting}
 %
-% \cvline{Ensure that also the first author is written as "given-name family-name"}
+% \subsection{Sorting Templates} \label{sec:sorting}
+%
+% Ensure that also the first author is written as "given-name family-name"
 %    \begin{macrocode}
 \DeclareNameAlias{sortname}{given-family}
 %    \end{macrocode}
@@ -1179,11 +1136,32 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 }
 %    \end{macrocode}
 % \end{macro}
-
-% \subsubsection{Related bibliography entries}
 %
-% \begin{macro}{related}
-% related
+% \subsection{Bibliography headings}
+%
+% \begin{macro}{bibliography}
+% \begin{macro}{section}
+% \begin{macro}{subsection}
+% \begin{macro}{subsubsection}
+% Redefine the usual bibliography heading from "section" to "subsection".
+% Define a "section" bibliography heading.
+% Define a "subsection" bibliography heading.
+% Define a "subsubsection" bibliography heading.
+%    \begin{macrocode}
+\defbibheading{bibliography}[\bibname]{\subsection{#1}}
+\defbibheading{section}[\bibname]{\section{#1}}
+\defbibheading{subsection}[\bibname]{\subsection{#1}}
+\defbibheading{subsubsection}[\bibname]{\subsubsection{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \subsection{Macros}
+%
+% \begin{macro}{related:default}
+% Related bibliography entries.
 %    \begin{macrocode}
 \renewbibmacro*{related:default}[1]{%
   \renewcommand*{\newunitpunct}{\addcomma\space}%
@@ -1191,109 +1169,306 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 }
 %    \end{macrocode}
 % \end{macro}
-
-% \cvline{End of check for "bibliography" option.}
-%    \begin{macrocode}
-\fi
-%    \end{macrocode}
 %
-%</package>
-
-% \section{Helper}
-
-%<*helper>
-%
-% \cvline{Make \software{hep-cv} compatible with the "doc" package.}
+% \begin{macro}{titlefirst}
+% A macro that can be used to places the title at the beginning.
 %    \begin{macrocode}
-\setlength{\@totalleftmargin}{\hepcv@seperator@width}
-\setlength{\MacroIndent}{\hepcv@left@width}
-%    \end{macrocode}
-
-% \cvline{PrintMacroName}
-%    \begin{macrocode}
-\def\PrintMacroName#1{%
-  \makebox[\hepcv@left@width+\hepcv@seperator@width-2.5em][r]{%
-    \MacroFont\string#1\ %
-  }\hspace{2.5em}%
+\newbibmacro*{titlefirst}{%
+  \ifboolexpr{
+    test {\iffieldundef{title}}
+    and
+    test {\iffieldundef{subtitle}}
+  }{%
+  }{\printtext[title]{%
+      \printfield[titlecase]{title}%
+      \setunit{\subtitlepunct}%
+      \printfield[titlecase]{subtitle}%
+    }\newunit%
+  }\printfield{titleaddon}%
 }
 %    \end{macrocode}
-
-% \cvline{macro}
+% \end{macro}
+%
+% \begin{macro}{\setlengths}
+% Set bibliography length.
 %    \begin{macrocode}
-\long\def\m@cro@#1#2{\endgroup\topsep\MacroTopsep\trivlist
-  \edef\saved@macroname{\string#2}%
-  #1
-    \let\saved@indexname\saved@macroname
-  \else
-    \edef\saved@indexname{\expandafter\@gobble\string#2}%
-  \fi
-  \def\makelabel##1{##1}
-  \if@inlabel
-    \let\@tempa\@empty \count@\macro@cnt
-    \loop \ifnum\count@>\z@
-      \edef\@tempa{\@tempa\hbox{\strut}}%
-    \advance\count@\m@ne%
-    \repeat
-      \edef\makelabel##1{%
-        \llap{\vtop to\baselineskip{\@tempa\hbox{##1}\vss}}%
-      }%
-    \advance \macro@cnt \@ne
-  \else
-    \macro@cnt\@ne
-  \fi
-  \edef\@tempa{\noexpand\item[%
-    #1%
-      \noexpand\PrintMacroName
-    \else
-      \noexpand\PrintEnvName
-    \fi
-    {\string#2}]}%
-  \@tempa
-  \global\advance\c@CodelineNo\@ne
-  #1%
-    \SpecialMainIndex{#2}\nobreak
-    \DoNotIndex{#2}%
-  \else
-    \SpecialMainEnvIndex{#2}\nobreak
-  \fi
-  \global\advance\c@CodelineNo\m@ne
-  \ignorespaces%
-  \setlength{\hangindent}{\hepcv@left@width+\hepcv@seperator@width}
+\newcommand{\setlengths}{%
+  \setlength{\labelnumberwidth}{\hep@left@width-\hep@seperator@width}%
+  \setlength{\labelwidth}{\labelnumberwidth}%
+  \setlength{\leftmargin}{\labelwidth}%
+  \setlength{\labelsep}{\biblabelsep}%
+  \addtolength{\leftmargin}{\labelsep}%
+  \setlength{\itemsep}{\bibitemsep}%
+  \setlength{\parsep}{\bibparsep}%
+  \addtolength{\leftmargin}{\hep@seperator@width}%
+  \addtolength{\labelwidth}{\hep@seperator@width}%
 }
 %    \end{macrocode}
-
-% \cvline{Describe macro}
+% \end{macro}
+%
+% \begin{macro}{\printcvdate}
+% Print date in the left column.
 %    \begin{macrocode}
-\def\Describe@Macro#1{\endgroup%
-  \makebox[\hepcv@left@width+\hepcv@seperator@width-.5em][r]{%
-    \PrintDescribeMacro{#1}%
-    \hspace{.1em}%
+\newcommand{\printcvdate}{%
+  \printtext{\hfill}%
+  \ifkeyword{ongoing}{\printtext{Since} }{}%
+  \iffieldundef{day}{}{\printfield{day}\printtext{.\space}}%
+  \smash{\vphantom{\printfield{day}}}% Why do I need this?
+  \printfield{month} %
+  \tstyle\iffieldundef{year}{}{\printfield{year}}%
+  \iffieldundef{endyear}{}{%
+    --\iffieldundef{endday}{}{\printfield{endday}. }%
+    \printfield{endmonth} \printfield{endyear}%
   }%
-  \SpecialUsageIndex{#1}\@esphack\ignorespaces%
-  \setlength{\hangindent}{\hepcv@left@width+\hepcv@seperator@width}%
 }
 %    \end{macrocode}
-
-% \cvline{Describe environment}
+% \end{macro}
+%
+% \begin{macro}{\printindex}
+% Print index label in the left column.
 %    \begin{macrocode}
-\def\Describe@Env#1{\endgroup%
-  \makebox[\hepcv@left@width+\hepcv@seperator@width-.5em][r]{%
-    \PrintDescribeEnv{#1}%
-    \hspace{.1em}
+\newcommand{\printindex}{%
+  \printtext[labelnumberwidth]{%
+    \printfield{labelprefix}\tstyle\printfield{labelnumber}%
   }%
-  \SpecialEnvIndex{#1}\@esphack\ignorespaces%
-  \setlength{\hangindent}{\hepcv@left@width+\hepcv@seperator@width}%
 }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{given-family-bold}
+% Bold names.
+%    \begin{macrocode}
+\DeclareNameFormat{given-family-bold}{%
+  \mkbibbold{%
+    \ifgiveninits{%
+      \usebibmacro{name:given-family}{\namepartfamily}%
+      {\namepartgiveni}{\namepartprefix}{\namepartsuffix}%
+    }{%
+      \usebibmacro{name:given-family}{\namepartfamily}%
+      {\namepartgiven}{\namepartprefix}{\namepartsuffix}%
+    }%
+  \usebibmacro{name:andothers}
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\printissuedate}
+% Print issue and date.
+%    \begin{macrocode}
+\newcommand{\printissuedate}{%
+  % \ifhepcv@date
+  \printtext{\hfill}%
+  \ifkeyword{ongoing}{\printtext{Since}}{}
+  \printfield{issue} %
+  \tstyle\iffieldundef{year}{}{\printfield{year}}%
+  \iffieldundef{endyear}{}{%
+    --\printfield{endmonth} \printfield{endyear}%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\adjustOrgLocDat}
+% Adjust organisation, location, and Date.
+%    \begin{macrocode}
+\newcommand{\adjustOrgLocDat}{%
+  \renewbibmacro*{organization+location+date}{%
+    \printlist{organization}\setunit*{\addcomma\space}%
+    \printlist{location}\setunit*{\addcomma\space}\newunit%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\adjustOrgLocDat}
+% Adjust organisation, location, and Date.
+%    \begin{macrocode}
+\newcommand{\cleardate}{%
+  \renewbibmacro*{issue+date}{%
+    \printfield{issue}%
+    \setunit*{\addspace}\newunit
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Bibliography environments}
+%
+% \begin{environment}{unnumbered}
+% Unnumbered bibliography environment.
+%    \begin{macrocode}
+\defbibenvironment{unnumbered}{%
+  \toggletrue{blx@skiplab}%
+  \cleardate
+  \list{\printcvdate}{\setlengths}%
+  \renewcommand*{\makelabel}[1]{\hss##1}%
+}{\endlist}{\item}
+%    \end{macrocode}
+%\end{environment}
+%
+% \environment{numbered}{Numbered bibliography environment.}
+%    \begin{macrocode}
+\defbibenvironment{numbered}{%
+  \cleardate
+  \list{\printindex\printcvdate}{\setlengths}%
+  \renewcommand*{\makelabel}[1]{\hss##1}%
+}{\endlist}{\item}
 %    \end{macrocode}
 %
-%</helper>
+% \begin{environment}{starrednumbered}
+% Starrred and numbered bibliography environment.
+%    \begin{macrocode}
+\defbibenvironment{starrednumbered}{%
+  \cleardate
+  \list{%
+    \printindex%
+    \ifkeyword{main5}{\hfill\textborn}{}%
+    \printcvdate%
+  }{\setlengths}%
+  \renewcommand*{\makelabel}[1]{\hss##1}%
+}{\endlist}{\item}
+%    \end{macrocode}
+%\end{environment}
+%
+%</bibliography>
+%
+% \section{Tests}
+%
+% \section{Package}
+%
+%<*test-sty>
+%
+%    \begin{macrocode}
+\documentclass{article}
 
+\usepackage{hep-cv}
+
+\author{First Last}
+\title{Test}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Macros and environments}
+
+\subsection{Macros}
+
+\cvline[left]{cvline example}
+
+\cventry[left]{cvetry example}[one][two]*[starred three][four]
+\cventry[left]{cvetry example}[one]
+\cventry[left]{cvetry example}
+
+\subsection{Environments}
+
+\subsubsection{Itemize}
+
+\begin{itemize}
+\item first
+\item second
+\end{itemize}
+
+\subsubsection{Enumerate}
+
+\begin{enumerate}
+\item first
+\item second
+\end{enumerate}
+
+\subsubsection{Description}
+
+\begin{description}
+\item[first] one
+\item[second] two
+\end{description}
+
+\subsubsection{Enumdescript}
+
+\begin{enumdescript}
+\item{first} one
+\item{second} two
+\end{enumdescript}
+
+\end{document}
+\end{macro}
+%    \end{macrocode}
+%</test-sty>
+%
+% \subsection{Class}
+%
+%<*test-cls>
+%    \begin{macrocode}
+\documentclass{hep-cv}
+
+\usepackage{blindtext}
+
+\author{First Last}
+\address{Address}
+\addtitleline{Additional}{Info}
+\addcontactline{Contact info}
+
+\setcounter{secnumdepth}{2}
+\opening{To whom it may concern,}
+\closing{With kind regards,}
+\begin{document}
+
+\begin{letter}
+Letter content
+\end{letter}
+
+\tableofcontents
+
+\section{Title}
+
+\subsection{Short name}
+
+\author{First Last}
+\maketitle
+
+\subsection{Long name}
+
+\author{{First-name Last-name}}
+\maketitle
+
+\subsection{Photo}
+
+\author{First Last}
+\photo{picture}
+\maketitle
+
+\begin{abstract}
+\blindtext
+\end{abstract}
+
+\end{document}
+\end{macro}
+%    \end{macrocode}
+%</test-cls>
+%
+% \subsection{Bibliography}
+%
+%<*test-bib>
+%    \begin{macrocode}
+\documentclass{article}
+
+\usepackage{hep-cv-bibliography}
+
+\addbibresource{hep-bibliography-test.bib}
+
+\nocite{*}
+
+\begin{document}
+\printbibliography[env=numbered, heading=section, title=Publications]
+\end{document}
+\end{macro}
+%    \end{macrocode}
+%</test-bib>
+%
 % \Finale
 %
 \endinput
-% \newcommand{\check@for@optional@args}{%
-%   \@ifnextchar[{\next@optional@arg}{.\cv@end}%
-% }
-% \newcommand{\next@optional@arg}[1][]{%
-%   , \em{\em{#1}}\@ifnextchar[{\next@optional@arg}{.\cv@end}%
-% }

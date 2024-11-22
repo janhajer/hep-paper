@@ -52,7 +52,7 @@
 %
 % \fi
 %
-% \CheckSum{498}
+% \CheckSum{501}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -281,6 +281,10 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 %    \begin{macrocode}
 \g@addto@macro\@floatboxreset{\tlstyle}
 % \g@addto@macro\@subfloatboxreset{\tlstyle}
+%    \end{macrocode}
+% Adjust the equation such that the number is always table style.
+%    \begin{macrocode}
+\pretocmd{\theequation}{\tstyle}{}{}
 %    \end{macrocode}
 %
 % Load the \software{textcomp} extension \cite{textcomp} and define helper functions.

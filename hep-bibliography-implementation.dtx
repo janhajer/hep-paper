@@ -331,7 +331,7 @@ Errata can be included using the "related" feature.
 % Allow the bibliography to be printed sloppy
 %    \begin{macrocode}
 \let\hep@printbibliography\printbibliography
-\renewcommand{\printbibliography}{\sloppy\hep@printbibliography}
+\renewcommand{\printbibliography}{{\sloppy\hep@printbibliography}}
 %    \end{macrocode}
 % \end{macro}
 

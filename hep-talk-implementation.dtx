@@ -182,7 +182,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 \RequirePackage[oldstyle, sans]{hep-font}
 \RequirePackage{hep-math-font}
 \RequirePackage{hep-math}
-\RequirePackage[style=authoryear]{hep-bibliography}
+\RequirePackage{hep-bibliography}
 \RequirePackage{hep-title}
 % \RequirePackage{hep-float}
 \RequirePackage{hep-text}
@@ -215,7 +215,9 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 % Vertical lengths
 %    \begin{macrocode}
 \newlength{\vmargin}
-\setlength{\vmargin}{.01\paperheight plus .1\paperheight minus .005\paperheight}
+\setlength{\vmargin}{%
+  .01\paperheight plus .1\paperheight minus .005\paperheight%
+}
 \setlength{\parskip}{\vmargin}
 %    \end{macrocode}
 % Adjust spacing around equations.
@@ -567,12 +569,23 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 % \end{macro}
 
 
+% \begin{macro}{\logo}
+% The "\logo" macro
+%    \begin{macrocode}
+\renewcommand\Affilfont{\normalsize}
+\newcommand{\titlemargin}{.05\paperwidth}
+\newcommand{\prelogo}[1]{\def\hep@pre@logo{#1}}
+\newcommand{\logo}[1]{\def\hep@logo{#1}}
+\newcommand{\postlogo}[1]{\def\hep@post@logo{#1}}
+\prelogo{\vfill\hfill}
+\postlogo{}
+%    \end{macrocode}
+% \end{macro}
+
 % \begin{macro}{\maketitle}
 % The "\maketitle" macro
 %    \begin{macrocode}
-\renewcommand\Affilfont{\normalsize}
 \renewcommand{\maketitle}{%
-  \newcommand{\titlemargin}{.05\paperwidth}
   \newframe%
   \strut\par\vspace{10ex}\bgroup%
     \leftskip=\titlemargin
@@ -584,6 +597,10 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
     {\huge\hep@author@font\@author\vspace{1ex}\par}
     \vspace{3ex}%
     \normalsize\hep@date@font\@date\par%
+    \vspace{3ex}%
+    \@ifundefined{hep@logo}{}{%
+      \hep@pre@logo\hep@logo\hep@post@logo\par%
+    }%
   \egroup%
 }
 %    \end{macrocode}
@@ -604,14 +621,38 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 %
 % The pagenumber is implemented using the "picture" \cite{picture} and "atbegshi" \cite{atbegshi} packages.
 %    \begin{macrocode}
-\RequirePackage{picture}
-\RequirePackage{atbegshi}
+% \RequirePackage{picture}
+% \RequirePackage{atbegshi}
+\RequirePackage{tikz}
+\usetikzlibrary{fadings}
+\usetikzlibrary{external}
+\tikzfading[
+  name=fade out,
+  inner color=transparent!0,
+  outer color=transparent!80,
+]
+\tikzset{
+  pagenumber/.style={
+    font=\footnotesize,
+    anchor=south east,
+    outer sep=1ex,
+    circle,
+    inner sep=1pt,
+    text=Structure,
+    fill=PageBg,
+    path fading=fade out,
+  },
+}
 \AtBeginShipout{\AtBeginShipoutUpperLeftForeground{%
   \ifnum\thepage>1%
-    \put(\paperwidth-\widthof{\footnotesize\thepage}-\hmargin,%
-        -\paperheight+\hmargin){%
-      \footnotesize\color{Structure}\thepage%
-    }%
+%     \put(\paperwidth-\widthof{\footnotesize\thepage}-\hmargin,%
+%         -\paperheight+\hmargin){%
+%       \footnotesize\color{Structure}\thepage%
+%     }%
+    \tikzset{external/export next=false}%
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[pagenumber] at (current page.south east){\thepage};%
+    \end{tikzpicture}
   \fi%
 }}
 %    \end{macrocode}
@@ -642,33 +683,52 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 %
 % Prepare the bibliography
 %    \begin{macrocode}
-\ExecuteBibliographyOptions{
-  maxcitenames=1,
-  maxbibnames=5,
-  dashed=false,
-  uniquename=false,
-  uniquelist=false
-}
-\DeclareNameAlias{sortname}{given-family}
+% \ExecuteBibliographyOptions{
+%   maxcitenames=1,
+%   maxbibnames=5,
+%   dashed=false,
+%   uniquename=false,
+%   uniquelist=false
+% }
+% \DeclareNameAlias{sortname}{given-family}
 %    \end{macrocode}
 % \begin{macro}{cite}
 % Add the collaboration field to the citation macro.
 %    \begin{macrocode}
-\renewbibmacro*{cite}{%
-  \iffieldundef{shorthand}{%
-    \ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}{%
-      \usebibmacro{cite:label}%
-      \setunit{\printdelim{nonameyeardelim}}}{%
-        \iffieldundef{collaboration}{%
-          \printnames{labelname}%
-        }{%
-          \printfield{collaboration}%
-        }%
-        \setunit{\printdelim{nameyeardelim}}%
-      }%
-     \usebibmacro{cite:labeldate+extradate}%
-  }{\usebibmacro{cite:shorthand}}%
-}
+% \renewbibmacro*{cite}{%
+%   \DeclareFieldFormat{eprint}{##1}%
+%   \iffieldundef{shorthand}{%
+%     \iffieldundef{eprint}{%
+%       \ifthenelse{%
+%         \ifnameundef{labelname}\OR\iffieldundef{labelyear}%
+%        }{%
+%         \usebibmacro{cite:label}%
+%         \setunit{\printdelim{nonameyeardelim}}%
+%       }{%
+%         \iffieldundef{collaboration}{%
+%           \printnames{labelname}%
+%          }{%
+%           \printfield{collaboration}%
+%          }\setunit{\printdelim{nameyeardelim}}%
+%       }\usebibmacro{cite:labeldate+extradate}%
+%     }{\printfield{eprint}}%
+%   }{\usebibmacro{cite:shorthand}}%
+% }
+% \renewbibmacro*{cite}{%
+%   \iffieldundef{shorthand}{%
+%     \ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}{%
+%       \usebibmacro{cite:label}%
+%       \setunit{\printdelim{nonameyeardelim}}}{%
+%         \iffieldundef{collaboration}{%
+%           \printnames{labelname}%
+%         }{%
+%           \printfield{collaboration}%
+%         }%
+%         \setunit{\printdelim{nameyeardelim}}%
+%       }%
+%      \usebibmacro{cite:labeldate+extradate}%
+%   }{\usebibmacro{cite:shorthand}}%
+% }
 %    \end{macrocode}
 % \end{macro}
 % clickable parencite
@@ -680,9 +740,10 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 %    \end{macrocode}
 % small rightaligned Structure colored citations
 %    \begin{macrocode}
-\renewcommand{\cite}[1]{%
-  \hfill{\scriptsize\normalfont\color{Structure}\autocite{#1}}%
+\newcommand{\citestyle}[1]{%
+  \hfill{\scriptsize\normalfont\color{Structure}#1}%
 }
+\renewcommand{\cite}[1]{\citestyle{\autocite{#1}}}
 %    \end{macrocode}
 % do not color the titles
 %    \begin{macrocode}
@@ -692,16 +753,139 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 %    \end{macrocode}
 % put references in blocks
 %    \begin{macrocode}
-\renewbibmacro{begentry}{%
-  \vspace{-.3ex}%
-  \block\relax%
-  \setlength{\leftskip}{1.25em}%
-  \setlength{\parindent}{-1.25em}%
-}
+% \renewbibmacro{begentry}{%
+%   \vspace{-.3ex}%
+%   \block\relax%
+%   \setlength{\leftskip}{1.25em}%
+%   \setlength{\parindent}{-1.25em}%
+% }
 %    \end{macrocode}
 % close the blocks
 %    \begin{macrocode}
-\renewbibmacro{finentry}{\endblock}
+% \renewbibmacro{finentry}{\endblock}
+%    \end{macrocode}
+%
+%
+%
+%
+% use eprint info for references
+%    \begin{macrocode}
+\newcommand{\hep@talk@cite}{%
+  \iffieldundef{shorthand}{%
+    \iffieldundef{eprint}{%
+      \ifthenelse{%
+        \ifnameundef{labelname}\OR\iffieldundef{labelyear}%
+       }{%
+        \usebibmacro{cite:label}%
+        \setunit{\printdelim{nonameyeardelim}}%
+      }{%
+        \iffieldundef{collaboration}{%
+          \printnames{labelname}%
+         }{%
+          \printfield{collaboration}%
+         }\setunit{\printdelim{nameyeardelim}}%
+      }\usebibmacro{cite:labeldate+extradate}%
+    }{\texttt{\printfield{eprint}}}%
+  }{\usebibmacro{cite:shorthand}}%
+}
+%    \end{macrocode}
+% use eprint info for reference labeles
+%    \begin{macrocode}
+\newcommand{\hep@talk@label}{%
+  \DeclareFieldFormat{eprint:arxiv}{%
+    \ifhyperref{%
+      \href{https://arxiv.org/\abx@arxivpath/##1}{\nolinkurl{##1}}%
+    }{%
+      \nolinkurl{##1}\iffieldundef{eprintclass}{}{%
+        \addspace\texttt{\mkbibbrackets{\thefield{eprintclass}}}%
+      }%
+    }%
+  }%
+  \DeclareFieldFormat{eprint:github}{%
+    \hep@bib@online{https://github.com/\thefield{eprintclass}/##1}{##1}%
+  }%
+  \iffieldundef{shorthand}{%
+    \iffieldundef{eprint}{%
+      \ifthenelse{%
+        \ifnameundef{labelname}\OR\iffieldundef{labelyear}%
+       }{%
+        \setunit{\printdelim{nonameyeardelim}}%
+      }{%
+        \iffieldundef{collaboration}{%
+          \printnames{labelname}%
+         }{%
+          \printfield{collaboration}%
+         }\setunit{\printdelim{nameyeardelim}}%
+      }
+      \usebibmacro{cite:labeldate+extradate}%
+    }{\usebibmacro{eprint}}%
+  }{\usebibmacro{cite:shorthand}}%
+}
+%    \end{macrocode}
+% remove eprint from entry
+%    \begin{macrocode}
+\newcommand{\hep@talk@entry}{%
+  \iffieldundef{shorthand}{%
+    \iffieldundef{eprint}{%
+      \ifthenelse{%
+        \ifnameundef{labelname}\OR\iffieldundef{labelyear}%
+       }{%
+        \setunit{}%
+      }{%
+        \iffieldundef{collaboration}{%
+          \DeclareNameFormat{sortname}{}%
+          \DeclareNameFormat{year}{}%
+      \DeclareFieldFormat{cite:labeldate+extradate}{}%
+          \DeclareFieldFormat{labelyear}{}%
+         }{%
+          \DeclareFieldFormat{collaboration}{}%
+%           \DeclareFieldFormat{labelyear}{}%
+         }\setunit{}%
+      }
+      \DeclareFieldFormat{cite:labeldate+extradate}{}%
+    }{
+    \DeclareFieldFormat{eprint:arxiv}{}%
+    \DeclareFieldFormat{eprint:github}{}
+    }%
+  }{\usebibmacro{cite:shorthand}}%
+}
+%    \end{macrocode}
+% redefine cite
+%    \begin{macrocode}
+\renewbibmacro*{cite}{%
+  \DeclareFieldFormat{eprint}{##1}%
+  \hep@talk@cite%
+}
+%    \end{macrocode}
+% put bib item in a block
+%    \begin{macrocode}
+\renewbibmacro{begentry}{%
+  \block[[\hep@talk@label]\hfill]%
+  \hep@talk@entry%
+}
+%    \end{macrocode}
+% close block
+%    \begin{macrocode}
+\renewbibmacro{finentry}{%
+  \endblock\filbreak%
+}
+%    \end{macrocode}
+% start a new frame for bibliography
+%    \begin{macrocode}
+\defbibheading{bibliography}[\refname]{%
+  \newframe[#1]%
+}
+%    \end{macrocode}
+% use small font for bibliography
+%    \begin{macrocode}
+\defbibenvironment{bibliography}{%
+  \small%
+%   start environment
+}{
+%   end environment
+}{
+%   item
+}
 %    \end{macrocode}
 %
 %</package>

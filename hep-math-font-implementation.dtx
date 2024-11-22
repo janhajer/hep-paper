@@ -40,6 +40,10 @@
 \bibliography{bibliography}
 \acronym{CM}{computer modern}
 \acronym{LM}{latin modern}
+\acronym{NFSS}{new font selection scheme}
+\acronym{PU}{PDF Unicode}
+\acronym{TU}{\hologo{TeX} Unicode}
+\acronym{LGR}{local Greek}
 %</documentation>
 
 %<*driver>
@@ -52,7 +56,7 @@
 %
 % \fi
 %
-% \CheckSum{802}
+% \CheckSum{1716}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -107,7 +111,7 @@ This is is neither the literal meaning of the macros nor the best behaviour if a
 However, it simplifies working in an environment where one copies pieces of math between serif and sans-serif documents \eg publications \vs talks and funding applications.
 
 Using the \software{fixmath} \cite{fixmath} and \software{textalpha} \cite{textalpha} packages Greek letter are adjusted so that they are always italic and upright in math and text mode, respectively.
-Greek letters can be written by using their unicode characters.
+Greek letters can be written by using their unicode characters, with code following the \software{alphabeta} package \cite{alphabeta}.
 
 \DescribeMacro{symbols}
 The "symbols"=\meta{family} class option sets the family of the symbol fonts.
@@ -293,7 +297,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 % \StopEventually{
 % \printbibliography
 % \PrintChanges
-% }
+%}
 %
 % \appendix
 %
@@ -419,8 +423,8 @@ Hence, the minion option uses three to four more math alphabets than a usual set
   \AtBeginDocument{%
     \@ifpackageloaded{esint}{%
       \DeclareSymbolFont{largesymbolsA}{U}{ssesint}{m}{n}
-    }{}
-  }
+}{}
+}
 %    \end{macrocode}
 % \begin{macro}{\mathrm}
 % \begin{macro}{\mathnormal}
@@ -467,7 +471,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
   \RequirePackage{textalpha}
   \def\hep@Greek#1#2#3{
     \protected\def#1{\TextOrMath{#3}{\ifnum\fam=0 \text{#3}\else#2\fi}}%
-  }
+}
   \def\hep@greek#1#2#3{\let#2=#1\hep@Greek#1#2#3}
 %    \end{macrocode}
 % The following code follows closely the \software{alphabeta} package \cite{alphabeta}.
@@ -476,10 +480,10 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 %
 % For letters defined in math mode, the commands work in both, text and math.
 % Some Greek letters look identical to Latin letters and can therefore not be used as variable symbols in math formulas.
-% These letters are not defined in TeX's math mode, we provide an alias to the corrsponding "\text..."  command.
+% These letters are not defined in \hologo{TeX}'s math mode, we provide an alias to the corrsponding "\text..."  command.
 %
-% Mathematical notation distinguishes `variant shape symbols` for pi, phi, rho, theta (small and capital), beta, and kappa (characters for the latter three symbols are not included in TeX’s math fonts).
-% These variations have no syntactic meaning in Greek text and are not given code-points in the LGR encoding while Unicode defines separate code points for the symbol variants.
+% Mathematical notation distinguishes `variant shape symbols` for \pi, \phi, \rho, \theta\  (small and capital), \beta, and \kappa\ (characters for the latter three symbols are not included in \hologo{TeX}’s math fonts).
+% These variations have no syntactic meaning in Greek text and are not given code-points in the \LGR encoding while Unicode defines separate code points for the symbol variants.
 %
 % \subsubsection{Greek Alphabet}
 %
@@ -487,107 +491,109 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 % For "\epsilon" and "\phi", this means that the selected symbol variant differs in text \vs math mode.
 % Use "\varepsilon" and "\varphi" (see section `variant shape symbols` below) to select the "greek letter ..." in both, text and math mode.
 %    \begin{macrocode}
-  \providecommand*{\Alpha}{\textAlpha}
-  \providecommand*{\Beta}{\textBeta}
-  \hep@greek\Gamma\mathGamma\textGamma
-  \hep@greek\Delta\mathDelta\textDelta
-  \providecommand*{\Epsilon}{\textEpsilon}
-  \providecommand*{\Zeta}{\textZeta}
-  \providecommand*{\Eta}{\textEta}
-  \hep@greek\Theta\mathTheta\textTheta
-  \providecommand*{\Iota}{\textIota}
-  \providecommand*{\Kappa}{\textKappa}
-  \hep@greek\Lambda\mathLambda\textLambda
-  \providecommand*{\Mu}{\textMu}
-  \providecommand*{\Nu}{\textNu}
-  \hep@greek\Xi\mathXi\textXi
-  \providecommand*{\Omicron}{\textOmicron}
-  \hep@greek\Pi\mathPi\textPi
-  \providecommand*{\Rho}{\textRho}
-  \hep@greek\Sigma\mathSigma\textSigma
-  \providecommand*{\Tau}{\textTau}
-  \hep@greek\Upsilon\mathUpsilon\textUpsilon
-  \hep@greek\Phi\mathPhi\textPhi
-  \providecommand*{\Chi}{\textChi}
-  \hep@greek\Psi\mathPsi\textPsi
-  \hep@greek\Omega\mathOmega\textOmega
+  \providecommand*{\Alpha}{\textAlpha} % Α
+  \providecommand*{\Beta}{\textBeta} % Β
+  \hep@greek\Gamma\mathGamma\textGamma % Γ
+  \hep@greek\Delta\mathDelta\textDelta % Δ
+  \providecommand*{\Epsilon}{\textEpsilon} % Ε
+  \providecommand*{\Zeta}{\textZeta} % Ζ
+  \providecommand*{\Eta}{\textEta} % Η
+  \hep@greek\Theta\mathTheta\textTheta % Θ
+  \providecommand*{\Iota}{\textIota} % Ι
+  \providecommand*{\Kappa}{\textKappa} % Κ
+  \hep@greek\Lambda\mathLambda\textLambda % Λ
+  \providecommand*{\Mu}{\textMu} % Μ
+  \providecommand*{\Nu}{\textNu} % Ν
+  \hep@greek\Xi\mathXi\textXi % Ξ
+  \providecommand*{\Omicron}{\textOmicron} % Ο
+  \hep@greek\Pi\mathPi\textPi % Π
+  \providecommand*{\Rho}{\textRho} % Ρ
+  \hep@greek\Sigma\mathSigma\textSigma % Σ
+  \providecommand*{\Tau}{\textTau} % Τ
+  \hep@greek\Upsilon\mathUpsilon\textUpsilon % Υ
+  \hep@greek\Phi\mathPhi\textPhi % Φ
+  \providecommand*{\Chi}{\textChi} % Χ
+  \hep@greek\Psi\mathPsi\textPsi % Ψ
+  \hep@greek\Omega\mathOmega\textOmega % Ω
 %    \end{macrocode}
 % Apply to minuscule Greek letters.
 %    \begin{macrocode}
-  \hep@greek\alpha\mathalpha\textalpha
-  \hep@greek\beta\mathbeta\textbeta
-  \hep@greek\gamma\mathgamma\textgamma
-  \hep@greek\delta\mathdelta\textdelta
-  \hep@greek\epsilon\mathepsilon\textepsilon
-  \hep@greek\zeta\mathzeta\textzeta
-  \hep@greek\eta\matheta\texteta
-  \hep@greek\theta\maththeta\texttheta
-  \hep@greek\iota\mathiota\textiota
-  \hep@greek\kappa\mathkappa\textkappa
-  \hep@greek\lambda\mathlambda\textlambda
-  \hep@greek\mu\mathmu\textmu
-  \hep@greek\nu\mathnu\textnu
-  \hep@greek\xi\mathxi\textxi
-  \providecommand*{\omicron}{\textomicron}
-  \hep@greek\pi\mathpi\textpi
-  \hep@greek\rho\mathrho\textrho
-  \hep@greek\sigma\mathsigma\textsigma
-  \hep@greek\varsigma\mathvarsigma\textvarsigma
-  \providecommand*{\finalsigma}{\varsigma}
-  \hep@greek\tau\mathtau\texttau
-  \hep@greek\upsilon\mathupsilon\textupsilon
-  \hep@greek\phi\mathphi\textphi
-  \hep@greek\chi\mathchi\textchi
-  \hep@greek\psi\mathpsi\textpsi
-  \hep@greek\omega\mathomega\textomega
+  \hep@greek\alpha\mathalpha\textalpha % α
+  \hep@greek\beta\mathbeta\textbeta % β
+  \hep@greek\gamma\mathgamma\textgamma % γ
+  \hep@greek\delta\mathdelta\textdelta % δ
+  \hep@greek\epsilon\mathepsilon\textepsilon % ε
+  \hep@greek\zeta\mathzeta\textzeta % ζ
+  \hep@greek\eta\matheta\texteta % η
+  \hep@greek\theta\maththeta\texttheta % θ
+  \hep@greek\iota\mathiota\textiota % ι
+  \hep@greek\kappa\mathkappa\textkappa % κ
+  \hep@greek\lambda\mathlambda\textlambda % λ
+  \hep@greek\mu\mathmu\textmu % μ
+  \hep@greek\nu\mathnu\textnu % ν
+  \hep@greek\xi\mathxi\textxi % ξ
+  \providecommand*{\omicron}{\textomicron} % ο
+  \hep@greek\pi\mathpi\textpi % π
+  \hep@greek\rho\mathrho\textrho % ρ
+  \hep@greek\sigma\mathsigma\textsigma % σ
+  \hep@greek\varsigma\mathvarsigma\textvarsigma % ς
+  \providecommand*{\finalsigma}{\varsigma} % ς
+  \hep@greek\tau\mathtau\texttau % τ
+  \hep@greek\upsilon\mathupsilon\textupsilon % υ
+  \hep@greek\phi\mathphi\textphi % φ
+  \hep@greek\chi\mathchi\textchi % χ
+  \hep@greek\psi\mathpsi\textpsi % ψ
+  \hep@greek\omega\mathomega\textomega % ω
 %    \end{macrocode}
-% Archaic letters
+% Archaic letters \textvarsigma
 %    \begin{macrocode}
-  \hep@greek\digamma\mathdigamma\textdigamma
-  \providecommand*{\Digamma}{\textDigamma}
-  \providecommand*{\stigma}{\textstigma}
-  \providecommand*{\varstigma}{\textvarstigma}
-  \providecommand*{\koppa}{\textkoppa}
-  \providecommand*{\Koppa}{\textKoppa}
-  \providecommand*{\qoppa}{\textqoppa}
-  \providecommand*{\Qoppa}{\textQoppa}
-  \providecommand*{\Stigma}{\textStigma}
-  \providecommand*{\Sampi}{\textSampi}
-  \providecommand*{\sampi}{\textsampi}
+  \hep@greek\digamma\mathdigamma\textdigamma % ϝ
+  \providecommand*{\Digamma}{\textDigamma} % Ϝ
+  \providecommand*{\stigma}{\textstigma} % ϛ
+  \providecommand*{\varstigma}{\textvarstigma} % ϛ stigma variant (CB.enc, teubner) not in LM
+  \providecommand*{\koppa}{\textkoppa} % ϟ (greek small letter koppa)
+  \providecommand*{\Koppa}{\textKoppa} % Ϟ (greek letter koppa)
+%    \end{macrocode}
+% babel-greek defines "\qoppa" as alias for ϟ ("\textkoppa")!
+%    \begin{macrocode}
+  \def\qoppa{\textqoppa} % ϙ (archaic koppa)
+  \providecommand*{\Qoppa}{\textQoppa} % Ϙ (archaic Koppa)
+  \providecommand*{\Stigma}{\textStigma} % Ϛ (in some fonts CT ligature)
+  \providecommand*{\Sampi}{\textSampi} % Ϡ
+  \providecommand*{\sampi}{\textsampi} % ϡ
 %    \end{macrocode}
 %
 % \subsubsection{Variant shape symbols}
 %
-% TeX’s concept of “standard” \vs “variant” math symbols does not map to the
+% \hologo{TeX}'s concept of \enquote{standard} \vs \enquote{variant} math symbols does not map to the
 % distinction between "greek letter ..." \vs "greek ... symbol" in the Unicode standard (see "test-tuenc-greek.pdf").
 %
 % The "\...symbol"  macros select the "greek ... symbol" in both, text and math mode.
 % For "\epsilonsymbol" and "\phisymbol" this is the default shape in math mode.
-% The "\var..." macros select the shape used by TeX math (or, if not supported, the "symbol" shape)
+% The "\var..." macros select the shape used by \hologo{TeX} math (or, if not supported, the "symbol" shape)
 %
-% "...symbol == var..."
-%
+% "...symbol == var..." Does not work 8-bit
 %    \begin{macrocode}
-  \hep@greek\varpi\mathvarpi\textpisymbol
-  \providecommand*{\pisymbol}{\varpi}
-  \hep@greek\varrho\mathvarrho\textrhosymbol
-  \hep@greek\rhosymbol\mathvarrho\textrhosymbol
-  \hep@greek\vartheta\mathvartheta\textthetasymbol
-  \providecommand*{\thetasymbol}{\vartheta}
+  \hep@greek\varpi\mathvarpi\textpisymbol %
+  \providecommand*{\pisymbol}{\varpi} %
+  \hep@greek\varrho\mathvarrho\textrhosymbol %
+  \hep@greek\rhosymbol\mathvarrho\textrhosymbol %
+  \hep@greek\vartheta\mathvartheta\textthetasymbol %
+  \providecommand*{\thetasymbol}{\vartheta} %
 %    \end{macrocode}
-% "...symbol != var..."
+% "...symbol != var..." Does not work 8-bit
 %    \begin{macrocode}
-  \hep@greek\varepsilon\mathvarepsilon\textepsilon
-  \hep@Greek\epsilonsymbol\mathepsilon\textepsilonsymbol
-  \hep@greek\varphi\mathvarphi\textphi
-  \hep@Greek\phisymbol\mathphi\textphisymbol
+  \hep@greek\varepsilon\mathvarepsilon\textepsilon %
+  \hep@Greek\epsilonsymbol\mathepsilon\textepsilonsymbol %
+  \hep@greek\varphi\mathvarphi\textphi %
+  \hep@Greek\phisymbol\mathphi\textphisymbol %
 %    \end{macrocode}
-% only text (in standard 8-bit TeX, may be defined with additional packages):
+% only text (in standard 8-bit \hologo{TeX}, may be defined with additional packages):
 %    \begin{macrocode}
   \ifdefined\varbeta
-    \hep@greek\varbeta\mathvarbeta\textbetasymbol
+    \hep@greek\varbeta\mathvarbeta\textbetasymbol %
   \else
-    \providecommand*{\varbeta}{\textbetasymbol}
+    \providecommand*{\varbeta}{\textbetasymbol} %
   \fi
   \providecommand*{\betasymbol}{\varbeta}
   \ifdefined\varkappa
@@ -602,62 +608,389 @@ Hence, the minion option uses three to four more math alphabets than a usual set
   \providecommand*{\Thetasymbol}{\textThetasymbol}
 %    \end{macrocode}
 %
-% \subsubsection{TextCompositeCommands for the generic macros}
+% \subsubsection{TextCompositeCommands for the letter-name macros}
 %
-% The NFSS TextComposite mechanism looks for the next token without expanding it.
+% The \NFSS TextComposite mechanism looks for the next token without expanding it.
 % In order to let compositions like "\ensuregreek{\'\Alpha}" or "\ensuregreek"\allowbreak"{\>''\alpha}" work as expected we define TextComposites with the `letter name commands`.
-% (Composition only works if the active font encoding is LGR).
+%
+% TextCompositeCommands are always specific for the font-encoding.
+% Documents may use \TU, \LGR, and \PU in parallel.
+% We define auxiliary commands with definitions
+% that are required by more than one font encoding.
+%
+% \paragraph{Select pre-composed characters}
+%
+% Required by \LGR and \PU.
+%
+% \begin{macro}{\alphabeta@select@precomposed}
+% With \TU, most pre-composed characters are selected by the the engine.
+% (Actually by the `Harfbuzz` renderer which is default for \hologo{XeTeX} and can be selected with fontspec for \hologo{LuaTeX}).
 %    \begin{macrocode}
-  \@ifl@aded{def}{tuenc-greek}{\input{alphabeta-tuenc.def}}{}
-  \@ifl@aded{def}{lgrenc}{\input{alphabeta-lgr.def}}{}
+\newcommand*{\alphabeta@select@precomposed}[1]{
+%    \end{macrocode}
+% Minuscule letters.
+%    \begin{macrocode}
+  \DeclareTextCompositeCommand{\accvaria}{#1}{\alpha}{\accvaria\textalpha}
+  \DeclareTextCompositeCommand{\accdasia}{#1}{\alpha}{\accdasia\textalpha}
+  \DeclareTextCompositeCommand{\accpsili}{#1}{\alpha}{\accpsili\textalpha}
+  \DeclareTextCompositeCommand{\accdasiavaria}{#1}{\alpha}{\accdasiavaria\textalpha}
+  \DeclareTextCompositeCommand{\acctonos}{#1}{\alpha}{\acctonos\textalpha}
+  \DeclareTextCompositeCommand{\accdasiaoxia}{#1}{\alpha}{\accdasiaoxia\textalpha}
+  \DeclareTextCompositeCommand{\accpsilioxia}{#1}{\alpha}{\accpsilioxia\textalpha}
+  \DeclareTextCompositeCommand{\accpsilivaria}{#1}{\alpha}{\accpsilivaria\textalpha}
+  \DeclareTextCompositeCommand{\accperispomeni}{#1}{\alpha}{\accperispomeni\textalpha}
+  \DeclareTextCompositeCommand{\accdasiaperispomeni}{#1}{\alpha}{\accdasiaperispomeni\textalpha}
+  \DeclareTextCompositeCommand{\accpsiliperispomeni}{#1}{\alpha}{\accpsiliperispomeni\textalpha}
+  \DeclareTextCompositeCommand{\accvaria}{#1}{\eta}{\accvaria\texteta}
+  \DeclareTextCompositeCommand{\accdasia}{#1}{\eta}{\accdasia\texteta}
+  \DeclareTextCompositeCommand{\accpsili}{#1}{\eta}{\accpsili\texteta}
+  \DeclareTextCompositeCommand{\acctonos}{#1}{\eta}{\acctonos\texteta}
+  \DeclareTextCompositeCommand{\accdasiaoxia}{#1}{\eta}{\accdasiaoxia\texteta}
+  \DeclareTextCompositeCommand{\accpsilioxia}{#1}{\eta}{\accpsilioxia\texteta}
+  \DeclareTextCompositeCommand{\accdasiavaria}{#1}{\eta}{\accdasiavaria\texteta}
+  \DeclareTextCompositeCommand{\accperispomeni}{#1}{\eta}{\accperispomeni\texteta}
+  \DeclareTextCompositeCommand{\accdasiaperispomeni}{#1}{\eta}{\accdasiaperispomeni\texteta}
+  \DeclareTextCompositeCommand{\accpsiliperispomeni}{#1}{\eta}{\accpsiliperispomeni\texteta}
+  \DeclareTextCompositeCommand{\accpsilivaria}{#1}{\eta}{\accpsilivaria\texteta}
+  \DeclareTextCompositeCommand{\accvaria}{#1}{\omega}{\accvaria\textomega}
+  \DeclareTextCompositeCommand{\accdasia}{#1}{\omega}{\accdasia\textomega}
+  \DeclareTextCompositeCommand{\accpsili}{#1}{\omega}{\accpsili\textomega}
+  \DeclareTextCompositeCommand{\accdasiavaria}{#1}{\omega}{\accdasiavaria\textomega}
+  \DeclareTextCompositeCommand{\acctonos}{#1}{\omega}{\acctonos\textomega}
+  \DeclareTextCompositeCommand{\accdasiaoxia}{#1}{\omega}{\accdasiaoxia\textomega}
+  \DeclareTextCompositeCommand{\accpsilioxia}{#1}{\omega}{\accpsilioxia\textomega}
+  \DeclareTextCompositeCommand{\accpsilivaria}{#1}{\omega}{\accpsilivaria\textomega}
+  \DeclareTextCompositeCommand{\accperispomeni}{#1}{\omega}{\accperispomeni\textomega}
+  \DeclareTextCompositeCommand{\accdasiaperispomeni}{#1}{\omega}{\accdasiaperispomeni\textomega}
+  \DeclareTextCompositeCommand{\accpsiliperispomeni}{#1}{\omega}{\accpsiliperispomeni\textomega}
+  \DeclareTextCompositeCommand{\accvaria}{#1}{\iota}{\accvaria\textiota}
+  \DeclareTextCompositeCommand{\accdasia}{#1}{\iota}{\accdasia\textiota}
+  \DeclareTextCompositeCommand{\accpsili}{#1}{\iota}{\accpsili\textiota}
+  \DeclareTextCompositeCommand{\accdasiavaria}{#1}{\iota}{\accdasiavaria\textiota}
+  \DeclareTextCompositeCommand{\acctonos}{#1}{\iota}{\acctonos\textiota}
+  \DeclareTextCompositeCommand{\accdasiaoxia}{#1}{\iota}{\accdasiaoxia\textiota}
+  \DeclareTextCompositeCommand{\accpsilioxia}{#1}{\iota}{\accpsilioxia\textiota}
+  \DeclareTextCompositeCommand{\accpsilivaria}{#1}{\iota}{\accpsilivaria\textiota}
+  \DeclareTextCompositeCommand{\accperispomeni}{#1}{\iota}{\accperispomeni\textiota}
+  \DeclareTextCompositeCommand{\accdasiaperispomeni}{#1}{\iota}{\accdasiaperispomeni\textiota}
+  \DeclareTextCompositeCommand{\accpsiliperispomeni}{#1}{\iota}{\accpsiliperispomeni\textiota}
+  \DeclareTextCompositeCommand{\accdialytika}{#1}{\iota}{\accdialytika\textiota}
+  \DeclareTextCompositeCommand{\accdialytikavaria}{#1}{\iota}{\accdialytikavaria\textiota}
+  \DeclareTextCompositeCommand{\accdialytikatonos}{#1}{\iota}{\accdialytikatonos\textiota}
+  \DeclareTextCompositeCommand{\accdialytikaperispomeni}{#1}{\iota}{\accdialytikaperispomeni\textiota}
+  \DeclareTextCompositeCommand{\accvaria}{#1}{\upsilon}{\accvaria\textupsilon}
+  \DeclareTextCompositeCommand{\accdasia}{#1}{\upsilon}{\accdasia\textupsilon}
+  \DeclareTextCompositeCommand{\accpsili}{#1}{\upsilon}{\accpsili\textupsilon}
+  \DeclareTextCompositeCommand{\accdasiavaria}{#1}{\upsilon}{\accdasiavaria\textupsilon}
+  \DeclareTextCompositeCommand{\acctonos}{#1}{\upsilon}{\acctonos\textupsilon}
+  \DeclareTextCompositeCommand{\accdasiaoxia}{#1}{\upsilon}{\accdasiaoxia\textupsilon}
+  \DeclareTextCompositeCommand{\accpsilioxia}{#1}{\upsilon}{\accpsilioxia\textupsilon}
+  \DeclareTextCompositeCommand{\accpsilivaria}{#1}{\upsilon}{\accpsilivaria\textupsilon}
+  \DeclareTextCompositeCommand{\accperispomeni}{#1}{\upsilon}{\accperispomeni\textupsilon}
+  \DeclareTextCompositeCommand{\accdasiaperispomeni}{#1}{\upsilon}{\accdasiaperispomeni\textupsilon}
+  \DeclareTextCompositeCommand{\accpsiliperispomeni}{#1}{\upsilon}{\accpsiliperispomeni\textupsilon}
+  \DeclareTextCompositeCommand{\accdialytika}{#1}{\upsilon}{\accdialytika\textupsilon}
+  \DeclareTextCompositeCommand{\accdialytikavaria}{#1}{\upsilon}{\accdialytikavaria\textupsilon}
+  \DeclareTextCompositeCommand{\accdialytikatonos}{#1}{\upsilon}{\accdialytikatonos\textupsilon}
+  \DeclareTextCompositeCommand{\accdialytikaperispomeni}{#1}{\upsilon}{\accdialytikaperispomeni\textupsilon}
+  \DeclareTextCompositeCommand{\accvaria}{#1}{\epsilon}{\accvaria\textepsilon}
+  \DeclareTextCompositeCommand{\accdasia}{#1}{\epsilon}{\accdasia\textepsilon}
+  \DeclareTextCompositeCommand{\accpsili}{#1}{\epsilon}{\accpsili\textepsilon}
+  \DeclareTextCompositeCommand{\accdasiavaria}{#1}{\epsilon}{\accdasiavaria\textepsilon}
+  \DeclareTextCompositeCommand{\acctonos}{#1}{\epsilon}{\acctonos\textepsilon}
+  \DeclareTextCompositeCommand{\accdasiaoxia}{#1}{\epsilon}{\accdasiaoxia\textepsilon}
+  \DeclareTextCompositeCommand{\accpsilioxia}{#1}{\epsilon}{\accpsilioxia\textepsilon}
+  \DeclareTextCompositeCommand{\accpsilivaria}{#1}{\epsilon}{\accpsilivaria\textepsilon}
+  \DeclareTextCompositeCommand{\accvaria}{#1}{\omicron}{\accvaria\textomicron}
+  \DeclareTextCompositeCommand{\accdasia}{#1}{\omicron}{\accdasia\textomicron}
+  \DeclareTextCompositeCommand{\accpsili}{#1}{\omicron}{\accpsili\textomicron}
+  \DeclareTextCompositeCommand{\accdasiavaria}{#1}{\omicron}{\accdasiavaria\textomicron}
+  \DeclareTextCompositeCommand{\acctonos}{#1}{\omicron}{\acctonos\textomicron}
+  \DeclareTextCompositeCommand{\accdasiaoxia}{#1}{\omicron}{\accdasiaoxia\textomicron}
+  \DeclareTextCompositeCommand{\accpsilioxia}{#1}{\omicron}{\accpsilioxia\textomicron}
+  \DeclareTextCompositeCommand{\accpsilivaria}{#1}{\omicron}{\accpsilivaria\textomicron}
+%    \end{macrocode}
+% Majuscule letters.
+%    \begin{macrocode}
+  \DeclareTextCompositeCommand{\accdasia}{#1}{\Alpha}{\accdasia\textAlpha}
+  \DeclareTextCompositeCommand{\accdasiavaria}{#1}{\Alpha}{\accdasiavaria\textAlpha}
+  \DeclareTextCompositeCommand{\accdasiaoxia}{#1}{\Alpha}{\accdasiaoxia\textAlpha}
+  \DeclareTextCompositeCommand{\accdasiaperispomeni}{#1}{\Alpha}{\accdasiaperispomeni\textAlpha}
+  \DeclareTextCompositeCommand{\accpsili}{#1}{\Alpha}{\accpsili\textAlpha}
+  \DeclareTextCompositeCommand{\accpsilivaria}{#1}{\Alpha}{\accpsilivaria\textAlpha}
+  \DeclareTextCompositeCommand{\accpsilioxia}{#1}{\Alpha}{\accpsilioxia\textAlpha}
+  \DeclareTextCompositeCommand{\accpsiliperispomeni}{#1}{\Alpha}{\accpsiliperispomeni\textAlpha}
+  \DeclareTextCompositeCommand{\acctonos}{#1}{\Alpha}{\acctonos\textAlpha}
+  \DeclareTextCompositeCommand{\accvaria}{#1}{\Alpha}{\accvaria\textAlpha}
+  \DeclareTextCompositeCommand{\accdasia}{#1}{\Epsilon}{\accdasia\textEpsilon}
+  \DeclareTextCompositeCommand{\accdasiaoxia}{#1}{\Epsilon}{\accdasiaoxia\textEpsilon}
+  \DeclareTextCompositeCommand{\accdasiavaria}{#1}{\Epsilon}{\accdasiavaria\textEpsilon}
+  \DeclareTextCompositeCommand{\accpsili}{#1}{\Epsilon}{\accpsili\textEpsilon}
+  \DeclareTextCompositeCommand{\accpsilioxia}{#1}{\Epsilon}{\accpsilioxia\textEpsilon}
+  \DeclareTextCompositeCommand{\accpsilivaria}{#1}{\Epsilon}{\accpsilivaria\textEpsilon}
+  \DeclareTextCompositeCommand{\acctonos}{#1}{\Epsilon}{\acctonos\textEpsilon}
+  \DeclareTextCompositeCommand{\accvaria}{#1}{\Epsilon}{\accvaria\textEpsilon}
+  \DeclareTextCompositeCommand{\accdasia}{#1}{\Eta}{\accdasia\textEta}
+  \DeclareTextCompositeCommand{\accdasiavaria}{#1}{\Eta}{\accdasiavaria\textEta}
+  \DeclareTextCompositeCommand{\accdasiaoxia}{#1}{\Eta}{\accdasiaoxia\textEta}
+  \DeclareTextCompositeCommand{\accdasiaperispomeni}{#1}{\Eta}{\accdasiaperispomeni\textEta}
+  \DeclareTextCompositeCommand{\accpsili}{#1}{\Eta}{\accpsili\textEta}
+  \DeclareTextCompositeCommand{\accpsilivaria}{#1}{\Eta}{\accpsilivaria\textEta}
+  \DeclareTextCompositeCommand{\accpsilioxia}{#1}{\Eta}{\accpsilioxia\textEta}
+  \DeclareTextCompositeCommand{\accpsiliperispomeni}{#1}{\Eta}{\accpsiliperispomeni\textEta}
+  \DeclareTextCompositeCommand{\acctonos}{#1}{\Eta}{\acctonos\textEta}
+  \DeclareTextCompositeCommand{\accvaria}{#1}{\Eta}{\accvaria\textEta}
+  \DeclareTextCompositeCommand{\accdasia}{#1}{\Iota}{\accdasia\textIota}
+  \DeclareTextCompositeCommand{\accdasiavaria}{#1}{\Iota}{\accdasiavaria\textIota}
+  \DeclareTextCompositeCommand{\accdasiaoxia}{#1}{\Iota}{\accdasiaoxia\textIota}
+  \DeclareTextCompositeCommand{\accdasiaperispomeni}{#1}{\Iota}{\accdasiaperispomeni\textIota}
+  \DeclareTextCompositeCommand{\accdialytika}{#1}{\Iota}{\accdialytika\textIota}
+  \DeclareTextCompositeCommand{\accpsili}{#1}{\Iota}{\accpsili\textIota}
+  \DeclareTextCompositeCommand{\accpsilivaria}{#1}{\Iota}{\accpsilivaria\textIota}
+  \DeclareTextCompositeCommand{\accpsilioxia}{#1}{\Iota}{\accpsilioxia\textIota}
+  \DeclareTextCompositeCommand{\accpsiliperispomeni}{#1}{\Iota}{\accpsiliperispomeni\textIota}
+  \DeclareTextCompositeCommand{\acctonos}{#1}{\Iota}{\acctonos\textIota}
+  \DeclareTextCompositeCommand{\accvaria}{#1}{\Iota}{\accvaria\textIota}
+  \DeclareTextCompositeCommand{\accdasia}{#1}{\Omicron}{\accdasia\textOmicron}
+  \DeclareTextCompositeCommand{\accdasiavaria}{#1}{\Omicron}{\accdasiavaria\textOmicron}
+  \DeclareTextCompositeCommand{\accdasiaoxia}{#1}{\Omicron}{\accdasiaoxia\textOmicron}
+  \DeclareTextCompositeCommand{\accpsili}{#1}{\Omicron}{\accpsili\textOmicron}
+  \DeclareTextCompositeCommand{\accpsilivaria}{#1}{\Omicron}{\accpsilivaria\textOmicron}
+  \DeclareTextCompositeCommand{\accpsilioxia}{#1}{\Omicron}{\accpsilioxia\textOmicron}
+  \DeclareTextCompositeCommand{\acctonos}{#1}{\Omicron}{\acctonos\textOmicron}
+  \DeclareTextCompositeCommand{\accvaria}{#1}{\Omicron}{\accvaria\textOmicron}
+  \DeclareTextCompositeCommand{\accdasia}{#1}{\Upsilon}{\accdasia\textUpsilon}
+  \DeclareTextCompositeCommand{\accdasiavaria}{#1}{\Upsilon}{\accdasiavaria\textUpsilon}
+  \DeclareTextCompositeCommand{\accdasiaoxia}{#1}{\Upsilon}{\accdasiaoxia\textUpsilon}
+  \DeclareTextCompositeCommand{\accdasiaperispomeni}{#1}{\Upsilon}{\accdasiaperispomeni\textUpsilon}
+  \DeclareTextCompositeCommand{\accdialytika}{#1}{\Upsilon}{\accdialytika\textUpsilon}
+  \DeclareTextCompositeCommand{\acctonos}{#1}{\Upsilon}{\acctonos\textUpsilon}
+  \DeclareTextCompositeCommand{\accvaria}{#1}{\Upsilon}{\accvaria\textUpsilon}
+  \DeclareTextCompositeCommand{\accdasia}{#1}{\Rho}{\accdasia\textRho}
+  \DeclareTextCompositeCommand{\accdasia}{#1}{\Omega}{\accdasia\textOmega}
+  \DeclareTextCompositeCommand{\accdasiavaria}{#1}{\Omega}{\accdasiavaria\textOmega}
+  \DeclareTextCompositeCommand{\accdasiaoxia}{#1}{\Omega}{\accdasiaoxia\textOmega}
+  \DeclareTextCompositeCommand{\accdasiaperispomeni}{#1}{\Omega}{\accdasiaperispomeni\textOmega}
+  \DeclareTextCompositeCommand{\accpsili}{#1}{\Omega}{\accpsili\textOmega}
+  \DeclareTextCompositeCommand{\accpsilivaria}{#1}{\Omega}{\accpsilivaria\textOmega}
+  \DeclareTextCompositeCommand{\accpsilioxia}{#1}{\Omega}{\accpsilioxia\textOmega}
+  \DeclareTextCompositeCommand{\accpsiliperispomeni}{#1}{\Omega}{\accpsiliperispomeni\textOmega}
+  \DeclareTextCompositeCommand{\acctonos}{#1}{\Omega}{\acctonos\textOmega}
+  \DeclareTextCompositeCommand{\accvaria}{#1}{\Omega}{\accvaria\textOmega}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \paragraph{Drop \enquote{capital} accents}
+%
+% Definitions in "babel-greek_" let "\MakeUppercase" convert standard accents "\'", "\", "\~", and \verb+\"+ to \enquote{capital} versions.
+%
+% In \LGR, the \enquote{capital} accents are generally dropped.
+% In \PU and \TU, they must be kept on Latin letters but dropped from Greek letters.
+
+%    \begin{macrocode}
+\newcommand*{\alphabeta@drop@capital@accents}[1]{
+%    \end{macrocode}
+% acute
+%    \begin{macrocode}
+  \DeclareTextCompositeCommand{\accACUTE}{#1}{\Alpha}{\alphabeta@alpha@hiatus}
+  \DeclareTextCompositeCommand{\accACUTE}{#1}{\Epsilon}{\alphabeta@epsilon@hiatus}
+  \DeclareTextCompositeCommand{\accACUTE}{#1}{\Eta}{\textEta}
+  \DeclareTextCompositeCommand{\accACUTE}{#1}{\Iota}{\textIota}
+  \DeclareTextCompositeCommand{\accACUTE}{#1}{\Upsilon}{\textUpsilon}
+  \DeclareTextCompositeCommand{\accACUTE}{#1}{\Omega}{\textOmega}
+%    \end{macrocode}
+% grave
+%    \begin{macrocode}
+  \DeclareTextCompositeCommand{\accGRAVE}{#1}{\Alpha}{\textAlpha}
+  \DeclareTextCompositeCommand{\accGRAVE}{#1}{\Epsilon}{\textEpsilon}
+  \DeclareTextCompositeCommand{\accGRAVE}{#1}{\Eta}{\textEta}
+  \DeclareTextCompositeCommand{\accGRAVE}{#1}{\Iota}{\textIota}
+  \DeclareTextCompositeCommand{\accGRAVE}{#1}{\Upsilon}{\textUpsilon}
+  \DeclareTextCompositeCommand{\accGRAVE}{#1}{\Omega}{\textOmega}
+%    \end{macrocode}
+% tilde
+%    \begin{macrocode}
+  \DeclareTextCompositeCommand{\accTILDE}{#1}{\Alpha}{\textAlpha}
+  \DeclareTextCompositeCommand{\accTILDE}{#1}{\Eta}{\textEta}
+  \DeclareTextCompositeCommand{\accTILDE}{#1}{\Iota}{\textIota}
+  \DeclareTextCompositeCommand{\accTILDE}{#1}{\Upsilon}{\textUpsilon}
+  \DeclareTextCompositeCommand{\accTILDE}{#1}{\Omega}{\textOmega}
+}
+%    \end{macrocode}
+
+% \paragraph{Hiatus feature}
+%
+% Look ahead and place a diaeresis on Ι or Υ.
+% Leads to errors in \PU.
+
+%    \begin{macrocode}
+\newcommand*{\alphabeta@hiatus@composites}[1]{
+  \DeclareTextCommand{\alphabeta@alpha@hiatus}{#1}{%
+    \csname LGR@ifnextchar\endcsname {\Iota}{\Alpha\"}{%
+      \csname LGR@ifnextchar\endcsname {\Upsilon}{\Alpha\"}{\Alpha}%
+}%
+}
+  \DeclareTextCommand{\alphabeta@epsilon@hiatus}{#1}{%
+    \csname LGR@ifnextchar\endcsname {\Iota}{\Epsilon\"}{%
+      \csname LGR@ifnextchar\endcsname {\Upsilon}{\Epsilon\"}{\Epsilon}%
+}%
+}
+  \DeclareTextCompositeCommand{\LGR@hiatus}{#1}{\Alpha}{\alphabeta@alpha@hiatus}
+  \DeclareTextCompositeCommand{\LGR@hiatus}{#1}{\Epsilon}{\alphabeta@epsilon@hiatus}
+}
+%    \end{macrocode}
+
+
+% \paragraph{Composites for \TU}
+%
+% With font encoding \TU, pre-composed characters are selected by the the Harfbuzz renderer (default for \hologo{XeTeX}, select with fontspec for \hologo{LuaTeX}).
+% Exception: the (standard) combining tilde.
+
+%    \begin{macrocode}
+\@ifl@aded{def}{tuenc-greek}{
+  \DeclareUnicodeComposite{\~}{\alpha}{"1FB6} % ᾶ
+  \DeclareUnicodeComposite{\~}{\eta}{"1FC6} % ῆ
+  \DeclareUnicodeComposite{\~}{\iota}{"1FD6} % ῖ
+  \DeclareUnicodeComposite{\~}{\upsilon}{"1FE6} % ῦ
+  \DeclareUnicodeComposite{\~}{\omega}{"1FF6} % ῶ
+  \alphabeta@drop@capital@accents{\UnicodeEncodingName}
+  \alphabeta@hiatus@composites{\UnicodeEncodingName}
+}{}
+%    \end{macrocode}
+
+% \paragraph{Composites for \LGR}
+
+%    \begin{macrocode}
+\@ifl@aded{def}{lgrenc}{
+  \alphabeta@select@precomposed{LGR}
+  \alphabeta@hiatus@composites{LGR}
+}{}
+%    \end{macrocode}
+
+% \paragraph{Composites for \PU}
+%
+% Load composite defs
+%    \begin{macrocode}
+\@ifl@aded{def}{puenc}{
+  \alphabeta@select@precomposed{PU}
+  \alphabeta@drop@capital@accents{PU}
+%    \end{macrocode}
+% The hiatus feature leads to errors in \PU
+%    \begin{macrocode}
+  \DeclareTextCompositeCommand{\LGR@hiatus}{PU}{\Alpha}{\textAlpha}
+  \DeclareTextCompositeCommand{\LGR@hiatus}{PU}{\Epsilon}{\textEpsilon}
+%    \end{macrocode}
+% fix "\'\alpha" and "\'\epsilon" (\'{\alpha} works):
+%    \begin{macrocode}
+  \DeclareTextCompositeCommand{\accACUTE}{PU}{\Alpha}{\textAlpha}
+  \DeclareTextCompositeCommand{\accACUTE}{PU}{\Epsilon}{\textEpsilon}
+}{}
 %    \end{macrocode}
 %
+% Drop auxiliary definitions to free memory
+%    \begin{macrocode}
+\renewcommand*{\alphabeta@select@precomposed}{\relax}
+\renewcommand*{\alphabeta@drop@capital@accents}{\relax}
+\renewcommand*{\alphabeta@hiatus@composites}{\relax}
+%    \end{macrocode}
+
+% \subsubsection{Case changing}
+%
+% We need to extend the case-mapping "\@uclclist" for characters that are defined with "\DeclareTextCommandDefault".
+%
+% The definition of an auxiliary, self-resetting macro makes this idempotent (only the first use of this function will expand the "@uclclist").
+% The second and third lines are \hologo{TeX}'s way of writing "@uclclist += …".
+%
+% Since 2022, "\MakeUppercase" expects the default for ambiguous mappings in first position, before, the default was in last position.
+
+%    \begin{macrocode}
+\providecommand*\alphabeta@update@uclclist{%
+  \expandafter\def\expandafter\@uclclist\expandafter{%
+    \@uclclist
+    \alpha         \Alpha
+    \epsilon       \Epsilon
+    \epsilonsymbol \Epsilon
+    \varepsilon    \Epsilon
+    \eta           \Eta
+    \iota          \Iota
+    \omicron       \Omicron
+    \rho           \Rho
+    \varrho        \Rho
+    \rhosymbol     \Rho
+    \upsilon       \Upsilon
+    \omega         \Omega
+%    \end{macrocode}
+% repeat default for pre-2022 "\MakeUppercase"
+%    \begin{macrocode}
+    \epsilon       \Epsilon
+    \rho           \Rho
+}%
+  \let\alphabeta@update@uclclist\relax
+}
+%    \end{macrocode}
+%
+% Expand the "@uclclist" using the just defined macro::
+%
+%    \begin{macrocode}
+\alphabeta@update@uclclist
+%    \end{macrocode}
+
 % \subsubsection{Re-definition for Greek Unicode input in math mode}
 %
 % Check with "\ifdefined" for the definition of
 % "\DeclareUnicodeCharacter". In contrast to "\@ifdefined", this works
 % without side-effects. It makes the package dependent on the \hologo{eTeX}
-% extensions but these are standard in all current TeX distributions anyway.
+% extensions but these are standard in all current \hologo{TeX} distributions anyway.
 % Map Greek characters that are also defined in math mode to the generic macros.
 %    \begin{macrocode}
   \ifdefined\DeclareUnicodeCharacter
-    \DeclareUnicodeCharacter{0393}{\Gamma}
-    \DeclareUnicodeCharacter{0394}{\Delta}
-    \DeclareUnicodeCharacter{0398}{\Theta}
-    \DeclareUnicodeCharacter{039B}{\Lambda}
-    \DeclareUnicodeCharacter{039E}{\Xi}
-    \DeclareUnicodeCharacter{03A0}{\Pi}
-    \DeclareUnicodeCharacter{03A3}{\Sigma}
-    \DeclareUnicodeCharacter{03A5}{\Upsilon}
-    \DeclareUnicodeCharacter{03A6}{\Phi}
-    \DeclareUnicodeCharacter{03A8}{\Psi}
-    \DeclareUnicodeCharacter{03A9}{\Omega}
-    \DeclareUnicodeCharacter{03B1}{\alpha}
-    \DeclareUnicodeCharacter{03B2}{\beta}
-    \DeclareUnicodeCharacter{03B3}{\gamma}
-    \DeclareUnicodeCharacter{03B4}{\delta}
-    \DeclareUnicodeCharacter{03B5}{\varepsilon}
-    \DeclareUnicodeCharacter{03B6}{\zeta}
-    \DeclareUnicodeCharacter{03B7}{\eta}
-    \DeclareUnicodeCharacter{03B8}{\theta}
-    \DeclareUnicodeCharacter{03B9}{\iota}
-    \DeclareUnicodeCharacter{03BA}{\kappa}
-    \DeclareUnicodeCharacter{03BB}{\lambda}
-    \DeclareUnicodeCharacter{03BC}{\mu}
-    \DeclareUnicodeCharacter{03BD}{\nu}
-    \DeclareUnicodeCharacter{03BE}{\xi}
-    \DeclareUnicodeCharacter{03C0}{\pi}
-    \DeclareUnicodeCharacter{03C1}{\rho}
-    \DeclareUnicodeCharacter{03C2}{\varsigma}
-    \DeclareUnicodeCharacter{03C3}{\sigma}
-    \DeclareUnicodeCharacter{03C4}{\tau}
-    \DeclareUnicodeCharacter{03C5}{\upsilon}
-    \DeclareUnicodeCharacter{03C6}{\varphi}
-    \DeclareUnicodeCharacter{03C7}{\chi}
-    \DeclareUnicodeCharacter{03C8}{\psi}
-    \DeclareUnicodeCharacter{03C9}{\omega}
-    \DeclareUnicodeCharacter{03D1}{\thetasymbol}
-    \DeclareUnicodeCharacter{03D5}{\phisymbol}
+%    \end{macrocode}
+% Majuscule
+%    \begin{macrocode}
+    \DeclareUnicodeCharacter{0393}{\Gamma} % Γ
+    \DeclareUnicodeCharacter{0394}{\Delta} % Δ
+    \DeclareUnicodeCharacter{0398}{\Theta} % Θ
+    \DeclareUnicodeCharacter{039B}{\Lambda} % Λ
+    \DeclareUnicodeCharacter{039E}{\Xi} % Ξ
+    \DeclareUnicodeCharacter{03A0}{\Pi} % Π
+    \DeclareUnicodeCharacter{03A3}{\Sigma} % Σ
+    \DeclareUnicodeCharacter{03A5}{\Upsilon} % Υ
+    \DeclareUnicodeCharacter{03A6}{\Phi} % Φ
+    \DeclareUnicodeCharacter{03A8}{\Psi} % Ψ
+    \DeclareUnicodeCharacter{03A9}{\Omega} % Ω
+%    \end{macrocode}
+% Minuscule
+%    \begin{macrocode}
+    \DeclareUnicodeCharacter{03B1}{\alpha} % α
+    \DeclareUnicodeCharacter{03B2}{\beta} % β
+    \DeclareUnicodeCharacter{03B3}{\gamma} % γ
+    \DeclareUnicodeCharacter{03B4}{\delta} % δ
+    \DeclareUnicodeCharacter{03B5}{\varepsilon} % ε textepsilon/varepsilon
+    \DeclareUnicodeCharacter{03B6}{\zeta} % ζ
+    \DeclareUnicodeCharacter{03B7}{\eta} % η
+    \DeclareUnicodeCharacter{03B8}{\theta} % θ
+    \DeclareUnicodeCharacter{03B9}{\iota} % ι
+    \DeclareUnicodeCharacter{03BA}{\kappa} % κ
+    \DeclareUnicodeCharacter{03BB}{\lambda} % λ
+    \DeclareUnicodeCharacter{03BC}{\mu} % μ
+    \DeclareUnicodeCharacter{03BD}{\nu} % ν
+    \DeclareUnicodeCharacter{03BE}{\xi} % ξ
+    \DeclareUnicodeCharacter{03C0}{\pi} % π
+    \DeclareUnicodeCharacter{03C1}{\rho} % ρ
+    \DeclareUnicodeCharacter{03C2}{\varsigma} % ς
+    \DeclareUnicodeCharacter{03C3}{\sigma} % σ
+    \DeclareUnicodeCharacter{03C4}{\tau} % τ
+    \DeclareUnicodeCharacter{03C5}{\upsilon} % υ
+    \DeclareUnicodeCharacter{03C6}{\varphi} % φ textphi/varphi
+    \DeclareUnicodeCharacter{03C7}{\chi} % χ
+    \DeclareUnicodeCharacter{03C8}{\psi} % ψ
+    \DeclareUnicodeCharacter{03C9}{\omega} % ω
+%    \end{macrocode}
+% Symbols (Does not work 8-bit)
+%    \begin{macrocode}
+    \DeclareUnicodeCharacter{03D1}{\thetasymbol} %
+    \DeclareUnicodeCharacter{03D5}{\phisymbol} %
     \DeclareUnicodeCharacter{03D6}{\pisymbol}
     \DeclareUnicodeCharacter{03DD}{\digamma}
     \DeclareUnicodeCharacter{03F1}{\rhosymbol}
@@ -665,20 +998,19 @@ Hence, the minion option uses three to four more math alphabets than a usual set
   \fi
 %    \end{macrocode}
 
-% Ensure that this works also after loading other fonts packages such as \software{cfr-lm} using \software{substitutefont} \cite{substitutefont}.
+% Ensure that this works also after loading other fonts packages such as \software{cfr-lm}.
 %    \begin{macrocode}
   \ifxetexorluatex
     % missing code
   \else
-    \RequirePackage{substitutefont}
-    \substitutefont{LGR}{\rmdefault}{lmr}
+    \DeclareFontFamilySubstitution{LGR}{\rmdefault}{lmr}
     \DeclareFontFamily{LGR}{\rmdefault}{}
     \DeclareFontShape{LGR}{\rmdefault}{b}{n}{<->ssub*lmr/bx/n}{}
     \DeclareFontShape{LGR}{\rmdefault}{b}{sc}{<->ssub*lmr/bx/sc}{}
-    \substitutefont{LGR}{\ttdefault}{lmtt}
+    \DeclareFontFamilySubstitution{LGR}{\ttdefault}{lmtt}
     \DeclareFontFamily{LGR}{\ttdefault}{}
     \DeclareFontShape{LGR}{\ttdefault}{b}{n}{<->ssub*lmtt/bx/n}{}
-    \substitutefont{LGR}{\sfdefault}{lmss}
+    \DeclareFontFamilySubstitution{LGR}{\sfdefault}{lmss}
     \DeclareFontFamily{LGR}{\sfdefault}{}
     \DeclareFontShape{LGR}{\sfdefault}{b}{n}{<->ssub*lmss/bx/n}{}
     \DeclareFontShape{LGR}{\sfdefault}{b}{sc}{<->ssub*lmss/bx/sc}{}
@@ -728,12 +1060,12 @@ Hence, the minion option uses three to four more math alphabets than a usual set
   \ifhep@minion
     \DeclareMathAlphabet{\mathbb}{U}{%
       \ifhepmathfont@serif dsrom\else dsss\fi%
-    }{m}{n}
+}{m}{n}
   \else
     \ifhep@ams\else
       \SetMathAlphabet{\mathbb}{normal}{U}{%
         \ifhepmathfont@serif dsrom\else dsss\fi%
-      }{m}{n}
+}{m}{n}
     \fi
   \fi
 %    \end{macrocode}
