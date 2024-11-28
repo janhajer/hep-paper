@@ -18,8 +18,8 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-paper}[2023/07/01 v2.2 Publications in High Energy Physics]
-%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2023/07/01 v2.2 HEP-Paper documentation]
+%<package>\ProvidesPackage{hep-paper}[2024/11/01 v2.3 Publications in High Energy Physics]
+%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2024/11/01 v2.3 HEP-Paper documentation]
 %
 %<*documentation>
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -52,6 +52,24 @@
 %
 % \fi
 %
+% \CheckSum{461}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
 % \changes{v1.0}{2019/01/01}{Initial version of the style file.}
 % \changes{v1.1}{2020/01/01}{Transition to documented \hologo{LaTeX} source file.}
 % \changes{v1.2}{2020/03/01}{Introduction of package options.}
@@ -62,7 +80,9 @@
 % \changes{v1.7}{2021/06/01}{Introduction of dedicated style file for the title, acronyms and bibliography macros. Extension of the title macros.}
 % \changes{v1.8}{2021/08/01}{Expand thanks to allow for reference label and fine tune the title page. Reimplement the must relevant macros from the physics package. Make mathrm produce upright Greek.}
 % \changes{v2.0}{2021/09/01}{Move independent logic into dedicated packages.}
-% \changes{v2.1}{2023/07/01}{Bug fixes in the underlying packages.}
+% \changes{v2.1}{2022/11/01}{Bug fixes in the underlying packages.}
+% \changes{v2.2}{2023/07/01}{Bug fixes in the underlying packages.}
+% \changes{v2.3}{2024/11/01}{Bug fixes in the underlying packages.}
 %
 % \ifshort
 %<*documentation>
@@ -650,8 +670,10 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \begin{macrocode}
 \@ifclassloaded{PoS}{\setkeys{hep}{pos}}{}
 \ifhep@pos
-  \setkeys{hep}{defaults, title=false}
+  \setkeys{hep}{defaults, title=false, references=false, font=default}
   \DeclareRobustCommand\boldmath{\@nomath\boldmath\mathversion{bold}}
+  \PassOptionsToPackage{hidelinks}{hyperref}
+  \RequirePackage{hyperref}
 \fi
 %    \end{macrocode}
 %
@@ -659,7 +681,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \begin{macrocode}
 \@ifclassloaded{beamer}{\setkeys{hep}{beamer}}{}
 \ifhep@beamer
-  \setkeys{hep}{defaults, title=false, references=false, sansserif}
+  \setkeys{hep}{defaults, title=false, references=false, sansserif, font=default}
   \@ifpackageloaded{beamerbasefont}{\usefonttheme{professionalfonts}}{}
   \setbeamertemplate{navigation symbols}{}
 \fi
@@ -1042,7 +1064,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \begin{macrocode}
 \documentclass{PoS}
 
-\usepackage[lang=english,title=false]{hep-paper}
+\usepackage[lang=english]{hep-paper}
 \usepackage[math]{blindtext}
 
 \title{Title}

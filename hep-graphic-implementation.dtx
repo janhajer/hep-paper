@@ -18,10 +18,10 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-graphic}[2023/07/01 v1.0 Graphics in High Energy Physics]
-%<plot>\ProvidesPackage{hep-plot}[2023/07/01 v1.0 Plots in High Energy Physics]
-%<feynman>\ProvidesPackage{hep-feynman}[2023/07/01 v1.0 Feynman diagrams in High Energy Physics]
-%<documentation>\ProvidesFile{hep-graphic-documentation.tex}[2023/07/01 v1.0 HEP-graphic documentation]
+%<package>\ProvidesPackage{hep-graphic}[2024/11/01 v1.3 Graphics in High Energy Physics]
+%<plot>\ProvidesPackage{hep-plot}[2024/11/01 v1.3 Plots in High Energy Physics]
+%<feynman>\ProvidesPackage{hep-feynman}[2024/11/01 v1.3 Feynman diagrams in High Energy Physics]
+%<documentation>\ProvidesFile{hep-graphic-documentation.tex}[2024/11/01 v1.3 HEP-graphic documentation]
 %
 %<*documentation>
 %
@@ -53,7 +53,7 @@
 %
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{130}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -70,6 +70,10 @@
 %   Right bracket \]     Circumflex    \^     Underscore    \_
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.1}{2022/11/01}{Bug fixes.}
+% \changes{v1.2}{2023/07/01}{Bug fixes.}
+% \changes{v1.3}{2024/11/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -177,7 +181,7 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 \ifx\hepgraphic@extern\@empty\else
  \usetikzlibrary{external}
  \tikzexternalize[
-  optimize=false,
+%   optimize=false,
   only named=true,
  ]
  \tikzsetexternalprefix{\hepgraphic@extern/}
@@ -187,7 +191,7 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 % \begin{macro}{\graphicpath}
 % Load the \software{standalone} package \cite{standalone} and define the "\graphicpath" pointing to the folder with "pgf" files.
 %    \begin{macrocode}
-\RequirePackage{standalone}
+\RequirePackage{tikzscale}
 \def\hep@graphic@path{.}
 \newcommand{\graphicpath}[1]{\def\hep@graphic@path{#1}}
 %    \end{macrocode}
@@ -196,17 +200,17 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 % Define a macro to include "tikz" figures using the \software{xparse} package \cite{xparse}.
 %    \begin{macrocode}
 \RequirePackage{xparse}
-\NewDocumentCommand{\includetikz}{sO{1}m}{%
+\NewDocumentCommand{\includepgf}{sO{}m}{%
  \tikzsetnextfilename{#3}%
  \IfBooleanTF{#1}{%
-  \includestandalone{\hep@graphic@path/#3}%
+  \includegraphics{\hep@graphic@path/#3}%
  }{%
-  \linewidth=#2\linewidth
-  \includestandalone[width=\linewidth]{\hep@graphic@path/#3}%
+  \pgfplotsset{#2}
+  \includegraphics[#2]{\hep@graphic@path/#3}%
  }%
 }
 \newcommand{\includefeynman}[1]{%
- \vcenter{\hbox{\includestandalone{\hep@graphic@path/#1}}}%
+ \vcenter{\hbox{\includegraphics{\hep@graphic@path/#1}}}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -234,6 +238,12 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
  dashdotdotdotdotted/.style={dash pattern=on 3pt off 2pt
   on \the\pgflinewidth off 2pt on \the\pgflinewidth off 2pt
   on \the\pgflinewidth off 2pt on \the\pgflinewidth off 2pt
+ },
+ dotdotdashed/.style={dash pattern=on 3pt off 2pt
+  on 3pt off 2pt on \the\pgflinewidth off 2pt
+ },
+ dotdotdotdashed/.style={dash pattern=on 3pt off 2pt
+  on 3pt off 2pt on 3pt off 2pt on \the\pgflinewidth off 2pt
  },
 }%
 %    \end{macrocode}
@@ -304,12 +314,12 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 %    \begin{macrocode}
 \colorlet{darkgreen}{green!50!black}
 \pgfplotscreateplotcyclelist{colors}{
- blue, red, darkgreen, violet, orange, yellow!25!orange,
+ blue, red, darkgreen, violet, orange, yellow!75!orange,
  brown, black
 }
 \pgfplotscreateplotcyclelist{line styles}{
  solid, dashed, {densely dotted, semithick}, dashdotted,
- dashdotdotted, dashdotdotdotted, dashdotdotdotdotted
+ dashdotdotted, dotdotdashed, dashdotdotdotted, dotdotdotdashed, dashdotdotdotdotted
 }
 \pgfplotscreateplotcyclelist{marks}{
  mark=-, mark=|, mark=Mercedes star flipped, mark=Mercedes star, mark=+,

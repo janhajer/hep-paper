@@ -18,12 +18,12 @@
 % \iffalse
 
 %<package|class|bibliography>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-cv}[2020/01/02 v1.2 Curricula Vitarum in High Energy Physics]
-%<bibliography>\ProvidesPackage{hep-cv-bibliography}[2020/01/02 v1.2 Curricula Vitarum in High Energy Physics]
-%<class>\ProvidesClass{hep-cv}[2020/01/02 v1.2 Curricula Vitarum in High Energy Physics]
-%<documentation>\ProvidesFile{hep-cv-documentation.tex}[2021/09/01 v1.0 HEP-CV documentation]
-%<test-sty>\ProvidesFile{hep-cv-test-sty.tex}[2021/09/01 v1.0 HEP-CV class test]
-%<test-cls>\ProvidesFile{hep-cv-test-cls.tex}[2021/09/01 v1.0 HEP-CV class test]
+%<package>\ProvidesPackage{hep-cv}[2024/11/01 v1.3 Curricula Vitarum in High Energy Physics]
+%<bibliography>\ProvidesPackage{hep-cv-bibliography}[2024/11/01 v1.3 Curricula Vitarum in High Energy Physics]
+%<class>\ProvidesClass{hep-cv}[2024/11/01 v1.3 Curricula Vitarum in High Energy Physics]
+%<documentation>\ProvidesFile{hep-cv-documentation.tex}[2024/11/01 v1.3 HEP-CV documentation]
+%<test-sty>\ProvidesFile{hep-cv-test-sty.tex}[2024/11/01 v1.3 HEP-CV class test]
+%<test-cls>\ProvidesFile{hep-cv-test-cls.tex}[2024/11/01 v1.3 HEP-CV class test]
 %
 %<*documentation>
 %
@@ -58,7 +58,7 @@
 %
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{1009}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -77,6 +77,9 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2019/01/01}{Initial version of the style file}
+% \changes{v1.1}{2022/11/01}{Bug fixes.}
+% \changes{v1.2}{2023/07/01}{Bug fixes.}
+% \changes{v1.3}{2024/11/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -344,14 +347,16 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{itemize}
 % Adjust lists to the \CV format.
 %    \begin{macrocode}
+\setlist[1]{
+  leftmargin=\hep@left@width+\hep@seperator@width,
+  labelwidth=\hep@left@width,
+  labelsep=\hep@seperator@width,
+}
 \setlist{
   nosep,
   topsep=.5ex,
-  leftmargin=\hep@left@width+\hep@seperator@width,
-  labelwidth=\hep@left@width,
   listparindent=0pt,
   itemindent=0pt,
-  labelsep=\hep@seperator@width,
   align=right
 }
 %    \end{macrocode}
@@ -712,12 +717,11 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\section*}
 % Redefine "\section*".
 %    \begin{macrocode}
-\titleformat{name=\section, numberless}{\Large}{}{0em}{%
+\titleformat{name=\section, numberless}{\Large}{%
   \phantomsection%
   \setlength{\hep@dash@width}{\hep@left@width}%
   \hdashrule[\hep@dash@shift][x]{\hep@dash@width}{\hep@dash@height}{}%
-  \hspace{\hep@seperator@width}\sentence%
-}
+}{\hep@seperator@width}{\sentence}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -742,15 +746,14 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\subsection*}
 % Redefine "\subsection*".
 %    \begin{macrocode}
-\titleformat{name=\subsection, numberless}{\large}{}{0em}{%
+\titleformat{name=\subsection, numberless}{\large}{
   \phantomsection%
   \setlength{\hep@dash@width}{\hep@left@width+\hep@dash@length}%
   \setlength{\hep@dash@seperator}{\hep@seperator@width-\hep@dash@length}%
   \hdashrule[\hep@dash@shift][x]{\hep@dash@width}{\hep@dash@height}{%
     \hep@dash@length%
   }%
-  \hspace{\hep@dash@seperator}\sentence%
-}
+}{\hep@dash@seperator}{\sentence}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -777,15 +780,14 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\subsubsection*}
 % Redefine "\subsubsection*".
 %    \begin{macrocode}
-\titleformat{name=\subsubsection, numberless}{}{}{0em}{%
+\titleformat{name=\subsubsection, numberless}{}{%
   \phantomsection%
   \setlength{\hep@dash@width}{\hep@left@width+\hep@dash@length}%
   \setlength{\hep@dash@seperator}{\hep@seperator@width-\hep@dash@length}%
   \hdashrule[\hep@dash@shift][x]{\hep@dash@width}{\hep@dash@height}{%
     .7pt \hep@dash@length%
   }%
-  \hspace{\hep@dash@seperator}\sentence%
-}
+  }{\hep@dash@seperator}{\sentence}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1335,7 +1337,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 %
 % \section{Tests}
 %
-% \section{Package}
+% \subsection{Package}
 %
 %<*test-sty>
 %
@@ -1423,6 +1425,8 @@ Letter content
 
 \tableofcontents
 
+\clearpage
+
 \section{Title}
 
 \subsection{Short name}
@@ -1445,6 +1449,8 @@ Letter content
 \blindtext
 \end{abstract}
 
+\blinddocument
+
 \end{document}
 \end{macro}
 %    \end{macrocode}
@@ -1465,7 +1471,6 @@ Letter content
 \begin{document}
 \printbibliography[env=numbered, heading=section, title=Publications]
 \end{document}
-\end{macro}
 %    \end{macrocode}
 %</test-bib>
 %

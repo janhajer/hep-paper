@@ -18,8 +18,8 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-math}[2023/07/01 v1.2 Math and physics macros]
-%<documentation>\ProvidesFile{hep-math-documentation.tex}[2023/07/01 v1.2 hep-math documentation]
+%<package>\ProvidesPackage{hep-math}[2024/11/01 v1.3 Math and physics macros]
+%<documentation>\ProvidesFile{hep-math-documentation.tex}[2024/11/01 v1.3 hep-math documentation]
 %
 %<*documentation>
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -61,7 +61,7 @@
 %
 % \fi
 %
-% \CheckSum{712}
+% \CheckSum{724}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -80,7 +80,9 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2021/09/01}{Initial version of the style file.}
-% \changes{v1.1}{2023/07/01}{Bug fixes.}
+% \changes{v1.1}{2022/11/01}{Bug fixes.}
+% \changes{v1.2}{2023/07/01}{Bug fixes.}
+% \changes{v1.3}{2024/11/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -921,11 +923,16 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
  \begin{matrix}\seq_use:Nn\hep@seq{\\}\end{matrix}%
 }
 \ExplSyntaxOff
-\DeclarePairedDelimiterX{\row}[1]{(}{)}{\hep@row{#1}}
-\NewDocumentCommand{\column}{me{^}e{_}}{%
+\DeclarePairedDelimiterX{\hep@row@}[1]{(}{)}{\hep@row{#1}}
+\NewDocumentCommand{\hep@column@}{me{^}e{_}}{%
   \left(\hep@column{#1}\right)%
   \IfValueT{#2}{^{\!\!\!#2}}\IfValueT{#3}{_{\!\!\!#3}}%
 }
+\providecommand{\column}{}
+\providecommand{\row}{}
+\mathdef{\column}{\hep@column@}
+\providecommand{\row}{}
+\mathdef{\row}{\hep@row@}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}

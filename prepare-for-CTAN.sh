@@ -20,6 +20,8 @@ fi
 
 generate "acronym"
 generate "bibliography"
+generate "cv"
+generate "erc"
 generate "float"
 generate "font"
 generate "graphic"
@@ -27,6 +29,7 @@ generate "math"
 generate "math-font"
 generate "paper"
 generate "reference"
+generate "talk"
 generate "text"
 generate "title"
 

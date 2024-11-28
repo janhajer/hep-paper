@@ -18,11 +18,11 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-talk}[2020/03/01 v1 Talks in High Energy Physics]
-%<dark>\ProvidesPackage{hep-dark}[2020/03/01 v1 Dark color scheme]
-%<ligt>\ProvidesPackage{hep-light}[2020/03/01 v1 Light color scheme]
-%<blue>\ProvidesPackage{hep-blue}[2020/03/01 v1 Blue color scheme]
-%<metropolis>\ProvidesPackage{hep-metropolis}[2020/03/01 v1 Metropolis color scheme]
+%<package>\ProvidesPackage{hep-talk}[2024/11/01 v1.3 Talks in High Energy Physics]
+%<dark>\ProvidesPackage{hep-dark}[2024/11/01 v1.3 Dark color scheme]
+%<ligt>\ProvidesPackage{hep-light}[2024/11/01 v1.3 Light color scheme]
+%<blue>\ProvidesPackage{hep-blue}[2024/11/01 v1.3 Blue color scheme]
+%<metropolis>\ProvidesPackage{hep-metropolis}[2024/11/01 v1.3 Metropolis color scheme]
 %
 %<*documentation>
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -53,7 +53,7 @@
 %
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{629}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -72,6 +72,9 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2019/01/01}{Initial version of the style file}
+% \changes{v1.1}{2022/11/01}{Bug fixes.}
+% \changes{v1.2}{2023/07/01}{Bug fixes.}
+% \changes{v1.3}{2024/11/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -181,7 +184,6 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 % \RequirePackage[sansserif, bibliography=authoryear]{hep-paper}
 \RequirePackage[oldstyle, sans]{hep-font}
 \RequirePackage{hep-math-font}
-\RequirePackage{hep-math}
 \RequirePackage{hep-bibliography}
 \RequirePackage{hep-title}
 % \RequirePackage{hep-float}
@@ -400,6 +402,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 %  \item optional width of the block
 % \end{enumerate}
 %    \begin{macrocode}
+\providecommand{\row}{}
 \NewDocumentEnvironment{block}{sd<>oO{1}}{%
   \NewDocumentCommand{\hep@begin@block@env}{md<>oO{1}}{%
     \IfNoValueOrEmptyTF{##3}{}{%
@@ -408,7 +411,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
     }%
     \begin{hep@block@env}##1<##2>[BlockBg][BlockFg][##4]%
   }%
-  \NewDocumentCommand{\row}{sd<>oO{1}}{%
+  \RenewDocumentCommand{\row}{sd<>oO{1}}{%
     \hep@end@block@env%
     \hep@begin@block@env##1<##2>[##3][##4]%
   }%
@@ -435,6 +438,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 %  \item optional width of the first column
 % \end{enumerate}
 %    \begin{macrocode}
+\providecommand{\column}{}
 \NewDocumentEnvironment{columns}{sd<>oO{2}}{%
   \begin{minipage}{\linewidth-2\leftskip}%
   \def\needs@space{}%
@@ -476,7 +480,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 %  \item optional name
 % \end{enumerate}
 %    \begin{macrocode}
-    \NewDocumentCommand{\column}{sd<>oo}{%
+    \RenewDocumentCommand{\column}{sd<>oo}{%
       \end{block}\end{minipage}%
       \ifdefempty{\needs@space}{\hspace{\hmargin}}{%
         \only<\needs@space>{\hspace{\hmargin}}%
@@ -505,7 +509,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 %  \item mandatory width
 % \end{enumerate}
 %    \begin{macrocode}
-    \NewDocumentCommand{\column}{sd<>oo}{%
+    \RenewDocumentCommand{\column}{sd<>oo}{%
       \end{block}\end{minipage}%
       \ifdefempty{\needs@space}{\hspace{\hmargin}}{%
         \only<\needs@space>{\hspace{\hmargin}}%
@@ -525,6 +529,10 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 }{\end{block}\end{minipage}\end{minipage}\par}%
 %    \end{macrocode}
 % \end{macro}
+%
+%    \begin{macrocode}
+\RequirePackage{hep-math}
+%    \end{macrocode}
 
 % \section{Frames}
 %

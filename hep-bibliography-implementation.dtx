@@ -18,9 +18,9 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-bibliography}[2023/07/01 v1.2 HEP-Bibliography]
-%<datamodel>\ProvidesFile{hep-bibliography.dbx}[2023/07/01 v1.2 HEP-Bibliography biblatex data model]
-%<documentation>\ProvidesFile{hep-bibliography-documentation.tex}[2023/07/01 v1.2 HEP-Bibliography documentation]
+%<package>\ProvidesPackage{hep-bibliography}[2024/11/01 v1.3 HEP-Bibliography]
+%<datamodel>\ProvidesFile{hep-bibliography.dbx}[2024/11/01 v1.3 HEP-Bibliography biblatex data model]
+%<documentation>\ProvidesFile{hep-bibliography-documentation.tex}[2024/11/01 v1.3 HEP-Bibliography documentation]
 %
 %<*documentation>
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -52,7 +52,7 @@
 %
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{354}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -71,7 +71,9 @@
 %   Right brace   \}     Tilde         \~}
 %
 % \changes{v1.0}{2021/09/01}{Initial version of the style file.}
-% \changes{v1.1}{2023/07/01}{Bug fixes.}
+% \changes{v1.1}{2022/11/01}{Bug fixes.}
+% \changes{v1.2}{2023/07/01}{Bug fixes.}
+% \changes{v1.3}{2024/11/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -330,8 +332,8 @@ Errata can be included using the "related" feature.
 % \begin{macro}{\printbibliography}
 % Allow the bibliography to be printed sloppy
 %    \begin{macrocode}
-\let\hep@printbibliography\printbibliography
-\renewcommand{\printbibliography}{{\sloppy\hep@printbibliography}}
+% \let\hep@printbibliography\printbibliography
+% \renewcommand{\printbibliography}{{\sloppy\hep@printbibliography}}
 %    \end{macrocode}
 % \end{macro}
 
