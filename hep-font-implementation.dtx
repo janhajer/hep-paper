@@ -24,9 +24,9 @@
 %<*documentation>
 \documentclass{ltxdoc}
 
-\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
-\renewcommand{\MacroFont}{\codestyle}
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
 \EnableCrossrefs
@@ -241,7 +241,7 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 % Switch document to sans-serif font if requested.
 %    \begin{macrocode}
 \ifhepfont@sans
-  \renewcommand{\familydefault}{\sfdefault}
+  \renewcommand*{\familydefault}{\sfdefault}
 \fi
 %    \end{macrocode}
 % Fix the remaining \CM \cite{cm} fonts using the \software{fix-cm} package \cite{fix-cm} and load the \software{microtype} font optimizations \cite{microtype}.
@@ -274,7 +274,7 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 % Ensure that the "verbatim" environment uses proportional font and provide an inline "\code" macro.
 % Work around a bug in \software{nfssext-cfr} which defines a global "\set" macro and breaks other macros of the same name.
 %    \begin{macrocode}
-\newcommand{\codestyle}{\tmstyle\lstyle}
+\newcommand*{\codestyle}{\tmstyle\lstyle}
 \let\verbatim@font\codestyle
 \RequirePackage{xparse}
 \ProvideDocumentCommand{\code}{v}{{\codestyle #1}}
@@ -292,10 +292,10 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 % Load the \software{textcomp} extension \cite{textcomp} and define helper functions.
 %    \begin{macrocode}
 \RequirePackage{textcomp}
-\newcommand{\hepfont@sf@shape}[3]{%
+\newcommand*{\hepfont@sf@shape}[3]{%
   \DeclareFontShape{\hepfont@encoding}{\sfdefault}{#1}{#2}{#3}{}%
 }
-\newcommand{\hepfont@rm@shape}[3]{%
+\newcommand*{\hepfont@rm@shape}[3]{%
   \DeclareFontShape{\hepfont@encoding}{\rmdefault}{#1}{#2}{#3}{}%
 }
 %    \end{macrocode}

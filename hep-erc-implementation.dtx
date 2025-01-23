@@ -24,9 +24,9 @@
 %<*documentation>
 \documentclass{ltxdoc}
 
-\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
-\renewcommand{\MacroFont}{\codestyle}
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
 \EnableCrossrefs
@@ -147,22 +147,22 @@ To use the \software{hep-erc} package include it with "\usepackage{hep-erc}".
 % Define the proposal counter.
 %    \begin{macrocode}
 \newcounter{proposal}
-\renewcommand{\theproposal}{B\arabic{proposal}}
+\renewcommand*{\theproposal}{B\arabic{proposal}}
 \crefname{proposal}{part}{parts}
 %    \end{macrocode}
 % Redfine the meaning of the date macro.
 %    \begin{macrocode}
-\newcommand{\months}{60}
+\newcommand*{\months}{60}
 \date{\months\ months}
 %    \end{macrocode}
 % Rename the abstract.
 %    \begin{macrocode}
-\AtBeginDocument{\renewcommand{\abstractname}{Proposal summary}}
+\AtBeginDocument{\renewcommand*{\abstractname}{Proposal summary}}
 %    \end{macrocode}
 % Do some bookkeeping after the end of the abstract.
 %    \begin{macrocode}
 \let\heperc@endabstract\endabstract
-\renewcommand\endabstract{
+\renewcommand*\endabstract{
   \heperc@endabstract
   \thispagestyle{main}
 %   \clearpage
@@ -186,18 +186,18 @@ To use the \software{hep-erc} package include it with "\usepackage{hep-erc}".
 %    \begin{macrocode}
 \PassOptionsToPackage{compact, tiny, pagestyles}{titlesec}
 \RequirePackage{titlesec}
-\renewcommand\thesection{Section \alph{section}:}
-\renewcommand\thesubsection{\alph{section}.\arabic{subsection}}
+\renewcommand*\thesection{Section \alph{section}:}
+\renewcommand*\thesubsection{\alph{section}.\arabic{subsection}}
 %    \end{macrocode}
 %
 % \subsection{Page Header and footer}
 %
 % Define the tail helper function
 %    \begin{macrocode}
-\newcommand\heperc@tail[1]{%
+\newcommand*\heperc@tail[1]{%
   \expandafter\@hep@tail\expandafter\expandafter#1 \@nil%
 }%
-\newcommand\@hep@tail{}%
+\newcommand*\@hep@tail{}%
 \def\@hep@tail#1 #2\@nil{#2\unskip}%
 %    \end{macrocode}
 % Use \software{titleps} and \software{lastpage} packages \cite{lastpage} to define the page headers and footers.
@@ -237,26 +237,26 @@ To use the \software{hep-erc} package include it with "\usepackage{hep-erc}".
 %    \begin{macrocode}
 \newlength{\heperc@longest@month}
 \setlength{\heperc@longest@month}{\widthof{May}}
-\newcommand{\heperc@spread@even}[1]{\@tfor\next:=#1\do{\hfil\next}}
-\newcommand{\heperc@month}[1]{%
+\newcommand*{\heperc@spread@even}[1]{\@tfor\next:=#1\do{\hfil\next}}
+\newcommand*{\heperc@month}[1]{%
   \makebox[\heperc@longest@month][c]{\heperc@spread@even{#1}}%
 }
 %    \end{macrocode}
 %
 % Apply macros of equally distributed month names.
 %    \begin{macrocode}
-\newcommand{\Jan}{\heperc@month{Jan}}
-\newcommand{\Feb}{\heperc@month{Feb}}
-\newcommand{\Mar}{\heperc@month{Mar}}
-\newcommand{\Apr}{\heperc@month{Apr}}
-\newcommand{\May}{\heperc@month{May}}
-\newcommand{\Jun}{\heperc@month{Jun}}
-\newcommand{\Jul}{\heperc@month{Jul}}
-\newcommand{\Aug}{\heperc@month{Aug}}
-\newcommand{\Sep}{\heperc@month{Sep}}
-\newcommand{\Oct}{\heperc@month{Oct}}
-\newcommand{\Nov}{\heperc@month{Nov}}
-\newcommand{\Dec}{\heperc@month{Dec}}
+\newcommand*{\Jan}{\heperc@month{Jan}}
+\newcommand*{\Feb}{\heperc@month{Feb}}
+\newcommand*{\Mar}{\heperc@month{Mar}}
+\newcommand*{\Apr}{\heperc@month{Apr}}
+\newcommand*{\May}{\heperc@month{May}}
+\newcommand*{\Jun}{\heperc@month{Jun}}
+\newcommand*{\Jul}{\heperc@month{Jul}}
+\newcommand*{\Aug}{\heperc@month{Aug}}
+\newcommand*{\Sep}{\heperc@month{Sep}}
+\newcommand*{\Oct}{\heperc@month{Oct}}
+\newcommand*{\Nov}{\heperc@month{Nov}}
+\newcommand*{\Dec}{\heperc@month{Dec}}
 %    \end{macrocode}
 %
 % \subsection{tikz}
@@ -289,7 +289,7 @@ To use the \software{hep-erc} package include it with "\usepackage{hep-erc}".
 % \dottedcontents{subsection}[4em]{}{3em}{1pc}
 % \dottedcontents{subsubsection}[7em]{}{4em}{1pc}
 %
-% \newcommand{\newparskip}{3.25ex}
+% \newcommand*{\newparskip}{3.25ex}
 %
 % \RequirePackage{zref-abspage}
 %
@@ -350,9 +350,9 @@ To use the \software{hep-erc} package include it with "\usepackage{hep-erc}".
 
 \affiliation{Affiliation}
 
-\renewcommand{\months}{60}
+\renewcommand*{\months}{60}
 
-\newcommand{\abstracttext}{
+\newcommand*{\abstracttext}{
 \blindtext
 }
 %    \end{macrocode}

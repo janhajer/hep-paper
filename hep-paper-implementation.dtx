@@ -25,9 +25,9 @@
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltxdoc}
 
-\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
-\renewcommand{\MacroFont}{\codestyle}
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
 \EnableCrossrefs
@@ -719,7 +719,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
     urlcolor=blue, anchorcolor=blue, citecolor=blue, filecolor=blue,
     linkcolor=blue, menucolor=blue, pagecolor=blue
   }{hyperref}
-  \AtBeginDocument{\renewcommand{\foreignabbrfont}{}}
+  \AtBeginDocument{\renewcommand*{\foreignabbrfont}{}}
 \fi
 \ifhep@jhep
     \PassOptionsToPackage{\hep@paper paper}{geometry}
@@ -774,11 +774,11 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \begin{macrocode}
 \ifhep@parindent\else
 \RequirePackage{parskip}
-\newcommand{\useparskip}{%
+\newcommand*{\useparskip}{%
   \setlength{\parskip}{.5\baselineskip plus 2pt}%
   \setlength{\parindent}{0pt}%
 }
-\newcommand{\useparindent}{%
+\newcommand*{\useparindent}{%
   \setlength{\parskip}{0pt}%
   \setlength{\parindent}{15pt}%
   \if@twocolumn\setlength\parindent{1em}
@@ -857,8 +857,8 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   \DeclareCaptionFormat{revtex}{#1#2\justifying{#3}}
   \captionsetup{font=small, format=revtex}
   \captionsetup[sub]{font=footnotesize, format=plain}
-  \renewcommand{\figurename}{Figure}
-  \renewcommand{\tablename}{Table}
+  \renewcommand*{\figurename}{Figure}
+  \renewcommand*{\tablename}{Table}
 \fi
 %    \end{macrocode}
 %
@@ -1269,9 +1269,9 @@ part of all distributions of LaTeX version 2005/12/01 or later.
 %
 %
 % \RequirePackage{contour}
-% \renewcommand{\ULdepth}{1.8pt}
+% \renewcommand*{\ULdepth}{1.8pt}
 % \contourlength{0.8pt}
-% \newcommand{\myuline}[1]{%
+% \newcommand*{\myuline}[1]{%
 %   \uline{\phantom{#1}}\llap{\contour{white}{#1}}%
 % }
 

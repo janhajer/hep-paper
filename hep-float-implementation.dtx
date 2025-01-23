@@ -24,9 +24,9 @@
 %<*documentation>
 \documentclass{ltxdoc}
 
-\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
-\renewcommand{\MacroFont}{\codestyle}
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
 \EnableCrossrefs
@@ -152,7 +152,7 @@ In the case that the width of the first sub-float has been given as an optional 
 The example code is presented in \cref{tab:panels}.
 \DescribeMacro{\panelhspace}
 \DescribeMacro{\panelvspace}
-The spacing between the panels can be adjusted by adjusting the "\panelvspace" in terms of a "\linewidth" fraction "\renewcommand{\panelhspace}"{fraction} and the "\panelvspace" in terms of a length "\renewcommand{\panelvspace}"\marg{length}.
+The spacing between the panels can be adjusted by adjusting the "\panelvspace" in terms of a "\linewidth" fraction "\renewcommand*{\panelhspace}"{fraction} and the "\panelvspace" in terms of a length "\renewcommand*{\panelvspace}"\marg{length}.
 
 \DescribeEnv{tabular}
 The \software{booktabs} \cite{booktabs} and \software{multirow} \cite{multirow} packages are loaded enabling publication quality tabulars such as in \cref{tab:booktabs}.
@@ -205,10 +205,10 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 \setcounter{bottomnumber}{0} % 1
 \setcounter{topnumber}{1} % 2
 \setcounter{dbltopnumber}{1} % 2
-\renewcommand{\topfraction}{.9} % .7
-\renewcommand{\dbltopfraction}{.9} % .7
-\renewcommand{\textfraction}{.1} % .2
-\renewcommand{\floatpagefraction}{.8} % .5
+\renewcommand*{\topfraction}{.9} % .7
+\renewcommand*{\dbltopfraction}{.9} % .7
+\renewcommand*{\textfraction}{.1} % .2
+\renewcommand*{\floatpagefraction}{.8} % .5
 %    \end{macrocode}
 %
 % \begin{environment}{figure}
@@ -246,25 +246,25 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 % \begin{macro}{\figure}
 % Define the "figures" environment that places figures next to each other.
 %    \begin{macrocode}
-\newcommand{\figurehspace}{0.0333}
-\newcommand{\figurevspace}{.5\baselineskip}
+\newcommand*{\figurehspace}{0.0333}
+\newcommand*{\figurevspace}{.5\baselineskip}
 \newenvironment{figures}[2][b]{%
   \begin{figure}
   \let\oldcaption\caption
-  \renewcommand{\caption}[1]{%
-    \renewcommand{\caption}{\oldcaption}%
+  \renewcommand*{\caption}[1]{%
+    \renewcommand*{\caption}{\oldcaption}%
     \captionof{figure}{##1}\vspace{\figurevspace}%
   }
   \ifdim#2pt>1pt%
-    \newcommand{\hep@figure@space}{\figurehspace\linewidth/#2}%
-    \renewcommand{\figure}[1][b]{%
+    \newcommand*{\hep@figure@space}{\figurehspace\linewidth/#2}%
+    \renewcommand*{\figure}[1][b]{%
       \end{minipage}\hfill%
       \begin{minipage}[##1]{\linewidth/#2-\hep@figure@space}%
     }
     \begin{minipage}[#1]{\linewidth/#2-\hep@figure@space}
   \else%
-    \newcommand{\hep@figure@space}[1]{##1\linewidth*\real{\figurehspace}}
-    \renewcommand{\figure}[2][b]{%
+    \newcommand*{\hep@figure@space}[1]{##1\linewidth*\real{\figurehspace}}
+    \renewcommand*{\figure}[2][b]{%
       \end{minipage}\hfill%
       \begin{minipage}[##1]{##2\linewidth-\hep@figure@space{##2}}%
     }
@@ -280,25 +280,25 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 % \begin{macro}{\table}
 % Define the "tables" environment that places tables next to each other.
 %    \begin{macrocode}
-\newcommand{\tablehspace}{0.0333}
-\newcommand{\tablevspace}{.5\baselineskip}
+\newcommand*{\tablehspace}{0.0333}
+\newcommand*{\tablevspace}{.5\baselineskip}
 \newenvironment{tables}[2][b]{%
   \begin{table}
   \let\oldcaption\caption
-  \renewcommand{\caption}[1]{%
-    \renewcommand{\caption}{\oldcaption}%
+  \renewcommand*{\caption}[1]{%
+    \renewcommand*{\caption}{\oldcaption}%
     \captionof{table}{##1}\vspace{\tablevspace}%
   }
   \ifdim#2pt>1pt%
-    \newcommand{\hep@table@space}{\tablehspace\linewidth/#2}%
-    \renewcommand{\table}[1][b]{%
+    \newcommand*{\hep@table@space}{\tablehspace\linewidth/#2}%
+    \renewcommand*{\table}[1][b]{%
       \end{minipage}\hfill%
       \begin{minipage}[##1]{\linewidth/#2-\hep@table@space}\centering%
     }
     \begin{minipage}[#1]{\linewidth/#2-\hep@table@space}\centering
   \else%
-    \newcommand{\hep@table@space}[1]{##1\linewidth*\real{\tablehspace}}
-    \renewcommand{\table}[2][b]{%
+    \newcommand*{\hep@table@space}[1]{##1\linewidth*\real{\tablehspace}}
+    \renewcommand*{\table}[2][b]{%
       \end{minipage}\hfill%
       \begin{minipage}[##1]{##2\linewidth-\hep@table@space{##2}}%
       \centering%
@@ -341,25 +341,25 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 %    \begin{macrocode}
 \RequirePackage{calc}
 \RequirePackage{etoolbox}
-\newcommand{\panelhspace}{0.0333}
-\newcommand{\panelvspace}{.5\baselineskip}
+\newcommand*{\panelhspace}{0.0333}
+\newcommand*{\panelvspace}{.5\baselineskip}
 \newenvironment{panels}[2][b]{%
   \addtolength{\belowcaptionskip}{\panelvspace}%
 %    \end{macrocode}
 % Define an internal macro for global behaviour.
 %    \begin{macrocode}
-  \newcommand{\begin@subcaption@minipage}[2][b]{%
+  \newcommand*{\begin@subcaption@minipage}[2][b]{%
 %     \caption@withoptargs\subcaption@minipage[##1]{##2}%
     \subcaptionblock[##1]{##2}%
     \centering\vskip 0pt%
-%     \renewcommand{\hep@panel@vspace}{\panelvspace}%
+%     \renewcommand*{\hep@panel@vspace}{\panelvspace}%
   }%
 %    \end{macrocode}
 % Define the "\panel" macro for the case that the number of panels is given.
 %    \begin{macrocode}
   \ifdim#2pt>1pt%
-    \newcommand{\hep@panel@space}{\panelhspace\linewidth/#2}%
-    \newcommand{\panel}[1][b]{%
+    \newcommand*{\hep@panel@space}{\panelhspace\linewidth/#2}%
+    \newcommand*{\panel}[1][b]{%
       \endminipage\hfill\begin@subcaption@minipage[#1]{%
         \linewidth/#2-\hep@panel@space%
       }%
@@ -369,8 +369,8 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 % Define the "\panel" macro for the case that the width of the panel is given.
 %    \begin{macrocode}
   \else%
-    \newcommand{\hep@panel@space}[1]{##1\linewidth*\real{\panelhspace}}%
-    \newcommand{\panel}[2][b]{%
+    \newcommand*{\hep@panel@space}[1]{##1\linewidth*\real{\panelhspace}}%
+    \newcommand*{\panel}[2][b]{%
       \endminipage\hfill\begin@subcaption@minipage[#1]{%
         ##2\linewidth-\hep@panel@space{##2}%
       }%
@@ -396,7 +396,7 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 %    \begin{macrocode}
 \RequirePackage{booktabs}
 \RequirePackage{multirow}
-\newcommand\header[1]{\multicolumn{1}{c}{#1}}
+\newcommand*\header[1]{\multicolumn{1}{c}{#1}}
 %    \end{macrocode}
 % \end{environment}
 
@@ -406,8 +406,8 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 % Provide the "\graphic" macro for the inclusion of figures using the \software{graphicx} package \cite{graphicx}.
 %    \begin{macrocode}
 \RequirePackage{graphicx}
-\providecommand{\tikzsetnextfilename}[1]{}
-\newcommand{\graphic}[2][1]{\tikzsetnextfilename{#2}{%
+\providecommand*{\tikzsetnextfilename}[1]{}
+\newcommand*{\graphic}[2][1]{\tikzsetnextfilename{#2}{%
   \centering\includegraphics[width=#1\linewidth]{#2}\par%
 }}
 %    \end{macrocode}
@@ -416,7 +416,7 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 % \begin{macro}{\graphics}
 % Provide the "\graphics" macro for the inclusion of figures located in a subfolder.
 %    \begin{macrocode}
-\newcommand{\graphics}[1]{\graphicspath{{./#1/}}}
+\newcommand*{\graphics}[1]{\graphicspath{{./#1/}}}
 %    \end{macrocode}
 % \end{macro}
 %

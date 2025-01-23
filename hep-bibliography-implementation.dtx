@@ -26,9 +26,9 @@
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltxdoc}
 
-\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
-\renewcommand{\MacroFont}{\codestyle}
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
 \EnableCrossrefs
@@ -165,11 +165,11 @@ Errata can be included using the "related" feature.
 % Define the "\online"\marg{text}\marg{url} macro combining the features of the "\href" and the "\url" macros.
 % Define a macro for typesetting emails.
 %    \begin{macrocode}
-\providecommand{\online}[2]{\texttt{#2}}%
-\providecommand{\hep@email}[1]{\online{mailto:#1}{#1}}
-\providecommand\email{\hep@email}
+\providecommand*{\online}[2]{\texttt{#2}}%
+\providecommand*{\hep@email}[1]{\online{mailto:#1}{#1}}
+\providecommand*\email{\hep@email}
 \AtBeginDocument{\@ifpackageloaded{hyperref}{%
-    \renewcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
+    \renewcommand*{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
   }{}
 }
 %    \end{macrocode}
@@ -210,7 +210,7 @@ Errata can be included using the "related" feature.
 % Provide the "\DeclareSortingTemplate" macro for older "biblatex" installations.
 % Define a new sorting template that sorts only multi key "\cite" entries according to their date and leaves the rest of the bibliography entries in the order they appear in the text.
 %    \begin{macrocode}
-\providecommand{\DeclareSortingTemplate}{\DeclareSortingScheme}
+\providecommand*{\DeclareSortingTemplate}{\DeclareSortingScheme}
 \DeclareSortingTemplate{hep-bibliography}{
   \sort{\citeorder}
   \sort[final]{\field{sortkey}}
@@ -236,8 +236,8 @@ Errata can be included using the "related" feature.
 %
 % Redefine the "pages" filed such that leading zeros are stripped from the page numbers.
 %    \begin{macrocode}
-\newcommand\hep@strip@zero[1]{\expandafter\hep@strip@zero@helper#1}
-\newcommand\hep@strip@zero@helper[1]{%
+\newcommand*\hep@strip@zero[1]{\expandafter\hep@strip@zero@helper#1}
+\newcommand*\hep@strip@zero@helper[1]{%
   \ifx0#1\expandafter\hep@strip@zero@helper\else#1\fi%
 }
 \DeclareFieldFormat{pages}{%
@@ -287,7 +287,7 @@ Errata can be included using the "related" feature.
 %    \end{macrocode}
 % Ensure table style numbers in the bibliography labels.
 %    \begin{macrocode}
-\providecommand{\tstyle}{}
+\providecommand*{\tstyle}{}
 \DeclareFieldFormat{labelnumberwidth}{%
   \usebibmacro{cbx:linktofirstcite}{\mkbibbrackets{\tstyle#1}}%
 }
@@ -319,21 +319,21 @@ Errata can be included using the "related" feature.
 %    \begin{macrocode}
 \NewBibliographyString{erratum,erratums}
 \DefineBibliographyStrings{english}{erratum={Erratum},erratums={Errata}}
-\providecommand{\relateddelimerratum}{\addsemicolon\space}
+\providecommand*{\relateddelimerratum}{\addsemicolon\space}
 %    \end{macrocode}
 % \end{macro}
 %
 % Activate the Oxford comma when using "british" and separate title and subtitle with a colon.
 %    \begin{macrocode}
 \DefineBibliographyExtras{british}{\def\finalandcomma{\addcomma}}
-\renewcommand{\subtitlepunct}{\addcolon\addspace}
+\renewcommand*{\subtitlepunct}{\addcolon\addspace}
 %    \end{macrocode}
 %
 % \begin{macro}{\printbibliography}
 % Allow the bibliography to be printed sloppy
 %    \begin{macrocode}
 % \let\hep@printbibliography\printbibliography
-% \renewcommand{\printbibliography}{{\sloppy\hep@printbibliography}}
+% \renewcommand*{\printbibliography}{{\sloppy\hep@printbibliography}}
 %    \end{macrocode}
 % \end{macro}
 
@@ -345,10 +345,10 @@ Errata can be included using the "related" feature.
 % \begin{macro}{\hep@reg@exp@pmc}
 % Define regular expressions in order to deal with inconsistent journal title and volume naming as well as \URL protocols and the PMCID.
 %    \begin{macrocode}
-\newcommand{\hep@reg@exp@one}{\regexp{\A(\p{L}+)?\d+(\p{L}+)?\Z}}
-\newcommand{\hep@reg@exp@two}{\regexp{\A(\p{L}+)?(\d+)(\p{L}+)?\Z}}
-\newcommand{\hep@reg@exp@url}{\regexp{\A(ht|f)tp(s)?:\/\/}}
-\newcommand{\hep@reg@exp@pmc}{\regexp{\A(PMC)?}}
+\newcommand*{\hep@reg@exp@one}{\regexp{\A(\p{L}+)?\d+(\p{L}+)?\Z}}
+\newcommand*{\hep@reg@exp@two}{\regexp{\A(\p{L}+)?(\d+)(\p{L}+)?\Z}}
+\newcommand*{\hep@reg@exp@url}{\regexp{\A(ht|f)tp(s)?:\/\/}}
+\newcommand*{\hep@reg@exp@pmc}{\regexp{\A(PMC)?}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -419,7 +419,7 @@ Errata can be included using the "related" feature.
 % \begin{macro}{\letbibmacro}
 % Provide the "\letbibmacro" macro for old "biblatex" installations.
 %    \begin{macrocode}
-\providecommand{\letbibmacro}[2]{\csletcs{abx@macro@#1}{abx@macro@#2}}
+\providecommand*{\letbibmacro}[2]{\csletcs{abx@macro@#1}{abx@macro@#2}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -479,7 +479,7 @@ Errata can be included using the "related" feature.
 % \begin{macro}{\hep@bib@online}
 % Private "\hep@bib@online" macro
 %    \begin{macrocode}
-\newcommand{\hep@bib@online}[2]{%
+\newcommand*{\hep@bib@online}[2]{%
   \ifhyperref{\online{#1}{#2}}{\nolinkurl{#2}}%
 }
 %    \end{macrocode}
@@ -529,7 +529,7 @@ Errata can be included using the "related" feature.
 %    \begin{macrocode}
 \NewDocumentCommand{\hep@eprint}{smm}{
   \DeclareFieldFormat{eprint:#2}{%
-    \newcommand{\@path}{\IfBooleanT{#1}{\thefield{eprintclass}/}##1}%
+    \newcommand*{\@path}{\IfBooleanT{#1}{\thefield{eprintclass}/}##1}%
     #2\addcolon\space\hep@bib@online{#3/\@path}{\@path}%
   }%
 }

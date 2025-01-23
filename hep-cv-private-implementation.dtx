@@ -24,9 +24,9 @@
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltxdoc}
 
-\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
-\renewcommand{\MacroFont}{\codestyle}
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
 \EnableCrossrefs
@@ -344,7 +344,7 @@ The "hep-cv-private" package aims to provide a single style file for \dots
 %    \begin{macrocode}
 \NewDocumentCommand{\hep@indico}{mm}{
   \DeclareFieldFormat{eprint:#1}{%
-    \newcommand{\hep@path}{event/\thefield{eprintclass}}%
+    \newcommand*{\hep@path}{event/\thefield{eprintclass}}%
     \mkbibacro{URL}\addcolon\space%
     \hep@bib@online{https://#2/\hep@path}{#2/\hep@path}%
     \hep@bib@online{https://#2/\hep@path/contributions/##1}{/contributions/##1}%

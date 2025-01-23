@@ -27,9 +27,9 @@
 
 \documentclass{ltxdoc}
 
-\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
-\renewcommand{\MacroFont}{\codestyle}
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
 \EnableCrossrefs
@@ -194,11 +194,11 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % Provide the "\online"\marg{text}\marg{url} macro combining the features of the "\href" and the "\url" macros.
 % Define a macro for typesetting emails.
 %    \begin{macrocode}
-\providecommand{\online}[2]{\texttt{#2}}%
-\providecommand{\hep@email}[1]{\online{mailto:#1}{#1}}
-\providecommand\email{\hep@email}
+\providecommand*{\online}[2]{\texttt{#2}}%
+\providecommand*{\hep@email}[1]{\online{mailto:#1}{#1}}
+\providecommand*{\email}{\hep@email}
 \AtBeginDocument{\@ifpackageloaded{hyperref}{%
-    \renewcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
+    \renewcommand*{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
   }{}
 }
 %    \end{macrocode}
@@ -209,7 +209,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % Transform reference list to list of references.
 %    \begin{macrocode}
 \newif\ifhep@first%
-\newcommand{\hep@multi@ref}[1]{%
+\newcommand*{\hep@multi@ref}[1]{%
   \hep@firsttrue%
   \forcsvlist{%
     \ifhep@first\hep@firstfalse\else\textsuperscript,\fi\ref%
@@ -220,10 +220,10 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 %
 % Redefine the email macro for the title page.
 %    \begin{macrocode}
-\renewcommand{\email}[2][]{\unskip\thanks[#1]{\hep@email{#2}}}%
+\renewcommand*{\email}[2][]{\unskip\thanks[#1]{\hep@email{#2}}}%
 \AtBeginDocument{
   \let\hep@maketitle\maketitle
-  \renewcommand\maketitle{\hep@maketitle\let\email\hep@email}
+  \renewcommand*\maketitle{\hep@maketitle\let\email\hep@email}
 }
 %    \end{macrocode}
 %
@@ -235,7 +235,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % Define the "\preprintfont" macro.
 %    \begin{macrocode}
 \let\hep@preprint@font\relax
-\newcommand{\preprintfont}[1]{\def\hep@preprint@font{#1}}
+\newcommand*{\preprintfont}[1]{\def\hep@preprint@font{#1}}
 \preprintfont{\scshape\small}
 %    \end{macrocode}
 % \end{macro}
@@ -244,9 +244,9 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % Define the "\preprint" macro using the \software{varwidth} package \cite{varwidth}.
 %    \begin{macrocode}
 \let\hep@preprint\relax
-\newcommand\preprint[1]{\def\hep@preprint{#1}}
+\newcommand*\preprint[1]{\def\hep@preprint{#1}}
 \RequirePackage{varwidth}
-\newcommand{\hep@preprint@box}{%
+\newcommand*{\hep@preprint@box}{%
   \begin{varwidth}{\textwidth}%
     \hep@preprint@font\hep@preprint%
   \end{varwidth}%
@@ -260,7 +260,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 \RequirePackage{calc}
 \RequirePackage{atbegshi}
 \RequirePackage{picture}
-\newcommand{\placepreprint}{%
+\newcommand*{\placepreprint}{%
   \AtBeginShipoutFirst{%
     \put(
       \textwidth+\oddsidemargin-\widthof{\hep@preprint@box},
@@ -277,7 +277,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % Define a series title.
 %    \begin{macrocode}
 \newcommand{\preseries}[1]{\def\hep@pre@series{#1}}
-\newcommand{\series}[1]{\def\hep@series{#1}}
+\newcommand*{\series}[1]{\def\hep@series{#1}}
 \newcommand{\postseries}[1]{\def\hep@post@series{#1}}
 %    \end{macrocode}
 % \end{macro}
@@ -286,7 +286,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % Allow to change the fontface of the series title.
 %    \begin{macrocode}
 \let\hep@series@font\relax
-\newcommand{\seriesfont}[1]{\def\hep@series@font{#1}}
+\newcommand*{\seriesfont}[1]{\def\hep@series@font{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -308,7 +308,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % \begin{macro}{\maketitlehooka}
 % Place the preprint and the series title using "\maketitlehooka".
 %    \begin{macrocode}
-\renewcommand{\maketitlehooka}{%
+\renewcommand*{\maketitlehooka}{%
   \placepreprint\vspace{-\bigskipamount}%
   \@ifundefined{hep@series}{}{%
     \hep@pre@series\hep@series\hep@post@series%
@@ -322,7 +322,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % Allow to change the fontface of the the title.
 %    \begin{macrocode}
 \let\hep@title@font\relax
-\newcommand{\titlefont}[1]{\def\hep@title@font{#1}}
+\newcommand*{\titlefont}[1]{\def\hep@title@font{#1}}
 %    \end{macrocode}
 % \end{macro}
 % Set default title layout.
@@ -337,7 +337,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % Define a subtitle.
 %    \begin{macrocode}
 \newcommand{\presubtitle}[1]{\def\hep@pre@sub@title{#1}}
-\newcommand{\subtitle}[1]{\def\hep@sub@title{#1}}
+\newcommand*{\subtitle}[1]{\def\hep@sub@title{#1}}
 \newcommand{\postsubtitle}[1]{\def\hep@post@sub@title{#1}}
 %    \end{macrocode}
 % \end{macro}
@@ -346,7 +346,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % Allow to change the fontface of the subtitle.
 %    \begin{macrocode}
 \let\hep@subtitle@font\relax
-\newcommand{\subtitlefont}[1]{\def\hep@subtitle@font{#1}}
+\newcommand*{\subtitlefont}[1]{\def\hep@subtitle@font{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -365,8 +365,8 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 %    \begin{macrocode}
 \RequirePackage{authblk}
 \newcounter{editors}
-\newcommand\hep@editorlist{}
-\newcommand\hep@editors{}
+\newcommand*\hep@editorlist{}
+\newcommand*\hep@editors{}
 \@namedef{hep@editor@sep1}{}
 \@namedef{hep@editor@sep2}{\Authand}
 %    \end{macrocode}
@@ -374,7 +374,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % \begin{macro}{\editor}
 % Copy of the "authblk" author code adjusted for editors.
 %    \begin{macrocode}
-\newcommand\editor[2][]{%
+\newcommand*\editor[2][]{%
   \ifnewaffil%
     \addtocounter{affil}{1}%
     \edef\AB@thenote{\arabic{affil}}%
@@ -429,7 +429,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % Allow to change the fontface of the editors.
 %    \begin{macrocode}
 \let\hep@editor@font\relax
-\newcommand{\editorfont}[1]{\def\hep@editor@font{#1}}
+\newcommand*{\editorfont}[1]{\def\hep@editor@font{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -439,11 +439,11 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 %    \begin{macrocode}
 \newcommand{\preeditor}[1]{\def\hep@pre@editor{#1}}
 \newcommand{\posteditor}[1]{\def\hep@post@editor{#1}}
-\newcommand{\editortitle}[2]{
+\newcommand*{\editortitle}[2]{
   \def\hep@editor@title{#1}
   \def\hep@editor@title@pl{#2}
 }
-\newcommand{\editortitlefont}[1]{\def\hep@editor@title@font{#1}}
+\newcommand*{\editortitlefont}[1]{\def\hep@editor@title@font{#1}}
 \newcommand{\preeditortitle}[1]{\def\hep@pre@editor@title{#1}}
 \newcommand{\posteditortitle}[1]{\def\hep@post@editor@title{#1}}
 \editortitle{Editor}{Editors}
@@ -471,7 +471,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % \begin{macro}{\maketitlehookb}
 % Show subtitle and editor.
 %    \begin{macrocode}
-\renewcommand{\maketitlehookb}{%
+\renewcommand*{\maketitlehookb}{%
   \@ifundefined{hep@sub@title}{}{%
     \hep@pre@sub@title\hep@sub@title\hep@post@sub@title%
   }%
@@ -507,18 +507,18 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % Allow to change the fontface of the individual parts of the title.
 %    \begin{macrocode}
 \let\hep@author@font\relax
-\newcommand{\authorfont}[1]{\def\hep@author@font{#1}}
-\renewcommand\Authfont{\hep@author@font}
+\newcommand*{\authorfont}[1]{\def\hep@author@font{#1}}
+\renewcommand*\Authfont{\hep@author@font}
 %    \end{macrocode}
 % \end{macro}
 %
 % Set default author fontface.
 %    \begin{macrocode}
-\newcommand{\authortitle}[2]{
+\newcommand*{\authortitle}[2]{
   \def\hep@author@title{#1}
   \def\hep@author@title@pl{#2}
 }
-\newcommand{\authortitlefont}[1]{\def\hep@author@title@font{#1}}
+\newcommand*{\authortitlefont}[1]{\def\hep@author@title@font{#1}}
 \newcommand{\preauthortitle}[1]{\def\hep@pre@author@title{#1}}
 \newcommand{\postauthortitle}[1]{\def\hep@post@author@title{#1}}
 \authortitle{Author}{Authors}
@@ -544,8 +544,8 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 %
 %    \begin{macrocode}
 \newcounter{endorsers}
-\newcommand\hep@endorserlist{}
-\newcommand\hep@endorsers{}
+\newcommand*\hep@endorserlist{}
+\newcommand*\hep@endorsers{}
 \@namedef{hep@editor@sep1}{}
 \@namedef{hep@editor@sep2}{\Authand}
 %    \end{macrocode}
@@ -558,7 +558,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 }
 \def\hep@@endorser[#1]#2{\hep@@@@endorser[#1]{#2}}
 \def\hep@@@endorser#1{\hep@@@@endorser{#1}}
-\newcommand\hep@@@@endorser[2][]{%
+\newcommand*\hep@@@@endorser[2][]{%
   \ifnewaffil%
     \addtocounter{affil}{1}%
     \edef\AB@thenote{\arabic{affil}}%
@@ -661,7 +661,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % Patch the "\affiliation" macro to comply with the label ref system.
 %    \begin{macrocode}
 \newcounter{affiliation}
-\renewcommand{\theaffiliation}{%
+\renewcommand*{\theaffiliation}{%
   \textsuperscript{\normalfont\alph{affiliation}}%
 }
 \xpatchcmd{\affil}{%
@@ -676,12 +676,12 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % Allow to change the fontface of affiliation.
 %    \begin{macrocode}
 \let\hep@affiliation@font\relax
-\newcommand{\affiliationfont}[1]{\def\hep@affiliation@font{#1}}
+\newcommand*{\affiliationfont}[1]{\def\hep@affiliation@font{#1}}
 % \newif\ifhep@lining\hep@liningtrue
 % \ifhep@lining
-  \renewcommand{\Affilfont}{\small\hep@affiliation@font}
+  \renewcommand*{\Affilfont}{\small\hep@affiliation@font}
 % \else
-%   \renewcommand{\Affilfont}{\small\ostyle\hep@affiliation@font}
+%   \renewcommand*{\Affilfont}{\small\ostyle\hep@affiliation@font}
 % \fi
 %    \end{macrocode}
 % \end{macro}
@@ -689,11 +689,11 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % \begin{macro}{\affiliation}
 % Define the "\affiliation" macro, ensure that linebreaks happen after a comma.
 %    \begin{macrocode}
-\newcommand\hep@penalty{\if@twocolumn85\else50\fi}
-\newcommand\hep@active@comma{,\penalty-\hep@penalty\relax}
-\newcommand\hep@cat@comma@active{\catcode`\,\active}
+\newcommand*\hep@penalty{\if@twocolumn85\else50\fi}
+\newcommand*\hep@active@comma{,\penalty-\hep@penalty\relax}
+\newcommand*\hep@cat@comma@active{\catcode`\,\active}
 {\hep@cat@comma@active\gdef,{\hep@active@comma}}
-\newcommand\hep@affil[1]{%
+\newcommand*\hep@affil[1]{%
   \endgroup\@flushglue=0pt plus .5\linewidth\affil{#1}%
 }
 \def\hep@affil@opt[#1]#2{%
@@ -702,7 +702,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 \DeclareRobustCommand\hep@affiliation{%
   \@ifnextchar[{\hep@affil@opt}{\hep@affil}%
 }
-\newcommand{\affiliation}{%
+\newcommand*{\affiliation}{%
   \begingroup\hep@cat@comma@active\hep@affiliation%
 }
 %    \end{macrocode}
@@ -710,7 +710,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 %
 % Place endorser and affiliation
 %    \begin{macrocode}
-\renewcommand{\maketitlehookc}{%
+\renewcommand*{\maketitlehookc}{%
   \ifx\hep@endorserlist\AB@empty\else%
     \hep@pre@endorser\hep@endorserlist\hep@post@endorser%
   \fi
@@ -757,7 +757,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % Allow to change the fontface of the individual parts of the title.
 %    \begin{macrocode}
 \let\hep@date@font\relax
-\newcommand{\datefont}[1]{\def\hep@date@font{#1}}
+\newcommand*{\datefont}[1]{\def\hep@date@font{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -774,12 +774,12 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 %    \begin{macrocode}
 \@ifundefined{abstract}{}{%
   \let\hep@abstract\abstract%
-  \renewcommand\abstract{\hep@abstract\noindent\ignorespaces}%
+  \renewcommand*\abstract{\hep@abstract\noindent\ignorespaces}%
   \let\hep@key@words\relax
-  \newcommand{\keywords}[1]{\def\hep@key@words{#1}}
+  \newcommand*{\keywords}[1]{\def\hep@key@words{#1}}
   \AtBeginDocument{\@ifundefined{hep@key@words}{}{%
     \let\hep@end@abstract\endabstract%
-    \renewcommand\endabstract{
+    \renewcommand*\endabstract{
       \par\medskip\noindent\textit{Keywords: \hep@key@words}%
       \hep@end@abstract%
     }%
@@ -792,7 +792,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
   \if@twocolumn
     \RequirePackage{environ}
     \RequirePackage{abstract}
-    \renewcommand{\abstitleskip}{-3ex}
+    \renewcommand*{\abstitleskip}{-3ex}
     \NewEnviron{abstract*}{%
       \twocolumn[\maketitle\vspace{-5ex}%
       \begin{onecolabstract}\noindent\BODY\end{onecolabstract}%
@@ -820,9 +820,9 @@ The "\preprintfont" macro can be used to change the font of the preprint.
     \if\relax#1\relax%
       \footnotemark%
     \else%
-      \renewcommand\thefootnote{\textsuperscript{\@fnsymbol\c@footnote}}%
+      \renewcommand*\thefootnote{\textsuperscript{\@fnsymbol\c@footnote}}%
       \protect\refstepcounter{footnote}\protect\label{#1}%
-      \renewcommand\thefootnote{\@arabic\c@footnote}%
+      \renewcommand*\thefootnote{\@arabic\c@footnote}%
     \fi%
     \protected@xdef\@thanks{%
       \@thanks\protect\footnotetext[\the\c@footnote]{#2}%

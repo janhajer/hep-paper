@@ -26,9 +26,9 @@
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltxdoc}
 
-\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
-\renewcommand{\MacroFont}{\codestyle}
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
 \EnableCrossrefs
@@ -237,12 +237,12 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
 %    \begin{macrocode}
 \RequirePackage{pdftexcmds}
 \ifnum\pdf@strcmp{\heptext@lang}{american}=0
-  \newcommand{\heptext@lang@foreign}{USenglish}
+  \newcommand*{\heptext@lang@foreign}{USenglish}
 \else
   \ifnum\pdf@strcmp{\heptext@lang}{USenglish}=0
-    \newcommand{\heptext@lang@foreign}{USenglish}
+    \newcommand*{\heptext@lang@foreign}{USenglish}
   \else
-    \newcommand{\heptext@lang@foreign}{british}
+    \newcommand*{\heptext@lang@foreign}{british}
   \fi
 \fi
 %    \end{macrocode}
@@ -253,7 +253,7 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
 %    \begin{macrocode}
 \PassOptionsToPackage{all, \heptext@lang@foreign}{foreign}
 \RequirePackage{foreign}
-\renewcommand\foreignabbrfont{}
+\renewcommand*\foreignabbrfont{}
 \DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
 %    \end{macrocode}
 % \end{macro}
@@ -267,7 +267,7 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
 %\begin{macro}{\no}
 % Define the macro "\no"\marg{number} for the use of \textnumero\ with appropriate spacing.
 %    \begin{macrocode}
-\newcommand{\no}[1]{\textnumero~#1}
+\newcommand*{\no}[1]{\textnumero~#1}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -275,7 +275,7 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
 % Define a macro for software with optional version information "\software"\linebreak[1]\oarg{version}\linebreak[1]\marg{name}, using the \software{relsize} \cite{relsize} and \software{xparse} \cite{xparse} packages.
 %    \begin{macrocode}
 \RequirePackage{relsize}
-\newcommand{\software}[2][\hspace{-\fontdimen2\font}]{%
+\newcommand*{\software}[2][\hspace{-\fontdimen2\font}]{%
   {\smaller[.5]\textsc{#2}~#1}%
 }
 \RequirePackage{xparse}
@@ -291,11 +291,11 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
 % Define the "\online"\marg{text}\marg{url} macro combining the features of the "\href" and the "\url" macros.
 % Define a macro for typesetting emails.
 %    \begin{macrocode}
-\providecommand{\online}[2]{\texttt{#2}}%
-\providecommand{\hep@email}[1]{\online{mailto:#1}{#1}}
-\providecommand\email{\hep@email}
+\providecommand*{\online}[2]{\texttt{#2}}%
+\providecommand*{\hep@email}[1]{\online{mailto:#1}{#1}}
+\providecommand*{\email}{\hep@email}
 \AtBeginDocument{\@ifpackageloaded{hyperref}{%
-  \renewcommand{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
+  \renewcommand*{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
 }{}}
 %    \end{macrocode}
 % \end{macro}
@@ -304,14 +304,14 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
 % \begin{macro}{\prefix}
 % Define the "\prefix"\marg{prefix}\marg{word} macro ensuring the correct linebreak in \prefix{prefix}{word}.
 %    \begin{macrocode}
-\newcommand{\prefix}[2]{(#1\mbox{-)}\allowbreak #2}
+\newcommand*{\prefix}[2]{(#1\mbox{-)}\allowbreak #2}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\subsubparagraph}
 % Define the "\subsubparagraph" macro starting a new paragraph with the same spacing as the paragraph macro but without title.
 %    \begin{macrocode}
-\newcommand\subsubparagraph{%
+\newcommand*\subsubparagraph{%
   \@tempskipa 3.25ex \@plus 1ex \@minus .2ex\relax%
   \addpenalty\@secpenalty\addvspace\@tempskipa%
   \everypar{\setbox\z@\lastbox\everypar{}}%
@@ -345,7 +345,7 @@ The "\underline" macro is redefined to allow line-breaks using the \software{sou
 \newenvironment{enumdescript}[1][]{
 \begin{enumdesc}[#1]
   \let\hep@item\item
-  \renewcommand{\item}[2][]{%
+  \renewcommand*{\item}[2][]{%
     \ifx&##1&\hep@item\else\hep@item[##1]\fi%
     \textbf{##2}\ifx##2\empty\else\hspace{1em}\fi%
     \@ifnextchar\par\@gobble\relax%

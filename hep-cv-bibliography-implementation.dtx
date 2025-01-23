@@ -24,9 +24,9 @@
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltxdoc}
 
-\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
-\renewcommand{\MacroFont}{\codestyle}
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
 \EnableCrossrefs
@@ -219,26 +219,26 @@ The \software{hep-cv-bibliography} package aims to provide a single style file f
 %    \begin{macrocode}
 % \newlength{\hep@longest@month}
 % \setlength{\hep@longest@month}{\widthof{May}}
-% \newcommand{\hep@spread@even}[1]{\@tfor\next:=#1\do{\hfil\next}}
-% \newcommand{\hep@month}[1]{%
+% \newcommand*{\hep@spread@even}[1]{\@tfor\next:=#1\do{\hfil\next}}
+% \newcommand*{\hep@month}[1]{%
 %   \makebox[\hep@longest@month][c]{\hep@spread@even{#1}}%
 % }
 % %    \end{macrocode}
 % %
 % % Apply macros of equally distributed month names.
 % %    \begin{macrocode}
-% \newcommand{\Jan}{\hep@month{Jan}}
-% \newcommand{\Feb}{\hep@month{Feb}}
-% \newcommand{\Mar}{\hep@month{Mar}}
-% \newcommand{\Apr}{\hep@month{Apr}}
-% \newcommand{\May}{\hep@month{May}}
-% \newcommand{\Jun}{\hep@month{Jun}}
-% \newcommand{\Jul}{\hep@month{Jul}}
-% \newcommand{\Aug}{\hep@month{Aug}}
-% \newcommand{\Sep}{\hep@month{Sep}}
-% \newcommand{\Oct}{\hep@month{Oct}}
-% \newcommand{\Nov}{\hep@month{Nov}}
-% \newcommand{\Dec}{\hep@month{Dec}}
+% \newcommand*{\Jan}{\hep@month{Jan}}
+% \newcommand*{\Feb}{\hep@month{Feb}}
+% \newcommand*{\Mar}{\hep@month{Mar}}
+% \newcommand*{\Apr}{\hep@month{Apr}}
+% \newcommand*{\May}{\hep@month{May}}
+% \newcommand*{\Jun}{\hep@month{Jun}}
+% \newcommand*{\Jul}{\hep@month{Jul}}
+% \newcommand*{\Aug}{\hep@month{Aug}}
+% \newcommand*{\Sep}{\hep@month{Sep}}
+% \newcommand*{\Oct}{\hep@month{Oct}}
+% \newcommand*{\Nov}{\hep@month{Nov}}
+% \newcommand*{\Dec}{\hep@month{Dec}}
 %    \end{macrocode}
 %
 % Define short names for month without dots.
@@ -404,7 +404,7 @@ The \software{hep-cv-bibliography} package aims to provide a single style file f
 % \begin{macro}{\setlengths}
 % Set bibliography length.
 %    \begin{macrocode}
-\newcommand{\setlengths}{%
+\newcommand*{\setlengths}{%
   \setlength{\labelnumberwidth}{\hep@left@width-\hep@seperator@width}%
   \setlength{\labelwidth}{\labelnumberwidth}%
   \setlength{\leftmargin}{\labelwidth}%
@@ -421,7 +421,7 @@ The \software{hep-cv-bibliography} package aims to provide a single style file f
 % \begin{macro}{\printcvdate}
 % Print date in the left column.
 %    \begin{macrocode}
-\newcommand{\printcvdate}{%
+\newcommand*{\printcvdate}{%
   % \ifhepcv@date
   \printtext{\hfill}%
   \ifkeyword{ongoing}{\printtext{Since} }{}%
@@ -443,7 +443,7 @@ The \software{hep-cv-bibliography} package aims to provide a single style file f
 % \begin{macro}{\printindex}
 % Print index label in the left column.
 %    \begin{macrocode}
-\newcommand{\printindex}{%
+\newcommand*{\printindex}{%
   \printtext[labelnumberwidth]{%
     \printfield{labelprefix}\tstyle\printfield{labelnumber}%
   }%
@@ -472,7 +472,7 @@ The \software{hep-cv-bibliography} package aims to provide a single style file f
 % \begin{macro}{\printissuedate}
 % Issue and date.
 %    \begin{macrocode}
-\newcommand{\printissuedate}{%
+\newcommand*{\printissuedate}{%
   % \ifhepcv@date
   \printtext{\hfill}%
   \ifkeyword{ongoing}{\printtext{Since}}{}
@@ -491,7 +491,7 @@ The \software{hep-cv-bibliography} package aims to provide a single style file f
 % \begin{macro}{\printissuedate}
 % Issue and date.
 %    \begin{macrocode}
-\newcommand{\adjustOrgLocDat}{%
+\newcommand*{\adjustOrgLocDat}{%
   \renewbibmacro*{organization+location+date}{%
     \printlist{organization}\setunit*{\addcomma\space}%
     \printlist{location}\setunit*{\addcomma\space}\newunit%

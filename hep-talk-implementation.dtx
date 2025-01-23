@@ -28,9 +28,9 @@
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltxdoc}
 
-\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
-\renewcommand{\MacroFont}{\codestyle}
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
 \EnableCrossrefs
@@ -53,7 +53,7 @@
 %
 % \fi
 %
-% \CheckSum{629}
+% \CheckSum{642}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -238,7 +238,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 % Make the \software{overlays} package \cite{overlays} compatible.
 %    \begin{macrocode}
 \RequirePackage{xcolor}
-\newcommand{\globalcolor}[1]{%
+\newcommand*{\globalcolor}[1]{%
   \color{#1}\global\let\default@color\current@color%
 }
 \AtBeginDocument{
@@ -335,7 +335,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 % \begin{macro}{\hep@block@width}
 % The internal block width
 %    \begin{macrocode}
-\newcommand{\hep@block@width}[1]{%
+\newcommand*{\hep@block@width}[1]{%
   \dimexpr#1\linewidth-2\fboxsep-2\leftskip\relax%
 }
 %    \end{macrocode}
@@ -402,7 +402,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 %  \item optional width of the block
 % \end{enumerate}
 %    \begin{macrocode}
-\providecommand{\row}{}
+\providecommand*{\row}{}
 \NewDocumentEnvironment{block}{sd<>oO{1}}{%
   \NewDocumentCommand{\hep@begin@block@env}{md<>oO{1}}{%
     \IfNoValueOrEmptyTF{##3}{}{%
@@ -423,7 +423,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 % \begin{macro}{\hep@end@block@env}
 % The internal "\hep@end@block@env" macro.
 %    \begin{macrocode}
-\newcommand{\hep@end@block@env}{%
+\newcommand*{\hep@end@block@env}{%
   \end{hep@block@env}\setlength{\parskip}{\vmargin}\par%\par%
 }
 %    \end{macrocode}
@@ -438,7 +438,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 %  \item optional width of the first column
 % \end{enumerate}
 %    \begin{macrocode}
-\providecommand{\column}{}
+\providecommand*{\column}{}
 \NewDocumentEnvironment{columns}{sd<>oO{2}}{%
   \begin{minipage}{\linewidth-2\leftskip}%
   \def\needs@space{}%
@@ -580,11 +580,11 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 % \begin{macro}{\logo}
 % The "\logo" macro
 %    \begin{macrocode}
-\renewcommand\Affilfont{\normalsize}
-\newcommand{\titlemargin}{.05\paperwidth}
-\newcommand{\prelogo}[1]{\def\hep@pre@logo{#1}}
-\newcommand{\logo}[1]{\def\hep@logo{#1}}
-\newcommand{\postlogo}[1]{\def\hep@post@logo{#1}}
+\renewcommand*\Affilfont{\normalsize}
+\newcommand*{\titlemargin}{.05\paperwidth}
+\newcommand*{\prelogo}[1]{\def\hep@pre@logo{#1}}
+\newcommand*{\logo}[1]{\def\hep@logo{#1}}
+\newcommand*{\postlogo}[1]{\def\hep@post@logo{#1}}
 \prelogo{\vfill\hfill}
 \postlogo{}
 %    \end{macrocode}
@@ -593,7 +593,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 % \begin{macro}{\maketitle}
 % The "\maketitle" macro
 %    \begin{macrocode}
-\renewcommand{\maketitle}{%
+\renewcommand*{\maketitle}{%
   \newframe%
   \strut\par\vspace{10ex}\bgroup%
     \leftskip=\titlemargin
@@ -618,7 +618,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 % The "\section" macro is adjusted using the "titlesec" package \cite{titlesec}
 %    \begin{macrocode}
 \RequirePackage{titlesec}
-\newcommand{\sectionbreak}{\clearpage}
+\newcommand*{\sectionbreak}{\clearpage}
 \titleformat{\section}{\huge}{}{0pt}{%
   \strut\vfill\centering\color{PageFg}%
 }[\vfill\strut\clearpage]
@@ -679,7 +679,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 % \begin{macro}{\emph}
 % Empheses
 %    \begin{macrocode}
-\renewcommand{\emph}[1]{\textcolor{Structure}{#1}}
+\renewcommand*{\emph}[1]{\textcolor{Structure}{#1}}
 %    \end{macrocode}
 % \end{macro}
 % Equations
@@ -748,10 +748,10 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 %    \end{macrocode}
 % small rightaligned Structure colored citations
 %    \begin{macrocode}
-\newcommand{\citestyle}[1]{%
+\newcommand*{\citestyle}[1]{%
   \hfill{\scriptsize\normalfont\color{Structure}#1}%
 }
-\renewcommand{\cite}[1]{\citestyle{\autocite{#1}}}
+\renewcommand*{\cite}[1]{\citestyle{\autocite{#1}}}
 %    \end{macrocode}
 % do not color the titles
 %    \begin{macrocode}
@@ -778,7 +778,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 %
 % use eprint info for references
 %    \begin{macrocode}
-\newcommand{\hep@talk@cite}{%
+\newcommand*{\hep@talk@cite}{%
   \iffieldundef{shorthand}{%
     \iffieldundef{eprint}{%
       \ifthenelse{%
@@ -799,7 +799,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 %    \end{macrocode}
 % use eprint info for reference labeles
 %    \begin{macrocode}
-\newcommand{\hep@talk@label}{%
+\newcommand*{\hep@talk@label}{%
   \DeclareFieldFormat{eprint:arxiv}{%
     \ifhyperref{%
       \href{https://arxiv.org/\abx@arxivpath/##1}{\nolinkurl{##1}}%
@@ -832,30 +832,42 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 %    \end{macrocode}
 % remove eprint from entry
 %    \begin{macrocode}
-\newcommand{\hep@talk@entry}{%
-  \iffieldundef{shorthand}{%
-    \iffieldundef{eprint}{%
-      \ifthenelse{%
-        \ifnameundef{labelname}\OR\iffieldundef{labelyear}%
-       }{%
-        \setunit{}%
+\newcommand*{\hep@talk@entry}{%
+  \DeclareFieldFormat{doi}{}%
+  \renewbibmacro{in:}{}%
+  \renewbibmacro{journal+issuetitle}{}%
+  \renewbibmacro{note+pages}{}%
+  \renewbibmacro{organization+location+date}{}%
+  \iffieldundef{eprint}{%
+    \ifthenelse{%
+      \ifnameundef{labelname}\OR\iffieldundef{labelyear}%
+    }{}{%
+      \iffieldundef{collaboration}{%
+        \DeclareNameFormat{sortname}{}%
+        \DeclareNameFormat{year}{}%
+        \DeclareFieldFormat{cite:labeldate+extradate}{}%
+        \DeclareFieldFormat{labelyear}{}%
       }{%
-        \iffieldundef{collaboration}{%
-          \DeclareNameFormat{sortname}{}%
-          \DeclareNameFormat{year}{}%
-      \DeclareFieldFormat{cite:labeldate+extradate}{}%
-          \DeclareFieldFormat{labelyear}{}%
-         }{%
-          \DeclareFieldFormat{collaboration}{}%
-%           \DeclareFieldFormat{labelyear}{}%
-         }\setunit{}%
-      }
-      \DeclareFieldFormat{cite:labeldate+extradate}{}%
-    }{
-    \DeclareFieldFormat{eprint:arxiv}{}%
-    \DeclareFieldFormat{eprint:github}{}
+        \DeclareFieldFormat{collaboration}{}%
+      }%
     }%
-  }{\usebibmacro{cite:shorthand}}%
+    \DeclareFieldFormat{cite:labeldate+extradate}{}%
+  }{%
+    \DeclareFieldFormat{eprint:arxiv}{}%
+    \DeclareFieldFormat{eprint:github}{}%
+  }%
+}
+%    \end{macrocode}
+% redefine end of line in the header
+%    \begin{macrocode}
+\newcommand*{\hep@talk@entry@tail}{%
+  \bibsentence%
+  \usebibmacro{in:}%
+  \usebibmacro{journal+issuetitle}%
+  \newunit%
+  \usebibmacro{note+pages}%
+  \printunit{\addcomma\space}%
+  \iftoggle{bbx:doi}{\printfield{doi}}{}%
 }
 %    \end{macrocode}
 % redefine cite
@@ -868,7 +880,7 @@ The "\row"\oarg{title} macro starts a new row in a "block" or "column".
 % put bib item in a block
 %    \begin{macrocode}
 \renewbibmacro{begentry}{%
-  \block[[\hep@talk@label]\hfill]%
+  \block[[\hep@talk@label]\hfill\hep@talk@entry@tail]%
   \hep@talk@entry%
 }
 %    \end{macrocode}

@@ -24,9 +24,9 @@
 %<*documentation>
 \documentclass{ltxdoc}
 
-\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
-\renewcommand{\MacroFont}{\codestyle}
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
 \EnableCrossrefs
@@ -188,7 +188,7 @@ Additionally the reference back to the text where they are called from.
 % Ensure that no spaces appear before the footmark or at the beginning of the footnote.
 %    \begin{macrocode}
 \let\@foot@note\footnote
-\renewcommand{\footnote}[1]{\unskip\@foot@note{\ignorespaces#1}}
+\renewcommand*{\footnote}[1]{\unskip\@foot@note{\ignorespaces#1}}
 %    \end{macrocode}
 % \end{macro}
 
@@ -199,7 +199,7 @@ Additionally the reference back to the text where they are called from.
 %    \begin{macrocode}
 \AtBeginDocument{
   \let\hep@ref\ref
-  \renewcommand\ref{\no@break@before\hep@ref}
+  \renewcommand*\ref{\no@break@before\hep@ref}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -208,7 +208,7 @@ Additionally the reference back to the text where they are called from.
 % Adjust "\eqref"\marg{key} from the \software{amsmath} package in order to prevent preceding line breaks.
 %    \begin{macrocode}
 \AtBeginDocument{\@ifpackageloaded{amsmath}{%
-  \renewcommand\eqref{\no@break@before\labelcref}%
+  \renewcommand*\eqref{\no@break@before\labelcref}%
 }{}}
 %    \end{macrocode}
 % \end{macro}
@@ -216,9 +216,9 @@ Additionally the reference back to the text where they are called from.
 % \begin{macro}{\usecommand}
 % Define the "\usecommand" macro providing an anonymous function.
 %    \begin{macrocode}
-\providecommand\hep@use@command{}
-\newcommand\usecommand[2][1]{%
-  \renewcommand\hep@use@command[#1]{#2}\hep@use@command%
+\providecommand*\hep@use@command{}
+\newcommand*\usecommand[2][1]{%
+  \renewcommand*\hep@use@command[#1]{#2}\hep@use@command%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -244,7 +244,7 @@ Additionally the reference back to the text where they are called from.
 %    \begin{macrocode}
 \PassOptionsToPackage{noabbrev, nameinlink}{cleveref}
 \RequirePackage{cleveref}
-\newcommand{\creflastconjunction}{, and\nobreakspace}
+\newcommand*{\creflastconjunction}{, and\nobreakspace}
 \crefname{enumi}{point}{points}
 \crefname{inlinelisti}{point}{points}
 %    \end{macrocode}
@@ -253,7 +253,7 @@ Additionally the reference back to the text where they are called from.
 %\begin{macro}{\no@break@before}
 % Define a macro able to prevent line breaks.
 %    \begin{macrocode}
-\newcommand\no@break@before{%
+\newcommand*\no@break@before{%
   \relax\ifvmode\else%
     \ifhmode%
       \ifdim\lastskip > 0pt%
@@ -270,7 +270,7 @@ Additionally the reference back to the text where they are called from.
 %    \begin{macrocode}
 \AtBeginDocument{\@ifpackageloaded{subcaption}{%
   \let\hep@subref\subref
-  \renewcommand\subref{\no@break@before\hep@subref}
+  \renewcommand*\subref{\no@break@before\hep@subref}
   \renewcommand*\subcaption@ref[2]{\begingroup%
     \caption@setoptions{sub}%
     \subcaption@reffmt\p@subref{\hep@ref#1{sub@#2}}%
@@ -281,7 +281,7 @@ Additionally the reference back to the text where they are called from.
 % \begin{macro}{\subcref}
 % Provide the "\subcref" macro.
 %    \begin{macrocode}
-  \newcommand{\subcref}[1]{\cref{sub@#1}}
+  \newcommand*{\subcref}[1]{\cref{sub@#1}}
 }{}}
 %    \end{macrocode}
 % \end{macro}
@@ -323,7 +323,7 @@ Additionally the reference back to the text where they are called from.
 % Adjust "\cite"\marg{key} in order to prevent preceding line breaks.
 %    \begin{macrocode}
 \let\hep@cite\cite
-\renewcommand\cite{\no@break@before\hep@cite}
+\renewcommand*\cite{\no@break@before\hep@cite}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -339,7 +339,7 @@ Additionally the reference back to the text where they are called from.
 \usepackage{amsmath}
 \usepackage{hep-reference}
 \usepackage{parskip}
-\providecommand{\cref}{section \ref}
+\providecommand*{\cref}{section \ref}
 
 \begin{document}
 

@@ -30,9 +30,9 @@
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltxdoc}
 
-\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
-\renewcommand{\MacroFont}{\codestyle}
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
 \EnableCrossrefs
@@ -58,7 +58,7 @@
 %
 % \fi
 %
-% \CheckSum{1009}
+% \CheckSum{1011}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -219,7 +219,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % Define private macro for setting the main widths using the \software{calc} package \cite{calc}.
 %    \begin{macrocode}
 \RequirePackage{calc}
-\newcommand{\hep@set@main@width}{
+\newcommand*{\hep@set@main@width}{
   \setlength{\hep@main@width}{%
     \textwidth-\hep@left@width-\hep@seperator@width%
   }
@@ -232,11 +232,11 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\setseperatorwidth}
 % Define macros for setting the document widths.
 %    \begin{macrocode}
-\newcommand{\setleftwidth}[1]{
+\newcommand*{\setleftwidth}[1]{
   \setlength{\hep@left@width}{#1}
   \hep@set@main@width
 }
-\newcommand{\setseperatorwidth}[1]{
+\newcommand*{\setseperatorwidth}[1]{
   \setlength{\hep@seperator@width}{#1}
   \hep@set@main@width
 }
@@ -254,11 +254,11 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 %    \begin{macrocode}
 \RequirePackage{array}
 \RequirePackage{hep-font}
-\newcommand{\hep@begin}{\noindent\begin{tabular}{%
+\newcommand*{\hep@begin}{\noindent\begin{tabular}{%
   @{}>{\raggedleft\arraybackslash}p{\hep@left@width}%
   @{\hspace{\hep@seperator@width}}p{\hep@main@width}@{}%
 }\tstyle}
-\newcommand{\hep@end}{\end{tabular}\hfill\par}
+\newcommand*{\hep@end}{\end{tabular}\hfill\par}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -266,7 +266,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\cvline}
 % Define the "\cvline" macro.
 %    \begin{macrocode}
-\newcommand{\cvline}[2][]{\hep@begin#1&#2\hep@end}
+\newcommand*{\cvline}[2][]{\hep@begin#1&#2\hep@end}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -274,10 +274,10 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\hep@next@optional@arg}
 % Define private recursive macros for the "\cventry" macro.
 %    \begin{macrocode}
-\newcommand{\hep@next@optional@arg}[1][]{%
+\newcommand*{\hep@next@optional@arg}[1][]{%
   \em{\em{#1}}\hep@check@for@optional@args%
 }
-\newcommand{\hep@check@for@optional@args}{%
+\newcommand*{\hep@check@for@optional@args}{%
   \@ifnextchar*{%
     ,\newline\@firstoftwo\hep@next@optional@arg%
   }{%
@@ -291,7 +291,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\cventry}
 % Define the "\cventry" macro.
 %    \begin{macrocode}
-\newcommand{\cventry}[2][]{%
+\newcommand*{\cventry}[2][]{%
   \vspace{.5ex plus .2ex minus .2ex}%
   \hep@begin#1&\textbf{#2}\hep@check@for@optional@args%
 }
@@ -309,26 +309,26 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 %    \begin{macrocode}
 \newlength{\hep@longest@month}
 \setlength{\hep@longest@month}{\widthof{May}}
-\newcommand{\hep@spread@even}[1]{\@tfor\next:=#1\do{\hfil\next}}
-\newcommand{\hep@month}[1]{%
+\newcommand*{\hep@spread@even}[1]{\@tfor\next:=#1\do{\hfil\next}}
+\newcommand*{\hep@month}[1]{%
   \makebox[\hep@longest@month][c]{\hep@spread@even{#1}}%
 }
 %    \end{macrocode}
 %
 % Apply macros of equally distributed month names.
 %    \begin{macrocode}
-\newcommand{\Jan}{\hep@month{Jan}}
-\newcommand{\Feb}{\hep@month{Feb}}
-\newcommand{\Mar}{\hep@month{Mar}}
-\newcommand{\Apr}{\hep@month{Apr}}
-\newcommand{\May}{\hep@month{May}}
-\newcommand{\Jun}{\hep@month{Jun}}
-\newcommand{\Jul}{\hep@month{Jul}}
-\newcommand{\Aug}{\hep@month{Aug}}
-\newcommand{\Sep}{\hep@month{Sep}}
-\newcommand{\Oct}{\hep@month{Oct}}
-\newcommand{\Nov}{\hep@month{Nov}}
-\newcommand{\Dec}{\hep@month{Dec}}
+\newcommand*{\Jan}{\hep@month{Jan}}
+\newcommand*{\Feb}{\hep@month{Feb}}
+\newcommand*{\Mar}{\hep@month{Mar}}
+\newcommand*{\Apr}{\hep@month{Apr}}
+\newcommand*{\May}{\hep@month{May}}
+\newcommand*{\Jun}{\hep@month{Jun}}
+\newcommand*{\Jul}{\hep@month{Jul}}
+\newcommand*{\Aug}{\hep@month{Aug}}
+\newcommand*{\Sep}{\hep@month{Sep}}
+\newcommand*{\Oct}{\hep@month{Oct}}
+\newcommand*{\Nov}{\hep@month{Nov}}
+\newcommand*{\Dec}{\hep@month{Dec}}
 %    \end{macrocode}
 %
 % End of date conditional.
@@ -464,8 +464,8 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\addressfont}
 % Define contact information macros.
 %    \begin{macrocode}
-\newcommand\address[1]{\long\gdef\hep@address{#1}}
-\newcommand{\addressfont}{\itshape\small}
+\newcommand*\address[1]{\long\gdef\hep@address{#1}}
+\newcommand*{\addressfont}{\itshape\small}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -473,7 +473,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\hep@address@field}
 % Define "\hep@address@field" macro.
 %    \begin{macrocode}
-\newcommand{\hep@address@field}{
+\newcommand*{\hep@address@field}{
   \ifdef{\hep@address}{\hep@address\\}{}\strut
 }
 %    \end{macrocode}
@@ -485,8 +485,8 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\makelettertitle}
 % Define "\lettertitle" macros.
 %    \begin{macrocode}
-\newcommand\opening[1]{\long\gdef\hep@opening{#1}}
-\newcommand\makelettertitle{{%
+\newcommand*\opening[1]{\long\gdef\hep@opening{#1}}
+\newcommand*\makelettertitle{{%
     \raggedleft\addressfont
     \textbf{\@author}\\
     \hep@address@field
@@ -500,8 +500,8 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\makeletterclosing}
 % Define macros for the letter closing.
 %    \begin{macrocode}
-\newcommand\closing[1]{\long\gdef\hep@closing{#1}}
-\newcommand\makeletterclosing{%
+\newcommand*\closing[1]{\long\gdef\hep@closing{#1}}
+\newcommand*\makeletterclosing{%
   \par\bigskip\hep@closing\par\textbf{\@author}%
 }
 %    \end{macrocode}
@@ -526,9 +526,9 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % Define the "\HUGE" fontsize for the title using the "anyfontsize" package \cite{anyfontsize}.
 %    \begin{macrocode}
 \RequirePackage{anyfontsize}
-\newcommand\HUGE{\@setfontsize\Huge{38}{47}}
-\newcommand{\titlefont}{\HUGE}
-\newcommand{\infofont}{\small}
+\newcommand*\HUGE{\@setfontsize\Huge{38}{47}}
+\newcommand*{\titlefont}{\HUGE}
+\newcommand*{\infofont}{\small}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -536,10 +536,10 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\addtitleline}
 % Define macros for further identity informations.
 %    \begin{macrocode}
-\newcommand{\hep@title@lines}{}
-\newcommand{\addtitleline}[2]{
+\newcommand*{\hep@title@lines}{}
+\newcommand*{\addtitleline}[2]{
   \let\@hep@title@lines\hep@title@lines
-  \expandafter\renewcommand\expandafter\hep@title@lines\expandafter{%
+  \expandafter\renewcommand\expandafter*\expandafter\hep@title@lines\expandafter{%
     \@hep@title@lines\cvline[#1]{#2}%
   }
 }
@@ -553,9 +553,9 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 \def\hep@contact@line{%
   \ifdef{\hep@address}{\hep@address\\[-1.5ex]\strut}{}%
 }
-\newcommand{\addcontactline}[1]{
+\newcommand*{\addcontactline}[1]{
   \let\@hep@contact@line\hep@contact@line
-  \expandafter\renewcommand\expandafter\hep@contact@line\expandafter{%
+  \expandafter\renewcommand\expandafter*\expandafter\hep@contact@line\expandafter{%
     \ifdef{\hep@address}{\@hep@contact@line\\}{}#1%
   }
 }
@@ -567,16 +567,16 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\hep@tail}
 % Define head and tail macros.
 %    \begin{macrocode}
-\newcommand\hep@head[1]{%
+\newcommand*\hep@head[1]{%
   \expandafter\@hep@head\expandafter\expandafter#1 \@nil%
 }%
-\newcommand\@hep@head{}%
+\newcommand*\@hep@head{}%
 \def\@hep@head#1 #2\@nil{#1\unskip}%
 %
-\newcommand\hep@tail[1]{%
+\newcommand*\hep@tail[1]{%
   \expandafter\@hep@tail\expandafter\expandafter#1 \@nil%
 }%
-\newcommand\@hep@tail{}%
+\newcommand*\@hep@tail{}%
 \def\@hep@tail#1 #2\@nil{#2\unskip}%
 %    \end{macrocode}
 % \end{macro}
@@ -586,7 +586,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % Include graphics top aligned using the \software{graphicx} package \cite{graphicx}.
 %    \begin{macrocode}
 \RequirePackage{graphicx}
-\newcommand{\hep@top@include@graphics}[2][]{%
+\newcommand*{\hep@top@include@graphics}[2][]{%
   \raisebox{%
     \dimexpr-\height+\ht\strutbox\relax%
   }{%
@@ -599,7 +599,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\photo}
 % Store photo path.
 %    \begin{macrocode}
-\newcommand\photo[1]{\long\gdef\hep@photo{#1}}
+\newcommand*\photo[1]{\long\gdef\hep@photo{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -622,7 +622,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
         \hep@top@include@graphics[width=\hep@left@width]{\hep@photo}%
       &%
         \@author\newline\newline\infofont%
-        \renewcommand{\cvline}[2][]{##1&##2\\}%
+        \renewcommand*{\cvline}[2][]{##1&##2\\}%
         \noindent%
         \begin{tabular}{@{}r@{: }l@{}}\hep@title@lines\end{tabular}%
       \hep@end\medskip%
@@ -638,7 +638,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{environment}{abstract}
 % Redfine the abstract environment.
 %    \begin{macrocode}
-\AtBeginDocument{\renewcommand{\abstractname}{Summary}}
+\AtBeginDocument{\renewcommand*{\abstractname}{Summary}}
 \renewenvironment{abstract}{\hep@begin\abstractname&}{\hep@end\bigskip}
 %    \end{macrocode}
 % \end{environment}
@@ -685,10 +685,10 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % Load the \software{dashrule} package \cite{dashrule} and define dash properties.
 %    \begin{macrocode}
 \RequirePackage{dashrule}
-\newcommand{\hep@dash@length}{4pt}
-\newcommand{\hep@dash@height}{.5pt}
-\newcommand{\hep@dash@shift}{.6ex}
-\newcommand{\hep@dash@sep}{.5em}
+\newcommand*{\hep@dash@length}{4pt}
+\newcommand*{\hep@dash@height}{.5pt}
+\newcommand*{\hep@dash@shift}{.6ex}
+\newcommand*{\hep@dash@sep}{.5em}
 \newlength{\hep@dash@width}
 \newlength{\hep@dash@seperator}
 %    \end{macrocode}
@@ -698,7 +698,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \end{macro}
 %
 %    \begin{macrocode}
-\providecommand{\sentence}{}
+\providecommand*{\sentence}{}
 %    \end{macrocode}
 %
 % \begin{macro}{\section}
@@ -880,13 +880,13 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % Use the \software{fancyhdr} package \cite{fancyhdr}.
 %    \begin{macrocode}
 \RequirePackage{fancyhdr}
-\renewcommand{\headrulewidth}{0pt}
+\renewcommand*{\headrulewidth}{0pt}
 %    \end{macrocode}
 %
 % \begin{macro}{\cvpart}
 % Define the "\cvpart" macro.
 %    \begin{macrocode}
-\newcommand\cvpart[1]{\long\gdef\hep@part{#1}}
+\newcommand*\cvpart[1]{\long\gdef\hep@part{#1}}
 \cvpart{Curriculum Vitæ}
 %    \end{macrocode}
 %  \end{macro}
@@ -933,7 +933,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % Provide subfile features using the \software{subfiles} package \cite{subfiles}.
 %    \begin{macrocode}
 \RequirePackage{subfiles}
-\newcommand{\insubfile}[1]{\ifx\@onlypreamble\@notprerr\else#1\fi}
+\newcommand*{\insubfile}[1]{\ifx\@onlypreamble\@notprerr\else#1\fi}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1194,7 +1194,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\setlengths}
 % Set bibliography length.
 %    \begin{macrocode}
-\newcommand{\setlengths}{%
+\newcommand*{\setlengths}{%
   \setlength{\labelnumberwidth}{\hep@left@width-\hep@seperator@width}%
   \setlength{\labelwidth}{\labelnumberwidth}%
   \setlength{\leftmargin}{\labelwidth}%
@@ -1211,7 +1211,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\printcvdate}
 % Print date in the left column.
 %    \begin{macrocode}
-\newcommand{\printcvdate}{%
+\newcommand*{\printcvdate}{%
   \printtext{\hfill}%
   \ifkeyword{ongoing}{\printtext{Since} }{}%
   \iffieldundef{day}{}{\printfield{day}\printtext{.\space}}%
@@ -1229,7 +1229,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\printindex}
 % Print index label in the left column.
 %    \begin{macrocode}
-\newcommand{\printindex}{%
+\newcommand*{\printindex}{%
   \printtext[labelnumberwidth]{%
     \printfield{labelprefix}\tstyle\printfield{labelnumber}%
   }%
@@ -1258,7 +1258,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\printissuedate}
 % Print issue and date.
 %    \begin{macrocode}
-\newcommand{\printissuedate}{%
+\newcommand*{\printissuedate}{%
   % \ifhepcv@date
   \printtext{\hfill}%
   \ifkeyword{ongoing}{\printtext{Since}}{}
@@ -1274,7 +1274,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\adjustOrgLocDat}
 % Adjust organisation, location, and Date.
 %    \begin{macrocode}
-\newcommand{\adjustOrgLocDat}{%
+\newcommand*{\adjustOrgLocDat}{%
   \renewbibmacro*{organization+location+date}{%
     \printlist{organization}\setunit*{\addcomma\space}%
     \printlist{location}\setunit*{\addcomma\space}\newunit%
@@ -1286,7 +1286,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 % \begin{macro}{\adjustOrgLocDat}
 % Adjust organisation, location, and Date.
 %    \begin{macrocode}
-\newcommand{\cleardate}{%
+\newcommand*{\cleardate}{%
   \renewbibmacro*{issue+date}{%
     \printfield{issue}%
     \setunit*{\addspace}\newunit

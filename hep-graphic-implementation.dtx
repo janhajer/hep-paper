@@ -28,9 +28,9 @@
 \RequirePackage[l2tabu, orthodox]{nag}
 \documentclass{ltxdoc}
 
-\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
-\renewcommand{\MacroFont}{\codestyle}
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
 \EnableCrossrefs
@@ -193,7 +193,7 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 %    \begin{macrocode}
 \RequirePackage{tikzscale}
 \def\hep@graphic@path{.}
-\newcommand{\graphicpath}[1]{\def\hep@graphic@path{#1}}
+\newcommand*{\graphicpath}[1]{\def\hep@graphic@path{#1}}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\includetikz}
@@ -209,7 +209,7 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
   \includegraphics[#2]{\hep@graphic@path/#3}%
  }%
 }
-\newcommand{\includefeynman}[1]{%
+\newcommand*{\includefeynman}[1]{%
  \vcenter{\hbox{\includegraphics{\hep@graphic@path/#1}}}%
 }
 %    \end{macrocode}
@@ -352,7 +352,7 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 % Must be used in combination with "\setcounter{cyclelistshift}{0}".
 %    \begin{macrocode}
 \newcounter{cyclelistshift}
-\newcommand\cyclelistshift{
+\newcommand*\cyclelistshift{
   \globaldefs=1\relax
 %   \stepcounter{cyclelistshift}
   \addtocounter{cyclelistshift}{1}
@@ -502,7 +502,7 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 % \begin{macro}{\addlegendtitle}
 % Define a legend title macro.
 %    \begin{macrocode}
-\newcommand{\addlegendtitle}[2][]{
+\newcommand*{\addlegendtitle}[2][]{
  \addlegendimage{empty legend}
  \addlegendentry[#1]{\hspace{-7mm}#2}
 }%

@@ -24,9 +24,9 @@
 %<*documentation>
 \documentclass{ltxdoc}
 
-\renewcommand\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
-\AtBeginEnvironment{macrocode}{\renewcommand{\ttdefault}{clmt}}
-\renewcommand{\MacroFont}{\codestyle}
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
 \AtBeginDocument{\DeleteShortVerb{\|}}
 \AtBeginDocument{\MakeShortVerb{\"}}
 \EnableCrossrefs
@@ -154,7 +154,7 @@ Details about the font handling in \hologo{TeX} can be found in \ccite{fntguide}
 
 \bgroup
 \makeatletter
-\renewcommand{\arraystretch}{0}
+\renewcommand*{\arraystretch}{0}
 \setlength{\tabcolsep}{0pt}
 \nodecimals
 \nohexoct
@@ -374,10 +374,10 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 % \begin{macro}{\mathsf}
 % Declare "\mathsf" for serif documents.
 %    \begin{macrocode}
-  \newcommand\hep@font@sf{cmssm}
+  \newcommand*\hep@font@sf{cmssm}
   \DeclareMathAlphabet{\mathsf}{OML}{\hep@font@sf}{m}{it}
   \SetMathAlphabet{\mathsf}{bold}{OML}{\hep@font@sf}{b}{it}
-  \newcommand\hep@textfont@sf{lmss}
+  \newcommand*\hep@textfont@sf{lmss}
   \DeclareMathAlphabet{\mathsftext}{OT1}{\hep@textfont@sf}{m}{n}
   \SetMathAlphabet{\mathsftext}{bold}{OT1}{\hep@textfont@sf}{bx}{n}
 %    \end{macrocode}
@@ -385,11 +385,11 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 % Define fonts for sans-serif documents.
 %    \begin{macrocode}
 \else
-  \newcommand\hep@font@sf{lmr}
-  \newcommand\hep@font@text{lmss}
-  \newcommand\hep@font@math{cmssm}
-  \newcommand\hep@font@symbol{cmsssy}
-  \newcommand\hep@font@extra{cmssex}
+  \newcommand*\hep@font@sf{lmr}
+  \newcommand*\hep@font@text{lmss}
+  \newcommand*\hep@font@math{cmssm}
+  \newcommand*\hep@font@symbol{cmsssy}
+  \newcommand*\hep@font@extra{cmssex}
 %    \end{macrocode}
 % Declare font substitutions.
 %    \begin{macrocode}
@@ -1086,7 +1086,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 %    \begin{macrocode}
 \documentclass{article}
 
-%<testsans>\renewcommand{\familydefault}{\sfdefault}
+%<testsans>\renewcommand*{\familydefault}{\sfdefault}
 \usepackage[oldstyle]{hep-font}
 \usepackage{hep-math-font}
 
