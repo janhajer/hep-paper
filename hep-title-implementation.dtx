@@ -18,8 +18,8 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-title}[2024/11/01 v1.3 Extend title page macros]
-%<documentation>\ProvidesFile{hep-title-documentation.tex}[2024/11/01 v1.3 hep-title documentation]
+%<package>\ProvidesPackage{hep-title}[2025/09/01 v1.4 Extend title page macros]
+%<documentation>\ProvidesFile{hep-title-documentation.tex}[2025/09/01 v1.4 hep-title documentation]
 %
 %<*documentation>
 
@@ -55,7 +55,7 @@
 %
 % \fi
 %
-% \CheckSum{945}
+% \CheckSum{1004}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -77,6 +77,7 @@
 % \changes{v1.1}{2022/11/01}{Bug fixes.}
 % \changes{v1.2}{2023/07/01}{Bug fixes.}
 % \changes{v1.3}{2024/11/01}{Bug fixes.}
+% \changes{v1.4}{2025/09/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -229,22 +230,64 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 %
 % \subsection{Preprint and title}
 %
-% \subsubsection{Preprint}
+% \subsubsection{Preprint and Reprint}
+%
+% \begin{macro}{\reprintfont}
+% Define the "\reprintfont" macro.
+%    \begin{macrocode}
+\let\hep@reprint@font\relax
+\newcommand*{\reprintfont}[1]{\def\hep@reprint@font{#1}}
+\reprintfont{\scshape\small}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\reprint}
+% \begin{macro}{\doi}
+% Define the "\preprint" macro using the \software{varwidth} package \cite{varwidth}.
+%    \begin{macrocode}
+\let\hep@reprint\relax
+\newcommand*\reprint[1]{
+  \@ifundefined{hep@reprint}{%
+    \gdef\hep@reprint{#1}%
+  }{%
+    \apptocmd{\hep@reprint}{\\#1}{}{}%
+  }%
+}
+\newcommand*\doi[1]{\reprint{\textsc{doi}: \online{https://doi.org/#1}{#1}}}
+\newcommand*{\hep@reprint@box}{%
+  \begin{varwidth}{\textwidth}%
+    \hep@reprint@font\hep@reprint%
+  \end{varwidth}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
 %
 % \begin{macro}{\preprintfont}
 % Define the "\preprintfont" macro.
 %    \begin{macrocode}
 \let\hep@preprint@font\relax
 \newcommand*{\preprintfont}[1]{\def\hep@preprint@font{#1}}
-\preprintfont{\scshape\small}
+\preprintfont{\scshape\small\raggedleft}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\preprint}
+% \begin{macro}{\arxiv}
 % Define the "\preprint" macro using the \software{varwidth} package \cite{varwidth}.
 %    \begin{macrocode}
+\RequirePackage{etoolbox}
 \let\hep@preprint\relax
-\newcommand*\preprint[1]{\def\hep@preprint{#1}}
+\newcommand*\preprint[1]{%
+  \@ifundefined{hep@preprint}{%
+    \gdef\hep@preprint{#1}%
+  }{%
+    \apptocmd{\hep@preprint}{\\#1}{}{}%
+  }%
+}
+\newcommand*\arxiv[1]{%
+  \preprint{\textsc{arXiv}: \online{https://arxiv.org/abs/#1}{#1}}%
+}
 \RequirePackage{varwidth}
 \newcommand*{\hep@preprint@box}{%
   \begin{varwidth}{\textwidth}%
@@ -253,8 +296,10 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 }
 %    \end{macrocode}
 % \end{macro}
+% \end{macro}
 %
 % \begin{macro}{\placepreprint}
+% \begin{macro}{\placereprint}
 % Places a preprint number in the top right corner of the title page using the \software{calc} \cite{calc}, \software{atbegshi} \cite{atbegshi}, and \software{picture} \cite{picture} packages.
 %    \begin{macrocode}
 \RequirePackage{calc}
@@ -268,7 +313,16 @@ The "\preprintfont" macro can be used to change the font of the preprint.
     ){\normalfont\hep@preprint@box}
   }
 }
+\newcommand*{\placereprint}{%
+  \AtBeginShipoutFirst{%
+    \put(
+      \oddsidemargin      ,
+      -2pt-\topmargin-\heightof{\hep@reprint@box}
+    ){\normalfont\hep@reprint@box}
+  }
+}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \subsubsection{Series}
@@ -309,7 +363,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 % Place the preprint and the series title using "\maketitlehooka".
 %    \begin{macrocode}
 \renewcommand*{\maketitlehooka}{%
-  \placepreprint\vspace{-\bigskipamount}%
+  \placereprint\placepreprint\vspace{-\bigskipamount}%
   \@ifundefined{hep@series}{}{%
     \hep@pre@series\hep@series\hep@post@series%
   }%
@@ -365,7 +419,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 %    \begin{macrocode}
 \RequirePackage{authblk}
 \newcounter{editors}
-\newcommand*\hep@editorlist{}
+\newcommand\hep@editorlist{}
 \newcommand*\hep@editors{}
 \@namedef{hep@editor@sep1}{}
 \@namedef{hep@editor@sep2}{\Authand}
@@ -544,7 +598,7 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 %
 %    \begin{macrocode}
 \newcounter{endorsers}
-\newcommand*\hep@endorserlist{}
+\newcommand\hep@endorserlist{}
 \newcommand*\hep@endorsers{}
 \@namedef{hep@editor@sep1}{}
 \@namedef{hep@editor@sep2}{\Authand}
@@ -851,6 +905,10 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 \usepackage{hep-title}
 \usepackage{hyperref}
 \def\BackrefFootnoteTag{}\usepackage{footnotebackref}
+
+\doi{10.1234/5678}
+
+\arxiv{1234.5678}
 
 \preprint{Preprint}
 

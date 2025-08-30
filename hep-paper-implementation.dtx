@@ -18,8 +18,8 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-paper}[2024/11/01 v2.3 Publications in High Energy Physics]
-%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2024/11/01 v2.3 HEP-Paper documentation]
+%<package>\ProvidesPackage{hep-paper}[2025/09/01 v2.4 Publications in High Energy Physics]
+%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2025/09/01 v2.4 HEP-Paper documentation]
 %
 %<*documentation>
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -52,7 +52,7 @@
 %
 % \fi
 %
-% \CheckSum{461}
+% \CheckSum{641}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -83,6 +83,7 @@
 % \changes{v2.1}{2022/11/01}{Bug fixes in the underlying packages.}
 % \changes{v2.2}{2023/07/01}{Bug fixes in the underlying packages.}
 % \changes{v2.3}{2024/11/01}{Bug fixes in the underlying packages.}
+% \changes{v2.4}{2025/09/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -681,7 +682,9 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \begin{macrocode}
 \@ifclassloaded{beamer}{\setkeys{hep}{beamer}}{}
 \ifhep@beamer
-  \setkeys{hep}{defaults, title=false, references=false, sansserif, font=default}
+  \setkeys{hep}{%
+    defaults, title=false, references=false, sansserif, font=default%
+  }
   \@ifpackageloaded{beamerbasefont}{\usefonttheme{professionalfonts}}{}
   \setbeamertemplate{navigation symbols}{}
 \fi
@@ -693,7 +696,14 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \@ifclassloaded{revtex4-1}{\setkeys{hep}{revtex}}{}
 \@ifclassloaded{revtex4-2}{\setkeys{hep}{revtex}}{}
 \ifhep@revtex
-  \setkeys{hep}{defaults, title=false, bibliography=false, lang=american}
+  \setkeys{hep}{
+    defaults,
+    font=default,
+    title=false,
+    bibliography=false,
+    lang=american,
+  }
+  \RequirePackage{hep-revtex}
 \fi
 %    \end{macrocode}
 %
@@ -714,20 +724,25 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \begin{macrocode}
 \ifhep@sissa
   \setkeys{hep}{defaults, title=false, bibliography=false}
-  \PassOptionsToPackage{
-    colorlinks=true, linktocpage=true, pdfproducer=medialab, pdfa=true,
-    urlcolor=blue, anchorcolor=blue, citecolor=blue, filecolor=blue,
-    linkcolor=blue, menucolor=blue, pagecolor=blue
-  }{hyperref}
-  \AtBeginDocument{\renewcommand*{\foreignabbrfont}{}}
+  \RequirePackage{hep-sissa}
 \fi
 \ifhep@jhep
     \PassOptionsToPackage{\hep@paper paper}{geometry}
     \RequirePackage{geometry}
     \geometry{
-      offset=0in,textheight=.762\paperheight,textwidth=.72\paperwidth
+      offset=0in,
+      top=.1\paperheight,
+      textheight=.756\paperheight,
+      textwidth=.72\paperwidth,
     }
 \fi
+%    \end{macrocode}
+%
+% \section{Math}
+%
+% Load the \software{hep-math} package \cite{hep-math}.
+%    \begin{macrocode}
+\ifhep@physics\RequirePackage{hep-math}\fi
 %    \end{macrocode}
 %
 % \section{Font} \label{sec:font}
@@ -798,19 +813,12 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \RequirePackage{hep-text}
 %    \end{macrocode}
 %
-% \section{Math}
-%
-% Load the \software{hep-math} package \cite{hep-math}.
-%    \begin{macrocode}
-\ifhep@physics\RequirePackage{hep-math}\fi
-%    \end{macrocode}
-%
 % \section{Floats}
 %
 % Adjust the \hologo{LaTeX} float placement defaults using the \software{hep-float} package \cite{hep-float}.
 %    \begin{macrocode}
-\PassOptionsToPackage{
-  manualplacement=\ifhep@manualplacement true\else false \fi
+\PassOptionsToPackage{%
+  \ifhep@manualplacement local\else global\fi%
 }{hep-float}
 \RequirePackage{hep-float}
 %    \end{macrocode}
@@ -850,18 +858,6 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \fi
 %    \end{macrocode}
 %
-% Readjust the document captions to look like the original revtex captions using the \software{ragged2e} package \cite{ragged2e}.
-%    \begin{macrocode}
-\ifhep@revtex
-  \RequirePackage{ragged2e}
-  \DeclareCaptionFormat{revtex}{#1#2\justifying{#3}}
-  \captionsetup{font=small, format=revtex}
-  \captionsetup[sub]{font=footnotesize, format=plain}
-  \renewcommand*{\figurename}{Figure}
-  \renewcommand*{\tablename}{Table}
-\fi
-%    \end{macrocode}
-%
 % \section{Title page}
 %
 % Adjust the title page using the \software{hep-title} package \cite{hep-title}.
@@ -890,24 +886,6 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \RequirePackage{hep-reference}
 %    \end{macrocode}
 %
-% Set the \PDF meta data according to the paper information and ensure that unnecessary information is suppressed.
-%    \begin{macrocode}
-\ifhep@revtex
-  \AtBeginShipout{\hypersetup{pdftitle={\@title}}}
-\else
-  \ifhep@beamer\else
-    \AtBeginDocument{\hypersetup{pdftitle={\@title}}}
-  \fi
-\fi
-\ifhep@title
-  \AtBeginDocument{\hypersetup{pdfauthor=\AB@authlist}}
-\else
-  \ifhep@beamer\else
-    \ifhep@pos\else\AtBeginDocument{\hypersetup{pdfauthor={\@author}}}\fi
-  \fi
-\fi
-%    \end{macrocode}
-%
 % End of "references" conditional
 %    \begin{macrocode}
 \fi
@@ -924,6 +902,238 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 %</package>
 %
+% \section{SISSA compatibility}
+%
+%<*sissa>
+%
+%\begin{macro}{\arxiv}
+% Provide the "\arxiv" macro.
+%    \begin{macrocode}
+\let\arxiv\arxivnumber
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\subtitle}
+% Provide the "\subtitle" macro.
+%    \begin{macrocode}
+\newcommand*{\subtitle}[1]{%
+  \let\hep@title\@title%
+  \title{\hep@title: #1}%
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\author}
+% Ensure that the affiliation superscript is not in bold font.
+%    \begin{macrocode}
+\renewcommand{\author}[2][]{%
+  \if!#1!%
+    \auth@toks=\expandafter{\the\auth@toks#2\ }%
+  \else%
+    \auth@toks=\expandafter{%
+      \the\auth@toks#2\textsuperscript{\textnormal{\textit{#1}}}\
+    }%
+  \fi%
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{macro}{\email}
+% Provide the "\email" macro.
+%    \begin{macrocode}
+\newcommand*\email[2][]{%
+  \global\emailaddtrue%
+  \ifnum\theemail@counter>0%
+    \global\email@toks=\expandafter{\the\email@toks, \@email{#2}}%
+  \else%
+    \global\email@toks=\expandafter{\the\email@toks\@email{#2}}%
+  \fi%
+  \stepcounter{email@counter}%
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\begin{environment}{abstract}
+% Define an "abstract" environment that works within the document using the \software{environ} \cite{environ} and a new auxiliary file.
+%    \begin{macrocode}
+\RequirePackage{environ}
+\newcommand{\hep@abstract@file}{\jobname.abs}
+\newwrite\hep@write@abstract
+\AtBeginDocument{%
+  \RenewEnviron{abstract}{%
+    \immediate\openout\hep@write@abstract=\hep@abstract@file%
+    \immediate\write\hep@write@abstract{\unexpanded\expandafter{\BODY}}%
+    \immediate\closeout\hep@write@abstract%
+  }%
+}
+\IfFileExists{\hep@abstract@file}{%
+  \gdef\@abstract{\input{\hep@abstract@file}}%
+}{}
+%    \end{macrocode}
+%\end{environment}
+%
+%\begin{macro}{\tableofcontents}
+%\begin{macro}{\listoffigures}
+%\begin{macro}{\listoftables}
+% Disable the "\tableofcontents", "\listoffigures", "\listoftables" macros since the "\maketitle" macro takes care of the journal style.
+%    \begin{macrocode}
+\let\hep@make@title\maketitle
+\def\maketitle{\hep@make@title\renewcommand*{\tableofcontents}{}}
+\renewcommand*{\listoffigures}{}
+\renewcommand*{\listoftables}{}
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%
+% Ensure that hyperlinks are colored correctly.
+%    \begin{macrocode}
+\AtEndPreamble{
+  \hypersetup{
+    colorlinks=true,
+    linktocpage=true
+    pdfproducer=medialab,
+    pdfa=true,
+    urlcolor=blue,
+    anchorcolor=blue,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    menucolor=blue,
+    pagecolor=blue
+  }
+}
+\AtEndPreamble{\@ifpackageloaded{cleveref}{\@cref@nameinlinkfalse}{}}
+\AtEndPreamble{\@ifpackageloaded{glossaries}{\glsdisablehyper}{}}
+\AtEndPreamble{\@ifpackageloaded{foreign}{
+  \renewcommand*{\foreignabbrfont}{}
+}{}}
+%    \end{macrocode}
+%
+% Adjust the lining style in the bibliography.
+%    \begin{macrocode}
+\@ifpackageloaded{nfssext-cfr}{\renewcommand{\bibnumfmt}[1]{[\textt{#1}]}}{}
+%    \end{macrocode}
+%
+%</sissa>
+%
+% \section{Revtex}
+%
+%<*revtex>
+%
+% Prevent adjustment of paper size.
+%    \begin{macrocode}
+\PassOptionsToPackage{size=default}{hep-font}
+%    \end{macrocode}
+%
+% Provide the "\arxiv" macro.
+%    \begin{macrocode}
+\newcommand*\arxiv[1]{\preprint{%
+    \textsc{arXiv}: \href{https://arxiv.org/abs/#1}{\nolinkurl{#1}}%
+}}
+%    \end{macrocode}
+%
+% Provide the "\subtitle" macro.
+%    \begin{macrocode}
+\newcommand*{\subtitle}[1]{\let\hep@title\@title\title{\hep@title: #1}}
+%    \end{macrocode}
+%
+% Load the "hyperref" package \cite{hyperref} in order to avoid compilation errors.
+%    \begin{macrocode}
+\RequirePackage{hyperref}
+%    \end{macrocode}
+%
+% Allow definition of meta data in the preamble.
+%    \begin{macrocode}
+\frontmatter@init
+\let\frontmatter@init\@empty
+%    \end{macrocode}
+%
+% Redefine the "\author" macro.
+%    \begin{macrocode}
+\renewcommand*{\author}[2][]{\frontmatter@author{#2}}
+%    \end{macrocode}
+%
+% Redefine the "\@affiliation" macro.
+%    \begin{macrocode}
+\renewcommand*\@affiliation[2][]{%
+  \endgroup%
+  \let\@AF@join\@affil@join%
+  \@affil@def{#2}%
+}%
+%    \end{macrocode}
+%
+% Provide an abstract environment that can be called after "\maketitle" using the \software{environ}  package \cite{environ} and an additional auxiliary file.
+%    \begin{macrocode}
+\RequirePackage{environ}
+\newcommand{\hep@abstract@file}{\jobname.abs}
+\newwrite\hep@write@abstract
+% \let\hep@frontmatter@abstractfont\frontmatter@abstractfont
+% \def\frontmatter@abstractfont{\hep@frontmatter@abstractfont\rmfamily}
+\let\hep@make@title\maketitle%
+\def\maketitle{\hep@make@title%
+  \NewEnviron{abstract}{%
+    \immediate\openout\hep@write@abstract=\hep@abstract@file%
+    \immediate\write\hep@write@abstract{\unexpanded\expandafter{\BODY}}%
+    \immediate\closeout\hep@write@abstract%
+    \let\abstract\@undefined\let\endabstract\@undefined
+  }%
+}
+\IfFileExists{\hep@abstract@file}{\AtBeginDocument{%
+  \begin{frontmatter@abstract}%
+    \input{\hep@abstract@file}%
+  \end{frontmatter@abstract}%
+}}{}
+%    \end{macrocode}
+% Prevent the abstract to move to the second page in preprint mode.
+%    \begin{macrocode}
+\RequirePackage{etoolbox}
+\patchcmd{\frontmatter@abstract@produce}{
+  \vskip200\p@\@plus1fil
+  \penalty-200\relax
+}{
+  \vskip225\p@\@plus1fil
+}{}{}
+%    \end{macrocode}
+%
+% Ensure that the hyperlinks are colored correctly using the software{xcolor} package \cite{xcolor}.
+%    \begin{macrocode}
+\RequirePackage{xcolor}
+\definecolor{linkcolor}{RGB}{46,48,146}
+\AtEndPreamble{
+\@ifpackageloaded{hyperref}{
+\hypersetup{
+  colorlinks=true,
+  linkcolor=linkcolor,
+  citecolor=linkcolor,
+  urlcolor=linkcolor,
+  linktocpage=true
+}}{}}
+\AtEndPreamble{\@ifpackageloaded{cleveref}{\@cref@nameinlinkfalse}{}}
+\AtEndPreamble{\@ifpackageloaded{glossaries}{\glsdisablehyper}{}}
+\AtBeginShipout{\hypersetup{pdftitle={\@title}}}
+%    \end{macrocode}
+%
+% Ensure correct formatting of float captions using the \software{ragged2e} package \cite{ragged2e}.
+%    \begin{macrocode}
+\AtBeginDocument{\@ifpackageloaded{caption}{
+  \RequirePackage{ragged2e}
+  \DeclareCaptionFormat{revtex}{#1#2\justifying{#3}}
+  \captionsetup{font=small, format=revtex}
+  \captionsetup[sub]{font=small, format=plain}
+}{}}
+%    \end{macrocode}
+%
+% Fixing the names of figures and tables.
+%    \begin{macrocode}
+\AfterEndPreamble{
+  \renewcommand{\figurename}{FIG.}
+  \renewcommand{\tablename}{TABLE}
+}
+%    \end{macrocode}
+%
+%</revtex>
+%
 % \section{Tests}
 %
 % \subsection{JHEP}
@@ -937,20 +1147,25 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \usepackage[lang=english]{hep-paper}
 \usepackage[math]{blindtext}
 
-\begin{document}
-
 \title{Title}
 
-\emailAdd{first@email.com}
 \author[a]{First author}
-\emailAdd{second@email.com}
-\author[b]{Second author}
 \affiliation[a]{First affiliation}
-\affiliation[b]{Second affiliation}
+\email{first@email.com}
 
-\abstract{\blindtext}
+\author[b]{Second author}
+\affiliation[b]{Second affiliation}
+\email{second@email.com}
+
+\arxiv{1234.5678}
+
+\begin{document}
 
 \maketitle
+
+\begin{abstract}
+\blindtext
+\end{abstract}
 
 \Blinddocument
 
@@ -1112,8 +1327,6 @@ Second affiliation}
 \usepackage{hep-paper}
 \usepackage[math]{blindtext}
 
-\begin{document}
-
 \title{Title}
 
 \author{First author}
@@ -1126,11 +1339,15 @@ Second affiliation}
 \author{Third author}
 \affiliation{Fourth affiliation}
 
+\arxiv{1234.5678}
+
+\begin{document}
+
+\maketitle
+
 \begin{abstract}
 \blindtext
 \end{abstract}
-
-\maketitle
 
 \Blinddocument
 
@@ -1231,7 +1448,7 @@ part of all distributions of LaTeX version 2005/12/01 or later.
 %</readme>
 %
 % \Finale
-
+%
 \endinput
 
 % \PrintIndex

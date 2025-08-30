@@ -18,8 +18,8 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-float}[2024/11/01 v1.3 Float adjustments]
-%<documentation>\ProvidesFile{hep-float-documentation.tex}[2024/11/01 v1.3 hep-float documentation]
+%<package>\ProvidesPackage{hep-float}[2025/09/01 v1.4 Float adjustments]
+%<documentation>\ProvidesFile{hep-float-documentation.tex}[2025/09/01 v1.4 hep-float documentation]
 %
 %<*documentation>
 \documentclass{ltxdoc}
@@ -49,7 +49,7 @@
 %
 % \fi
 %
-% \CheckSum{355}
+% \CheckSum{364}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -71,6 +71,7 @@
 % \changes{v1.1}{2022/11/01}{Bug fixes.}
 % \changes{v1.2}{2023/07/01}{Bug fixes.}
 % \changes{v1.3}{2024/11/01}{Bug fixes.}
+% \changes{v1.4}{2025/09/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -110,8 +111,8 @@ Automatic float placement is adjusted to place a single float at the top of page
 "\renewcommand{\floatpagefraction}{.8}" \hfill float pages must be full (default 0.5)
 
 The most useful float placement is usually archived by placing the float \emph{in front} of the paragraph it is referenced in first.
-\DescribeMacro{manualplacement}
-Additionally, manual float placement can be deactivated using the "manualplacement" package option.
+\DescribeMacro{local}
+Additionally, manual float placement can be deactivated using the "local" package option.
 
 \DescribeMacro{\raggedright}
 The float environments have been adjusted to center their content.
@@ -189,10 +190,11 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 }
 %    \end{macrocode}
 %
-% \begin{macro}{manualplacement}
-% Provide the "manualplacement" option for reactivating the manual placement of floats.
+% \begin{macro}{local}
+% Provide the "local" option for reactivating the manual placement of floats.
 %    \begin{macrocode}
-\DeclareBoolOption[true]{manualplacement}
+\DeclareBoolOption[true]{local}
+\DeclareComplementaryOption{global}{local}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -214,26 +216,34 @@ If the graphics are located in a sub-folder its path can be indicated by "\graph
 % \begin{environment}{figure}
 % \begin{environment}{table}
 % Center the content of "figure" and "table" environments.
-% Ignore the manual placement if the "manualplacement" option is set to false.
+% Ignore the manual placement if the "local" option is set to false.
 %    \begin{macrocode}
-\let\hep@figure\figure%
-\let\end@hep@figure\endfigure%
-\let\hep@table\table%
-\let\end@hep@table\endtable%
-\ifhepfloat@manualplacement%
+\ifhepfloat@local%
   \renewenvironment{figure}[1][tbp]{%
-    \hep@figure[#1]\centering\small%
-    }{\end@hep@figure}%
+    \@float{figure}[#1]\centering\small%
+  }{\end@float}
+  \renewenvironment{figure*}[1][tbp]{%
+    \@dblfloat{figure}[#1]\centering\small%
+  }{\end@dblfloat}
   \renewenvironment{table}[1][tbp]{%
-    \hep@table[#1]\centering\small%
-  }{\end@hep@table}%
+    \@float{table}[#1]\centering\small%
+  }{\end@float}
+  \renewenvironment{table*}[1][tbp]{%
+    \@dblfloat{table}[#1]\centering\small%
+  }{\end@dblfloat}
 \else%
   \renewenvironment{figure}[1][]{%
-    \hep@figure\centering\small%
-  }{\end@hep@figure}%
+    \@float{figure}\centering\small%
+  }{\end@float}
+  \renewenvironment{figure*}[1][]{%
+    \@dblfloat{figure}\centering\small%
+  }{\end@dblfloat}
   \renewenvironment{table}[1][]{%
-    \hep@table\centering\small%
-  }{\end@hep@table}
+    \@float{table}\centering\small%
+  }{\end@float}
+  \renewenvironment{table*}[1][]{%
+    \@dblfloat{table}\centering\small%
+  }{\end@dblfloat}
 \fi%
 %    \end{macrocode}
 % \end{environment}

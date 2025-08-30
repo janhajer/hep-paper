@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019-2023 by Jan Hajer
+% Copyright (C) 2019-2025 by Jan Hajer
 % -----------------------------------
 %
 % This file may be distributed and/or modified under the
@@ -18,9 +18,9 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-bibliography}[2024/11/01 v1.3 HEP-Bibliography]
-%<datamodel>\ProvidesFile{hep-bibliography.dbx}[2024/11/01 v1.3 HEP-Bibliography biblatex data model]
-%<documentation>\ProvidesFile{hep-bibliography-documentation.tex}[2024/11/01 v1.3 HEP-Bibliography documentation]
+%<package>\ProvidesPackage{hep-bibliography}[2025/09/01 v1.4 HEP-Bibliography]
+%<datamodel>\ProvidesFile{hep-bibliography.dbx}[2025/09/01 v1.4 HEP-Bibliography biblatex data model]
+%<documentation>\ProvidesFile{hep-bibliography-documentation.tex}[2025/09/01 v1.4 HEP-Bibliography documentation]
 %
 %<*documentation>
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -74,6 +74,7 @@
 % \changes{v1.1}{2022/11/01}{Bug fixes.}
 % \changes{v1.2}{2023/07/01}{Bug fixes.}
 % \changes{v1.3}{2024/11/01}{Bug fixes.}
+% \changes{v1.4}{2025/09/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -1017,6 +1018,47 @@ Errata can be included using the "related" feature.
     pages = "206",
     year = "1976",
     options = {skipbib=true}
+}
+
+@article{test,
+    author = "author",
+    title = "title",
+    journaltitle = "journal title",
+    year = "2000",
+    translator = "translator",
+    annotator = "annotator",
+    commentator = "commentator",
+    subtitle = "subtitle",
+    titleaddon = "titleaddon",
+    editor = "editor",
+    editora = "editora",
+    editorb = "editorb",
+    editorc = "editorc",
+    journalsubtitle = "journalsubtitle",
+    journaltitleaddon = "journaltitleaddon",
+    issuetitle = "issuetitle",
+    issuesubtitle = "issuesubtitle",
+    issuetitleaddon = "issuetitleaddon",
+    language = "language",
+    origlanguage = "origlanguage",
+    series = "series",
+    volume = "volume",
+    number = "number",
+    eid = "eid",
+    issue = "issue",
+    month = "1",
+    pages = "100",
+    version = "1",
+    note = "note",
+    issn = "issn",
+    addendum = "addendum",
+    pubstate = "pubstate",
+    doi = "doi",
+    eprint = "eprint",
+    eprintclass = "eprintclass",
+    eprinttype = "eprinttype",
+    url = "url",
+    urldate = "2000",
 }
 \end{filecontents}
 \bibliography{\jobname}

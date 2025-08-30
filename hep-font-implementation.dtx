@@ -18,8 +18,8 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-font}[2024/11/01 v1.3 hep-font]
-%<documentation>\ProvidesFile{hep-font-documentation.tex}[2024/11/01 v1.3 hep-font documentation]
+%<package>\ProvidesPackage{hep-font}[2025/09/01 v1.4 hep-font style file]
+%<documentation>\ProvidesFile{hep-font-documentation.tex}[2025/09/01 v1.4 hep-font documentation]
 %
 %<*documentation>
 \documentclass{ltxdoc}
@@ -52,7 +52,7 @@
 %
 % \fi
 %
-% \CheckSum{501}
+% \CheckSum{768}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -74,6 +74,7 @@
 % \changes{v1.1}{2022/11/01}{Bug fixes.}
 % \changes{v1.2}{2023/07/01}{Bug fixes.}
 % \changes{v1.3}{2024/11/01}{Bug fixes.}
+% \changes{v1.4}{2025/09/01}{Bug fixes.}
 %
 % \ifshort
 %<*documentation>
@@ -120,7 +121,7 @@ The \software{microtype} \cite{microtype} optimizations are activated.
 
 The \hologo{LaTeX} \NFSS is extended with the \software{nfssext-cfr} package \cite{nfssext-cfr}.
 
-The \LM font is loaded using the \software{cfr-lm} \cite{cfr-lm}  and \software{lmodern} \cite{lmodern} packages for \hologo{pdfTeX} and \hologo{LuaTeX}, respectively.
+The \LM font is loaded using the \software{cfr-lm}  package \cite{cfr-lm} for \hologo{pdfTeX}.
 
 The text companion fonts are loaded \cite{textcomp}.
 
@@ -199,28 +200,7 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 \@ifpackageloaded{jheppub}{\setkeys{hepfont}{size=default}}{}
 %    \end{macrocode}
 %
-% \begin{macro}{\ifxetexorluatex}
-% Load the \software{ifluatex} \cite{ifluatex} and \software{ifxetex} \cite{ifxetex} packages.
-% Define the "\ifxetexorluatex" conditional checking if the package is executed by \hologo{LuaLaTeX} or \hologo{XeLaTeX}.
-%    \begin{macrocode}
-\RequirePackage{ifluatex}
-\RequirePackage{ifxetex}
-\newif\ifxetexorluatex
-\ifxetex\xetexorluatextrue
-\else\ifluatex\xetexorluatextrue
-  \else\xetexorluatexfalse\fi
-\fi
-%    \end{macrocode}
-% \end{macro}
-%
-% Pick the correct font encoding depending on the engine used and load the \software{fontenc} package \cite{fontenc} with this encoding.
-% For details of the font encoding see \cite{encguide}.
-%    \begin{macrocode}
-\def\hepfont@encoding{T\ifxetexorluatex U\else 1\fi}
-\PassOptionsToPackage{\hepfont@encoding}{fontenc}
-\RequirePackage{fontenc}
-%    \end{macrocode}
-% Switch document to sans-serif font if requested using the \software{pdftexcmds} package \cite{pdftexcmds}.
+% Switch text size to requested value using the \software{pdftexcmds} package \cite{pdftexcmds}.
 %    \begin{macrocode}
 \RequirePackage{pdftexcmds}
 \ifnum\pdf@strcmp{\hepfont@size}{default}=0\else
@@ -238,93 +218,122 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
   \input{size\hepfont@pt@size.clo}
 \fi
 %    \end{macrocode}
+%
+% \subsection{\hologo{LuaLaTeX} or \hologo{XeLaTeX}}
+%
+% Load the \software{iftex} package \cite{iftex} and check if \hologo{LuaLaTeX} or \hologo{XeLaTeX} are running
+%    \begin{macrocode}
+\RequirePackage{iftex}
+\iftutex
+%    \end{macrocode}
+% Load the \software{fontsetup} package \cite{fontsetup} which lodas in turn the \software{fontspec} \cite{fontspec} and \software{unicode-math} \cite{unicode-math} packages.
+%    \begin{macrocode}
+  \RequirePackage{fontspec}
+  \ifhepfont@lining\else
+    \defaultfontfeatures{Numbers=OldStyle}
+  \fi
+  \PassOptionsToPackage{
+    math-style=ISO,
+    bold-style=ISO,
+    sans-style=italic
+  }{unicode-math}
+  \PassOptionsToPackage{
+    \ifhepfont@sans sansdefault\else olddefault\fi
+  }{fontsetup}
+  \RequirePackage{fontsetup}
+%    \end{macrocode}
+% Define numeral macros.
+%    \begin{macrocode}
+  \DeclareRobustCommand{\pstyle}{%
+    \not@math@alphabet\pstyle\relax%
+    \addfontfeatures{Numbers=Proportional}%
+  }
+  \DeclareRobustCommand{\tstyle}{%
+    \not@math@alphabet\tstyle\relax%
+    \addfontfeatures{Numbers=Monospaced}%
+  }
+  \DeclareRobustCommand{\ostyle}{%
+    \not@math@alphabet\ostyle\relax%
+    \addfontfeatures{Numbers=OldStyle}%
+  }
+  \DeclareRobustCommand{\lstyle}{%
+    \not@math@alphabet\lstyle\relax%
+    \addfontfeatures{Numbers=Lining}%
+  }
+  \DeclareRobustCommand{\postyle}{\pstyle\ostyle}
+  \DeclareRobustCommand{\plstyle}{\pstyle\lstyle}
+  \DeclareRobustCommand{\tostyle}{\tstyle\ostyle}
+  \DeclareRobustCommand{\tlstyle}{\tstyle\lstyle}
+  \DeclareRobustCommand{\tmstyle}{\ttfamily}
+  \DeclareRobustCommand{\tvstyle}{\ttfamily}
+  \DeclareTextFontCommand{\textl}{\lstyle}
+  \DeclareTextFontCommand{\texto}{\ostyle}
+  \DeclareTextFontCommand{\textp}{\pstyle}
+  \DeclareTextFontCommand{\textt}{\tstyle}
+  \DeclareTextFontCommand{\textpl}{\plstyle}
+  \DeclareTextFontCommand{\textpo}{\postyle}
+  \DeclareTextFontCommand{\texttl}{\tlstyle}
+  \DeclareTextFontCommand{\textto}{\tostyle}
+%    \end{macrocode}
+%
+% \subsection{\hologo{pdfLaTeX}}
+%
+%    \begin{macrocode}
+\else
+%    \end{macrocode}
+%
+% Load the \software{inputenc} package \cite{inputenc}.
+%    \begin{macrocode}
+  \PassOptionsToPackage{utf8}{inputenc}
+  \RequirePackage{inputenc}
+%    \end{macrocode}
+%
+% Pick the correct font encoding depending on the engine used and load the \software{fontenc} package \cite{fontenc} with this encoding.
+% For details of the font encoding see \cite{encguide}.
+%    \begin{macrocode}
+  \def\hepfont@encoding{T1}
+  \PassOptionsToPackage{\hepfont@encoding}{fontenc}
+  \RequirePackage{fontenc}
+%    \end{macrocode}
 % Switch document to sans-serif font if requested.
 %    \begin{macrocode}
-\ifhepfont@sans
-  \renewcommand*{\familydefault}{\sfdefault}
-\fi
+  \ifhepfont@sans
+    \renewcommand*{\familydefault}{\sfdefault}
+  \fi
 %    \end{macrocode}
-% Fix the remaining \CM \cite{cm} fonts using the \software{fix-cm} package \cite{fix-cm} and load the \software{microtype} font optimizations \cite{microtype}.
+% Switch to the \LM font using the \software{cfr-lm} package \cite{cfr-lm}
+% Additionally, some warnings are silenced using the \software{silence} \cite{silence} and \software{etoolbox} \cite{etoolbox} packages.
 %    \begin{macrocode}
-\RequirePackage{fix-cm}
-\RequirePackage{microtype}
-%    \end{macrocode}
-% Switch to the \LM font using the \software{cfr-lm} \cite{cfr-lm} or \software{lmodern} \cite{lmodern} packages depending on the \hologo{TeX} engine.
-% In both cases the \NFSS is extended using the \software{nfssext-cfr} \cite{nfssext-cfr} package.
-%    \begin{macrocode}
-\ifxetexorluatex
-  \RequirePackage{nfssext-cfr}
-  \RequirePackage{lmodern}
-\else
+  \RequirePackage{etoolbox}
+  \RequirePackage{silence}
+  \robustify\@latex@warning@no@line
+  \robustify\sl@StoreMessage
+  \WarningFilter{nfssext-cfr}{Patching font initialisation macro for serif.}
+  \WarningFilter{nfssext-cfr}{Patching font initialisation macro for sans.}
+  \WarningFilter{nfssext-cfr}{Patching font initialisation macro for typewriter.}
+  \WarningFilter{nfssext-cfr}{Overwriting kernel definition of \swshape (new)}
   \ifhepfont@lining
     \PassOptionsToPackage{rm={lining},sf={lining},tt={lining}}{cfr-lm}
   \fi
   \RequirePackage{cfr-lm}
-\fi
 %    \end{macrocode}
-% Ensure that the table of contest uses tabular figures using the \software{xpatch} package \cite{xpatch}.
+% Fix the remaining \CM \cite{cm} fonts using the \software{fix-cm} package \cite{fix-cm}
 %    \begin{macrocode}
-\RequirePackage{xpatch}
-\xpretocmd{\@dottedtocline}{\tstyle}{}{}
-\xpatchcmd{\@dottedtocline}{\normalfont}{\normalfont\tstyle}{}{}
-\xpretocmd{\l@section}{\tstyle}{}{}
-\xpretocmd{\l@chapter}{\tstyle}{}{}
-\xpretocmd{\l@part}{\tstyle}{}{}
+  \RequirePackage{fix-cm}
 %    \end{macrocode}
-% Ensure that the "verbatim" environment uses proportional font and provide an inline "\code" macro.
-% Work around a bug in \software{nfssext-cfr} which defines a global "\set" macro and breaks other macros of the same name.
-%    \begin{macrocode}
-\newcommand*{\codestyle}{\tmstyle\lstyle}
-\let\verbatim@font\codestyle
-\RequirePackage{xparse}
-\ProvideDocumentCommand{\code}{v}{{\codestyle #1}}
-%    \end{macrocode}
-% Adjust the figures according to the "lining" option and ensure that tables always use lining.
-%    \begin{macrocode}
-\g@addto@macro\@floatboxreset{\tlstyle}
-% \g@addto@macro\@subfloatboxreset{\tlstyle}
-%    \end{macrocode}
-% Adjust the equation such that the number is always table style.
-%    \begin{macrocode}
-\pretocmd{\theequation}{\tstyle}{}{}
-%    \end{macrocode}
-%
 % Load the \software{textcomp} extension \cite{textcomp} and define helper functions.
 %    \begin{macrocode}
-\RequirePackage{textcomp}
-\newcommand*{\hepfont@sf@shape}[3]{%
-  \DeclareFontShape{\hepfont@encoding}{\sfdefault}{#1}{#2}{#3}{}%
-}
-\newcommand*{\hepfont@rm@shape}[3]{%
-  \DeclareFontShape{\hepfont@encoding}{\rmdefault}{#1}{#2}{#3}{}%
-}
+  \RequirePackage{textcomp}
 %    \end{macrocode}
 %
-% For modern \hologo{TeX} engines define the bold and sans serif small caps font shapes using the \software{fontspec} package \cite{fontspec}.
-%    \begin{macrocode}
-\ifxetexorluatex
-  \RequirePackage{fontspec}
-  \setmainfont{Latin Modern Roman}[
-    UprightFeatures={SmallCapsFont={[lmromancaps10-regular.otf]}},
-    BoldFeatures={
-      SmallCapsFeatures={Letters=SmallCaps},
-      SmallCapsFont={[cmunbx.otf]}
-    }
-  ]
-  \hepfont@sf@shape{bx}{sc}{<->cmssbxcsc10}{}
-  \hepfont@sf@shape{b}{sc}{<->cmssbxcsc10}{}
-  \hepfont@sf@shape{m}{scit}{<->cmsscsci10}{}
-  \hepfont@sf@shape{m}{sc}{%
-    <-9>cmsscsc8<9-10>cmsscsc9<10->cmsscsc10%
-  }{}
-%    \end{macrocode}
-%If \hologo{pdfLaTeX}
-%    \begin{macrocode}
-\else
-%    \end{macrocode}
+% \subsubsection{Serif}
+%
 %For serif fonts
 %    \begin{macrocode}
   \rmfamily
+  \newcommand*{\hepfont@rm@shape}[3]{%
+    \DeclareFontShape{\hepfont@encoding}{\rmdefault}{#1}{#2}{#3}{}%
+  }
 %    \end{macrocode}
 %\begin{macro}{\textsc}
 %For lining numerals add \CM roman small caps (italic and bold) from the \software{slantsc} package \cite{slantsc}.
@@ -361,10 +370,18 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
   \fi
 %    \end{macrocode}
 %\end{macro}
+%
+% \subsubsection{Sans serif}
+%
+%    \begin{macrocode}
+  \sffamily
+  \newcommand*{\hepfont@sf@shape}[3]{%
+    \DeclareFontShape{\hepfont@encoding}{\sfdefault}{#1}{#2}{#3}{}%
+  }
+%    \end{macrocode}
 %\begin{macro}{\textsc}
 %Provide the sans serif small caps font shape using the extended \CM from the \software{sansmathfonts} package \cite{sansmathfonts}.
 %    \begin{macrocode}
-  \sffamily
   \hepfont@sf@shape{m}{sc}{<->ssub*xcmss/m/sc}{}
   \hepfont@sf@shape{b}{sc}{<->ssub*xcmss/bx/sc}{}
   \hepfont@sf@shape{bx}{sc}{<->ssub*xcmss/bx/sc}{}
@@ -380,16 +397,45 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 %Provide a sans upright italic font.
 %    \begin{macrocode}
   \hepfont@sf@shape{m}{ui}{<->cmssu10}{}
-\fi
 %    \end{macrocode}
 %\end{macro}
 %
-% Load the \software{inputenc} package \cite{inputenc} whe using \hologo{pdfLaTeX}.
+% \subsection{Engine independent macros}
+%
 %    \begin{macrocode}
-\ifxetexorluatex\else
-  \PassOptionsToPackage{utf8}{inputenc}
-  \RequirePackage{inputenc}
 \fi
+%    \end{macrocode}
+%
+% Load the \software{microtype} font optimizations \cite{microtype}.
+%    \begin{macrocode}
+\RequirePackage{microtype}
+%    \end{macrocode}
+%
+% Ensure that the table of contest uses tabular figures using the \software{xpatch} package \cite{xpatch}.
+%    \begin{macrocode}
+\RequirePackage{xpatch}
+\xpretocmd{\@dottedtocline}{\tstyle}{}{}
+\xpatchcmd{\@dottedtocline}{\normalfont}{\normalfont\tstyle}{}{}
+\xpretocmd{\l@section}{\tstyle}{}{}
+\xpretocmd{\l@chapter}{\tstyle}{}{}
+\xpretocmd{\l@part}{\tstyle}{}{}
+%    \end{macrocode}
+% Ensure that the "verbatim" environment uses proportional font and provide an inline "\code" macro.
+% Work around a bug in \software{nfssext-cfr} which defines a global "\set" macro and breaks other macros of the same name.
+%    \begin{macrocode}
+\newcommand*{\codestyle}{\tmstyle\lstyle}
+\let\verbatim@font\codestyle
+\RequirePackage{xparse}
+\ProvideDocumentCommand{\code}{v}{{\codestyle #1}}
+%    \end{macrocode}
+% Adjust the figures according to the "lining" option and ensure that tables always use lining.
+%    \begin{macrocode}
+\g@addto@macro\@floatboxreset{\tlstyle}
+% \g@addto@macro\@subfloatboxreset{\tlstyle}
+%    \end{macrocode}
+% Adjust the equation such that the number is always table style.
+%    \begin{macrocode}
+\pretocmd{\theequation}{\tstyle}{}{}
 %    \end{macrocode}
 %
 % \begin{macro}{\unit}
@@ -399,14 +445,14 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 \ifhepfont@lining\else
 % \AtBeginDocument{
 %   \@ifpackageloaded{units}{
-    \RequirePackage{units}
-    \RequirePackage{xpatch}
-    \xpatchcmd{\unit}{\else#1}{%
-      \else\ifthenelse{\boolean{mmode}}{#1}{\textl{#1}}%
-    }{}{}
-    \xpatchcmd{\unitfrac}{\else#1}{%
-      \else\ifthenelse{\boolean{mmode}}{#1}{\textl{#1}}%
-    }{}{}
+  \RequirePackage{units}
+  \RequirePackage{xpatch}
+  \xpatchcmd{\unit}{\else#1}{%
+    \else\ifthenelse{\boolean{mmode}}{#1}{\textl{#1}}%
+  }{}{}
+  \xpatchcmd{\unitfrac}{\else#1}{%
+    \else\ifthenelse{\boolean{mmode}}{#1}{\textl{#1}}%
+  }{}{}
 %   }{}
 % }
 \fi
@@ -417,15 +463,157 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 %
 % \section{Test}
 %
-%<*test>
+% \subsection{\hologo{pdfLaTeX}}
+%
+%<*pdflatex>
 %
 %    \begin{macrocode}
 \documentclass[a4paper]{article}
 
 \usepackage[oldstyle]{hep-font}
-%% \usepackage[oldstyle]{hep-paper}
-
 \usepackage[cm]{fullpage}
+\usepackage{fancyvrb}\DefineShortVerb{\|}
+\newenvironment{vrb}{\begin{tabular}{@{}p{5.4cm}ll@{}}}{\end{tabular}}
+
+\begin{document}
+
+\subsection*{Roman}
+
+\begin{vrb}
+|\rmfamily| &
+{\rmfamily Latin Modern Roman 123} \\
+|  \sbweight| &
+{\rmfamily\sbweight Latin Modern Roman Semi Bold 123} \\
+|  \bfseries| &
+{\rmfamily\bfseries Latin Modern Roman Bold Extended 123} \\
+|\slshape| &
+{\rmfamily\slshape Latin Modern Roman Oblique 123} \\
+|  \sbweight| &
+{\rmfamily\sbweight\slshape Latin Modern Roman Semi Bold Oblique 123} \\
+|  \bfseries| &
+{\rmfamily\bfseries\slshape Latin Modern Roman Bold Oblique Extended 123} \\
+|\itshape| &
+{\rmfamily\itshape Latin Modern Roman Italic 123} \\
+|  \bfseries| &
+{\rmfamily\bfseries\itshape Latin Modern Roman Bold Italic Extended 123} \\
+|\uishape| &
+{\rmfamily\uishape Latin Modern Roman Upright Italic 123} \\
+|\scshape| &
+{\rmfamily\scshape Latin Modern Roman Small Caps 123} \\
+|  \bfseries| &
+{\rmfamily\bfseries\scshape Computer Modern Roman Bold Small Caps 123} \\
+|  \sishape| &
+{\rmfamily\scshape\slshape Latin Modern Roman Oblique Small Caps 123} \\
+|    \bfseries| &
+{\rmfamily\slshape\bfseries\scshape Computer Modern Roman Bold Small Caps 123} \\
+\end{vrb}
+
+\subsubsection*{Dunhill}
+
+\begin{vrb}
+|\tistyle | &
+{\tistyle Latin Modern Dunhill 123} \\
+|  \slshape| &
+{\tistyle\slshape Latin Modern Dunhill Oblique 123} \\
+\end{vrb}
+
+\subsection*{Sans}
+
+\begin{vrb}
+|\sffamily| &
+{\sffamily Latin Modern Sans 123} \\
+|  \fontseries{sbc}\selectfont| &
+{\sffamily\fontseries{sbc}\selectfont Latin Modern Sans Demi Condensed 123} \\
+|  \bfseries| &
+{\sffamily\bfseries Latin Modern Sans Bold 123} \\
+|\slshape| &
+{\sffamily\slshape Latin Modern Sans Oblique 123} \\
+|  \fontseries{sbc}\selectfont| &
+{\sffamily\fontseries{sbc}\selectfont\slshape Latin Modern Sans Demi Condensed Oblique 123} \\
+|  \bfseries| &
+{\sffamily\bfseries\slshape Latin Modern Sans Bold Oblique 123} \\
+|\uishape| &
+{\sffamily\uishape Computer Modern Sans Upright Italic 123} \\
+|\scshape| &
+{\sffamily\scshape Computer Modern Sans Small Caps 123} \\
+|  \bfseries| &
+{\sffamily\bfseries\scshape Computer Modern Sans Bold Small Caps 123} \\
+|  \itshape| &
+{\sffamily\itshape\scshape Computer Modern Sans Italic Small Caps 123} \\
+|    \bfseries| &
+{\sffamily\itshape\bfseries\scshape Computer Modern Sans Italic Bold Small Caps 123} \\
+\end{vrb}
+
+\subsubsection*{Quotation}
+
+\begin{vrb}
+|\qtstyle | &
+{\sffamily\qtstyle Latin Modern Sans Extended 123} \\
+|  \bfseries | &
+{\sffamily\qtstyle\bfseries Latin Modern Sans Bold Extended 123} \\
+|\slshape | &
+{\sffamily\qtstyle\slshape Latin Modern Sans Extended Oblique 123} \\
+|  \bfseries | &
+{\sffamily\qtstyle\bfseries\slshape Latin Modern Sans Bold Extended Oblique 123} \\
+\end{vrb}
+
+\subsection*{Typewriter}
+
+\begin{vrb}
+|\ttfamily\tvstyle | &
+{\ttfamily\tvstyle Latin Modern Typewriter Proportional 123} \\
+|  \bfseries | &
+{\ttfamily\tvstyle\bfseries Latin Modern Typewriter Proportional Dark 123} \\
+|  \lgweight | &
+{\ttfamily\tvstyle\lgweight Latin Modern Typewriter Proportional Light 123} \\
+|\slshape | &
+{\ttfamily\tvstyle\slshape Latin Modern Typewriter Proportional Oblique 123} \\
+|  \bfseries | &
+{\ttfamily\tvstyle\bfseries\slshape Latin Modern Typewriter Proportional Dark Oblique 123} \\
+|  \lgweight | &
+{\ttfamily\tvstyle\lgweight\slshape Latin Modern Typewriter Proportional Light Oblique 123} \\
+\end{vrb}
+
+\subsubsection*{Fixed-width}
+
+\begin{vrb}
+|\ttfamily\tmstyle | &
+{\ttfamily\tmstyle Latin Modern Typewriter 123} \\
+|  \lgweight | &
+{\ttfamily\tmstyle\lgweight Latin Modern Typewriter Light 123} \\
+|  \bfseries | &
+{\ttfamily\tmstyle\bfseries Latin Modern Typewriter Dark 123} \\
+|  \fontseries{lc}\selectfont | &
+{\ttfamily\tmstyle\fontseries{lc}\selectfont Latin Modern Typewriter Light Condensed 123} \\
+|\slshape | &
+{\ttfamily\tmstyle\slshape Latin Modern Typewriter Oblique 123} \\
+|  \lgweight | &
+{\ttfamily\tmstyle\lgweight\slshape Latin Modern Typewriter Light Oblique 123} \\
+|  \bfseries | &
+{\ttfamily\tmstyle\bfseries\slshape Latin Modern Typewriter Dark Oblique 123} \\
+|  \fontseries{lc} | &
+{\ttfamily\tmstyle\fontseries{lc}\slshape Latin Modern Typewriter Light Condensed Oblique 123} \\
+|\itshape | &
+{\ttfamily\tmstyle\itshape Latin Modern Typewriter Italic 123} \\
+|\scshape | &
+{\ttfamily\tmstyle\scshape Latin Modern Typewriter Small Caps 123} \\
+|  \slshape | &
+{\ttfamily\tmstyle\scshape\slshape Latin Modern Typewriter Oblique Small Caps 123} \\
+\end{vrb}
+
+\end{document}
+%    \end{macrocode}
+%
+%</pdflatex>
+%
+% \subsection{\hologo{LuaLaTeX}}
+%
+%<*lualatex>
+%
+%    \begin{macrocode}
+\documentclass{article}
+
+\usepackage[oldstyle]{hep-font}
 
 \usepackage{fancyvrb}\DefineShortVerb{\|}
 \newenvironment{vrb}{\begin{tabular}{@{}p{5.4cm}ll@{}}}{\end{tabular}}
@@ -434,108 +622,84 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 
 \subsection*{Roman}
 
-\rmfamily
 \begin{vrb}
-|\rmfamily| & {Latin Modern Roman 123} \\
-|  \sbweight| & {\sbweight Latin Modern Roman Semi Bold 123} \\
-|  \bfseries| & {\bfseries Latin Modern Roman Bold Extended 123} \\
-|\slshape| & {\slshape Latin Modern Roman Oblique 123} \\
-|  \sbweight| & {\sbweight\slshape Latin Modern Roman Semi Bold Oblique 123} \\
-|  \bfseries| & {\bfseries\slshape Latin Modern Roman Bold Oblique Extended 123} \\
-|\itshape| & {\itshape Latin Modern Roman Italic 123} \\
-|  \bfseries| & {\bfseries\itshape Latin Modern Roman Bold Italic Extended 123} \\
-|\uishape| & {\uishape Latin Modern Roman Upright Italic 123} \\
-|\scshape| & {\scshape Latin Modern Roman Small Caps 123} \\
-|  \bfseries| & {\bfseries\scshape Computer Modern Roman Bold Small Caps 123} \\
-|  \sishape| & {\scshape\slshape Latin Modern Roman Oblique Small Caps 123} \\
-|    \bfseries| & {\slshape\bfseries\scshape Computer Modern Roman Bold Small Caps 123} \\
-\end{vrb}
-
-\subsubsection*{Dunhill}
-
-\tistyle
-\begin{vrb}
-|\tistyle | & {Latin Modern Dunhill 123} \\
-|  \slshape| & {\slshape Latin Modern Dunhill Oblique 123} \\
-\end{vrb}
-
-\subsubsection*{Funny}
-
-\fontfamily{cmfr}\selectfont
-\begin{vrb}
-|\fontfamily{cmfr}\selectfont | & {Computer Modern Funny 123} \\
-|  \itshape| & {\itshape Computer Modern Funny Oblique 123} \\
-\end{vrb}
-
-\subsubsection*{Fib}
-
-\fontfamily{cmfib}\selectfont
-\begin{vrb}
-|\fontfamily{cmfib}\selectfont | & {Computer Modern Fibonacci 123} \\
-|  \slshape| & {\slshape Computer Modern Fibonacci Oblique 123} \\
+|\rmfamily| &
+{\rmfamily New Computer Modern 123} \\
+|  \bfseries| &
+{\rmfamily\bfseries New Computer Modern 123} \\
+|\slshape| &
+{\rmfamily\slshape New Computer Modern 123} \\
+|  \bfseries| &
+{\rmfamily\bfseries\slshape New Computer Modern 123} \\
+|\itshape| &
+{\rmfamily\itshape New Computer Modern 123} \\
+|  \bfseries| &
+{\rmfamily\bfseries\itshape New Computer Modern 123} \\
+|\scshape| &
+{\rmfamily\scshape New Computer Modern 123} \\
+|  \bfseries| &
+{\rmfamily\bfseries\scshape New Computer Modern 123} \\
+|  \sishape| &
+{\rmfamily\scshape\slshape New Computer Modern 123} \\
+|    \bfseries| &
+{\rmfamily\slshape\bfseries\scshape New Computer Modern 123} \\
 \end{vrb}
 
 \subsection*{Sans}
 
-\sffamily
 \begin{vrb}
-|\sffamily| & {Latin Modern Sans 123} \\
-|  \fontseries{sbc}\selectfont| & {\fontseries{sbc}\selectfont Latin Modern Sans Demi Condensed 123} \\
-|  \bfseries| & {\bfseries Latin Modern Sans Bold 123} \\
-|\slshape| & {\slshape Latin Modern Sans Oblique 123} \\
-|  \fontseries{sbc}\selectfont| & {\fontseries{sbc}\selectfont\slshape Latin Modern Sans Demi Condensed Oblique 123} \\
-|  \bfseries| & {\bfseries\slshape Latin Modern Sans Bold Oblique 123} \\
-|\uishape| & {\uishape Computer Modern Sans Upright Italic 123} \\
-|\scshape| & {\scshape Computer Modern Sans Small Caps 123} \\
-|  \bfseries| & {\bfseries\scshape Computer Modern Sans Bold Small Caps 123} \\
-|  \itshape| & {\itshape\scshape Computer Modern Sans Italic Small Caps 123} \\
-|    \bfseries| & {\itshape\bfseries\scshape Computer Modern Sans Italic Bold Small Caps 123} \\
-\end{vrb}
-
-\subsubsection*{Quotation}
-
-\qtstyle
-\begin{vrb}
-|\qtstyle | & {Latin Modern Sans Extended 123} \\
-|  \bfseries | & {\bfseries Latin Modern Sans Bold Extended 123} \\
-|\slshape | & {\slshape Latin Modern Sans Extended Oblique 123} \\
-|  \bfseries | & {\bfseries\slshape Latin Modern Sans Bold Extended Oblique 123} \\
+|\sffamily| &
+{\sffamily New Computer Modern 123} \\
+|  \bfseries| &
+{\sffamily\bfseries New Computer Modern 123} \\
+|\slshape| &
+{\sffamily\slshape New Computer Modern 123} \\
+|  \bfseries| &
+{\sffamily\bfseries\slshape New Computer Modern 123} \\
+|\itshape| &
+{\sffamily\itshape New Computer Modern 123} \\
+|  \bfseries| &
+{\sffamily\bfseries\itshape New Computer Modern 123} \\
+|\scshape| &
+{\sffamily\scshape New Computer Modern 123} \\
 \end{vrb}
 
 \subsection*{Typewriter}
 
-\ttfamily
-\tvstyle
 \begin{vrb}
-|\ttfamily\tvstyle | & {Latin Modern Typewriter Proportional 123} \\
-|  \bfseries | & {\bfseries Latin Modern Typewriter Proportional Dark 123} \\
-|  \lgweight | & {\lgweight Latin Modern Typewriter Proportional Light 123} \\
-|\slshape | & {\slshape Latin Modern Typewriter Proportional Oblique 123} \\
-|  \bfseries | & {\bfseries\slshape Latin Modern Typewriter Proportional Dark Oblique 123} \\
-|  \lgweight | & {\lgweight Latin Modern Typewriter Proportional Light Oblique 123} \\
+|\ttfamily| &
+{\ttfamily New Computer Modern 123} \\
+|  \bfseries| &
+{\ttfamily\bfseries New Computer Modern 123} \\
+|\slshape| &
+{\ttfamily\slshape New Computer Modern 123} \\
+|  \bfseries| &
+{\ttfamily\bfseries\slshape New Computer Modern 123} \\
+|\itshape| &
+{\ttfamily\itshape New Computer Modern 123} \\
+|  \bfseries| &
+{\ttfamily\bfseries\itshape New Computer Modern 123} \\
+|\scshape| &
+{\ttfamily\scshape New Computer Modern 123} \\
 \end{vrb}
 
-\subsubsection*{Fixed-width}
+\subsection*{Uncial}
 
-\tmstyle
 \begin{vrb}
-|\ttfamily\tmstyle | & {Latin Modern Typewriter 123} \\
-|  \lgweight | & {\lgweight Latin Modern Typewriter Light 123} \\
-|  \bfseries | & {\bfseries Latin Modern Typewriter Dark 123} \\
-|  \fontseries{lc}\selectfont | & {\fontseries{lc}\selectfont Latin Modern Typewriter Light Condensed 123} \\
-|\slshape | & {\slshape Latin Modern Typewriter Oblique 123} \\
-|  \lgweight | & {\lgweight\slshape Latin Modern Typewriter Light Oblique 123} \\
-|  \bfseries | & {\bfseries\slshape Latin Modern Typewriter Dark Oblique 123} \\
-|  \fontseries{lc} | & {\fontseries{lc}\slshape Latin Modern Typewriter Light Condensed Oblique 123} \\
-|\itshape | & {\itshape Latin Modern Typewriter Italic 123} \\
-|\scshape | & {\scshape Latin Modern Typewriter Small Caps 123} \\
-|  \slshape | & {\scshape\slshape Latin Modern Typewriter Oblique Small Caps 123} \\
+|\uncial| &
+{\uncial New Computer Modern 123} \\
+|  \bfseries| &
+{\uncial\bfseries New Computer Modern 123} \\
+|\slshape| &
+{\uncial\slshape New Computer Modern 123} \\
+|  \bfseries| &
+{\uncial\bfseries\slshape New Computer Modern 123} \\
 \end{vrb}
 
 \end{document}
 %    \end{macrocode}
 %
-%</test>
+%</lualatex>
 %
 % \section{Readme}
 %
