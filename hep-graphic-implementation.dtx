@@ -17,11 +17,11 @@
 %
 % \iffalse
 %
-%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-graphic}[2025/09/01 v1.4 Graphics in High Energy Physics]
-%<plot>\ProvidesPackage{hep-plot}[2025/09/01 v1.4 Plots in High Energy Physics]
-%<feynman>\ProvidesPackage{hep-feynman}[2025/09/01 v1.4 Feynman diagrams in High Energy Physics]
-%<documentation>\ProvidesFile{hep-graphic-documentation.tex}[2025/09/01 v1.4 HEP-graphic documentation]
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-graphic}[2026/08/01 v1.5 Graphics in High Energy Physics]
+%<plot>\ProvidesPackage{hep-plot}[2026/08/01 v1.5 Plots in High Energy Physics]
+%<feynman>\ProvidesPackage{hep-feynman}[2026/08/01 v1.5 Feynman diagrams in High Energy Physics]
+%<documentation>\ProvidesFile{hep-graphic-documentation.tex}[2026/08/01 v1.5 HEP-graphic documentation]
 %
 %<*documentation>
 %
@@ -53,7 +53,7 @@
 %
 % \fi
 %
-% \CheckSum{130}
+% \CheckSum{282}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -71,10 +71,10 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
-% \changes{v1.2}{2023/07/01}{Bug fixes.}
-% \changes{v1.3}{2024/11/01}{Bug fixes.}
-% \changes{v1.4}{2025/09/01}{Bug fixes.}
+% \changes{v1.0}{2023/07/01}{Added hep-graphic, hep-plot, and hep-feynman with TikZ externalisation, path-aware PGF and Feynman inclusion, pgfplots defaults, cycle lists, legend helpers, contour and error legend styles, and tikz-feynman settings.}
+% \changes{v1.3}{2024/11/01}{Updated graphics, plot, and Feynman release metadata and documentation.}
+% \changes{v1.4}{2025/09/01}{Applied starred command definitions and refreshed release metadata.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, expanded the graphic, plot, and Feynman documentation and README, and documented colormap and cycle-list helpers.}
 %
 % \ifshort
 %<*documentation>
@@ -82,12 +82,10 @@
 %
 \GetFileInfo{hep-graphic.sty}
 
-% \title{The \software{hep-graphic} package\thanks{This document corresponds to \software{hep-graphic}~\fileversion.}}
-\title{The \software{hep-graphic} package\thanks{This document corresponds to \software{hep-graphic}~v1.0.}}
-\subtitle{Plot macros}
+\title{The \software{hep-graphic} package\thanks{This document corresponds to \software{hep-graphic}~\fileversion.}}
+\subtitle{Graphics, plots, and Feynman diagrams}
 \author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
-% \date{\filedate}
-\date{2023/07/01}
+\date{\filedate}
 
 % \ifshort
 \begin{document}
@@ -98,22 +96,36 @@
 \maketitle
 
 \begin{abstract}
-The \software{hep-graphic} is a convenience wrapper for the \software{pgf/tikz}, \software{pgfplots}, and \software{standalone} packages.
+The \software{hep-graphic} package collects graphics helpers for HEP documents.
+It loads \software{TikZ}, optional TikZ externalisation, and \software{tikzscale}, provides path-aware inclusion commands for PGF plots and Feynman diagrams, and can load companion \software{hep-plot} and \software{hep-feynman} modules for \software{pgfplots} defaults, colour cycles, line styles, legends, and \software{tikz-feynman} settings.
 \end{abstract}
 
 \section{Graphic}
 
-After loading the "hep-graphic" package the \software{pgf/tikz} \cite{pgf} and \software{standalone} \cite{standalone} packages are loaded and externalisation is activated.
-The "plot" and "feynman" options load the neccessary packages for plotting and feynman diagrams.
-The macro "\includetikz"\oarg{width}\marg{name} loads "tikz" pictures.
+After loading the "hep-graphic" package the \software{TikZ} \cite{pgf} package is loaded.
+
+\DescribeMacro{extern}
+The "extern="\meta{folder} option activates the TikZ "external" library and stores externalised graphics in \meta{folder}.
+
+\DescribeMacro{plot}
+\DescribeMacro{feynman}
+The "plot" and "feynman" options load the \software{hep-plot} and \software{hep-feynman} companion modules.
+
+\DescribeMacro{\graphicpath}
+\DescribeMacro{\includepgf}
+\DescribeMacro{\includefeynman}
+The "\graphicpath"\marg{folder} macro stores the folder from which generated graphics are included.
+The "\includepgf"\meta{*}\oarg{options}\marg{name} macro includes a PGF or PGFPlots graphic from that folder and passes \meta{options} to both "\pgfplotsset" and "\includegraphics"; the starred form includes the graphic without applying plotting options.
+The "\includefeynman"\marg{name} macro includes a generated Feynman diagram centred for use in math displays.
 
 \subsection{Plot}
 
-The \software{hep-plot} package loads the \software{pgfplots} package \cite{pgfplots} and applies some optimisation.
+The \software{hep-plot} package loads the \software{pgfplots} package \cite{pgfplots}, sets global plot dimensions and fonts, adjusts numeric formatting, and provides a "three panels" style for compact multi-panel figures.
+It defines "rainbow" and "rainbow reversed" colormaps, spaced colour and line-style cycle-list generators, matching cycle lists for up to many curves, and the "\addlegendtitle"\marg{text} helper for legend headers.
 
 \subsection{Feynman}
 
-The \software{hep-feynman} package loads the \software{tikz-feynman} package \cite{tikz-feynman} and applies some optimisation.
+The \software{hep-feynman} package loads the \software{tikz-feynman} package \cite{tikz-feynman} and adjusts default line, momentum-arrow, and diagram styles.
 
 % \ifshort
 \printbibliography
@@ -231,22 +243,22 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 % \begin{macro}{dashdotdotdotdotted}
 % Add new line styles.
 %    \begin{macrocode}
-\tikzset{
- dashdotdotdotted/.style={dash pattern=on 3pt off 2pt
-  on \the\pgflinewidth off 2pt on \the\pgflinewidth off 2pt
-  on \the\pgflinewidth off 2pt
- },
- dashdotdotdotdotted/.style={dash pattern=on 3pt off 2pt
-  on \the\pgflinewidth off 2pt on \the\pgflinewidth off 2pt
-  on \the\pgflinewidth off 2pt on \the\pgflinewidth off 2pt
- },
- dotdotdashed/.style={dash pattern=on 3pt off 2pt
-  on 3pt off 2pt on \the\pgflinewidth off 2pt
- },
- dotdotdotdashed/.style={dash pattern=on 3pt off 2pt
-  on 3pt off 2pt on 3pt off 2pt on \the\pgflinewidth off 2pt
- },
-}%
+% \tikzset{
+%  dashdotdotdotted/.style={dash pattern=on 3pt off 2pt
+%   on \the\pgflinewidth off 2pt on \the\pgflinewidth off 2pt
+%   on \the\pgflinewidth off 2pt
+%  },
+%  dashdotdotdotdotted/.style={dash pattern=on 3pt off 2pt
+%   on \the\pgflinewidth off 2pt on \the\pgflinewidth off 2pt
+%   on \the\pgflinewidth off 2pt on \the\pgflinewidth off 2pt
+%  },
+%  dotdotdashed/.style={dash pattern=on 3pt off 2pt
+%   on 3pt off 2pt on \the\pgflinewidth off 2pt
+%  },
+%  dotdotdotdashed/.style={dash pattern=on 3pt off 2pt
+%   on 3pt off 2pt on 3pt off 2pt on \the\pgflinewidth off 2pt
+%  },
+% }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -306,6 +318,255 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 %    \end{macrocode}
 % \end{macro}
 %
+% \subsubsection{Cycles}
+%
+% \begin{macro}{rainbow reversed}
+% Define the "rainbow reversed" colormap.
+% Approximate spectral colormap for visible white-light dispersion in wavelength ordering.
+%    \begin{macrocode}
+\usepgfplotslibrary{colormaps}
+\pgfplotsset{
+  colormap={rainbow reversed}{
+    rgb255(410)=(38,0,79)
+    rgb255(430)=(67,0,170)
+    rgb255(450)=(58,0,200)
+    rgb255(470)=(0,50,180)
+    rgb255(490)=(0,100,120)
+    rgb255(510)=(0,135,75)
+    rgb255(530)=(0,150,35)
+    rgb255(550)=(55,145,0)
+    rgb255(570)=(174,155,0)
+    rgb255(590)=(226,110,0)
+    rgb255(610)=(241,0,0)
+    rgb255(630)=(205,0,0)
+    rgb255(650)=(141,0,0)
+  },
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{rainbow}
+% Define the "rainbow" colormap in frequency ordering.
+%    \begin{macrocode}
+  colormap={rainbow}{
+    colors of colormap={
+      650,630,610,590,570,550,530,510,490,470,450,430,410
+      of rainbow reversed,
+      source range=410:650,
+      target pos={
+        0,83,167,250,333,417,500,583,667,750,833,917,1000
+      }
+    }
+  },
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\l\_rainbow\_positions\_seq}
+% \begin{macro}{\l\_rainbow\_target\_int}
+% \begin{macro}{\rainbow\_positions\_full\_p}
+% True once the current generated list has reached its requested length.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\seq_new:N \l_rainbow_positions_seq
+\int_new:N \l_rainbow_target_int
+\cs_new:Npn \rainbow_positions_full_p:{
+  \int_compare_p:n{
+    \seq_count:N \l_rainbow_positions_seq >= \l_rainbow_target_int
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\rainbow\_add\_position}
+% Append a colormap coordinate if the requested number of colors has not yet been reached. Values are rounded only to keep printed output readable.
+%    \begin{macrocode}
+\cs_new_protected:Npn \rainbow_add_position:n #1{
+  \int_compare:nNnT {
+    \seq_count:N \l_rainbow_positions_seq } < { \l_rainbow_target_int
+  }{
+    \seq_put_right:Nx \l_rainbow_positions_seq{\fp_eval:n{round(#1, 6)}}
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\RainbowCyclePositions}
+% \begin{macro}{\l\_rainbow\_denominator\_int}
+% \begin{macro}{\CreateSpacedColormapCycleList}
+% "\CreateSpacedColormapCycleList{<cycle list>}{<colormap>}{<count>}"
+% Builds a PGFPlots cycle list by sampling <count> colors from <colormap>.
+% The positions are generated by repeatedly bisecting the largest remaining
+% gaps. Within each bisection level they are emitted from the outside inward:
+% 0,1000,500,250,750,125,875,... This preserves even coverage while keeping
+% neighboring colors visually distinct.
+% Side effect: "\RainbowCyclePositions" is set to the comma-separated list of
+% generated colormap coordinates for logging, inspection, or typesetting.
+%    \begin{macrocode}
+\newcommand{\RainbowCyclePositions}{}
+\int_new:N \l_rainbow_denominator_int
+\int_set:Nn \l_rainbow_denominator_int { 2 }
+\NewDocumentCommand{\CreateSpacedColormapCycleList}{mmm}{
+  \seq_clear:N \l_rainbow_positions_seq
+  \int_set:Nn \l_rainbow_target_int { \int_max:nn { 1 } { #3 } }
+  \rainbow_add_position:n { 0 }
+  \rainbow_add_position:n { 1000 }
+%    \end{macrocode}
+% Largest-gap bisection, ordered outside-in for high adjacent contrast.
+%    \begin{macrocode}
+  \bool_until_do:nn { \rainbow_positions_full_p: }{
+    \int_step_inline:nnnn { 1 } { 2 } { \l_rainbow_denominator_int / 2 }{
+      \rainbow_add_position:n{ 1000 * ##1 / \l_rainbow_denominator_int }
+      \int_compare:nNnT { ##1 } < { \l_rainbow_denominator_int - ##1 }{
+        \rainbow_add_position:n{
+          1000*(\l_rainbow_denominator_int-##1)/\l_rainbow_denominator_int
+        }
+      }
+    }
+    \int_set:Nn \l_rainbow_denominator_int{2*\l_rainbow_denominator_int}
+  }
+  \cs_gset:Npx \RainbowCyclePositions{
+    \seq_use:Nn \l_rainbow_positions_seq { , }
+  }
+  \exp_args:Nnx \pgfplotscreateplotcyclelist { #1 }{
+    [ colors~of~colormap = { \RainbowCyclePositions ~ of ~ #2 } ]
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+%
+% \begin{macro}{\l\_rainbow\_line\_styles\_tl}
+% \begin{macro}{\l\_rainbow\_line\_count\_int}
+% \begin{macro}{\rainbow\_line\_add\_style}
+% Append one line style to the line-style cycle list, stopping at the requested total count.
+%    \begin{macrocode}
+\tl_new:N \l_rainbow_line_styles_tl
+\int_new:N \l_rainbow_line_count_int
+\cs_new_protected:Npn \rainbow_line_add_style:n #1{
+  \int_compare:nNnT{\l_rainbow_line_count_int}<{\l_rainbow_target_int}{
+    \tl_put_right:Nn \l_rainbow_line_styles_tl { #1 \\ }
+    \int_incr:N \l_rainbow_line_count_int
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+%
+% \begin{macro}{\LineStyleDotLength}
+% \begin{macro}{\LineStyleDashLength}
+% \begin{macro}{\LineStyleGapLength}
+% \begin{macro}{\l\_rainbow\_line\_pattern\_tl}
+% Dot, dash, and gap lengths are functions of "\pgflinewidth", so the pattern scales when the plot line width changes.
+% Filled by "\CreateSpacedColormapCycleList" with values such as 0,1000,500,250,750,...
+% Append one dashed style made from "#1" dashes followed by "#2" round dots.
+% Dots are zero-length dash segments with round line caps.
+%    \begin{macrocode}
+\newcommand{\LineStyleDotLength}{0pt}
+\newcommand{\LineStyleDashLength}{4\pgflinewidth}
+\newcommand{\LineStyleGapLength}{3\pgflinewidth}
+\tl_new:N \l_rainbow_line_pattern_tl
+\cs_new_protected:Npn \rainbow_line_add_pattern:nn #1#2{
+  \tl_set:Nn \l_rainbow_line_pattern_tl { line~cap=round,dash~pattern= }
+  \prg_replicate:nn { #1 }{
+    \tl_put_right:Nn \l_rainbow_line_pattern_tl
+    { on~\LineStyleDashLength~off~\LineStyleGapLength~ }
+  }
+  \prg_replicate:nn { #2 }{
+    \tl_put_right:Nn \l_rainbow_line_pattern_tl
+    { on~\LineStyleDotLength~off~\LineStyleGapLength~ }
+  }
+  \exp_args:NV \rainbow_line_add_style:n \l_rainbow_line_pattern_tl
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\l\_rainbow\_line\_repeat\_int}
+% \begin{macro}{\CreateLineStyleCycleList}
+% "\CreateLineStyleCycleList{<cycle list>}{<count>}"
+% Builds a PGFPlots cycle list of <count> line style cycle.
+% Order: solid, dash, dot, dash dot, dash dash dot, dash dot dot,
+% dash dash dot dot, dash dash dash dot, dash dot dot dot, \dots
+% This orders styles by the smallest repetition count first, while preferring
+% dash-leading patterns over dot-leading patterns.
+%    \begin{macrocode}
+\int_new:N \l_rainbow_line_repeat_int
+\NewDocumentCommand{\CreateLineStyleCycleList}{mm}{
+  \tl_clear:N \l_rainbow_line_styles_tl
+  \int_zero:N \l_rainbow_line_count_int
+  \int_set:Nn \l_rainbow_target_int { \int_max:nn { 1 } { #2 } }
+  \rainbow_line_add_style:n { solid }
+  \rainbow_line_add_pattern:nn { 1 } { 0 }
+  \rainbow_line_add_pattern:nn { 0 } { 1 }
+  \rainbow_line_add_pattern:nn { 1 } { 1 }
+  \int_set:Nn \l_rainbow_line_repeat_int { 2 }
+  \bool_until_do:nn{
+    \int_compare_p:n { \l_rainbow_line_count_int >= \l_rainbow_target_int }
+  }{
+    \int_step_inline:nn { \l_rainbow_line_repeat_int - 1 }{
+      \rainbow_line_add_pattern:nn{ \l_rainbow_line_repeat_int }{ ##1 }
+      \rainbow_line_add_pattern:nn{ ##1 }{ \l_rainbow_line_repeat_int }
+    }
+    \rainbow_line_add_pattern:nn{
+      \l_rainbow_line_repeat_int
+    }{
+      \l_rainbow_line_repeat_int
+    }
+    \int_incr:N \l_rainbow_line_repeat_int
+  }
+  \exp_args:NnV \pgfplotscreateplotcyclelist { #1 } \l_rainbow_line_styles_tl
+}
+\ExplSyntaxOff
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+%
+% \begin{macro}{\LineStyleCycleLength}
+% \begin{macro}{line style cycle}
+% \begin{macro}{\RainbowCycleLength}
+% \begin{macro}{rainbow cycle}
+% \begin{macro}{line styles}
+% \begin{macro}{colors}
+% "\RainbowCycleLength" controls how many colors are generated.
+% "\LineStyleCycleLength" controls how many line style cycle are generated.
+%    \begin{macrocode}
+\newcommand{\LineStyleCycleLength}{64}
+\CreateLineStyleCycleList{line style cycle}{\LineStyleCycleLength}
+\newcommand{\RainbowCycleLength}{64}
+\CreateSpacedColormapCycleList{rainbow cycle}{rainbow}{\RainbowCycleLength}
+\CreateLineStyleCycleList{line styles}{\LineStyleCycleLength}
+\CreateSpacedColormapCycleList{colors}{rainbow}{\RainbowCycleLength}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+%
+% \begin{macro}{}
+%    \begin{macrocode}
+\pgfplotsset{
+  cycle multiindex* list={
+    rainbow cycle
+    \nextlist
+    line style cycle
+    \nextlist
+  },
+}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{colors}
 % \begin{macro}{line styles}
 % \begin{macro}{marks}
@@ -313,15 +574,16 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 % \begin{macro}{vertical marks}
 % Create cycle lists
 %    \begin{macrocode}
-\colorlet{darkgreen}{green!50!black}
-\pgfplotscreateplotcyclelist{colors}{
- blue, red, darkgreen, violet, orange, yellow!75!orange,
- brown, black
-}
-\pgfplotscreateplotcyclelist{line styles}{
- solid, dashed, densely dotted, dashdotted,
- dashdotdotted, dotdotdashed, dashdotdotdotted, dotdotdotdashed, dashdotdotdotdotted
-}
+\colorlet{dark green}{green!50!black}
+\colorlet{darkgreen}{dark green}
+% \pgfplotscreateplotcyclelist{colors}{
+%  blue, red, dark green, violet, orange, yellow!75!orange,
+%  brown, black
+% }
+% \pgfplotscreateplotcyclelist{line styles}{
+%  solid, dashed, densely dotted, dashdotted,
+%  dashdotdotted, dotdotdashed, dashdotdotdotted, dotdotdotdashed, dashdotdotdotdotted
+% }
 \pgfplotscreateplotcyclelist{marks}{
  mark=-, mark=|, mark=Mercedes star flipped, mark=Mercedes star, mark=+,
  mark=x, mark=star, mark=asterisk, mark=10-pointed star
@@ -363,18 +625,6 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{rainbow}
-% Define the "rainbow" colormap.
-%    \begin{macrocode}
-\pgfplotsset{
-  colormap={rainbow}{
-    color(0)=(violet); color(1)=(blue); color(2)=(darkgreen);
-    color(3)=(yellow); color(4)=(orange); color(5)=(red)
-  },
-}
-%    \end{macrocode}
-% \end{macro}
-%
 % \begin{macro}{legend}
 % Set the legend style.
 %    \begin{macrocode}
@@ -396,6 +646,8 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 }
 %    \end{macrocode}
 % \end{macro}
+%
+% \subsubsection{Contour plots}
 %
 % \begin{macro}{contour legend}
 % Define basic contour legend
@@ -567,11 +819,21 @@ The \software{hep-feynman} package loads the \software{tikz-feynman} package \ci
 %    \begin{macrocode}
 # The `hep-graphic` package
 
-A `LaTeX` package for publications in High Energy Physics.
+Graphics, plot, and Feynman-diagram helpers
 
 ## Introduction
 
-...
+The `hep-graphic` package collects graphics helpers for HEP documents. It
+loads TikZ, optional TikZ externalisation, and `tikzscale`, provides
+path-aware inclusion commands for generated PGF plots and Feynman
+diagrams, and can load companion `hep-plot` and `hep-feynman` modules for
+`pgfplots` defaults, colour cycles, line styles, legends, and
+`tikz-feynman` settings.
+
+It can be loaded with `\usepackage{hep-graphic}`. The `plot` option loads
+the plot module, the `feynman` option loads the Feynman-diagram module,
+and `extern=<folder>` activates TikZ externalisation into the selected
+folder.
 
 ## Author
 

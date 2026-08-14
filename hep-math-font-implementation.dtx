@@ -17,9 +17,9 @@
 %
 % \iffalse
 
-%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-math-font}[2025/09/01 v1.4 selection of math fonts for latin modern]
-%<documentation>\ProvidesFile{hep-math-font-documentation.tex}[2025/09/01 v1.4 hep-math-Font documentation]
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-math-font}[2026/08/01 v1.5 selection of math fonts for latin modern]
+%<documentation>\ProvidesFile{hep-math-font-documentation.tex}[2026/08/01 v1.5 hep-math-Font documentation]
 %
 %<*documentation>
 \documentclass{ltxdoc}
@@ -56,7 +56,7 @@
 %
 % \fi
 %
-% \CheckSum{698}
+% \CheckSum{869}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -74,11 +74,12 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2021/09/01}{Initial version of the style file.}
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
-% \changes{v1.2}{2023/07/01}{Bug fixes.}
-% \changes{v1.3}{2024/11/01}{Bug fixes.}
-% \changes{v1.4}{2025/09/01}{Bug fixes.}
+% \changes{v1.0}{2021/09/01}{Created the dedicated math-font package with serif and sans-serif math switching, Greek text and math handling, symbol package selection, and math alphabets.}
+% \changes{v1.1}{2022/11/01}{Protected Greek redefinitions, adjusted symbol-package documentation, and refined sans-serif and MinionPro handling.}
+% \changes{v1.2}{2023/07/01}{Added \cs{mathsftext}, fixed symbols option processing, and refreshed documentation and README formatting.}
+% \changes{v1.3}{2024/11/01}{Reworked Greek handling with fixmath and alphabeta, added \cs{hep@greek}, added nfssext-cfr LGR substitutions, and made symbol and math-alphabet loading conditional.}
+% \changes{v1.4}{2025/09/01}{Simplified the Greek-letter implementation, removed older Unicode and case-list code, updated LGR substitution handling, and applied starred command definitions.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, refreshed math-font documentation and README, restored an active checksum, removed the active \cs{mathsf} digit wrapper, made math digits lining symbols, and routed \cs{mathsf} digits through a matching lining digit font.}
 %
 % \ifshort
 %<*documentation>
@@ -100,9 +101,8 @@
 \maketitle
 
 \begin{abstract}
-The \software{hep-math-font} package adjust the math fonts to be italic sans-serif if the document is sans-serif.
-Additionally Greek letters are redefined to be always italic and upright in math and text mode, respectively.
-Some math font macros are adjusted to give more consistently the naively expected results.
+The \software{hep-math-font} package aligns the math fonts with the document font family.
+It switches to italic sans-serif math in sans-serif documents, keeps Greek letters italic in math and upright in text, keeps math digits lining even when the main text uses oldstyle numerals, provides configurable symbol-font sets, and adjusts the usual math alphabets so that "\mathrm", "\text", "\mathbf", "\mathsf", "\mathscr", "\mathbb", "\mathtt", and "\mathfrak" behave consistently across serif and sans-serif documents.
 \end{abstract}
 
 The package is loaded using "\usepackage{hep-math-font}".
@@ -136,6 +136,8 @@ Macros switching to "bfseries" such as "\section"\marg{text} are ensured to also
 \DescribeMacro{\mathsf}
 The math sans-serif alphabet is redefined to be italic sans-serif if the main text is serif and italic serif if the main text is sans-serif, \ie ($\mathsf A \mathsf b \mathsf \Gamma \mathsf \delta \mathbf{\mathsf A} \mathbf{\mathsf b} \mathbf{\mathsf \Gamma} \mathbf{\mathsf \delta}$).
 Ensuring that the distinction between these fonts is also kept if the \prefix{sans}{serif} option of the document is switched.
+Digits are declared as ordinary math symbols from a lining font matching the document family so that oldstyle text numerals do not leak into math.
+Digits inside "\mathsf" are routed through the lining "\mathsftext" alphabet.
 
 \DescribeMacro{\mathscr}
 The "\mathcal" font \ie ($\mathcal{ABCD}$) is accompanied by the "\mathscr" font \ie ($\mathscr{ABCD}$).
@@ -161,108 +163,115 @@ Details about the font handling in \hologo{TeX} can be found in \ccite{fntguide}
 \nohexoct
 \fntcolwidth=0pt
 \setlength\arrayrulewidth{0pt}
-
+\renewcommand*{\f@tevenlinenonum}{%
+  \f@tloopforsixteen
+  \ifnum\f@tn=\f@thigh
+  \else
+    \\\hline
+    \f@tmorechartnonum
+  \fi
+}
 \begin{figure}
-\begin{panels}[t]{4}
-\fonttable{rm-\ifhepmathfont@serif lmr\else lmss\fi10}
-\caption{Text}
-\panel
-\fontrange{0}{127}
-\fonttable{\ifhepmathfont@serif lm\else cmss\fi mi10}
-\caption{Math}\vspace{2ex}
-\fonttable{\ifhepmathfont@serif lm\else cmss\fi sy10}
-\caption{Symbol}
-\panel
-\fontrange{0}{127}
-\fonttable{\ifhepmathfont@serif\else ss\fi msam10}
-\caption{AMS a}\vspace{2ex}
-\fontrange{0}{79}
-\fonttable{\ifhepmathfont@serif\else ss\fi msbm10}
-\fontrange{96}{127}
-\fonttable{\ifhepmathfont@serif\else ss\fi msbm10}
-\caption{AMS b}
-\panel
-\fontrange{0}{8}
-\fonttable{eufm10}
-\fontrange{32}{127}
-\fonttable{eufm10}
-\caption{Euler fraktur}\vspace{2ex}
-\fontrange{64}{95}
-\fonttable{eusm10}
-\caption{Euler caligraphy}\vspace{2ex}
-\fonttable{MnSymbolS10}
-\caption{Minion caligraphy}\vspace{2ex}
-\fonttable{ds\ifhepmathfont@serif rom\else ss\fi10}
-\caption{Doublestroke}
-\end{panels}
-\caption{Basic math fonts}
+  \begin{panels}{4}
+    \fonttable{rm-\ifhepmathfont@serif lmr\else lmss\fi10}
+    \caption{Text}
+    \panel
+    \fontrange{0}{127}
+    \fonttable{\ifhepmathfont@serif lm\else cmss\fi mi10}
+    \caption{Math}\vspace{2ex}
+    \fonttable{\ifhepmathfont@serif lm\else cmss\fi sy10}
+    \caption{Symbol}
+    \panel
+    \fontrange{0}{127}
+    \fonttable{\ifhepmathfont@serif\else ss\fi msam10}
+    \caption{AMS a}\vspace{2ex}
+    \fontrange{0}{79}
+    \fonttable{\ifhepmathfont@serif\else ss\fi msbm10}
+    \fontrange{96}{127}
+    \fonttable{\ifhepmathfont@serif\else ss\fi msbm10}
+    \caption{AMS b}
+    \panel
+    \fontrange{0}{8}
+    \fonttable{eufm10}
+    \fontrange{32}{127}
+    \fonttable{eufm10}
+    \caption{Euler fraktur}\vspace{2ex}
+    \fontrange{64}{95}
+    \fonttable{eusm10}
+    \caption{Euler caligraphy}\vspace{2ex}
+    \fonttable{MnSymbolS10}
+    \caption{Minion caligraphy}\vspace{2ex}
+    \fonttable{ds\ifhepmathfont@serif rom\else ss\fi10}
+    \caption{Doublestroke}
+  \end{panels}
+  \caption{Basic math fonts}
 \end{figure}
 
 \begin{figure}
-\hspace*{-2cm}%
-\begin{panels}[t]{.3}
-\fontrange{0}{127}
-\fonttable{cm\ifhepmathfont@serif\else ss\fi ex10}
-\caption{Computer modern}
-\panel{.22}
-\fontrange{0}{143}
-\fonttable{MnSymbolE5}
-\caption{Mn Symbol E 1}
-\panel{.6}
-\fontrange{144}{215}
-\fonttable{MnSymbolE5}
-\caption{Mn Symbol E 2}\vspace{2ex}
-\begin{minipage}{.48\linewidth}
-\fontrange{0}{127}\fonttable{MnSymbolF10}
-\caption{Mn Symbols F}
-\end{minipage}%
-\begin{minipage}{.5\linewidth}
-\fontrange{0}{47}\fonttable{\ifhepmathfont@serif\else ss\fi esint10}
-\caption{Extended set of integrals}
-\end{minipage}
-\end{panels}
-\caption{Math extension fonts}
+  \hspace*{-2cm}%
+  \begin{panels}[t]{.3}
+    \fontrange{0}{127}
+    \fonttable{cm\ifhepmathfont@serif\else ss\fi ex10}
+    \caption{Computer modern}
+    \panel{.22}
+    \fontrange{0}{143}
+    \fonttable{MnSymbolE5}
+    \caption{Mn Symbol E 1}
+    \panel{.6}
+    \fontrange{144}{215}
+    \fonttable{MnSymbolE5}
+    \caption{Mn Symbol E 2}\vspace{2ex}
+    \begin{minipage}{.48\linewidth}
+      \fontrange{0}{127}\fonttable{MnSymbolF10}
+      \caption{Mn Symbols F}
+    \end{minipage}%
+    \begin{minipage}{.5\linewidth}
+      \fontrange{0}{47}\fonttable{\ifhepmathfont@serif\else ss\fi esint10}
+      \caption{Extended set of integrals}
+    \end{minipage}
+  \end{panels}
+  \caption{Math extension fonts}
 \end{figure}
 
 \begin{figure}
-\begin{panels}[t]{.26}
-\fonttable{MnSymbolA10}
-\caption{Mn Symbol A}
-\panel{.26}
-\fonttable{MnSymbolB10}
-\caption{Mn Symbol B}
-\panel{.26}
-\fonttable{MnSymbolC10}
-\caption{Mn Symbol C}
-\panel{.2}
-\fonttable{MnSymbolD10}
-\caption{Mn Symbol D}
-\end{panels}
-\makeatother
-\caption{Minion symbol fonts}
+  \begin{panels}[t]{.26}
+    \fonttable{MnSymbolA10}
+    \caption{Mn Symbol A}
+    \panel{.26}
+    \fonttable{MnSymbolB10}
+    \caption{Mn Symbol B}
+    \panel{.26}
+    \fonttable{MnSymbolC10}
+    \caption{Mn Symbol C}
+    \panel{.2}
+    \fonttable{MnSymbolD10}
+    \caption{Mn Symbol D}
+  \end{panels}
+  \makeatother
+  \caption{Minion symbol fonts}
 \end{figure}
 \egroup
 
 Of the 16 available math alphabets, \hologo{TeX} loads four by default
 \begin{enumdescript}[start=0,label=\arabic*)]
-\item{OT1} \label{it:math text} Text (latin, upper case greek, numerals, text symbols)
+  \item{OT1} \label{it:math text} Text (latin, upper case greek, numerals, text symbols)
 
-The text font \ref{it:math text}\strut\ of \CM is \textbf{cmr10} "\OT1/cmr/m/n/10", which is replaced by \LM to be \textbf{rm-lmr10} "\OT1/lmr/m/n/10", the "sansserif" option uses \textbf{rm-lmss10} "\OT1/lmss/m/n/10".
-\item{OML} \label{it:math italic} Math Italic (latin, greek, numerals, text symbols)
+  The text font \ref{it:math text}\strut\ of \CM is \textbf{cmr10} "\OT1/cmr/m/n/10", which is replaced by \LM to be \textbf{rm-lmr10} "\OT1/lmr/m/n/10", the "sansserif" option uses \textbf{rm-lmss10} "\OT1/lmss/m/n/10".
+  \item{OML} \label{it:math italic} Math Italic (latin, greek, numerals, text symbols)
 
-The italic math font \ref{it:math italic} of \CM is \textbf{cmmi10} "\OML/cmm/m/it/"\allowbreak"10", and is replaced by \LM to be \textbf{lmmi10} "\OML/lmm/m/it/10", the "sansserif" options uses \textbf{cmssmi10} "\OML/cmssrm/m/it/10" from the \software{sansmathfonts} package \cite{sansmathfonts}.
-\item{OMS} \label{it:math symbol} Symbol ("\mathcal", operators)
+  The italic math font \ref{it:math italic} of \CM is \textbf{cmmi10} "\OML/cmm/m/it/"\allowbreak"10", and is replaced by \LM to be \textbf{lmmi10} "\OML/lmm/m/it/10", the "sansserif" options uses \textbf{cmssmi10} "\OML/cmssrm/m/it/10" from the \software{sansmathfonts} package \cite{sansmathfonts}.
+  \item{OMS} \label{it:math symbol} Symbol ("\mathcal", operators)
 
-The symbol font \ref{it:math symbol}\strut\ of \CM is \textbf{cmsy10} "\OMS/cmsy/m/n/10", and is replaced by \LM to be \textbf{lmsy10} "\OMS/lmsy/m/n/10", the "sansserif" options uses \textbf{cmsssy10} "\OMS/cmsssy/m/n/10" from the \software{sansmathfonts} package \cite{sansmathfonts}.
-\item{OMX} \label{it:math extension} Math Extension (big operators, delimiters)
+  The symbol font \ref{it:math symbol}\strut\ of \CM is \textbf{cmsy10} "\OMS/cmsy/m/n/10", and is replaced by \LM to be \textbf{lmsy10} "\OMS/lmsy/m/n/10", the "sansserif" options uses \textbf{cmsssy10} "\OMS/cmsssy/m/n/10" from the \software{sansmathfonts} package \cite{sansmathfonts}.
+  \item{OMX} \label{it:math extension} Math Extension (big operators, delimiters)
 
-The extension font \ref{it:math extension}\strut\ of \CM is \textbf{cmex10} "\OMX/cmex/m/n/5", and is replaced by the \software{exscale} package \cite{exscale} to be \textbf{cmex10} "\OMX/cmex/m/n/10", the "sansserif" option loads \textbf{cmssex10} "\OMX/cmssex/m/n/10".
+  The extension font \ref{it:math extension}\strut\ of \CM is \textbf{cmex10} "\OMX/cmex/m/n/5", and is replaced by the \software{exscale} package \cite{exscale} to be \textbf{cmex10} "\OMX/cmex/m/n/10", the "sansserif" option loads \textbf{cmssex10} "\OMX/cmssex/m/n/10".
 \end{enumdescript}
 
 The \software{amssymb} (\software{amsfonts}) packages \cite{amssymb} load two more symbol fonts
 \begin{enumdescript}[start=4,label=\arabic*)]
-\item{msam10} \label{it:math ams a} "\U/msa/m/n/10" AMS symbol font A (special math operators)
-\item{msbm10} \label{it:math ams b} "\U/msb/m/n/10" AMS symbol font B ("\mathbb", negated operators)
+  \item{msam10} \label{it:math ams a} "\U/msa/m/n/10" AMS symbol font A (special math operators)
+  \item{msbm10} \label{it:math ams b} "\U/msb/m/n/10" AMS symbol font B ("\mathbb", negated operators)
 \end{enumdescript}
 The "sansserif" option replaces them with \textbf{ssmsam10} "\U/ssmsa/m/n/10" and \textbf{ssmsbm10} "\U/ssmsb/m/n/10" from the \software{sansmathfonts} package \cite{sansmathfonts}, respectively.
 
@@ -271,19 +280,19 @@ The \software{bm} package \cite{bm} loads the bold version for the fonts \labelc
 Other math alphabets are only loaded on demand, \eg "\mathsf" uses a sans-serif font and "\mathbf" without the \software{bm} package uses a bold font.
 The "\mathscr" macro uses the script font from the \software{mathrsfs} package \cite{mathrsfs}
 \begin{enumdescript}[start=9,label=\arabic*)]
-\item{rsfs10} "\U/rsfs/m/n/10" Math script font (capital letters)
+  \item{rsfs10} "\U/rsfs/m/n/10" Math script font (capital letters)
 \end{enumdescript}
 The "\mathbb" macro loads the double stroke font from the \software{dsfont} package \cite{dsfont}, this can be prevented with the "symbols=ams" option.
 \begin{enumdescript}[start=10,label=\arabic*)]
-\item{dsrom10} "\U/dsrom/m/n/10" Double stroke font
+  \item{dsrom10} "\U/dsrom/m/n/10" Double stroke font
 \end{enumdescript}
 The "\mathfrak" macro loads the fractur font from the \software{amssymb} package \cite{amssymb}
 \begin{enumdescript}[start=11,label=\arabic*)]
-\item{eufm10} "\U/euf/m/n/10" Math fraktur (Basic Latin)
+  \item{eufm10} "\U/euf/m/n/10" Math fraktur (Basic Latin)
 \end{enumdescript}
 
-The \software{hep-math-font} package uses nine of the available 16 math alphabets.
-This number can be reduced by three using "\newcommand{\bmmax}{0}" from the \software{bm} package \cite{bm} and brought down to the default of four with the option "symbols=false".
+With the default symbol setup in a serif document, the \software{hep-math-font} package reserves eleven of the available 16 math alphabets.
+This number can be reduced by three using "\newcommand{\bmmax}{0}" from the \software{bm} package \cite{bm}; the option "symbols=false" avoids the additional symbol-font block but keeps the lining digit fonts active.
 
 The "symbols=minion" options replaces the fonts \labelcref{it:math symbol,it:math extension,it:math ams a,it:math ams b} with corresponding fonts from the \software{MnSymbol} package \cite{MnSymbol}.
 Additionally, two more symbol alphabets are allocated, the \software{bm} package \cite{bm} loads one more font and now "\mathcal" triggers the use of one additional alphabet.
@@ -429,13 +438,21 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 %    \end{macrocode}
 % \begin{macro}{\mathsf}
 % Declare "\mathsf" for serif documents.
+% The \software{sansmathfonts} "cmssm" family provides OML sans-serif math with Greek letters.
 %    \begin{macrocode}
     \newcommand*\hep@font@sf{cmssm}
     \DeclareMathAlphabet{\mathsf}{OML}{\hep@font@sf}{m}{it}
     \SetMathAlphabet{\mathsf}{bold}{OML}{\hep@font@sf}{b}{it}
     \newcommand*\hep@textfont@sf{lmss}
-    \DeclareMathAlphabet{\mathsftext}{OT1}{\hep@textfont@sf}{m}{n}
-    \SetMathAlphabet{\mathsftext}{bold}{OT1}{\hep@textfont@sf}{bx}{n}
+    \DeclareSymbolFont{hep@mathsftext}{OT1}{\hep@textfont@sf}{m}{n}
+    \SetSymbolFont{hep@mathsftext}{bold}{OT1}{\hep@textfont@sf}{bx}{n}
+    \DeclareSymbolFontAlphabet{\mathsftext}{hep@mathsftext}
+    \DeclareMathVersion{sfmath}
+    \SetSymbolFont{letters}{sfmath}{OT1}{\hep@textfont@sf}{m}{it}
+    \SetSymbolFont{operators}{sfmath}{OT1}{\hep@textfont@sf}{m}{n}
+    \SetSymbolFont{hep@mathsftext}{sfmath}{OT1}{\hep@textfont@sf}{m}{n}
+    \RequirePackage{xpatch}
+    \xapptocmd{\sffamily}{\mathversion{sfmath}}{}{}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -456,33 +473,33 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 %    \begin{macrocode}
     \DeclareFontSubstitution{OML}{\hep@font@math}{m}{it}
     \ifhepmathfont@symbols\ifhep@minion\else
-      \DeclareFontSubstitution{OMS}{\hep@font@symbol}{m}{n}
-      \DeclareFontSubstitution{OMX}{\hep@font@extra}{m}{n}
-    \fi\fi
+        \DeclareFontSubstitution{OMS}{\hep@font@symbol}{m}{n}
+        \DeclareFontSubstitution{OMX}{\hep@font@extra}{m}{n}
+      \fi\fi
 %    \end{macrocode}
 % Declare the symbol fonts.
 %    \begin{macrocode}
     \DeclareSymbolFont{operators}{OT1}{\hep@font@text}{m}{n}
     \DeclareSymbolFont{letters}{OML}{\hep@font@math}{m}{it}
     \ifhepmathfont@symbols\ifhep@minion\else
-      \DeclareSymbolFont{symbols}{OMS}{\hep@font@symbol}{m}{n}
-      \DeclareSymbolFont{largesymbols}{OMX}{\hep@font@extra}{m}{n}
-    \fi\fi
+        \DeclareSymbolFont{symbols}{OMS}{\hep@font@symbol}{m}{n}
+        \DeclareSymbolFont{largesymbols}{OMX}{\hep@font@extra}{m}{n}
+      \fi\fi
 %    \end{macrocode}
 % Set bold symbol fonts.
 %    \begin{macrocode}
     \SetSymbolFont{operators}{bold}{OT1}{\hep@font@text}{b}{n}
     \SetSymbolFont{letters}{bold}{OML}{\hep@font@math}{b}{it}
     \ifhepmathfont@symbols\ifhep@minion\else
-      \SetSymbolFont{symbols}{bold}{OMS}{\hep@font@symbol}{b}{n}
-    \fi\fi
+        \SetSymbolFont{symbols}{bold}{OMS}{\hep@font@symbol}{b}{n}
+      \fi\fi
 %    \end{macrocode}
 % Adjust the fonts loaded by the \software{amsfonts} \cite{amsfonts} and \software{esint} \cite{esint} packages.
 %    \begin{macrocode}
     \ifhepmathfont@symbols\ifhep@minion\else
-      \DeclareSymbolFont{AMSa}{U}{ssmsa}{m}{n}
-      \DeclareSymbolFont{AMSb}{U}{ssmsb}{m}{n}
-    \fi\fi
+        \DeclareSymbolFont{AMSa}{U}{ssmsa}{m}{n}
+        \DeclareSymbolFont{AMSb}{U}{ssmsb}{m}{n}
+      \fi\fi
     \ifhepmathfont@symbols\RequirePackage{alphabeta}\fi %fix compilation error
     \AtBeginDocument{%
       \@ifpackageloaded{esint}{%
@@ -521,6 +538,78 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 % End of "sansserif".
 %    \begin{macrocode}
   \fi
+%    \end{macrocode}
+%
+% \subsection{Lining digits}
+%
+% Declare digits as ordinary math symbols from a dedicated lining font.
+% This follows the approach used by \software{sansmath} and prevents math
+% alphabets such as "\mathsf" from selecting the OML digit glyphs.
+%    \begin{macrocode}
+  \ifhepmathfont@serif
+    \newcommand*\hep@font@digits{lmr}
+  \else
+    \newcommand*\hep@font@digits{lmss}
+  \fi
+  \DeclareSymbolFont{hep@digits}{OT1}{\hep@font@digits}{m}{n}
+  \SetSymbolFont{hep@digits}{bold}{OT1}{\hep@font@digits}{bx}{n}
+  \ifhepmathfont@serif
+    \SetSymbolFont{hep@digits}{sfmath}{OT1}{lmss}{m}{n}
+  \fi
+  \DeclareMathSymbol{0}{\mathord}{hep@digits}{`0}
+  \DeclareMathSymbol{1}{\mathord}{hep@digits}{`1}
+  \DeclareMathSymbol{2}{\mathord}{hep@digits}{`2}
+  \DeclareMathSymbol{3}{\mathord}{hep@digits}{`3}
+  \DeclareMathSymbol{4}{\mathord}{hep@digits}{`4}
+  \DeclareMathSymbol{5}{\mathord}{hep@digits}{`5}
+  \DeclareMathSymbol{6}{\mathord}{hep@digits}{`6}
+  \DeclareMathSymbol{7}{\mathord}{hep@digits}{`7}
+  \DeclareMathSymbol{8}{\mathord}{hep@digits}{`8}
+  \DeclareMathSymbol{9}{\mathord}{hep@digits}{`9}
+  \let\hep@mathsf\mathsf
+  \ifhepmathfont@serif
+    \DeclareMathSymbol{\hep@mathsf@zero}{\mathord}{hep@mathsftext}{`0}
+    \DeclareMathSymbol{\hep@mathsf@one}{\mathord}{hep@mathsftext}{`1}
+    \DeclareMathSymbol{\hep@mathsf@two}{\mathord}{hep@mathsftext}{`2}
+    \DeclareMathSymbol{\hep@mathsf@three}{\mathord}{hep@mathsftext}{`3}
+    \DeclareMathSymbol{\hep@mathsf@four}{\mathord}{hep@mathsftext}{`4}
+    \DeclareMathSymbol{\hep@mathsf@five}{\mathord}{hep@mathsftext}{`5}
+    \DeclareMathSymbol{\hep@mathsf@six}{\mathord}{hep@mathsftext}{`6}
+    \DeclareMathSymbol{\hep@mathsf@seven}{\mathord}{hep@mathsftext}{`7}
+    \DeclareMathSymbol{\hep@mathsf@eight}{\mathord}{hep@mathsftext}{`8}
+    \DeclareMathSymbol{\hep@mathsf@nine}{\mathord}{hep@mathsftext}{`9}
+  \else
+    \newcommand*\hep@mathsf@zero{\hep@mathsf{0}}
+    \newcommand*\hep@mathsf@one{\hep@mathsf{1}}
+    \newcommand*\hep@mathsf@two{\hep@mathsf{2}}
+    \newcommand*\hep@mathsf@three{\hep@mathsf{3}}
+    \newcommand*\hep@mathsf@four{\hep@mathsf{4}}
+    \newcommand*\hep@mathsf@five{\hep@mathsf{5}}
+    \newcommand*\hep@mathsf@six{\hep@mathsf{6}}
+    \newcommand*\hep@mathsf@seven{\hep@mathsf{7}}
+    \newcommand*\hep@mathsf@eight{\hep@mathsf{8}}
+    \newcommand*\hep@mathsf@nine{\hep@mathsf{9}}
+  \fi
+  \ExplSyntaxOn
+  \cs_new_protected:Npn \hep_mathsf:n #1 {
+    \tl_map_function:nN {#1} \hep_mathsf_token:N
+  }
+  \cs_new_protected:Npn \hep_mathsf_token:N #1 {
+    \token_if_eq_charcode:NNTF #1 0 {\hep@mathsf@zero} {
+    \token_if_eq_charcode:NNTF #1 1 {\hep@mathsf@one} {
+    \token_if_eq_charcode:NNTF #1 2 {\hep@mathsf@two} {
+    \token_if_eq_charcode:NNTF #1 3 {\hep@mathsf@three} {
+    \token_if_eq_charcode:NNTF #1 4 {\hep@mathsf@four} {
+    \token_if_eq_charcode:NNTF #1 5 {\hep@mathsf@five} {
+    \token_if_eq_charcode:NNTF #1 6 {\hep@mathsf@six} {
+    \token_if_eq_charcode:NNTF #1 7 {\hep@mathsf@seven} {
+    \token_if_eq_charcode:NNTF #1 8 {\hep@mathsf@eight} {
+    \token_if_eq_charcode:NNTF #1 9 {\hep@mathsf@nine}
+      {\hep@mathsf{#1}}
+    }}}}}}}}}
+  }
+  \protected\def\mathsf#1{\hep_mathsf:n {#1}}
+  \ExplSyntaxOff
 %    \end{macrocode}
 %
 % \subsection{Greek letters}
@@ -595,19 +684,19 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 % Ensure that this works also after loading other fonts packages such as \software{cfr-lm}.
 %    \begin{macrocode}
     \AtBeginDocument{\@ifpackageloaded{nfssext-cfr}{
-      \DeclareFontFamily{LGR}{clmj}{}
-      \DeclareFontFamilySubstitution{LGR}{clmj}{lmr}
-      \DeclareFontFamily{LGR}{clm2j}{}
-      \DeclareFontFamilySubstitution{LGR}{clm2j}{lmr}
-      \DeclareFontFamily{LGR}{clm2}{}
-      \DeclareFontFamilySubstitution{LGR}{clm2}{lmr}
-      \DeclareFontFamily{LGR}{clm2s}{}
-      \DeclareFontFamilySubstitution{LGR}{clm2s}{lmss}
-      \DeclareFontFamily{LGR}{clm2js}{}
-      \DeclareFontFamilySubstitution{LGR}{clm2js}{lmss}
-      \DeclareFontFamily{LGR}{clmjs}{}
-      \DeclareFontFamilySubstitution{LGR}{clmjs}{lmss}
-    }{}}
+        \DeclareFontFamily{LGR}{clmj}{}
+        \DeclareFontFamilySubstitution{LGR}{clmj}{lmr}
+        \DeclareFontFamily{LGR}{clm2j}{}
+        \DeclareFontFamilySubstitution{LGR}{clm2j}{lmr}
+        \DeclareFontFamily{LGR}{clm2}{}
+        \DeclareFontFamilySubstitution{LGR}{clm2}{lmr}
+        \DeclareFontFamily{LGR}{clm2s}{}
+        \DeclareFontFamilySubstitution{LGR}{clm2s}{lmss}
+        \DeclareFontFamily{LGR}{clm2js}{}
+        \DeclareFontFamilySubstitution{LGR}{clm2js}{lmss}
+        \DeclareFontFamily{LGR}{clmjs}{}
+        \DeclareFontFamilySubstitution{LGR}{clmjs}{lmss}
+      }{}}
 %     \fi
 %    \end{macrocode}
 %
@@ -628,6 +717,7 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 % Load the \software{bm} package \cite{bm} for superior boldmath.
 % Make math symbols bold whenever they appear in bold macros such as "\section"\marg{text}.
 %    \begin{macrocode}
+    \ifx\bmmax\@undefined\chardef\bmmax=3 \fi
     \RequirePackage{bm}
     \AtBeginDocument{\let\mathbf\bm}
     \g@addto@macro\bfseries{\boldmath}
@@ -635,10 +725,16 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 % \end{macro}
 %
 % \begin{macro}{\mathtt}
-% Typewriter math font
+% Typewriter math font using the \software{xpatch} package \cite{xpatch}.
 %    \begin{macrocode}
-    \DeclareMathAlphabet{\mathtt}{OT1}{lmtt}{m}{n}
-    \SetMathAlphabet{\mathtt}{bold}{OT1}{lmtt}{bx}{n}
+    \RequirePackage{xpatch}
+    \newcommand*\hep@font@tt{lmtt}
+    \DeclareMathAlphabet{\mathtt}{OT1}{\hep@font@tt}{m}{it}
+    \SetMathAlphabet{\mathtt}{bold}{OT1}{\hep@font@tt}{bx}{n}
+    \DeclareMathVersion{ttmath}
+    \SetSymbolFont{letters}{ttmath}{OT1}{\hep@font@tt}{m}{it}
+    \SetSymbolFont{operators}{ttmath}{OT1}{\hep@font@tt}{m}{n}
+    \xapptocmd{\ttfamily}{\mathversion{ttmath}}{}{}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -692,20 +788,20 @@ Hence, the minion option uses three to four more math alphabets than a usual set
 \begin{document}
 
 \begin{vrb}
-|| & $Ab\Gamma\delta123$ \\
-|\mathbf | & $\mathbf{Ab\Gamma\delta123}$ \\
-|\mathrm | & $\mathrm{Ab\Gamma\delta123}$ \\
-|   \mathbf | & $\mathbfrm{Ab\Gamma\delta123}$ !! \\
-|\text | & $\text{Ab\Gamma\delta123}$ \\
-|   \textbf | & $\textbf{\text{Ab\Gamma\delta123}}$ \\
-|\mathsf | & $\mathsf{Ab\Gamma\delta123}$ \\
-|   \mathbf | & $\mathbfsf{Ab\Gamma\delta123}$ \\
-|\mathtt | & $\mathtt{Ab\Gamma123}$ \\
-|   \mathbf | & $\mathbf{\mathtt{Ab\Gamma123}}$ \\
-|\mathcal | & $\mathcal{ABC}$ \\
-|\mathscr | & $\mathscr{ABC123}$ \\
-|\mathbb | & $\mathbb{ABC1}$ \\
-|\mathfrak | & $\mathfrak{ABC123}$ \\
+  || & $Ab\Gamma\delta123$ \\
+  |\mathbf | & $\mathbf{Ab\Gamma\delta123}$ \\
+  |\mathrm | & $\mathrm{Ab\Gamma\delta123}$ \\
+  |   \mathbf | & $\mathbfrm{Ab\Gamma\delta123}$ !! \\
+  |\text | & $\text{Ab\Gamma\delta123}$ \\
+  |   \textbf | & $\textbf{\text{Ab\Gamma\delta123}}$ \\
+  |\mathsf | & $\mathsf{Ab\Gamma\delta123}$ \\
+  |   \mathbf | & $\mathbfsf{Ab\Gamma\delta123}$ \\
+  |\mathtt | & $\mathtt{Ab\Gamma123}$ \\
+  |   \mathbf | & $\mathbf{\mathtt{Ab\Gamma123}}$ \\
+  |\mathcal | & $\mathcal{ABC}$ \\
+  |\mathscr | & $\mathscr{ABC123}$ \\
+  |\mathbb | & $\mathbb{ABC1}$ \\
+  |\mathfrak | & $\mathfrak{ABC123}$ \\
 \end{vrb}
 
 $\Gamma\Delta\Lambda\Phi\Pi\Psi\Sigma\Theta\Upsilon\Xi\Omega$
@@ -715,10 +811,10 @@ $\mathrm{\Gamma\Delta\Lambda\Phi\Pi\Psi\Sigma\Theta\Upsilon\Xi\Omega}$
 \Gamma\Delta\Lambda\Phi\Pi\Psi\Sigma\Theta\Upsilon\Xi\Omega
 
 $\alpha\beta\gamma\delta\epsilon\zeta\eta\theta\iota\kappa\lambda
-\mu\nu\xi\pi\rho\sigma\varsigma\tau\upsilon\phi\chi\psi\omega$
+  \mu\nu\xi\pi\rho\sigma\varsigma\tau\upsilon\phi\chi\psi\omega$
 
 $\mathrm{\alpha\beta\gamma\delta\epsilon\zeta\eta\theta\iota\kappa\lambda
-\mu\nu\xi\pi\rho\sigma\varsigma\tau\upsilon\phi\chi\psi\omega}$
+    \mu\nu\xi\pi\rho\sigma\varsigma\tau\upsilon\phi\chi\psi\omega}$
 
 \alpha\beta\gamma\delta\epsilon\zeta\eta\theta\iota\kappa\lambda
 \mu\nu\xi\pi\rho\sigma\varsigma\tau\upsilon\phi\chi\psi\omega
@@ -739,11 +835,14 @@ Extended Greek and sans-serif math
 
 ## Introduction
 
-The `hep-math-font` package adjust the math fonts to be sans-serif if the
-document is sans-serif. Additionally Greek letters are redefined to be
-always italic and upright in math and text mode respectively. Some math
-font macros are adjusted to give more consistently the naively expected
-results.
+The `hep-math-font` package aligns the math fonts with the document font
+family. It switches to italic sans-serif math in sans-serif documents,
+keeps Greek letters italic in math and upright in text, keeps math
+digits lining even when the main text uses oldstyle numerals, provides
+configurable symbol-font sets, and adjusts the usual math alphabets so
+that `\mathrm`, `\text`, `\mathbf`, `\mathsf`, `\mathscr`, `\mathbb`,
+`\mathtt`, and `\mathfrak` behave consistently across serif and
+sans-serif documents.
 
 The package is loaded using `\usepackage{hep-math-font}`.
 

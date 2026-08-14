@@ -17,8 +17,8 @@
 %
 % \iffalse
 
-%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-cv-private}[2024/11/01 v1.3 Curricula Vitarum in High Energy Physics]
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-cv-private}[2026/08/01 v1.4 Curricula Vitarum in High Energy Physics]
 %
 %<*documentation>
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -51,7 +51,7 @@
 %
 % \fi
 %
-% \CheckSum{250}
+% \CheckSum{251}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -69,10 +69,9 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2019/01/01}{Initial version of the style file}
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
-% \changes{v1.2}{2023/07/01}{Bug fixes.}
-% \changes{v1.3}{2024/11/01}{Bug fixes.}
+% \changes{v1.0}{2019/01/01}{Created the private CV bibliography filters and environments for work, visits, education, supervision, funding, talks, publications, software, theses, and service entries.}
+% \changes{v1.3}{2024/11/01}{Split the private CV helpers into a dedicated documented package with keyword filters, CV bibliography environments, and Indico e-print formatting.}
+% \changes{v1.4}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, replaced the stub documentation with package documentation, added README content, and added README extraction to the installer.}
 %
 % \ifshort
 %<*documentation>
@@ -80,9 +79,9 @@
 %
 \GetFileInfo{hep-cv-private.sty}
 
-\title{The \software{hep-cv-private} package}
+\title{The \software{hep-cv-private} package\thanks{This document corresponds to \software{hep-cv-private}~\fileversion.}}
 
-\author{Jan Hajer}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
 
 \date{\filedate}
 
@@ -93,13 +92,72 @@
 \maketitle*
 
 \begin{abstract}
-The "hep-cv-private" package aims to provide a single style file for \dots
+The \software{hep-cv-private} package adds private CV bibliography filters and environments on top of the HEP CV bibliography setup.
+It groups work, visits, education, supervision, funding, talks, publications, software, theses, and service entries by keyword, provides specialised CV bibliography environments for those groups, and formats Indico event and contribution links as eprint data.
 \end{abstract}
 
 \tableofcontents\clearpage
 
 \section{Introduction}
 
+Load the package with "\usepackage{hep-cv-private}" after the CV bibliography setup.
+
+\DescribeMacro{work}
+\DescribeMacro{visit}
+\DescribeMacro{education}
+\DescribeMacro{lecture}
+\DescribeMacro{tutorial}
+\DescribeMacro{master-supervision}
+\DescribeMacro{PhD}
+\DescribeMacro{master}
+\DescribeMacro{funding-individual}
+\DescribeMacro{funding-project}
+\DescribeMacro{funding-participation}
+\DescribeMacro{organization}
+The package defines bibliography filters for CV material using keywords in the bibliography database.
+The filters cover work, visits, education, lectures, tutorials, master supervision, PhD and master entries, individual, project, and participation funding, and organisation or service entries.
+
+\DescribeMacro{seminar}
+\DescribeMacro{conference}
+\DescribeMacro{contributions}
+\DescribeMacro{student}
+Talk-related filters separate invited seminars, invited conferences, contributed conference, workshop, or school presentations, and student presentations.
+
+\DescribeMacro{preprint}
+\DescribeMacro{journal}
+\DescribeMacro{proceedings}
+\DescribeMacro{editor}
+\DescribeMacro{community}
+\DescribeMacro{software}
+\DescribeMacro{thesis}
+\DescribeMacro{main}
+Publication filters group preprints, journal articles, proceedings, editor entries, community entries, software, theses, and selected main-recent publications.
+
+\DescribeEnv{work}
+\DescribeEnv{visit}
+\DescribeEnv{education}
+\DescribeEnv{student}
+\DescribeEnv{course}
+\DescribeEnv{funding}
+\DescribeEnv{talk}
+\DescribeEnv{publication}
+\DescribeEnv{main}
+The corresponding bibliography environments customise the CV left-column layout and field formatting for positions, visits, education, students, courses, funding, talks, publications, and selected main publications.
+They move titles, dates, event information, funding titles, annotations, or presentation styles to the positions expected in a private CV.
+
+\DescribeMacro{CERN}
+\DescribeMacro{INFN}
+\DescribeMacro{IJS}
+\DescribeMacro{DESY}
+\DescribeMacro{FNAL}
+\DescribeMacro{Edinburgh}
+\DescribeMacro{CNRS}
+\DescribeMacro{IIHE}
+\DescribeMacro{IRMP}
+\DescribeMacro{MITP}
+\DescribeMacro{LIP}
+The package also defines Indico eprint formats for common event servers.
+Entries can use these eprint types to link both the event and a contribution number.
 
 % \ifshort
 \printbibliography
@@ -380,6 +438,41 @@ The "hep-cv-private" package aims to provide a single style file for \dots
 %
 %</package>
 
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-cv-private` package
+
+Private CV bibliography filters and environments
+
+## Introduction
+
+The `hep-cv-private` package adds private CV bibliography filters and
+environments on top of the HEP CV bibliography setup. It groups work,
+visits, education, supervision, funding, talks, publications, software,
+theses, and service entries by keyword, provides specialised CV
+bibliography environments for those groups, and formats Indico event and
+contribution links as eprint data.
+
+It can be loaded with `\usepackage{hep-cv-private}`.
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
+%
 % \Finale
 %
 \endinput

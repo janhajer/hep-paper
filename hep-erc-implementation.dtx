@@ -17,9 +17,9 @@
 %
 % \iffalse
 
-%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-erc}[2025/09/01 v1.4 HEP-ERC style file]
-%<documentation>\ProvidesFile{hep-erc-documentation.tex}[2025/09/01 v1.4 hep-erc documentation]
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-erc}[2026/08/01 v1.5 HEP-ERC style file]
+%<documentation>\ProvidesFile{hep-erc-documentation.tex}[2026/08/01 v1.5 hep-erc documentation]
 %
 %<*documentation>
 \documentclass{ltxdoc}
@@ -50,7 +50,7 @@
 %
 % \fi
 %
-% \CheckSum{313}
+% \CheckSum{314}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -68,11 +68,12 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2021/09/01}{Initial version of the style file.}
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
-% \changes{v1.2}{2023/07/01}{Bug fixes.}
-% \changes{v1.3}{2024/11/01}{Bug fixes.}
-% \changes{v1.4}{2025/09/01}{Bug fixes.}
+% \changes{v1.0}{2021/09/01}{Created the ERC proposal package with hep-paper defaults, A4 proposal geometry, proposal counters, proposal summary formatting, section headings, month markers, and extracted header, B1, and B2 templates.}
+% \changes{v1.1}{2022/11/01}{Added the documented implementation and proposal templates for the v2.1 package suite.}
+% \changes{v1.2}{2023/07/01}{Refreshed package metadata and documentation formatting.}
+% \changes{v1.3}{2024/11/01}{Updated release metadata.}
+% \changes{v1.4}{2025/09/01}{Corrected package metadata wording and applied starred command definitions to proposal helpers.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, completed the abstract, user documentation, and README, and added README extraction to the installer.}
 %
 % \ifshort
 %<*documentation>
@@ -81,7 +82,7 @@
 \GetFileInfo{hep-erc.sty}
 
 \title{The \software{hep-erc} package\thanks{This document corresponds to \software{hep-erc}~\fileversion.}}
-\subtitle{Extensions for the title page}
+\subtitle{ERC proposal documents}
 \author{Jan Hajer \email{jan.hajer@unibas.ch}}
 \date{\filedate}
 
@@ -94,11 +95,39 @@
 \maketitle
 
 \begin{abstract}
-The \software{hep-erc} package prepares
+The \software{hep-erc} package prepares ERC-style proposal documents.
+It loads the HEP package suite with proposal-oriented defaults, sets A4 proposal geometry, defines proposal part numbering, formats the proposal summary and section headings, provides month markers for work-plan tables, and extracts starter "hep-erc-header", "hep-erc-B1", and "hep-erc-B2" template files.
 \end{abstract}
 
 To use the \software{hep-erc} package include it with "\usepackage{hep-erc}".
 
+\DescribeMacro{\months}
+The "\months" macro stores the project duration in months and is used as the document date.
+It defaults to "60" and can be redefined before "\date" is used.
+
+\DescribeMacro{proposal}
+The "proposal" counter labels the proposal parts as "B1", "B2", and so on.
+The extracted B2 template sets this counter to "2".
+
+\DescribeMacro{\Jan}
+\DescribeMacro{\Feb}
+\DescribeMacro{\Mar}
+\DescribeMacro{\Apr}
+\DescribeMacro{\May}
+\DescribeMacro{\Jun}
+\DescribeMacro{\Jul}
+\DescribeMacro{\Aug}
+\DescribeMacro{\Sep}
+\DescribeMacro{\Oct}
+\DescribeMacro{\Nov}
+\DescribeMacro{\Dec}
+The month macros are compact table helpers that spread the month name evenly across a table cell and are intended for work-plan and Gantt-style tables.
+
+\DescribeMacro{hep-erc-header}
+\DescribeMacro{hep-erc-B1}
+\DescribeMacro{hep-erc-B2}
+Besides the package file, the documented source extracts a shared "hep-erc-header" template and "hep-erc-B1" and "hep-erc-B2" proposal skeletons.
+The header contains the common package loading, title data, month setting, and abstract text used by the two skeletons.
 
 % \ifshort
 \printbibliography
@@ -505,6 +534,41 @@ Text \\
 %    \end{macrocode}
 %
 %</B2>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-erc` package
+
+ERC proposal documents
+
+## Introduction
+
+The `hep-erc` package prepares ERC-style proposal documents. It loads the
+HEP package suite with proposal-oriented defaults, sets A4 proposal
+geometry, defines proposal part numbering, formats the proposal summary
+and section headings, provides month markers for work-plan tables, and
+extracts starter `hep-erc-header`, `hep-erc-B1`, and `hep-erc-B2`
+template files.
+
+It can be loaded with `\usepackage{hep-erc}`.
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
 %
 % \Finale
 

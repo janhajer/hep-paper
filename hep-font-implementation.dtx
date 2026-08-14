@@ -17,9 +17,9 @@
 %
 % \iffalse
 %
-%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-font}[2025/09/01 v1.4 hep-font style file]
-%<documentation>\ProvidesFile{hep-font-documentation.tex}[2025/09/01 v1.4 hep-font documentation]
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-font}[2026/08/01 v1.5 hep-font style file]
+%<documentation>\ProvidesFile{hep-font-documentation.tex}[2026/08/01 v1.5 hep-font documentation]
 %
 %<*documentation>
 \documentclass{ltxdoc}
@@ -52,7 +52,7 @@
 %
 % \fi
 %
-% \CheckSum{768}
+% \CheckSum{775}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -70,11 +70,12 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2021/09/01}{Initial version of the style file.}
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
-% \changes{v1.2}{2023/07/01}{Bug fixes.}
-% \changes{v1.3}{2024/11/01}{Bug fixes.}
-% \changes{v1.4}{2025/09/01}{Bug fixes.}
+% \changes{v1.0}{2021/09/01}{Created the dedicated font package with size, family, numeral, encoding, microtype, Latin Modern and Computer Modern, small-caps, and upright italic handling.}
+% \changes{v1.1}{2022/11/01}{Added size and sans-serif options, class font-size detection, dynamic size loading, code and verbatim styling, safer option passing, and namespaced font-shape helpers.}
+% \changes{v1.2}{2023/07/01}{Disabled size overrides under jheppub, added tabular figures to table-of-contents and float contexts, introduced \cs{codestyle}, and refreshed documentation and README formatting.}
+% \changes{v1.3}{2024/11/01}{Made equation numbers use table-style figures.}
+% \changes{v1.4}{2025/09/01}{Split pdfLaTeX and TU-engine font setup, using iftex, fontspec, unicode-math, and fontsetup for LuaLaTeX and XeLaTeX, and applied starred command definitions.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, refreshed the documentation and README, replaced engine markup that broke documentation builds, and updated the checksum.}
 %
 % \ifshort
 %<*documentation>
@@ -96,7 +97,8 @@
 \maketitle
 
 \begin{abstract}
-The \software{hep-font} package loads standard font packages and extends the usual \glsdesc{LM} implementations by replacing missing fonts with \glsdesc{CM} counterparts.
+The \software{hep-font} package sets up text fonts for the HEP package suite.
+It selects the document font size, switches between serif and sans-serif documents, chooses lining or oldstyle numerals, loads the appropriate encodings and micro-typographic support, and extends the \glsdesc{LM} setup with \glsdesc{CM} small caps and sans-serif upright italic shapes where needed.
 \end{abstract}
 
 The package is loaded using "\usepackage{hep-font}".
@@ -113,15 +115,15 @@ The "sans" option switches to sans-serif font instead of serif font.
 \DescribeMacro{oldstyle}
 The "oldstyle" option switches to oldstyle numerals such as 123 in text mode instead of lining numerals such as \textl{123}.
 
-The \software{fontenc} package \cite{fontenc} with "T1" and "TU" font encoding is loaded for \hologo{pdfTeX} and \hologo{LuaTeX}, respectively.
+The \software{fontenc} package \cite{fontenc} with "T1" and "TU" font encoding is loaded for \software{pdfTeX} and \software{LuaTeX}, respectively.
 
 Some restrictions of \CM fonts are lifted with the \software{fixcm} package \cite{fix-cm}.
 
 The \software{microtype} \cite{microtype} optimizations are activated.
 
-The \hologo{LaTeX} \NFSS is extended with the \software{nfssext-cfr} package \cite{nfssext-cfr}.
+The \LaTeX{} \NFSS is extended with the \software{nfssext-cfr} package \cite{nfssext-cfr}.
 
-The \LM font is loaded using the \software{cfr-lm}  package \cite{cfr-lm} for \hologo{pdfTeX}.
+The \LM font is loaded using the \software{cfr-lm}  package \cite{cfr-lm} for \software{pdfTeX}.
 
 The text companion fonts are loaded \cite{textcomp}.
 
@@ -219,9 +221,9 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 \fi
 %    \end{macrocode}
 %
-% \subsection{\hologo{LuaLaTeX} or \hologo{XeLaTeX}}
+% \subsection{LuaLaTeX or XeLaTeX}
 %
-% Load the \software{iftex} package \cite{iftex} and check if \hologo{LuaLaTeX} or \hologo{XeLaTeX} are running
+% Load the \software{iftex} package \cite{iftex} and check if LuaLaTeX or XeLaTeX are running
 %    \begin{macrocode}
 \RequirePackage{iftex}
 \iftutex
@@ -274,9 +276,10 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
   \DeclareTextFontCommand{\textpo}{\postyle}
   \DeclareTextFontCommand{\texttl}{\tlstyle}
   \DeclareTextFontCommand{\textto}{\tostyle}
+  \protected\def\hep@lining@style{\lstyle}
 %    \end{macrocode}
 %
-% \subsection{\hologo{pdfLaTeX}}
+% \subsection{pdfLaTeX}
 %
 %    \begin{macrocode}
 \else
@@ -316,6 +319,23 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
     \PassOptionsToPackage{rm={lining},sf={lining},tt={lining}}{cfr-lm}
   \fi
   \RequirePackage{cfr-lm}
+%    \end{macrocode}
+% The lining-style command provided by \software{nfssext-cfr} is not reliable for \software{cfr-lm} fonts in some older \TeX{} distributions when it is invoked from nested text-mode constructions.
+% We therefore preserve the original command for all other font families and handle \software{cfr-lm} explicitly.
+% For these families, the oldstyle-figure modifier \code{j} is removed from the current family name before the font is selected again.
+% This changes only the figure style while retaining the current serif, sans-serif, typewriter, quotation, or Dunhill variant.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\cs_set_eq:NN \hepfont_cfr_lstyle: \lstyle
+\cs_set_protected:Npn \hep@lining@style{
+  \tl_set:Nx \l_tmpa_tl { \f@family }
+  \exp_args:NnV \regex_match:nnTF{ \A clm }\l_tmpa_tl{
+    \regex_replace_once:nnN{ \A ( clm [^j]* ) j }{ \1 }\l_tmpa_tl
+    \fontfamily { \tl_use:N \l_tmpa_tl }
+    \selectfont
+  }{\hepfont_cfr_lstyle:}
+}
+\ExplSyntaxOff
 %    \end{macrocode}
 % Fix the remaining \CM \cite{cm} fonts using the \software{fix-cm} package \cite{fix-cm}
 %    \begin{macrocode}
@@ -423,7 +443,7 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 % Ensure that the "verbatim" environment uses proportional font and provide an inline "\code" macro.
 % Work around a bug in \software{nfssext-cfr} which defines a global "\set" macro and breaks other macros of the same name.
 %    \begin{macrocode}
-\newcommand*{\codestyle}{\tmstyle\lstyle}
+\newcommand*{\codestyle}{\ttfamily\tmstyle\lstyle}
 \let\verbatim@font\codestyle
 \RequirePackage{xparse}
 \ProvideDocumentCommand{\code}{v}{{\codestyle #1}}
@@ -438,32 +458,11 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 \pretocmd{\theequation}{\tstyle}{}{}
 %    \end{macrocode}
 %
-% \begin{macro}{\unit}
-% Patch the "\unit" and "\unitfrac" macros to work with lining numerals using the \software{xpatch} package \cite{xpatch} if the \software{units} package \cite{units} is loaded.
-% TODO implement patch without actually loading the package.
-%    \begin{macrocode}
-\ifhepfont@lining\else
-% \AtBeginDocument{
-%   \@ifpackageloaded{units}{
-  \RequirePackage{units}
-  \RequirePackage{xpatch}
-  \xpatchcmd{\unit}{\else#1}{%
-    \else\ifthenelse{\boolean{mmode}}{#1}{\textl{#1}}%
-  }{}{}
-  \xpatchcmd{\unitfrac}{\else#1}{%
-    \else\ifthenelse{\boolean{mmode}}{#1}{\textl{#1}}%
-  }{}{}
-%   }{}
-% }
-\fi
-%    \end{macrocode}
-% \end{macro}
-%
 %</package>
 %
 % \section{Test}
 %
-% \subsection{\hologo{pdfLaTeX}}
+% \subsection{pdfLaTeX}
 %
 %<*pdflatex>
 %
@@ -606,7 +605,7 @@ Finally the \software{inputenc} package \cite{inputenc} with the "utf8" option i
 %
 %</pdflatex>
 %
-% \subsection{\hologo{LuaLaTeX}}
+% \subsection{LuaLaTeX}
 %
 %<*lualatex>
 %
@@ -712,9 +711,12 @@ Latin modern extended by computer modern.
 
 ## Introduction
 
-The `hep-font` package loads standard font packages and extends the usual
-Latin Modern implementations by replacing missing fonts with Computer
-Modern counterparts.
+The `hep-font` package sets up text fonts for the HEP package suite. It
+selects the document font size, switches between serif and sans-serif
+documents, chooses lining or oldstyle numerals, loads the appropriate
+encodings and micro-typographic support, and extends the Latin Modern
+setup with Computer Modern small caps and sans-serif upright italic shapes
+where needed.
 
 The package is loaded with `\usepackage{hep-font}`.
 

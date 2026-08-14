@@ -17,13 +17,13 @@
 %
 % \iffalse
 
-%<package|class|bibliography>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-cv}[2025/09/01 v1.4 Curricula Vitarum in High Energy Physics]
-%<bibliography>\ProvidesPackage{hep-cv-bibliography}[2025/09/01 v1.4 Curricula Vitarum in High Energy Physics]
-%<class>\ProvidesClass{hep-cv}[2025/09/01 v1.4 Curricula Vitarum in High Energy Physics]
-%<documentation>\ProvidesFile{hep-cv-documentation.tex}[2025/09/01 v1.4 HEP-CV documentation]
-%<test-sty>\ProvidesFile{hep-cv-test-sty.tex}[2025/09/01 v1.4 HEP-CV class test]
-%<test-cls>\ProvidesFile{hep-cv-test-cls.tex}[2025/09/01 v1.4 HEP-CV class test]
+%<package|class|bibliography>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-cv}[2026/08/01 v1.5 Curricula Vitarum]
+%<bibliography>\ProvidesPackage{hep-cv-bibliography}[2026/08/01 v1.5 Curricula Vitarum]
+%<class>\ProvidesClass{hep-cv}[2026/08/01 v1.5 Curricula Vitarum]
+%<documentation>\ProvidesFile{hep-cv-documentation.tex}[2026/08/01 v1.5 HEP-CV documentation]
+%<test-sty>\ProvidesFile{hep-cv-test-sty.tex}[2026/08/01 v1.5 HEP-CV package test]
+%<test-cls>\ProvidesFile{hep-cv-test-cls.tex}[2026/08/01 v1.5 HEP-CV class test]
 %
 %<*documentation>
 %
@@ -58,7 +58,7 @@
 %
 % \fi
 %
-% \CheckSum{1011}
+% \CheckSum{1020}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -76,11 +76,12 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2019/01/01}{Initial version of the style file}
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
-% \changes{v1.2}{2023/07/01}{Bug fixes.}
-% \changes{v1.3}{2024/11/01}{Bug fixes.}
-% \changes{v1.4}{2025/09/01}{Bug fixes.}
+% \changes{v1.0}{2019/01/01}{Created the CV package with left-column layout, CV entries, list styling, title, photo, contact, letter, and bibliography helpers.}
+% \changes{v1.1}{2022/11/01}{Added the documented CV implementation with standalone loading, paper, font, language, and list options, contact and title helpers, and cover-letter support.}
+% \changes{v1.2}{2023/07/01}{Refreshed package metadata and documentation formatting.}
+% \changes{v1.3}{2024/11/01}{Added class, package, and bibliography extraction, class tests, month helpers, title-page, contact, and photo support, page styles, \cs{cvpart}, \cs{insubfile}, and CV bibliography integration.}
+% \changes{v1.4}{2025/09/01}{Updated release metadata and applied starred command definitions throughout the CV helpers.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, and expanded the abstract, package and class documentation, README, and examples.}
 %
 % \ifshort
 %<*documentation>
@@ -88,7 +89,7 @@
 %
 \GetFileInfo{hep-cv.sty}
 
-\title{The \software{hep-cv} package\thanks{This document corresponds to \software{hep-paper}~\fileversion.}}
+\title{The \software{hep-cv} package\thanks{This document corresponds to \software{hep-cv}~\fileversion.}}
 \author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
 \date{\filedate}
 
@@ -101,11 +102,9 @@
 \maketitle
 
 \begin{abstract}
-The \software{hep-cv} package enables the user to write an appealing \CV.
-The style is heavily influenced by the \software{moderncv} package \cite{moderncv}.
+The \software{hep-cv} package and class provide a compact $\CV$ layout for academic applications.
+The package defines the left-column $\CV$ line and entry layout, list styling, month helpers, and bibliography support, while the class adds article-based $\CV$ defaults, contact and photo title pages, cover-letter helpers, section and page styles, and subfile support.
 \end{abstract}
-
-\tableofcontents%\clearpage
 
 \newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
 
@@ -113,16 +112,19 @@ The style is heavily influenced by the \software{moderncv} package \cite{modernc
 
 The \software{hep-cv} package enables the user to write an appealing \CV.
 The style is heavily influenced by the \software{moderncv} package \cite{moderncv}.
-In order to use this package the user has to load only the \software{hep-cv} package in addition to the "article" class.
+In order to use the package layout macros the user has to load only the \software{hep-cv} package in addition to the "article" class.
 \begin{verbatim}
 \documentclass{article}
 \usepackage{hep-cv}
 \end{verbatim}
+The source also provides a "hep-cv" class for complete \CV documents and a "hep-cv-bibliography" module for \CV bibliography layouts.
 
 \subsection{Options}
 
-\DescribeMacro{serif}
-The "serif" option switches the document including math to the serif font shape.
+\DescribeMacro{date}
+\DescribeMacro{list}
+The "date" option keeps the usual bibliography date scheme.
+The "list=false" option prevents the package from adjusting the standard list environments.
 
 \section{Macros}
 
@@ -138,14 +140,15 @@ The "\cvline"\oarg{left}\marg{main} adds an unformatted line to the \CV.
 \end{verbatim}
 
 \DescribeMacro{\cventry}
-The "\cventry"\oarg{left}\marg{main 1}\oarg{main 2}\meta{*}\oarg{\dots} macro adds a boldface entry to the \CV, the contents passed to the following arguments are typeset alternatic upright and italic.
+The "\cventry"\oarg{left}\marg{main 1}\oarg{main 2}\meta{*}\oarg{\dots} macro adds a boldface entry to the \CV.
+The contents passed to the following arguments alternate between upright and italic text.
 Starred optional arguments begin on a new line.
-Leading to
+For example:
 
 \begin{verbatim}
-\cventry[left]{cvetry example}[one][two]*[starred three][four]
-\cventry[left]{cvetry example}[one]
-\cventry[left]{cvetry example}
+\cventry[left]{cventry example}[one][two]*[starred three][four]
+\cventry[left]{cventry example}[one]
+\cventry[left]{cventry example}
 \end{verbatim}
 
 \subsection{Lists}
@@ -158,6 +161,63 @@ The "enumerate" environment is adjusted.
 The "description" environment is adjusted.
 \DescribeEnv{enumdescript}
 The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adjusted.
+
+\subsection{Months}
+
+\DescribeMacro{\Jan}
+\DescribeMacro{\Feb}
+\DescribeMacro{\Mar}
+\DescribeMacro{\Apr}
+\DescribeMacro{\May}
+\DescribeMacro{\Jun}
+\DescribeMacro{\Jul}
+\DescribeMacro{\Aug}
+\DescribeMacro{\Sep}
+\DescribeMacro{\Oct}
+\DescribeMacro{\Nov}
+\DescribeMacro{\Dec}
+The month macros spread a short month name evenly across the available width and are intended for compact date columns.
+
+\section{Class additions}
+
+The "hep-cv" class is based on "article" and loads the package layout with full-page \CV defaults.
+
+\DescribeMacro{font}
+\DescribeMacro{serif}
+\DescribeMacro{hyperref}
+The class accepts a "font="\meta{size} option, the "serif" option, and a "hyperref" switch that controls whether \software{hep-reference} is loaded for PDF metadata and links.
+
+\DescribeMacro{\address}
+\DescribeMacro{\addressfont}
+\DescribeMacro{\addcontactline}
+The "\address"\marg{text} macro stores contact information, "\addressfont" controls its font, and "\addcontactline"\marg{text} appends additional contact material.
+
+\DescribeMacro{\opening}
+\DescribeMacro{\closing}
+\DescribeMacro{\makelettertitle}
+\DescribeMacro{\makeletterclosing}
+\DescribeEnv{letter}
+The cover-letter helpers store opening and closing text, typeset a letter title and closing, and provide a "letter" environment that wraps one letter page.
+
+\DescribeMacro{\titlefont}
+\DescribeMacro{\infofont}
+\DescribeMacro{\addtitleline}
+\DescribeMacro{\photo}
+\DescribeMacro{\maketitle}
+The class title page uses "\author" for the name, optional "\photo"\marg{file} material, "\addtitleline"\marg{label}\marg{text} for title metadata, and "\addcontactline" for contact metadata.
+The "\titlefont" and "\infofont" macros control the title and metadata fonts.
+
+\DescribeEnv{abstract}
+The class renames the abstract to \enquote{Summary} and formats it in the \CV left-column layout.
+
+\DescribeMacro{\cvpart}
+\DescribeMacro{\insubfile}
+The "\cvpart"\marg{name} macro stores the current \CV part for headers and PDF metadata, and "\insubfile"\marg{code} emits \meta{code} only when the file is compiled as part of the main \CV.
+
+\section{Bibliography}
+
+The bibliography module mirrors the standalone \software{hep-cv-bibliography} package.
+It defines \CV date sorting, section-level bibliography headings, left-column date and index helpers, and "unnumbered", "numbered", and "starrednumbered" bibliography environments for publication lists.
 
 % \ifshort
 \printbibliography
@@ -449,7 +509,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
   oldstyle
 }{hep-font}
 \RequirePackage{hep-cv}
-\RequirePackage{fullpage}
+% \RequirePackage{fullpage}
 \setleftwidth{2.8cm}
 \setseperatorwidth{4mm}
 %    \end{macrocode}
@@ -547,20 +607,31 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\hep@contact@lines}
 % \begin{macro}{\hep@contact@line}
 % \begin{macro}{\addcontactline}
 % Define the "\hep@contact@line" macro.
 %    \begin{macrocode}
-\def\hep@contact@line{%
-  \ifdef{\hep@address}{\hep@address\\[-1.5ex]\strut}{}%
+\newcommand*{\hep@contact@lines}{}
+\newcommand{\addcontactline}[1]{%
+  \ifx\hep@contact@lines\@empty
+    \gappto\hep@contact@lines{#1}%
+  \else
+    \gappto\hep@contact@lines{\\#1}%
+  \fi
 }
-\newcommand*{\addcontactline}[1]{
-  \let\@hep@contact@line\hep@contact@line
-  \expandafter\renewcommand\expandafter*\expandafter\hep@contact@line\expandafter{%
-    \ifdef{\hep@address}{\@hep@contact@line\\}{}#1%
-  }
+\newcommand*{\hep@contact@line}{%
+  \ifdef{\hep@address}{%
+    \hep@address\\[-1.5ex]\strut
+    \ifx\hep@contact@lines\@empty
+    \else
+      \\%
+    \fi
+  }{}%
+  \hep@contact@lines
 }
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 %
@@ -628,7 +699,7 @@ The "enumdescript" environment of the "hep-text" package \cite{hep-text} is adju
         \begin{tabular}{@{}r@{: }l@{}}\hep@title@lines\end{tabular}%
       \hep@end\medskip%
     }%
-    \begin{textblock*}{\linewidth}[1,0](\linewidth,-2.5ex)%
+    \begin{textblock*}{\linewidth}[1,0](\linewidth,-4ex)%
       \raggedleft\addressfont\hep@contact@line%
     \end{textblock*}%
   }%
@@ -1474,6 +1545,45 @@ Letter content
 \end{document}
 %    \end{macrocode}
 %</test-bib>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-cv` package
+
+Compact CV layout for HEP applications
+
+## Introduction
+
+The `hep-cv` package and class provide a compact CV layout for HEP
+applications. The package defines the left-column CV line and entry
+layout, list styling, month helpers, and bibliography support. The class
+adds article-based CV defaults, contact and photo title pages,
+cover-letter helpers, section and page styles, and subfile support.
+
+For package-only use:
+
+    \documentclass{article}
+    \usepackage{hep-cv}
+
+For complete CV documents use the `hep-cv` class.
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
 %
 % \Finale
 %

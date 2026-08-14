@@ -17,9 +17,9 @@
 %
 % \iffalse
 %
-%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-acronym}[2025/09/01 v1.4 Acronyms using glossaries]
-%<documentation>\ProvidesFile{hep-acronym-documentation.tex}[2025/09/01 v1.4 hep-acronym documentation]
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-acronym}[2026/08/01 v1.5 An acronym extension for glossaries]
+%<documentation>\ProvidesFile{hep-acronym-documentation.tex}[2026/08/01 v1.5 HEP-acronym documentation]
 %
 %<*documentation>
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -51,7 +51,7 @@
 %
 % \fi
 %
-% \CheckSum{541}
+% \CheckSum{627}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -69,11 +69,12 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2021/09/01}{Initial version of the style file.}
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
-% \changes{v1.2}{2023/07/01}{Bug fixes.}
-% \changes{v1.3}{2024/11/01}{Bug fixes.}
-% \changes{v1.4}{2025/09/01}{Bug fixes.}
+% \changes{v1.0}{2021/09/01}{Created the dedicated acronym package with glossaries-extra based acronym declarations, sentence-aware use, short and long variants, reset and dummy helpers, and acronym groups.}
+% \changes{v1.1}{2022/11/01}{Added \cs{sentence}, forced long-form acronym commands, conditional PDF-string disabling without hyperref, safer option passing, and title-case tests.}
+% \changes{v1.2}{2023/07/01}{Added the \option{hyper} option, alternative long-form acronyms, math-mode acronym atom wrapping, and refreshed documentation and README formatting.}
+% \changes{v1.3}{2024/11/01}{Renamed the sentence-state helper, applied starred command definitions, corrected release dates, and disabled the table/list acronym reset patch.}
+% \changes{v1.4}{2025/09/01}{Updated release metadata.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, and expanded the abstract, user documentation, README, and examples.}
 %
 % \ifshort
 %<*documentation>
@@ -95,11 +96,16 @@
 \maketitle
 
 \begin{abstract}
-The \software{hep-acronym} package provides an acronym macro based on the \software{glossaries} package.
+The \software{hep-acronym} package provides sentence-aware acronym helpers based on \software{glossaries-extra}.
+It defines declaration commands for regular, always-short, always-long, and alternative long-form acronyms, optional links back to the first use, reset and dummy-use helpers, and support for several acronym groups.
 \end{abstract}
 
 Acronyms are implemented using the \software{glossaries-extra} package \cite{glossaries-extra} which is an extension of the \software{glossaries} package \cite{glossaries} and must be loaded after the \software{hyperref} package \cite{hyperref}.
 It can be loaded using "\usepackage{hep-acronym}".
+
+\DescribeMacro{hyper}
+The "hyper" option controls whether later acronym uses link back to their first appearance.
+It is enabled by default and can be deactivated with "hyper=false".
 
 \DescribeMacro{\acronym}
 The "\acronym"\meta{*}\oarg{typeset abbreviation}\marg{abbreviation}\meta{*}\marg{definition}\oarg{plural definition} macro generates the singular "\"\meta{abbreviation} and plural "\"\meta{abbreviation}"s" macros.
@@ -119,12 +125,19 @@ The "\sentence" macro ensures that the directly following abbreviation is capita
 \DescribeMacro{\longacronym}
 The "\shortacronym" and "\longacronym" macros are drop-in replacements of the "\acronym" macro showing only the short or long form of their acronym.
 
+\DescribeMacro{\acronymalternative}
+The "\acronymalternative"\marg{acronym}\marg{name}\meta{*}\marg{alternative long form} macro defines an additional acronym macro that shares the use counter and short form of \meta{acronym} but prints the supplied long form at first use.
+
 \DescribeMacro{\resetacronym}
 The first use form of the acronym can be enforced by resetting the acronym counter with "\resetacronym"\marg{key}.
 
 \DescribeMacro{\dummyacronym}
 If the acronym counter equals one at the end of the document the short form of the acronym is not introduced.
 Placing a "\dummyacronym"\marg{key} at the end of the document ensures that the short form is introduced.
+
+\DescribeMacro{\acronyms}
+The "\acronyms"\oarg{key}\marg{title} macro creates a new acronym glossary and switches subsequent declarations to it.
+Without the optional argument the mandatory argument is used both as glossary key and printed title.
 
 \DescribeMacro{warning}
 In order to reduce the number of potentially conflicting packages the \software{glossaries} package is loaded without any glossary style.
@@ -213,12 +226,29 @@ In the case that the glossary should be printed additional packages must be load
 \newcommand*{\hep@disable}[1]{%
   \@ifpackageloaded{hyperref}{\pdfstringdefDisableCommands{#1}}{}%
 }
+% Ignore only hyperref's "math shift" PDF-string warning.
+%    \begin{macrocode}
+\AtBeginDocument{%
+  \@ifpackageloaded{hyperref}{%
+    \let\hep@HyPsd@CatcodeWarning\HyPsd@CatcodeWarning
+    \renewcommand*{\HyPsd@CatcodeWarning}[1]{%
+      \ifstrequal{#1}{math shift}{}{%
+        \hep@HyPsd@CatcodeWarning{#1}%
+      }%
+    }%
+  }{}%
+}
 %    \end{macrocode}
 % Deactivate hyperrefs if requested.
 %    \begin{macrocode}
 \ifhepacronym@hyper\else
   \glsdisablehyper
 \fi
+%    \end{macrocode}
+%
+% Load the \software{titlesec} package \cite{titlesec} in order to ensure that section headers are treated as sentences.
+%    \begin{macrocode}
+\RequirePackage{titlesec}
 %    \end{macrocode}
 %
 % \begin{macro}{\begin@sentence}
@@ -255,6 +285,45 @@ In the case that the glossary should be printed additional packages must be load
   }{#1}{#2}%
 }}
 %    \end{macrocode}
+% \end{macro}
+%
+% Fix the table of contents.
+%    \begin{macrocode}
+\let\hep@table@of@contents\tableofcontents
+\renewcommand*{\tableofcontents}{%
+  \begingroup
+    \glsunsetall
+    \let\hep@contents@line\contentsline
+    \let\hep@number@line\numberline
+    \renewcommand*{\contentsline}[4]{%
+      \hep@contents@line{##1}{\sentence ##2}{##3}{##4}%
+    }%
+    \renewcommand*{\numberline}[1]{\hep@number@line{##1}\sentence}%
+    \hep@table@of@contents
+  \endgroup
+  \glsresetall
+}
+%    \end{macrocode}
+%
+% \begin{macro}{\hep@item@sentence}
+% \begin{macro}{\descriptionsitem}
+% Ensure that acronyms in description items get capitalised using the \software{enumitem} package \cite{enumitem}.
+%    \begin{macrocode}
+\RequirePackage{enumitem}
+\newcommand*\hep@item@sentence{\leavevmode\sentence}
+\newcommand*\descriptionsitem{%
+  \let\hep@descripton@item\item
+  \RenewDocumentCommand{\item}{o}{%
+    \IfNoValueTF{##1}{%
+      \hep@descripton@item\hep@item@sentence
+    }{%
+      \hep@descripton@item[\hep@item@sentence##1]\hep@item@sentence
+    }%
+  }%
+}
+\setlist[description]{before=\descriptionsitem}
+%    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \begin{macro}{\mathdef}
@@ -366,6 +435,25 @@ In the case that the glossary should be printed additional packages must be load
 %    \begin{macrocode}
   \hep@disable{\expandafter\def\csname#3slong\endcsname{%
     \IfNoValueTF{#6}{#5s}{#6} }%
+  }
+%    \end{macrocode}
+% Provide an enforced short form.
+%    \begin{macrocode}
+  \expandafter\newcommand\expandafter*\csname#3short\endcsname[1][]{%
+    \glsxtrshort{#3}\@gls@increment@currcount{#3}%
+    \IfBooleanTF{#4}{}{\@\xspace}%
+  }
+%    \end{macrocode}
+% Provide an enforced first form.
+%    \begin{macrocode}
+  \expandafter\newcommand\expandafter*\csname#3first\endcsname[1][]{%
+    \glsreset{#3}
+    \hep@if@begin@of@sentence{%
+      \ifglsused{#3}{\cgls{#3}[##1]}{\cGls{#3}[##1]}%
+    }{\cgls{#3}[##1]}%
+    \ifnum\glsentrycurrcount{#3}>1\relax
+      \IfBooleanTF{#4}{}{\@\xspace}%
+    \else\@\xspace\fi
   }
 %    \end{macrocode}
 % End of "\acronym".
@@ -676,7 +764,13 @@ An acronym extension for glossaries
 ## Introduction
 
 The `hep-acronym` package provides an acronym macro based on the
-`glossaries` package. It can be loaded using `\usepackage{hep-acronym}`.
+`glossaries-extra` package. It defines declaration commands for regular,
+always-short, always-long, and alternative long-form acronyms, keeps the
+first-use counters sentence-aware, optionally links later uses back to the
+first occurrence, and provides helpers for resetting, dummy-using, and
+grouping acronyms.
+
+It can be loaded using `\usepackage{hep-acronym}`.
 
 ## Author
 

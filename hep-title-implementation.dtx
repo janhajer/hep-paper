@@ -17,9 +17,9 @@
 %
 % \iffalse
 
-%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-title}[2025/09/01 v1.4 Extend title page macros]
-%<documentation>\ProvidesFile{hep-title-documentation.tex}[2025/09/01 v1.4 hep-title documentation]
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-title}[2026/08/01 v1.5 Extend title page macros]
+%<documentation>\ProvidesFile{hep-title-documentation.tex}[2026/08/01 v1.5 hep-title documentation]
 %
 %<*documentation>
 
@@ -55,7 +55,7 @@
 %
 % \fi
 %
-% \CheckSum{1004}
+% \CheckSum{1059}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -73,11 +73,12 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2021/09/01}{Initial version of the style file.}
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
-% \changes{v1.2}{2023/07/01}{Bug fixes.}
-% \changes{v1.3}{2024/11/01}{Bug fixes.}
-% \changes{v1.4}{2025/09/01}{Bug fixes.}
+% \changes{v1.0}{2021/09/01}{Created the dedicated title package with series, subtitle, preprint placement, author, affiliation, email, editor, endorser, keyword, and abstract handling.}
+% \changes{v1.1}{2022/11/01}{Added keyword metadata, improved author, affiliation, editor, and endorser documentation, made affiliation output conditional, and fixed affiliation references.}
+% \changes{v1.2}{2023/07/01}{Refreshed package metadata and documentation formatting.}
+% \changes{v1.3}{2024/11/01}{Updated release metadata.}
+% \changes{v1.4}{2025/09/01}{Added reprint blocks, \cs{doi}, \cs{arxiv}, multiple preprint and reprint lines, \cs{placereprint}, ragged preprint font, and applied starred command definitions.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, expanded title documentation and README, and added fuller title tests.}
 %
 % \ifshort
 %<*documentation>
@@ -99,7 +100,8 @@
 \maketitle
 
 \begin{abstract}
-The \software{hep-title} package extends the title macros of the standard classes with macros for a preprint, affiliation, editors, and endorsers.
+The \software{hep-title} package extends the title macros of the standard classes.
+It adds series and subtitle metadata, preprint and reprint blocks, DOI and arXiv helpers, author, editor, endorser, affiliation, email and ORCID helpers, date and abstract formatting, keywords, and two-column title-aware abstracts.
 \end{abstract}
 
 To use the \software{hep-title} package include it with "\usepackage{hep-title}".
@@ -113,27 +115,39 @@ If the \software{hyperref} package is loaded the \PDF meta information is set ac
 
 \subsection{Title}
 
+\DescribeMacro{\preseries}
 \DescribeMacro{\series}
+\DescribeMacro{\postseries}
 \DescribeMacro{\title}
+\DescribeMacro{\presubtitle}
 \DescribeMacro{\subtitle}
+\DescribeMacro{\postsubtitle}
 \DescribeMacro{\seriesfont}
 \DescribeMacro{\titlefont}
 \DescribeMacro{\subtitlefont}
 The "\series"\marg{series} places a series title above the usual title generated via "\title"\marg{title}.
 The "\subtitle"\marg{subtitle} macro places a subtitle below the usual title.
+The "\preseries", "\postseries", "\presubtitle", and "\postsubtitle" hooks adjust the surrounding material.
 The fonts and their size can be adjusted using the "\seriesfont"\marg{font}, "\titlefont"\marg{font}, and "\subtitlefont"\marg{font} macros.
 
 \subsection{Authors}
 
 \DescribeMacro{\author}
 \DescribeMacro{\authorfont}
+\DescribeMacro{\authortitle}
+\DescribeMacro{\authortitlefont}
+\DescribeMacro{\preauthortitle}
+\DescribeMacro{\postauthortitle}
 \DescribeMacro{\email}
+\DescribeMacro{\orcmail}
 \DescribeMacro{\affiliation}
 \DescribeMacro{\affiliationfont}
 In order to facilitate multiple authors with different affiliations the \software{authblk} package \cite{authblk} is extended.
-The author macro is extended to take a affiliation label "\author"\oarg{label}\marg{name}.
+The author macro is extended to take an affiliation label "\author"\oarg{label}\marg{name}.
 The affiliation macro takes the corresponding label "\affiliation"\oarg{label}\marg{institution}.
-Additionally, the "\email{email}" macro places a link containing the email in typewrite font into a footnote.
+Additionally, the "\email"\marg{email} macro places a link containing the email address in typewriter font into a footnote.
+The "\orcmail"\marg{orcid}\marg{email} macro combines an email address with an ORCID link in the same footnote.
+If editors are present, the author line receives a title that can be adjusted using "\authortitle", "\authortitlefont", "\preauthortitle", and "\postauthortitle".
 The fonts can be adjusted using the "\authorfont"\marg{font} and "\affiliationfont"\marg{font} macros.
 The following lines add \eg two authors with different affiliations
 \begin{verbatim}
@@ -147,29 +161,53 @@ The following lines add \eg two authors with different affiliations
 \DescribeMacro{\endorser}
 \DescribeMacro{\editorfont}
 \DescribeMacro{\endorserfont}
+\DescribeMacro{\preeditor}
+\DescribeMacro{\posteditor}
+\DescribeMacro{\preendorser}
+\DescribeMacro{\postendorser}
 Additionally the "\editor"\oarg{label}\marg{name} and "\endorser"\oarg{label}\marg{name} macros are provided that act similar to the "\author"\oarg{label}\marg{name} macros but place their content in a dedicated line.
-Their font can be adjusted by the "\editorfont"\marg{font} and "\endorserfont"\marg{font}.
+Their font and surrounding material can be adjusted by "\editorfont"\marg{font}, "\endorserfont"\marg{font}, "\preeditor"\marg{code}, "\posteditor"\marg{code}, "\preendorser"\marg{code}, and "\postendorser"\marg{code}.
 \DescribeMacro{\editortitle}
 \DescribeMacro{\endorsertitle}
 \DescribeMacro{\editortitlefont}
 \DescribeMacro{\endorsertitlefont}
-The titles of these lines can be adjusted using the "\editortitle"\marg{singluar}\marg{plural} and  "\endorsertitle"\marg{singluar}\marg{plural} macros.
-Their font can be adjust with the "\editortitlefont"\marg{font} and "\endorsertitlefont"\allowbreak\marg{font}.
+\DescribeMacro{\preeditortitle}
+\DescribeMacro{\posteditortitle}
+\DescribeMacro{\preendorsertitle}
+\DescribeMacro{\postendorsertitle}
+The titles of these lines can be adjusted using the "\editortitle"\marg{singular}\marg{plural} and "\endorsertitle"\marg{singular}\marg{plural} macros.
+Their font and surrounding material can be adjusted with "\editortitlefont"\marg{font}, "\endorsertitlefont"\allowbreak\marg{font}, "\preeditortitle"\marg{code}, "\posteditortitle"\marg{code}, "\preendorsertitle"\marg{code}, and "\postendorsertitle"\marg{code}.
 
 \subsection{Abstract}
 
 \DescribeEnv{abstract}
 \DescribeEnv{abstract*}
+\DescribeMacro{\keywords}
 The "abstract" environment is adjusted to not start with an indentation.
 The "abstract*" environment takes care of placing the title as well.
 This is used in "twocolumn" documents if the abstract should span both columns.
+The "\keywords"\marg{keywords} macro appends an italic keyword line to the abstract.
+
+\DescribeMacro{\datefont}
+The date is empty by default and can be formatted with "\datefont"\marg{font}.
 
 \subsection{Preprint}
 
 \DescribeMacro{\preprint}
+\DescribeMacro{\arxiv}
+\DescribeMacro{\placepreprint}
 \DescribeMacro{\preprintfont}
-The "\preprint"\marg{numer} macro places a pre-print number in the upper right corner of the title page.
-The "\preprintfont" macro can be used to change the font of the preprint.
+The "\preprint"\marg{number} macro places a preprint number in the upper right corner of the title page.
+The "\arxiv"\marg{id} macro adds an arXiv preprint link.
+The "\placepreprint" hook places the preprint block on the first page, and "\preprintfont" changes its font.
+
+\DescribeMacro{\reprint}
+\DescribeMacro{\doi}
+\DescribeMacro{\placereprint}
+\DescribeMacro{\reprintfont}
+The "\reprint"\marg{text} macro collects reprint or publication information for the upper left corner of the title page.
+The "\doi"\marg{id} helper adds a DOI link.
+The "\placereprint" hook places the reprint block on the first page, and "\reprintfont" changes its font.
 
 % \ifshort
 \printbibliography
@@ -795,6 +833,84 @@ The "\preprintfont" macro can be used to change the font of the preprint.
 }
 %    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\g\_hep\_authors\_seq}
+% \begin{macro}{\hep\_author}
+% Place author information in dedicated PDF field.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\seq_new:N \g_hep_authors_seq
+\cs_new_eq:NN \hep_author \author
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\hep\_add\_to\_authors}
+% Strip footnote-like commands from the plain-author copy
+%    \begin{macrocode}
+\cs_set_protected:Npn \hep_add_to_authors:n #1{
+  \group_begin:
+  \cs_set:Npn \email ##1 {}
+  \cs_set:Npn \thanks ##1 {}
+  \cs_set:Npn \footnote ##1 {}
+  \cs_set:Npn \orcidlink##1{}
+  \cs_set:Npn \orcmail ##1 ##2 {}
+  \tl_set:Ne \l_tmpa_tl {#1}
+  \seq_gput_right:NV \g_hep_authors_seq \l_tmpa_tl
+  \group_end:
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\author}
+% Patch author macro.
+%    \begin{macrocode}
+\RenewDocumentCommand{\author}{O{}m}{
+  \hep_add_to_authors:n{#2}
+  \hep_author[#1]{#2}
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\hep\_authors}
+% \begin{macro}{\hep@authors}
+% Expandable plain list
+%    \begin{macrocode}
+\cs_new:Npn \hep_authors:{
+  \seq_use:Nnnn \g_hep_authors_seq {~and~} {,~} {,~and~}
+}
+\cs_new_eq:NN \hep@authors \hep_authors:
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% Safe plain author in PDF.
+%    \begin{macrocode}
+\AddToHook{cmd/maketitle/before}[hep-title/pdfauthor]{%
+  \@ifpackageloaded{hyperref}{%
+    \hypersetup{pdfauthor={\hep@authors}}%
+  }{}%
+}
+\ExplSyntaxOff
+%    \end{macrocode}
+%
+% Load the \software{orcidlink} \cite{orcidlink} package and make the logo monochrome.
+%    \begin{macrocode}
+\RequirePackage{orcidlink}
+\colorlet{orcidlogocol}{black}
+\tikzset{
+  orcidlogo/.pic={
+    \fill[orcidlogocol] svg{M256,128c0,70.7-57.3,128-128,128C57.3,256,0,198.7,0,128C0,57.3,57.3,0,128,0C198.7,0,256,57.3,256,128z};
+    \fill[white] svg{M236,128 c0,59.6-48.4,108-108,108 C68.4,236,20,187.6,20,128 C20,68.4,68.4,20,128,20 C187.6,20,236,68.4,236,128z};
+    \fill[black] svg{M86.3,186.2H70.9V79.1h15.4v48.4V186.2z}
+    svg{M108.9,79.1h41.6c39.6,0,57,28.3,57,53.6c0,27.5-21.5,53.6-56.8,53.6h-41.8V79.1z M124.3,172.4h24.5c34.9,0,42.9-26.5,42.9-39.7c0-21.5-13.7-39.7-43.7-39.7h-23.7V172.4z}
+    svg{M88.7,56.8c0,5.5-4.5,10.1-10.1,10.1c-5.6,0-10.1-4.6-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1C84.2,46.7,88.7,51.3,88.7,56.8z};
+  }
+}
+%    \end{macrocode}
+%
+% \begin{macro}{\orcmail}
+% Define the "\orcmail" macro that places the ORCid together with the email in the footer.
+%    \begin{macrocode}
+\NewDocumentCommand{\orcmail}{mm}{\thanks{\hep@email{#2} \orcidlinkc{#1}}}
+\pdfstringdefDisableCommands{\def\orcmail#1#2{}}
+%    \end{macrocode}
+% \end{macro}
 %
 % \subsection{Date and Abstract}
 %
@@ -975,7 +1091,10 @@ Extensions for the title page
 ## Introduction
 
 The `hep-title` package extends the title macros of the standard classes
-with macros for a preprint, affiliation, editors, and endorsers.
+with series and subtitle metadata, preprint and reprint blocks, DOI and
+arXiv helpers, author, editor, endorser, affiliation, email and ORCID
+helpers, date and abstract formatting, keywords, and two-column
+title-aware abstracts.
 
 To use the `hep-title` package include it with `\usepackage{hep-title}`.
 

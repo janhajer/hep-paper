@@ -17,9 +17,9 @@
 %
 % \iffalse
 
-%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-math}[2025/09/01 v1.4 Math and physics macros]
-%<documentation>\ProvidesFile{hep-math-documentation.tex}[2025/09/01 v1.4 hep-math documentation]
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-math}[2026/08/01 v1.5 Math and physics macros]
+%<documentation>\ProvidesFile{hep-math-documentation.tex}[2026/08/01 v1.5 hep-math documentation]
 %
 %<*documentation>
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -61,7 +61,7 @@
 %
 % \fi
 %
-% \CheckSum{725}
+% \CheckSum{754}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -79,11 +79,12 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2021/09/01}{Initial version of the style file.}
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
-% \changes{v1.2}{2023/07/01}{Bug fixes.}
-% \changes{v1.3}{2024/11/01}{Bug fixes.}
-% \changes{v1.4}{2025/09/01}{Bug fixes.}
+% \changes{v1.0}{2021/09/01}{Created the dedicated math helper package with \cs{mathdef}, overlines, accents, operators, fractions, units, differentials, delimiters, probabilities, brackets, bra-ket notation, matrix elements, and vectors.}
+% \changes{v1.1}{2022/11/01}{Added optional defaults to \cs{mathdef}, \cs{widebar}, row and column vector documentation, centred colons, amssymb loading, improved flat fractions and slashed symbols, cfr-lm and nfssext-cfr patching, and separate bra-ket spacing.}
+% \changes{v1.2}{2023/07/01}{Added \cs{imaginaryunit}, math-mode \cs{unit} and \cs{unitfrac} wrappers, optional integral placement, \cs{floor} and \cs{ceil}, and differential and flat-fraction spacing refinements.}
+% \changes{v1.3}{2024/11/01}{Switched underline support from soulutf8 to soul, disabled the active \cs{int} redefinition, added \cs{slashedpartialdifferential} and \cs{spd}, and exposed \cs{row} and \cs{column} through \cs{mathdef}.}
+% \changes{v1.4}{2025/09/01}{Applied starred command definitions consistently and refreshed release metadata.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, and expanded the documentation, README, and examples for the math interface.}
 %
 % \ifshort
 %<*documentation>
@@ -105,7 +106,8 @@
 \maketitle
 
 \begin{abstract}
-The \software{hep-math} package provides some additional features beyond the \software{mathtools} and \software{amsmath} packages.
+The \software{hep-math} package extends \software{mathtools} and \software{amsmath} with HEP-oriented math notation.
+It provides math-only command definitions, improved overlines and arrow accents, operator names, fractions and unit helpers, differentials and derivative builders, paired delimiters, probabilities, brackets, quantum-mechanical bra-ket notation, matrix elements, and expectation values.
 \end{abstract}
 
 To use the package place "\usepackage{hep-math}" in the preamble.
@@ -421,6 +423,7 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 %    \begin{macrocode}
 \RequirePackage{mathtools}
 \mathtoolsset{centercolon}
+\numberwithin{equation}{section}
 \allowdisplaybreaks[1]
 \thickmuskip=5mu plus 3mu minus 1mu
 \medmuskip=4mu plus 2mu minus 3mu
@@ -452,7 +455,7 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 % \begin{macro}{\i}
 % Provide an upright imaginary unit in math mode.
 %    \begin{macrocode}
-\newcommand*{\imaginaryunit}{\text{i}}
+\newcommand*{\imaginaryunit}{i}
 \AtBeginDocument{\mathdef{\i}{\imaginaryunit}}
 %    \end{macrocode}
 % \end{macro}
@@ -617,28 +620,61 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 %
 % \subsection{Units and fractions}
 %
-% \begin{macro}{\unit}
-% Load the \software{units} package \cite{units} which provides the "\units" and "\nicefrac" macros.
-% Patch the "\unit" macros to behave like "\mathinner" within an equation
+% \begin{macro}{\nicefrac}
+% Define the "\nicefrac" macro using the \software{xfrac} package \cite{xfrac}.
 %    \begin{macrocode}
-\RequirePackage{units}
-\let\oldunit\unit
-\renewcommand*{\unit}[2][]{%
-  \ifthenelse{\boolean{mmode}}{%
-    \mathinner{\oldunit[#1]{#2}}%
-  }{%
-     \oldunit[#1]{#2}%
-  }%
-}
-\let\oldunitfrac\unitfrac
-\renewcommand*{\unitfrac}[3][]{%
-  \ifthenelse{\boolean{mmode}}{%
-    \mathinner{\oldunitfrac[#1]{#2}{#3}}%
-  }{%
-    \oldunitfrac[#1]{#2}{#3}%
-  }%
+\RequirePackage{xfrac}
+\let\nicefrac\sfrac
+%    \end{macrocode}
+% \end{macro}
+%
+% Load the \software{siunitx} package \cite{siunitx}.
+%    \begin{macrocode}
+\RequirePackage{siunitx}
+\providecommand*{\hep@lining@style}{\ifdefined\lstyle\lstyle\fi}
+\sisetup{
+  reset-math-version=false,
+  reset-text-family=false,
+  reset-text-series=false,
+  uncertainty-mode=separate,
+  exponent-product=\cdot,
+  unit-mode=text,
+  text-font-command=\hep@lining@style,
 }
 %    \end{macrocode}
+% Provide a compatibility macro for older installations.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\cs_if_exist:NF \siunitx_declare_prefix:Nne
+{
+  \cs_generate_variant:Nn
+  \siunitx_declare_prefix:Nnn
+  { Nne }
+}
+\ExplSyntaxOff
+%    \end{macrocode}
+% \begin{macro}{\unit}
+% \begin{macro}{\unitfrac}
+% Ensure that its macros are compatible with the definitions used in the depreciated \software{unit} package.
+%    \begin{macrocode}
+\NewCommandCopy{\hep@unit}{\unit}
+\ExplSyntaxOn
+  \siunitx_declare_prefix:Nne\mu{-6}{\__siunitx_unit_non_latin:n{"03BC}}
+  \prg_new_conditional:Npnn\hep_if_keyval:n#1{TF}{
+    \tl_if_in:nnTF{#1}{=}{\prg_return_true:}{\prg_return_false:}
+  }
+  \cs_new_protected:Npn\hep_unit:nn#1#2{
+    \hep_if_keyval:nTF{#1}{\hep@unit[#1]{#2}}{\qty[parse-numbers=false]{#1}{#2}}
+  }
+  \RenewDocumentCommand{\unit}{om}{
+    \IfNoValueTF{#1}{\hep@unit{#2}}{\hep_unit:nn{#1}{#2}}
+  }
+\ExplSyntaxOff
+\NewDocumentCommand{\unitfrac}{omm}{
+  \IfNoValueTF{#1}{\hep@unit{#2\per#3}}{\qty{#1}{#2\per#3}}
+}
+%    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \begin{macro}{\inv}
@@ -1186,8 +1222,12 @@ Extended math macros
 
 ## Introduction
 
-The `hep-math` package provides some additional features beyond the
-`mathtools` and `amsmath` packages.
+The `hep-math` package extends `mathtools` and `amsmath` with
+HEP-oriented math notation. It provides math-only command definitions,
+improved overlines and arrow accents, operator names, fractions and unit
+helpers, differentials and derivative builders, paired delimiters,
+probabilities, brackets, quantum-mechanical bra-ket notation, matrix
+elements, and expectation values.
 
 To use the package place `\usepackage{hep-math}` in the preamble.
 

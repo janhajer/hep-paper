@@ -17,9 +17,9 @@
 %
 % \iffalse
 %
-%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-reference}[2025/09/01 v1.4 Convenience macros for references]
-%<documentation>\ProvidesFile{hep-reference-documentation.tex}[2025/09/01 v1.4 HEP-reference documentation]
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-reference}[2026/08/01 v1.5 Adjustments of standard references, footnotes, and citations]
+%<documentation>\ProvidesFile{hep-reference-documentation.tex}[2026/08/01 v1.5 HEP-reference documentation]
 %
 %<*documentation>
 \documentclass{ltxdoc}
@@ -50,7 +50,7 @@
 %
 % \fi
 %
-% \CheckSum{181}
+% \CheckSum{186}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -68,11 +68,12 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2011/08/01}{Initial version of the style file.}
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
-% \changes{v1.2}{2023/07/01}{Bug fixes.}
-% \changes{v1.3}{2024/11/01}{Bug fixes.}
-% \changes{v1.4}{2025/09/01}{Bug fixes.}
+% \changes{v1.0}{2011/08/01}{Provided hidden hyperref links, PDF metadata setup, footnote backlinks, non-breaking references and citations, cleveref integration, subreference helpers, and title-page affiliation reference formats.}
+% \changes{v1.1}{2022/11/01}{Rescoped the package metadata and documentation, added keyword metadata, added usecommand and textlabel, and made the amsmath, subcaption, and hep-title patches conditional on the corresponding packages.}
+% \changes{v1.2}{2023/07/01}{Updated documentation formatting and package metadata, made PDF titles subtitle-aware, namespaced the temporary command helper, loaded etoolbox for textlabel, and refreshed the README.}
+% \changes{v1.3}{2024/11/01}{Updated the release metadata for the 2024 package version.}
+% \changes{v1.4}{2025/09/01}{Applied starred command definitions consistently, guarded missing titles in PDF metadata, and stopped setting the PDF author from the raw author macro.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, moved PDF metadata setup to the maketitle hook, and expanded the documentation and README to cover the package interface.}
 %
 % \ifshort
 %<*documentation>
@@ -81,7 +82,7 @@
 \GetFileInfo{hep-reference.sty}
 
 \title{The \software{hep-reference} package\thanks{This document corresponds to \software{hep-reference}~\fileversion.}}
-\subtitle{Adjustments of standard references, footnote, and citations}
+\subtitle{Adjustments of standard references, footnotes, and citations}
 \author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
 \date{\filedate}
 
@@ -94,28 +95,51 @@
 \maketitle
 
 \begin{abstract}
-The \software{hep-reference} package applies some light convenience modifications to the reference, citation and footnote macros after loading standard classes improving on the default \hologo{LaTeX} behaviour.
+The \software{hep-reference} package collects small reference-related adjustments for high-energy physics documents.
+It loads and configures \software{hyperref}, \software{cleveref}, and \software{footnotebackref}, suppresses unwanted line breaks before references and citations, adds backlinking footnotes, sets useful \PDF metadata from the document title data, and provides helper macros for text labels, subobject references, and named equation-like references.
 \end{abstract}
 
 \section{Introduction}
 
-The \software{hyperref} package is loaded and the links are hidden.
+Load the package with "\usepackage{hep-reference}".
+
+The \software{hyperref} package \cite{hyperref} is loaded with hidden, breakable links and Unicode-aware \PDF strings.
+The package also clears the \PDF creator and producer fields and disables fragile formatting commands in bookmarks.
+Before "\maketitle" is executed, the \PDF title is filled from "\title" and, if present, the subtitle defined by \software{hep-title}; keywords from \software{hep-title} are passed to the \PDF metadata as well.
+If \software{hep-title} is loaded, label-only references to affiliations are formatted as superscript lists and ranges on the title page.
 
 \DescribeMacro{\cref}
-References are extended with the \software{cleveref} package \cite{cleveref}, which allows to \eg just type "\cref"\marg{key}  in order to write \enquote{figure 1}.
-Furthermore, the \software{cleveref} package allows to reference multiple objects within one "\cref"\marg{key1,key2}.
+\DescribeMacro{\labelcrefrange}
+References are extended with the \software{cleveref} package \cite{cleveref}, loaded with the "noabbrev" and "nameinlink" options.
+This allows "\cref"\marg{key} to write context-sensitive references such as \enquote{figure 1}, and "\cref"\marg{key1,key2} to combine multiple references.
+The final conjunction is set to a comma followed by a non-breaking \enquote{and}, enumerated items from "enumerate" and "inlinelist" are named \enquote{point} and \enquote{points}, and "\labelcrefrange"\marg{key1}\marg{key2} provides the corresponding range command for label-only references.
 
-\DescribeMacro{\cite}
-Citations are adjusted to not start on a new line in order to avoid the repeated use of "~\cite"\marg{key}.
+\DescribeMacro{\eqcrefname}
+The "\eqcrefname"\marg{counter}\marg{singular}\oarg{plural} macro declares a \software{cleveref} name for an equation-like counter and formats label-only references to that counter in parentheses.
+If the optional plural is omitted, the plural form is built by appending \enquote{s} to the singular name.
 
 \DescribeMacro{\ref}
 \DescribeMacro{\eqref}
 \DescribeMacro{\subref}
-References are also adjusted to not start on a new line.
+\DescribeMacro{\cite}
+The "\ref", "\eqref", "\subref", and "\cite" commands are adjusted so that a preceding inter-word space is converted to a non-breaking space.
+This avoids line starts such as \enquote{[1]} or \enquote{(2)} without requiring repeated manual uses of "~\cite"\marg{key}.
+When \software{amsmath} is loaded, "\eqref" is routed through "\labelcref".
+When \software{subcaption} is loaded, "\subref" keeps the same no-break behaviour.
+
+\DescribeMacro{\subcref}
+If \software{subcaption} is loaded, the package additionally defines "\subcref"\marg{key}, which applies "\cref" to the underlying subobject label.
 
 \DescribeMacro{\footnote}
 Footnotes are adjusted to swallow white space before the footnote mark and at the beginning of the footnote text.
-Additionally the reference back to the text where they are called from.
+They also receive backlinks to the text location from which they were called.
+
+\DescribeMacro{\textlabel}
+The "\textlabel"\oarg{reference format}\marg{key}\oarg{text format}\marg{text} macro creates a hyperlink target and a label for a piece of text while also printing the text.
+The first optional argument formats the text stored in the label and the second optional argument formats the printed text.
+
+\DescribeMacro{\usecommand}
+The "\usecommand"\oarg{number of arguments}\marg{definition} helper defines a temporary command with the requested number of arguments and immediately applies it to the following arguments.
 
 % \ifshort
 \printbibliography
@@ -164,18 +188,17 @@ Additionally the reference back to the text where they are called from.
 % Set the \PDF meta data according to the paper information
 %
 %    \begin{macrocode}
-\AtBeginDocument{
-  \@ifundefined{@title}{}{
-    \@ifundefined{hep@sub@title}{
-      \hypersetup{pdftitle={\@title}}
-    }{
-      \hypersetup{pdftitle={\@title: \hep@sub@title}}
-    }
-  }
-%   \hypersetup{pdfauthor={\@author}}
+\NewDocumentCommand{\subject}{m}{\def\hep@subject{#1}}
+\AddToHook{cmd/maketitle/before}[hep-reference/pdfinfo]{%
+  \@ifundefined{hep@sub@title}{%
+    \hypersetup{pdftitle={\@title}}%
+  }{%
+    \hypersetup{pdftitle={\@title: \hep@sub@title}}%
+  }%
   \@ifundefined{hep@key@words}{}{%
     \hypersetup{pdfkeywords={\hep@key@words}}%
-  }
+  }%
+  \@ifundefined{hep@subject}{}{\hypersetup{pdfsubject=\hep@subject}}%
 }
 %    \end{macrocode}
 
@@ -386,13 +409,18 @@ E=mc^2
 %    \begin{macrocode}
 # The `hep-reference` package
 
-A `LaTeX` package for publications in High Energy Physics.
+Reference, citation, and footnote helpers
 
 ## Introduction
 
-The `hep-reference` package applies some light convenience modifications
-to the reference, citation and footnote macros after loading standard
-classes improving on the default LaTeX behaviour.
+The `hep-reference` package loads and configures `hyperref`,
+`cleveref`, and `footnotebackref` for high-energy physics documents.
+It hides and breaks links, fills PDF title and keyword metadata from the
+document title data, prevents unwanted line breaks before references and
+citations, adds footnote backlinks, and provides helper macros for text
+labels, subobject references, and named equation-like references.
+
+Load the package with `\usepackage{hep-reference}`.
 
 ## Author
 
@@ -412,7 +440,3 @@ part of all distributions of LaTeX version 2005/12/01 or later.
 % \Finale
 
 \endinput
-
-% \PrintIndex
-% makeindex -s gglo.ist -o hep-reference-implementation.gls hep-reference-implementation.glo
-% makeindex -s gglo.ist -o hep-reference-implementation.ind hep-reference-implementation.idx

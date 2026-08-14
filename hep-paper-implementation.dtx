@@ -17,9 +17,9 @@
 %
 % \iffalse
 %
-%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-paper}[2025/09/01 v2.4 Publications in High Energy Physics]
-%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2025/09/01 v2.4 HEP-Paper documentation]
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-paper}[2026/08/01 v2.5 Publications in High Energy Physics]
+%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2026/08/01 v2.5 HEP-Paper documentation]
 %
 %<*documentation>
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -52,7 +52,7 @@
 %
 % \fi
 %
-% \CheckSum{641}
+% \CheckSum{644}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -70,20 +70,21 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2019/01/01}{Initial version of the style file.}
-% \changes{v1.1}{2020/01/01}{Transition to documented \hologo{LaTeX} source file.}
-% \changes{v1.2}{2020/03/01}{Introduction of package options.}
-% \changes{v1.3}{2020/05/01}{Inclusion of JHEP and JCAP package options. Fix of incompatibility with recent subcaption package version. Move of biblatex datamodel into its own file}
-% \changes{v1.4}{2020/09/01}{If possible the compatibility options are selected automatically. Inclusion of PubMed IDs in bibliography.}
-% \changes{v1.5}{2020/10/01}{Reduce the numer of math alphabets used in sans serif mode. Add more title options such as a subtitle. Use standard class options.}
-% \changes{v1.6}{2020/12/01}{Implementation of the twocolumn mode.}
-% \changes{v1.7}{2021/06/01}{Introduction of dedicated style file for the title, acronyms and bibliography macros. Extension of the title macros.}
-% \changes{v1.8}{2021/08/01}{Expand thanks to allow for reference label and fine tune the title page. Reimplement the must relevant macros from the physics package. Make mathrm produce upright Greek.}
-% \changes{v2.0}{2021/09/01}{Move independent logic into dedicated packages.}
-% \changes{v2.1}{2022/11/01}{Bug fixes in the underlying packages.}
-% \changes{v2.2}{2023/07/01}{Bug fixes in the underlying packages.}
-% \changes{v2.3}{2024/11/01}{Bug fixes in the underlying packages.}
-% \changes{v2.4}{2025/09/01}{Bug fixes.}
+% \changes{v1.0}{2019/01/01}{Created the monolithic HEP publication style file.}
+% \changes{v1.1}{2020/01/01}{Converted the package to documented LaTeX source.}
+% \changes{v1.2}{2020/03/01}{Added package options for class, font, language, bibliography, citation, and compatibility controls.}
+% \changes{v1.3}{2020/05/01}{Added JHEP and JCAP options, RevTeX compatibility, improved acronym macros, math-font fixes, enumdescript and citation support, and moved the biblatex data model into its own file.}
+% \changes{v1.4}{2020/09/01}{Added automatic compatibility option selection, PubMed IDs, and bibliography and source-map updates.}
+% \changes{v1.5}{2020/10/01}{Reduced the number of math alphabets used in sans-serif mode, added subtitle and title options, and switched to standard class options.}
+% \changes{v1.6}{2020/12/01}{Added two-column mode and tests.}
+% \changes{v1.7}{2021/06/01}{Split title, acronym, and bibliography logic into dedicated style files and expanded the title macros.}
+% \changes{v1.8}{2021/08/01}{Expanded thanks and reference-label handling, refined the title page, reimplemented selected physics macros, and made \cs{mathrm} produce upright Greek.}
+% \changes{v2.0}{2021/09/01}{Split independent logic into the modular hep-font, hep-math-font, hep-text, hep-math, hep-bibliography, hep-acronym, hep-reference, hep-title, and hep-float packages.}
+% \changes{v2.1}{2022/11/01}{Integrated the new CV, ERC, reference, and talk packages and propagated the v1.1 fixes from the split-out modules.}
+% \changes{v2.2}{2023/07/01}{Added hep-graphic, hep-plot, and hep-feynman and propagated bibliography, float, font, math, acronym, and documentation updates from the modules.}
+% \changes{v2.3}{2024/11/01}{Propagated the v1.3 module updates, including the CV private and bibliography split, talk logo and citation updates, math-font Greek rework, and math, text, and font fixes.}
+% \changes{v2.4}{2025/09/01}{Propagated the v1.4 module updates, including TU-engine font setup, title reprint, DOI, and arXiv support, float local and global placement, and starred command definitions.}
+% \changes{v2.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, and refreshed the aggregate documentation and README for the modular package suite.}
 %
 % \ifshort
 %<*documentation>
@@ -103,8 +104,8 @@
 \maketitle
 
 \begin{abstract}
-The \software{hep-paper} package aims to provide a single style file containing most configurations and macros necessary to write appealing publications in High Energy Physics.
-Instead of reinventing the wheel by introducing newly created macros \software{hep-paper} preferably loads third party packages.
+The \software{hep-paper} package is the aggregate publication setup for the HEP package suite.
+It configures the page geometry, language, fonts, hyperlinks, title data, bibliography, acronyms, references, floats, text helpers, and math fonts by loading the corresponding modular packages with publication-oriented defaults.
 \end{abstract}
 
 \tableofcontents\clearpage
@@ -118,11 +119,10 @@ For usual publications it is enough to load additionally to the "article" class 
 \documentclass{article}
 \usepackage{hep-paper}
 \end{verbatim}
-The most notable changes after loading the \software{hep-paper} package is the change of some \hologo{LaTeX} defaults.
+The most notable changes after loading the \software{hep-paper} package are the changes of some \hologo{LaTeX} defaults.
 The paper and font sizes are set to A4 and \unit[11]{pt}, respectively.
 Additionally, the paper geometry is adjusted using the \software{geometry} package \cite{geometry}.
-Furthermore, the font is changed to \LM using the \software{hep-font} package \cite{hep-font}.
-Finally, \PDF hyperlinks are implemented with the \software{hyperref} package \cite{hyperref}.
+Furthermore, text and math fonts are configured with \software{hep-font} and \software{hep-math-font}, text helpers with \software{hep-text}, bibliographies with \software{hep-bibliography}, acronyms with \software{hep-acronym}, references and hyperlinks with \software{hep-reference}, titles with \software{hep-title}, and floats with \software{hep-float}.
 
 \subsection{Options}
 
@@ -382,7 +382,7 @@ A better looking over left right arrow is defined \ie $\overleftright{\partial}$
 \DescribeEnv{figure}
 \DescribeEnv{table}
 Automatic float placement is adjusted to place a single float at the top of pages and to reduce the number of float pages, using the \software{hep-float} package \cite{hep-float}.
-The most useful float placement is usually archived by placing the float \emph{in front} of the paragraph it is referenced in first.
+The most useful float placement is usually achieved by placing the float \emph{in front} of the paragraph it is referenced in first.
 
 \DescribeEnv{panels}
 \DescribeMacro{\panel}
@@ -950,6 +950,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   \fi%
   \stepcounter{email@counter}%
 }
+\ProvideDocumentCommand{\orcmail}{mm}{\email{#2}}
 %    \end{macrocode}
 %\end{macro}
 %
@@ -991,16 +992,13 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \AtEndPreamble{
   \hypersetup{
     colorlinks=true,
-    linktocpage=true
-    pdfproducer=medialab,
-    pdfa=true,
+    linktocpage=true,
     urlcolor=blue,
     anchorcolor=blue,
     citecolor=blue,
     filecolor=blue,
     linkcolor=blue,
-    menucolor=blue,
-    pagecolor=blue
+    menucolor=blue
   }
 }
 \AtEndPreamble{\@ifpackageloaded{cleveref}{\@cref@nameinlinkfalse}{}}
@@ -1420,11 +1418,11 @@ A `LaTeX` package for publications in High Energy Physics.
 
 ## Introduction
 
-The `hep-paper` package aims to provide a single style file containing
-most configurations and macros necessary to write appealing publications
-in High Energy Physics. Instead of reinventing the wheel by introducing
-newly created macros `hep-paper` preferably loads third party packages as
-long as they are lightweight enough.
+The `hep-paper` package is the aggregate publication setup for the HEP
+package suite. It configures the page geometry, language, fonts,
+hyperlinks, title data, bibliography, acronyms, references, floats, text
+helpers, and math fonts by loading the corresponding modular packages
+with publication-oriented defaults.
 
 For usual publications it is enough to load additionally to the `article`
 class without optional arguments only the `hep-paper` package.

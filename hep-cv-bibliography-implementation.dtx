@@ -17,8 +17,8 @@
 %
 % \iffalse
 
-%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-cv-bibliography}[2025/09/01 v1.4 Curricula Vitarum in High Energy Physics]
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-cv-bibliography}[2026/08/01 v1.5 Curricula Vitarum in High Energy Physics]
 %
 %<*documentation>
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -50,7 +50,7 @@
 %
 % \fi
 %
-% \CheckSum{371}
+% \CheckSum{372}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -68,8 +68,9 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2019/01/01}{Initial version of the style file}
-% \changes{v1.4}{2025/09/01}{Bug fixes.}
+% \changes{v1.0}{2019/01/01}{Created the CV bibliography module with CV sorting and date helpers, bibliography headings, left-column date and index helpers, and unnumbered, numbered, and starred-numbered bibliography environments.}
+% \changes{v1.4}{2025/09/01}{Updated release metadata and applied starred command definitions to the CV bibliography helpers.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, replaced the stub documentation with package documentation, added README content, and added README extraction to the installer.}
 %
 % \ifshort
 %<*documentation>
@@ -77,7 +78,7 @@
 %
 \GetFileInfo{hep-cv.sty}
 
-\title{The \software{hep-cv-bibliography} package\thanks{This document corresponds to \software{hep-paper}~\fileversion.}}
+\title{The \software{hep-cv-bibliography} package\thanks{This document corresponds to \software{hep-cv-bibliography}~\fileversion.}}
 
 \author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
 
@@ -90,13 +91,39 @@
 \maketitle*
 
 \begin{abstract}
-The \software{hep-cv-bibliography} package aims to provide a single style file for \dots
+The \software{hep-cv-bibliography} package configures \software{biblatex} bibliographies for CV documents.
+It provides CV-oriented date formatting, descending date sorting, section-level bibliography headings, helper macros for left-column dates and labels, and unnumbered, numbered, and starred-numbered bibliography environments.
 \end{abstract}
 
 \tableofcontents\clearpage
 
 \section{Introduction}
 
+Load the package with "\usepackage{hep-cv-bibliography}".
+
+\DescribeMacro{bibliography}
+The "bibliography="\meta{style} option passes a bibliography style to \software{biblatex}.
+The default is "numeric-comp".
+
+\DescribeMacro{date}
+The "date" option disables the compact CV date aliases and keeps the usual \software{biblatex} date handling.
+
+The package loads \software{biblatex}, sets broad name limits for CV entries, enables deferred numbering, and defines the "ymdnt" and "ymnt" sorting templates for reverse and forward date sorting.
+For "authoryear" bibliographies it adjusts the beginning of each entry so that dates appear in the CV left column.
+
+\DescribeMacro{\setlengths}
+\DescribeMacro{\printcvdate}
+\DescribeMacro{\printindex}
+\DescribeMacro{\printissuedate}
+\DescribeMacro{\adjustOrgLocDat}
+The helper macros "\setlengths", "\printcvdate", "\printindex", and "\printissuedate" set the bibliography list dimensions and print date or index material in the CV left column.
+The "\adjustOrgLocDat" macro suppresses the date in the "organization+location+date" bibliography macro, which is useful for entries whose date is already printed in the left column.
+
+\DescribeEnv{unnumbered}
+\DescribeEnv{numbered}
+\DescribeEnv{starrednumbered}
+The "unnumbered", "numbered", and "starrednumbered" bibliography environments use the CV left-column layout.
+The numbered variants print the bibliography label before the date, and "starrednumbered" additionally marks entries with the "main5" keyword.
 
 % \ifshort
 \printbibliography
@@ -150,7 +177,7 @@ The \software{hep-cv-bibliography} package aims to provide a single style file f
 %
 % Execute bibliography options.
 %    \begin{macrocode}
-\usepackage{biblatex}
+\RequirePackage{biblatex}
 \ExecuteBibliographyOptions{
   maxnames=99,
   uniquename=init,
@@ -539,6 +566,40 @@ The \software{hep-cv-bibliography} package aims to provide a single style file f
 %\end{environment}
 %
 %</package>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-cv-bibliography` package
+
+Bibliographies for HEP CV documents
+
+## Introduction
+
+The `hep-cv-bibliography` package configures `biblatex` bibliographies
+for CV documents. It provides CV-oriented date formatting, descending date
+sorting, section-level bibliography headings, helper macros for
+left-column dates and labels, and unnumbered, numbered, and
+starred-numbered bibliography environments.
+
+It can be loaded with `\usepackage{hep-cv-bibliography}`.
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
 %
 % \Finale
 %

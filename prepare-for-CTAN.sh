@@ -5,9 +5,15 @@ runlatex () {
   latexmk --pdf $1
 }
 
+makechanges () {
+  makeindex -s gglo.ist -o $1.gls $1.glo
+}
+
 generate () {
   mv README-hep-$1.md README.md
   yes | pdflatex hep-$1.ins
+  runlatex hep-$1-implementation.dtx
+  makechanges hep-$1-implementation
   runlatex hep-$1-implementation.dtx
   runlatex hep-$1-documentation.tex
   ctanify -nos --noauto hep-$1.ins hep-$1-implementation.dtx hep-$1-documentation.pdf hep-$1-implementation.pdf bibliography.bib license.md README.md ${@:2}

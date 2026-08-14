@@ -17,9 +17,9 @@
 %
 % \iffalse
 
-%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{hep-float}[2025/09/01 v1.4 Float adjustments]
-%<documentation>\ProvidesFile{hep-float-documentation.tex}[2025/09/01 v1.4 hep-float documentation]
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-float}[2026/08/01 v1.5 Float adjustments]
+%<documentation>\ProvidesFile{hep-float-documentation.tex}[2026/08/01 v1.5 hep-float documentation]
 %
 %<*documentation>
 \documentclass{ltxdoc}
@@ -67,11 +67,12 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2021/09/01}{Initial version of the style file.}
-% \changes{v1.1}{2022/11/01}{Bug fixes.}
-% \changes{v1.2}{2023/07/01}{Bug fixes.}
-% \changes{v1.3}{2024/11/01}{Bug fixes.}
-% \changes{v1.4}{2025/09/01}{Bug fixes.}
+% \changes{v1.0}{2021/09/01}{Created the dedicated float package with panel, subfloat, caption, placement, and float-styling helpers.}
+% \changes{v1.1}{2022/11/01}{Added manual float placement, panel spacing commands, subcaption-block compatibility, and reworked panel spacing with xparse, calc, and etoolbox.}
+% \changes{v1.2}{2023/07/01}{Added side-by-side figure and table environments with horizontal and vertical spacing controls, small centred float contents, and refreshed documentation and README formatting.}
+% \changes{v1.3}{2024/11/01}{Added the \cs{header} helper.}
+% \changes{v1.4}{2025/09/01}{Renamed manual placement to local and global placement modes, reimplemented figure and table wrappers through the standard float internals, and applied starred command definitions.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, and expanded the abstract, user documentation, README, and examples.}
 %
 % \ifshort
 %<*documentation>
@@ -93,7 +94,8 @@
 \maketitle
 
 \begin{abstract}
-The \software{hep-float} package redefines some \hologo{LaTeX} float placement defaults and defines convenience wrappers for floats.
+The \software{hep-float} package configures float placement for publication-style documents and adds convenience wrappers for figures, tables, sub-floats, and graphics.
+It centres float contents by default, provides side-by-side figure and table environments, loads \software{booktabs}, \software{multirow}, and \software{subcaption}, and defines compact graphics helpers.
 \end{abstract}
 
 The \software{hep-float} package can be loaded with "\usepackage{hep-float}".
@@ -110,13 +112,29 @@ Automatic float placement is adjusted to place a single float at the top of page
 "\renewcommand{\dbltopfraction}{.9}" \hfill (default 0.7) \\
 "\renewcommand{\floatpagefraction}{.8}" \hfill float pages must be full (default 0.5)
 
-The most useful float placement is usually archived by placing the float \emph{in front} of the paragraph it is referenced in first.
+The most useful float placement is usually achieved by placing the float \emph{in front} of the paragraph it is referenced in first.
 \DescribeMacro{local}
 Additionally, manual float placement can be deactivated using the "local" package option.
 
 \DescribeMacro{\raggedright}
 The float environments have been adjusted to center their content.
 The usual behaviour can be reactivated using "\raggedright".
+
+\DescribeEnv{figures}
+\DescribeMacro{\figure}
+\DescribeMacro{\figurehspace}
+\DescribeMacro{\figurevspace}
+The "figures" environment places several figure panels next to each other inside one "figure" float.
+It takes an optional vertical alignment and a mandatory argument that is either the number of equal-width figures or the width of the first figure as a fraction of "\linewidth".
+Inside the environment the "\figure" macro starts the next figure panel.
+The horizontal and vertical spacing are controlled by "\figurehspace" and "\figurevspace".
+
+\DescribeEnv{tables}
+\DescribeMacro{\table}
+\DescribeMacro{\tablehspace}
+\DescribeMacro{\tablevspace}
+The "tables" environment is the analogous wrapper for several tables inside one "table" float.
+Inside the environment "\table" starts the next table panel, and "\tablehspace" and "\tablevspace" control the spacing.
 
 \begin{table}
 \begin{panels}{2}
@@ -564,9 +582,13 @@ Convenience package for float placement
 
 ## Introduction
 
-The `hep-float` package redefines some `LaTeX` float placement defaults
-and defines convenience wrappers for floats. The `hep-float` package can
-be loaded with `\usepackage{hep-float}`.
+The `hep-float` package configures float placement for publication-style
+documents and adds convenience wrappers for figures, tables, sub-floats,
+and graphics. It centres float contents by default, provides side-by-side
+`figures`, `tables`, and `panels` environments, loads `booktabs`,
+`multirow`, and `subcaption`, and defines compact graphics helpers.
+
+It can be loaded with `\usepackage{hep-float}`.
 
 ## Author
 
