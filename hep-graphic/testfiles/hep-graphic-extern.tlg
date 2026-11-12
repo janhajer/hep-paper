@@ -1,0 +1,22 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: External library
+============================================================
+\tikzexternalize: defined
+\tikzsetnextfilename: defined
+prefix: figures/, only named: true
+============================================================
+============================================================
+TEST 2: Pictures without name are not externalised
+============================================================
+wd 28.85274pt, ht 28.85274pt
+============================================================
+============================================================
+TEST 3: includepgf: the file name applies only to the included file
+============================================================
+include ./img [] as `img'
+after starred: `'
+include ./plot [width=1cm] as `plot'
+after plain: `'
+============================================================

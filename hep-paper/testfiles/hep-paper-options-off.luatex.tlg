@@ -1,0 +1,61 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Option values
+============================================================
+class: article
+paper: [a4]
+font: [default]
+lang: [british]
+symbols: [true]
+bibliography: [false]
+serif: true
+lining: true
+parindent: true
+defaults: true
+title: false
+physics: false
+glossaries: false
+references: false
+eqnarray: true
+manualplacement: false
+beamer: false
+revtex: false
+jhep: false
+jcap: false
+pos: false
+springer: false
+amsart: false
+sissa: false
+journal: false
+============================================================
+============================================================
+TEST 2: Loaded packages and their options
+============================================================
+hep-math: not loaded
+hep-font: loaded [size=default,sans=false,lining=true,]
+hep-math-font: loaded [symbols=true,]
+geometry: not loaded
+parskip: not loaded
+hep-text: loaded [lang=british,]
+hep-float: loaded [global,]
+hep-title: not loaded
+hep-bibliography: not loaded
+biblatex: not loaded
+hep-reference: not loaded
+hyperref: not loaded
+cleveref: not loaded
+hep-acronym: not loaded
+titlesec: not loaded
+hep-revtex: not loaded
+hep-sissa: not loaded
+xpatch: loaded []
+============================================================
+============================================================
+TEST 3: Page geometry and font size
+============================================================
+paper: 614.295pt x 794.96999pt
+text: 345.0pt x 550.0pt
+font size: 10
+parindent: 15.0pt, parskip: 0.0pt plus 1.0pt
+============================================================

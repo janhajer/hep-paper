@@ -1,0 +1,76 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Options and page size
+============================================================
+paperwidth: 20cm, ratio: 9/16
+paper: 569.05511pt x 320.09349pt
+hmargin: 7.11145pt, vmargin: 3.19917pt plus 32.01129pt minus 1.60202pt
+============================================================
+============================================================
+TEST 2: Theme package information
+============================================================
+hep-dark: provided
+hep-light: provided
+hep-blue: provided
+hep-metropolis: provided
+============================================================
+============================================================
+TEST 3: Theme colours
+============================================================
+hep-talk:
+PageBg: gray 1
+PageFg: gray 0
+TitleBg: gray 0.8
+TitleFg: gray 0.1
+CaptionBg: gray 0.9
+CaptionFg: gray 0.2
+BlockBg: gray 1
+BlockFg: gray 0
+Structure: rgb 1,0.3,0.3
+Highlight: rgb 1,0,0
+hep-dark:
+PageBg: gray 0.3
+PageFg: gray 0.9
+TitleBg: gray 0.5
+TitleFg: gray 1
+CaptionBg: gray 0.8
+CaptionFg: gray 0.2
+BlockBg: gray 1
+BlockFg: gray 0
+Structure: rgb 0.41255,0.65137,0.80785
+Highlight: rgb 1,0,0
+hep-light:
+PageBg: gray 1
+PageFg: gray 0
+TitleBg: gray 0.8
+TitleFg: gray 0.1
+CaptionBg: gray 0.9
+CaptionFg: gray 0.2
+BlockBg: gray 1
+BlockFg: gray 0
+Structure: rgb 1,0.3,0.3
+Highlight: rgb 1,0,0
+hep-blue:
+PageBg: gray 1
+PageFg: gray 0
+TitleBg: gray 1
+TitleFg: rgb 0.2,0.2,0.69804
+CaptionBg: rgb 0.14903,0.14903,0.5255
+CaptionFg: gray 1
+BlockBg: rgb 0.91374,0.91374,0.95294
+BlockFg: gray 0
+Structure: rgb 0.2,0.2,0.69804
+Highlight: rgb 1,0,0
+hep-metropolis:
+PageBg: gray 0.98
+PageFg: rgb 0.13725,0.2157,0.23137
+TitleBg: rgb 0.13725,0.2157,0.23137
+TitleFg: gray 0.98
+CaptionBg: rgb 0.81145,0.82713,0.83028
+CaptionFg: rgb 0.13725,0.2157,0.23137
+BlockBg: rgb 0.89572,0.90356,0.90514
+BlockFg: rgb 0.13725,0.2157,0.23137
+Structure: rgb 0.92157,0.50587,0.10588
+Highlight: rgb 0.92157,0.50587,0.10588
+============================================================

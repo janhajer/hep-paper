@@ -1,0 +1,94 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Modifiers commute
+============================================================
+> \box...=
+\hbox(4.58333+0.0)x7.81029
+.\mathon
+.\U/hepalpha3/m/n/10 V
+.\mathoff
+! OK.
+<argument> ...hbf {\mathsf {\alpha }}$}\showbox 0 
+                                                  \setbox 0\hbox {$\mathsf {...
+l. ......etbox0\hbox{$\mathbfsf{\alpha}$}\showbox0}
+> \box...=
+\hbox(4.58333+0.0)x7.81029
+.\mathon
+.\U/hepalpha3/m/n/10 V
+.\mathoff
+! OK.
+<argument> ...hsf {\mathbf {\alpha }}$}\showbox 0 
+                                                  \setbox 0\hbox {$\mathbfsf...
+l. ......etbox0\hbox{$\mathbfsf{\alpha}$}\showbox0}
+> \box...=
+\hbox(4.58333+0.0)x7.81029
+.\mathon
+.\U/hepalpha3/m/n/10 V
+.\mathoff
+! OK.
+<to be read again> 
+                   \endgroup 
+l. ......etbox0\hbox{$\mathbfsf{\alpha}$}\showbox0}
+============================================================
+============================================================
+TEST 2: Upright is not serif
+============================================================
+> \box...=
+\hbox(4.41675+0.0)x9.611
+.\mathon
+.\U/hepalpha2/m/n/10 ^^9a
+.\U/hepalpha2/m/n/10 ^^9a
+.\mathoff
+! OK.
+<to be read again> 
+                   \endgroup 
+l. ......mathrm{a}} \mathrm{\mathsf{a}}$}\showbox0}
+============================================================
+============================================================
+TEST 3: Alphabets
+============================================================
+> \box...=
+\hbox(6.84999+1.86665)x20.16425
+.\mathon
+.\U/hepbb/m/n/10 ^^Q
+.\U/hepdecor4/m/n/10 ^^9a
+.\U/hepdecor4/m/n/10 q
+.\mathoff
+! OK.
+<to be read again> 
+                   \endgroup 
+l. ......bb{R} \mathcal{L} \mathfrak{g}$}\showbox0}
+============================================================
+============================================================
+TEST 4: Script and upright calligraphic
+============================================================
+> \box...=
+\hbox(7.17+0.18)x26.70064
+.\mathon
+.\U/hepscript/m/n/10 ^^K
+.\kern1.91895
+.\U/hepscript/m/n/10 s
+.\U/hepscript/m/n/10 ?
+.\kern0.5
+.\mathoff
+! OK.
+<to be read again> 
+                   \endgroup 
+l. ......thcal{L}} \mathup{\mathscr{L}}$}\showbox0}
+============================================================
+============================================================
+TEST 5: Replaced everymath
+============================================================
+> \box...=
+\hbox(4.4439+0.0)x13.0243
+.\mathon
+.\U/hepalpha0/m/n/10 V
+.\kern0.03702
+.\U/hepalpha1/m/n/10 1
+.\mathoff
+! OK.
+<argument> ...ox {$\alpha \mathbf {x}$}\showbox 0 
+                                                  \endgroup 
+l. ...}
+============================================================

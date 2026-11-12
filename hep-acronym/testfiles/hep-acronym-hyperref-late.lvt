@@ -1,0 +1,18 @@
+\input{regression-test}
+\documentclass{article}
+% hep-acronym before hyperref, acronyms declared in the preamble and in the
+% document body: the PDF strings must still be defined.
+\usepackage{hep-acronym}
+\acronym{PDF}{portable document format}
+\longacronym{EFT}{effective field theory}
+\usepackage{hyperref}
+\input{hep-regression}
+\begin{document}
+\START
+\acronym{URL}{uniform resource locator}
+\TEST{Bookmarks with hyperref loaded late}{%
+  \PDFSTRING{\PDF and \PDFlong}%
+  \PDFSTRING{\EFT at the beginning}%
+  \PDFSTRING{\URLlong declared in the document}%
+}
+\END

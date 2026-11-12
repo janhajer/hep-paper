@@ -1,0 +1,22 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Options: authoryear style, date scheme after the class
+============================================================
+style: authoryear
+date: true
+Jan: defined
+Jul: defined
+hep@month: defined
+============================================================
+============================================================
+TEST 2: Bibliography: tabulars are closed and not overfull
+============================================================
+bibliography done
+bibliography without date scheme done
+============================================================
+============================================================
+TEST 3: Bibliography: entry width
+============================================================
+main: 253.95111pt, line: 328.5pt, itemindent: -16.5pt, left: 79.6678pt, separator: 11.38109pt
+============================================================

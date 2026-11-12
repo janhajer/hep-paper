@@ -1,0 +1,511 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019-2023 by Jan Hajer
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-reference}[2026/11/12 v1.7 Hyperref and cleveref setup with unbreakable references, footnote back-links and PDF metadata]
+%<documentation>\ProvidesFile{hep-reference-documentation.tex}[2026/11/12 v1.7 HEP-reference documentation]
+%
+%<*documentation>
+\documentclass{ltxdoc}
+
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+\usepackage{hologo}
+
+\usepackage[parskip,oldstyle,font=10pt]{hep-paper}
+\bibliography{bibliography}
+\shortacronym{PDF}{portable document format}
+%</documentation>
+
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
+\begin{document}
+\DocInput{hep-reference-implementation.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{245}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.0}{2011/08/01}{Provided hidden hyperref links, PDF metadata setup, footnote backlinks, non-breaking references and citations, cleveref integration, subreference helpers, and title-page affiliation reference formats.}
+% \changes{v1.1}{2022/11/01}{Rescoped the package metadata and documentation, added keyword metadata, added usecommand and textlabel, and made the amsmath, subcaption, and hep-title patches conditional on the corresponding packages.}
+% \changes{v1.2}{2023/07/01}{Updated documentation formatting and package metadata, made PDF titles subtitle-aware, namespaced the temporary command helper, loaded etoolbox for textlabel, and refreshed the README.}
+% \changes{v1.3}{2024/11/01}{Updated the release metadata for the 2024 package version.}
+% \changes{v1.4}{2025/09/01}{Applied starred command definitions consistently, guarded missing titles in PDF metadata, and stopped setting the PDF author from the raw author macro.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, moved PDF metadata setup to the maketitle hook, and expanded the documentation and README to cover the package interface.}
+% \changes{v1.6}{2026/11/11}{Kept the optional footnote argument, made ref, eqref, subref, and cite robust, fixed line breaks, equation references, citations, and math in PDF strings, removed the negative space from textlabel references, and removed spurious spaces and split links from eqcrefname, left the PDF title and keywords to hep-title and to the user, and loaded amsmath before cleveref, so that the package can be loaded first.}
+% \changes{v1.7}{2026/11/12}{Left the PDF title and keywords also to hep-journal and dropped a missing title, which looped in the PDF string.}
+%
+% \ifshort
+%<*documentation>
+% \fi
+%
+\GetFileInfo{hep-reference.sty}
+
+\title{The \software{hep-reference} package\thanks{This document corresponds to \software{hep-reference}~\fileversion.}}
+\subtitle{Hyperref and cleveref setup with unbreakable references, footnote back-links and PDF metadata}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
+\date{\filedate}
+
+% \ifshort
+\begin{document}
+% \fi
+
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+
+\maketitle
+
+\begin{abstract}
+The \software{hep-reference} package collects small reference-related adjustments for high-energy physics documents.
+It loads and configures \software{hyperref}, \software{cleveref}, and \software{footnotebackref}, suppresses unwanted line breaks before references and citations, adds backlinking footnotes, sets useful \PDF metadata from the document title data, and provides helper macros for text labels, subobject references, and named equation-like references.
+\end{abstract}
+
+\section{Introduction}
+
+Load the package with "\usepackage{hep-reference}".
+
+The \software{hyperref} package \cite{hyperref} is loaded with hidden, breakable links and Unicode-aware \PDF strings.
+The package also clears the \PDF creator and producer fields and disables fragile formatting commands in bookmarks.
+In \PDF strings such as bookmarks and the \PDF title, line breaks "\\" become spaces, footnotes, thanks, and citations are dropped, and "\eqref"\marg{key} gives the equation number in parentheses.
+Before "\maketitle" is executed, the \PDF title is filled from "\title" and, if present, the subtitle defined by \software{hep-title}; keywords from \software{hep-title} are passed to the \PDF metadata as well.
+If \software{hep-title} is loaded, label-only references to affiliations are formatted as superscript lists and ranges on the title page.
+
+\DescribeMacro{\subject}
+The "\subject"\marg{subject} macro sets the subject of the \PDF, which is also passed to the \PDF metadata before "\maketitle" is executed.
+Classes that define their own "\subject", such as the KOMA-Script classes, keep their definition, and the subject given with it becomes the \PDF subject.
+
+\DescribeMacro{\cref}
+\DescribeMacro{\labelcrefrange}
+References are extended with the \software{cleveref} package \cite{cleveref}, loaded with the "noabbrev" and "nameinlink" options.
+This allows "\cref"\marg{key} to write context-sensitive references such as \enquote{figure 1}, and "\cref"\marg{key1,key2} to combine multiple references.
+The final conjunction is set to a comma followed by a non-breaking \enquote{and}, enumerated items from "enumerate" and "inlinelist" are named \enquote{point} and \enquote{points}, and "\labelcrefrange"\marg{key1}\marg{key2} provides the corresponding range command for label-only references.
+
+\DescribeMacro{\eqcrefname}
+The "\eqcrefname"\marg{counter}\marg{singular}\oarg{plural} macro declares a \software{cleveref} name for an equation-like counter and formats label-only references to that counter in parentheses.
+If the optional plural is omitted, the plural form is built by appending \enquote{s} to the singular name.
+
+\DescribeMacro{\ref}
+\DescribeMacro{\eqref}
+\DescribeMacro{\subref}
+\DescribeMacro{\cite}
+The "\ref", "\eqref", "\subref", and "\cite" commands are adjusted so that a preceding inter-word space is converted to a non-breaking space.
+This avoids line starts such as \enquote{[1]} or \enquote{(2)} without requiring repeated manual uses of "~\cite"\marg{key}.
+The adjusted commands are robust, so they can be used in section titles and captions.
+When \software{amsmath} is loaded, "\eqref" is routed through "\labelcref".
+When \software{subcaption} is loaded, "\subref" keeps the same no-break behaviour.
+
+\DescribeMacro{\subcref}
+If \software{subcaption} is loaded, the package additionally defines "\subcref"\marg{key}, which applies "\cref" to the underlying subobject label.
+
+\DescribeMacro{\footnote}
+Footnotes are adjusted to swallow white space before the footnote mark and at the beginning of the footnote text; the optional footnote number of "\footnote"\oarg{number}\marg{text} is kept, and the text may contain several paragraphs.
+They also receive backlinks to the text location from which they were called.
+
+\DescribeMacro{\textlabel}
+The "\textlabel"\oarg{reference format}\marg{key}\oarg{text format}\marg{text} macro creates a hyperlink target and a label for a piece of text while also printing the text.
+The first optional argument formats the text stored in the label and the second optional argument formats the printed text.
+
+\DescribeMacro{\usecommand}
+The "\usecommand"\oarg{number of arguments}\marg{definition} helper defines a temporary command with the requested number of arguments and immediately applies it to the following arguments.
+
+% \ifshort
+\printbibliography
+
+\end{document}
+%
+%</documentation>
+% \fi
+%
+% \StopEventually{
+% \printbibliography
+% \PrintChanges
+% }
+%
+% \appendix
+%
+%<*package>
+%
+% \section{Implementation}
+%
+% Load the \software{hyperref} package \cite{hyperref} enable Unicode encoding and hide links.
+%    \begin{macrocode}
+\RequirePackage{hyperref}
+\hypersetup{
+  pdfencoding=auto, psdextra,
+  linktoc=all, hidelinks, breaklinks=true,
+  pdfcreator={}, pdfproducer={}
+}
+\AtBeginDocument{\@ifpackageloaded{doc}{\hypersetup{hidelinks}}{}}
+%    \end{macrocode}
+%
+% \begin{macro}{\hep@gobble@opt@mand}
+% \begin{macro}{\hep@gobble@cite}
+% \begin{macro}{\hep@pdf@newline}
+% \begin{macro}{\hep@pdf@eqref}
+% Ensure that unnecessary information is suppressed in \PDF strings.
+% Footnotes, thanks, and citations are dropped, together with an optional argument and, for citations, the following spaces.
+% Line breaks become spaces, "\unskip" and "\m@th" are ignored, and the content of "\ensuremath" is kept.
+% Equation references become the parenthesised reference number.
+%    \begin{macrocode}
+\RequirePackage{xparse}
+\NewExpandableDocumentCommand\hep@gobble@opt@mand{o+m}{}
+\NewExpandableDocumentCommand\hep@gobble@cite{oom}{\ignorespaces}
+\newcommand*\hep@pdf@newline{\space\ignorespaces}
+\newcommand*\hep@pdf@eqref[1]{(\ref*{#1})}
+\pdfstringdefDisableCommands{\def\varepsilon{\textepsilon}}
+\pdfstringdefDisableCommands{\def\to{\textrightarrow}}
+\AtBeginDocument{%
+  \pdfstringdefDisableCommands{%
+    \let\ensuremath\@firstofone
+    \let\m@th\@empty
+    \let\mathsurround\@gobble
+    \let\unskip\@empty
+    \let\thanks\@gobble
+    \let\footnote\hep@gobble@opt@mand
+    \let\\\hep@pdf@newline
+    \let\cite\hep@gobble@cite
+    \let\eqref\hep@pdf@eqref
+    \let\@latex@warning@no@line\@gobble
+    \let\class@warn\@gobble
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\subject}
+% Set the \PDF meta data according to the paper information.
+% The title and keywords are left to \software{hep-title} or \software{hep-journal} if one of them is loaded, and a title or keywords set by the user with "\hypersetup" are kept.
+% A missing title is skipped, since its default is a warning, which loops in a \PDF string if the \software{silence} package is loaded.
+% For the same reason the warnings of the missing title in \LaTeX{} ("\@latex@warning@no@line") and REV\hologo{TeX} ("\class@warn") are dropped in \PDF strings.
+% Define "\subject"\marg{subject} for the \PDF subject, unless the class already defines it.
+% The KOMA-Script classes define "\subject" and store its argument in "\@subject", which then becomes the \PDF subject.
+%
+%    \begin{macrocode}
+\@ifundefined{subject}{%
+  \NewDocumentCommand{\subject}{m}{\def\hep@subject{#1}}%
+}{}
+\newcommand*{\hep@if@title@package}{%
+  \@ifpackageloaded{hep-title}{\@firstoftwo}{%
+    \@ifpackageloaded{hep-journal}{\@firstoftwo}{\@secondoftwo}%
+  }%
+}
+\AddToHook{cmd/maketitle/before}[hep-reference/pdfinfo]{%
+  \hep@if@title@package{}{%
+    \ifx\@pdftitle\@empty
+      \expandafter\in@\expandafter\@latex@warning@no@line
+        \expandafter{\@title}%
+      \ifin@\else
+        \@ifundefined{hep@sub@title}{%
+          \hypersetup{pdftitle={\@title}}%
+        }{%
+          \hypersetup{pdftitle={\@title: \hep@sub@title}}%
+        }%
+      \fi
+    \fi
+    \ifx\@pdfkeywords\@empty
+      \@ifundefined{hep@key@words}{}{%
+        \hypersetup{pdfkeywords={\hep@key@words}}%
+      }%
+    \fi
+  }%
+  \@ifundefined{hep@subject}{%
+    \@ifundefined{@subject}{}{%
+      \ifx\@subject\@empty\else\hypersetup{pdfsubject=\@subject}\fi
+    }%
+  }{%
+    \hypersetup{pdfsubject=\hep@subject}%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \subsection{Footnotes}
+%
+% Place a hyperlink from the footnote back to its referencing label using the \software{footnotebackref} package \cite{footnotebackref}.
+%    \begin{macrocode}
+\def\BackrefFootnoteTag{}
+\RequirePackage{footnotebackref}
+%    \end{macrocode}
+%
+% \begin{macro}{\footnote}
+% Ensure that no spaces appear before the footmark or at the beginning of the footnote.
+% The footnote text may contain paragraphs.
+%    \begin{macrocode}
+\NewCommandCopy\@foot@note\footnote
+\RenewDocumentCommand{\footnote}{o+m}{%
+  \unskip%
+  \IfValueTF{#1}{\@foot@note[#1]}{\@foot@note}{\ignorespaces#2}%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \subsection{References}
+%
+% \begin{macro}{\ref}
+% Adjust "\ref"\marg{key} in order to prevent preceding line breaks.
+% Keep it robust, so that it is written unexpanded to auxiliary files.
+%    \begin{macrocode}
+\AtBeginDocument{%
+  \NewCommandCopy\hep@ref\ref
+  \DeclareRobustCommand*\ref{\no@break@before\hep@ref}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\eqref}
+% Adjust "\eqref"\marg{key} from the \software{amsmath} package in order to prevent preceding line breaks.
+%    \begin{macrocode}
+\AtBeginDocument{\@ifpackageloaded{amsmath}{%
+  \DeclareRobustCommand*\eqref{\no@break@before\labelcref}%
+}{}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\usecommand}
+% Define the "\usecommand" macro providing an anonymous function.
+%    \begin{macrocode}
+\providecommand*\hep@use@command{}
+\newcommand*\usecommand[2][1]{%
+  \renewcommand*\hep@use@command[#1]{#2}\hep@use@command%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\textlabel}
+% Define the "\textlabel" macro allowing to link to a piece of text using the \software{etoolbox} pcakage \cite{etoolbox}.
+%    \begin{macrocode}
+\RequirePackage{etoolbox}
+\NewDocumentCommand\textlabel{O{}mO{}m}{%
+  \protected@write\@auxout{}{%
+    \string\newlabel{#2}{%
+      {\protecting{#1{#4}}}{\thepage}{#4}{#2}{}%
+    }%
+  }%
+  \hypertarget{#2}{}%
+  {#3{#4}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\cref}
+% Improve reference using the \software{cleveref} package \cite{cleveref}.
+% It must be loaded after \software{amsmath} \cite{amsmath}, so load that first.
+%    \begin{macrocode}
+\RequirePackage{amsmath}
+\PassOptionsToPackage{noabbrev, nameinlink}{cleveref}
+\RequirePackage{cleveref}
+\newcommand*{\creflastconjunction}{, and\nobreakspace}
+\crefname{enumi}{point}{points}
+\crefname{inlinelisti}{point}{points}
+%    \end{macrocode}
+% \end{macro}
+%
+%\begin{macro}{\no@break@before}
+% Define a macro able to prevent line breaks.
+%    \begin{macrocode}
+\newcommand*\no@break@before{%
+  \relax\ifvmode\else%
+    \ifhmode%
+      \ifdim\lastskip > 0pt%
+        \relax\unskip\nobreakspace%
+      \fi%
+    \fi%
+  \fi%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\subref}
+% Adjust "\subref"\marg{key} from the \software{subcaption} package in order to prevent preceding line breaks.
+%    \begin{macrocode}
+\AtBeginDocument{\@ifpackageloaded{subcaption}{%
+  \NewCommandCopy\hep@subref\subref
+  \DeclareRobustCommand*\subref{\no@break@before\hep@subref}%
+  \renewcommand*\subcaption@ref[2]{\begingroup%
+    \caption@setoptions{sub}%
+    \subcaption@reffmt\p@subref{\hep@ref#1{sub@#2}}%
+  \endgroup}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\subcref}
+% Provide the "\subcref" macro.
+%    \begin{macrocode}
+  \newcommand*{\subcref}[1]{\cref{sub@#1}}
+}{}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\eqcrefname}
+% Define the "\eqcrefname" macro for named equation types.
+%    \begin{macrocode}
+\NewDocumentCommand{\eqcrefname}{mmo}{%
+  \crefname{#1}{#2}{\IfValueTF{#3}{#3}{#2s}}%
+  \creflabelformat{#1}{##2(##1)##3}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\labelcrefrange}
+% Define the missing "\labelcrefrange"\marg{key1}\marg{key2} macro.
+%    \begin{macrocode}
+\DeclareRobustCommand{\labelcrefrange}[2]{%
+  \@crefrangenostar{labelcref}{#1}{#2}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% Adjust the title page
+%    \begin{macrocode}
+\AtBeginDocument{\@ifpackageloaded{hep-title}{%
+  \labelcrefmultiformat{affiliation}{#2#1#3}{%
+    \textsuperscript,#2#1#3}{\textsuperscript,#2#1#3%
+  }{%
+    \textsuperscript,#2#1#3%
+  }
+  \labelcrefrangeformat{affiliation}{#3#1#4\textsuperscript{--}#5#2#6}
+}{}}
+%    \end{macrocode}
+
+% \subsection{Citations}
+%
+% \begin{macro}{\cite}
+% Adjust "\cite"\marg{key} in order to prevent preceding line breaks.
+%    \begin{macrocode}
+\NewCommandCopy\hep@cite\cite
+\DeclareRobustCommand*\cite{\no@break@before\hep@cite}
+%    \end{macrocode}
+% \end{macro}
+%
+%</package>
+%
+% \section{Tests}
+%
+%<*test>
+%
+%    \begin{macrocode}
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{hep-reference}
+\usepackage{parskip}
+\providecommand*{\cref}{section \ref}
+
+\begin{document}
+
+\section{Section} \label{sec:Section}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Etiam lobortis section \ref{sec:Section}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Etiam lobortis \cref{sec:Section}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Etiam loborti equation \eqref{eq:Equation}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Etiam loborti reference \cite{cite}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+\footnote{
+ Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+}
+
+\begin{equation} \label{eq:Equation}
+E=mc^2
+\end{equation}
+
+
+\begin{thebibliography}{1}
+\bibitem{cite} reference
+\end{thebibliography}
+
+\end{document}
+%    \end{macrocode}
+%
+%</test>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-reference` package
+
+Hyperref and cleveref setup with unbreakable references, footnote
+back-links and PDF metadata
+
+## Introduction
+
+The `hep-reference` package loads and configures `hyperref`,
+`cleveref`, and `footnotebackref` for high-energy physics documents.
+It hides and breaks links, fills PDF title and keyword metadata from the
+document title data, prevents unwanted line breaks before references and
+citations, adds footnote backlinks, and provides helper macros for text
+labels, subobject references, and named equation-like references.
+
+Load the package with `\usepackage{hep-reference}`.
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
+%
+% \Finale
+
+\endinput

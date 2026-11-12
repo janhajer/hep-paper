@@ -1,0 +1,41 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage[extern=figures]{hep-graphic}
+\input{hep-regression}
+
+\makeatletter
+\newcommand*{\SHOWEXTERNAL}{%
+  \TYPE{prefix: \tikzexternal@filenameprefix,
+    only named: \iftikzexternal@onlynamed true\else false\fi}%
+}
+\makeatother
+
+\begin{document}
+\setbox0\hbox{\tikz\draw (0,0) -- (1,1);}
+\START
+
+\TEST{External library}{%
+  \TYPE{\string\tikzexternalize:
+    \ifdefined\tikzexternalize defined\else undefined\fi}%
+  \TYPE{\string\tikzsetnextfilename:
+    \ifdefined\tikzsetnextfilename defined\else undefined\fi}%
+  \SHOWEXTERNAL
+}
+
+\TEST{Pictures without name are not externalised}{%
+  \setbox0\hbox{\tikz\draw (0,0) -- (1,1);}%
+  \TYPE{wd \the\wd0, ht \the\ht0}%
+}
+
+\makeatletter
+\TEST{includepgf: the file name applies only to the included file}{%
+  \renewcommand*{\includegraphics}[2][]{%
+    \TYPE{include #2 [#1] as `\tikzexternal@nextfile'}}%
+  \includepgf*{img}%
+  \TYPE{after starred: `\tikzexternal@nextfile'}%
+  \includepgf[width=1cm]{plot}%
+  \TYPE{after plain: `\tikzexternal@nextfile'}%
+}
+\makeatother
+
+\END

@@ -1,0 +1,167 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: No footnote marks before the title
+============================================================
+footnote=0
+macro:->
+============================================================
+============================================================
+TEST 2: Counters
+============================================================
+affil=1, Maxaffil=2, authors=5, editors=2, endorsers=1
+============================================================
+============================================================
+TEST 3: Stored lines
+============================================================
+macro:->\protect \@nameuse {@sep1}\protect \Authfont Ann\email {ann@mail.com}\protect \@nameuse {@sep2}\protect \Authfont Bob\email {bob@mail.com}\orcid {0000-0002-1825-0097}\protect \@nameuse {@sep3}\protect \Authfont Cid \email {cid@mail.com}\protect \thanks {Funded}\protect \@nameuse {@sep4}\protect \Authfont Dan \email {dan@mail.com} \orcid {0000-0001-5109-3700}\protect \@nameuse {@sep5}\protect \Authfont Eli\email {eli@mail.com}\orcid {0000-0003-1415-9269}
+macro:->\protect \@nameuse {hep@editor@sep1}\protect \Authfont Eve\email {eve@mail.com}\protect \@nameuse {hep@editor@sep2}\protect \Authfont Fay
+macro:->\protect \@nameuse {hep@endorser@sep1}\protect \Authfont Gus\email {gus@mail.com}
+============================================================
+============================================================
+TEST 4: All authors without affiliations
+============================================================
+> \box...=
+\hbox(7.16+1.93)x136.26999, direction TLT
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 B
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 b
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 C
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 d
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 D
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 E
+.\TU/lmr/m/n/10 l
+.\TU/lmr/m/n/10 i
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 5: Consecutive \email and \orcid share one footnote
+============================================================
+> \box...=
+\hbox(8.27692+0.11)x42.133, direction TLT
+.\TU/lmr/m/n/10 D
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\penalty 10000
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Hfootnote.1}
+.\hbox(8.27692+0.0)x4.483, direction TLT
+..\hbox(4.648+0.0)x3.983, shifted -3.62892, direction TLT
+...\pdfcolorstack 0 push {0 g 0 G}
+...\TU/lmr/m/n/7 1
+...\pdfcolorstack 0 pop
+..\penalty 10000
+..\glue 0.5
+..\kern0.0
+.\pdfendlink
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+footnote=1
+macro:->\protect \footnotetext [1]{\protect \href  {mailto:dan@mail.com}{\protect \nolinkurl  {dan@mail.com}} \protect \orcidlinkX  {}{0000-0001-5109-3700}{0000-0001-5109-3700}}
+> \box...=
+\hbox(8.27692+0.11)x20.733, direction TLT
+.\TU/lmr/m/n/10 E
+.\TU/lmr/m/n/10 v
+.\kern-0.28 (font)
+.\TU/lmr/m/n/10 e
+.\penalty 10000
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Hfootnote.2}
+.\hbox(8.27692+0.0)x4.483, direction TLT
+..\hbox(4.648+0.0)x3.983, shifted -3.62892, direction TLT
+...\pdfcolorstack 0 push {0 g 0 G}
+...\TU/lmr/m/n/7 2
+...\pdfcolorstack 0 pop
+..\penalty 10000
+..\glue 0.5
+..\kern0.0
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+footnote=2
+> \box...=
+\hbox(8.34692+2.05)x24.666, direction TLT
+.\TU/lmr/m/n/10 F
+.\kern-0.83 (font)
+.\TU/lmr/m/n/10 a
+.\kern-0.28 (font)
+.\TU/lmr/m/n/10 y
+.\penalty 10000
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Hfootnote.3}
+.\hbox(8.27692+0.0)x4.483, direction TLT
+..\hbox(4.648+0.14)x3.983, shifted -3.62892, direction TLT
+...\pdfcolorstack 0 push {0 g 0 G}
+...\TU/lmr/m/n/7 3
+...\pdfcolorstack 0 pop
+..\penalty 10000
+..\glue 0.5
+..\kern0.0
+.\pdfendlink
+.\penalty 10000
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Hfootnote.4}
+.\hbox(8.34692+0.0)x4.483, direction TLT
+..\hbox(4.718+0.0)x3.983, shifted -3.62892, direction TLT
+...\pdfcolorstack 0 push {0 g 0 G}
+...\TU/lmr/m/n/7 4
+...\pdfcolorstack 0 pop
+..\penalty 10000
+..\glue 0.5
+..\kern0.0
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+footnote=4
+============================================================
+============================================================
+TEST 6: A single author without affiliation
+============================================================
+> \box...=
+\hbox(7.16+0.0)x18.62, direction TLT
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 n
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.16+0.0)x18.62, direction TLT
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 n
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 7: Entries in the document are added immediately
+============================================================
+authors=6
+============================================================

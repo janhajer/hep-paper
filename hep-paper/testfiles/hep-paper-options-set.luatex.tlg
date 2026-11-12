@@ -1,0 +1,87 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Option values
+============================================================
+class: article
+paper: [a5]
+font: [10pt]
+lang: [american]
+symbols: [false]
+bibliography: [authoryear]
+serif: false
+lining: false
+parindent: false
+defaults: false
+title: true
+physics: true
+glossaries: true
+references: true
+eqnarray: false
+manualplacement: true
+beamer: false
+revtex: false
+jhep: false
+jcap: false
+pos: false
+springer: false
+amsart: false
+sissa: false
+journal: false
+============================================================
+============================================================
+TEST 2: Loaded packages and their options
+============================================================
+hep-math: loaded []
+hep-font: loaded [size=10pt,sans=true,lining=false,]
+hep-math-font: loaded [symbols=false,]
+geometry: loaded []
+parskip: loaded []
+hep-text: loaded [lang=american,]
+hep-float: loaded [local,]
+hep-title: loaded []
+hep-bibliography: loaded [style=authoryear,]
+biblatex: loaded [style=authoryear,datamodel=hep-bibliography,]
+hep-reference: loaded []
+hyperref: loaded []
+cleveref: loaded [noabbrev,nameinlink,]
+hep-acronym: loaded []
+titlesec: loaded []
+hep-revtex: not loaded
+hep-sissa: not loaded
+xpatch: loaded []
+============================================================
+============================================================
+TEST 3: Page geometry and font size
+============================================================
+paper: 421.10078pt x 597.50787pt
+text: 315.82558pt x 411.00812pt
+font size: 10
+parindent: 0.0pt, parskip: 6.0pt plus 2.0pt
+============================================================
+============================================================
+TEST 4: Paragraph helpers: useparindent and useparskip
+============================================================
+useparskip: defined
+useparindent: defined
+parindent: 15.0pt, parskip: 0.0pt
+parindent: 0.0pt, parskip: 6.0pt plus 2.0pt
+============================================================
+============================================================
+TEST 5: Paragraph helpers: no spurious spaces
+============================================================
+> \box...=
+\hbox(6.94+0.11)x14.7, direction TLT
+.\TU/NewCMSans10-Regular.otf(0)/m/n/10 a
+.\TU/NewCMSans10-Regular.otf(0)/m/n/10 b
+.\kern0.28 (font)
+.\TU/NewCMSans10-Regular.otf(0)/m/n/10 c
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 6: Paragraph helpers in two-column mode
+============================================================
+parindent: 10.0pt, parskip: 0.0pt
+============================================================

@@ -1,0 +1,201 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Float placement parameters
+============================================================
+bottomnumber 0, topnumber 1, dbltopnumber 1
+textfraction .1, topfraction .9, dbltopfraction .9, floatpagefraction .8
+booktabs: yes
+multirow: yes
+subcaption: yes
+graphicx: yes
+calc: yes
+============================================================
+============================================================
+TEST 2: Float environments: placement, centring and size
+============================================================
+type and placement: 62, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+type and placement: 49, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+type and placement: 62, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+type and placement: 36, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+type and placement: 62, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+type and placement: 50, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+type and placement: 94, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+type and placement: 81, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+LaTeX Warning: `h' float specifier changed to `ht'.
+type and placement: 88, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+============================================================
+============================================================
+TEST 3: raggedright restores the usual alignment
+============================================================
+type and placement: 62, size: 9, leftskip: 0.0pt, rightskip: 0.0pt plus 1.0fil
+type and placement: 94, size: 9, leftskip: 0.0pt, rightskip: 0.0pt plus 1.0fil
+============================================================
+============================================================
+TEST 4: figures: equal widths
+============================================================
+first: linewidth 166.75667pt
+after caption: 1
+second: linewidth 166.75667pt
+after caption: 2
+first: linewidth 111.17111pt
+second: linewidth 111.17111pt
+third: linewidth 111.17111pt
+============================================================
+============================================================
+TEST 5: figures: given widths
+============================================================
+.3: linewidth 100.05502pt
+.7: linewidth 233.45833pt
+============================================================
+============================================================
+TEST 6: figures: spacing macros
+============================================================
+figurehspace 0.0333, figurevspace .5\baselineskip 
+hspace 0: linewidth 172.5pt
+hspace 0: linewidth 172.5pt
+hspace 0: linewidth 172.5pt
+hspace 0: linewidth 172.5pt
+============================================================
+============================================================
+TEST 7: figures: only the first caption of a panel adds figurevspace
+============================================================
+one caption: wd 166.75667pt, ht 41.0pt, dp 0.0pt
+two captions: wd 166.75667pt, ht 62.0pt, dp 0.0pt
+two panels: wd 333.51334pt, ht 41.0pt, dp 0.0pt
+============================================================
+============================================================
+TEST 8: figures: vertical alignment and vertical space
+============================================================
+default b: wd 333.51334pt, ht 22.0pt, dp 0.0pt
+b, t: wd 333.51334pt, ht 10.0pt, dp 12.0pt
+t, t: wd 333.51334pt, ht 10.0pt, dp 12.0pt
+fraction t, t: wd 333.51334pt, ht 10.0pt, dp 12.0pt
+caption: wd 166.75667pt, ht 37.0pt, dp 0.0pt
+caption, figurevspace 20pt: wd 166.75667pt, ht 51.0pt, dp 0.0pt
+============================================================
+============================================================
+TEST 9: figure works again after figures
+============================================================
+type and placement: 49, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+LaTeX Warning: `h' float specifier changed to `ht'.
+macro:->\@protected@testopt \figure \\figure {tbp}
+============================================================
+============================================================
+TEST 10: tables: widths, centring and captions
+============================================================
+tablehspace 0.0333, tablevspace .5\baselineskip 
+first: linewidth 166.75667pt
+type and placement: 94, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+after caption: 1
+second: linewidth 166.75667pt
+type and placement: 94, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+after caption: 2
+.4: linewidth 133.4033pt
+type and placement: 94, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+.6: linewidth 200.11005pt
+type and placement: 94, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+hspace 0: linewidth 172.5pt
+hspace 0: linewidth 172.5pt
+macro:->\@protected@testopt \table \\table {tbp}
+============================================================
+============================================================
+TEST 11: tables: vertical alignment and vertical space
+============================================================
+b, t: wd 333.51334pt, ht 10.0pt, dp 12.0pt
+t, t: wd 333.51334pt, ht 10.0pt, dp 12.0pt
+caption: wd 166.75667pt, ht 37.0pt, dp 0.0pt
+caption, tablevspace 20pt: wd 166.75667pt, ht 51.0pt, dp 0.0pt
+============================================================
+============================================================
+TEST 12: panels: widths and subcaptions
+============================================================
+panelhspace 0.0333, panelvspace .5\baselineskip 
+first: linewidth 166.75667pt
+label: 13a
+belowcaptionskip 5.5pt
+second: linewidth 166.75667pt
+label: 13b
+label: 13
+belowcaptionskip 0.0pt
+.25: linewidth 83.37834pt
+.75: linewidth 250.13501pt
+label: 6b
+hspace 0: linewidth 115.0pt
+belowcaptionskip 1.0pt
+============================================================
+============================================================
+TEST 13: panels: vertical alignment
+============================================================
+default b: wd 333.51334pt, ht 21.0pt, dp 0.0pt
+t, default: wd 333.51334pt, ht 0.0pt, dp 21.0pt
+default, t: wd 333.51334pt, ht 10.0pt, dp 21.0pt
+fraction default, t: wd 333.51334pt, ht 10.0pt, dp 21.0pt
+t, b: wd 333.51334pt, ht 21.0pt, dp 10.0pt
+============================================================
+============================================================
+TEST 14: panels: nested
+============================================================
+outer first: linewidth 166.75667pt
+inner first: linewidth 80.60228pt
+inner second: linewidth 80.60228pt
+outer second: linewidth 166.75667pt
+inner .25: linewidth 40.30115pt
+inner .75: linewidth 120.90341pt
+============================================================
+============================================================
+TEST 15: Captions written to the lists of figures and tables
+============================================================
+lof/figure: \protect \numberline {17}{\ignorespaces plain}
+lof/figure: \protect \numberline {18}{\ignorespaces first}
+lof/figure: \protect \numberline {19}{\ignorespaces second}
+lot/table: \protect \numberline {7}{\ignorespaces first}
+lot/table: \protect \numberline {8}{\ignorespaces second}
+lof/figure: \protect \numberline {20}{\ignorespaces short}
+lot/table: \protect \numberline {9}{\ignorespaces short}
+lof/figure: \protect \numberline {21}{\ignorespaces main}
+============================================================
+============================================================
+TEST 16: graphic and graphics
+============================================================
+<example-image-1x1.pdf, id=1, 200.75pt x 200.75pt>
+File: example-image-1x1.pdf Graphic file (type pdf)
+<use example-image-1x1.pdf>
+Package pdftex.def Info: example-image-1x1.pdf  used on input line ....
+(pdftex.def)             Requested size: 100.0pt x 100.00104pt.
+graphic: wd 100.0pt, ht 100.00104pt, dp 0.0pt
+File: example-image-1x1.pdf Graphic file (type pdf)
+<use example-image-1x1.pdf>
+Package pdftex.def Info: example-image-1x1.pdf  used on input line ....
+(pdftex.def)             Requested size: 50.0pt x 50.00052pt.
+graphic[.5]: wd 100.0pt, ht 50.00052pt, dp 0.0pt
+> \box...=
+\vbox(50.00052+0.0)x100.0
+.\hbox(50.00052+0.0)x100.0, glue set 25.0fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\hbox(0.0+0.0)x0.0
+..\hbox(50.00052+0.0)x50.0 []
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+! OK.
+<argument> ...}}\SHOWSIZE {graphic[.5]}\showbox 0 
+                                                  \SHOWGRAPHICSPATH \graphic...
+l. ...}
+graphicspath: undefined
+graphicspath: macro:->{./figures/}
+graphicspath: macro:->{./figures/sub/}
+============================================================
+============================================================
+TEST 17: graphic: name of the externalised file
+============================================================
+next file name: [example-image-1x1]
+graphic: example-image-1x1
+next file name: []
+============================================================
+============================================================
+TEST 18: header in tabulars
+============================================================
+tabular: wd 45.94455pt, ht 26.07079pt, dp 21.07079pt
+macro:#1->\multicolumn {1}{c}{#1}
+============================================================

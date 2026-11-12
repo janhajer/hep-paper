@@ -1,0 +1,18 @@
+% hep-paper: explicit font and paper options take precedence over the
+% class options.
+\input{regression-test}
+\documentclass[10pt, letterpaper]{article}
+\usepackage[font=12pt, paper=a4]{hep-paper}
+\input{hep-regression}
+\begin{document}
+\makeatletter
+\START
+
+\TEST{Explicit options win over class options}{%
+  \TYPE{font: [\hep@font], paper: [\hep@paper]}%
+  \TYPE{paper: \the\paperwidth\space x \the\paperheight}%
+  \TYPE{font size: \f@size}%
+}
+
+\makeatother
+\END

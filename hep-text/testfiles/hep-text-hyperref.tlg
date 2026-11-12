@@ -1,0 +1,89 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Bookmarks: software names
+============================================================
+[HEP-Text at the beginning]
+[The HEP-Text in the middle]
+[The HEP-Text with version]
+[At the end HEP-Text]
+============================================================
+============================================================
+TEST 2: Bookmarks: foreign abbreviations
+============================================================
+[The e.g. here]
+[The i.e., cf., vs. here]
+[The e.g.. End]
+============================================================
+============================================================
+TEST 3: Bookmarks: other text macros
+============================================================
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textnumero' on input line ....
+[ 123 number]
+[\376\377\041\026\000\040\0001\0002\0003\000\040\000n\000u\000m\000b\000e\000r]
+[\(pre-\)selection prefix]
+["quoted" ""nested"" text]
+============================================================
+============================================================
+TEST 4: Bookmarks: online and email
+============================================================
+[ctan.org text]
+[a@b.c text]
+============================================================
+============================================================
+TEST 5: Bookmarks: underline
+============================================================
+[An underlined word]
+[An underlined and other word]
+============================================================
+============================================================
+TEST 6: Bookmarks: sectioning commands
+============================================================
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textnumero' on input line ....
+[The HEP-Text, e.g. the \0401]
+[\(pre-\)selection and "quotes"]
+============================================================
+============================================================
+TEST 7: Table of contents entries
+============================================================
+\protect \BOOKMARK [1][-]{section.3}{\376\377\000T\000h\000e\000\040\000H\000E\000P\000-\000T\000e\000x\000t\000,\000\040\000e\000.\000g\000.\000\040\000t\000h\000e\000\040\041\026\000\040\0001}{}% 4
+\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {3}The \protect \software [v1.5]{HEP-Text}, \protect \eg  \ the \textnumero ~1}{\thepage }{section.3}\protected@file@percent }
+\protect \BOOKMARK [1][-]{section.4}{\376\377\000\050\000p\000r\000e\000-\000\051\000s\000e\000l\000e\000c\000t\000i\000o\000n\000\040\000a\000n\000d\000\040\000"\000q\000u\000o\000t\000e\000s\000"}{}% 5
+\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {4}(pre\protect \mbox  {-)}\protect \allowbreak  selection and \enquote {quotes}}{\thepage }{section.4}\protected@file@percent }
+\protect \BOOKMARK [1][-]{section.5}{\376\377\000A\000n\000\040\000u\000n\000d\000e\000r\000l\000i\000n\000e\000d\000\040\000w\000o\000r\000d\000\040\000a\000n\000d\000\040\000a\000@\000b\000.\000c}{}% 6
+\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {5}An \protect \underline  {underlined} word and \protect \href  {mailto:a@b.c}{\protect \nolinkurl  {a@b.c}}}{\thepage }{section.5}\protected@file@percent }
+============================================================
+============================================================
+TEST 8: Online and email with hyperref
+============================================================
+> \box...=
+\hbox(6.11111+0.0)x15.74986
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://a.b)>>}
+.\mathon
+.\OT1/cmtt/m/n/10 a
+.\glue(\medmuskip) 0.0
+.\OT1/cmtt/m/n/10 .
+.\glue(\medmuskip) 0.0
+.\OT1/cmtt/m/n/10 b
+.\mathoff
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.11111+0.0)x15.74986
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(mailto:a@b)>>}
+.\mathon
+.\OT1/cmtt/m/n/10 a
+.\glue(\medmuskip) 0.0
+.\OT1/cmtt/m/n/10 @
+.\glue(\medmuskip) 0.0
+.\OT1/cmtt/m/n/10 b
+.\mathoff
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

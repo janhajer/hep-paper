@@ -1,0 +1,92 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Document information before \maketitle 
+============================================================
+[]
+[]
+[]
+[]
+============================================================
+============================================================
+TEST 2: Document information after \maketitle 
+============================================================
+[The Title: The Subtitle]
+[Ann Author and Bob Author]
+[]
+[one, two]
+============================================================
+============================================================
+TEST 3: PDF author: one, two and three authors
+============================================================
+[Ann]
+[Ann and Bob]
+[Ann, Bob, and Cid]
+============================================================
+============================================================
+TEST 4: PDF author: footnotes, emails and ORCID links are dropped
+============================================================
+[Ann and Bob]
+[Ann and Bob]
+[Ann and Bob]
+[Ann and Bob]
+[Ann and Bob]
+[Ann and Bob]
+[Ann and Bob]
+============================================================
+============================================================
+TEST 5: PDF author: labelled email and thanks
+============================================================
+[Ann and Bob]
+[Ann and Bob]
+============================================================
+============================================================
+TEST 6: PDF author: line break, tie and accents
+============================================================
+[Ann Author and Bob]
+[A. Ann and Bob]
+[Ren\351 M\374ller and Bob]
+============================================================
+============================================================
+TEST 7: PDF author: formatting, links, \and and line breaks with arguments
+============================================================
+[Ann Author and Bob]
+[Ann Author and Bob]
+[Ann, Bob and Cid]
+[Ann Author and Bob Author]
+[Ann and Bob]
+============================================================
+============================================================
+TEST 8: PDF information set by the user is kept by \maketitle 
+============================================================
+[Custom Author]
+[Custom Author]
+[Custom Title]
+[custom]
+============================================================
+============================================================
+TEST 9: PDF title: footnotes and line breaks
+============================================================
+[A Title with bold: The Subtitle]
+============================================================
+============================================================
+TEST 10: PDF strings of the email and ORCID macros
+============================================================
+[Contact: ann@mail.com]
+[Contact: ]
+[]
+[Contact: ann@mail.com ]
+============================================================
+============================================================
+TEST 11: Bookmarks of a section with an email address
+============================================================
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line ....
+[Contact ann@mail.com]
+============================================================
+============================================================
+TEST 12: PDF author with Unicode PDF strings
+============================================================
+Package hyperref Info: Option `unicode' set `true' on input line ....
+[\376\377\000A\000n\000n\000\040\000a\000n\000d\000\040\000B\000o\000b]
+============================================================

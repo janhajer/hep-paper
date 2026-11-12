@@ -1,0 +1,11 @@
+% hep-paper with jcap: abstract in the preamble in the command form \abstract{...}.
+\input{regression-test}
+\documentclass[a4paper, 11pt]{article}
+\usepackage[jcap]{hep-paper}
+\input{journal-title}
+\abstract{Abstract text.}
+\begin{document}
+\maketitle
+\section{Section}
+Text.
+\end{document}

@@ -1,0 +1,125 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-math}
+\usepackage{hyperref}
+\nofiles% read the .toc and .lof below, do not overwrite them
+
+% Helpers \PDFSTRING, \SECTIONBOOKMARKS etc.
+\input{hep-regression}
+
+% \WRITE{text}: what \protected@write puts into the .toc, .lof and .aux
+% files for text (the moving argument of \section, \caption, ...)
+\makeatletter
+\newcommand*{\WRITE}[1]{%
+  \begingroup
+    \protected@edef\hep@test@string{#1}%
+    \TYPE{[\detokenize\expandafter{\hep@test@string}]}%
+  \endgroup
+}
+\makeatother
+
+% The contents lines that hyperref writes for sections with hep-math macros
+\begin{filecontents*}[overwrite]{\jobname.toc}
+\contentsline {section}{\numberline {1}Differential $\protect \d  x$ and unit \unit [5]{GeV}}{1}{section.1}%
+\contentsline {section}{\numberline {2}Derivative $\derivative [f]x$ and $\protect \braket  xy$}{1}{section.2}%
+\contentsline {section}{\numberline {3}Over \protect \overline  {text}}{1}{section.3}%
+\contentsline {section}{\numberline {4}Transpose $x^\protect \transpose  $ and $\protect \slashed  {p}$}{1}{section.4}%
+\end{filecontents*}
+\begin{filecontents*}[overwrite]{\jobname.lof}
+\contentsline {figure}{\numberline {1}{\ignorespaces Ket $\protect \ket  x$ and $\protect \abs  x$\relax }}{1}{figure.1}%
+\end{filecontents*}
+
+\begin{document}
+% Load the fonts of the table of contents before the test
+\setbox0\vbox{\hsize=20em\tableofcontents\listoffigures}
+\START
+
+\TEST{Moving arguments: text and math definitions}{%
+  \WRITE{\i\d\overline{x} $\i \d x \overline{x}$}%
+  \WRITE{$\oset{a}{b}\overleft{x}\overright{x}\overleftright{x}$}%
+  \WRITE{$\diag x\sgn x\tr x\Tr x\rank x\Re x\Im x$}%
+  \WRITE{$\sin x\cos x\tan x\arccsc x$}%
+}
+
+\TEST{Moving arguments: fractions, units, derivatives}{%
+  \WRITE{\unit[5]{GeV} \unit{\GeV} \inv{fb} \inv[2]{cm}}%
+  \WRITE{\textfrac12 $\nicefrac12\flatfrac12\flatfrac*12$}%
+  \WRITE{$\differential{x}\d x \dv[f]x \dv*xf \pd x \pdv[f]x[y]$}%
+  \WRITE{$\var x \fdv[F]x \cancel{x}$}%
+}
+
+\TEST{Moving arguments: delimiters and bra-ket}{%
+  \WRITE{$\abs x\norm x\norm[2]x\eval x_0^1\order x$}%
+  \WRITE{$\comm xy\acomm xy\pb xy$}%
+  \WRITE{$\bra x\ket x\braket xy\ketbra xy$}%
+  \WRITE{$\mel xyz\ev x\ev[\Omega]x\vev x$}%
+  \WRITE{$\column{x,y}\row{x,y}$}%
+  \WRITE{$x^\trans y^\transpose \slashed{p} \slashed\pd$}%
+}
+
+\TEST{Bookmarks: mathdef macros (text and math meaning)}{%
+  \PDFSTRING{The \i\ and \d\ in text}%
+  \PDFSTRING{Math $\i \d x$}%
+  \PDFSTRING{Over \overline{text}}%
+  \PDFSTRING{Over $\overline{x}$}%
+  \PDFSTRING{Vectors $\column{x,y}$ and $\row{x,y}$}%
+}
+
+\TEST{Bookmarks: accents and operators}{%
+  \PDFSTRING{$\oset{a}{b}$ and $\overleftright{\partial}$}%
+  \PDFSTRING{$\overleft{x}$ and $\overright{x}$}%
+  \PDFSTRING{Sine $\sin x$}%
+  \PDFSTRING{Cosine $\cos x$}%
+  \PDFSTRING{Operators $\diag(a)$ and $\Re z$}%
+  \PDFSTRING{$\tan x \arccsc x \log x \lim_x \liminf_x \operatorname{op} x$}%
+  \PDFSTRING{$\Pr$ and $\Pr[x \given y]$}%
+}
+
+\TEST{Bookmarks: fractions and units}{%
+  \PDFSTRING{Unit \unit{GeV} and \unit{\GeV}}%
+  \PDFSTRING{Value \unit[5]{GeV}}%
+  \PDFSTRING{Keyval \unit[per-mode=symbol]{\GeV\per\second}}%
+  \PDFSTRING{Quantity \qty{5}{\GeV}}%
+  \PDFSTRING{Inverse \inv{fb} and \unit[5]{\inv{fb}} and \inv[2]{cm}}%
+  \PDFSTRING{Fraction \unitfrac{m}{s} and \unitfrac[5]{m}{s}}%
+  \PDFSTRING{Fractions $\nicefrac12$, \textfrac12, $\flatfrac12$}%
+  \PDFSTRING{Fractions $\nicefrac{a}{b}$, $\flatfrac*{a}{b}$}%
+}
+
+\TEST{Bookmarks: derivatives}{%
+  \PDFSTRING{$\differential{x}$ and $\pd x$ and $\var x$}%
+  \PDFSTRING{$\dv[f]x$ and $\dv xf$}%
+  \PDFSTRING{$\pdv[f]x$ and $\fdv[F]x$}%
+  \PDFSTRING{$\cancel{x}$}%
+  \PDFSTRING{$\slashed{p}$ and $\slashed\partial$}%
+}
+
+\TEST{Bookmarks: delimiters and bra-ket}{%
+  \PDFSTRING{$\abs x$, $\norm x$, $\norm[2]x$}%
+  \PDFSTRING{$\eval x_0^1$, $\order x$}%
+  \PDFSTRING{$\comm xy$, $\acomm xy$, $\pb xy$}%
+  \PDFSTRING{$\bra x$, $\ket x$, $\braket xy$, $\ketbra xy$}%
+  \PDFSTRING{$\mel xyz$, $\ev x$, $\vev x$}%
+  \PDFSTRING{$x^\trans$ and $\row{x,y}^\transpose$}%
+}
+
+\TEST{Bookmarks: Unicode}{%
+  \UNICODEPDFSTRING{\unit[5]{GeV}, $\nicefrac12$, $\ket x$}%
+}
+
+\TEST{Bookmarks: sectioning commands}{%
+  \SECTIONBOOKMARKS{%
+    \section{Differential $\differential{x}$ and unit \unit[5]{GeV}}%
+    \section{Derivative $\dv[f]x$ and $\braket xy$}%
+    \section[Optional $\abs x$]{Long $\abs x$}%
+    \section{The \d\ and $\i$}%
+    \section{Transpose $x^\trans$ and $\slashed{p}$}%
+  }%
+}
+
+\TEST{Table of contents and list of figures}{%
+  \setbox0\vbox{\hsize=20em\tableofcontents}\showbox0
+  \setbox0\vbox{\hsize=20em\listoffigures}\showbox0
+}
+
+\END

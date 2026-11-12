@@ -1,0 +1,87 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-font}
+\usepackage{hep-math-font}
+\usepackage{hyperref}
+
+% Helpers \PDFSTRING, \SECTIONBOOKMARKS, \PDFINFO etc.
+\input{hep-regression}
+
+% The contents lines that hyperref writes for \section{The $x$ field} and
+% \subsection{The $\mathbf{x}$ field}
+\begin{filecontents*}[overwrite]{\jobname.toc}
+\contentsline {section}{\numberline {1}The $x$ field}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}The $\mathbf {x}$ field}{1}{subsection.1.1}%
+\end{filecontents*}
+
+\begin{document}
+% Load all fonts before the test, so font loading is not recorded. The
+% contents are only read here, \tableofcontents would empty the file.
+\makeatletter
+\setbox0\vbox{%
+  \section{The $\mathbf{x}$ field}\subsection{The $\mathbf{x}$ field}%
+  \section*{Contents}\@input{\jobname.toc}}
+\makeatother
+\START
+
+% hep-math-font tells hyperref to keep the arguments of the alphabet
+% commands, so that only the math shifts are removed. \bm is only tested in
+% PDF strings: typesetting it loops with regression-test.tex (also without
+% hep-math-font).
+\TEST{Bookmarks: math alphabets}{%
+  \UNICODEPDFSTRING{$\mathbf{x}$}%
+  \UNICODEPDFSTRING{$\mathup{a}\mathrm{b}\mathit{c}$}%
+  \UNICODEPDFSTRING{$\mathserif{a}\mathsf{b}\mathtt{c}\mathnormal{d}$}%
+  \UNICODEPDFSTRING{$\mathbfup{a}\mathbfrm{b}\mathbfsf{c}\mathsfup{d}$}%
+  \UNICODEPDFSTRING{$\mathsftext{a}\mathbfsfup{b}$}%
+  \UNICODEPDFSTRING{$\mathbftt{a}\mathttup{b}\mathbfttup{c}$}%
+  \UNICODEPDFSTRING{$\mathsf{\mathbf{x}}$}%
+  \UNICODEPDFSTRING{$\bm{x}$}%
+}
+
+\TEST{Bookmarks: decorative alphabets}{%
+  \UNICODEPDFSTRING{$\mathbb{R}\mathcal{L}\mathscr{H}\mathfrak{g}$}%
+}
+
+% The Greek letters stand for the text commands of hyperref's PU encoding.
+\TEST{Bookmarks: Greek letters}{%
+  \UNICODEPDFSTRING{\alpha-decay}%
+  \UNICODEPDFSTRING{$\alpha_s$ running}%
+  \UNICODEPDFSTRING{\alpha\beta\Gamma\Omega}%
+  \UNICODEPDFSTRING{\varsigma\varepsilon\varphi\vartheta\varrho\varpi}%
+  \UNICODEPDFSTRING{\epsilon\phi\varkappa\varTheta}%
+  \UNICODEPDFSTRING{$\partial\nabla\imath\jmath\ell\hbar$}%
+  \UNICODEPDFSTRING{$\mathbf{\alpha}\bm{\beta}$}%
+}
+
+\TEST{Bookmarks: texorpdfstring}{%
+  \UNICODEPDFSTRING{\texorpdfstring{$\mathbf{x}$}{x} field}%
+  \UNICODEPDFSTRING{\texorpdfstring{$\bm{\alpha}$}{\textalpha} field}%
+}
+
+\TEST{Bookmarks: sectioning commands}{%
+  \SECTIONBOOKMARKS{%
+    \section{The $\mathbf{x}$ field}%
+    \subsection{The $\mathsf{\mathbf{x}}$ field}%
+    \subsection{The $\alpha_s$ and $\partial$ terms}%
+    \section*{The $\mathbb{R}$ numbers}%
+    \addcontentsline{toc}{section}{The $\mathbb{R}$ numbers}%
+  }%
+}
+
+\TEST{Document information}{%
+  \hypersetup{pdftitle={The $\mathbf{x}$ field}}%
+  \PDFINFO{title}
+}
+
+% Math in contents entries follows the bold section entries.
+\TEST{Table of contents with math}{%
+  \setbox0\vbox{\hsize=20em\tableofcontents}\showbox0
+}
+
+% The symbol variants keep their characters in Unicode bookmarks.
+\TEST{Greek variants in bookmarks}{%
+  \UNICODEPDFSTRING{$\epsilon\varepsilon\phi\varphi\Theta\varTheta$}%
+}
+
+\END

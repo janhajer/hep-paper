@@ -1,0 +1,170 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Bookmarks: small caps and Greek
+============================================================
+[Abc and Abc]
+[\376\377\003\261\000-\000d\000e\000c\000a\000y\000\040\000a\000n\000d\000\040\003\223]
+[\376\377\003\261\003\262\003\223\003\251]
+[\376\377\003\302\003\265\003\306\003\321\003\361\003\326]
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\000T\000h\000e\000\040\003\261\000\040\000i\000n\000\040\000m\000a\000t\000h]
+============================================================
+============================================================
+TEST 2: Bookmarks: numeral and typewriter declarations
+============================================================
+[1 lining]
+[2 oldstyle]
+[3456 numerals]
+[78 numerals]
+[abc typewriter]
+============================================================
+============================================================
+TEST 3: Bookmarks: code
+============================================================
+[a_b verbatim]
+[\alpha ^2 verbatim]
+============================================================
+============================================================
+TEST 4: Bookmarks: numeral commands
+============================================================
+[1234]
+[1234]
+[12]
+[ui upright italic]
+============================================================
+============================================================
+TEST 5: Bookmarks: sectioning commands
+============================================================
+[Abc 1]
+[12 numerals Abc]
+[Old 2 and 3]
+[Starred]
+============================================================
+============================================================
+TEST 6: Document information
+============================================================
+[\376\377\000A\000b\000c\000\040\003\261]
+============================================================
+============================================================
+TEST 7: Table of contents with hyperlinks
+============================================================
+(hep-font-hyperref.toc)
+\tf@toc=\write...
+> \box...=
+\vbox(43.9648+0.165)x200.0
+.\hbox(9.9648+0.0936)x200.0, glue set 136.74089fil
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+..\hbox(0.0+0.0)x0.0
+...\kern 0.0
+...\penalty 10000
+...\hbox(0.0+0.0)x0.0
+....\hbox(0.0+0.0)x0.0, shifted -18.0
+.....\pdfdest name{section*.2} xyz
+.....\penalty 10000
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\T1/clm2/bx/n/14.4 C
+..\T1/clm2/bx/n/14.4 o
+..\T1/clm2/bx/n/14.4 n
+..\kern-0.44641
+..\T1/clm2/bx/n/14.4 t
+..\T1/clm2/bx/n/14.4 e
+..\T1/clm2/bx/n/14.4 n
+..\kern-0.44641
+..\T1/clm2/bx/n/14.4 t
+..\T1/clm2/bx/n/14.4 s
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty 10000
+.\glue 9.913 plus 0.86198
+.\glue -9.913 plus -0.86198
+.\glue 10.0 plus 1.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.97142
+.\hbox(6.93498+0.075)x200.0, glue set 115.27507fil
+..\glue(\leftskip) 15.0
+..\glue -15.0
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+..\hbox(6.47+0.0)x15.0, glue set 9.25002fil
+...\T1/clm/bx/n/10 1
+...\glue 0.0 plus 1.0fil
+..\T1/clm/bx/n/10 S
+..\T1/clm/bx/n/10 e
+..\T1/clm/bx/n/10 c
+..\T1/clm/bx/n/10 t
+..\T1/clm/bx/n/10 i
+..\T1/clm/bx/n/10 o
+..\T1/clm/bx/n/10 n
+..\glue 3.83 plus 1.92 minus 1.28
+..\T1/clm/bx/n/10 1
+..\T1/clm/bx/n/10 0
+..\pdfendlink
+..\penalty 10000
+..\glue 0.0 plus 1.0fil
+..\penalty 10000
+..\hbox(6.47+0.0)x17.825, glue set 12.07501fil
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\T1/clm/bx/n/10 1
+...\kern -1.0
+...\kern 1.0
+..\penalty 10000
+..\glue(\parfillskip) -15.50003
+..\glue(\rightskip) 15.50003
+.\glue 0.0 plus 0.2
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.88501
+.\hbox(7.04+0.165)x200.0, glue set 86.43996fill
+..\glue(\leftskip) 38.00003
+..\hbox(0.0+0.0)x15.0
+..\hbox(0.0+0.0)x0.0
+..\penalty 10000
+..\glue -38.00003
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.1.1}
+..\hbox(6.70499+0.0)x23.00003, glue set 10.22003fil
+...\T1/clm/m/n/10 1
+...\T1/clm/m/n/10 .
+...\T1/clm/m/n/10 1
+...\glue 0.0 plus 1.0fil
+..\T1/clm/m/n/10 S
+..\T1/clm/m/n/10 u
+..\T1/clm/m/n/10 b
+..\T1/clm/m/n/10 s
+..\T1/clm/m/n/10 e
+..\T1/clm/m/n/10 c
+..\T1/clm/m/n/10 t
+..\T1/clm/m/n/10 i
+..\T1/clm/m/n/10 o
+..\T1/clm/m/n/10 n
+..\glue 3.33 plus 1.67 minus 1.11
+..\T1/clm/m/n/10 1
+..\T1/clm/m/n/10 0
+..\pdfendlink
+..\penalty 10000
+..\leaders 0.0 plus 1.0fill
+...\hbox(1.04999+0.0)x7.77988
+....\mathon
+....\kern 2.49994
+....\hbox(1.04999+0.0)x2.78
+.....\T1/clm/m/n/10 .
+....\kern 2.49994
+....\mathoff
+..\penalty 10000
+..\hbox(6.70499+0.0)x15.50003, glue set 10.50003fil
+...\glue 0.0 plus 1.0fil
+...\T1/clm/m/n/10 1
+...\kern -1.0
+...\kern 1.0
+..\penalty 10000
+..\glue(\parfillskip) -25.50003
+..\glue(\rightskip) 25.50003
+! OK.
+<argument> ...e =20em\tableofcontents }\showbox 0 
+l. ...}
+============================================================

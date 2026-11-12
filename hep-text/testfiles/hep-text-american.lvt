@@ -1,0 +1,28 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage[lang=american]{hep-text}
+\input{hep-regression}
+
+\begin{document}
+
+% Load the fonts before \START
+\setbox0\hbox{\enquote{\enquote{x}}}
+
+\START
+
+\TEST{Language}{%
+  \TYPE{[\languagename]}%
+}
+
+% American English: a comma follows e.g., i.e. and cf.; vs is the same in
+% both variants.
+\TEST{Foreign abbreviations (american)}{%
+  \SHOWHBOX{\eg x}%
+  \SHOWHBOX{\ie, \cf. \vs x}%
+}
+
+\TEST{Quotation marks (american)}{%
+  \SHOWHBOX{\enquote{a \enquote{b}}}%
+}
+
+\END

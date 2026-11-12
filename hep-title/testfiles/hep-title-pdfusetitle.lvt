@@ -1,0 +1,33 @@
+\input{regression-test}
+% hyperref's pdfusetitle option takes the PDF title and author from \title
+% and \author. hep-title loads hyperref (through orcidlink), so the option
+% has to be passed before hep-title is loaded.
+\PassOptionsToPackage{pdfusetitle}{hyperref}
+\documentclass{article}
+\usepackage{hep-title}
+\hypersetup{unicode=false}% readable PDF strings
+\input{hep-regression}
+
+\title{The Title\thanks{Title thanks}\\second line}
+\author{Ann Author \email{ann@mail.com}}
+\author{Bob Author}
+\affiliation{Affil}
+
+\begin{document}
+% Load the fonts before \START
+\setbox0\hbox{$x^x$\LARGE$x^x$\Large$x^x$\large$x^x$\small$x^x$
+  \footnotesize$x^x$}
+\makeatletter
+\START
+
+\TEST{Title and author stored by hyperref}{%
+  \TYPE{\meaning\Hy@title}%
+  \TYPE{\meaning\Hy@author}%
+}
+
+\TEST{Document information after \maketitle and the first page}{%
+  \setbox0\vbox{\maketitle}%
+  \Hy@UseMaketitleInfos % called by hyperref when the first page is shipped out
+  \PDFINFO{title}\PDFINFO{author}%
+}
+\END

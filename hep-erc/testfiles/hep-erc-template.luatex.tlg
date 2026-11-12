@@ -1,0 +1,31 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Header data
+============================================================
+proposal: B1
+date: 60\ months
+months: 60
+subtitle: Acronym
+============================================================
+============================================================
+TEST 2: Document information
+============================================================
+[Title:\040Acronym]
+[First\040name\040Last\040name]
+============================================================
+============================================================
+TEST 3: B2: title and abstract
+============================================================
+Package blindtext Warning: british not defined, using English instead.
+(blindtext)                 on input line ....
+title done
+[Title:\040Acronym]
+============================================================
+============================================================
+TEST 4: Bookmarks: B1 sections
+============================================================
+[Extended Synopsis of the scientific proposal]
+[Curriculum Vit\346]
+[Early achievements track-record]
+============================================================

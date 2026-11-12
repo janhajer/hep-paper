@@ -1,0 +1,32 @@
+\input{regression-test}
+\documentclass{article}
+% global (= local=false): the placement argument of the floats is ignored
+\usepackage[global]{hep-float}
+\input{hep-regression}
+
+\makeatletter
+\newcommand*{\SHOWFLOAT}{%
+  \TYPE{type and placement: \the\count\@currbox,
+    size: \f@size,
+    leftskip: \the\leftskip, rightskip: \the\rightskip}%
+}
+\makeatother
+
+\begin{document}
+\START
+
+\TEST{Placement arguments are ignored}{%
+  \begin{figure}\SHOWFLOAT\end{figure}%
+  \begin{figure}[h]\SHOWFLOAT\end{figure}%
+  \begin{figure}[!b]\SHOWFLOAT\end{figure}%
+  \begin{figure*}[t]\SHOWFLOAT\end{figure*}%
+  \begin{table}[h]\SHOWFLOAT\end{table}%
+  \begin{table*}[p]\SHOWFLOAT\end{table*}%
+}
+
+\TEST{figures and tables}{%
+  \begin{figures}{2}\SHOWFLOAT\figure\SHOWFLOAT\end{figures}%
+  \begin{tables}{2}\SHOWFLOAT\table\SHOWFLOAT\end{tables}%
+}
+
+\END

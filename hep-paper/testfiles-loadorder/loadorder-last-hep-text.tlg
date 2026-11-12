@@ -1,0 +1,43 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: PDF strings
+============================================================
+[PDF and portable document format at the beginning]
+[The dx and cos x in math]
+[Numerals 12, e.g. here, under]
+[example.org and x]
+[\376\377\000T\000h\000e\000\040\003\261\000-\000d\000e\000c\000a\000y]
+============================================================
+============================================================
+TEST 2: Section bookmarks
+============================================================
+[Portable document format in a title]
+[Math x and dx]
+============================================================
+============================================================
+TEST 3: Document information
+============================================================
+[The\040PDF\040title:\040with\040a\040subtitle]
+[Ann\040Author\040and\040Bob\040Builder]
+============================================================
+============================================================
+TEST 4: Typesetting
+============================================================
+> \box...=
+\hbox(6.94444+0.0)x18.2241
+.\mathon
+.\U/hepalpha3/m/n/10 ^^Z
+.\kern0.38731
+.\glue(\thinmuskip) 1.66663
+.\hbox(0.0+0.0)x0.0
+.\glue -1.66663
+.\glue(\thinmuskip) 1.66663
+.\U/hepalpha0/m/n/10 ^^]
+.\U/hepalpha0/m/n/10 1
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+251.79999pt, 7.04pt, 2.01999pt
+============================================================

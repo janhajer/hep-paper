@@ -1,0 +1,31 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: mathsf=contrast: sans document
+============================================================
+> \box...=
+\hbox(4.44444+0.0)x20.76129
+.\mathon
+.\U/hepalpha2/m/n/10 ^^Z
+.\kern0.09805
+.\U/hepalpha0/m/n/10 ^^Z
+.\U/hepalpha0/m/n/10 ^^Z
+.\U/hepalpha0/m/n/10 ^^Z
+.\mathoff
+! OK.
+<argument> ...hsf {a}} \mathserif {a}$}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 2: mathsf=contrast: combined with bold
+============================================================
+> \box...=
+\hbox(4.4439+0.0)x12.65735
+.\mathon
+.\U/hepalpha1/m/n/10 ^^Z
+.\U/hepalpha1/m/n/10 ^^Z
+.\mathoff
+! OK.
+<argument> ...} \mathsf {\mathbf {a}}$}\showbox 0 
+l. ...}
+============================================================

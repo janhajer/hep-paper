@@ -1,0 +1,104 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: The date option is passed on to hep-cv
+============================================================
+hep-cv options: date,
+date: true
+Jan: defined
+Jun: defined
+Jul: defined
+mkbibshortyear: defined
+============================================================
+============================================================
+TEST 2: Short years
+============================================================
+[22]
+[]
+============================================================
+============================================================
+TEST 3: printcvdate with month macros and short years
+============================================================
+> \box...=
+\hbox(7.04+0.165)x75.56
+.\glue 0.0 plus 1.0fill
+.\hbox(0.0+0.0)x0.0
+..\hbox(0.0+0.0)x0.0
+.\hbox(6.70499+0.165)x19.17, glue set 0.694fil
+..\glue 0.0 plus 1.0fil minus 1.0fil
+..\glue 0.0 plus 1.0fil
+..\T1/clm2/m/n/10 J
+..\glue 0.0 plus 1.0fil
+..\T1/clm2/m/n/10 a
+..\glue 0.0 plus 1.0fil
+..\T1/clm2/m/n/10 n
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\glue 3.33 plus 1.67 minus 1.11
+.\T1/clm/m/n/10 '
+.\T1/clm/m/n/10 2
+.\T1/clm/m/n/10 0
+.\T1/clm/m/n/10 ^^U (ligature --)
+.\hbox(6.70499+0.165)x19.17, glue set 0.582fil
+..\glue 0.0 plus 1.0fil minus 1.0fil
+..\glue 0.0 plus 1.0fil
+..\T1/clm/m/n/10 J
+..\glue 0.0 plus 1.0fil
+..\T1/clm/m/n/10 u
+..\glue 0.0 plus 1.0fil
+..\T1/clm/m/n/10 n
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\glue 3.33 plus 1.67 minus 1.11
+.\T1/clm/m/n/10 '
+.\T1/clm/m/n/10 2
+.\T1/clm/m/n/10 2
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.04+0.165)x30.56
+.\glue 0.0 plus 1.0fill
+.\hbox(0.0+0.0)x0.0
+..\hbox(0.0+0.0)x0.0
+.\T1/clm/m/n/10 '
+.\T1/clm/m/n/10 1
+.\T1/clm/m/n/10 8
+.\T1/clm/m/n/10 ^^U (ligature --)
+.\T1/clm/m/n/10 '
+.\T1/clm/m/n/10 1
+.\T1/clm/m/n/10 9
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 4: printcvdate: open-ended range
+============================================================
+> \box...=
+\hbox(7.04+0.165)x66.39
+.\glue 0.0 plus 1.0fill
+.\T1/clm2/m/n/10 S
+.\T1/clm2/m/n/10 i
+.\T1/clm2/m/n/10 n
+.\T1/clm2/m/n/10 c
+.\T1/clm2/m/n/10 e
+.\glue 3.33 plus 1.67 minus 1.11
+.\hbox(0.0+0.0)x0.0
+..\hbox(0.0+0.0)x0.0
+.\hbox(7.04+0.165)x19.17, glue set 1.138fil
+..\glue 0.0 plus 1.0fil minus 1.0fil
+..\glue 0.0 plus 1.0fil
+..\T1/clm2/m/n/10 J
+..\glue 0.0 plus 1.0fil
+..\T1/clm2/m/n/10 u
+..\glue 0.0 plus 1.0fil
+..\T1/clm2/m/n/10 l
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\glue 3.33 plus 1.67 minus 1.11
+.\T1/clm/m/n/10 '
+.\T1/clm/m/n/10 2
+.\T1/clm/m/n/10 2
+.\T1/clm/m/n/10 ^^U (ligature --)
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

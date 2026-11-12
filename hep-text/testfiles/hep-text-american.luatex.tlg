@@ -1,0 +1,67 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Language
+============================================================
+[american]
+============================================================
+============================================================
+TEST 2: Foreign abbreviations (american)
+============================================================
+> \box...=
+\hbox(4.53+2.06)x26.39, direction TLT
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 x
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.05+1.93)x54.22, direction TLT
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 f
+.\TU/lmr/m/n/10 .
+.\glue(\spaceskip) 4.44 plus 4.99498 minus 0.37
+.\TU/lmr/m/n/10 v
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 .
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 x
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 3: Quotation marks (american)
+============================================================
+> \box...=
+\hbox(6.94+0.11)x29.39003, direction TLT
+.\TU/lmr/m/n/10 “
+.\penalty 10000
+.\glue -0.0002
+.\glue 0.0002
+.\TU/lmr/m/n/10 a
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 ‘
+.\penalty 10000
+.\glue -0.0002
+.\glue 0.0002
+.\TU/lmr/m/n/10 b
+.\TU/lmr/m/n/10 ’
+.\penalty 10000
+.\glue 0.50003
+.\TU/lmr/m/n/10 ”
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

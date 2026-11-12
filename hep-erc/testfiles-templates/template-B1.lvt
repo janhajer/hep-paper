@@ -1,0 +1,5 @@
+% Compile the extracted proposal template hep-erc-B1.tex. The configuration
+% halts on the first error, so a failing document never reaches \END.
+\input{regression-test}
+\AtEndDocument{\START\TYPE{hep-erc-B1 compiled}\END}
+\input{hep-erc-B1}

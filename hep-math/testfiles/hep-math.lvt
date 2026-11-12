@@ -1,0 +1,255 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-math}
+
+% Helpers \SHOWHBOX, \SHOWVBOX
+\input{hep-regression}
+
+% User definitions with the extension macros
+\newcommand*{\hepword}{word}
+\mathdef{\hepword}{\omega}
+\newcommand*{\hepargs}{text}
+\mathdef{\hepargs}[2][a]{#1+#2}
+% A default math definition is only used without an earlier \mathdef.
+\newcommand*{\hepdefault}{text}
+\mathdef{\hepdefault}{\alpha}
+\newcommand*{\hepnodefault}{text}
+\makeatletter
+\hep@mathdef@default{\hepdefault}{\beta}
+\hep@mathdef@default{\hepnodefault}{\gamma}
+\makeatother
+% A macro taking an argument, which soul cannot process
+\newcommand*{\hepmacro}[1]{#1}
+\newderivative{\Dv}{D}
+\newpartialderivative{\Pdv}{\nabla}
+\newpair{\pairbare}{\lbrack}{\rbrack}
+\newpair{\pairsub}{\lbrack}{\rbrack}_-
+\newpair{\pairsup}{\lbrace}{\rbrace}^+
+
+\newcommand*{\HEIGHT}[1]{%
+  \setbox0\hbox{#1}%
+  \TYPE{\detokenize{#1}: height \the\ht0, depth \the\dp0}%
+}
+
+\begin{document}
+% Load all fonts before the test, so font loading is not recorded.
+\setbox0\vbox{%
+  $\displaystyle \nicefrac12 \textstyle x \scriptstyle x \scriptscriptstyle x
+  \bigl( \Bigl( \biggl( \Biggl($
+  \textfrac12 \unit[5]{\inv{fb}} \unit{\GeV\per\second} \overline{text}
+  \textbf{x} \textit{x} \small x \footnotesize x \scriptsize x \tiny x
+  \begin{equation}\dv[f]x \pdv[f]x[y]^2 \fdv[F]x \slashed{p} \cancel{x}
+  \Pr*[x \given y] \set*{x \suchthat y}
+  \end{equation}
+}
+\setcounter{equation}{0}
+\START
+
+\TEST{mleftright: \left and \right}{%
+  \SHOWHBOX{$f\left(x\right)g$}%
+}
+
+\TEST{mathdef: text and math definitions}{%
+  \SHOWHBOX{\hepword\ $\hepword$}%
+  \SHOWHBOX{\hepargs\ $\hepargs{b}\hepargs[c]{d}$}%
+}
+
+% Redefining keeps the text definition.
+\TEST{mathdef: repeated definitions}{%
+  \mathdef{\hepword}{\Omega}%
+  \mathdef{\d}{D}%
+  \SHOWHBOX{\hepword\ $\hepword$}%
+  \SHOWHBOX{\d{o} $\d$}%
+  \SHOWHBOX{\hepdefault\ $\hepdefault$ \hepnodefault\ $\hepnodefault$}%
+}
+
+\TEST{Imaginary unit and differential in text and math}{%
+  \SHOWHBOX{\i\ \d{o} $\i \d x$}%
+}
+
+\TEST{Overline in text and math}{%
+  \SHOWHBOX{\overline{ab}}%
+  \SHOWHBOX{$\overline{x}$}%
+}
+
+% Text with macros that soul cannot process is overlined as a whole.
+\makeatletter
+\TEST{Overline of text with macros unknown to soul}{%
+  \hep@soul@if@safe{a \textbf{b} $\alpha$}{\TYPE{soul}}{\TYPE{whole}}%
+  \hep@soul@if@safe{a \hepmacro{b}}{\TYPE{soul}}{\TYPE{whole}}%
+  \SHOWHBOX{\overline{a \hepmacro{b}}}%
+}
+\makeatother
+
+\TEST{Arrow accents}{%
+  \SHOWHBOX{$\oset{*}{x}$}%
+  \SHOWHBOX{$\oset[0pt]{*}{x}$}%
+  \SHOWHBOX{$\overleft{\partial}$}%
+  \SHOWHBOX{$\overright{\partial}$}%
+  \SHOWHBOX{$\overleftright{\partial}$}%
+}
+
+\TEST{Operators}{\setbox0\hbox{$\diag(a) \sgn x \Re z \Im z \sin x$}\showbox0}
+
+\TEST{More operators}{%
+  \SHOWHBOX{$\tr x \Tr x \rank x$}%
+}
+
+\TEST{Trigonometric functions have the same height}{%
+  \HEIGHT{$\sin$}%
+  \HEIGHT{$\cos$}%
+  \HEIGHT{$\tan$}%
+  \HEIGHT{$\cot$}%
+  \HEIGHT{$\sec$}%
+  \HEIGHT{$\csc$}%
+  \HEIGHT{$\arccos$}%
+  \HEIGHT{$\arctan$}%
+  \HEIGHT{$\arccsc$}%
+  \HEIGHT{$\arcsec$}%
+  \HEIGHT{$\arccot$}%
+  \HEIGHT{$\asin$}%
+  \HEIGHT{$\acos$}%
+  \HEIGHT{$\atan$}%
+  \HEIGHT{$\acsc$}%
+  \HEIGHT{$\asec$}%
+  \HEIGHT{$\acot$}%
+}
+
+\TEST{Units}{%
+  \SHOWHBOX{\unit{GeV}}%
+  \SHOWHBOX{\unit[5]{GeV}}%
+  \SHOWHBOX{\unit[5]{\GeV}}%
+  \SHOWHBOX{\unit[per-mode=symbol]{\GeV\per\second}}%
+  \SHOWHBOX{$\unit[5]{GeV}$}%
+}
+
+\TEST{Inverse units}{%
+  \SHOWHBOX{\inv{fb}}%
+  \SHOWHBOX{\inv[2]{cm}}%
+  \SHOWHBOX{\unit[5]{\inv{fb}}}%
+}
+
+\TEST{Fractions}{%
+  \SHOWHBOX{$\nicefrac12$}%
+  \SHOWHBOX{\textfrac12}%
+  \SHOWHBOX{$\flatfrac12$}%
+  \SHOWHBOX{$\flatfrac*12$}%
+  \SHOWHBOX{$\flatfrac[\big]12$}%
+}
+
+\TEST{Differentials}{%
+  \SHOWHBOX{$\differential{x}$}%
+  \SHOWHBOX{$f\d x$}%
+  \SHOWHBOX{$f\pd x$}%
+  \SHOWHBOX{$f\var x$}%
+}
+
+\TEST{Derivatives}{%
+  \SHOWHBOX{$\dv[f]x$}%
+  \SHOWHBOX{$\dv*[f]x^n$}%
+  \SHOWHBOX{$\dv[f]x*^n$}%
+  \SHOWHBOX{$\dv*[f]x*^n$}%
+  \SHOWHBOX{$\dv xf$}%
+}
+
+\TEST{Partial derivatives}{%
+  \SHOWHBOX{$\pdv[f]x$}%
+  \SHOWHBOX{$\pdv[f]x[y]$}%
+  \SHOWHBOX{$\pdv[f]x^3$}%
+  \SHOWHBOX{$\pdv[f]x^2[y]^3$}%
+  \SHOWHBOX{$\pdv x[y]f$}%
+}
+
+% Integer orders are summed, others are added.
+\TEST{Partial derivatives: symbolic orders}{%
+  \SHOWHBOX{$\pdv[f]x^n$}%
+  \SHOWHBOX{$\pdv[f]x^n[y]^2$}%
+  \SHOWHBOX{$\pdv[f]x^{a}[y]^{b}[z]$}%
+}
+
+\TEST{Functional and user-defined derivatives}{%
+  \SHOWHBOX{$\fdv[F]x$}%
+  \SHOWHBOX{$\Dv[f]x$}%
+  \SHOWHBOX{$\Pdv[f]x[y]$}%
+}
+
+\TEST{Cancel and slash}{%
+  \SHOWHBOX{$\cancel{x}$}%
+  \SHOWHBOX{$\slashed{p}$}%
+  \SHOWHBOX{$\slashed\pd$}%
+}
+
+\TEST{Absolute value and norm}{%
+  \SHOWHBOX{$\abs x$}%
+  \SHOWHBOX{$\abs{}$}%
+  \SHOWHBOX{$\norm x$}%
+  \SHOWHBOX{$\norm[2]x$}%
+  \SHOWHBOX{$\norm*[2]x$}%
+}
+
+\TEST{Evaluation and order}{%
+  \SHOWHBOX{$\order x$}%
+  \SHOWHBOX{$\eval x_0^1$}%
+  \SHOWHBOX{$\eval* x_0^1$}%
+}
+
+\TEST{Pairs and commutators}{%
+  \SHOWHBOX{$\comm xy$}%
+  \SHOWHBOX{$\acomm xy$}%
+  \SHOWHBOX{$\pb xy$}%
+  \SHOWHBOX{$\comm{}{}$}%
+  \SHOWHBOX{$\pairbare xy \pairsub xy \pairsup xy$}%
+}
+
+\TEST{Bra-ket notation}{%
+  \SHOWHBOX{$\bra x$}%
+  \SHOWHBOX{$\ket x$}%
+  \SHOWHBOX{$\braket xy$}%
+  \SHOWHBOX{$\bra x\ket y$}%
+  \SHOWHBOX{$\ketbra xy$}%
+}
+
+\TEST{Matrix elements and expectation values}{%
+  \SHOWHBOX{$\mel xyz$}%
+  \SHOWHBOX{$\ev x$}%
+  \SHOWHBOX{$\ev[\Omega] x$}%
+  \SHOWHBOX{$\vev x$}%
+}
+
+\TEST{Column and row vectors}{%
+  \SHOWHBOX{$\column{x,y}$}%
+  \SHOWHBOX{$\row{x,y}^\trans$}%
+  \SHOWHBOX{\column\ \row}%
+}
+
+\TEST{Undocumented helpers: probability, set, units fraction}{%
+  \SHOWHBOX{$\Pr[x \given y]$}%
+  \SHOWHBOX{$\set{x \suchthat y}$}%
+  \SHOWHBOX{\unitfrac[5]{m}{s}}%
+  \SHOWHBOX{\unitfrac{m}{s}}%
+}
+
+\TEST{Equation numbers within sections}{%
+  \setcounter{section}{2}%
+  \setbox0\vbox{\hsize=20em
+    \begin{equation} x \end{equation}
+    \begin{multline} x \\ y \end{multline}
+    \begin{equation} \begin{split} x &= y \\ &= z \end{split} \end{equation}
+    \begin{subequations}
+      \begin{align} x &= y & z &= w \\ x &= y & z &= w \end{align}
+    \end{subequations}
+    \begin{equation} \begin{aligned} x &= y \\ z &= w \end{aligned}
+    \end{equation}
+    \begin{equation} \begin{split} x &= y \\ &= \begin{multlined}[t]
+      z \\ + w \end{multlined} \end{split} \end{equation}
+    \begin{alignat}{2} x &= y && , \\ x &= y , & \mathllap{z = w} & .
+    \end{alignat}
+    \begin{eqnarray} x &=& y \end{eqnarray}
+  }%
+  \TYPE{\theequation}%
+  \stepcounter{section}%
+  \refstepcounter{equation}%
+  \TYPE{\theequation}%
+}
+
+\END

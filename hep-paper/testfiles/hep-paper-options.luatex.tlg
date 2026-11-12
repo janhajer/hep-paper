@@ -1,0 +1,73 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Option values
+============================================================
+class: article
+paper: [a4]
+font: [11pt]
+lang: [british]
+symbols: [true]
+bibliography: [numeric-comp]
+serif: true
+lining: true
+parindent: true
+defaults: false
+title: true
+physics: true
+glossaries: true
+references: true
+eqnarray: true
+manualplacement: false
+beamer: false
+revtex: false
+jhep: false
+jcap: false
+pos: false
+springer: false
+amsart: false
+sissa: false
+journal: false
+============================================================
+============================================================
+TEST 2: Loaded packages and their options
+============================================================
+hep-math: loaded []
+hep-font: loaded [size=11pt,sans=false,lining=true,]
+hep-math-font: loaded [symbols=true,]
+geometry: loaded []
+parskip: not loaded
+hep-text: loaded [lang=british,]
+hep-float: loaded [global,]
+hep-title: loaded []
+hep-bibliography: loaded [style=numeric-comp,]
+biblatex: loaded [style=numeric-comp,datamodel=hep-bibliography,]
+hep-reference: loaded []
+hyperref: loaded []
+cleveref: loaded [noabbrev,nameinlink,]
+hep-acronym: loaded []
+titlesec: loaded []
+hep-revtex: not loaded
+hep-sissa: not loaded
+xpatch: loaded []
+============================================================
+============================================================
+TEST 3: Page geometry and font size
+============================================================
+paper: 597.50787pt x 845.04684pt
+text: 448.1309pt x 609.04005pt
+font size: 11
+parindent: 16.5pt, parskip: 0.0pt plus 1.0pt
+============================================================
+============================================================
+TEST 4: Paragraph helpers only with the parskip option
+============================================================
+useparskip: undefined
+useparindent: undefined
+============================================================
+============================================================
+TEST 5: Document information set by maketitle
+============================================================
+[\376\377\000T\000h\000e\000\040\000t\000i\000t\000l\000e\000\040\000w\000i\000t\000h\000\040\003\261\000\040\000m\000a\000t\000h]
+[First\040Author\040and\040Second\040Author]
+============================================================

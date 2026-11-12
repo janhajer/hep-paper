@@ -1,0 +1,173 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Option names
+============================================================
+[NewCM10-Regular.otf(0)]
+[10]
+============================================================
+============================================================
+TEST 2: Numeral commands
+============================================================
+> \box...=
+\hbox(6.77+0.22)x47.27, direction TLT
+.\TU/NewCM10-Regular.otf(1)/m/n/10 0
+.\kern0.0 (italic)
+.\TU/NewCM10-Regular.otf(1)/m/n/10 1
+.\kern0.0 (italic)
+.\TU/NewCM10-Regular.otf(2)/m/n/10 
+.\kern0.0 (italic)
+.\TU/NewCM10-Regular.otf(5)/m/n/10 
+.\kern0.0 (italic)
+.\TU/NewCM10-Regular.otf(7)/m/n/10 4
+.\kern0.0 (italic)
+.\TU/NewCM10-Regular.otf(5)/m/n/10 
+.\kern0.0 (italic)
+.\TU/NewCM10-Regular.otf(6)/m/n/10 
+.\kern0.0 (italic)
+.\TU/NewCM10-Regular.otf(7)/m/n/10 7
+.\kern0.0 (italic)
+.\TU/NewCM10-Regular.otf(8)/m/n/10 
+.\kern0.0 (italic)
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......ral commands}{\SHOWHBOX{\NUMERALCOMMANDS}}
+============================================================
+============================================================
+TEST 3: Numeral declarations
+============================================================
+> \box...=
+\hbox(6.77+0.22)x42.27, direction TLT
+.\TU/NewCM10-Regular.otf(1)/m/n/10 1
+.\TU/NewCM10-Regular.otf(2)/m/n/10 
+.\TU/NewCM10-Regular.otf(5)/m/n/10 
+.\TU/NewCM10-Regular.otf(7)/m/n/10 4
+.\TU/NewCM10-Regular.otf(5)/m/n/10 
+.\TU/NewCM10-Regular.otf(6)/m/n/10 
+.\TU/NewCM10-Regular.otf(7)/m/n/10 7
+.\TU/NewCM10-Regular.otf(8)/m/n/10 
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......arations}{\SHOWHBOX{\NUMERALDECLARATIONS}}
+============================================================
+============================================================
+TEST 4: Typewriter declarations: monospaced, proportional, code
+============================================================
+> \box...=
+\hbox(6.22+0.06)x31.35, direction TLT
+.\TU/NewCMMono10-Regular.otf(1)/m/n/10 a
+.\TU/NewCMMono10-Regular.otf(1)/m/n/10 1
+.\TU/lmmonoprop10-regular.otf(0)/m/n/10 a
+.\TU/lmmonoprop10-regular.otf(0)/m/n/10 1
+.\TU/NewCMMono10-Regular.otf(1)/m/n/10 a
+.\TU/NewCMMono10-Regular.otf(1)/m/n/10 1
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...  \SHOWHBOX{\TYPEWRITER}}
+============================================================
+============================================================
+TEST 5: Code: verbatim argument
+============================================================
+> \box...=
+\hbox(6.94+1.67)x26.25, direction TLT
+.\TU/NewCMMono10-Regular.otf(1)/m/n/10 a
+.\TU/NewCMMono10-Regular.otf(1)/m/n/10 _
+.\TU/NewCMMono10-Regular.otf(1)/m/n/10 1
+.\glue(\spaceskip) 5.25
+.\TU/NewCMMono10-Regular.otf(1)/m/n/10 %
+! OK.
+l. ...\setbox0\hbox{\code{a_1 %}}\showbox0
+============================================================
+============================================================
+TEST 6: Verbatim environment uses the code style
+============================================================
+> \box...=
+\vbox(26.28+0.0)x200.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\parskip) 0.0
+.\hbox(6.22+0.06)x200.0, glue set 189.5fil, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 5.0
+..\TU/NewCMMono10-Regular.otf(1)/m/n/10 a
+..\TU/NewCMMono10-Regular.otf(1)/m/n/10 1
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty 0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+l. ...}\showbox0
+============================================================
+============================================================
+TEST 7: Bold and sans-serif small caps
+============================================================
+> \box...=
+\hbox(5.22+0.0)x17.96, direction TLT
+.\TU/NewCM10-Regular.otf(0)/b/sc/10 
+.\kern0.0 (italic)
+.\TU/NewCMSans10-Regular.otf(0)/m/sc/10 󰀨
+.\kern0.0 (italic)
+.\TU/NewCMSans10-Regular.otf(0)/b/sc/10 󰀎
+.\kern0.0 (italic)
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......s-serif small caps}{\SHOWHBOX{\SMALLCAPS}}
+============================================================
+============================================================
+TEST 8: Engine specific fonts: upright italic, uncial
+============================================================
+> \box...=
+\hbox(4.5+0.14)x9.79, direction TLT
+.\TU/NewCMUncial10-Regular.otf(0)/m/n/10 a
+.\kern0.0 (italic)
+.\TU/NewCMUncial10-Regular.otf(0)/m/n/10 b
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......t italic, uncial}{\SHOWHBOX{\ENGINEFONTS}}
+============================================================
+============================================================
+TEST 9: Greek letters in text and math
+============================================================
+> \box...=
+\hbox(6.83331+1.25)x28.37405, direction TLT
+.\TU/NewCM10-Regular.otf(1)/m/n/10 α
+.\TU/NewCM10-Regular.otf(1)/m/n/10 Γ
+.\TU/NewCM10-Regular.otf(1)/m/n/10 ς
+.\mathon
+.\OML/cmm/m/it/10 ^^K
+.\kern0.03702 (italic)
+.\OT1/cmr/m/n/10 ^^@
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......tters in text and math}{\SHOWHBOX{\GREEK}}
+============================================================
+============================================================
+TEST 10: Equation numbers use tabular lining numerals
+============================================================
+> \box...=
+\hbox(7.6+2.6)x15.44, direction TLT
+.\kern-1.17
+.\TU/NewCM10-Regular.otf(7)/m/n/10 (
+.\TU/NewCM10-Regular.otf(7)/m/n/10 1
+.\TU/NewCM10-Regular.otf(7)/m/n/10 0
+.\TU/NewCM10-Regular.otf(7)/m/n/10 )
+.\kern-1.17
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...  \SHOWHBOX{\EQUATIONNUMBER}}
+============================================================

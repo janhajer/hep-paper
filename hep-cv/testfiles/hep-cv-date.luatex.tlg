@@ -1,0 +1,79 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Month macros
+============================================================
+Jan: defined
+Feb: defined
+Mar: defined
+Apr: defined
+May: defined
+Jun: defined
+Jul: defined
+Aug: defined
+Sep: defined
+Oct: defined
+Nov: defined
+Dec: defined
+width of May: 19.17pt
+Jan: 19.17pt
+Feb: 19.17pt
+Mar: 19.17pt
+Apr: 19.17pt
+May: 19.17pt
+Jun: 19.17pt
+Jul: 19.17pt
+Aug: 19.17pt
+Sep: 19.17pt
+Oct: 19.17pt
+Nov: 19.17pt
+Dec: 19.17pt
+============================================================
+============================================================
+TEST 2: Month macros: letters spread evenly (May is wider than the box)
+============================================================
+> \box...=
+\hbox(6.83+0.22)x19.17, direction TLT
+.\hbox(6.83+0.22)x19.17, glue set 0.694fil, direction TLT
+..\glue 0.0 plus 1.0fil minus 1.0fil
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/m/n/10 J
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/m/n/10 a
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/m/n/10 n
+..\glue 0.0 plus 1.0fil minus 1.0fil
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.83+2.05)x19.17, direction TLT
+.\hbox(6.83+2.05)x19.17, glue set - 0.14fil, direction TLT
+..\glue 0.0 plus 1.0fil minus 1.0fil
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/m/n/10 M
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/m/n/10 a
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/m/n/10 y
+..\glue 0.0 plus 1.0fil minus 1.0fil
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 3: Month macros are robust and plain in PDF strings
+============================================================
+\protected macro:->\hep@month {Jan}
+[Since Jan 2020 until Dec 2021]
+[Since May 2020]
+macro:->\Jan 
+============================================================
+============================================================
+TEST 4: Lists are not adjusted with list=false
+============================================================
+itemize: leftmargin 25.0pt, labelwidth 20.0pt, labelsep 5.0pt, topsep 8.0pt plus 2.0pt minus 4.0pt, itemsep 4.0pt plus 2.0pt minus 1.0pt, parsep 4.0pt plus 2.0pt minus 1.0pt
+enumerate: leftmargin 25.0pt, labelwidth 20.0pt, labelsep 5.0pt, topsep 8.0pt plus 2.0pt minus 4.0pt, itemsep 4.0pt plus 2.0pt minus 1.0pt, parsep 4.0pt plus 2.0pt minus 1.0pt
+description: leftmargin 25.0pt, labelwidth 0.0pt, labelsep 5.0pt, topsep 8.0pt plus 2.0pt minus 4.0pt, itemsep 4.0pt plus 2.0pt minus 1.0pt, parsep 4.0pt plus 2.0pt minus 1.0pt
+enumdescript: undefined
+============================================================

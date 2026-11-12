@@ -1,0 +1,27 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Text and math
+============================================================
+> \box...=
+\hbox(9.1212+0.913)x56.9078, direction TLT
+.\TU/NewCM10-Regular.otf(0)/m/n/11 T
+.\kern-0.913 (font)
+.\TU/NewCM10-Regular.otf(0)/m/n/11 e
+.\TU/NewCM10-Regular.otf(0)/m/n/11 x
+.\TU/NewCM10-Regular.otf(0)/m/n/11 t
+.\glue(\spaceskip) 3.663 plus 1.8315 minus 1.221
+.\mathon
+.\TU/hep-serif/m/n/11 𝑥
+.\hbox(5.1282+0.0)x4.466, shifted -3.993, direction TLT
+..\TU/hep-serif/m/n/7.7 2
+.\glue(\medmuskip) 2.4444 plus 1.2222 minus 1.8333
+.\TU/NewCMMath-Regular.otf(1)/m/n/11 +
+.\glue(\medmuskip) 2.4444 plus 1.2222 minus 1.8333
+.\TU/hep-serif/m/n/11 𝛼
+.\mathoff
+! OK.
+<to be read again> 
+                   \endgroup 
+l. ......setbox0\hbox{Text $x^2 + \alpha$}\showbox0}
+============================================================

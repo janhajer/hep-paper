@@ -1,0 +1,643 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019-2026 by Jan Hajer
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-text}[2026/11/11 v1.6 Text utilities: language setup, abbreviations, links, breakable underlining and compact lists]
+%<documentation>\ProvidesFile{hep-text-documentation.tex}[2026/11/11 v1.6 HEP-Text documentation]
+%<documentation>\ProvidesFile{hep-text-text.tex}[2026/11/11 v1.6 HEP-Text tests]
+%
+%<*documentation>
+
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass{ltxdoc}
+
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+\usepackage{hologo}
+
+\usepackage[parskip,oldstyle,font=10pt]{hep-paper}
+\bibliography{bibliography}
+
+\acronym{CM}{computer modern}
+\acronym{LM}{latin modern}
+\shortacronym{PDF}{portable document format}
+
+\newenvironment{columns}[1][.5]{%
+  \par\vspace{-\bigskipamount}%
+  \begin{minipage}[t]{\linewidth}%
+  \begin{minipage}[t]{#1\linewidth}%
+  \def\column{%
+    \end{minipage}%
+    \begin{minipage}[t]{\linewidth-#1\linewidth}%
+  }%
+}{\end{minipage}\end{minipage}\par}
+%</documentation>
+
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
+\begin{document}
+\DocInput{hep-text-implementation.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{400}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.0}{2021/09/01}{Created the dedicated text package with language and quotation support, foreign abbreviations, text helpers, list environments, and line-breakable underlining.}
+% \changes{v1.1}{2022/11/01}{Disabled styling of foreign abbreviations by default, made software names safe in PDF strings, added subsubparagraph, and tightened enumdescript internals.}
+% \changes{v1.2}{2023/07/01}{Updated documentation formatting, package metadata, and README wrapping.}
+% \changes{v1.3}{2024/11/01}{Switched line-breakable underlining from soulutf8 to soul and adjusted list example layout.}
+% \changes{v1.4}{2025/09/01}{Applied starred command definitions consistently.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, expanded the user documentation, README, and tests, and added no-indent-after-list handling.}
+% \changes{v1.6}{2026/11/11}{Restored underline in math mode, made underline, online links, email addresses, and foreign abbreviations safe in PDF strings, fixed the empty-title test of enumdescript, and stopped enumdescript from changing the items of nested lists.}
+%
+% \ifshort
+%<*documentation>
+% \fi
+%
+\GetFileInfo{hep-text.sty}
+
+\title{The \software{hep-text} package\thanks{This document corresponds to \software{hep-text}~\fileversion.}}
+\subtitle{Text utilities: language setup, abbreviations, links, breakable underlining and compact lists}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
+\date{\filedate}
+
+% \ifshort
+\begin{document}
+% \fi
+
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+
+\maketitle
+
+\begin{abstract}
+The \software{hep-text} package collects lightweight text utilities.
+It configures language-aware hyphenation, quotation marks, and Latin abbreviations through established \hologo{LaTeX} packages, adds helpers for software names, online references, email addresses, numero labels, prefix constructions, and line-breakable underlining, and defines compact inline and enumerated description lists based on \software{enumitem}.
+\end{abstract}
+
+Load the package with "\usepackage{hep-text}".
+
+\DescribeMacro{lang}
+The "lang" option selects the document language.
+It accepts the language names understood by \software{babel} \cite{babel}, which is loaded for hyphenation support.
+
+\software{csquotes} \cite{csquotes} provides context-sensitive quotation commands.
+\DescribeMacro{\enquote}
+\DescribeMacro{\MakeOuterQuote}
+The macros "\enquote"\marg{text} and "\MakeOuterQuote{}" leave the choice of quotation marks to \hologo{LaTeX}.
+The latter also allows \verb|"| to be used instead of the pair \verb|``| and \verb|''|.
+
+\DescribeMacro{\eg}
+\DescribeMacro{\ie}
+\DescribeMacro{\cf}
+\DescribeMacro{\vs}
+The \software{foreign} package \cite{foreign} defines common Latin abbreviations such as "\eg", "\ie", "\cf", and "\vs".
+They are typeset as \eg, \ie, \cf, and \vs with appropriate spacing.
+Redefine "\foreignabbrfont" to adjust their style, for example "\renewcommand\foreignabbrfont{\itshape}" for italic abbreviations.
+
+\DescribeMacro{\no}
+The "\no"\marg{number} macro prints a numero sign followed by a non-breaking space, as in \no{123}.
+
+\DescribeMacro{\software}
+The "\software"\oarg{version}\marg{name} macro typesets software names in small caps, with optional version information, as in \software[\fileversion]{HEP-Paper}.
+
+\DescribeMacro{\online}
+The "\online"\marg{url}\marg{text} macro links \meta{text} to \meta{url} when \software{hyperref} \cite{hyperref} is loaded and otherwise prints the text in a URL-like style, as in \online{https://ctan.org/pkg/hep-text}{ctan.org/pkg/hep-text}.
+
+\DescribeMacro{\email}
+The "\email"\marg{address} macro is shorthand for "\online"\marg{mailto:address}\marg{address}, as in \email{jan.hajer@tecnico.ulisboa.pt}.
+
+\DescribeMacro{\prefix}
+The "\prefix"\marg{prefix}\marg{word} macro typesets prefix constructions with a permissible line break after the prefix, as in \prefix{pre}{selection}.
+
+\DescribeMacro{\subsubparagraph}
+The "\subsubparagraph" macro starts an unnumbered paragraph-level break with the same vertical spacing as "\paragraph" but without a heading.
+
+\DescribeMacro{inlinelist}
+\DescribeMacro{enumdescript}
+The "inlinelist" and "enumdescript" environments are built with \software{enumitem} \cite{enumitem}.
+\\
+\begin{columns}
+\begin{verbatim}
+The three main points are
+\begin{inlinelist}
+  \item one
+  \item two
+  \item three
+\end{inlinelist}
+\end{verbatim}
+\column
+% \vspace{.1ex}
+The three main points are
+\begin{inlinelist}
+ \item one
+ \item two
+ \item three
+\end{inlinelist}
+\end{columns}
+\vspace{4ex}
+\begin{columns}[.6]
+\begin{verbatim}
+\begin{enumdescript}[label=\Roman*)]
+  \item{First} one
+  \item{Second} two
+  \item{Third} three
+\end{enumdescript}
+\end{verbatim}
+\column
+\begin{enumdescript}[label=\Roman*)]
+ \item{First} one
+ \item{Second} two
+ \item{Third} three
+\end{enumdescript}
+\end{columns}
+
+In "enumdescript", "\item"\oarg{label}\marg{title} prints the title in bold; lists nested inside keep their usual "\item".
+
+\DescribeMacro{\underline}
+The "\underline" macro is redefined with \software{soul} \cite{soul} so that underlined text can break across lines.
+In math mode it keeps its standard meaning.
+Text containing macros unknown to \software{soul}, such as "\ref"\marg{key}, "\enquote"\marg{text}, or "\eg", is underlined as a whole without line breaks.
+
+If \software{hyperref} is loaded, software names, online links, email addresses, underlined text, and the foreign abbreviations reduce to their plain text in \PDF strings such as bookmarks.
+
+% \ifshort
+
+\printbibliography
+
+\end{document}
+%
+%</documentation>
+% \fi
+%
+% \StopEventually{
+% \PrintChanges
+% \printbibliography
+% }
+%
+% \appendix
+%
+% \section{Implementation}
+%
+%<*package>
+%
+% Load \software{kvoptions} \cite{kvoptions} and set up the "heptext" option namespace.
+%    \begin{macrocode}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=heptext,
+  prefix=heptext@
+}
+%    \end{macrocode}
+%
+% \begin{macro}{lang}
+% Define the "lang" option, which accepts the language names provided by \software{babel} \cite{babel}.
+% Use "british" as the default.
+%    \begin{macrocode}
+\DeclareStringOption[british]{lang}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+%    \end{macrocode}
+%
+% Load \software{babel} \cite{babel} for hyphenation and \software{csquotes} \cite{csquotes} for quotation commands.
+%    \begin{macrocode}
+\PassOptionsToPackage{\heptext@lang}{babel}
+\RequirePackage{babel}
+\PassOptionsToPackage{autostyle}{csquotes}
+\RequirePackage{csquotes}
+%    \end{macrocode}
+%
+% \begin{macro}{\underline}
+% Load \software{soul} \cite{soul} for underlined text that can break across lines.
+% Redefine "\underline" robustly so that it uses "\textul" in text mode and keeps its original definition in math mode.
+%    \begin{macrocode}
+\RequirePackage{soul}
+\NewCommandCopy\hep@underline\underline
+\DeclareRobustCommand*\underline{%
+  \ifmmode
+    \expandafter\hep@underline
+  \else
+    \expandafter\hep@text@underline
+  \fi
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\hep@soul@if@safe}
+% Test whether the \software{soul} package can process a text.
+% This is the case if every macro in the text, outside of inline math, is known to \software{soul}: registered with "\soulregister", such as font commands and accents, or handled by \software{soul} itself, such as "\\" and "\mbox".
+% Other macros may take arguments, which \software{soul} would separate from the macro, or look ahead, as "\xspace" does.
+% The same test is defined by the \software{hep-math} package for "\overline", so it is only defined if it does not exist yet.
+% "\hep@soul@if@safe" is the \hologo{LaTeXe} name of the conditional "\hep_soul_if_safe:nTF".
+%    \begin{macrocode}
+\ExplSyntaxOn
+\cs_if_exist:NF \hep_soul_if_safe:nTF {
+  \seq_new:N \l__hep_soul_seq
+  \tl_new:N \l__hep_soul_tl
+  \tl_new:N \l__hep_soul_known_tl
+  \bool_new:N \l__hep_soul_bool
+  \regex_const:Nn \c__hep_soul_math_regex { \cM\$ .*? \cM\$ }
+  \regex_const:Nn \c__hep_soul_cs_regex { \c{.*} }
+  \tl_const:Nn \c__hep_soul_known_tl {
+    \\0\\ \\0\slash \\0\mbox \\0\hbox \\0\soulomit
+    \\0\break \\0\linebreak \\0\- \\0\par
+  }
+  \prg_new_protected_conditional:Npnn \hep_soul_if_safe:n #1 { TF } {
+    \group_begin:
+    \cs_set:Npn \\ ##1 ##2 { \token_to_str:N ##2 , }
+    \tl_set:No \l__hep_soul_known_tl { \the \SOUL@cmds }
+    \tl_set:Ne \l__hep_soul_known_tl
+      { , \l__hep_soul_known_tl \c__hep_soul_known_tl }
+    \tl_set:Nn \l__hep_soul_tl {#1}
+    \regex_replace_all:NnN \c__hep_soul_math_regex { } \l__hep_soul_tl
+    \regex_extract_all:NVN \c__hep_soul_cs_regex
+      \l__hep_soul_tl \l__hep_soul_seq
+    \bool_set_true:N \l__hep_soul_bool
+    \seq_map_inline:Nn \l__hep_soul_seq {
+      \token_if_macro:NT ##1 {
+        \exp_args:NNe \tl_if_in:NnF \l__hep_soul_known_tl
+          { , \token_to_str:N ##1 , }
+          { \bool_set_false:N \l__hep_soul_bool \seq_map_break: }
+      }
+    }
+    \bool_if:NTF \l__hep_soul_bool
+      { \group_end: \prg_return_true: }
+      { \group_end: \prg_return_false: }
+  }
+  \cs_new_eq:NN \hep@soul@if@safe \hep_soul_if_safe:nTF
+}
+\ExplSyntaxOff
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\hep@text@underline}
+% Underline text with "\textul", which allows line breaks, if \software{soul} can process it.
+% Otherwise, for example for text containing "\ref"\marg{key}, "\enquote"\marg{text}, or "\eg", underline it as a whole with the original "\underline".
+% The macro is long, since "\textul" accepts paragraphs.
+%    \begin{macrocode}
+\newcommand\hep@text@underline[1]{%
+  \hep@soul@if@safe{#1}{\textul{#1}}{\hep@underline{#1}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% Use \software{pdftexcmds} \cite{pdftexcmds} to map the selected language to the option expected by \software{foreign}.
+%    \begin{macrocode}
+\RequirePackage{pdftexcmds}
+\ifnum\pdf@strcmp{\heptext@lang}{american}=0
+  \newcommand*{\heptext@lang@foreign}{USenglish}
+\else
+  \ifnum\pdf@strcmp{\heptext@lang}{USenglish}=0
+    \newcommand*{\heptext@lang@foreign}{USenglish}
+  \else
+    \newcommand*{\heptext@lang@foreign}{british}
+  \fi
+\fi
+%    \end{macrocode}
+%
+%\begin{macro}{\vs}
+% Load \software{foreign} \cite{foreign} for common foreign abbreviations and vocabulary.
+% Add the missing "\vs" abbreviation.
+%    \begin{macrocode}
+\PassOptionsToPackage{all, \heptext@lang@foreign}{foreign}
+\RequirePackage{foreign}
+\renewcommand*\foreignabbrfont{}
+\DeclareRobustCommand\vs{\xperiodafter{{\foreignabbrfont{vs}}}}
+%    \end{macrocode}
+% \end{macro}
+%
+% The \software{foreign} package relies on the \software{xspace} package \cite{xspace}.
+% Ensure that "\xspace" is compatible with the "\enquote" macro from \software{csquotes}.
+%    \begin{macrocode}
+\xspaceaddexceptions{\csq@qclose@i}
+%    \end{macrocode}
+%
+%\begin{macro}{\no}
+% Define "\no"\marg{number} for \textnumero\ with appropriate spacing.
+%    \begin{macrocode}
+\newcommand*{\no}[1]{\textnumero~#1}
+%    \end{macrocode}
+% \end{macro}
+%
+%\begin{macro}{\software}
+% Define "\software"\linebreak[1]\oarg{version}\linebreak[1]\marg{name} for software names with optional version information, using \software{relsize} \cite{relsize} and \software{xparse} \cite{xparse}.
+%    \begin{macrocode}
+\RequirePackage{relsize}
+\newcommand*{\software}[2][\hspace{-\fontdimen2\font}]{%
+  {\smaller[.5]\textsc{#2}~#1}%
+}
+\RequirePackage{xparse}
+\NewExpandableDocumentCommand\hep@gobble@opt@arg{om}{#2}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\hep@url@text}
+% Print a URL or email address in typewriter font without \software{hyperref}.
+% As for "\nolinkurl", the text is printed verbatim, so that characters such as "_", "#", "&", and "~" need no escaping.
+% The escaped characters "\%", "\#", "\&", "\_", "\$", and "\~" become the characters themselves.
+% The \software{hep-title} package defines the same macro, so define it only once.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\cs_if_exist:NF \hep@url@text {
+  \tl_new:N \l__hep_url_tl
+  \cs_generate_variant:Nn \tl_replace_all:Nnn { NnV }
+  \cs_new_protected:Npn \hep@url@text #1 {
+    \tl_set:Nn \l__hep_url_tl {#1}
+    \regex_replace_all:nnN { \cP. } { \cO\# } \l__hep_url_tl
+    \tl_replace_all:NnV \l__hep_url_tl { \# } \c_hash_str
+    \tl_replace_all:NnV \l__hep_url_tl { \% } \c_percent_str
+    \tl_replace_all:NnV \l__hep_url_tl { \& } \c_ampersand_str
+    \tl_replace_all:NnV \l__hep_url_tl { \_ } \c_underscore_str
+    \tl_replace_all:NnV \l__hep_url_tl { \$ } \c_dollar_str
+    \tl_replace_all:NnV \l__hep_url_tl { \~ } \c_tilde_str
+    \texttt { \tl_to_str:N \l__hep_url_tl }
+  }
+}
+\ExplSyntaxOff
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\online}
+% \begin{macro}{\email}
+% Define "\online"\marg{url}\marg{text}, combining the link target of "\href" with the URL-style text of "\url".
+% Define "\email"\marg{address} as a convenience wrapper.
+%    \begin{macrocode}
+\providecommand*{\online}[2]{\hep@url@text{#2}}%
+\providecommand*{\hep@email}[1]{\online{mailto:#1}{#1}}
+\providecommand*{\email}{\hep@email}
+\AtBeginDocument{\@ifpackageloaded{hyperref}{%
+  \renewcommand*{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
+}{}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% Make the text macros safe in \PDF strings such as bookmarks.
+% Software names, underlined text, links, and email addresses reduce to their text.
+% The abbreviations of \software{foreign} end with "\xperiodafter" or "\xperiodcommaafter" from \software{xpunctuate}, which look ahead and are therefore replaced by their expandable core.
+% \begin{macro}{\hep@pdf@period}
+% \begin{macro}{\hep@pdf@periodcomma}
+% Add the period, or period and comma, followed by "\xspace", which \software{hyperref} supports in \PDF strings.
+%    \begin{macrocode}
+\newcommand*\hep@pdf@period[1]{#1.\xspace}
+\newcommand*\hep@pdf@periodcomma[1]{#1.,\xspace}
+\AtBeginDocument{\@ifpackageloaded{hyperref}{%
+  \pdfstringdefDisableCommands{%
+    \let\software\hep@gobble@opt@arg
+    \let\underline\@firstofone
+    \let\textul\@firstofone
+    \let\ul\@firstofone
+    \let\online\@secondoftwo
+    \let\hep@email\@firstofone
+    \let\xperiodafter\hep@pdf@period
+    \let\xperiodcommaafter\hep@pdf@periodcomma
+  }%
+}{}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\prefix}
+% Define "\prefix"\marg{prefix}\marg{word} with a controlled line break after the prefix.
+%    \begin{macrocode}
+\newcommand*{\prefix}[2]{(#1\mbox{-)}\allowbreak #2}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\subsubparagraph}
+% Define "\subsubparagraph", which starts a paragraph-level break without printing a title.
+%    \begin{macrocode}
+\newcommand*\subsubparagraph{%
+  \@tempskipa 3.25ex \@plus 1ex \@minus .2ex\relax%
+  \addpenalty\@secpenalty\addvspace\@tempskipa%
+  \everypar{\setbox\z@\lastbox\everypar{}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Lists}
+%
+% Load \software{enumitem} \cite{enumitem}.
+%    \begin{macrocode}
+\PassOptionsToPackage{inline}{enumitem}
+\RequirePackage{enumitem}
+%    \end{macrocode}
+%
+% \begin{environment}{inlinelist}
+% Define the inline list environment.
+%    \begin{macrocode}
+\newlist{inlinelist}{enumerate*}{1}
+\setlist*[inlinelist,1]{%
+  label=\roman*), itemjoin={,\ }, itemjoin*={, and\ }, after=.%
+}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{macro}{\hep@descript@item}
+% \begin{macro}{\hep@descript@select}
+% \begin{environment}{enumdescript}
+% Define the enumerated description list environment.
+% Its "\item"\oarg{label}\marg{title} prints the title in bold, followed by a space unless it is empty.
+% The redefined "\item" acts only at the list depth of the environment, so that nested lists use the original "\item".
+% The original "\item" is saved only if the redefined one is not active yet, because in nested "enumdescript" lists saving the active "\item" would make it call itself.
+%    \begin{macrocode}
+\newlist{enumdesc}{enumerate}{2}
+\setlist[enumdesc]{label=\arabic*.}
+\newcommand*{\hep@descript@item}[2][]{%
+  \if\relax\detokenize{#1}\relax\hep@item\else\hep@item[#1]\fi%
+  \textbf{#2}\if\relax\detokenize{#2}\relax\else\hspace{1em}\fi%
+  \@ifnextchar\par\@gobble\relax%
+}
+\newcommand*{\hep@descript@select}{%
+  \ifnum\@listdepth=\hep@descript@depth\relax%
+    \expandafter\hep@descript@item%
+  \else%
+    \expandafter\hep@item%
+  \fi%
+}
+\newenvironment{enumdescript}[1][]{%
+  \begin{enumdesc}[#1]%
+  \edef\hep@descript@depth{\the\@listdepth}%
+  \ifx\item\hep@descript@select\else%
+    \let\hep@item\item%
+    \let\item\hep@descript@select%
+  \fi%
+}{\end{enumdesc}}
+%    \end{macrocode}
+% \end{environment}
+% \end{macro}
+% \end{macro}
+%
+% Load \software{noindentafter} \cite{noindentafter} and suppress paragraph indentation after list environments.
+%    \begin{macrocode}
+\RequirePackage{noindentafter}
+\NoIndentAfterEnv{itemize}
+\NoIndentAfterEnv{enumerate}
+\NoIndentAfterEnv{description}
+\NoIndentAfterEnv{enumdescript}
+\NoIndentAfterEnv{verbatim}
+%    \end{macrocode}
+%
+%</package>
+%
+% \section{Test}
+%
+%<*test>
+%
+%    \begin{macrocode}
+\documentclass{article}
+
+\usepackage[lang=american]{hep-text}
+\usepackage{hyperref}
+
+\begin{document}
+
+\section{HEP-Text test}
+
+Language selection: \languagename.
+
+\MakeOuterQuote{"}
+Quotation commands: \enquote{quoted text} and "outer quoted text".
+
+Foreign abbreviations: \eg, \ie, \cf, and \vs.
+\begingroup
+\renewcommand\foreignabbrfont{\itshape}
+Styled foreign abbreviations: \eg, \ie, \cf, and \vs.
+\endgroup
+
+Numero labels: \no{123}.
+
+Software names: \software{HEP-Text} and \software[v1.5]{HEP-Text}.
+
+Online material:
+\online{https://ctan.org/pkg/hep-text}
+  {ctan.org/pkg/hep-text}.
+Email addresses: \email{jan.hajer@tecnico.ulisboa.pt}.
+
+Prefix constructions: \prefix{pre}{selection} and \prefix{post}{processing}.
+
+\subsubparagraph
+This paragraph follows a heading-free paragraph-level break.
+
+\begin{itemize}
+  \item An itemize entry.
+\end{itemize}
+This paragraph tests indentation after an itemize environment.
+
+\begin{enumerate}
+  \item An enumerate entry.
+\end{enumerate}
+This paragraph tests indentation after an enumerate environment.
+
+\begin{description}
+  \item[Term] A description entry.
+\end{description}
+This paragraph tests indentation after a description environment.
+
+Inline lists:
+\begin{inlinelist}
+  \item first
+  \item second
+  \item third
+\end{inlinelist}
+
+\begin{enumdescript}[label=\Roman*)]
+  \item{First} one
+  \item{Second} two
+  \item{Third} three
+\end{enumdescript}
+This paragraph tests indentation after an enumdescript environment.
+
+\noindent\begin{minipage}{.35\linewidth}
+\underline{This underlined sentence is long enough to wrap across
+multiple lines.}
+\end{minipage}
+
+\end{document}
+%    \end{macrocode}
+%
+%</test>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-text` package
+
+Text utilities: language setup, abbreviations, links, breakable
+underlining and compact lists
+
+## Introduction
+
+The `hep-text` package collects lightweight text utilities. It configures
+language-aware hyphenation, quotation marks, and Latin abbreviations
+through established LaTeX packages; adds helpers for software names,
+online references, email addresses, numero labels, prefix constructions,
+and line-breakable underlining; and defines compact inline and enumerated
+description lists based on `enumitem`.
+
+Load the package with `\usepackage{hep-text}`.
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
+%
+% \Finale
+
+\endinput

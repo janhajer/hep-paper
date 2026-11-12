@@ -1,0 +1,11 @@
+% hep-paper with amsart: abstract as environment directly after \maketitle.
+\input{regression-test}
+\documentclass{amsart}
+\usepackage{hep-paper}
+\input{journal-title}
+\begin{document}
+\maketitle
+\begin{abstract}Abstract text.\end{abstract}
+\section{Section}
+Text.
+\end{document}

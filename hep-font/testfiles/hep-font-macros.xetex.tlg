@@ -1,0 +1,157 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Option names
+============================================================
+[NewCM10-Regular.otf(0)]
+[10]
+============================================================
+============================================================
+TEST 2: Numeral commands
+============================================================
+> \box...=
+\hbox(6.77+0.21999)x47.90001
+.\TU/NewCM10-Regular.otf(1)/m/n/10 0
+.\kern 0.0
+.\TU/NewCM10-Regular.otf(1)/m/n/10 1
+.\kern 0.0
+.\TU/NewCM10-Regular.otf(2)/m/n/10 2
+.\kern 0.0
+.\TU/NewCM10-Regular.otf(3)/m/n/10 3
+.\kern 0.0
+.\TU/NewCM10-Regular.otf(4)/m/n/10 4
+.\kern 0.0
+.\TU/NewCM10-Regular.otf(5)/m/n/10 5
+.\kern 0.0
+.\TU/NewCM10-Regular.otf(6)/m/n/10 6
+.\kern 0.0
+.\TU/NewCM10-Regular.otf(7)/m/n/10 7
+.\kern 0.0
+.\TU/NewCM10-Regular.otf(8)/m/n/10 8
+.\kern 0.0
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......ral commands}{\SHOWHBOX{\NUMERALCOMMANDS}}
+============================================================
+============================================================
+TEST 3: Numeral declarations
+============================================================
+> \box...=
+\hbox(6.77+0.21999)x42.90001
+.\TU/NewCM10-Regular.otf(1)/m/n/10 1
+.\TU/NewCM10-Regular.otf(2)/m/n/10 2
+.\TU/NewCM10-Regular.otf(3)/m/n/10 3
+.\TU/NewCM10-Regular.otf(4)/m/n/10 4
+.\TU/NewCM10-Regular.otf(5)/m/n/10 5
+.\TU/NewCM10-Regular.otf(6)/m/n/10 6
+.\TU/NewCM10-Regular.otf(7)/m/n/10 7
+.\TU/NewCM10-Regular.otf(8)/m/n/10 8
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......arations}{\SHOWHBOX{\NUMERALDECLARATIONS}}
+============================================================
+============================================================
+TEST 4: Typewriter declarations: monospaced, proportional, code
+============================================================
+> \box...=
+\hbox(6.22+0.05998)x31.35
+.\TU/NewCMMono10-Regular.otf(1)/m/n/10 a1
+.\TU/lmmonoprop10-regular.otf(0)/m/n/10 a1
+.\TU/NewCMMono10-Regular.otf(1)/m/n/10 a1
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...  \SHOWHBOX{\TYPEWRITER}}
+============================================================
+============================================================
+TEST 5: Code: verbatim argument
+============================================================
+> \box...=
+\hbox(6.94+1.66998)x26.25
+.\TU/NewCMMono10-Regular.otf(1)/m/n/10 a_1
+.\glue 5.25
+.\TU/NewCMMono10-Regular.otf(1)/m/n/10 %
+! OK.
+l. ...\setbox0\hbox{\code{a_1 %}}\showbox0
+============================================================
+============================================================
+TEST 6: Verbatim environment uses the code style
+============================================================
+> \box...=
+\vbox(26.27998+0.0)x200.0
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\parskip) 0.0
+.\hbox(6.22+0.05998)x200.0, glue set 189.5fil
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0
+...\glue 5.0
+..\TU/NewCMMono10-Regular.otf(1)/m/n/10 a1
+..\hbox(0.0+0.0)x0.0
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty 0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+l. ...}\showbox0
+============================================================
+============================================================
+TEST 7: Bold and sans-serif small caps
+============================================================
+> \box...=
+\hbox(5.22+0.0)x17.96
+.\TU/NewCM10-Regular.otf(0)/b/sc/10 a
+.\kern 0.0
+.\TU/NewCMSans10-Regular.otf(0)/m/sc/10 a
+.\kern 0.0
+.\TU/NewCMSans10-Regular.otf(0)/b/sc/10 a
+.\kern 0.0
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......s-serif small caps}{\SHOWHBOX{\SMALLCAPS}}
+============================================================
+============================================================
+TEST 8: Engine specific fonts: upright italic, uncial
+============================================================
+> \box...=
+\hbox(4.49+0.14998)x9.79
+.\TU/NewCMUncial10-Regular.otf(0)/m/n/10 a
+.\kern 0.0
+.\TU/NewCMUncial10-Regular.otf(0)/m/n/10 b
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......t italic, uncial}{\SHOWHBOX{\ENGINEFONTS}}
+============================================================
+============================================================
+TEST 9: Greek letters in text and math
+============================================================
+> \box...=
+\hbox(6.83331+1.24998)x28.37405
+.\TU/NewCM10-Regular.otf(1)/m/n/10 αΓς
+.\mathon
+.\OML/cmm/m/it/10 ^^K
+.\kern0.03702
+.\OT1/cmr/m/n/10 ^^@
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......tters in text and math}{\SHOWHBOX{\GREEK}}
+============================================================
+============================================================
+TEST 10: Equation numbers use tabular lining numerals
+============================================================
+> \box...=
+\hbox(7.6+2.59999)x15.44
+.\kern -1.17
+.\TU/NewCM10-Regular.otf(7)/m/n/10 (10)
+.\kern -1.17
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...  \SHOWHBOX{\EQUATIONNUMBER}}
+============================================================

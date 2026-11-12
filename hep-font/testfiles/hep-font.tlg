@@ -1,0 +1,70 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Font family in the preamble
+============================================================
+preamble: [clm2], begindocument/before: [clm2], document: [clm2]
+============================================================
+============================================================
+TEST 2: Small caps and numerals
+============================================================
+> \box...=
+\hbox(7.165+2.155)x56.85992
+.\T1/clm2/m/sc/10 A
+.\T1/clm2/m/sc/10 b
+.\T1/clm2/m/sc/10 c
+.\kern 0.0
+.\glue 3.33 plus 1.67 minus 1.11
+.\T1/clm2/m/n/10 1
+.\T1/clm2/m/n/10 2
+.\T1/clm2/m/n/10 3
+.\kern 0.0
+.\glue 3.33 plus 1.67 minus 1.11
+.\T1/clm2j/m/n/10 1
+.\T1/clm2j/m/n/10 2
+.\T1/clm2j/m/n/10 3
+.\kern 0.0
+! OK.
+<to be read again> 
+                   \endgroup 
+l. ......sc{Abc} \textl{123} \texto{123}}\showbox0}
+============================================================
+============================================================
+TEST 3: Tabular numerals in tabulars only
+============================================================
+> \box...=
+\hbox(8.5+3.5)x48.12001
+.\T1/clm2/m/n/10 1
+.\T1/clm2/m/n/10 0
+.\glue 3.33 plus 1.67 minus 1.11
+.\hbox(8.5+3.5)x22.00002
+..\vbox(8.5+3.5)x22.00002
+...\hbox(8.39996+3.60004)x22.00002
+....\glue(\tabskip) 0.0
+....\hbox(8.39996+3.60004)x22.00002
+.....\rule(8.39996+3.60004)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\T1/clm/m/n/10 1
+.....\T1/clm/m/n/10 0
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0
+.\glue 3.33 plus 1.67 minus 1.11
+.\T1/clm2/m/n/10 1
+.\T1/clm2/m/n/10 0
+! OK.
+<to be read again> 
+                   \endgroup 
+l. ......n{tabular}{l}10\end{tabular} 10}\showbox0}
+============================================================
+============================================================
+TEST 4: Bold small caps in the families of all numeral styles
+============================================================
+\bfseries \scshape : ecxc1000
+\tstyle \bfseries \scshape : ecxc1000
+\tstyle \bfseries \scshape \slshape : ecoc1000
+\lstyle \bfseries \scshape : ecxc1000
+\ostyle \bfseries \scshape : hfoxc1000
+\ostyle \tstyle \bfseries \scshape \itshape : hfooc1000
+============================================================

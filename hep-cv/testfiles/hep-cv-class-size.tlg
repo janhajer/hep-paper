@@ -1,0 +1,15 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Size option
+============================================================
+font: 12pt, font size: 12
+hep-font options: size=12pt,sans=true,oldstyle,
+============================================================
+============================================================
+TEST 2: CV lines fill the text width set by geometry
+============================================================
+textwidth: 312.98032pt, cvline: 312.98032pt
+cventry: 312.98032pt
+abstract done
+============================================================

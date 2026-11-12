@@ -1,0 +1,24 @@
+% hep-paper: amsart compatibility mode without hep-reference, where the
+% footnotes of \thanks, \address and \date must not use footnotebackref.
+\input{regression-test}
+\documentclass{amsart}
+\usepackage[references=false]{hep-paper}
+\input{hep-regression}
+\title{Title}
+\author{Author}
+\address{Address}
+\thanks{Thanks}
+\date{Date}
+\begin{document}
+% Typeset the title before the test, so font loading is not recorded.
+% An error here stops the run, so the test fails.
+\setbox0\vbox{\maketitle}
+\START
+
+\TEST{maketitle without footnotebackref}{%
+  \TYPE{maketitle done}%
+  \TYPE{footnotebackref: \ifcsname BHFN@OldMakefntext\endcsname
+    loaded\else not loaded\fi}%
+}
+
+\END

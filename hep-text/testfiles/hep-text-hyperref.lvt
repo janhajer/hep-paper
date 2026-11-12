@@ -1,0 +1,86 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-text}
+\usepackage{hyperref}
+\input{hep-regression}
+
+% Shows what \protected@write would write to the .aux file (contents
+% lines, bookmarks, labels) by writing it immediately to the log.
+\makeatletter
+\newcommand*{\SHOWWRITES}[1]{%
+  \begingroup
+    \long\def\protected@write##1##2##3{%
+      \begingroup
+        \let\thepage\relax
+        ##2%
+        \let\protect\@unexpandable@protect
+        \edef\reserved@a{\immediate\write\m@ne{##3}}%
+        \reserved@a
+      \endgroup
+    }%
+    \setbox0\vbox{#1}%
+  \endgroup
+}
+\makeatother
+
+\begin{document}
+
+% Load the fonts before \START
+\setbox0\vbox{\section{\software{x}}\online{x}{x}\textnumero
+  {\Large\bfseries\ttfamily x$x$}}
+
+\START
+
+\TEST{Bookmarks: software names}{%
+  \PDFSTRING{\software{HEP-Text} at the beginning}%
+  \PDFSTRING{The \software{HEP-Text} in the middle}%
+  \PDFSTRING{The \software[v1.5]{HEP-Text} with version}%
+  \PDFSTRING{At the end \software{HEP-Text}}%
+}
+
+% \eg and friends end with \xperiodafter from xpunctuate, which looks
+% ahead; in PDF strings a following period is doubled.
+\TEST{Bookmarks: foreign abbreviations}{%
+  \PDFSTRING{The \eg here}%
+  \PDFSTRING{The \ie, \cf, \vs\ here}%
+  \PDFSTRING{The \eg. End}%
+}
+
+\TEST{Bookmarks: other text macros}{%
+  \PDFSTRING{\no{123} number}%
+  \UNICODEPDFSTRING{\no{123} number}%
+  \PDFSTRING{\prefix{pre}{selection} prefix}%
+  \PDFSTRING{\enquote{quoted} \enquote{\enquote{nested}} text}%
+}
+
+\TEST{Bookmarks: online and email}{%
+  \PDFSTRING{\online{https://ctan.org}{ctan.org} text}%
+  \PDFSTRING{\email{a@b.c} text}%
+}
+
+\TEST{Bookmarks: underline}{%
+  \PDFSTRING{An \underline{underlined} word}%
+  \PDFSTRING{An \textul{underlined} and \ul{other} word}%
+}
+
+\TEST{Bookmarks: sectioning commands}{%
+  \SECTIONBOOKMARKS{%
+    \section{The \software[v1.5]{HEP-Text}, \eg\ the \no{1}}%
+    \subsection{\prefix{pre}{selection} and \enquote{quotes}}%
+  }%
+}
+
+\TEST{Table of contents entries}{%
+  \SHOWWRITES{%
+    \section{The \software[v1.5]{HEP-Text}, \eg\ the \no{1}}%
+    \section{\prefix{pre}{selection} and \enquote{quotes}}%
+    \section{An \underline{underlined} word and \email{a@b.c}}%
+  }%
+}
+
+\TEST{Online and email with hyperref}{%
+  \SHOWHBOX{\online{https://a.b}{a.b}}%
+  \SHOWHBOX{\email{a@b}}%
+}
+
+\END

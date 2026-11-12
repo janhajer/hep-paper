@@ -1,0 +1,147 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage[plot,feynman]{hep-graphic}
+\usepackage{hyperref}
+\input{hep-regression}
+
+% A TikZ picture of 2cm x 1cm
+\begin{filecontents*}[overwrite]{hep-graphic-plot-rectangle.tikz}
+\begin{tikzpicture}
+\draw[line width=0pt] (0,0) rectangle (2,1);
+\end{tikzpicture}
+\end{filecontents*}
+
+\makeatletter
+\newcommand*{\SHOWSIZE}[1]{%
+  \TYPE{#1: wd \the\wd0, ht \the\ht0, dp \the\dp0}%
+}
+\newcommand*{\SHOWLOADED}[1]{\TYPE{#1: \@ifpackageloaded{#1}{yes}{no}}}
+% The entries of a pgfplots cycle list
+\newcommand*{\SHOWCYCLELIST}[1]{%
+  \begingroup
+    \def\pgfpl@@##1{\TYPE{\detokenize{##1}}}%
+    \TYPE{cycle list #1:}%
+    \csname pgfp@cyclist@#1@\endcsname
+  \endgroup
+}
+% Whether a pgfplots or TikZ style is defined
+\newcommand*{\SHOWSTYLE}[1]{%
+  \TYPE{#1: \pgfkeysifdefined{#1/.@cmd}{defined}{undefined}}%
+}
+\newcommand*{\SHOWPGFPLOTSVALUE}[1]{%
+  \TYPE{#1: \pgfkeysvalueof{/pgfplots/#1}}%
+}
+\makeatother
+
+\begin{document}
+% Load fonts and the picture once
+\setbox0\hbox{\includegraphics{hep-graphic-plot-rectangle.tikz}}
+\setbox0\hbox{\footnotesize\tikz\node{x};\small\tikz\node{x};$x^{x^x}$}
+\START
+
+\TEST{Loaded packages}{%
+  \SHOWLOADED{hep-plot}\SHOWLOADED{hep-feynman}\SHOWLOADED{pgfplots}%
+  \SHOWLOADED{tikz-feynman}%
+  \TYPE{\string\tikzsetnextfilename:
+    \ifdefined\tikzsetnextfilename defined\else undefined\fi}%
+}
+
+\TEST{pgfplots settings}{%
+  \SHOWPGFPLOTSVALUE{width}%
+  \SHOWPGFPLOTSVALUE{height}%
+  \pgfkeys{/pgf/number format/fixed}%
+  \pgfmathprintnumberto{1234567}{\hepTestNumber}%
+  \TYPE{1234567 printed as \detokenize\expandafter{\hepTestNumber}}%
+  \SHOWSTYLE{/pgfplots/three panels}%
+  \SHOWSTYLE{/pgfplots/contour legend}%
+  \SHOWSTYLE{/pgfplots/contour legend x}%
+  \SHOWSTYLE{/pgfplots/contour legend y}%
+  \SHOWSTYLE{/pgfplots/contour plot x}%
+  \SHOWSTYLE{/pgfplots/contour plot y}%
+  \SHOWSTYLE{/pgfplots/error legend}%
+  \SHOWSTYLE{/tikzfeynman/with arrow}%
+  \SHOWSTYLE{/tikzfeynman/with reversed arrow}%
+}
+
+\TEST{Colormap positions of the default cycle lists}{%
+  % \RainbowCyclePositions holds the positions of the last generated
+  % list (colors, 64 entries)
+  \TYPE{RainbowCycleLength \RainbowCycleLength,
+    LineStyleCycleLength \LineStyleCycleLength}%
+  \TYPE{\RainbowCyclePositions}%
+}
+
+\TEST{CreateSpacedColormapCycleList}{%
+  \CreateSpacedColormapCycleList{test one}{rainbow}{1}%
+  \TYPE{1: \RainbowCyclePositions}%
+  \CreateSpacedColormapCycleList{test five}{rainbow}{5}%
+  \TYPE{5: \RainbowCyclePositions}%
+  \CreateSpacedColormapCycleList{test nine}{rainbow reversed}{9}%
+  \TYPE{9: \RainbowCyclePositions}%
+  \SHOWCYCLELIST{test five}%
+}
+
+\TEST{CreateLineStyleCycleList}{%
+  \CreateLineStyleCycleList{test one}{1}%
+  \SHOWCYCLELIST{test one}%
+  \CreateLineStyleCycleList{test ten}{10}%
+  \SHOWCYCLELIST{test ten}%
+}
+
+\TEST{Predefined cycle lists}{%
+  \SHOWCYCLELIST{marks}%
+  \SHOWCYCLELIST{vertical marks}%
+  \SHOWCYCLELIST{horizontal marks}%
+  \SHOWCYCLELIST{star marks}%
+}
+
+\TEST{cyclelistshift}{%
+  \setcounter{cyclelistshift}{0}%
+  \setbox0\hbox{\cyclelistshift
+    \TYPE{counter \the\value{cyclelistshift},
+      cycle list shift \pgfkeysvalueof{/pgfplots/cycle list shift}}}%
+  \SHOWSIZE{cyclelistshift}%
+  \begingroup\cyclelistshift
+    \TYPE{in a group: counter \the\value{cyclelistshift},
+      cycle list shift \pgfkeysvalueof{/pgfplots/cycle list shift}}%
+  \endgroup
+  \TYPE{after the group: counter \the\value{cyclelistshift},
+    cycle list shift \pgfkeysvalueof{/pgfplots/cycle list shift}}%
+  \setcounter{cyclelistshift}{0}%
+  \pgfplotsset{cycle list shift=0}%
+}
+
+\TEST{A plot with addlegendtitle}{%
+  \setbox0\hbox{%
+    \begin{tikzpicture}
+      \begin{axis}[width=4cm, height=3cm, hide axis]
+        \addlegendtitle{Title}
+        \addplot coordinates {(0,0) (1,1)};
+        \addlegendentry{one}
+        \cyclelistshift
+        \addplot coordinates {(0,1) (1,0)};
+        \addlegendentry{two}
+      \end{axis}
+    \end{tikzpicture}%
+  }%
+  \SHOWSIZE{axis}%
+  \setcounter{cyclelistshift}{0}%
+  \pgfplotsset{cycle list shift=0}%
+}
+
+\TEST{includepgf with options}{%
+  \setbox0\hbox{\includepgf*{hep-graphic-plot-rectangle}}%
+  \SHOWSIZE{includepgf*}%
+  \setbox0\hbox{\includepgf{hep-graphic-plot-rectangle}}%
+  \SHOWSIZE{includepgf}%
+  \setbox0\hbox{\includepgf[width=4cm]{hep-graphic-plot-rectangle}}%
+  \SHOWSIZE{includepgf[width=4cm]}%
+  \SHOWPGFPLOTSVALUE{width}%
+}
+
+\TEST{PDF strings}{%
+  \PDFSTRING{\graphicpath{x}text}%
+  \PDFSTRING{\includefeynman{x} text}%
+}
+
+\END

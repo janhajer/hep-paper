@@ -1,0 +1,2182 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: mleftright: \left and \right 
+============================================================
+> \box...=
+\hbox(7.5+2.5)x24.5938
+.\mathon
+.\OML/cmm/m/it/10 f
+.\kern1.0764
+.\hbox(0.0+0.0)x0.0
+.\hbox(7.5+2.5)x13.49307
+..\hbox(7.5+2.5)x13.49307
+...\hbox(7.5+2.5)x3.8889
+....\OT1/cmr/m/n/10 (
+...\OML/cmm/m/it/10 x
+...\hbox(7.5+2.5)x3.8889
+....\OT1/cmr/m/n/10 )
+.\OML/cmm/m/it/10 g
+.\kern0.35878
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 2: mathdef: text and math definitions
+============================================================
+> \box...=
+\hbox(6.94444+0.0)x31.33334
+.\OT1/cmr/m/n/10 w
+.\kern-0.27779
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 d
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\mathon
+.\OML/cmm/m/it/10 !
+.\kern0.35878
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94444+0.83333)x64.38762
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 x
+.\OT1/cmr/m/n/10 t
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\mathon
+.\OML/cmm/m/it/10 a
+.\glue(\medmuskip) 2.22217 plus 1.11108 minus 1.66663
+.\OT1/cmr/m/n/10 +
+.\glue(\medmuskip) 2.22217 plus 1.11108 minus 1.66663
+.\OML/cmm/m/it/10 b
+.\OML/cmm/m/it/10 c
+.\glue(\medmuskip) 2.22217 plus 1.11108 minus 1.66663
+.\OT1/cmr/m/n/10 +
+.\glue(\medmuskip) 2.22217 plus 1.11108 minus 1.66663
+.\OML/cmm/m/it/10 d
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 3: mathdef: repeated definitions
+============================================================
+LaTeX Info: Redefining \hepword on input line ....
+LaTeX Info: Redefining \d on input line ....
+> \box...=
+\hbox(6.94444+0.0)x31.97226
+.\OT1/cmr/m/n/10 w
+.\kern-0.27779
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 d
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\mathon
+.\OT1/cmr/m/n/10 
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.83331+2.13193)x16.89029
+.\vbox(4.30554+2.13193)x5.00002
+..\hbox(4.30554+0.0)x5.00002
+...\glue(\tabskip) 0.0
+...\hbox(4.30554+0.0)x5.00002
+....\OT1/cmr/m/n/10 o
+...\glue(\tabskip) 0.0
+..\glue(\lineskip) 1.07639
+..\hbox(1.05554+0.0)x5.00002
+...\glue(\tabskip) 0.0
+...\hbox(1.05554+0.0)x5.00002, glue set 1001.11111fill
+....\glue -1000.0 plus 1.0fill
+....\kern 0.0
+....\OT1/cmr/m/n/10 .
+....\glue -1000.0 plus 1.0fill
+...\glue(\tabskip) 0.0
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\mathon
+.\OML/cmm/m/it/10 D
+.\kern0.27779
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.15079+1.94444)x57.16696
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 x
+.\OT1/cmr/m/n/10 t
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\mathon
+.\OML/cmm/m/it/10 ^^K
+.\kern0.03702
+.\mathoff
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 x
+.\OT1/cmr/m/n/10 t
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\mathon
+.\OML/cmm/m/it/10 ^^M
+.\kern0.55554
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 4: Imaginary unit and differential in text and math
+============================================================
+> \box...=
+\hbox(6.94444+2.13193)x30.47635
+.\OT1/cmr/m/n/10 ^^P
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\vbox(4.30554+2.13193)x5.00002
+..\hbox(4.30554+0.0)x5.00002
+...\glue(\tabskip) 0.0
+...\hbox(4.30554+0.0)x5.00002
+....\OT1/cmr/m/n/10 o
+...\glue(\tabskip) 0.0
+..\glue(\lineskip) 1.07639
+..\hbox(1.05554+0.0)x5.00002
+...\glue(\tabskip) 0.0
+...\hbox(1.05554+0.0)x5.00002, glue set 1001.11111fill
+....\glue -1000.0 plus 1.0fill
+....\kern 0.0
+....\OT1/cmr/m/n/10 .
+....\glue -1000.0 plus 1.0fill
+...\glue(\tabskip) 0.0
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\mathon
+.\OML/cmm/m/it/10 i
+.\glue(\thinmuskip) 1.66663
+.\hbox(0.0+0.0)x0.0
+.\glue -1.66663
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 d
+.\OML/cmm/m/it/10 x
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 5: Overline in text and math
+============================================================
+> \box...=
+\hbox(8.1805+0.0)x10.55559
+.\hbox(8.1805+0.0)x0.0, glue set - 10.80559fil
+..\hbox(0.0+0.0)x0.0
+..\kern -0.25
+..\leaders 11.05559
+...\rule(8.1805+-7.74992)x*
+..\kern 0.0
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.30544+0.0)x5.71527
+.\mathon
+.\vbox(6.30544+0.0)x5.71527
+..\kern0.39998
+..\rule(0.39998+0.0)x*
+..\kern1.19994
+..\hbox(4.30554+0.0)x5.71527
+...\OML/cmm/m/it/10 x
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 6: Overline of text with macros unknown to soul
+============================================================
+soul
+whole
+> \box...=
+\hbox(8.94434+0.0)x13.88892
+.\mathon
+.\vbox(8.94434+0.0)x13.88892
+..\kern0.39998
+..\rule(0.39998+0.0)x*
+..\kern1.19994
+..\hbox(6.94444+0.0)x13.88892
+...\OT1/cmr/m/n/10 a
+...\glue 3.33333 plus 1.66666 minus 1.11111
+...\OT1/cmr/m/n/10 b
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 7: Arrow accents
+============================================================
+> \box...=
+\hbox(8.51384+0.0)x5.71527
+.\mathon
+.\hbox(8.51384+0.0)x5.71527
+..\hbox(8.51384+0.0)x5.71527
+...\hbox(8.51384+0.0)x5.71527
+....\hbox(7.65276+0.0)x5.71527, shifted -0.86108
+.....\mathon
+.....\vbox(7.65276+0.0)x5.71527
+......\kern1.0
+......\hbox(0.0+0.0)x5.71527, glue set 1.01735fil
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+.......\vbox(-1.0+0.0)x3.68059, glue set - 1.32637fil
+........\kern -2.0
+........\hbox(2.32637+0.0)x3.68059
+.........\mathon
+.........\OMS/cmsy/m/n/5 ^^C
+.........\mathoff
+........\glue 0.0 plus 1.0fil minus 1.0fil
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+......\kern1.99998
+......\hbox(4.65277+0.0)x5.71527
+.......\hbox(4.30554+0.0)x5.71527, shifted -0.34723
+........\OML/cmm/m/it/10 x
+.....\mathoff
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(8.51384+0.0)x5.71527
+.\mathon
+.\hbox(8.51384+0.0)x5.71527
+..\hbox(8.51384+0.0)x5.71527
+...\hbox(8.51384+0.0)x5.71527
+....\hbox(7.65276+0.0)x5.71527, shifted -0.86108
+.....\mathon
+.....\vbox(7.65276+0.0)x5.71527
+......\kern1.0
+......\hbox(0.0+0.0)x5.71527, glue set 1.01735fil
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+.......\vbox(0.0+0.0)x3.68059, glue set - 0.32637fil
+........\kern -2.0
+........\hbox(2.32637+0.0)x3.68059
+.........\mathon
+.........\OMS/cmsy/m/n/5 ^^C
+.........\mathoff
+........\glue 0.0 plus 1.0fil minus 1.0fil
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+......\kern1.99998
+......\hbox(4.65277+0.0)x5.71527
+.......\hbox(4.30554+0.0)x5.71527, shifted -0.34723
+........\OML/cmm/m/it/10 x
+.....\mathoff
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(8.83328+0.11115)x6.80565
+.\mathon
+.\hbox(8.83328+0.11115)x6.80565
+..\hbox(8.83328+0.11115)x6.80565
+...\hbox(8.83328+0.11115)x6.80565
+....\hbox(7.9722+0.97223)x6.80565, shifted -0.86108
+.....\mathon
+.....\vbox(7.9722+0.97223)x6.80565
+......\kern1.0
+......\vbox(-1.0+0.0)x6.80565, glue set - 0.98203fil, shifted 0.27777
+.......\kern -2.0
+.......\hbox(1.98203+0.0)x6.80565
+........\mathon
+........\OMS/cmsy/m/n/5  
+........\mathoff
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+......\kern1.99998
+......\hbox(5.97221+0.97223)x6.80565, glue set 0.47054fil
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+.......\hbox(6.94444+0.0)x5.86458, shifted 0.97223
+........\OML/cmm/m/it/10 @
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\mathoff
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(8.83328+0.11115)x6.80565
+.\mathon
+.\hbox(8.83328+0.11115)x6.80565
+..\hbox(8.83328+0.11115)x6.80565
+...\hbox(8.83328+0.11115)x6.80565
+....\hbox(7.9722+0.97223)x6.80565, shifted -0.86108
+.....\mathon
+.....\vbox(7.9722+0.97223)x6.80565
+......\kern1.0
+......\vbox(-1.0+0.0)x6.80565, glue set - 0.98203fil, shifted 0.27777
+.......\kern -2.0
+.......\hbox(1.98203+0.0)x6.80565
+........\mathon
+........\OMS/cmsy/m/n/5 !
+........\mathoff
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+......\kern1.99998
+......\hbox(5.97221+0.97223)x6.80565, glue set 0.47054fil
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+.......\hbox(6.94444+0.0)x5.86458, shifted 0.97223
+........\OML/cmm/m/it/10 @
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\mathoff
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(8.83328+0.11115)x6.80565
+.\mathon
+.\hbox(8.83328+0.11115)x6.80565
+..\hbox(8.83328+0.11115)x6.80565
+...\hbox(8.83328+0.11115)x6.80565
+....\hbox(7.9722+0.97223)x6.80565, shifted -0.86108
+.....\mathon
+.....\vbox(7.9722+0.97223)x6.80565
+......\kern1.0
+......\vbox(-1.0+0.0)x6.80565, glue set - 0.98203fil, shifted 0.27777
+.......\kern -2.0
+.......\hbox(1.98203+0.0)x6.80565
+........\mathon
+........\OMS/cmsy/m/n/5 $
+........\mathoff
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+......\kern1.99998
+......\hbox(5.97221+0.97223)x6.80565, glue set 0.47054fil
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+.......\hbox(6.94444+0.0)x5.86458, shifted 0.97223
+........\OML/cmm/m/it/10 @
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\mathoff
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 8: Operators
+============================================================
+> \box...=
+\hbox(7.5+2.5)x107.7024
+.\mathon
+.\hbox(6.94444+1.94444)x18.47226
+..\kern 0.0
+..\OT1/cmr/m/n/10 d
+..\OT1/cmr/m/n/10 i
+..\OT1/cmr/m/n/10 a
+..\OT1/cmr/m/n/10 g
+..\kern0.13887
+.\OT1/cmr/m/n/10 (
+.\OML/cmm/m/it/10 a
+.\OT1/cmr/m/n/10 )
+.\glue(\thinmuskip) 1.66663
+.\hbox(4.30554+1.94444)x14.50003
+..\kern 0.0
+..\OT1/cmr/m/n/10 s
+..\OT1/cmr/m/n/10 g
+..\OT1/cmr/m/n/10 n
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 x
+.\glue(\thinmuskip) 1.66663
+.\hbox(6.94444+0.0)x7.22223
+..\kern 0.0
+..\OMS/cmsy/m/n/10 <
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 z
+.\kern0.4398
+.\glue(\thinmuskip) 1.66663
+.\hbox(6.94444+0.0)x7.22223
+..\kern 0.0
+..\OMS/cmsy/m/n/10 =
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 z
+.\kern0.4398
+.\glue(\thinmuskip) 1.66663
+.\hbox(6.67859+0.0)x12.2778
+..\kern 0.0
+..\OT1/cmr/m/n/10 s
+..\OT1/cmr/m/n/10 i
+..\OT1/cmr/m/n/10 n
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 x
+.\mathoff
+! OK.
+<to be read again> 
+                   \endgroup 
+l. ......g(a) \sgn x \Re z \Im z \sin x$}\showbox0}
+============================================================
+============================================================
+TEST 9: More operators
+============================================================
+> \box...=
+\hbox(6.94444+0.0)x63.34013
+.\mathon
+.\hbox(6.15079+0.0)x7.80557
+..\kern 0.0
+..\OT1/cmr/m/n/10 t
+..\OT1/cmr/m/n/10 r
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 x
+.\glue(\thinmuskip) 1.66663
+.\hbox(6.83331+0.0)x10.30556
+..\kern 0.0
+..\OT1/cmr/m/n/10 T
+..\kern-0.83334
+..\OT1/cmr/m/n/10 r
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 x
+.\glue(\thinmuskip) 1.66663
+.\hbox(6.94444+0.0)x19.75006
+..\kern 0.0
+..\OT1/cmr/m/n/10 r
+..\OT1/cmr/m/n/10 a
+..\OT1/cmr/m/n/10 n
+..\OT1/cmr/m/n/10 k
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 x
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 10: Trigonometric functions have the same height
+============================================================
+$\sin $: height 6.67859pt, depth 0.0pt
+$\cos $: height 6.67859pt, depth 0.0pt
+$\tan $: height 6.67859pt, depth 0.0pt
+$\cot $: height 6.67859pt, depth 0.0pt
+$\sec $: height 6.67859pt, depth 0.0pt
+$\csc $: height 6.67859pt, depth 0.0pt
+$\arccos $: height 6.67859pt, depth 0.0pt
+$\arctan $: height 6.67859pt, depth 0.0pt
+$\arccsc $: height 6.67859pt, depth 0.0pt
+$\arcsec $: height 6.67859pt, depth 0.0pt
+$\arccot $: height 6.67859pt, depth 0.0pt
+$\asin $: height 6.67859pt, depth 0.0pt
+$\acos $: height 6.67859pt, depth 0.0pt
+$\atan $: height 6.67859pt, depth 0.0pt
+$\acsc $: height 6.67859pt, depth 0.0pt
+$\asec $: height 6.67859pt, depth 0.0pt
+$\acot $: height 6.67859pt, depth 0.0pt
+============================================================
+============================================================
+TEST 11: Units
+============================================================
+> \box...=
+\hbox(6.83331+0.0)x19.79169
+.\hbox(6.83331+0.0)x19.79169
+..\OT1/cmr/m/n/10 G
+..\OT1/cmr/m/n/10 e
+..\OT1/cmr/m/n/10 V
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.83331+0.0)x26.45872
+.\mathon
+.\OT1/cmr/m/n/10 5
+.\mathoff
+.\penalty 10000
+.\kern 1.66702
+.\hbox(6.83331+0.0)x19.79169
+..\OT1/cmr/m/n/10 G
+..\OT1/cmr/m/n/10 e
+..\OT1/cmr/m/n/10 V
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.83331+0.0)x26.45872
+.\mathon
+.\OT1/cmr/m/n/10 5
+.\mathoff
+.\penalty 10000
+.\kern 1.66702
+.\hbox(6.83331+0.0)x19.79169
+..\OT1/cmr/m/n/10 G
+..\OT1/cmr/m/n/10 e
+..\OT1/cmr/m/n/10 V
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x28.73615
+.\hbox(7.5+2.5)x28.73615
+..\OT1/cmr/m/n/10 G
+..\OT1/cmr/m/n/10 e
+..\OT1/cmr/m/n/10 V
+..\OT1/cmr/m/n/10 /
+..\OT1/cmr/m/n/10 s
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.83331+0.0)x26.45833
+.\mathon
+.\OT1/cmr/m/n/10 5
+.\penalty 10000
+.\glue 1.66663
+.\hbox(6.83331+0.0)x19.79169
+..\hbox(6.83331+0.0)x19.79169
+...\OT1/cmr/m/n/10 G
+...\OT1/cmr/m/n/10 e
+...\OT1/cmr/m/n/10 V
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 12: Inverse units
+============================================================
+> \box...=
+\hbox(8.14003+0.0)x19.34729
+.\OT1/cmr/m/n/10 f
+.\OT1/cmr/m/n/10 b
+.\mathon
+.\hbox(4.51111+0.83334)x10.73615, shifted -3.62892
+..\OMS/cmsy/m/n/7 ^^@
+..\OT1/cmr/m/n/7 1
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(8.14003+0.0)x23.51395
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 m
+.\mathon
+.\hbox(4.51111+0.83334)x10.73615, shifted -3.62892
+..\OMS/cmsy/m/n/7 ^^@
+..\OT1/cmr/m/n/7 2
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(8.14003+0.0)x26.01433
+.\mathon
+.\OT1/cmr/m/n/10 5
+.\mathoff
+.\penalty 10000
+.\kern 1.66702
+.\hbox(8.14003+0.0)x19.34729
+..\OT1/cmr/m/n/10 f
+..\OT1/cmr/m/n/10 b
+..\mathon
+..\hbox(4.51111+0.83334)x10.73615, shifted -3.62892
+...\OMS/cmsy/m/n/7 ^^@
+...\OT1/cmr/m/n/7 1
+..\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 13: Fractions
+============================================================
+> \box...=
+\hbox(7.5+2.5)x11.30565
+.\mathon
+.\hbox(7.5+2.5)x11.30565
+..\hbox(7.5+2.5)x11.30565
+...\hbox(7.5+0.0)x3.98613
+....\hbox(5.25+1.75)x3.98613, shifted -2.25
+.....\hbox(5.25+1.75)x3.98613
+......\hbox(5.25+1.75)x0.0
+.......\hbox(5.25+1.75)x0.0, glue set - 3.98613fil
+........\hbox(5.25+1.75)x3.98613
+.........\mathon
+.........\hbox(5.25+1.75)x3.98613
+..........\hbox(5.25+1.75)x0.0
+..........\OT1/cmr/m/n/7 1
+.........\mathoff
+........\glue 0.0 plus 1.0fil minus 1.0fil
+......\kern 3.98613
+......\glue 0.0 plus 1.0fil minus 1.0fil
+...\mathon
+...\glue -0.55554
+...\mathoff
+...\hbox(7.5+2.5)x5.00002
+....\mathon
+....\OML/cmm/m/it/10 =
+....\mathoff
+...\mathon
+...\glue -1.11108
+...\mathoff
+...\hbox(5.25+1.75)x3.98613
+....\hbox(5.25+1.75)x3.98613
+.....\hbox(5.25+1.75)x3.98613
+......\hbox(5.25+1.75)x0.0
+.......\hbox(5.25+1.75)x0.0, glue set - 3.98613fil
+........\hbox(5.25+1.75)x3.98613
+.........\mathon
+.........\hbox(5.25+1.75)x3.98613
+..........\hbox(5.25+1.75)x0.0
+..........\OT1/cmr/m/n/7 2
+.........\mathoff
+........\glue 0.0 plus 1.0fil minus 1.0fil
+......\kern 3.98613
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x11.30565
+.\mathon
+.\hbox(7.5+2.5)x11.30565
+..\hbox(7.5+2.5)x11.30565
+...\hbox(7.5+0.0)x3.98613
+....\hbox(5.25+1.75)x3.98613, shifted -2.25
+.....\hbox(5.25+1.75)x3.98613
+......\hbox(5.25+1.75)x0.0
+.......\hbox(5.25+1.75)x0.0, glue set - 3.98613fil
+........\hbox(5.25+1.75)x3.98613
+.........\mathon
+.........\hbox(5.25+1.75)x3.98613
+..........\hbox(5.25+1.75)x0.0
+..........\hbox(4.51111+0.0)x3.98613
+...........\hbox(4.51111+0.0)x3.98613
+............\OT1/cmr/m/n/7 1
+.........\mathoff
+........\glue 0.0 plus 1.0fil minus 1.0fil
+......\kern 3.98613
+......\glue 0.0 plus 1.0fil minus 1.0fil
+...\mathon
+...\glue -0.55554
+...\mathoff
+...\hbox(7.5+2.5)x5.00002
+....\mathon
+....\OML/cmm/m/it/10 =
+....\mathoff
+...\mathon
+...\glue -1.11108
+...\mathoff
+...\hbox(5.25+1.75)x3.98613
+....\hbox(5.25+1.75)x3.98613
+.....\hbox(5.25+1.75)x3.98613
+......\hbox(5.25+1.75)x0.0
+.......\hbox(5.25+1.75)x0.0, glue set - 3.98613fil
+........\hbox(5.25+1.75)x3.98613
+.........\mathon
+.........\hbox(5.25+1.75)x3.98613
+..........\hbox(5.25+1.75)x0.0
+..........\hbox(4.51111+0.0)x3.98613
+...........\hbox(4.51111+0.0)x3.98613
+............\OT1/cmr/m/n/7 2
+.........\mathoff
+........\glue 0.0 plus 1.0fil minus 1.0fil
+......\kern 3.98613
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x15.00005
+.\mathon
+.\hbox(7.5+2.5)x15.00005
+..\hbox(0.0+0.0)x0.0
+..\OT1/cmr/m/n/10 1
+..\OML/cmm/m/it/10 =
+..\hbox(0.0+0.0)x0.0
+..\OT1/cmr/m/n/10 2
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x15.00005
+.\mathon
+.\hbox(7.5+2.5)x15.00005
+..\hbox(0.0+0.0)x0.0
+..\hbox(7.5+2.5)x15.00005
+...\hbox(0.0+0.0)x0.0
+...\hbox(7.5+2.5)x15.00005
+....\hbox(7.5+2.5)x15.00005
+.....\hbox(0.0+0.0)x1.2, shifted -2.5
+.....\kern -1.2
+.....\OT1/cmr/m/n/10 1
+.....\hbox(7.5+2.5)x5.00002
+......\OT1/cmr/m/n/10 /
+.....\hbox(0.0+0.0)x0.0
+.....\OT1/cmr/m/n/10 2
+.....\kern -1.2
+.....\hbox(0.0+0.0)x1.2, shifted -2.5
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(8.50005+3.50006)x13.37782
+.\mathon
+.\hbox(8.50005+3.50006)x13.37782
+..\hbox(8.49998+3.49997)x0.0
+...\hbox(8.49998+3.49997)x0.0
+....\mathon
+....\hbox(0.0+0.0)x0.0
+....\hbox(8.49998+3.49997)x0.0
+.....\hbox(8.49998+3.49997)x0.0
+......\hbox(0.0+0.0)x0.0, shifted -2.5
+......\vbox(8.49998+3.49997)x0.0
+......\hbox(0.0+0.0)x0.0, shifted -2.5
+....\mathoff
+..\kern -1.2
+..\OT1/cmr/m/n/10 1
+..\hbox(8.50005+3.50006)x5.77779
+...\mathon
+...\hbox(0.0+0.0)x0.0
+...\hbox(8.50005+3.50006)x5.77779
+....\hbox(8.50005+3.50006)x5.77779
+.....\hbox(0.39998+11.60013)x5.77779, shifted -8.10007
+......\OMX/cmex/m/n/10 ^^N
+.....\vbox(8.49998+3.49997)x0.0
+.....\hbox(0.0+0.0)x0.0, shifted -2.5
+...\mathoff
+..\hbox(0.0+0.0)x0.0
+..\OT1/cmr/m/n/10 2
+..\kern -1.2
+..\hbox(8.49998+3.49997)x0.0
+...\hbox(8.49998+3.49997)x0.0
+....\mathon
+....\hbox(0.0+0.0)x0.0
+....\hbox(8.49998+3.49997)x0.0
+.....\hbox(8.49998+3.49997)x0.0
+......\hbox(0.0+0.0)x0.0, shifted -2.5
+......\vbox(8.49998+3.49997)x0.0
+......\hbox(0.0+0.0)x0.0, shifted -2.5
+....\mathoff
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 14: Differentials
+============================================================
+> \box...=
+\hbox(4.30554+0.0)x5.71527
+.\mathon
+.\hbox(0.0+0.0)x0.0
+.\glue -1.66663
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 x
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94444+1.94444)x18.55902
+.\mathon
+.\OML/cmm/m/it/10 f
+.\kern1.0764
+.\glue(\thinmuskip) 1.66663
+.\hbox(0.0+0.0)x0.0
+.\glue -1.66663
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 d
+.\OML/cmm/m/it/10 x
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94444+1.94444)x19.21873
+.\mathon
+.\OML/cmm/m/it/10 f
+.\kern1.0764
+.\glue(\thinmuskip) 1.66663
+.\hbox(0.0+0.0)x0.0
+.\glue -1.66663
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 @
+.\kern0.55554
+.\OML/cmm/m/it/10 x
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94444+1.94444)x18.17706
+.\mathon
+.\OML/cmm/m/it/10 f
+.\kern1.0764
+.\glue(\thinmuskip) 1.66663
+.\hbox(0.0+0.0)x0.0
+.\glue -1.66663
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 ^^N
+.\kern0.37846
+.\OML/cmm/m/it/10 x
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 15: Derivatives
+============================================================
+> \box...=
+\hbox(13.70952+6.85951)x13.32013
+.\mathon
+.\hbox(13.70952+6.85951)x13.32013
+..\hbox(13.70952+6.85951)x13.32013
+...\hbox(13.70952+6.85951)x13.32013
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+....\vbox(13.70952+6.85951)x10.92014
+.....\hbox(6.94444+1.94444)x10.92014, glue set 0.70485fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 d
+......\kern-1.66667
+......\OML/cmm/m/it/10 f
+......\kern1.0764
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern2.12064
+.....\rule(0.39998+0.0)x*
+.....\kern2.21507
+.....\hbox(6.94444+0.0)x10.92014
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 d
+......\hbox(4.30554+0.0)x5.71527
+.......\hbox(0.0+0.0)x0.0
+.......\OML/cmm/m/it/10 x
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x36.6182
+.\mathon
+.\hbox(7.5+2.5)x36.6182
+..\hbox(0.0+0.0)x0.0
+..\hbox(0.0+0.0)x0.0
+..\glue -1.66663
+..\glue(\thinmuskip) 1.66663
+..\OML/cmm/m/it/10 d
+..\hbox(3.01389+0.0)x4.07759, shifted -3.62892
+...\OML/cmm/m/it/7 n
+...\glue -1.36574
+..\OML/cmm/m/it/10 f
+..\kern1.0764
+..\OML/cmm/m/it/10 =
+..\hbox(0.0+0.0)x0.0
+..\hbox(0.0+0.0)x0.0
+..\glue -1.66663
+..\glue(\thinmuskip) 1.66663
+..\OML/cmm/m/it/10 d
+..\hbox(4.30554+0.0)x5.71527
+...\hbox(0.0+0.0)x0.0
+...\OML/cmm/m/it/10 x
+..\hbox(3.01389+0.0)x5.44333, shifted -3.62892
+...\OML/cmm/m/it/7 n
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(9.63164+3.44841)x16.00159
+.\mathon
+.\hbox(9.63164+3.44841)x16.00159
+..\hbox(9.63164+3.44841)x16.00159
+...\hbox(0.0+0.0)x1.2, shifted -2.5
+...\vbox(9.63164+3.44841)x13.6016
+....\hbox(5.17056+1.3611)x13.6016, glue set 0.53876fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(0.0+0.0)x0.0
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 d
+.....\hbox(2.15277+0.0)x3.67714, shifted -3.01779
+......\OML/cmm/m/it/5 n
+......\glue -1.22685
+.....\OML/cmm/m/it/7 f
+.....\kern0.78473
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\kern0.39998
+....\rule(0.39998+0.0)x*
+....\kern0.88731
+....\hbox(4.8611+0.0)x13.6016
+.....\hbox(0.0+0.0)x0.0
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 d
+.....\hbox(3.01389+0.0)x4.53473
+......\hbox(0.0+0.0)x0.0
+......\OML/cmm/m/it/7 x
+.....\hbox(2.15277+0.0)x4.90399, shifted -1.99998
+......\OML/cmm/m/it/5 n
+...\hbox(0.0+0.0)x1.2, shifted -2.5
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x32.19055
+.\mathon
+.\hbox(7.5+2.5)x32.19055
+..\hbox(7.5+2.5)x32.19055
+...\hbox(7.5+0.0)x13.88983
+....\hbox(5.25+1.75)x13.88983, shifted -2.25
+.....\hbox(5.25+1.75)x13.88983
+......\hbox(5.25+1.75)x0.0
+.......\hbox(5.25+1.75)x0.0, glue set - 13.88983fil
+........\hbox(5.25+1.75)x13.88983
+.........\mathon
+.........\hbox(5.25+1.75)x13.88983
+..........\hbox(5.25+1.75)x0.0
+..........\glue(\thinmuskip) 1.36574
+..........\hbox(0.0+0.0)x0.0
+..........\glue -1.36574
+..........\glue(\thinmuskip) 1.36574
+..........\OML/cmm/m/it/7 d
+..........\hbox(2.15277+0.0)x3.67714, shifted -3.01779
+...........\OML/cmm/m/it/5 n
+...........\glue -1.22685
+..........\OML/cmm/m/it/7 f
+..........\kern0.78473
+.........\mathoff
+........\glue 0.0 plus 1.0fil minus 1.0fil
+......\kern 13.88983
+......\glue 0.0 plus 1.0fil minus 1.0fil
+...\mathon
+...\glue -0.55554
+...\mathoff
+...\hbox(7.5+2.5)x5.00002
+....\mathon
+....\OML/cmm/m/it/10 =
+....\mathoff
+...\mathon
+...\glue -1.11108
+...\mathoff
+...\hbox(5.25+1.75)x14.96733
+....\hbox(5.25+1.75)x14.96733
+.....\hbox(5.25+1.75)x14.96733
+......\hbox(5.25+1.75)x0.0
+.......\hbox(5.25+1.75)x0.0, glue set - 14.96733fil
+........\hbox(5.25+1.75)x14.96733
+.........\mathon
+.........\hbox(5.25+1.75)x14.96733
+..........\hbox(5.25+1.75)x0.0
+..........\glue(\thinmuskip) 1.36574
+..........\hbox(0.0+0.0)x0.0
+..........\glue -1.36574
+..........\glue(\thinmuskip) 1.36574
+..........\OML/cmm/m/it/7 d
+..........\hbox(3.01389+0.0)x4.53473
+...........\hbox(0.0+0.0)x0.0
+...........\OML/cmm/m/it/7 x
+..........\hbox(2.15277+0.0)x4.90399, shifted -3.01779
+...........\OML/cmm/m/it/5 n
+.........\mathoff
+........\glue 0.0 plus 1.0fil minus 1.0fil
+......\kern 14.96733
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(13.70952+6.85951)x19.29239
+.\mathon
+.\hbox(13.70952+6.85951)x13.32013
+..\hbox(13.70952+6.85951)x13.32013
+...\hbox(13.70952+6.85951)x13.32013
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+....\vbox(13.70952+6.85951)x10.92014
+.....\hbox(6.94444+0.0)x10.92014, glue set 2.85764fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 d
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern4.06508
+.....\rule(0.39998+0.0)x*
+.....\kern2.21507
+.....\hbox(6.94444+0.0)x10.92014
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 d
+......\hbox(4.30554+0.0)x5.71527
+.......\hbox(0.0+0.0)x0.0
+.......\OML/cmm/m/it/10 x
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+.\OML/cmm/m/it/10 f
+.\kern1.0764
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 16: Partial derivatives
+============================================================
+> \box...=
+\hbox(13.70952+6.85951)x14.23683
+.\mathon
+.\hbox(13.70952+6.85951)x14.23683
+..\hbox(13.70952+6.85951)x14.23683
+...\hbox(13.70952+6.85951)x14.23683
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+....\vbox(13.70952+6.85951)x11.83684
+.....\hbox(6.94444+1.94444)x11.83684
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\OML/cmm/m/it/10 f
+......\kern1.0764
+.....\kern2.12064
+.....\rule(0.39998+0.0)x*
+.....\kern2.21507
+.....\hbox(6.94444+0.0)x11.83684, glue set 0.1285fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\hbox(4.30554+0.0)x5.71527
+.......\hbox(0.0+0.0)x0.0
+.......\OML/cmm/m/it/10 x
+......\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(14.9051+8.80396)x25.10602
+.\mathon
+.\hbox(14.9051+8.80396)x25.10602
+..\hbox(14.9051+8.80396)x25.10602
+...\hbox(14.9051+8.80396)x25.10602
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+....\vbox(14.9051+8.80396)x22.70602
+.....\hbox(8.14003+1.94444)x22.70602, glue set 3.8744fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\hbox(8.14003+0.0)x3.12039
+.......\hbox(4.51111+0.0)x3.12039, shifted -3.62892
+........\OT1/cmr/m/n/7 2
+........\glue -1.36574
+......\OML/cmm/m/it/10 f
+......\kern1.0764
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern2.12064
+.....\rule(0.39998+0.0)x*
+.....\kern2.21507
+.....\hbox(6.94444+1.94444)x22.70602
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\hbox(4.30554+0.0)x5.71527
+.......\hbox(0.0+0.0)x0.0
+.......\OML/cmm/m/it/10 x
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\OML/cmm/m/it/10 y
+......\kern0.35878
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(14.9051+6.85951)x18.46597
+.\mathon
+.\hbox(14.9051+6.85951)x18.46597
+..\hbox(14.9051+6.85951)x18.46597
+...\hbox(14.9051+6.85951)x18.46597
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+....\vbox(14.9051+6.85951)x16.06598
+.....\hbox(8.14003+1.94444)x16.06598, glue set 0.55438fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\hbox(8.14003+0.0)x3.12039
+.......\hbox(4.51111+0.0)x3.12039, shifted -3.62892
+........\OT1/cmr/m/n/7 3
+........\glue -1.36574
+......\OML/cmm/m/it/10 f
+......\kern1.0764
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern2.12064
+.....\rule(0.39998+0.0)x*
+.....\kern1.75952
+.....\hbox(7.4+0.0)x16.06598
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\hbox(4.30554+0.0)x5.71527
+.......\hbox(0.0+0.0)x0.0
+.......\OML/cmm/m/it/10 x
+......\hbox(7.4+0.0)x4.48613
+.......\hbox(4.51111+0.0)x4.48613, shifted -2.88889
+........\OT1/cmr/m/n/7 3
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(14.9051+8.80396)x34.07828
+.\mathon
+.\hbox(14.9051+8.80396)x34.07828
+..\hbox(14.9051+8.80396)x34.07828
+...\hbox(14.9051+8.80396)x34.07828
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+....\vbox(14.9051+8.80396)x31.67828
+.....\hbox(8.14003+1.94444)x31.67828, glue set 8.36053fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\hbox(8.14003+0.0)x3.12039
+.......\hbox(4.51111+0.0)x3.12039, shifted -3.62892
+........\OT1/cmr/m/n/7 5
+........\glue -1.36574
+......\OML/cmm/m/it/10 f
+......\kern1.0764
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern2.12064
+.....\rule(0.39998+0.0)x*
+.....\kern1.75952
+.....\hbox(7.4+1.94444)x31.67828
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\hbox(4.30554+0.0)x5.71527
+.......\hbox(0.0+0.0)x0.0
+.......\OML/cmm/m/it/10 x
+......\hbox(7.4+0.0)x4.48613
+.......\hbox(4.51111+0.0)x4.48613, shifted -2.88889
+........\OT1/cmr/m/n/7 2
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\OML/cmm/m/it/10 y
+......\kern0.35878
+......\hbox(7.4+0.0)x4.48613
+.......\hbox(4.51111+0.0)x4.48613, shifted -2.88889
+........\OT1/cmr/m/n/7 3
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(14.9051+8.80396)x31.07828
+.\mathon
+.\hbox(14.9051+8.80396)x25.10602
+..\hbox(14.9051+8.80396)x25.10602
+...\hbox(14.9051+8.80396)x25.10602
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+....\vbox(14.9051+8.80396)x22.70602
+.....\hbox(8.14003+0.0)x22.70602, glue set 6.86053fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\hbox(8.14003+0.0)x3.12039
+.......\hbox(4.51111+0.0)x3.12039, shifted -3.62892
+........\OT1/cmr/m/n/7 2
+........\glue -1.36574
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern4.06508
+.....\rule(0.39998+0.0)x*
+.....\kern2.21507
+.....\hbox(6.94444+1.94444)x22.70602
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\hbox(4.30554+0.0)x5.71527
+.......\hbox(0.0+0.0)x0.0
+.......\OML/cmm/m/it/10 x
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\OML/cmm/m/it/10 y
+......\kern0.35878
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+.\OML/cmm/m/it/10 f
+.\kern1.0764
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 17: Partial derivatives: symbolic orders
+============================================================
+> \box...=
+\hbox(13.70952+6.85951)x19.42317
+.\mathon
+.\hbox(13.70952+6.85951)x19.42317
+..\hbox(13.70952+6.85951)x19.42317
+...\hbox(13.70952+6.85951)x19.42317
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+....\vbox(13.70952+6.85951)x17.02318
+.....\hbox(6.94444+1.94444)x17.02318, glue set 0.55438fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\hbox(6.6428+0.0)x4.07759
+.......\hbox(3.01389+0.0)x4.07759, shifted -3.62892
+........\OML/cmm/m/it/7 n
+........\glue -1.36574
+......\OML/cmm/m/it/10 f
+......\kern1.0764
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern2.12064
+.....\rule(0.39998+0.0)x*
+.....\kern2.21507
+.....\hbox(6.94444+0.0)x17.02318
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\hbox(4.30554+0.0)x5.71527
+.......\hbox(0.0+0.0)x0.0
+.......\OML/cmm/m/it/10 x
+......\hbox(5.90277+0.0)x5.44333
+.......\hbox(3.01389+0.0)x5.44333, shifted -2.88889
+........\OML/cmm/m/it/7 n
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(14.9051+8.80396)x35.03548
+.\mathon
+.\hbox(14.9051+8.80396)x35.03548
+..\hbox(14.9051+8.80396)x35.03548
+...\hbox(14.9051+8.80396)x35.03548
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+....\vbox(14.9051+8.80396)x32.63548
+.....\hbox(8.14003+1.94444)x32.63548, glue set 3.298fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\hbox(8.14003+0.0)x14.20264
+.......\hbox(4.51111+0.83334)x14.20264, shifted -3.62892
+........\OML/cmm/m/it/7 n
+........\OT1/cmr/m/n/7 +
+........\OT1/cmr/m/n/7 2
+........\glue -1.36574
+......\OML/cmm/m/it/10 f
+......\kern1.0764
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern2.12064
+.....\rule(0.39998+0.0)x*
+.....\kern1.75952
+.....\hbox(7.4+1.94444)x32.63548
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\hbox(4.30554+0.0)x5.71527
+.......\hbox(0.0+0.0)x0.0
+.......\OML/cmm/m/it/10 x
+......\hbox(5.90277+0.0)x5.44333
+.......\hbox(3.01389+0.0)x5.44333, shifted -2.88889
+........\OML/cmm/m/it/7 n
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\OML/cmm/m/it/10 y
+......\kern0.35878
+......\hbox(7.4+0.0)x4.48613
+.......\hbox(4.51111+0.0)x4.48613, shifted -2.88889
+........\OT1/cmr/m/n/7 2
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(15.2551+8.80396)x44.9152
+.\mathon
+.\hbox(15.2551+8.80396)x44.9152
+..\hbox(15.2551+8.80396)x44.9152
+...\hbox(15.2551+8.80396)x44.9152
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+....\vbox(15.2551+8.80396)x42.51521
+.....\hbox(8.49002+1.94444)x42.51521, glue set 3.71292fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\hbox(8.49002+0.0)x23.25253
+.......\hbox(4.8611+0.83334)x23.25253, shifted -3.62892
+........\OML/cmm/m/it/7 a
+........\OT1/cmr/m/n/7 +
+........\OML/cmm/m/it/7 b
+........\OT1/cmr/m/n/7 +
+........\OT1/cmr/m/n/7 1
+........\glue -1.36574
+......\OML/cmm/m/it/10 f
+......\kern1.0764
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern2.12064
+.....\rule(0.39998+0.0)x*
+.....\kern1.40953
+.....\hbox(7.74998+1.94444)x42.51521
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\hbox(4.30554+0.0)x5.71527
+.......\hbox(0.0+0.0)x0.0
+.......\OML/cmm/m/it/10 x
+......\hbox(5.90277+0.0)x4.83765
+.......\hbox(3.01389+0.0)x4.83765, shifted -2.88889
+........\OML/cmm/m/it/7 a
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\OML/cmm/m/it/10 y
+......\kern0.35878
+......\hbox(7.74998+0.0)x4.01666
+.......\hbox(4.8611+0.0)x4.01666, shifted -2.88889
+........\OML/cmm/m/it/7 b
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\OML/cmm/m/it/10 z
+......\kern0.4398
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 18: Functional and user-defined derivatives
+============================================================
+> \box...=
+\hbox(13.70952+6.85951)x15.04236
+.\mathon
+.\hbox(13.70952+6.85951)x15.04236
+..\hbox(13.70952+6.85951)x15.04236
+...\hbox(13.70952+6.85951)x15.04236
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+....\vbox(13.70952+6.85951)x12.64236
+.....\hbox(6.94444+0.0)x12.64236
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 ^^N
+......\kern0.37846
+......\OML/cmm/m/it/10 F
+......\kern1.3889
+.....\kern4.06508
+.....\rule(0.39998+0.0)x*
+.....\kern2.21507
+.....\hbox(6.94444+0.0)x12.64236, glue set 1.0521fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 ^^N
+......\kern0.37846
+......\hbox(4.30554+0.0)x5.71527
+.......\hbox(0.0+0.0)x0.0
+.......\OML/cmm/m/it/10 x
+......\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(13.70952+6.85951)x16.9292
+.\mathon
+.\hbox(13.70952+6.85951)x16.9292
+..\hbox(13.70952+6.85951)x16.9292
+...\hbox(13.70952+6.85951)x16.9292
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+....\vbox(13.70952+6.85951)x14.5292
+.....\hbox(6.94444+1.94444)x14.5292
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 D
+......\kern0.27779
+......\OML/cmm/m/it/10 f
+......\kern1.0764
+.....\kern2.12064
+.....\rule(0.39998+0.0)x*
+.....\kern2.3262
+.....\hbox(6.83331+0.0)x14.5292, glue set 0.1285fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 D
+......\kern0.27779
+......\hbox(4.30554+0.0)x5.71527
+.......\hbox(0.0+0.0)x0.0
+.......\OML/cmm/m/it/10 x
+......\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(14.9051+8.80396)x30.04358
+.\mathon
+.\hbox(14.9051+8.80396)x30.04358
+..\hbox(14.9051+8.80396)x30.04358
+...\hbox(14.9051+8.80396)x30.04358
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+....\vbox(14.9051+8.80396)x27.64359
+.....\hbox(8.14003+1.94444)x27.64359, glue set 5.1088fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OMS/cmsy/m/n/10 r
+......\hbox(8.14003+0.0)x3.12039
+.......\hbox(4.51111+0.0)x3.12039, shifted -3.62892
+........\OT1/cmr/m/n/7 2
+........\glue -1.36574
+......\OML/cmm/m/it/10 f
+......\kern1.0764
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern2.12064
+.....\rule(0.39998+0.0)x*
+.....\kern2.3262
+.....\hbox(6.83331+1.94444)x27.64359
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OMS/cmsy/m/n/10 r
+......\hbox(4.30554+0.0)x5.71527
+.......\hbox(0.0+0.0)x0.0
+.......\OML/cmm/m/it/10 x
+......\OMS/cmsy/m/n/10 r
+......\OML/cmm/m/it/10 y
+......\kern0.35878
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 19: Cancel and slash
+============================================================
+> \box...=
+\hbox(7.15277+0.34723)x5.71527
+.\mathon
+.\hbox(7.15277+0.34723)x5.71527
+..\kern0.0
+..\hbox(7.5+0.0)x5.71527, shifted 0.34723
+...\vbox(7.5+0.0)x5.71527
+....\hbox(7.5+2.5)x5.71527
+.....\glue(\tabskip) 0.0
+.....\hbox(7.5+2.5)x5.71527, glue set 1000.35764fill
+......\glue -1000.0 plus 1.0fill
+......\mathon
+......\vbox(7.5+2.5)x5.0
+.......\hbox(10.0+0.0)x5.0
+........\glue 0.0
+........\hbox(10.0+0.0)x5.0
+.........\tenln ^^A
+......\mathoff
+......\glue -1000.0 plus 1.0fill
+.....\glue(\tabskip) 0.0
+....\glue(\baselineskip) -7.15277
+....\hbox(4.65277+0.0)x5.71527
+.....\glue(\tabskip) 0.0
+.....\hbox(4.65277+0.0)x5.71527
+......\glue 0.0 plus 1.0fil
+......\hbox(4.65277+0.0)x5.71527
+.......\mathon
+.......\vbox(4.65277+-0.34723)x5.71527
+........\hbox(4.30554+0.0)x5.71527
+.........\mathon
+.........\OML/cmm/m/it/10 x
+.........\mathoff
+.......\mathoff
+......\glue 0.0 plus 1.0fil
+.....\glue(\tabskip) 0.0
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.18056+3.81944)x5.03125
+.\mathon
+.\hbox(6.18056+3.81944)x5.03125
+..\hbox(6.18056+3.81944)x5.03125
+...\hbox(7.5+2.5)x5.03125, glue set 0.01563fil, shifted 1.31944
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\kern 0.0
+....\hbox(7.5+2.5)x5.00002
+.....\mathon
+.....\OML/cmm/m/it/10 =
+.....\mathoff
+....\kern 0.0
+....\glue 0.0 plus 1.0fil minus 1.0fil
+...\hbox(4.30554+1.94444)x0.0, glue set - 5.03125fil
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(4.30554+1.94444)x5.03125
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(4.30554+1.94444)x5.03125
+......\mathon
+......\OML/cmm/m/it/10 p
+......\mathoff
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(8.47221+1.52779)x5.86458
+.\mathon
+.\hbox(8.47221+1.52779)x5.86458
+..\hbox(8.47221+1.52779)x5.86458
+...\hbox(7.5+2.5)x5.86458, glue set 0.43228fil, shifted -0.97221
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\kern 0.0
+....\hbox(7.5+2.5)x5.00002
+.....\mathon
+.....\OML/cmm/m/it/10 =
+.....\mathoff
+....\kern 0.0
+....\glue 0.0 plus 1.0fil minus 1.0fil
+...\hbox(6.94444+0.0)x0.0, glue set - 5.86458fil
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.94444+0.0)x5.86458
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(6.94444+0.0)x5.86458
+......\mathon
+......\hbox(0.0+0.0)x0.0
+......\glue -1.66663
+......\glue(\thinmuskip) 1.66663
+......\OML/cmm/m/it/10 @
+......\kern0.55554
+......\mathoff
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 20: Absolute value and norm
+============================================================
+> \box...=
+\hbox(7.5+2.5)x11.27084
+.\mathon
+.\OMS/cmsy/m/n/10 j
+.\OML/cmm/m/it/10 x
+.\OMS/cmsy/m/n/10 j
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x12.7777
+.\mathon
+.\OMS/cmsy/m/n/10 j
+.\glue 2.22217 plus 1.11108 minus 1.66663
+.\OMS/cmsy/m/n/10 ^^A
+.\glue 2.22217 plus 1.11108 minus 1.66663
+.\OMS/cmsy/m/n/10 j
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x15.7153
+.\mathon
+.\OMS/cmsy/m/n/10 k
+.\OML/cmm/m/it/10 x
+.\OMS/cmsy/m/n/10 k
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x20.20143
+.\mathon
+.\OMS/cmsy/m/n/10 k
+.\OML/cmm/m/it/10 x
+.\OMS/cmsy/m/n/10 k
+.\hbox(4.51111+0.0)x4.48613, shifted 1.49998
+..\OT1/cmr/m/n/7 2
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.99998)x20.20143
+.\mathon
+.\hbox(0.0+0.0)x0.0
+.\hbox(7.5+2.5)x15.7153
+..\hbox(0.0+0.0)x0.0
+..\hbox(7.5+2.5)x15.7153
+...\hbox(7.5+2.5)x15.7153
+....\hbox(7.5+2.5)x5.00002
+.....\OMS/cmsy/m/n/10 k
+....\OML/cmm/m/it/10 x
+....\hbox(7.5+2.5)x5.00002
+.....\OMS/cmsy/m/n/10 k
+.\hbox(4.51111+0.0)x4.48613, shifted 2.99998
+..\OT1/cmr/m/n/7 2
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 21: Evaluation and order
+============================================================
+> \box...=
+\hbox(7.5+2.5)x21.732
+.\mathon
+.\OMS/cmsy/m/n/10 O
+.\kern0.27779
+.\OT1/cmr/m/n/10 (
+.\OML/cmm/m/it/10 x
+.\OT1/cmr/m/n/10 )
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(8.14003+2.5)x12.97919
+.\mathon
+.\OML/cmm/m/it/10 x
+.\OMS/cmsy/m/n/10 j
+.\vbox(10.62213+0.0)x4.48613, shifted 2.4821
+..\hbox(4.51111+0.0)x4.48613
+...\OT1/cmr/m/n/7 1
+..\kern1.59991
+..\hbox(4.51111+0.0)x4.48613
+...\OT1/cmr/m/n/7 0
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(9.53891+2.99998)x14.17918
+.\mathon
+.\hbox(0.0+0.0)x0.0
+.\hbox(7.5+2.5)x9.69305
+..\hbox(0.0+0.0)x0.0
+..\hbox(7.5+2.5)x9.69305
+...\hbox(7.5+2.5)x9.69305
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+....\OML/cmm/m/it/10 x
+....\hbox(7.5+2.5)x2.77779
+.....\OMS/cmsy/m/n/10 j
+.\vbox(12.5389+0.0)x4.48613, shifted 2.99998
+..\hbox(4.51111+0.0)x4.48613
+...\OT1/cmr/m/n/7 1
+..\kern3.51668
+..\hbox(4.51111+0.0)x4.48613
+...\OT1/cmr/m/n/7 0
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 22: Pairs and commutators
+============================================================
+> \box...=
+\hbox(7.5+2.5)x20.97685
+.\mathon
+.\OT1/cmr/m/n/10 [
+.\OML/cmm/m/it/10 x
+.\OML/cmm/m/it/10 ;
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 y
+.\kern0.35878
+.\OT1/cmr/m/n/10 ]
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x25.42131
+.\mathon
+.\OMS/cmsy/m/n/10 f
+.\OML/cmm/m/it/10 x
+.\OML/cmm/m/it/10 ;
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 y
+.\kern0.35878
+.\OMS/cmsy/m/n/10 g
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x25.42131
+.\mathon
+.\OMS/cmsy/m/n/10 f
+.\OML/cmm/m/it/10 x
+.\OML/cmm/m/it/10 ;
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 y
+.\kern0.35878
+.\OMS/cmsy/m/n/10 g
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x24.44423
+.\mathon
+.\OT1/cmr/m/n/10 [
+.\glue 2.22217 plus 1.11108 minus 1.66663
+.\OMS/cmsy/m/n/10 ^^A
+.\glue 2.22217 plus 1.11108 minus 1.66663
+.\OML/cmm/m/it/10 ;
+.\glue 2.22217 plus 1.11108 minus 1.66663
+.\glue(\thinmuskip) 1.66663
+.\OMS/cmsy/m/n/10 ^^A
+.\glue 2.22217 plus 1.11108 minus 1.66663
+.\OT1/cmr/m/n/10 ]
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.96227+2.5)x80.76395
+.\mathon
+.\OT1/cmr/m/n/10 [
+.\OML/cmm/m/it/10 x
+.\OML/cmm/m/it/10 ;
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 y
+.\kern0.35878
+.\OT1/cmr/m/n/10 ]
+.\OT1/cmr/m/n/10 [
+.\OML/cmm/m/it/10 x
+.\OML/cmm/m/it/10 ;
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 y
+.\kern0.35878
+.\OT1/cmr/m/n/10 ]
+.\hbox(4.33334+0.83334)x6.75002, shifted 1.49998
+..\OMS/cmsy/m/n/7 ^^@
+.\OMS/cmsy/m/n/10 f
+.\OML/cmm/m/it/10 x
+.\OML/cmm/m/it/10 ;
+.\glue(\thinmuskip) 1.66663
+.\OML/cmm/m/it/10 y
+.\kern0.35878
+.\OMS/cmsy/m/n/10 g
+.\hbox(4.33334+0.83334)x6.63892, shifted -3.62892
+..\OT1/cmr/m/n/7 +
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 23: Bra-ket notation
+============================================================
+> \box...=
+\hbox(7.5+2.5)x15.15967
+.\mathon
+.\OMS/cmsy/m/n/10 h
+.\glue 0.55554
+.\OML/cmm/m/it/10 x
+.\glue 1.11108
+.\OMS/cmsy/m/n/10 j
+.\glue 1.11108
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x15.15967
+.\mathon
+.\glue 1.11108
+.\OMS/cmsy/m/n/10 j
+.\glue 1.11108
+.\hbox(0.0+0.0)x0.0
+.\OML/cmm/m/it/10 x
+.\glue 0.55554
+.\OMS/cmsy/m/n/10 i
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x24.8657
+.\mathon
+.\OMS/cmsy/m/n/10 h
+.\glue 0.55554
+.\OML/cmm/m/it/10 x
+.\glue 1.11108
+.\OMS/cmsy/m/n/10 j
+.\glue 1.11108
+.\hbox(0.0+0.0)x0.0
+.\OML/cmm/m/it/10 y
+.\kern0.35878
+.\glue 0.55554
+.\OMS/cmsy/m/n/10 i
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x81.29637
+.\mathon
+.\OMS/cmsy/m/n/10 h
+.\glue 0.55554
+.\OML/cmm/m/it/10 x
+.\glue 1.11108
+.\OMS/cmsy/m/n/10 j
+.\glue 1.11108
+.\hbox(0.0+0.0)x0.0
+.\OMS/cmsy/m/n/10 ^^@
+.\OML/cmm/m/it/10 N
+.\kern1.09026
+.\OML/cmm/m/it/10 o
+.\OML/cmm/m/it/10 V
+.\kern2.22223
+.\OML/cmm/m/it/10 a
+.\OML/cmm/m/it/10 l
+.\kern0.19678
+.\OML/cmm/m/it/10 u
+.\OML/cmm/m/it/10 e
+.\OMS/cmsy/m/n/10 ^^@
+.\glue 0.55554
+.\OMS/cmsy/m/n/10 i
+.\OML/cmm/m/it/10 y
+.\kern0.35878
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x29.86566
+.\mathon
+.\glue 1.11108
+.\OMS/cmsy/m/n/10 j
+.\glue 1.11108
+.\hbox(0.0+0.0)x0.0
+.\OML/cmm/m/it/10 x
+.\glue 0.55554
+.\OMS/cmsy/m/n/10 i
+.\OMS/cmsy/m/n/10 h
+.\glue 0.55554
+.\OML/cmm/m/it/10 y
+.\kern0.35878
+.\glue 1.11108
+.\OMS/cmsy/m/n/10 j
+.\glue 1.11108
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 24: Matrix elements and expectation values
+============================================================
+> \box...=
+\hbox(7.5+2.5)x34.95596
+.\mathon
+.\OMS/cmsy/m/n/10 h
+.\glue 0.55554
+.\OML/cmm/m/it/10 x
+.\glue 1.11108
+.\OMS/cmsy/m/n/10 j
+.\glue 1.11108
+.\hbox(0.0+0.0)x0.0
+.\OML/cmm/m/it/10 y
+.\kern0.35878
+.\glue 1.11108
+.\OMS/cmsy/m/n/10 j
+.\glue 1.11108
+.\hbox(0.0+0.0)x0.0
+.\OML/cmm/m/it/10 z
+.\kern0.4398
+.\glue 0.55554
+.\OMS/cmsy/m/n/10 i
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x14.60416
+.\mathon
+.\OMS/cmsy/m/n/10 h
+.\glue 0.55554
+.\OML/cmm/m/it/10 x
+.\glue 0.55554
+.\OMS/cmsy/m/n/10 i
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x39.04852
+.\mathon
+.\OMS/cmsy/m/n/10 h
+.\glue 0.55554
+.\OT1/cmr/m/n/10 
+.\glue 1.11108
+.\OMS/cmsy/m/n/10 j
+.\glue 1.11108
+.\hbox(0.0+0.0)x0.0
+.\OML/cmm/m/it/10 x
+.\glue 1.11108
+.\OMS/cmsy/m/n/10 j
+.\glue 1.11108
+.\hbox(0.0+0.0)x0.0
+.\OT1/cmr/m/n/10 
+.\glue 0.55554
+.\OMS/cmsy/m/n/10 i
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x34.6041
+.\mathon
+.\OMS/cmsy/m/n/10 h
+.\glue 0.55554
+.\OT1/cmr/m/n/10 0
+.\glue 1.11108
+.\OMS/cmsy/m/n/10 j
+.\glue 1.11108
+.\hbox(0.0+0.0)x0.0
+.\OML/cmm/m/it/10 x
+.\glue 1.11108
+.\OMS/cmsy/m/n/10 j
+.\glue 1.11108
+.\hbox(0.0+0.0)x0.0
+.\OT1/cmr/m/n/10 0
+.\glue 0.55554
+.\OMS/cmsy/m/n/10 i
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 25: Column and row vectors
+============================================================
+> \box...=
+\hbox(14.5001+9.50012)x20.43758
+.\mathon
+.\hbox(0.0+0.0)x0.0
+.\hbox(14.5001+9.50012)x20.43758
+..\hbox(14.5001+9.50012)x20.43758
+...\hbox(0.39998+23.60025)x7.36115, shifted -14.10013
+....\OMX/cmex/m/n/10 ^^R
+...\glue -5.0
+...\vbox(14.5+9.5)x15.71529
+....\hbox(8.39996+3.60004)x15.71529
+.....\glue(\tabskip) 0.0
+.....\hbox(8.39996+3.60004)x15.71529
+......\rule(8.39996+3.60004)x0.0
+......\glue 5.0
+......\glue 0.0 plus 1.0fil
+......\glue 0.00002
+......\mathon
+......\OML/cmm/m/it/10 x
+......\mathoff
+......\glue 0.0 plus 1.0fil
+......\glue 5.0
+.....\glue(\tabskip) 0.0
+....\glue(\lineskip) 0.0
+....\hbox(8.39996+3.60004)x15.71529
+.....\glue(\tabskip) 0.0
+.....\hbox(8.39996+3.60004)x15.71529, glue set 0.22684fil
+......\rule(8.39996+3.60004)x0.0
+......\glue 5.0
+......\glue 0.0 plus 1.0fil
+......\glue 0.00002
+......\mathon
+......\OML/cmm/m/it/10 y
+......\kern0.35878
+......\mathoff
+......\glue 0.0 plus 1.0fil
+......\glue 5.0
+.....\glue(\tabskip) 0.0
+...\glue -5.0
+...\hbox(0.39998+23.60025)x7.36115, shifted -14.10013
+....\OMX/cmex/m/n/10 ^^S
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(8.5+3.5)x29.89351
+.\mathon
+.\OT1/cmr/m/n/10 (
+.\glue -5.0
+.\vbox(8.5+3.5)x27.08792
+..\hbox(8.39996+3.60004)x27.08792
+...\glue(\tabskip) 0.0
+...\hbox(8.39996+3.60004)x27.08792
+....\rule(8.39996+3.60004)x0.0
+....\glue 5.0
+....\glue 0.0 plus 1.0fil
+....\glue 0.00002
+....\mathon
+....\OML/cmm/m/it/10 x
+....\OML/cmm/m/it/10 ;
+....\glue 1.66663
+....\glue(\thinmuskip) 1.66663
+....\OML/cmm/m/it/10 y
+....\kern0.35878
+....\mathoff
+....\glue 0.0 plus 1.0fil
+....\glue 5.0
+...\glue(\tabskip) 0.0
+.\glue -5.0
+.\OT1/cmr/m/n/10 )
+.\hbox(4.34358+0.0)x5.02779, shifted -3.62892
+..\hbox(3.01389+1.3297)x4.52779, shifted -1.3297
+...\mathon
+...\U/msa/m/n/7 |
+...\mathoff
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(0.0+0.0)x3.33333
+.\glue 3.33333 plus 1.66666 minus 1.11111
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 26: Undocumented helpers: probability, set, units fraction
+============================================================
+> \box...=
+\hbox(7.5+2.5)x36.69904
+.\mathon
+.\hbox(6.83331+0.0)x10.72224
+..\kern 0.0
+..\OT1/cmr/m/n/10 P
+..\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 (
+.\OML/cmm/m/it/10 x
+.\glue(\nonscript)
+.\glue 2.22217 plus 1.11108 minus 1.66663
+.\OMS/cmsy/m/n/10 j
+.\penalty 0
+.\glue(\nonscript)
+.\glue 2.22217 plus 1.11108 minus 1.66663
+.\hbox(0.0+0.0)x0.0
+.\OML/cmm/m/it/10 y
+.\kern0.35878
+.\OT1/cmr/m/n/10 )
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x28.19902
+.\mathon
+.\OMS/cmsy/m/n/10 f
+.\OML/cmm/m/it/10 x
+.\glue(\nonscript)
+.\glue 2.22217 plus 1.11108 minus 1.66663
+.\OMS/cmsy/m/n/10 j
+.\penalty 0
+.\glue(\nonscript)
+.\glue 2.22217 plus 1.11108 minus 1.66663
+.\hbox(0.0+0.0)x0.0
+.\OML/cmm/m/it/10 y
+.\kern0.35878
+.\OMS/cmsy/m/n/10 g
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x23.94485
+.\mathon
+.\OT1/cmr/m/n/10 5
+.\mathoff
+.\penalty 10000
+.\kern 1.66702
+.\hbox(7.5+2.5)x17.27782
+..\OT1/cmr/m/n/10 m
+..\OT1/cmr/m/n/10 /
+..\OT1/cmr/m/n/10 s
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x17.27782
+.\hbox(7.5+2.5)x17.27782
+..\OT1/cmr/m/n/10 m
+..\OT1/cmr/m/n/10 /
+..\OT1/cmr/m/n/10 s
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 27: Equation numbers within sections
+============================================================
+2.9
+3.1
+============================================================

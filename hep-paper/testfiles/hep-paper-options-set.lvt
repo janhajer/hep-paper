@@ -1,0 +1,82 @@
+% hep-paper: options with values and the parskip helpers.
+\input{regression-test}
+\documentclass{article}
+\usepackage[paper=a5, font=10pt, lang=american, sansserif, oldstyle,
+  parskip, symbols=false, bibliography=authoryear, manualplacement,
+  eqnarray=false]{hep-paper}
+\input{hep-regression}
+\makeatletter
+% \OPTION{name}: the value of a kvoptions string or boolean option
+\newcommand*{\OPTION}[1]{%
+  \@ifundefined{ifhep@#1}{%
+    \TYPE{#1: [\csname hep@#1\endcsname]}%
+  }{%
+    \TYPE{#1: \csname ifhep@#1\endcsname true\else false\fi}%
+  }%
+}
+% \PACKAGES{list}: loaded or not, and the options it was loaded with
+\newcommand*{\PACKAGES}[1]{%
+  \@for\hep@test@name:=#1\do{%
+    \TYPE{\hep@test@name: \expandafter\ifx
+      \csname ver@\hep@test@name.sty\endcsname\relax not loaded\else
+      loaded [\unexpanded\expandafter\expandafter\expandafter
+        {\csname opt@\hep@test@name.sty\endcsname}]%
+      \fi}%
+  }%
+}
+% \DEFINED{list of macro names}
+\newcommand*{\DEFINED}[1]{%
+  \@for\hep@test@name:=#1\do{%
+    \TYPE{\hep@test@name: \ifcsname\hep@test@name\endcsname
+      \expandafter\ifx\csname\hep@test@name\endcsname\relax
+      undefined\else defined\fi\else undefined\fi}%
+  }%
+}
+\begin{document}
+\makeatletter
+\START
+
+\TEST{Option values}{%
+  \TYPE{class: \hep@class}%
+  \OPTION{paper}\OPTION{font}\OPTION{lang}\OPTION{symbols}%
+  \OPTION{bibliography}\OPTION{serif}\OPTION{lining}\OPTION{parindent}%
+  \OPTION{defaults}\OPTION{title}\OPTION{physics}\OPTION{glossaries}%
+  \OPTION{references}\OPTION{eqnarray}\OPTION{manualplacement}%
+  \OPTION{beamer}\OPTION{revtex}\OPTION{jhep}\OPTION{jcap}\OPTION{pos}%
+  \OPTION{springer}\OPTION{amsart}\OPTION{sissa}\OPTION{journal}%
+}
+
+\TEST{Loaded packages and their options}{%
+  \PACKAGES{hep-math,hep-font,hep-math-font,geometry,parskip,hep-text,%
+    hep-float,hep-title,hep-bibliography,biblatex,hep-reference,hyperref,%
+    cleveref,hep-acronym,titlesec,hep-revtex,hep-sissa,xpatch}%
+}
+
+\TEST{Page geometry and font size}{%
+  \TYPE{paper: \the\paperwidth\space x \the\paperheight}%
+  \TYPE{text: \the\textwidth\space x \the\textheight}%
+  \TYPE{font size: \f@size}%
+  \TYPE{parindent: \the\parindent, parskip: \the\parskip}%
+}
+
+\TEST{Paragraph helpers: useparindent and useparskip}{%
+  \DEFINED{useparskip,useparindent}%
+  \useparindent
+  \TYPE{parindent: \the\parindent, parskip: \the\parskip}%
+  \useparskip
+  \TYPE{parindent: \the\parindent, parskip: \the\parskip}%
+}
+
+\TEST{Paragraph helpers: no spurious spaces}{%
+  \SHOWHBOX{a\useparindent b\useparskip c}%
+}
+
+\TEST{Paragraph helpers in two-column mode}{%
+  \begingroup
+    \@twocolumntrue\useparindent
+    \TYPE{parindent: \the\parindent, parskip: \the\parskip}%
+  \endgroup
+}
+
+\makeatother
+\END

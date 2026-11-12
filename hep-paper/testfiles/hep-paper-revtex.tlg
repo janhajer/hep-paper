@@ -1,0 +1,83 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Option values
+============================================================
+class: revtex4-2
+paper: [a4]
+font: [default]
+lang: [american]
+symbols: [true]
+bibliography: [false]
+serif: true
+lining: true
+parindent: true
+defaults: true
+title: true
+physics: true
+glossaries: true
+references: true
+eqnarray: true
+manualplacement: false
+beamer: false
+revtex: true
+jhep: false
+jcap: false
+pos: false
+springer: false
+amsart: false
+sissa: false
+journal: true
+============================================================
+============================================================
+TEST 2: Loaded packages and their options
+============================================================
+hep-math: loaded []
+hep-font: loaded [size=default,size=default,sans=false,lining=true,]
+hep-math-font: loaded [symbols=true,]
+geometry: not loaded
+parskip: not loaded
+hep-text: loaded [lang=american,]
+hep-float: loaded [global,]
+hep-title: not loaded
+hep-bibliography: not loaded
+biblatex: not loaded
+hep-reference: loaded []
+hyperref: loaded []
+cleveref: loaded [noabbrev,nameinlink,]
+hep-acronym: loaded []
+titlesec: loaded []
+hep-revtex: loaded []
+hep-sissa: not loaded
+hep-journal: loaded [revtex]
+xpatch: loaded []
+============================================================
+============================================================
+TEST 3: Page geometry and font size
+============================================================
+paper: 614.295pt x 794.96999pt
+text: 510.0pt x 672.0pt
+font size: 10
+parindent: 10.0pt, parskip: 0.0pt plus 1.0pt
+============================================================
+============================================================
+TEST 4: hep-journal: title data handed to REVTeX
+============================================================
+\title {The \textit {title} with $\alpha $: Sub}
+\author {First Author}
+\affiliation {First Institute}
+\preprint {CERN-TH-0000-000}
+\preprint {arXiv: \href {https://arxiv.org/abs/2101.00001}{\nolinkurl {2101.00001}}}
+\maketitle 
+============================================================
+============================================================
+TEST 5: hep-journal: document title
+============================================================
+[\376\377\000T\000h\000e\000\040\000t\000i\000t\000l\000e\000\040\000w\000i\000t\000h\000\040\003\261\000:\000\040\000S\000u\000b]
+[First\040Author]
+============================================================
+============================================================
+TEST 6: hep-revtex: figure and table names
+============================================================
+FIG., TABLE
+============================================================

@@ -1,0 +1,760 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Bookmarks: acronym at the beginning
+============================================================
+[PDF at the beginning]
+[PDFs at the beginning]
+[Portable document format at the beginning]
+[Portable document formats at the beginning]
+[PDF at the beginning]
+[Portable document format \(PDF\) at the beginning]
+[Effective field theory at the beginning]
+[Effective field theories at the beginning]
+[SM at the beginning]
+[SM and SMs at the beginning]
+[Effective field theory and effective field theories at the beginning]
+[PDF at the beginning]
+[Printable document format at the beginning]
+[Portable document format after a space]
+[Portable document format in braces]
+============================================================
+============================================================
+TEST 2: Bookmarks: acronym in the middle
+============================================================
+[The PDF in the middle]
+[The portable document format in the middle]
+[The portable document formats in the middle]
+[The PDF in the middle]
+[The portable document format \(PDF\) in the middle]
+[The effective field theory and effective field theories in the middle]
+[The printable document format in the middle]
+[Plural QCD without s and electroweak]
+[Typeset LHCb and LHCbs]
+[Small capitals LHC, LHCs and LHC]
+[Large hadron collider \(LHC\) at the beginning]
+============================================================
+============================================================
+TEST 3: Bookmarks: spaces and punctuation
+============================================================
+[The PDF. Full stop]
+[The PDF, comma]
+[The PDF: colon]
+[The PDF-based]
+[The PDF's]
+[\(PDF\) in parentheses]
+[At the end PDF]
+[At the end portable document format]
+[Empty group PDF here]
+[Starred CM and CMis]
+[Math PDF in title]
+[SM and SMs]
+============================================================
+============================================================
+TEST 4: Bookmarks: sentences and helpers
+============================================================
+[Text. Portable document format after sentence]
+[Portable document format explicit sentence]
+[PDF reset]
+[PDF dummy]
+[Portable texorpdfstring]
+[PDF [-like] optional argument]
+[Portable document format in bold]
+[Portable document format in texorpdfstring]
+[LaTeX before portable document format]
+[]
+============================================================
+============================================================
+TEST 5: Bookmarks: sectioning commands
+============================================================
+[Portable document format at the beginning]
+[The portable document format in the middle]
+[Effective field theory starred]
+[Portable document formats in a subsection]
+[Portable document format in the optional argument]
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line ....
+[4 Portable document format numbered]
+============================================================
+============================================================
+TEST 6: Bookmarks: Unicode
+============================================================
+[\376\377\000P\000o\000r\000t\000a\000b\000l\000e\000\040\000d\000o\000c\000u\000m\000e\000n\000t\000\040\000f\000o\000r\000m\000a\000t\000.\000\040\000P\000D\000F\000,\000\040\000e\000f\000f\000e\000c\000t\000i\000v\000e\000\040\000f\000i\000e\000l\000d\000\040\000t\000h\000e\000o\000r\000i\000e\000s]
+============================================================
+============================================================
+TEST 7: Document information
+============================================================
+[\376\377\000P\000o\000r\000t\000a\000b\000l\000e\000\040\000d\000o\000c\000u\000m\000e\000n\000t\000\040\000f\000o\000r\000m\000a\000t\000\040\000a\000n\000d\000\040\000U\000R\000L]
+============================================================
+============================================================
+TEST 8: Table of contents: capitalisation, no links to the acronyms
+============================================================
+(hep-acronym-hyperref.toc)
+\tf@toc=\write...
+> \box...=
+\vbox(191.84729+0.0)x200.0003
+.\hbox(12.59995+5.40005)x200.0003, glue set 136.71873fil
+..\rule(12.59995+5.40005)x0.0
+..\OT1/cmr/bx/n/14.4 C
+..\OT1/cmr/bx/n/14.4 o
+..\OT1/cmr/bx/n/14.4 n
+..\kern-0.45001
+..\OT1/cmr/bx/n/14.4 t
+..\OT1/cmr/bx/n/14.4 e
+..\OT1/cmr/bx/n/14.4 n
+..\kern-0.45001
+..\OT1/cmr/bx/n/14.4 t
+..\OT1/cmr/bx/n/14.4 s
+..\kern 0.0
+..\rule(12.59995+5.40005)x0.0
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty 10000
+.\penalty 10000
+.\glue 9.90276 plus 0.86108
+.\glue 0.0
+.\glue 10.00002 plus 1.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\lineskip) 1.0
+.\hbox(6.94444+1.94444)x200.0003, glue set 56.53012fil
+..\glue(\leftskip) 15.00002
+..\glue -15.00002
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+..\hbox(6.44444+0.0)x15.00002, glue set 9.25005fil
+...\OT1/cmr/bx/n/10 1
+...\glue 0.0 plus 1.0fil
+..\OT1/cmr/bx/n/10 P
+..\OT1/cmr/bx/n/10 D
+..\OT1/cmr/bx/n/10 F
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 a
+..\OT1/cmr/bx/n/10 t
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 t
+..\OT1/cmr/bx/n/10 h
+..\OT1/cmr/bx/n/10 e
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 b
+..\kern0.31944
+..\OT1/cmr/bx/n/10 e
+..\OT1/cmr/bx/n/10 g
+..\OT1/cmr/bx/n/10 i
+..\OT1/cmr/bx/n/10 n
+..\OT1/cmr/bx/n/10 n
+..\OT1/cmr/bx/n/10 i
+..\OT1/cmr/bx/n/10 n
+..\OT1/cmr/bx/n/10 g
+..\pdfendlink
+..\penalty 10000
+..\glue 0.0 plus 1.0fil
+..\penalty 10000
+..\hbox(6.44444+0.0)x17.82494, glue set 12.07497fil
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\OT1/cmr/bx/n/10 1
+...\kern -1.0
+...\kern 1.0
+..\penalty 10000
+..\glue(\parfillskip) -15.50005
+..\glue(\rightskip) 15.50005
+.\penalty -300
+.\glue 10.00002 plus 1.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 3.11111
+.\hbox(6.94444+0.0)x200.0003, glue set 0.26465
+..\glue(\leftskip) 15.00002
+..\hbox(0.0+0.0)x0.0
+..\glue -15.00002
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2}
+..\hbox(6.44444+0.0)x15.00002, glue set 9.25005fil
+...\OT1/cmr/bx/n/10 2
+...\glue 0.0 plus 1.0fil
+..\OT1/cmr/bx/n/10 P
+..\kern-0.31944
+..\OT1/cmr/bx/n/10 o
+..\OT1/cmr/bx/n/10 r
+..\OT1/cmr/bx/n/10 t
+..\OT1/cmr/bx/n/10 a
+..\OT1/cmr/bx/n/10 b
+..\OT1/cmr/bx/n/10 l
+..\OT1/cmr/bx/n/10 e
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 d
+..\OT1/cmr/bx/n/10 o
+..\kern0.31944
+..\OT1/cmr/bx/n/10 c
+..\OT1/cmr/bx/n/10 u
+..\OT1/cmr/bx/n/10 m
+..\OT1/cmr/bx/n/10 e
+..\OT1/cmr/bx/n/10 n
+..\kern-0.31944
+..\OT1/cmr/bx/n/10 t
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 f
+..\OT1/cmr/bx/n/10 o
+..\OT1/cmr/bx/n/10 r
+..\OT1/cmr/bx/n/10 m
+..\OT1/cmr/bx/n/10 a
+..\OT1/cmr/bx/n/10 t
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 a
+..\OT1/cmr/bx/n/10 t
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 t
+..\OT1/cmr/bx/n/10 h
+..\OT1/cmr/bx/n/10 e
+..\glue(\rightskip) 15.50005
+.\penalty 300
+.\glue(\baselineskip) 5.05556
+.\hbox(6.94444+1.94444)x200.0003, glue set 118.14088fil
+..\glue(\leftskip) 15.00002
+..\OT1/cmr/bx/n/10 b
+..\kern0.31944
+..\OT1/cmr/bx/n/10 e
+..\OT1/cmr/bx/n/10 g
+..\OT1/cmr/bx/n/10 i
+..\OT1/cmr/bx/n/10 n
+..\OT1/cmr/bx/n/10 n
+..\OT1/cmr/bx/n/10 i
+..\OT1/cmr/bx/n/10 n
+..\OT1/cmr/bx/n/10 g
+..\pdfendlink
+..\penalty 10000
+..\glue 0.0 plus 1.0fil
+..\penalty 10000
+..\hbox(6.44444+0.0)x17.82494, glue set 12.07497fil
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\OT1/cmr/bx/n/10 1
+...\kern -1.0
+...\kern 1.0
+..\penalty 10000
+..\glue(\parfillskip) -15.50005
+..\glue(\rightskip) 15.50005
+.\penalty -300
+.\glue 10.00002 plus 1.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 3.11111
+.\hbox(6.94444+0.0)x200.0003, glue set 48.05792fil
+..\glue(\leftskip) 15.00002
+..\hbox(0.0+0.0)x0.0
+..\glue -15.00002
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.3}
+..\hbox(6.44444+0.0)x15.00002, glue set 9.25005fil
+...\OT1/cmr/bx/n/10 3
+...\glue 0.0 plus 1.0fil
+..\OT1/cmr/bx/n/10 T
+..\OT1/cmr/bx/n/10 h
+..\OT1/cmr/bx/n/10 e
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 U
+..\OT1/cmr/bx/n/10 R
+..\OT1/cmr/bx/n/10 L
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 i
+..\OT1/cmr/bx/n/10 n
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 t
+..\OT1/cmr/bx/n/10 h
+..\OT1/cmr/bx/n/10 e
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 m
+..\OT1/cmr/bx/n/10 i
+..\OT1/cmr/bx/n/10 d
+..\OT1/cmr/bx/n/10 d
+..\OT1/cmr/bx/n/10 l
+..\OT1/cmr/bx/n/10 e
+..\pdfendlink
+..\penalty 10000
+..\glue 0.0 plus 1.0fil
+..\penalty 10000
+..\hbox(6.44444+0.0)x17.82494, glue set 12.07497fil
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\OT1/cmr/bx/n/10 1
+...\kern -1.0
+...\kern 1.0
+..\penalty 10000
+..\glue(\parfillskip) -15.50005
+..\glue(\rightskip) 15.50005
+.\penalty -300
+.\glue 10.00002 plus 1.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 5.05556
+.\hbox(6.94444+0.0)x200.0003, glue set 118.69516fil
+..\glue(\leftskip) 15.00002
+..\hbox(0.0+0.0)x0.0
+..\glue -15.00002
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section*.1}
+..\OT1/cmr/bx/n/10 P
+..\OT1/cmr/bx/n/10 D
+..\OT1/cmr/bx/n/10 F
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 s
+..\OT1/cmr/bx/n/10 t
+..\OT1/cmr/bx/n/10 a
+..\OT1/cmr/bx/n/10 r
+..\OT1/cmr/bx/n/10 r
+..\OT1/cmr/bx/n/10 e
+..\OT1/cmr/bx/n/10 d
+..\pdfendlink
+..\penalty 10000
+..\glue 0.0 plus 1.0fil
+..\penalty 10000
+..\hbox(6.44444+0.0)x17.82494, glue set 12.07497fil
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\OT1/cmr/bx/n/10 1
+...\kern -1.0
+...\kern 1.0
+..\penalty 10000
+..\glue(\parfillskip) -15.50005
+..\glue(\rightskip) 15.50005
+.\penalty -300
+.\glue 10.00002 plus 1.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 5.05556
+.\hbox(6.94444+1.94444)x200.0003, glue set 0.4074
+..\glue(\leftskip) 15.00002
+..\hbox(0.0+0.0)x0.0
+..\glue -15.00002
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.4}
+..\hbox(6.44444+0.0)x15.00002, glue set 9.25005fil
+...\OT1/cmr/bx/n/10 4
+...\glue 0.0 plus 1.0fil
+..\OT1/cmr/bx/n/10 B
+..\OT1/cmr/bx/n/10 e
+..\OT1/cmr/bx/n/10 y
+..\kern-0.31944
+..\OT1/cmr/bx/n/10 o
+..\OT1/cmr/bx/n/10 n
+..\OT1/cmr/bx/n/10 d
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 t
+..\OT1/cmr/bx/n/10 h
+..\OT1/cmr/bx/n/10 e
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 s
+..\OT1/cmr/bx/n/10 t
+..\OT1/cmr/bx/n/10 a
+..\OT1/cmr/bx/n/10 n
+..\OT1/cmr/bx/n/10 d
+..\OT1/cmr/bx/n/10 a
+..\OT1/cmr/bx/n/10 r
+..\OT1/cmr/bx/n/10 d
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 m
+..\OT1/cmr/bx/n/10 o
+..\kern0.31944
+..\OT1/cmr/bx/n/10 d
+..\OT1/cmr/bx/n/10 e
+..\OT1/cmr/bx/n/10 l
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 u
+..\OT1/cmr/bx/n/10 s
+..\OT1/cmr/bx/n/10 e
+..\OT1/cmr/bx/n/10 d
+..\glue(\rightskip) 15.50005
+.\penalty 300
+.\glue(\baselineskip) 3.61111
+.\hbox(6.44444+0.0)x200.0003, glue set 144.65463fil
+..\glue(\leftskip) 15.00002
+..\OT1/cmr/bx/n/10 o
+..\OT1/cmr/bx/n/10 n
+..\OT1/cmr/bx/n/10 c
+..\OT1/cmr/bx/n/10 e
+..\pdfendlink
+..\penalty 10000
+..\glue 0.0 plus 1.0fil
+..\penalty 10000
+..\hbox(6.44444+0.0)x17.82494, glue set 12.07497fil
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\OT1/cmr/bx/n/10 1
+...\kern -1.0
+...\kern 1.0
+..\penalty 10000
+..\glue(\parfillskip) -15.50005
+..\glue(\rightskip) 15.50005
+.\penalty -300
+.\glue 10.00002 plus 1.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.5
+.\hbox(7.5+2.5)x200.0003, glue set - 0.20984
+..\glue(\leftskip) 15.00002
+..\hbox(0.0+0.0)x0.0
+..\glue -15.00002
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.5}
+..\hbox(6.44444+0.0)x15.00002, glue set 9.25005fil
+...\OT1/cmr/bx/n/10 5
+...\glue 0.0 plus 1.0fil
+..\OT1/cmr/bx/n/10 P
+..\kern-0.31944
+..\OT1/cmr/bx/n/10 o
+..\OT1/cmr/bx/n/10 r
+..\OT1/cmr/bx/n/10 t
+..\OT1/cmr/bx/n/10 a
+..\OT1/cmr/bx/n/10 b
+..\OT1/cmr/bx/n/10 l
+..\OT1/cmr/bx/n/10 e
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 d
+..\OT1/cmr/bx/n/10 o
+..\kern0.31944
+..\OT1/cmr/bx/n/10 c
+..\OT1/cmr/bx/n/10 u
+..\OT1/cmr/bx/n/10 m
+..\OT1/cmr/bx/n/10 e
+..\OT1/cmr/bx/n/10 n
+..\kern-0.31944
+..\OT1/cmr/bx/n/10 t
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 f
+..\OT1/cmr/bx/n/10 o
+..\OT1/cmr/bx/n/10 r
+..\OT1/cmr/bx/n/10 m
+..\OT1/cmr/bx/n/10 a
+..\OT1/cmr/bx/n/10 t
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\OT1/cmr/bx/n/10 (
+..\OT1/cmr/bx/n/10 P
+..\OT1/cmr/bx/n/10 D
+..\OT1/cmr/bx/n/10 F
+..\OT1/cmr/bx/n/10 )
+..\glue(\rightskip) 15.50005
+.\penalty 300
+.\glue(\baselineskip) 2.55556
+.\hbox(6.94444+0.0)x200.0003, glue set 144.9741fil
+..\glue(\leftskip) 15.00002
+..\OT1/cmr/bx/n/10 a
+..\OT1/cmr/bx/n/10 n
+..\OT1/cmr/bx/n/10 d
+..\glue 3.83331 plus 1.91666 minus 1.27777
+..\pdfendlink
+..\penalty 10000
+..\glue 0.0 plus 1.0fil
+..\penalty 10000
+..\hbox(6.44444+0.0)x17.82494, glue set 12.07497fil
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\OT1/cmr/bx/n/10 1
+...\kern -1.0
+...\kern 1.0
+..\penalty 10000
+..\glue(\parfillskip) -15.50005
+..\glue(\rightskip) 15.50005
+! OK.
+<argument> ...e =20em\tableofcontents }\showbox 0 
+                                                  \setbox 0\hbox {\PDF {} an...
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x263.16713
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{glo:PDF}
+.\OT1/cmr/m/n/10 P
+.\OT1/cmr/m/n/10 D
+.\OT1/cmr/m/n/10 F
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\hbox(7.5+0.0)x0.0
+..\hbox(0.0+0.0)x0.0, shifted -7.5
+...\pdfdest name{glo:URL} xyz
+...\penalty 10000
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 f
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 m
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 e
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 o
+.\kern0.27779
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 r
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 U
+.\OT1/cmr/m/n/10 R
+.\OT1/cmr/m/n/10 L
+.\OT1/cmr/m/n/10 )
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 f
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 e
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\kern-0.27779
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 n
+.\kern-0.27779
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 s
+! OK.
+<argument> ...RL {} after the contents}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 9: List of figures: no first use, no links to the acronyms
+============================================================
+(hep-acronym-hyperref.lof)
+\tf@lof=\write...
+> \box...=
+\vbox(50.80547+1.94444)x200.0003
+.\penalty -300
+.\glue 15.0694 plus 4.30554 minus 0.86108
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(12.59995+5.40005)x200.0003, glue set 97.0454fil
+..\rule(12.59995+5.40005)x0.0
+..\OT1/cmr/bx/n/14.4 L
+..\OT1/cmr/bx/n/14.4 i
+..\OT1/cmr/bx/n/14.4 s
+..\OT1/cmr/bx/n/14.4 t
+..\glue 5.4 plus 2.7 minus 1.79999
+..\OT1/cmr/bx/n/14.4 o
+..\OT1/cmr/bx/n/14.4 f
+..\glue 5.4 plus 2.7 minus 1.79999
+..\OT1/cmr/bx/n/14.4 F
+..\OT1/cmr/bx/n/14.4 i
+..\OT1/cmr/bx/n/14.4 g
+..\OT1/cmr/bx/n/14.4 u
+..\OT1/cmr/bx/n/14.4 r
+..\OT1/cmr/bx/n/14.4 e
+..\OT1/cmr/bx/n/14.4 s
+..\kern 0.0
+..\rule(12.59995+5.40005)x0.0
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty 10000
+.\penalty 10000
+.\glue 9.90276 plus 0.86108
+.\glue 0.0
+.\glue 0.0 plus 0.2
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\lineskip) 1.0
+.\hbox(6.83331+1.94444)x200.0003, glue set 68.30559fill
+..\glue(\leftskip) 38.00008
+..\hbox(0.0+0.0)x15.00002
+..\hbox(0.0+0.0)x0.0
+..\penalty 10000
+..\glue -38.00008
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1}
+..\hbox(6.44444+0.0)x23.00006, glue set 18.00005fil
+...\OT1/cmr/m/n/10 1
+...\glue 0.0 plus 1.0fil
+..\OT1/cmr/m/n/10 Q
+..\OT1/cmr/m/n/10 C
+..\OT1/cmr/m/n/10 D
+..\glue 3.33333 plus 1.66666 minus 1.11111
+..\OT1/cmr/m/n/10 i
+..\OT1/cmr/m/n/10 n
+..\glue 3.33333 plus 1.66666 minus 1.11111
+..\OT1/cmr/m/n/10 a
+..\glue 3.33333 plus 1.66666 minus 1.11111
+..\OT1/cmr/m/n/10 c
+..\OT1/cmr/m/n/10 a
+..\OT1/cmr/m/n/10 p
+..\OT1/cmr/m/n/10 t
+..\OT1/cmr/m/n/10 i
+..\OT1/cmr/m/n/10 o
+..\OT1/cmr/m/n/10 n
+..\pdfendlink
+..\penalty 10000
+..\leaders 0.0 plus 1.0fill
+...\hbox(1.05554+0.0)x7.77766
+....\mathon
+....\kern 2.49994
+....\hbox(1.05554+0.0)x2.77779
+.....\OT1/cmr/m/n/10 .
+....\kern 2.49994
+....\mathoff
+..\penalty 10000
+..\hbox(6.44444+0.0)x15.50005, glue set 10.50003fil
+...\glue 0.0 plus 1.0fil
+...\OT1/cmr/m/n/10 1
+...\kern -1.0
+...\kern 1.0
+..\penalty 10000
+..\glue(\parfillskip) -25.50006
+..\glue(\rightskip) 25.50006
+! OK.
+<argument> ...ize =20em\listoffigures }\showbox 0 
+                                                  \setbox 0\hbox {\QCD }\sho...
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x149.11145
+.\hbox(7.5+0.0)x0.0
+..\hbox(0.0+0.0)x0.0, shifted -7.5
+...\pdfdest name{glo:QCD} xyz
+...\penalty 10000
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\kern-0.27779
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 m
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 m
+.\OT1/cmr/m/n/10 o
+.\kern0.27779
+.\OT1/cmr/m/n/10 d
+.\OT1/cmr/m/n/10 y
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 m
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 s
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 Q
+.\OT1/cmr/m/n/10 C
+.\OT1/cmr/m/n/10 D
+.\OT1/cmr/m/n/10 )
+! OK.
+<argument> ... 0 \setbox 0\hbox {\QCD }\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 10: Link in link: first use in href, later use in hyperlink and href
+============================================================
+> \box...=
+\hbox(7.5+2.5)x179.66707
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://example.org)>>}
+.\hbox(7.5+0.0)x0.0
+..\hbox(0.0+0.0)x0.0, shifted -7.5
+...\pdfdest name{glo:API} xyz
+...\penalty 10000
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 m
+.\OT1/cmr/m/n/10 m
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 g
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 n
+.\kern-0.27779
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 f
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 e
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 P
+.\OT1/cmr/m/n/10 I
+.\OT1/cmr/m/n/10 )
+.\pdfendlink
+! OK.
+<argument> ...ps://example.org}{\API }}\showbox 0 
+                                                  \setbox 0\hbox {\hyperlink...
+l. ...}
+> \box...=
+\hbox(6.94444+0.0)x61.6668
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{target}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 P
+.\OT1/cmr/m/n/10 I
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 P
+.\OT1/cmr/m/n/10 D
+.\OT1/cmr/m/n/10 F
+.\pdfendlink
+! OK.
+<argument> ...rget}{\API {} and \PDF }}\showbox 0 
+                                                  \setbox 0\hbox {\href {htt...
+l. ...}
+> \box...=
+\hbox(6.83331+0.0)x17.9167
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://example.org)>>}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 P
+.\OT1/cmr/m/n/10 I
+.\pdfendlink
+! OK.
+<argument> ...ps://example.org}{\API }}\showbox 0 
+                                                  \setbox 0\hbox {\API {} st...
+l. ...}
+> \box...=
+\hbox(6.94444+0.0)x61.08345
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{glo:API}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 P
+.\OT1/cmr/m/n/10 I
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 l
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 k
+.\OT1/cmr/m/n/10 s
+! OK.
+<argument> ...box {\API {} still links}\showbox 0 
+l. ...}
+============================================================

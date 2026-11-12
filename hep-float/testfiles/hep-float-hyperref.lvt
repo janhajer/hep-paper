@@ -1,0 +1,108 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-float}
+\usepackage{hyperref}
+\input{hep-regression}
+
+% Tests run once: fake the files of a previous run. The entries are those
+% that hep-float, subcaption and hyperref write for
+%   \begin{figure}\caption{Plain caption with $m_H$}\end{figure}
+%   \begin{figures}{2}\caption{first}\figure\caption{second}\end{figures}
+%   \begin{figure}\begin{panels}{2}\caption{sub a}\label{fig:a}\panel
+%     \caption{sub b}\label{fig:b}\end{panels}
+%     \caption{Panels \subref{fig:a} and \subref{fig:b}}\label{fig:main}
+%   \end{figure}
+%   \begin{tables}{2}\caption{first table}\table\caption{second table}
+%   \end{tables}
+\begin{filecontents*}[overwrite]{\jobname.aux}
+\relax
+\newlabel{fig:plain}{{1}{1}{Plain caption with $m_H$}{figure.caption.1}{}}
+\newlabel{fig:a}{{4a}{1}{sub a}{figure.caption.3}{}}
+\newlabel{sub@fig:a}{{a}{1}{sub a}{figure.caption.3}{}}
+\newlabel{fig:b}{{4b}{1}{sub b}{figure.caption.3}{}}
+\newlabel{sub@fig:b}{{b}{1}{sub b}{figure.caption.3}{}}
+\newlabel{fig:main}{{4}{1}{Panels \subref {fig:a} and \subref {fig:b}}{figure.caption.3}{}}
+\end{filecontents*}
+\begin{filecontents*}[overwrite]{\jobname.lof}
+\contentsline {figure}{\numberline {1}{\ignorespaces Plain caption with $m_H$}}{1}{figure.caption.1}%
+\contentsline {figure}{\numberline {2}{\ignorespaces first}}{1}{figure.caption.2}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Panels \subref {fig:a} and \subref {fig:b}}}{1}{figure.caption.3}%
+\end{filecontents*}
+\begin{filecontents*}[overwrite]{\jobname.lot}
+\contentsline {table}{\numberline {1}{\ignorespaces first table}}{1}{table.caption.4}%
+\end{filecontents*}
+% Do not overwrite the faked files
+\nofiles
+
+\makeatletter
+\newcommand*{\SHOWANCHOR}[1]{\TYPE{#1: \@currentlabel, \@currentHref}}
+% Print the contents lines instead of writing them
+\newcommand*{\SHOWCONTENTSLINES}{%
+  \def\addcontentsline##1##2##3{%
+    \protected@edef\hep@test@line{##3}%
+    \TYPE{##1/##2: \detokenize\expandafter{\hep@test@line}}%
+  }%
+}
+\makeatother
+
+\begin{document}
+% Load the fonts of the lists
+\setbox0\vbox{\listoffigures\listoftables}
+\START
+
+\TEST{List of figures}{%
+  \SHOWVBOX{\listoffigures}%
+}
+
+\TEST{List of tables}{%
+  \SHOWVBOX{\listoftables}%
+}
+
+\TEST{Anchors of the captions}{%
+  \SHOWCONTENTSLINES
+  \begin{figure}\caption{plain}\SHOWANCHOR{plain}\end{figure}%
+  \begin{figures}{2}%
+    \caption{first}\SHOWANCHOR{first}%
+    \figure
+    \caption{second}\SHOWANCHOR{second}%
+  \end{figures}%
+  \begin{figure}%
+    \begin{panels}{2}%
+      \caption{sub a}\SHOWANCHOR{sub a}%
+      \panel
+      \caption{sub b}\SHOWANCHOR{sub b}%
+    \end{panels}%
+    \caption{main}\SHOWANCHOR{main}%
+  \end{figure}%
+  \begin{tables}{2}%
+    \caption{first table}\SHOWANCHOR{first table}%
+    \table
+    \caption{second table}\SHOWANCHOR{second table}%
+  \end{tables}%
+}
+
+\TEST{Optional short caption in figures}{%
+  \SHOWCONTENTSLINES
+  \begin{figure}\caption[short]{long}\end{figure}%
+  \begin{figures}{2}%
+    \caption[short first]{long first}%
+    \figure
+    \caption[short second]{long second}%
+  \end{figures}%
+  \begin{tables}{2}%
+    \caption[short first]{long first}%
+  \end{tables}%
+}
+
+\TEST{PDF strings of caption texts}{%
+  \PDFSTRING{Plain caption with $m_H$}%
+  \PDFSTRING{Panels \subref{fig:a} and \subref{fig:b}}%
+  \PDFSTRING{Figure \ref{fig:main} and \ref{fig:a}}%
+}
+
+\TEST{Links to figures and panels}{%
+  \SHOWHBOX{\subref{fig:a}}%
+  \SHOWHBOX{\ref*{fig:a}}%
+}
+
+\END

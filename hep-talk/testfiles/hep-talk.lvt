@@ -1,0 +1,248 @@
+% hep-talk with the article class and the hep-dark theme: options, frames,
+% slides, overlays, blocks, columns, rows, title, logo, citations and
+% bookmarks. hep-talk is not a beamer theme: with the beamer class it fails
+% in the preamble (\if@titlepage undefined in titling).
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-talk}
+\usepackage{hep-dark}
+\input{hep-regression}
+\makeatletter
+% \PACKAGES{list}: loaded or not, and the options it was loaded with
+\newcommand*{\PACKAGES}[1]{%
+  \@for\hep@test@name:=#1\do{%
+    \TYPE{\hep@test@name: \expandafter\ifx
+      \csname ver@\hep@test@name.sty\endcsname\relax not loaded\else
+      loaded [\unexpanded\expandafter\expandafter\expandafter
+        {\csname opt@\hep@test@name.sty\endcsname}]%
+      \fi}%
+  }%
+}
+% \OVERLAY: the current and the maximal overlay number
+\newcommand*{\OVERLAY}{\TYPE{overlay \the\curoverl@y\space of
+  \the\maxoverl@y}}
+\makeatother
+\title{Talk title}
+\subtitle{Talk subtitle}
+\author{First Last}
+\begin{document}
+\makeatletter
+% Load all fonts and ship out a first page before the test
+\setbox0\vbox{\maketitle\newframe[x]\section{x}x\textit{x}\textbf{x}%
+  {\scriptsize x}{\footnotesize x}$x$\texttt{x}}
+\newframe[First page]x\clearpage
+\START
+
+\TEST{Options and page size}{%
+  \TYPE{paperwidth: \heptalk@paperwidth, ratio: \heptalk@ratio}%
+  \TYPE{paper: \the\paperwidth\space x \the\paperheight}%
+  \TYPE{text: \the\textwidth\space x \the\textheight}%
+  \TYPE{hmargin: \the\hmargin, vmargin: \the\vmargin}%
+}
+
+\TEST{Loaded packages and their options}{%
+  \PACKAGES{hep-font,hep-math-font,hep-bibliography,biblatex,hep-title,%
+    hep-text,hep-math,geometry,xcolor,overlays,titlesec,tikz,hyperref,%
+    hep-reference,hep-acronym,hep-float}%
+}
+
+\TEST{Theme colours}{%
+  \@for\hep@test@name:=PageBg,PageFg,TitleBg,TitleFg,CaptionBg,CaptionFg,%
+    BlockBg,BlockFg,Structure,Highlight\do{%
+    \extractcolorspecs{\hep@test@name}\hep@test@model\hep@test@spec
+    \TYPE{\hep@test@name: \hep@test@model\space\hep@test@spec}%
+  }%
+}
+
+\TEST{Redefined macros}{%
+  \TYPE{\meaning\emph}%
+  \TYPE{\meaning\citestyle}%
+  \TYPE{\meaning\cite}%
+  \TYPE{\meaning\only}%
+  \TYPE{\meaning\visible}%
+}
+
+\TEST{Logo macros}{%
+  \TYPE{\ifdefined\hep@logo\meaning\hep@logo\else undefined\fi}%
+  \TYPE{\meaning\hep@pre@logo}%
+  \TYPE{\meaning\hep@post@logo}%
+  \logo{LOGO}\prelogo{PRE}\postlogo{POST}%
+  \TYPE{\meaning\hep@logo}%
+  \TYPE{\meaning\hep@pre@logo}%
+  \TYPE{\meaning\hep@post@logo}%
+  \setbox0\vbox{\maketitle}%
+  \TYPE{title done}%
+}
+
+\TEST{only and visible without overlay specification}{%
+  \SHOWHBOX{a\only{b}c\visible{d}e}%
+}
+
+\TEST{Slides: overlays are counted}{%
+  \setbox0\vbox{%
+    \begin{slide}[Slide title]
+      \OVERLAY
+      \only<2>{two}%
+      \visible<3>{three}%
+    \end{slide}%
+  }%
+  \setbox0\vbox{%
+    \begin{slide}
+      \OVERLAY
+    \end{slide}%
+  }%
+}
+
+\TEST{Blocks, rows and columns}{%
+  \setbox0\vbox{%
+    \begin{slide}[Blocks]
+      \OVERLAY
+      \begin{block}[Block title]
+        Text
+        \row[Row title]
+        Row text
+      \end{block}
+      \begin{block}*<2>[Visible on 2][.5]
+        Text
+      \end{block}
+      \begin{block}<3>
+        Text
+      \end{block}
+      \begin{columns}[First][2]
+        A
+        \column[Second]
+        B
+      \end{columns}
+      \begin{columns}[First][.3]
+        A
+        \column[Second][.7]
+        B
+      \end{columns}
+    \end{slide}%
+  }%
+  \TYPE{done}%
+}
+
+\TEST{Overlays: closed ranges count, open ranges do not}{%
+  \setbox0\vbox{%
+    \begin{slide}
+      \only<1-3>{A}%
+      \OVERLAY
+    \end{slide}%
+  }%
+  \setbox0\vbox{%
+    \begin{slide}
+      \only<2->{B}%
+      \visible<1,2-4>{C}%
+      \OVERLAY
+    \end{slide}%
+  }%
+}
+
+\TEST{Overlays: footnote counter and aux file}{%
+  \setcounter{footnote}{0}%
+  \setbox0\vbox{%
+    \begin{slide}
+      Text\footnote{Note}%
+      \TYPE{overlay \the\curoverl@y: footnote \thefootnote, aux writes
+        \ifx\protected@write\hep@overlay@write suppressed\else
+        active\fi}%
+      \only<2>{two}%
+    \end{slide}%
+  }%
+}
+
+\TEST{Nested blocks and columns}{%
+  \setbox0\vbox{%
+    \begin{slide}[Nested]
+      \begin{block}[Outer]
+        \begin{block}[Inner]
+          Inner
+          \row[Inner row]
+          Row
+        \end{block}
+        \row[Outer row]
+        \begin{columns}[Left][2]
+          \begin{columns}[a][.3]
+            a
+            \column[b][.7]
+            b
+          \end{columns}
+          \column[Right]
+          \begin{block}[In column]
+            c
+          \end{block}
+        \end{columns}
+      \end{block}
+    \end{slide}%
+  }%
+  \TYPE{done}%
+}
+
+\TEST{Frames}{%
+  \setbox0\vbox{\newframe Text}%
+  \setbox0\vbox{\newframe[Frame title] Text}%
+  \TYPE{done}%
+}
+
+% robustslide reads its body verbatim, so it cannot be inside \TEST
+\BEGINTEST{robustslide: verbatim body and overlays}
+\setbox0\vbox{%
+\begin{robustslide}[Robust]
+\OVERLAY
+\verb|#1 % {| \only<2>{two}
+\end{robustslide}
+}
+\ENDTEST
+
+\TEST{Citation style}{%
+  \SHOWHBOX{\citestyle{[1]}}%
+}
+
+\TEST{Citations: optional arguments}{%
+  \def\citestyle#1{#1}%
+  \RenewDocumentCommand{\autocite}{oom}{%
+    \TYPE{\string\autocite\IfNoValueF{#1}{[#1]}\IfNoValueF{#2}{[#2]}{#3}}}%
+  \cite{a}%
+  \cite[p. 3]{b}%
+  \cite[see][p. 3]{c}%
+}
+
+\TEST{Citations: label macros of the numeric default style}{%
+  \TYPE{style: \hepbib@style}%
+  \@for\hep@test@name:=cite:label,cite:labeldate+extradate,%
+    cite:shorthand\do{%
+    \TYPE{\hep@test@name: \ifcsname abx@macro@\hep@test@name\endcsname
+      defined\else undefined\fi}%
+  }%
+  \TYPE{labeldateparts: \iftoggle{blx@labeldateparts}{true}{false}}%
+}
+
+\TEST{Bibliography macros}{%
+  \TYPE{\expandafter\meaning\csname abx@macro@cite\endcsname}%
+  \TYPE{\expandafter\meaning\csname abx@macro@begentry\endcsname}%
+}
+
+\TEST{Bookmarks: sections}{%
+  \SECTIONBOOKMARKS{%
+    \section{Introduction}%
+    \section{Results with \emph{emphasis}}%
+    \section*{Starred}%
+  }%
+}
+
+\TEST{Document information}{%
+  \PDFINFO{title}%
+  \PDFINFO{author}%
+}
+
+\TEST{Overlays on shipped pages}{%
+  \begin{slide}[Shipped]
+    \only<2>{two}%
+  \end{slide}%
+  \clearpage
+  \TYPE{page \thepage}%
+}
+
+\makeatother
+\END

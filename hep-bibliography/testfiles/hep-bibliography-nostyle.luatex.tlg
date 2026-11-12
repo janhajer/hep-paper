@@ -1,0 +1,67 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: biblatex is not loaded
+============================================================
+style: [], biblatex: no
+============================================================
+============================================================
+TEST 2: Macros independent of biblatex
+============================================================
+> \box...=
+\hbox(6.11+2.29)x57.75, direction TLT
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 x
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 m
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 l
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 .
+.\TU/lmtt/m/n/10 o
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 g
+.\kern0.0 (italic)
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.17+2.29)x84.0, direction TLT
+.\TU/lmtt/m/n/10 n
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 m
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 @
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 x
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 m
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 l
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 .
+.\TU/lmtt/m/n/10 o
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 g
+.\kern0.0 (italic)
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94+1.93)x50.0, direction TLT
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 b
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 c
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

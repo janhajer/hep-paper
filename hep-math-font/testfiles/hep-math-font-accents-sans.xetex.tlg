@@ -1,0 +1,62 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Accents like vec
+============================================================
+> \box...=
+\hbox(9.91+3.518)x17.26382
+.\mathon
+.\vbox(9.91+0.0)x6.77
+..\hbox(7.47+0.0)x0.0, shifted 7.65
+...\TU/hep-sans/m/n/10 glyph#644
+..\kern-4.5
+..\hbox(6.94+0.0)x6.77
+...\TU/hep-sans/m/n/10 glyph#3406
+.\glue 1.66681
+.\TU/hep-sans/m/n/10 glyph#3455
+.\vbox(6.93701+0.021)x4.21701, shifted 3.49701
+..\hbox(5.229+0.0)x0.0, shifted 3.97598
+...\TU/NewCMSansMath-Regular.otf(1)/m/n/7 glyph#644
+..\kern-3.15
+..\hbox(4.858+0.021)x3.71701
+...\TU/hep-sans/m/n/7 glyph#3433
+...\kern0.098
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......WHBOX{$\dashedvec A \, x_{\dottedvec b}$}}
+> \box...=
+\hbox(9.91+3.518)x17.26382
+.\mathon
+.\vbox(9.91+0.0)x6.77
+..\hbox(7.47+0.0)x0.0, shifted 7.65
+...\TU/hep-accent/m/n/10 glyph#28
+..\kern-4.5
+..\hbox(6.94+0.0)x6.77
+...\TU/hep-sans/m/n/10 glyph#3406
+.\glue 1.66681
+.\TU/hep-sans/m/n/10 glyph#3455
+.\vbox(6.93701+0.021)x4.21701, shifted 3.49701
+..\hbox(5.229+0.0)x0.0, shifted 3.97598
+...\TU/hep-accent/m/n/7 glyph#29
+..\kern-3.15
+..\hbox(4.858+0.021)x3.71701
+...\TU/hep-sans/m/n/7 glyph#3433
+...\kern0.098
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......WHBOX{$\dashedvec A \, x_{\dottedvec b}$}}
+============================================================
+============================================================
+TEST 2: Bold math version
+============================================================
+> \box...=
+\hbox(7.5+2.5)x3.89
+.\mathon
+.\TU/hep-sans/m/n/10 glyph#9
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......ldmath$\vec x \dashedvec x \dottedvec x$}}
+============================================================

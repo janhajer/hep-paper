@@ -1,0 +1,1219 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Footnotes before the title
+============================================================
+footnote=1
+macro:->\protect \footnotetext [1]{\protect \href  {mailto:bob@mail.com}{\protect \nolinkurl  {bob@mail.com}}}
+============================================================
+============================================================
+TEST 2: \centering outside the title keeps the default \@flushglue 
+============================================================
+0.0pt plus 1.0fil
+============================================================
+============================================================
+TEST 3: Counters
+============================================================
+affil=1, Maxaffil=0, authors=3, editors=2, endorsers=2
+============================================================
+============================================================
+TEST 4: Footnotes after the title
+============================================================
+footnote=0
+macro:->\protect \footnotetext [1]{\protect \href  {mailto:bob@mail.com}{\protect \nolinkurl  {bob@mail.com}}}\protect \footnotetext [2]{\protect \href  {mailto:ann@mail.com}{\protect \nolinkurl  {ann@mail.com}}}\protect \footnotetext [3]{\protect \href  {mailto:cid@mail.com}{\protect \nolinkurl  {cid@mail.com}} \protect \orcidlinkX  {}{0000-0002-1825-0097}{0000-0002-1825-0097}}
+============================================================
+============================================================
+TEST 5: Author line: affiliation marks and email footnote marks
+============================================================
+> \box...=
+\hbox(9.98671+2.316)x136.54803, direction TLT
+.\TU/lmr/m/n/12 A
+.\TU/lmr/m/n/12 n
+.\TU/lmr/m/n/12 n
+.\penalty 10000
+.\hbox(5.632+1.72)x3.776, shifted -4.3547, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/8 †
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.1}
+.\hbox(3.568+0.08)x4.248, shifted -4.3547, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/8 a
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfendlink
+.\hbox(0.888+1.552)x2.36, shifted -4.3547, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/8 ,
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.2}
+.\hbox(5.552+0.08)x4.72, shifted -4.3547, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/8 b
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfendlink
+.\TU/lmr/m/n/12 ,
+.\glue(\spaceskip) 3.912 plus 2.44499 minus 1.0432
+.\TU/lmr/m/n/12 B
+.\TU/lmr/m/n/12 o
+.\TU/lmr/m/n/12 b
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.2}
+.\hbox(5.552+0.08)x4.72, shifted -4.3547, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/8 b
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfendlink
+.\hbox(0.888+1.552)x2.36, shifted -4.3547, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/8 ,
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{footnote.1}
+.\hbox(3.728+0.0)x4.248, shifted -4.3547, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/8 ∗
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfendlink
+.\TU/lmr/m/n/12 ,
+.\glue(\spaceskip) 3.912 plus 2.44499 minus 1.0432
+.\TU/lmr/m/n/12 a
+.\TU/lmr/m/n/12 n
+.\TU/lmr/m/n/12 d
+.\glue(\spaceskip) 3.912 plus 1.956 minus 1.304
+.\TU/lmr/m/n/12 C
+.\TU/lmr/m/n/12 i
+.\TU/lmr/m/n/12 d
+.\penalty 10000
+.\hbox(5.632+1.632)x3.776, shifted -4.3547, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/8 ‡
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.3}
+.\hbox(3.568+0.08)x3.776, shifted -4.3547, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/8 c
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfendlink
+! OK.
+<argument> ...box 0\box \TESTauthorbox \showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 6: Editor line
+============================================================
+> \box...=
+\hbox(9.90671+2.448)x81.87201, direction TLT
+.\TU/lmr/m/n/12 E
+.\TU/lmr/m/n/12 v
+.\kern-0.324 (font)
+.\TU/lmr/m/n/12 e
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.4}
+.\hbox(5.552+0.08)x4.72, shifted -4.3547, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/8 d
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfendlink
+.\glue(\spaceskip) 3.912 plus 1.956 minus 1.304
+.\TU/lmr/m/n/12 a
+.\TU/lmr/m/n/12 n
+.\TU/lmr/m/n/12 d
+.\glue(\spaceskip) 3.912 plus 1.956 minus 1.304
+.\TU/lmr/m/n/12 F
+.\kern-0.984 (font)
+.\TU/lmr/m/n/12 a
+.\kern-0.324 (font)
+.\TU/lmr/m/n/12 y
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.4}
+.\hbox(5.552+0.08)x4.72, shifted -4.3547, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/8 d
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfendlink
+.\hbox(0.888+1.552)x2.36, shifted -4.3547, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/8 ,
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.5}
+.\hbox(3.568+0.08)x3.776, shifted -4.3547, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/8 e
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfendlink
+! OK.
+<argument> ...box 0\box \TESTeditorbox \showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 7: Endorser line with two endorsers
+============================================================
+> \box...=
+\hbox(8.448+0.252)x74.11203, direction TLT
+.\TU/lmr/m/n/12 G
+.\TU/lmr/m/n/12 u
+.\TU/lmr/m/n/12 s
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.1}
+.\hbox(3.568+0.08)x4.248, shifted -4.3547, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/8 a
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfendlink
+.\glue(\spaceskip) 3.912 plus 1.956 minus 1.304
+.\TU/lmr/m/n/12 a
+.\TU/lmr/m/n/12 n
+.\TU/lmr/m/n/12 d
+.\glue(\spaceskip) 3.912 plus 1.956 minus 1.304
+.\TU/lmr/m/n/12 H
+.\TU/lmr/m/n/12 a
+.\TU/lmr/m/n/12 l
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.3}
+.\hbox(3.568+0.08)x3.776, shifted -4.3547, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/8 c
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfendlink
+! OK.
+<argument> ...x 0\box \TESTendorserbox \showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 8: Endorser and affiliation block
+============================================================
+> \box...=
+\vbox(93.448+0.0)x345.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue -10.0 plus -4.0 minus -5.0
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(8.448+0.252)x345.0, glue set 105.11fil, direction TLT
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+...\glue 0.0
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\TU/lmr/m/it/12 E
+..\TU/lmr/m/it/12 n
+..\discretionary (penalty 50)
+...< \TU/lmr/m/it/12 -
+..\TU/lmr/m/it/12 d
+..\TU/lmr/m/it/12 o
+..\TU/lmr/m/it/12 r
+..\TU/lmr/m/it/12 s
+..\TU/lmr/m/it/12 e
+..\TU/lmr/m/it/12 r
+..\TU/lmr/m/it/12 s
+..\TU/lmr/m/it/12 :
+..\glue(\spaceskip) 5.59999 plus 4.20001 minus 0.7
+..\hbox(8.448+0.252)x74.11203, direction TLT
+...\TU/lmr/m/n/12 G
+...\TU/lmr/m/n/12 u
+...\TU/lmr/m/n/12 s
+...\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.1}
+...\hbox(3.568+0.08)x4.248, shifted -4.3547, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\TU/lmr/m/n/8 a
+....\pdfcolorstack 0 pop
+...\penalty 10000
+...\glue 0.5
+...\kern0.0
+...\pdfendlink
+...\glue(\spaceskip) 3.912 plus 1.956 minus 1.304
+...\TU/lmr/m/n/12 a
+...\TU/lmr/m/n/12 n
+...\TU/lmr/m/n/12 d
+...\glue(\spaceskip) 3.912 plus 1.956 minus 1.304
+...\TU/lmr/m/n/12 H
+...\TU/lmr/m/n/12 a
+...\TU/lmr/m/n/12 l
+...\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.3}
+...\hbox(3.568+0.08)x3.776, shifted -4.3547, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\TU/lmr/m/n/8 c
+....\pdfcolorstack 0 pop
+...\penalty 10000
+...\glue 0.5
+...\kern0.0
+...\pdfendlink
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+.\glue -10.252 plus -3.0 minus -5.0
+.\penalty -51
+.\glue 0.252
+.\glue 10.0 plus 3.0 minus 5.0
+.\pdfdest name{affiliation.1} xyz
+.\penalty 10000
+.\glue -10.0 plus -3.0 minus -5.0
+.\glue 10.0 plus 3.0 minus 5.0
+.\write1{\newlabel{a}{{\protect \textsuperscript  {\protect \normalfont  a}}{\thepage }{}{affiliation.1}{}}}
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.24872
+.\hbox(6.49928+1.845)x345.0, glue set 0.72041, direction TLT
+..\glue(\leftskip) 0.0 plus 172.5
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\hbox(2.676+0.06)x3.666, shifted -3.82329, direction TLT
+...\pdfcolorstack 0 push {0 g 0 G}
+...\TU/lmr/m/n/6 a
+...\pdfcolorstack 0 pop
+..\penalty 10000
+..\glue 0.5
+..\kern0.0
+..\TU/lmr/m/n/9 A
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/9 f
+...< \TU/lmr/m/n/9 -
+...> \TU/lmr/m/n/9 ﬁ
+...= \TU/lmr/m/n/9 ﬃ
+..\TU/lmr/m/n/9 l
+..\glue(\spaceskip) 3.087 plus 1.5435 minus 1.029
+..\TU/lmr/m/n/9 A
+..\TU/lmr/m/n/9 ,
+..\penalty -50
+..\glue(\spaceskip) 3.087 plus 1.5435 minus 1.029
+..\TU/lmr/m/n/9 C
+..\TU/lmr/m/n/9 i
+..\TU/lmr/m/n/9 t
+..\kern-0.261 (font)
+..\TU/lmr/m/n/9 y
+..\kern-0.774 (font)
+..\TU/lmr/m/n/9 ,
+..\penalty -50
+..\glue(\spaceskip) 3.087 plus 1.92937 minus 0.8232
+..\TU/lmr/m/n/9 C
+..\TU/lmr/m/n/9 o
+..\TU/lmr/m/n/9 u
+..\TU/lmr/m/n/9 n
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/9 -
+...= \kern-0.261 (font)
+..\TU/lmr/m/n/9 t
+..\TU/lmr/m/n/9 r
+..\TU/lmr/m/n/9 y
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 172.5
+.\glue 0.0 plus -1.0
+.\pdfdest name{affiliation.2} xyz
+.\penalty 10000
+.\write1{\newlabel{b}{{\protect \textsuperscript  {\protect \normalfont  b}}{\thepage }{}{affiliation.2}{}}}
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 1.16771
+.\hbox(7.98729+0.0)x345.0, glue set 0.9049, direction TLT
+..\glue(\leftskip) 0.0 plus 172.5
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(4.164+0.06)x4.056, shifted -3.82329, direction TLT
+...\pdfcolorstack 0 push {0 g 0 G}
+...\TU/lmr/m/n/6 b
+...\pdfcolorstack 0 pop
+..\penalty 10000
+..\glue 0.5
+..\kern0.0
+..\TU/lmr/m/n/9 A
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/9 f
+...< \TU/lmr/m/n/9 -
+...> \TU/lmr/m/n/9 ﬁ
+...= \TU/lmr/m/n/9 ﬃ
+..\TU/lmr/m/n/9 l
+..\glue(\spaceskip) 3.087 plus 1.5435 minus 1.029
+..\TU/lmr/m/n/9 B
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 172.5
+.\glue 0.0 plus -1.0
+.\pdfdest name{affiliation.3} xyz
+.\penalty 10000
+.\write1{\newlabel{c}{{\protect \textsuperscript  {\protect \normalfont  c}}{\thepage }{}{affiliation.3}{}}}
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.50072
+.\hbox(6.49928+0.198)x345.0, glue set 0.90678, direction TLT
+..\glue(\leftskip) 0.0 plus 172.5
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(2.676+0.06)x3.276, shifted -3.82329, direction TLT
+...\pdfcolorstack 0 push {0 g 0 G}
+...\TU/lmr/m/n/6 c
+...\pdfcolorstack 0 pop
+..\penalty 10000
+..\glue 0.5
+..\kern0.0
+..\TU/lmr/m/n/9 A
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/9 f
+...< \TU/lmr/m/n/9 -
+...> \TU/lmr/m/n/9 ﬁ
+...= \TU/lmr/m/n/9 ﬃ
+..\TU/lmr/m/n/9 l
+..\glue(\spaceskip) 3.087 plus 1.5435 minus 1.029
+..\TU/lmr/m/n/9 C
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 172.5
+.\glue 0.0 plus -1.0
+.\pdfdest name{affiliation.4} xyz
+.\penalty 10000
+.\write1{\newlabel{ea}{{\protect \textsuperscript  {\protect \normalfont  d}}{\thepage }{}{affiliation.4}{}}}
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 2.81471
+.\hbox(7.98729+0.0)x345.0, glue set 0.90343, direction TLT
+..\glue(\leftskip) 0.0 plus 172.5
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(4.164+0.06)x4.056, shifted -3.82329, direction TLT
+...\pdfcolorstack 0 push {0 g 0 G}
+...\TU/lmr/m/n/6 d
+...\pdfcolorstack 0 pop
+..\penalty 10000
+..\glue 0.5
+..\kern0.0
+..\TU/lmr/m/n/9 A
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/9 f
+...< \TU/lmr/m/n/9 -
+...> \TU/lmr/m/n/9 ﬁ
+...= \TU/lmr/m/n/9 ﬃ
+..\TU/lmr/m/n/9 l
+..\glue(\spaceskip) 3.087 plus 1.5435 minus 1.029
+..\TU/lmr/m/n/9 D
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 172.5
+.\glue 0.0 plus -1.0
+.\pdfdest name{affiliation.5} xyz
+.\penalty 10000
+.\write1{\newlabel{eb}{{\protect \textsuperscript  {\protect \normalfont  e}}{\thepage }{}{affiliation.5}{}}}
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.50072
+.\hbox(6.49928+0.0)x345.0, glue set 0.90791, direction TLT
+..\glue(\leftskip) 0.0 plus 172.5
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(2.676+0.06)x3.276, shifted -3.82329, direction TLT
+...\pdfcolorstack 0 push {0 g 0 G}
+...\TU/lmr/m/n/6 e
+...\pdfcolorstack 0 pop
+..\penalty 10000
+..\glue 0.5
+..\kern0.0
+..\TU/lmr/m/n/9 A
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/9 f
+...< \TU/lmr/m/n/9 -
+...> \TU/lmr/m/n/9 ﬁ
+...= \TU/lmr/m/n/9 ﬃ
+..\TU/lmr/m/n/9 l
+..\glue(\spaceskip) 3.087 plus 1.5435 minus 1.029
+..\TU/lmr/m/n/9 E
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 172.5
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+<argument> ...\box \TESTaffiliationbox \showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 9: Author line title: plural
+============================================================
+> \box...=
+\vbox(34.0+0.0)x200.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(9.79996+4.20004)x200.0, glue set 64.95601fil, direction TLT
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\hbox(9.79996+4.20004)x70.088, direction TLT
+...\vbox(9.79996+4.20004)x70.088, direction TLT
+....\hbox(9.79996+4.20004)x70.088, direction TLT
+.....\glue(\tabskip) 0.0
+.....\hbox(9.79996+4.20004)x70.088, direction TLT
+......\rule(9.79996+4.20004)x0.0
+......\glue 6.0
+......\glue 0.0 plus 1.0fil
+......\glue 0.00002
+......\TU/lmr/m/it/12 A
+......\kern-0.6 (font)
+......\TU/lmr/m/it/12 u
+......\discretionary (penalty 50)
+.......< \TU/lmr/m/it/12 -
+......\TU/lmr/m/it/12 t
+......\TU/lmr/m/it/12 h
+......\TU/lmr/m/it/12 o
+......\TU/lmr/m/it/12 r
+......\TU/lmr/m/it/12 s
+......\TU/lmr/m/it/12 :
+......\glue(\spaceskip) 5.59999 plus 4.20001 minus 0.7
+......\TU/lmr/m/n/12 X
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 10: Editor line title: plural
+============================================================
+> \box...=
+\vbox(34.0+0.0)x200.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(9.79996+4.20004)x200.0, glue set 66.39fil, direction TLT
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\hbox(9.79996+4.20004)x67.22, direction TLT
+...\vbox(9.79996+4.20004)x67.22, direction TLT
+....\hbox(9.79996+4.20004)x67.22, direction TLT
+.....\glue(\tabskip) 0.0
+.....\hbox(9.79996+4.20004)x67.22, direction TLT
+......\rule(9.79996+4.20004)x0.0
+......\glue 6.0
+......\glue 0.0 plus 1.0fil
+......\glue 0.00002
+......\TU/lmr/m/it/12 E
+......\TU/lmr/m/it/12 d
+......\discretionary (penalty 50)
+.......< \TU/lmr/m/it/12 -
+......\TU/lmr/m/it/12 i
+......\discretionary (penalty 50)
+.......< \TU/lmr/m/it/12 -
+......\TU/lmr/m/it/12 t
+......\TU/lmr/m/it/12 o
+......\TU/lmr/m/it/12 r
+......\TU/lmr/m/it/12 s
+......\TU/lmr/m/it/12 :
+......\glue(\spaceskip) 5.59999 plus 4.20001 minus 0.7
+......\TU/lmr/m/n/12 X
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 11: Endorser line title: plural
+============================================================
+> \box...=
+\vbox(34.0+0.0)x200.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(9.79996+4.20004)x200.0, glue set 59.26201fil, direction TLT
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\hbox(9.79996+4.20004)x81.476, direction TLT
+...\vbox(9.79996+4.20004)x81.476, direction TLT
+....\hbox(9.79996+4.20004)x81.476, direction TLT
+.....\glue(\tabskip) 0.0
+.....\hbox(9.79996+4.20004)x81.476, direction TLT
+......\rule(9.79996+4.20004)x0.0
+......\glue 6.0
+......\glue 0.0 plus 1.0fil
+......\glue 0.00002
+......\TU/lmr/m/it/12 E
+......\TU/lmr/m/it/12 n
+......\discretionary (penalty 50)
+.......< \TU/lmr/m/it/12 -
+......\TU/lmr/m/it/12 d
+......\TU/lmr/m/it/12 o
+......\TU/lmr/m/it/12 r
+......\TU/lmr/m/it/12 s
+......\TU/lmr/m/it/12 e
+......\TU/lmr/m/it/12 r
+......\TU/lmr/m/it/12 s
+......\TU/lmr/m/it/12 :
+......\glue(\spaceskip) 5.59999 plus 4.20001 minus 0.7
+......\TU/lmr/m/n/12 X
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 12: Line titles: singular, and no author title without editors
+============================================================
+> \box...=
+\vbox(34.0+0.0)x200.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(9.79996+4.20004)x200.0, glue set 67.356fil, direction TLT
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\hbox(9.79996+4.20004)x65.288, direction TLT
+...\vbox(9.79996+4.20004)x65.288, direction TLT
+....\hbox(9.79996+4.20004)x65.288, direction TLT
+.....\glue(\tabskip) 0.0
+.....\hbox(9.79996+4.20004)x65.288, direction TLT
+......\rule(9.79996+4.20004)x0.0
+......\glue 6.0
+......\glue 0.0 plus 1.0fil
+......\glue 0.00002
+......\TU/lmr/m/it/12 A
+......\kern-0.6 (font)
+......\TU/lmr/m/it/12 u
+......\discretionary (penalty 50)
+.......< \TU/lmr/m/it/12 -
+......\TU/lmr/m/it/12 t
+......\TU/lmr/m/it/12 h
+......\TU/lmr/m/it/12 o
+......\TU/lmr/m/it/12 r
+......\TU/lmr/m/it/12 :
+......\glue(\spaceskip) 5.59999 plus 4.20001 minus 0.7
+......\TU/lmr/m/n/12 X
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+> \box...=
+\vbox(34.0+0.0)x200.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(9.79996+4.20004)x200.0, glue set 68.79001fil, direction TLT
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\hbox(9.79996+4.20004)x62.42, direction TLT
+...\vbox(9.79996+4.20004)x62.42, direction TLT
+....\hbox(9.79996+4.20004)x62.42, direction TLT
+.....\glue(\tabskip) 0.0
+.....\hbox(9.79996+4.20004)x62.42, direction TLT
+......\rule(9.79996+4.20004)x0.0
+......\glue 6.0
+......\glue 0.0 plus 1.0fil
+......\glue 0.00002
+......\TU/lmr/m/it/12 E
+......\TU/lmr/m/it/12 d
+......\discretionary (penalty 50)
+.......< \TU/lmr/m/it/12 -
+......\TU/lmr/m/it/12 i
+......\discretionary (penalty 50)
+.......< \TU/lmr/m/it/12 -
+......\TU/lmr/m/it/12 t
+......\TU/lmr/m/it/12 o
+......\TU/lmr/m/it/12 r
+......\TU/lmr/m/it/12 :
+......\glue(\spaceskip) 5.59999 plus 4.20001 minus 0.7
+......\TU/lmr/m/n/12 X
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+> \box...=
+\vbox(34.0+0.0)x200.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(9.79996+4.20004)x200.0, glue set 61.662fil, direction TLT
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\hbox(9.79996+4.20004)x76.676, direction TLT
+...\vbox(9.79996+4.20004)x76.676, direction TLT
+....\hbox(9.79996+4.20004)x76.676, direction TLT
+.....\glue(\tabskip) 0.0
+.....\hbox(9.79996+4.20004)x76.676, direction TLT
+......\rule(9.79996+4.20004)x0.0
+......\glue 6.0
+......\glue 0.0 plus 1.0fil
+......\glue 0.00002
+......\TU/lmr/m/it/12 E
+......\TU/lmr/m/it/12 n
+......\discretionary (penalty 50)
+.......< \TU/lmr/m/it/12 -
+......\TU/lmr/m/it/12 d
+......\TU/lmr/m/it/12 o
+......\TU/lmr/m/it/12 r
+......\TU/lmr/m/it/12 s
+......\TU/lmr/m/it/12 e
+......\TU/lmr/m/it/12 r
+......\TU/lmr/m/it/12 :
+......\glue(\spaceskip) 5.59999 plus 4.20001 minus 0.7
+......\TU/lmr/m/n/12 X
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+> \box...=
+\vbox(34.0+0.0)x200.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(9.79996+4.20004)x200.0, glue set 89.596fil, direction TLT
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\hbox(9.79996+4.20004)x20.80801, direction TLT
+...\vbox(9.79996+4.20004)x20.80801, direction TLT
+....\hbox(9.79996+4.20004)x20.80801, direction TLT
+.....\glue(\tabskip) 0.0
+.....\hbox(9.79996+4.20004)x20.80801, direction TLT
+......\rule(9.79996+4.20004)x0.0
+......\glue 6.0
+......\glue 0.0 plus 1.0fil
+......\glue 0.00002
+......\TU/lmr/m/n/12 X
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 13: Customised titles, fonts and hooks
+============================================================
+> \box...=
+\vbox(34.0+0.0)x200.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(9.79996+4.20004)x200.0, glue set 64.72fil, direction TLT
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\hbox(9.79996+4.20004)x70.56001, direction TLT
+...\vbox(9.79996+4.20004)x70.56001, direction TLT
+....\hbox(9.79996+4.20004)x70.56001, direction TLT
+.....\glue(\tabskip) 0.0
+.....\hbox(9.79996+4.20004)x70.56001, direction TLT
+......\rule(9.79996+4.20004)x0.0
+......\glue 6.0
+......\glue 0.0 plus 1.0fil
+......\glue 0.00002
+......\TU/lmr/m/it/12 [
+......\TU/lmr/m/it/12 W
+......\kern-0.9 (font)
+......\TU/lmr/m/it/12 r
+......\TU/lmr/m/it/12 i
+......\TU/lmr/m/it/12 t
+......\discretionary (penalty 50)
+.......< \TU/lmr/m/it/12 -
+......\TU/lmr/m/it/12 e
+......\TU/lmr/m/it/12 r
+......\TU/lmr/m/it/12 s
+......\TU/lmr/m/it/12 ]
+......\penalty 10000
+......\glue(\spaceskip) 4.2 plus 2.1 minus 1.4
+......\TU/lmr/m/it/12 X
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+> \box...=
+\vbox(34.0+0.0)x200.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(9.79996+4.20004)x200.0, glue set 67.216fil, direction TLT
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\hbox(9.79996+4.20004)x65.56801, direction TLT
+...\vbox(9.79996+4.20004)x65.56801, direction TLT
+....\hbox(9.79996+4.20004)x65.56801, direction TLT
+.....\glue(\tabskip) 0.0
+.....\hbox(9.79996+4.20004)x65.56801, direction TLT
+......\rule(9.79996+4.20004)x0.0
+......\glue 6.0
+......\glue 0.0 plus 1.0fil
+......\glue 0.00002
+......\TU/lmr/m/it/12 <
+......\TU/lmr/m/it/12 E
+......\TU/lmr/m/it/12 d
+......\TU/lmr/m/it/12 s
+......\TU/lmr/m/it/12 .
+......\TU/lmr/m/it/12 >
+......\penalty 10000
+......\glue(\spaceskip) 4.2 plus 2.1 minus 1.4
+......\TU/lmr/m/it/12 X
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+> \box...=
+\vbox(34.0+0.0)x200.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(9.79996+4.20004)x200.0, glue set 68.26fil, direction TLT
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\hbox(9.79996+4.20004)x63.48003, direction TLT
+...\vbox(9.79996+4.20004)x63.48003, direction TLT
+....\hbox(9.79996+4.20004)x63.48003, direction TLT
+.....\glue(\tabskip) 0.0
+.....\hbox(9.79996+4.20004)x63.48003, direction TLT
+......\rule(9.79996+4.20004)x0.0
+......\glue 6.0
+......\glue 0.0 plus 1.0fil
+......\glue 0.00002
+......\TU/lmr/m/it/12 (
+......\TU/lmr/m/it/12 E
+......\TU/lmr/m/it/12 n
+......\TU/lmr/m/it/12 d
+......\TU/lmr/m/it/12 s
+......\TU/lmr/m/it/12 .
+......\TU/lmr/m/it/12 )
+......\penalty 10000
+......\glue(\spaceskip) 4.2 plus 2.1 minus 1.4
+......\TU/lmr/m/it/12 X
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(3.978+0.099)x4.266, direction TLT
+.\TU/lmr/m/it/9 x
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x28.34, direction TLT
+.\TU/lmr/m/n/10 [
+.\TU/lmr/m/n/10 X
+.\TU/lmr/m/n/10 ]
+.\TU/lmr/m/n/10 (
+.\TU/lmr/m/n/10 X
+.\TU/lmr/m/n/10 )
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 14: Third endorser and third editor
+============================================================
+> \box...=
+\hbox(7.05+1.93)x87.009, direction TLT
+.\TU/lmr/m/n/10 G
+.\TU/lmr/m/n/10 u
+.\TU/lmr/m/n/10 s
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.1}
+.\hbox(3.122+0.07)x3.983, shifted -3.62892, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/7 a
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 H
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 l
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.3}
+.\hbox(3.122+0.07)x3.556, shifted -3.62892, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/7 c
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 I
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(8.48692+2.05)x95.13101, direction TLT
+.\TU/lmr/m/n/10 E
+.\TU/lmr/m/n/10 v
+.\kern-0.28 (font)
+.\TU/lmr/m/n/10 e
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.4}
+.\hbox(4.858+0.07)x4.417, shifted -3.62892, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/7 d
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 F
+.\kern-0.83 (font)
+.\TU/lmr/m/n/10 a
+.\kern-0.28 (font)
+.\TU/lmr/m/n/10 y
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.4}
+.\hbox(4.858+0.07)x4.417, shifted -3.62892, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/7 d
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfendlink
+.\hbox(0.805+1.358)x2.261, shifted -3.62892, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/7 ,
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.5}
+.\hbox(3.122+0.07)x3.556, shifted -3.62892, direction TLT
+..\pdfcolorstack 0 push {0 g 0 G}
+..\TU/lmr/m/n/7 e
+..\pdfcolorstack 0 pop
+.\penalty 10000
+.\glue 0.5
+.\kern0.0
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 J
+.\TU/lmr/m/n/10 o
+.\kern0.28 (font)
+.\TU/lmr/m/n/10 e
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 15: Email after the title
+============================================================
+> \box...=
+\hbox(6.17+0.06)x63.0, direction TLT
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(mailto:kim@mail.com)>>}
+.\mathon
+.\TU/lmtt/m/n/10 k
+.\TU/lmtt/m/n/10 i
+.\TU/lmtt/m/n/10 m
+.\glue(\medmuskip) 0.0
+.\TU/lmtt/m/n/10 @
+.\glue(\medmuskip) 0.0
+.\TU/lmtt/m/n/10 m
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 i
+.\TU/lmtt/m/n/10 l
+.\glue(\medmuskip) 0.0
+.\TU/lmtt/m/n/10 .
+.\glue(\medmuskip) 0.0
+.\TU/lmtt/m/n/10 c
+.\TU/lmtt/m/n/10 o
+.\TU/lmtt/m/n/10 m
+.\mathoff
+.\pdfendlink
+! OK.
+<argument> ... {\email {kim@mail.com}}}\showbox 1 
+l. ...}
+============================================================

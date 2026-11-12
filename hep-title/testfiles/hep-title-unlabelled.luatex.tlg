@@ -1,0 +1,140 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Counters
+============================================================
+affil=3, Maxaffil=2, authors=3
+============================================================
+============================================================
+TEST 2: Author line without affiliation marks
+============================================================
+> \box...=
+\hbox(7.16+1.93)x83.48999, direction TLT
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 B
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 b
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 C
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 d
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 3: Editor line
+============================================================
+macro:->\protect \@nameuse {hep@editor@sep1}\protect \Authfont Eve
+============================================================
+============================================================
+TEST 4: Affiliation block without marks
+============================================================
+> \box...=
+\vbox(48.444+0.0)x345.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\pdfdest name{affiliation.1} xyz
+.\penalty 10000
+.\glue -10.0 plus -4.0 minus -5.0
+.\glue 10.0 plus 4.0 minus 5.0
+.\write1{\newlabel{1}{{\protect \textsuperscript  {\protect \normalfont  a}}{\thepage }{}{affiliation.1}{}}}
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(6.444+0.0)x345.0, glue set 0.91693, direction TLT
+..\glue(\leftskip) 0.0 plus 172.5
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\TU/lmr/m/n/9 A
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/9 f
+...< \TU/lmr/m/n/9 -
+...> \TU/lmr/m/n/9 ﬁ
+...= \TU/lmr/m/n/9 ﬃ
+..\TU/lmr/m/n/9 l
+..\glue(\spaceskip) 3.087 plus 1.5435 minus 1.029
+..\TU/lmr/m/n/9 X
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 172.5
+.\glue 0.0 plus -1.0
+.\pdfdest name{affiliation.2} xyz
+.\penalty 10000
+.\write1{\newlabel{2}{{\protect \textsuperscript  {\protect \normalfont  b}}{\thepage }{}{affiliation.2}{}}}
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.556
+.\hbox(6.444+0.0)x345.0, glue set 0.91693, direction TLT
+..\glue(\leftskip) 0.0 plus 172.5
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\TU/lmr/m/n/9 A
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/9 f
+...< \TU/lmr/m/n/9 -
+...> \TU/lmr/m/n/9 ﬁ
+...= \TU/lmr/m/n/9 ﬃ
+..\TU/lmr/m/n/9 l
+..\glue(\spaceskip) 3.087 plus 1.5435 minus 1.029
+..\TU/lmr/m/n/9 Y
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 172.5
+.\glue 0.0 plus -1.0
+.\pdfdest name{affiliation.3} xyz
+.\penalty 10000
+.\write1{\newlabel{3}{{\protect \textsuperscript  {\protect \normalfont  c}}{\thepage }{}{affiliation.3}{}}}
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.556
+.\hbox(6.444+0.0)x345.0, glue set 0.92064, direction TLT
+..\glue(\leftskip) 0.0 plus 172.5
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\TU/lmr/m/n/9 A
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/9 f
+...< \TU/lmr/m/n/9 -
+...> \TU/lmr/m/n/9 ﬁ
+...= \TU/lmr/m/n/9 ﬃ
+..\TU/lmr/m/n/9 l
+..\glue(\spaceskip) 3.087 plus 1.5435 minus 1.029
+..\TU/lmr/m/n/9 Z
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 172.5
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+<argument> ...xtwidth \maketitlehookc }\showbox 0 
+l. ...}
+============================================================

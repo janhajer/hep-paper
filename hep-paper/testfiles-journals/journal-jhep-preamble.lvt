@@ -1,0 +1,11 @@
+% hep-paper with jhep: abstract as environment in the preamble.
+\input{regression-test}
+\documentclass[a4paper, 11pt]{article}
+\usepackage[jhep]{hep-paper}
+\input{journal-title}
+\begin{abstract}Abstract text.\end{abstract}
+\begin{document}
+\maketitle
+\section{Section}
+Text.
+\end{document}

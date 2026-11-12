@@ -1,0 +1,150 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage{hep-acronym}
+\usepackage{glossary-list}% not needed, but must not interfere
+
+% Every kind of acronym declaration
+\acronym{PDF}{portable document format}
+\acronym{URL}{uniform resource locator}
+\acronym*{QCD}{quantum chromodynamics}
+\acronym[LHCb]{LHCB}{large hadron collider beauty}
+\acronym{CM}*{computer modern}
+\acronym{EW}{electroweak}[electroweak]
+\acronym[\textsc{lhc}]{LHC}{large hadron collider}
+\acronym{API}{application programming interface}
+\acronym{BSM}{beyond the standard model}
+\shortacronym{SM}{standard model}
+\longacronym{EFT}{effective field theory}[effective field theories]
+\acronymalternative{PDF}{PDFalt}{printable document format}
+
+% Pretend that the acronyms have been used several times in the previous run,
+% so that the entry-count feature does not reduce them to their long form.
+\makeatletter
+\@for\hep@test@label:=PDF,URL,QCD,LHCB,LHC,CM,EW,API\do{%
+  \@gls@entry@count{\hep@test@label}{5}%
+}
+% BSM was used only once: \BSM always prints the long form.
+\@gls@entry@count{BSM}{1}
+\makeatother
+
+% Helpers \PDFSTRING, \SECTIONBOOKMARKS, \PDFINFO etc.
+\input{hep-regression}
+
+% The contents lines that hyperref writes for
+% \section{\PDF ...}, \section{\PDFlong ...} etc.
+\begin{filecontents*}[overwrite]{\jobname.toc}
+\contentsline {section}{\numberline {1}\PDF {} at the beginning}{1}{section.1}%
+\contentsline {section}{\numberline {2}\PDFlong {} at the beginning}{1}{section.2}%
+\contentsline {section}{\numberline {3}The \URL {} in the middle}{1}{section.3}%
+\contentsline {section}{\PDF {} starred}{1}{section*.1}%
+\contentsline {section}{\numberline {4}\BSM {} used once}{1}{section.4}%
+\contentsline {section}{\numberline {5}\PDFfirst {} and \resetacronym {URL}}{1}{section.5}%
+\end{filecontents*}
+\begin{filecontents*}[overwrite]{\jobname.lof}
+\contentsline {figure}{\numberline {1}{\ignorespaces \QCD {} in a caption\relax }}{1}{figure.1}%
+\end{filecontents*}
+
+\begin{document}
+\START
+
+\TEST{Bookmarks: acronym at the beginning}{%
+  \PDFSTRING{\PDF at the beginning}%
+  \PDFSTRING{\PDFs at the beginning}%
+  \PDFSTRING{\PDFlong at the beginning}%
+  \PDFSTRING{\PDFslong at the beginning}%
+  \PDFSTRING{\PDFshort at the beginning}%
+  \PDFSTRING{\PDFfirst at the beginning}%
+  \PDFSTRING{\EFT at the beginning}%
+  \PDFSTRING{\EFTs at the beginning}%
+  \PDFSTRING{\SM at the beginning}%
+  \PDFSTRING{\SMlong and \SMslong at the beginning}%
+  \PDFSTRING{\EFTlong and \EFTslong at the beginning}%
+  \PDFSTRING{\PDFalt at the beginning}%
+  \PDFSTRING{\PDFaltlong at the beginning}%
+  \PDFSTRING{ \PDFlong after a space}%
+  \PDFSTRING{{\PDFlong} in braces}%
+}
+
+\TEST{Bookmarks: acronym in the middle}{%
+  \PDFSTRING{The \PDF in the middle}%
+  \PDFSTRING{The \PDFlong in the middle}%
+  \PDFSTRING{The \PDFslong in the middle}%
+  \PDFSTRING{The \PDFshort in the middle}%
+  \PDFSTRING{The \PDFfirst in the middle}%
+  \PDFSTRING{The \EFT and \EFTs in the middle}%
+  \PDFSTRING{The \PDFaltlong in the middle}%
+  \PDFSTRING{Plural \QCDs without s and \EWslong}%
+  \PDFSTRING{Typeset \LHCB and \LHCBs}%
+  \PDFSTRING{Small capitals \LHC, \LHCs and \LHCshort}%
+  \PDFSTRING{\LHCfirst at the beginning}%
+}
+
+\TEST{Bookmarks: spaces and punctuation}{%
+  \PDFSTRING{The \PDF. Full stop}%
+  \PDFSTRING{The \PDF, comma}%
+  \PDFSTRING{The \PDF: colon}%
+  \PDFSTRING{The \PDF-based}%
+  \PDFSTRING{The \PDF's}%
+  \PDFSTRING{(\PDF) in parentheses}%
+  \PDFSTRING{At the end \PDF}%
+  \PDFSTRING{At the end \PDFlong}%
+  \PDFSTRING{Empty group \PDF{} here}%
+  \PDFSTRING{Starred \CM{} and \CM is}%
+  \PDFSTRING{Math $\PDF$ in title}%
+  \PDFSTRING{\SM and \SMs}%
+}
+
+\TEST{Bookmarks: sentences and helpers}{%
+  \PDFSTRING{Text. \sentence\PDFlong after sentence}%
+  \PDFSTRING{\sentence\PDFlong explicit sentence}%
+  \PDFSTRING{\resetacronym{PDF}\PDF reset}%
+  \PDFSTRING{\dummyacronym{PDF}\PDF dummy}%
+  \PDFSTRING{\texorpdfstring{\PDF}{Portable} texorpdfstring}%
+  \PDFSTRING{\PDF[-like] optional argument}%
+  \PDFSTRING{\textbf{\PDFlong} in bold}%
+  \PDFSTRING{\texorpdfstring{x}{\PDFlong} in texorpdfstring}%
+  \PDFSTRING{\LaTeX{} before \PDFlong}%
+  \PDFSTRING{}%
+}
+
+\TEST{Bookmarks: sectioning commands}{%
+  \SECTIONBOOKMARKS{%
+    \section{\PDFlong at the beginning}%
+    \section{The \PDFlong in the middle}%
+    \section*{\EFT starred}%
+    \addcontentsline{toc}{section}{\EFT starred}%
+    \subsection{\PDFslong in a subsection}%
+    \section[\PDFlong in the optional argument]{\PDF}%
+    \hypersetup{bookmarksnumbered}%
+    \section{\PDFlong numbered}%
+  }%
+}
+
+\TEST{Bookmarks: Unicode}{%
+  \UNICODEPDFSTRING{\PDFlong. \PDF, \EFTs}%
+}
+
+\TEST{Document information}{%
+  \hypersetup{pdftitle={\PDFlong{} and \URL}}%
+  \PDFINFO{title}
+}
+
+\TEST{Table of contents: capitalisation, no links to the acronyms}{%
+  \setbox0\vbox{\hsize=20em\tableofcontents}\showbox0
+  \setbox0\hbox{\PDF{} and \URL{} after the contents}\showbox0
+}
+
+\TEST{List of figures: no first use, no links to the acronyms}{%
+  \setbox0\vbox{\hsize=20em\listoffigures}\showbox0
+  \setbox0\hbox{\QCD}\showbox0
+}
+
+\TEST{Link in link: first use in href, later use in hyperlink and href}{%
+  \setbox0\hbox{\href{https://example.org}{\API}}\showbox0
+  \setbox0\hbox{\hyperlink{target}{\API{} and \PDF}}\showbox0
+  \setbox0\hbox{\href{https://example.org}{\API}}\showbox0
+  \setbox0\hbox{\API{} still links}\showbox0
+}
+
+\END

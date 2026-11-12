@@ -1,0 +1,136 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Accents like vec
+============================================================
+> \box...=
+\hbox(9.67221+3.43329)x18.89857
+.\mathon
+.\vbox(9.67221+0.0)x7.50002
+..\hbox(7.14444+0.0)x0.0, shifted 1.86984
+...\OML/lmm/m/it/10 ~
+..\kern-4.30554
+..\hbox(6.83331+0.0)x7.50002
+...\U/hepalpha0/m/n/10 ^^@
+.\glue 1.66663
+.\U/hepalpha0/m/n/10 1
+.\vbox(6.87772+0.0)x4.01666, shifted 3.43329
+..\hbox(5.0311+0.0)x0.0, shifted -0.82864
+...\OML/lmm/m/it/7 ~
+..\kern-3.01389
+..\hbox(4.8605+0.0)x3.51666
+...\U/hepalpha0/m/n/7 ^^[
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......WHBOX{$\dashedvec A \, x_{\dottedvec b}$}}
+> \box...=
+\hbox(9.67221+3.43329)x18.89857
+.\mathon
+.\vbox(9.67221+0.0)x7.50002
+..\hbox(7.14444+0.0)x0.0, shifted 1.86984
+...\U/hepalpha0/m/n/10 |
+..\kern-4.30554
+..\hbox(6.83331+0.0)x7.50002
+...\U/hepalpha0/m/n/10 ^^@
+.\glue 1.66663
+.\U/hepalpha0/m/n/10 1
+.\vbox(6.87772+0.0)x4.01666, shifted 3.43329
+..\hbox(5.0311+0.0)x0.0, shifted -0.82864
+...\U/hepalpha0/m/n/7 }
+..\kern-3.01389
+..\hbox(4.8605+0.0)x3.51666
+...\U/hepalpha0/m/n/7 ^^[
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......WHBOX{$\dashedvec A \, x_{\dottedvec b}$}}
+============================================================
+============================================================
+TEST 2: Nested accents
+============================================================
+> \box...=
+\hbox(9.72766+0.0)x17.14581
+.\mathon
+.\vbox(9.72766+0.0)x5.71527
+..\hbox(7.14444+0.0)x0.0, shifted -0.41145
+...\OML/lmm/m/it/10 ~
+..\kern-4.30554
+..\vbox(6.88876+0.0)x5.71527
+...\hbox(6.88875+0.0)x0.0, shifted 0.35764
+....\OT1/lmr/m/n/10 ^
+...\kern-4.3055
+...\hbox(4.30551+0.0)x5.71527
+....\hbox(4.30551+0.0)x5.71527
+....\kern 0.0
+.\kern -5.71527
+.\U/hepalpha0/m/n/10 1
+.\vbox(9.72766+0.0)x5.71527
+..\hbox(7.14444+0.0)x0.0, shifted -0.41145
+...\U/hepalpha0/m/n/10 |
+..\kern-4.30554
+..\vbox(6.88876+0.0)x5.71527
+...\hbox(6.88875+0.0)x0.0, shifted 0.35764
+....\OT1/lmr/m/n/10 ^
+...\kern-4.3055
+...\hbox(4.30551+0.0)x5.71527
+....\hbox(4.30551+0.0)x5.71527
+....\kern 0.0
+.\kern -5.71527
+.\U/hepalpha0/m/n/10 1
+.\vbox(9.72766+0.0)x5.71527
+..\hbox(7.14444+0.0)x0.0, shifted -0.41145
+...\U/hepalpha0/m/n/10 }
+..\kern-4.30554
+..\vbox(6.88876+0.0)x5.71527
+...\hbox(6.88875+0.0)x0.0, shifted 0.35764
+....\OT1/lmr/m/n/10 ^
+...\kern-4.3055
+...\hbox(4.30551+0.0)x5.71527
+....\hbox(4.30551+0.0)x5.71527
+....\kern 0.0
+.\kern -5.71527
+.\U/hepalpha0/m/n/10 1
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......} \dashedvec{\hat x} \dottedvec{\hat x}$}}
+============================================================
+============================================================
+TEST 3: Bold math version
+============================================================
+> \box...=
+\hbox(7.24443+0.0)x19.77081
+.\mathon
+.\vbox(7.24443+0.0)x6.59027
+..\hbox(7.24443+0.0)x0.0, shifted -0.03471
+...\OML/lmm/b/it/10 ~
+..\kern-4.4439
+..\hbox(4.4439+0.0)x6.59027
+...\U/hepalpha1/m/n/10 1
+.\vbox(7.24443+0.0)x6.59027
+..\hbox(7.24443+0.0)x0.0, shifted -0.03471
+...\U/hepalpha1/m/n/10 |
+..\kern-4.4439
+..\hbox(4.4439+0.0)x6.59027
+...\U/hepalpha1/m/n/10 1
+.\vbox(7.24443+0.0)x6.59027
+..\hbox(7.24443+0.0)x0.0, shifted -0.03471
+...\U/hepalpha1/m/n/10 }
+..\kern-4.4439
+..\hbox(4.4439+0.0)x6.59027
+...\U/hepalpha1/m/n/10 1
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......ldmath$\vec x \dashedvec x \dottedvec x$}}
+============================================================
+============================================================
+TEST 4: Bookmarks
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\000x\000p]
+============================================================

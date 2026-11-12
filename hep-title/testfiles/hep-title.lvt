@@ -1,0 +1,58 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-title}
+\input{hep-regression}
+
+\series{S}
+\title{T}
+\subtitle{U}
+\author{A}
+\keywords{k1, k2}
+
+\begin{document}
+% Load the fonts before \START
+\setbox0\vbox{\maketitle
+  \Large\itshape x\scshape x\LARGE\bfseries x\large\slshape x\small x}
+\makeatletter
+\START
+
+\TEST{Title block: series, title, subtitle, author, empty default date}{%
+  \SHOWVBOX{\maketitle}%
+}
+
+\TEST{Series, title, subtitle and date fonts}{%
+  \seriesfont{\itshape}%
+  \titlefont{\bfseries}%
+  \subtitlefont{\scshape}%
+  \authorfont{\slshape}%
+  \datefont{\small}%
+  \date{D}%
+  \let\placepreprint\relax
+  \let\placereprint\relax
+  \SHOWVBOX{\maketitlehooka}%
+  \SHOWVBOX{\@bspretitle T\@bsposttitle}%
+  \SHOWVBOX{\maketitlehookb}%
+  \SHOWHBOX{\Authfont A}%
+  \SHOWVBOX{\@bspredate\@date\@bspostdate}%
+}
+
+\TEST{Series and subtitle hooks}{%
+  \preseries{[}%
+  \postseries{]}%
+  \presubtitle{(}%
+  \postsubtitle{)}%
+  \let\placepreprint\relax
+  \let\placereprint\relax
+  \SHOWHBOX{\maketitlehooka}%
+  \SHOWHBOX{\maketitlehookb}%
+}
+
+\TEST{Abstract without indentation and with keywords}{%
+  \SHOWVBOX{\linewidth=\hsize\begin{abstract}x\end{abstract}}%
+}
+
+\TEST{abstract* in one-column mode: title and abstract}{%
+  \renewcommand*{\maketitle}{\TYPE{maketitle}}%
+  \SHOWVBOX{\linewidth=\hsize\begin{abstract*}x\end{abstract*}}%
+}
+\END

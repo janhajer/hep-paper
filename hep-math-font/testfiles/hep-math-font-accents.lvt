@@ -1,0 +1,23 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-font}
+\usepackage{hep-math-font}
+\usepackage{hyperref}
+\input{hep-regression}
+\begin{document}
+% Load all fonts before the test, so font loading is not recorded.
+\setbox0\hbox{$\vec x \dashedvec x \dottedvec x
+  x_{\dashedvec x_{\dottedvec x}}$\boldmath$\vec x \dashedvec x$}
+\START
+% The dashed and dotted accents are placed exactly like \vec, so the boxes
+% only differ in the accent characters.
+\TEST{Accents like vec}{%
+  \SHOWHBOX{$\vec A \, x_{\vec b}$}%
+  \SHOWHBOX{$\dashedvec A \, x_{\dottedvec b}$}}
+\TEST{Nested accents}{%
+  \SHOWHBOX{$\vec{\hat x} \dashedvec{\hat x} \dottedvec{\hat x}$}}
+\TEST{Bold math version}{%
+  \SHOWHBOX{\boldmath$\vec x \dashedvec x \dottedvec x$}}
+% In bookmarks the accents keep their argument.
+\TEST{Bookmarks}{\UNICODEPDFSTRING{$\dashedvec{x}\dottedvec{p}$}}
+\END

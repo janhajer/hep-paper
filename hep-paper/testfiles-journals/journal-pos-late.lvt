@@ -1,0 +1,12 @@
+% hep-paper with pos: abstract as environment after other material (moved to the title in the next run).
+\input{regression-test}
+\documentclass{PoS}
+\usepackage{hep-paper}
+\series{Full conference}
+\input{journal-title}
+\begin{document}
+\maketitle
+\section{Section}
+\begin{abstract}Abstract text.\end{abstract}
+Text.
+\end{document}

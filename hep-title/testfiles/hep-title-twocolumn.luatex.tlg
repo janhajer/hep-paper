@@ -1,0 +1,347 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: abstract* in two-column mode: title and abstract span both columns
+============================================================
+> \box...=
+\vbox(143.3514+0.0)x469.0, direction TLT
+.\pdfcolorstack 0 push {0 g 0 G}
+.\vbox(143.3514+0.0)x469.0, direction TLT
+..\glue 0.0 plus 1.0fil
+..\penalty -10000
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\glue 20.0
+..\rule(0.0+0.0)x*
+..\penalty 10000
+..\glue 0.0
+..\glue 0.0
+..\glue -12.0 plus -4.0 minus -4.0
+..\glue 0.0
+..\penalty -51
+..\glue 10.0 plus 3.0 minus 5.0
+..\glue(\parskip) 0.0
+..\glue(\parskip) 0.0
+..\glue(\baselineskip) 10.2496
+..\hbox(11.7504+0.0)x469.0, glue set 228.72849fil, direction TLT
+...\glue(\leftskip) 0.0 plus 1.0fil
+...\localpar
+....\localinterlinepenalty=0
+....\localbrokenpenalty=0
+....\localleftbox=null
+....\localrightbox=null
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\glue 0.0
+....\glue 0.0
+....\glue -5.0
+....\hbox(0.0+0.0)x0.0, direction TLT
+.....\pdfcolorstack 0 push {0 g 0 G}
+.....\pdfcolorstack 0 pop
+....\glue 5.0
+...\penalty 0
+...\TU/lmr/m/n/17.28 T
+...\penalty 10000
+...\glue(\parfillskip) 0.0
+...\glue(\rightskip) 0.0 plus 1.0fil
+..\penalty -51
+..\glue 10.0 plus 3.0 minus 5.0
+..\glue 3.0 plus 1.0 minus 1.0
+..\glue 0.0
+..\penalty -51
+..\glue 10.0 plus 3.0 minus 5.0
+..\glue -10.0 plus -3.0 minus -5.0
+..\glue 10.0 plus 3.0 minus 5.0
+..\glue(\parskip) 0.0
+..\glue(\parskip) 0.0
+..\glue(\baselineskip) 5.432
+..\hbox(8.568+0.0)x469.0, glue set 230.09601fil, direction TLT
+...\glue(\leftskip) 0.0 plus 1.0fil
+...\localpar
+....\localinterlinepenalty=0
+....\localbrokenpenalty=0
+....\localleftbox=null
+....\localrightbox=null
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\glue 0.0
+....\glue 0.0
+....\glue 0.0
+....\glue -5.0
+....\hbox(0.0+0.0)x0.0, direction TLT
+.....\pdfcolorstack 0 push {0 g 0 G}
+.....\pdfcolorstack 0 pop
+....\glue 5.0
+....\glue 0.0
+....\glue 0.0
+....\glue 0.0
+....\glue -5.0
+....\hbox(0.0+0.0)x0.0, direction TLT
+.....\pdfcolorstack 0 push {0 g 0 G}
+.....\pdfcolorstack 0 pop
+....\glue 5.0
+...\penalty 0
+...\TU/lmr/m/n/12 A
+...\penalty 10000
+...\hbox(8.0827+0.0)x0.0, glue set - 4.748fil, direction TLT
+....\hbox(3.728+0.0)x4.248, shifted -4.3547, direction TLT
+.....\pdfcolorstack 0 push {0 g 0 G}
+.....\TU/lmr/m/n/8 ∗
+.....\pdfcolorstack 0 pop
+....\penalty 10000
+....\glue 0.5
+....\kern0.0
+....\glue 0.0 plus 1.0fil minus 1.0fil
+...\penalty 10000
+...\glue(\parfillskip) 0.0
+...\glue(\rightskip) 0.0 plus 1.0fil
+..\penalty -51
+..\glue 10.0 plus 3.0 minus 5.0
+..\glue -10.0 plus -3.0 minus -5.0
+..\penalty -51
+..\glue 10.0 plus 3.0 minus 5.0
+..\glue -17.23999
+..\glue 0.0
+..\glue(\parskip) 0.0
+..\glue(\parskip) 0.0
+..\glue(\baselineskip) 12.0
+..\hbox(0.0+0.0)x469.0, glue set 234.5fil, direction TLT
+...\glue(\leftskip) 0.0 plus 1.0fil
+...\localpar
+....\localinterlinepenalty=0
+....\localbrokenpenalty=0
+....\localleftbox=null
+....\localrightbox=null
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\glue 0.0
+....\glue 0.0
+....\glue -5.0
+....\hbox(0.0+0.0)x0.0, direction TLT
+.....\pdfcolorstack 0 push {0 g 0 G}
+.....\pdfcolorstack 0 pop
+....\glue 5.0
+...\penalty 0
+...\penalty 10000
+...\glue(\parfillskip) 0.0
+...\glue(\rightskip) 0.0 plus 1.0fil
+..\penalty -51
+..\glue 10.0 plus 3.0 minus 5.0
+..\glue 15.0
+..\insert253, natural size 9.50002; split(6.65,2.85002); float cost 20000
+...\hbox(6.65+2.85002)x229.5, glue set 172.01999fil, direction TLT
+....\glue(\leftskip) -3.00003
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x0.0, direction TLT
+....\hbox(0.0+0.0)x0.0, direction TLT
+....\penalty 10000
+....\glue 3.00003
+....\hbox(5.61934+0.0)x15.0, glue set 10.834fil, direction TLT
+.....\glue 0.0 plus 1.0fil
+.....\hbox(2.796+0.0)x3.666, shifted -2.82333, direction TLT
+......\pdfcolorstack 0 push {0 g 0 G}
+......\TU/lmr/m/n/6 ∗
+......\pdfcolorstack 0 pop
+.....\penalty 10000
+.....\glue 0.5
+.....\kern0.0
+....\hbox(6.65+0.0)x0.0, direction TLT
+.....\rule(6.65+0.0)x0.0
+....\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(mailto:a@mail.com)>>}
+....\mathon
+....\TU/lmtt/m/n/8 a
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/n/8 @
+....\penalty 700
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/n/8 m
+....\TU/lmtt/m/n/8 a
+....\TU/lmtt/m/n/8 i
+....\TU/lmtt/m/n/8 l
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/n/8 .
+....\penalty 700
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/n/8 c
+....\TU/lmtt/m/n/8 o
+....\TU/lmtt/m/n/8 m
+....\mathoff
+....\pdfendlink
+....\penalty 10000
+....\rule(0.0+2.85002)x0.0
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+..\glue -21.54999
+..\glue 0.0
+..\penalty -51
+..\glue 10.0 plus 3.0 minus 5.0
+..\glue(\parskip) 0.0
+..\glue(\parskip) 0.0
+..\glue(\baselineskip) 4.7
+..\hbox(6.3+0.054)x469.0, glue set 214.133fil, direction TLT
+...\glue(\leftskip) 0.0 plus 1.0fil
+...\localpar
+....\localinterlinepenalty=0
+....\localbrokenpenalty=0
+....\localleftbox=null
+....\localrightbox=null
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\glue 0.0
+....\glue 0.0
+....\glue -5.0
+....\hbox(0.0+0.0)x0.0, direction TLT
+.....\pdfcolorstack 0 push {0 g 0 G}
+.....\pdfcolorstack 0 pop
+....\glue 5.0
+...\penalty 0
+...\TU/lmr/bx/n/9 A
+...\TU/lmr/bx/n/9 b
+...\discretionary (penalty 50)
+....< \TU/lmr/bx/n/9 -
+...\TU/lmr/bx/n/9 s
+...\TU/lmr/bx/n/9 t
+...\TU/lmr/bx/n/9 r
+...\TU/lmr/bx/n/9 a
+...\TU/lmr/bx/n/9 c
+...\TU/lmr/bx/n/9 t
+...\penalty 10000
+...\glue(\parfillskip) 0.0
+...\glue(\rightskip) 0.0 plus 1.0fil
+..\penalty -51
+..\glue 10.0 plus 3.0 minus 5.0
+..\glue -12.93
+..\glue 0.0
+..\penalty -51
+..\glue 8.0 plus 2.0 minus 4.0
+..\glue(\parskip) 0.0 plus 1.0
+..\glue(\parskip) 0.0
+..\glue(\baselineskip) 7.067
+..\hbox(3.879+0.0)x429.0, glue set 424.12201fil, shifted 20.0, direction TLT
+...\localpar
+....\localinterlinepenalty=0
+....\localbrokenpenalty=0
+....\localleftbox=null
+....\localrightbox=null
+...\kern-10.0
+...\hbox(0.0+0.0)x10.0, direction TLT
+....\glue 10.0
+....\glue -15.0
+....\glue -5.0
+....\hbox(0.0+0.0)x15.0, glue set 15.0fil, direction TLT
+.....\pdfcolorstack 0 push {0 g 0 G}
+.....\glue 0.0 plus 1.0fil
+.....\pdfcolorstack 0 pop
+....\glue 5.0
+...\penalty 0
+...\TU/lmr/m/n/9 x
+...\penalty 10000
+...\glue(\parfillskip) 0.0 plus 1.0fil
+...\glue(\rightskip) 0.0
+..\glue 6.0 plus 2.0 minus 2.0
+..\glue 0.0
+..\glue(\parskip) 0.0 plus 1.0
+..\glue(\parskip) 0.0
+..\glue(\baselineskip) 4.745
+..\hbox(6.255+1.845)x429.0, glue set 378.81299fil, shifted 20.0, direction TLT
+...\localpar
+....\localinterlinepenalty=0
+....\localbrokenpenalty=0
+....\localleftbox=null
+....\localrightbox=null
+...\TU/lmr/m/it/9 K
+...\kern-0.468 (font)
+...\TU/lmr/m/it/9 e
+...\TU/lmr/m/it/9 y
+...\discretionary (penalty 50)
+....< \TU/lmr/m/it/9 -
+...\TU/lmr/m/it/9 w
+...\TU/lmr/m/it/9 o
+...\TU/lmr/m/it/9 r
+...\kern-0.468 (font)
+...\TU/lmr/m/it/9 d
+...\TU/lmr/m/it/9 s
+...\TU/lmr/m/it/9 :
+...\glue(\spaceskip) 4.40399 plus 3.30301 minus 0.55049
+...\TU/lmr/m/it/9 k
+...\kern0.54 (italic)
+...\penalty 10000
+...\glue(\parfillskip) 0.0 plus 1.0fil
+...\glue(\rightskip) 0.0
+..\penalty -51
+..\glue 8.0 plus 2.0 minus 4.0
+..\glue 14.22636
+..\glue 0.0
+..\glue -20.0 plus -2.0 minus -4.0
+.\pdfcolorstack 0 pop
+! OK.
+<argument> \bx@A 
+l. ...}
+============================================================
+============================================================
+TEST 2: abstract* in two-column mode: title footnotes
+============================================================
+footnote=0
+### vertical mode entered at line 0
+### current page:
+\write-{}
+\pdfcolorstack 0 push {0 g 0 G}
+\pdfdest name{Doc-Start} xyz
+\write-{}
+\insert253, natural size 9.50002; split(6.65,2.85002); float cost 20000
+.\hbox(6.65+2.85002)x229.5, glue set 172.61996fil, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(5.61934+0.0)x14.40002, glue set 10.23402fil, direction TLT
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\hbox(5.61934+0.0)x4.166, direction TLT
+....\hbox(2.796+0.0)x3.666, shifted -2.82333, direction TLT
+.....\pdfcolorstack 0 push {0 g 0 G}
+.....\TU/lmr/m/n/6 ∗
+.....\pdfcolorstack 0 pop
+....\penalty 10000
+....\glue 0.5
+....\kern0.0
+..\hbox(6.65+0.0)x0.0, direction TLT
+...\rule(6.65+0.0)x0.0
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(mailto:a@mail.com)>>}
+..\mathon
+..\TU/lmtt/m/n/8 a
+..\glue(\medmuskip) 0.0
+..\TU/lmtt/m/n/8 @
+..\penalty 700
+..\glue(\medmuskip) 0.0
+..\TU/lmtt/m/n/8 m
+..\TU/lmtt/m/n/8 a
+..\TU/lmtt/m/n/8 i
+..\TU/lmtt/m/n/8 l
+..\glue(\medmuskip) 0.0
+..\TU/lmtt/m/n/8 .
+..\penalty 700
+..\glue(\medmuskip) 0.0
+..\TU/lmtt/m/n/8 c
+..\TU/lmtt/m/n/8 o
+..\TU/lmtt/m/n/8 m
+..\mathoff
+..\pdfendlink
+..\penalty 10000
+..\rule(0.0+2.85002)x0.0
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+total height 0.0 plus 4.0 minus 2.0
+ goal height 368.14859
+\insert253 adds 9.50002
+prevdepth 0.0
+! OK.
+<argument> ...otnote=\the \c@footnote }\showlists 
+l. ...}
+============================================================
+============================================================
+TEST 3: abstract* in two-column mode: email and ORCID in the text
+============================================================
+email: link, orcid: link
+============================================================

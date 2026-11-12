@@ -1,0 +1,319 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Default widths
+============================================================
+left: 79.6678pt, separator: 11.38109pt, main: 253.95111pt, textwidth: 345.0pt
+============================================================
+============================================================
+TEST 2: setleftwidth and setseperatorwidth
+============================================================
+left: 85.35826pt, separator: 11.38109pt, main: 248.26065pt
+left: 85.35826pt, separator: 10.0pt, main: 249.64174pt
+============================================================
+============================================================
+TEST 3: setleftwidth and setseperatorwidth: no spurious spaces
+============================================================
+> \box...=
+\hbox(6.94+0.11)x15.28, direction TLT
+.\TU/NewCM10-Regular.otf(0)/m/n/10 a
+.\TU/NewCM10-Regular.otf(0)/m/n/10 b
+.\kern0.28 (font)
+.\TU/NewCM10-Regular.otf(0)/m/n/10 c
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 4: Main width follows the line width at use time
+============================================================
+line: 300.0pt, main: 208.95111pt, cvline: 300.0pt
+============================================================
+============================================================
+TEST 5: cvline
+============================================================
+> \box...=
+\vbox(8.5+3.5)x345.0, direction TLT
+.\hbox(8.5+3.5)x345.0, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(8.5+3.5)x345.0, direction TLT
+...\vbox(8.5+3.5)x345.0, direction TLT
+....\hbox(8.39996+3.60004)x345.0, direction TLT
+.....\glue(\tabskip) 0.0
+.....\hbox(8.39996+3.60004)x91.04889, direction TLT
+......\rule(8.39996+3.60004)x0.0
+......\vbox(8.39996+3.60004)x79.6678, direction TLT
+.......\hbox(8.39996+3.60004)x79.6678, glue set 73.4178fil, direction TLT
+........\glue(\leftskip) 0.0 plus 1.0fil
+........\localpar
+.........\localinterlinepenalty=0
+.........\localbrokenpenalty=0
+.........\localleftbox=null
+.........\localrightbox=null
+........\hbox(0.0+0.0)x0.0, direction TLT
+........\rule(8.39996+*)x0.0
+........\TU/NewCM10-Regular.otf(2)/m/n/10 L
+........\penalty 10000
+........\rule(0.0+3.60004)x0.0
+........\penalty 10000
+........\glue(\parfillskip) 0.0
+........\glue(\rightskip) 0.0
+......\glue 0.0 plus 1.0fil
+......\glue 11.38109
+.....\glue(\tabskip) 0.0
+.....\hbox(8.39996+3.60004)x253.95111, direction TLT
+......\vbox(8.39996+3.60004)x253.95111, direction TLT
+.......\hbox(8.39996+3.60004)x253.95111, glue set 244.78111fil, direction TLT
+........\localpar
+.........\localinterlinepenalty=0
+.........\localbrokenpenalty=0
+.........\localleftbox=null
+.........\localrightbox=null
+........\hbox(0.0+0.0)x0.0, direction TLT
+........\rule(8.39996+*)x0.0
+........\TU/NewCM10-Regular.otf(2)/m/n/10 M
+........\penalty 10000
+........\rule(0.0+3.60004)x0.0
+........\penalty 10000
+........\glue(\parfillskip) 0.0 plus 1.0fil
+........\glue(\rightskip) 0.0
+......\glue 0.0 plus 1.0fil
+.....\glue(\tabskip) 0.0
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+! OK.
+<argument> ...x 0\vbox {\cvline [L]{M}}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 6: cvline text
+============================================================
+> \box...=
+\vbox(7.05+0.11)x55.75, direction TLT
+.\hbox(7.05+0.11)x55.75, direction TLT
+..\glue(\tabskip) 0.0
+..\hbox(7.05+0.11)x14.08, direction TLT
+...\TU/NewCM10-Regular.otf(0)/m/n/10 l
+...\TU/NewCM10-Regular.otf(0)/m/n/10 e
+...\TU/NewCM10-Regular.otf(0)/m/n/10 
+..\glue(\tabskip) 10.0
+..\hbox(7.05+0.11)x21.67, direction TLT
+...\TU/NewCM10-Regular.otf(0)/m/n/10 m
+...\TU/NewCM10-Regular.otf(0)/m/n/10 a
+...\TU/NewCM10-Regular.otf(0)/m/n/10 i
+...\TU/NewCM10-Regular.otf(0)/m/n/10 n
+..\glue(\tabskip) 10.0
+! OK.
+\hep@end ->\crcr \egroup \egroup \showbox 0 
+l. ...}
+> \box...=
+\vbox(7.05+0.11)x96.31, direction TLT
+.\hbox(7.05+0.11)x96.31, direction TLT
+..\glue(\tabskip) 0.0
+..\hbox(7.05+0.11)x0.0, direction TLT
+..\glue(\tabskip) 10.0
+..\hbox(7.05+0.11)x76.31, direction TLT
+...\TU/NewCM10-Regular.otf(0)/m/n/10 m
+...\TU/NewCM10-Regular.otf(0)/m/n/10 a
+...\TU/NewCM10-Regular.otf(0)/m/n/10 i
+...\TU/NewCM10-Regular.otf(0)/m/n/10 n
+...\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+...\TU/NewCM10-Regular.otf(0)/m/n/10 w
+...\TU/NewCM10-Regular.otf(0)/m/n/10 i
+...\TU/NewCM10-Regular.otf(0)/m/n/10 t
+...\TU/NewCM10-Regular.otf(0)/m/n/10 h
+...\TU/NewCM10-Regular.otf(0)/m/n/10 o
+...\TU/NewCM10-Regular.otf(0)/m/n/10 u
+...\TU/NewCM10-Regular.otf(0)/m/n/10 t
+...\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+...\TU/NewCM10-Regular.otf(0)/m/n/10 l
+...\TU/NewCM10-Regular.otf(0)/m/n/10 e
+...\TU/NewCM10-Regular.otf(0)/m/n/10 
+..\glue(\tabskip) 10.0
+! OK.
+\hep@end ->\crcr \egroup \egroup \showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 7: cventry: alternating shapes, punctuation, starred arguments
+============================================================
+> \box...=
+\vbox(7.05+0.11)x60.98001, direction TLT
+.\hbox(7.05+0.11)x60.98001, direction TLT
+..\glue(\tabskip) 0.0
+..\hbox(7.05+0.11)x14.08, direction TLT
+...\TU/NewCM10-Regular.otf(0)/m/n/10 l
+...\TU/NewCM10-Regular.otf(0)/m/n/10 e
+...\TU/NewCM10-Regular.otf(0)/m/n/10 
+..\glue(\tabskip) 10.0
+..\hbox(7.05+0.11)x26.90001, direction TLT
+...\TU/NewCM10-Regular.otf(0)/b/n/10 T
+...\TU/NewCM10-Regular.otf(0)/b/n/10 i
+...\TU/NewCM10-Regular.otf(0)/b/n/10 t
+...\TU/NewCM10-Regular.otf(0)/b/n/10 l
+...\TU/NewCM10-Regular.otf(0)/b/n/10 e
+...\kern0.0 (italic)
+...\TU/NewCM10-Regular.otf(0)/m/n/10 .
+..\glue(\tabskip) 10.0
+! OK.
+\hep@end ->\crcr \egroup \egroup \showbox 0 
+l. ...}
+> \box...=
+\vbox(7.05+1.93)x82.38002, direction TLT
+.\hbox(7.05+1.93)x82.38002, direction TLT
+..\glue(\tabskip) 0.0
+..\hbox(7.05+1.93)x14.08, direction TLT
+...\TU/NewCM10-Regular.otf(0)/m/n/10 l
+...\TU/NewCM10-Regular.otf(0)/m/n/10 e
+...\TU/NewCM10-Regular.otf(0)/m/n/10 
+..\glue(\tabskip) 10.0
+..\hbox(7.05+1.93)x48.30002, direction TLT
+...\TU/NewCM10-Regular.otf(0)/b/n/10 T
+...\TU/NewCM10-Regular.otf(0)/b/n/10 i
+...\TU/NewCM10-Regular.otf(0)/b/n/10 t
+...\TU/NewCM10-Regular.otf(0)/b/n/10 l
+...\TU/NewCM10-Regular.otf(0)/b/n/10 e
+...\kern0.0 (italic)
+...\TU/NewCM10-Regular.otf(0)/m/n/10 ,
+...\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+...\TU/NewCM10-Regular.otf(0)/m/n/10 o
+...\TU/NewCM10-Regular.otf(0)/m/n/10 n
+...\TU/NewCM10-Regular.otf(0)/m/n/10 e
+...\TU/NewCM10-Regular.otf(0)/m/it/10 .
+..\glue(\tabskip) 10.0
+! OK.
+\hep@end ->\crcr \egroup \egroup \showbox 0 
+l. ...}
+> \box...=
+\vbox(7.05+1.93)x132.46004, direction TLT
+.\hbox(7.05+1.93)x132.46004, direction TLT
+..\glue(\tabskip) 0.0
+..\hbox(7.05+1.93)x14.08, direction TLT
+...\TU/NewCM10-Regular.otf(0)/m/n/10 l
+...\TU/NewCM10-Regular.otf(0)/m/n/10 e
+...\TU/NewCM10-Regular.otf(0)/m/n/10 
+..\glue(\tabskip) 10.0
+..\hbox(7.05+1.93)x98.38004, direction TLT
+...\TU/NewCM10-Regular.otf(0)/b/n/10 T
+...\TU/NewCM10-Regular.otf(0)/b/n/10 i
+...\TU/NewCM10-Regular.otf(0)/b/n/10 t
+...\TU/NewCM10-Regular.otf(0)/b/n/10 l
+...\TU/NewCM10-Regular.otf(0)/b/n/10 e
+...\kern0.0 (italic)
+...\TU/NewCM10-Regular.otf(0)/m/n/10 ,
+...\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+...\TU/NewCM10-Regular.otf(0)/m/n/10 o
+...\TU/NewCM10-Regular.otf(0)/m/n/10 n
+...\TU/NewCM10-Regular.otf(0)/m/n/10 e
+...\TU/NewCM10-Regular.otf(0)/m/it/10 ,
+...\glue(\spaceskip) 3.58 plus 2.23749 minus 0.95465
+...\TU/NewCM10-Regular.otf(0)/m/it/10 t
+...\TU/NewCM10-Regular.otf(0)/m/it/10 w
+...\TU/NewCM10-Regular.otf(0)/m/it/10 o
+...\TU/NewCM10-Regular.otf(0)/m/n/10 ,
+...\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+...\TU/NewCM10-Regular.otf(0)/m/n/10 t
+...\TU/NewCM10-Regular.otf(0)/m/n/10 h
+...\TU/NewCM10-Regular.otf(0)/m/n/10 r
+...\TU/NewCM10-Regular.otf(0)/m/n/10 e
+...\TU/NewCM10-Regular.otf(0)/m/n/10 e
+...\TU/NewCM10-Regular.otf(0)/m/it/10 .
+..\glue(\tabskip) 10.0
+! OK.
+\hep@end ->\crcr \egroup \egroup \showbox 0 
+l. ...}
+> \box...=
+\vbox(7.05+1.93)x128.88004, direction TLT
+.\hbox(7.05+1.93)x128.88004, direction TLT
+..\glue(\tabskip) 0.0
+..\hbox(7.05+1.93)x14.08, direction TLT
+...\TU/NewCM10-Regular.otf(0)/m/n/10 l
+...\TU/NewCM10-Regular.otf(0)/m/n/10 e
+...\TU/NewCM10-Regular.otf(0)/m/n/10 
+..\glue(\tabskip) 10.0
+..\hbox(7.05+1.93)x94.80003, direction TLT
+...\TU/NewCM10-Regular.otf(0)/b/n/10 T
+...\TU/NewCM10-Regular.otf(0)/b/n/10 i
+...\TU/NewCM10-Regular.otf(0)/b/n/10 t
+...\TU/NewCM10-Regular.otf(0)/b/n/10 l
+...\TU/NewCM10-Regular.otf(0)/b/n/10 e
+...\kern0.0 (italic)
+...\TU/NewCM10-Regular.otf(0)/m/n/10 ,
+...\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+...\TU/NewCM10-Regular.otf(0)/m/n/10 o
+...\TU/NewCM10-Regular.otf(0)/m/n/10 n
+...\TU/NewCM10-Regular.otf(0)/m/n/10 e
+...\TU/NewCM10-Regular.otf(0)/m/it/10 ,
+...\penalty 10000
+...\glue 0.0 plus 1.0fil
+...\penalty -10000
+...\TU/NewCM10-Regular.otf(0)/m/it/10 t
+...\TU/NewCM10-Regular.otf(0)/m/it/10 w
+...\TU/NewCM10-Regular.otf(0)/m/it/10 o
+...\TU/NewCM10-Regular.otf(0)/m/n/10 ,
+...\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+...\TU/NewCM10-Regular.otf(0)/m/n/10 t
+...\TU/NewCM10-Regular.otf(0)/m/n/10 h
+...\TU/NewCM10-Regular.otf(0)/m/n/10 r
+...\TU/NewCM10-Regular.otf(0)/m/n/10 e
+...\TU/NewCM10-Regular.otf(0)/m/n/10 e
+...\TU/NewCM10-Regular.otf(0)/m/it/10 .
+..\glue(\tabskip) 10.0
+! OK.
+\hep@end ->\crcr \egroup \egroup \showbox 0 
+l. ...}
+> \box...=
+\vbox(6.94+1.93)x64.97002, direction TLT
+.\hbox(6.94+1.93)x64.97002, direction TLT
+..\glue(\tabskip) 0.0
+..\hbox(6.94+1.93)x0.0, direction TLT
+..\glue(\tabskip) 10.0
+..\hbox(6.94+1.93)x44.97002, direction TLT
+...\TU/NewCM10-Regular.otf(0)/b/n/10 T
+...\TU/NewCM10-Regular.otf(0)/b/n/10 i
+...\TU/NewCM10-Regular.otf(0)/b/n/10 t
+...\TU/NewCM10-Regular.otf(0)/b/n/10 l
+...\TU/NewCM10-Regular.otf(0)/b/n/10 e
+...\kern0.0 (italic)
+...\TU/NewCM10-Regular.otf(0)/m/n/10 ,
+...\penalty 10000
+...\glue 0.0 plus 1.0fil
+...\penalty -10000
+...\TU/NewCM10-Regular.otf(0)/m/n/10 o
+...\TU/NewCM10-Regular.otf(0)/m/n/10 n
+...\TU/NewCM10-Regular.otf(0)/m/n/10 e
+...\TU/NewCM10-Regular.otf(0)/m/it/10 .
+..\glue(\tabskip) 10.0
+! OK.
+\hep@end ->\crcr \egroup \egroup \showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 8: Lists
+============================================================
+itemize: leftmargin 91.04889pt, labelwidth 79.6678pt, labelsep 11.38109pt, topsep 2.155pt, itemsep 0.0pt, parsep 0.0pt
+enumerate: leftmargin 91.04889pt, labelwidth 79.6678pt, labelsep 11.38109pt, topsep 2.155pt, itemsep 0.0pt, parsep 0.0pt
+description: leftmargin 91.04889pt, labelwidth 79.6678pt, labelsep 11.38109pt, topsep 2.155pt, itemsep 0.0pt, parsep 0.0pt
+enumdescript: leftmargin 91.04889pt, labelwidth 79.6678pt, labelsep 11.38109pt, topsep 2.155pt, itemsep 0.0pt, parsep 0.0pt
+============================================================
+============================================================
+TEST 9: Month macros only with the date option
+============================================================
+Jan: undefined
+Feb: undefined
+Mar: undefined
+Apr: undefined
+May: undefined
+Jun: undefined
+Jul: undefined
+Aug: undefined
+Sep: undefined
+Oct: undefined
+Nov: undefined
+Dec: undefined
+============================================================

@@ -1,0 +1,26 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-font}
+\usepackage{hep-math-font}
+\begin{document}
+% Load all fonts before the test, so font loading is not recorded.
+\setbox0\hbox{$\mathbfsf{\alpha} \mathsf{\mathrm{a}} \mathrm{\mathsf{a}} \mathbb{R} \mathcal{L} \mathfrak{g}
+  \mathscr{L} \mathup{\mathcal{L}} \mathup{\mathscr{L}}$}
+\START
+\TEST{Modifiers commute}{%
+  \setbox0\hbox{$\mathbf{\mathsf{\alpha}}$}\showbox0
+  \setbox0\hbox{$\mathsf{\mathbf{\alpha}}$}\showbox0
+  \setbox0\hbox{$\mathbfsf{\alpha}$}\showbox0}
+\TEST{Upright is not serif}{%
+  \setbox0\hbox{$\mathsf{\mathrm{a}} \mathrm{\mathsf{a}}$}\showbox0}
+\TEST{Alphabets}{\setbox0\hbox{$\mathbb{R} \mathcal{L} \mathfrak{g}$}\showbox0}
+\TEST{Script and upright calligraphic}{%
+  \setbox0\hbox{$\mathscr{L} \mathup{\mathcal{L}} \mathup{\mathscr{L}}$}\showbox0}
+% A document that replaces \everymath still gets the initial state.
+\TEST{Replaced everymath}{%
+  \begingroup
+  \everymath{\displaystyle}%
+  \setbox0\hbox{$\alpha \mathbf{x}$}\showbox0
+  \endgroup
+}
+\END

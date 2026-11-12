@@ -1,0 +1,66 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage[serif,lining]{hep-font}
+\input{hep-regression}
+
+% The material of the tests, typeset once before \START to load the fonts
+\newcommand*{\NUMERALCOMMANDS}{%
+  0\textl{1}\texto{2}\textp{3}\textt{4}\textpl{5}\textpo{6}\texttl{7}%
+  \textto{8}}
+\newcommand*{\NUMERALDECLARATIONS}{%
+  {\lstyle 1}{\ostyle 2}{\pstyle 3}{\tstyle 4}{\plstyle 5}{\postyle 6}%
+  {\tlstyle 7}{\tostyle 8}}
+\newcommand*{\TYPEWRITER}{{\tmstyle a1}{\tvstyle a1}{\codestyle a1}}
+\newcommand*{\SMALLCAPS}{%
+  \textbf{\textsc{a}}\textsf{\textsc{a}}\textsf{\textbf{\textsc{a}}}}
+\newcommand*{\GREEK}{\alpha\Gamma\varsigma$\alpha\Gamma$}
+% \textui exists only with pdfTeX, \uncial and \textuncial only with
+% LuaTeX and XeTeX
+\newcommand*{\ENGINEFONTS}{%
+  \ifdefined\textui\textui{a}\fi
+  \ifdefined\uncial\textuncial{a}{\uncial b}\fi}
+\makeatletter
+\newcommand*{\EQUATIONNUMBER}{\@eqnnum}
+\makeatother
+
+\begin{document}
+% Load all fonts before the test, so font loading is not recorded.
+\setbox0\hbox{\NUMERALCOMMANDS\NUMERALDECLARATIONS\TYPEWRITER\SMALLCAPS
+  \GREEK\ENGINEFONTS\EQUATIONNUMBER\code{a_1}}
+\setcounter{equation}{10}
+\START
+
+\TEST{Option names}{%
+  \TYPE{[\familydefault]}%
+  \TYPE{[\csname f@size\endcsname]}
+}
+
+\TEST{Numeral commands}{\SHOWHBOX{\NUMERALCOMMANDS}}
+
+\TEST{Numeral declarations}{\SHOWHBOX{\NUMERALDECLARATIONS}}
+
+\TEST{Typewriter declarations: monospaced, proportional, code}{%
+  \SHOWHBOX{\TYPEWRITER}}
+
+\BEGINTEST{Code: verbatim argument}
+\setbox0\hbox{\code{a_1 %}}\showbox0
+\ENDTEST
+
+\BEGINTEST{Verbatim environment uses the code style}
+\setbox0\vbox{\hsize=20em
+\begin{verbatim}
+a1
+\end{verbatim}
+}\showbox0
+\ENDTEST
+
+\TEST{Bold and sans-serif small caps}{\SHOWHBOX{\SMALLCAPS}}
+
+\TEST{Engine specific fonts: upright italic, uncial}{\SHOWHBOX{\ENGINEFONTS}}
+
+\TEST{Greek letters in text and math}{\SHOWHBOX{\GREEK}}
+
+\TEST{Equation numbers use tabular lining numerals}{%
+  \SHOWHBOX{\EQUATIONNUMBER}}
+
+\END

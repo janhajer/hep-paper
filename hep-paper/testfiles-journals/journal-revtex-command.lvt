@@ -1,0 +1,11 @@
+% hep-paper with revtex: abstract in the preamble in the command form \abstract{...}.
+\input{regression-test}
+\documentclass[aps, prl, reprint, superscriptaddress, nofootinbib]{revtex4-2}
+\usepackage{hep-paper}
+\input{journal-title}
+\abstract{Abstract text.}
+\begin{document}
+\maketitle
+\section{Section}
+Text.
+\end{document}

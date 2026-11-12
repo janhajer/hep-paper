@@ -1,0 +1,50 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Loaded packages and options
+============================================================
+tikz: yes
+tikzscale: yes
+pgfplots: no
+hep-plot: no
+hep-feynman: no
+\tikzexternalize: undefined
+============================================================
+============================================================
+TEST 2: Macros that includepgf needs
+============================================================
+\tikzsetnextfilename: defined
+\pgfplotsset: undefined
+\graphicpath: defined
+\includepgf: defined
+\includefeynman: defined
+============================================================
+============================================================
+TEST 3: graphicpath
+============================================================
+graphic path: .
+graphic path: figures
+graphic path: .
+============================================================
+============================================================
+TEST 4: includepgf*
+============================================================
+(hep-graphic-rectangle.tikz)
+includepgf*: wd 56.90549pt, ht 28.45274pt, dp 0.0pt
+(hep-graphic-rectangle.tikz)
+includepgf* without extension: wd 56.90549pt, ht 28.45274pt, dp 0.0pt
+(hep-graphic-rectangle.tikz)
+includepgf without pgfplots: wd 56.90549pt, ht 28.45274pt, dp 0.0pt
+(hep-graphic-rectangle.tikz) (hep-graphic-rectangle.tikz) (hep-graphic-rectangle.tikz)
+includepgf[width=4cm] without pgfplots: wd 113.81097pt, ht 56.90549pt, dp 0.0pt
+(hep-graphic-rectangle.tikz)
+includegraphics: wd 56.90549pt, ht 28.45274pt, dp 0.0pt
+============================================================
+============================================================
+TEST 5: includefeynman
+============================================================
+(hep-graphic-rectangle.tikz)
+includefeynman: wd 56.90549pt, ht 16.72638pt, dp 11.72636pt
+(hep-graphic-rectangle.tikz)
+in a formula: wd 75.5246pt, ht 16.72638pt, dp 11.72636pt
+============================================================

@@ -1,0 +1,104 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: The date option is passed on to hep-cv
+============================================================
+hep-cv options: date,
+date: true
+Jan: defined
+Jun: defined
+Jul: defined
+mkbibshortyear: defined
+============================================================
+============================================================
+TEST 2: Short years
+============================================================
+[22]
+[]
+============================================================
+============================================================
+TEST 3: printcvdate with month macros and short years
+============================================================
+> \box...=
+\hbox(6.94+0.22)x75.56, direction TLT
+.\glue 0.0 plus 1.0fill
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+.\hbox(6.83+0.22)x19.17, glue set 0.694fil, direction TLT
+..\glue 0.0 plus 1.0fil minus 1.0fil
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/m/n/10 J
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/m/n/10 a
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/m/n/10 n
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/NewCM10-Regular.otf(1)/m/n/10 ’
+.\TU/NewCM10-Regular.otf(1)/m/n/10 2
+.\TU/NewCM10-Regular.otf(1)/m/n/10 0
+.\TU/NewCM10-Regular.otf(1)/m/n/10 –
+.\hbox(6.83+0.22)x19.17, glue set 0.582fil, direction TLT
+..\glue 0.0 plus 1.0fil minus 1.0fil
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(1)/m/n/10 J
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(1)/m/n/10 u
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(1)/m/n/10 n
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/NewCM10-Regular.otf(1)/m/n/10 ’
+.\TU/NewCM10-Regular.otf(1)/m/n/10 2
+.\TU/NewCM10-Regular.otf(1)/m/n/10 2
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94+0.22)x30.56, direction TLT
+.\glue 0.0 plus 1.0fill
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+.\TU/NewCM10-Regular.otf(1)/m/n/10 ’
+.\TU/NewCM10-Regular.otf(1)/m/n/10 1
+.\TU/NewCM10-Regular.otf(1)/m/n/10 8
+.\TU/NewCM10-Regular.otf(1)/m/n/10 –
+.\TU/NewCM10-Regular.otf(1)/m/n/10 ’
+.\TU/NewCM10-Regular.otf(1)/m/n/10 1
+.\TU/NewCM10-Regular.otf(1)/m/n/10 9
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 4: printcvdate: open-ended range
+============================================================
+> \box...=
+\hbox(7.06+0.22)x66.39, direction TLT
+.\glue 0.0 plus 1.0fill
+.\TU/NewCM10-Regular.otf(0)/m/n/10 S
+.\TU/NewCM10-Regular.otf(0)/m/n/10 i
+.\TU/NewCM10-Regular.otf(0)/m/n/10 n
+.\TU/NewCM10-Regular.otf(0)/m/n/10 c
+.\TU/NewCM10-Regular.otf(0)/m/n/10 e
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+.\hbox(6.94+0.22)x19.17, glue set 1.138fil, direction TLT
+..\glue 0.0 plus 1.0fil minus 1.0fil
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/m/n/10 J
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/m/n/10 u
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/m/n/10 l
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/NewCM10-Regular.otf(1)/m/n/10 ’
+.\TU/NewCM10-Regular.otf(1)/m/n/10 2
+.\TU/NewCM10-Regular.otf(1)/m/n/10 2
+.\TU/NewCM10-Regular.otf(1)/m/n/10 –
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

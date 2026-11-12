@@ -1,0 +1,30 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage[oldstyle]{hep-font}
+\input{hep-regression}
+
+% Tabular numerals have equal widths. New CM serif Regular and Italic apply
+% onum after tnum, which hep-font corrects on LuaTeX.
+\newcommand*{\WIDTHS}[2]{%
+  \setbox0\hbox{#1 1111}\setbox2\hbox{#1 0000}%
+  \TYPE{[#2: \ifdim\wd0=\wd2 equal\else different\fi]}}
+\newcommand*{\ALLWIDTHS}{%
+  \WIDTHS{}{text}%
+  \WIDTHS{\tstyle}{tstyle}%
+  \WIDTHS{\tstyle\itshape}{tstyle italic}%
+  \WIDTHS{\tstyle\bfseries}{tstyle bold}%
+  \WIDTHS{\tstyle\pstyle}{tstyle pstyle}%
+  \WIDTHS{\tstyle\lstyle}{tstyle lstyle}%
+  \setbox0\hbox{\begin{tabular}{l}1111\\0000\end{tabular}}%
+  \setbox2\hbox{\begin{tabular}{l}1111\end{tabular}}%
+  \setbox4\hbox{\begin{tabular}{l}0000\end{tabular}}%
+  \TYPE{[tabular: \ifdim\wd2=\wd4 equal\else different\fi]}}
+
+\begin{document}
+% Load all fonts before the test, so font loading is not recorded.
+\setbox0\vbox{\ALLWIDTHS}
+\START
+
+\TEST{Tabular oldstyle numerals have equal widths}{\ALLWIDTHS}
+
+\END

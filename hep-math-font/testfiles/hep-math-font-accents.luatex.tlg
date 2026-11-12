@@ -1,0 +1,127 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Accents like vec
+============================================================
+> \box...=
+\hbox(9.77+3.322)x18.54764, direction TLT
+.\mathon
+.\vbox(9.77+0.0)x7.5, direction TLT
+..\hbox(7.11+0.0)x0.0, shifted 8.14, direction TLT
+...\TU/NewCMMath-Regular.otf(1)/m/n/10 ⃗
+..\kern-4.5 (font)
+..\hbox(7.16+0.0)x7.5, direction TLT
+...\TU/hep-serif/m/n/10 𝐴
+.\glue 1.66663
+.\TU/hep-serif/m/n/10 𝑥
+.\vbox(6.68501+0.077)x3.66101, shifted 3.24501, direction TLT
+..\hbox(4.977+0.0)x0.0, shifted 3.24101, direction TLT
+...\TU/NewCMMath-Regular.otf(1)/m/n/7 ⃗
+..\kern-3.15 (font)
+..\hbox(4.858+0.077)x3.10101, direction TLT
+...\TU/hep-serif/m/n/7 𝑏
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......WHBOX{$\dashedvec A \, x_{\dottedvec b}$}}
+> \box...=
+\hbox(9.77+3.322)x18.54764, direction TLT
+.\mathon
+.\vbox(9.77+0.0)x7.5, direction TLT
+..\hbox(7.11+0.0)x0.0, shifted 8.14, direction TLT
+...\TU/hep-accent/m/n/10 
+..\kern-4.5 (font)
+..\hbox(7.16+0.0)x7.5, direction TLT
+...\TU/hep-serif/m/n/10 𝐴
+.\glue 1.66663
+.\TU/hep-serif/m/n/10 𝑥
+.\vbox(6.68501+0.077)x3.66101, shifted 3.24501, direction TLT
+..\hbox(4.977+0.0)x0.0, shifted 3.24101, direction TLT
+...\TU/hep-accent/m/n/7 
+..\kern-3.15 (font)
+..\hbox(4.858+0.077)x3.10101, direction TLT
+...\TU/hep-serif/m/n/7 𝑏
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......WHBOX{$\dashedvec A \, x_{\dottedvec b}$}}
+============================================================
+============================================================
+TEST 2: Nested accents
+============================================================
+> \box...=
+\hbox(9.53+0.11)x17.16, direction TLT
+.\mathon
+.\vbox(9.53+0.11)x5.72, direction TLT
+..\hbox(7.11+0.0)x0.0, shifted 5.93, direction TLT
+...\TU/NewCMMath-Regular.otf(1)/m/n/10 ⃗
+..\kern-4.5 (font)
+..\vbox(6.92+0.11)x5.72, direction TLT
+...\hbox(6.92+0.0)x0.0, shifted 0.79, direction TLT
+....\TU/NewCMMath-Regular.otf(1)/m/n/10 ̂
+...\kern-4.42 (font)
+...\hbox(4.42+0.11)x5.72, direction TLT
+....\TU/hep-serif/m/n/10 𝑥
+.\vbox(9.53+0.11)x5.72, direction TLT
+..\hbox(7.11+0.0)x0.0, shifted 5.93, direction TLT
+...\TU/hep-accent/m/n/10 
+..\kern-4.5 (font)
+..\vbox(6.92+0.11)x5.72, direction TLT
+...\hbox(6.92+0.0)x0.0, shifted 0.79, direction TLT
+....\TU/NewCMMath-Regular.otf(1)/m/n/10 ̂
+...\kern-4.42 (font)
+...\hbox(4.42+0.11)x5.72, direction TLT
+....\TU/hep-serif/m/n/10 𝑥
+.\vbox(9.53+0.11)x5.72, direction TLT
+..\hbox(7.11+0.0)x0.0, shifted 5.93, direction TLT
+...\TU/hep-accent/m/n/10 
+..\kern-4.5 (font)
+..\vbox(6.92+0.11)x5.72, direction TLT
+...\hbox(6.92+0.0)x0.0, shifted 0.79, direction TLT
+....\TU/NewCMMath-Regular.otf(1)/m/n/10 ̂
+...\kern-4.42 (font)
+...\hbox(4.42+0.11)x5.72, direction TLT
+....\TU/hep-serif/m/n/10 𝑥
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......} \dashedvec{\hat x} \dottedvec{\hat x}$}}
+============================================================
+============================================================
+TEST 3: Bold math version
+============================================================
+> \box...=
+\hbox(7.14+0.08)x19.76999, direction TLT
+.\mathon
+.\vbox(7.14+0.08)x6.59, direction TLT
+..\hbox(7.12+0.0)x0.0, shifted 6.23, direction TLT
+...\TU/NewCMMath-Bold.otf(1)/m/n/10 ⃗
+..\kern-4.5 (font)
+..\hbox(4.52+0.08)x6.59, direction TLT
+...\TU/hep-serif/m/n/10 𝒙
+.\vbox(7.14+0.08)x6.59, direction TLT
+..\hbox(7.12+0.0)x0.0, shifted 6.23, direction TLT
+...\TU/hep-accent/m/n/10 
+..\kern-4.5 (font)
+..\hbox(4.52+0.08)x6.59, direction TLT
+...\TU/hep-serif/m/n/10 𝒙
+.\vbox(7.14+0.08)x6.59, direction TLT
+..\hbox(7.12+0.0)x0.0, shifted 6.23, direction TLT
+...\TU/hep-accent/m/n/10 
+..\kern-4.5 (font)
+..\hbox(4.52+0.08)x6.59, direction TLT
+...\TU/hep-serif/m/n/10 𝒙
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......ldmath$\vec x \dashedvec x \dottedvec x$}}
+============================================================
+============================================================
+TEST 4: Bookmarks
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\000x\000p]
+============================================================

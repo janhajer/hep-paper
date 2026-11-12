@@ -1,0 +1,40 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-font}
+% The font family after loading hep-font, in the preamble and in the
+% begindocument/before hook.
+\makeatletter
+\edef\PREAMBLEFAMILY{\f@family}
+\AddToHook{begindocument/before}{\edef\BEFOREFAMILY{\f@family}}
+\makeatother
+\begin{document}
+% Load all fonts before the test, so font loading is not recorded.
+\setbox0\hbox{\textsc{Abc} \textl{123} \texto{123}}
+\setbox0\hbox{\begin{tabular}{l}10\end{tabular}}
+% The fonts of bold small caps in the families of all numeral styles, which
+% the Latin Modern fonts do not have. The table of contents uses \tstyle.
+\ExplSyntaxOn
+\cs_new_protected:Npn \SCFONTS #1 {
+  \clist_map_inline:nn {
+    {\bfseries\scshape}, {\tstyle\bfseries\scshape},
+    {\tstyle\bfseries\scshape\slshape}, {\lstyle\bfseries\scshape},
+    {\ostyle\bfseries\scshape}, {\ostyle\tstyle\bfseries\scshape\itshape}
+  } {
+    \group_begin: ##1 \selectfont
+    #1 { \tl_to_str:n {##1} :~ \fontname\font }
+    \group_end:
+  }
+}
+\SCFONTS \use_none:n
+\ExplSyntaxOff
+\START
+\TEST{Font family in the preamble}{%
+  \TYPE{preamble: [\PREAMBLEFAMILY], begindocument/before: [\BEFOREFAMILY],
+    document: [\csname f@family\endcsname]}}
+\TEST{Small caps and numerals}{%
+  \setbox0\hbox{\textsc{Abc} \textl{123} \texto{123}}\showbox0}
+\TEST{Tabular numerals in tabulars only}{%
+  \setbox0\hbox{10 \begin{tabular}{l}10\end{tabular} 10}\showbox0}
+\TEST{Bold small caps in the families of all numeral styles}{%
+  \SCFONTS\TYPE}
+\END

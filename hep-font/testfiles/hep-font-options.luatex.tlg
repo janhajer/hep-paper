@@ -1,0 +1,71 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Options: sans, size
+============================================================
+[NewCMSans10-Regular.otf(0)]
+[10.5]
+============================================================
+============================================================
+TEST 2: Oldstyle numerals in text, lining on request
+============================================================
+> \box...=
+\hbox(7.119+2.268)x20.034, direction TLT
+.\TU/NewCMSans10-Regular.otf(5)/m/n/10.5 
+.\kern0.0 (italic)
+.\TU/NewCMSans10-Regular.otf(1)/m/n/10.5 2
+.\kern0.0 (italic)
+.\TU/NewCMSans10-Regular.otf(4)/m/n/10.5 
+.\kern0.0 (italic)
+.\TU/NewCMSans10-Regular.otf(3)/m/n/10.5 4
+.\kern0.0 (italic)
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......, lining on request}{\SHOWHBOX{\NUMERALS}}
+============================================================
+============================================================
+TEST 3: Equation numbers use tabular oldstyle numerals (amsmath)
+============================================================
+> \box...=
+\hbox(7.875+2.625)x18.669, direction TLT
+.\hbox(7.875+2.625)x18.669, direction TLT
+..\TU/NewCMSans10-Regular.otf(4)/m/n/10.5 (
+..\TU/NewCMSans10-Regular.otf(4)/m/n/10.5 
+..\TU/NewCMSans10-Regular.otf(4)/m/n/10.5 
+..\TU/NewCMSans10-Regular.otf(4)/m/n/10.5 )
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...  \SHOWHBOX{\EQUATIONNUMBER}}
+============================================================
+============================================================
+TEST 4: Tabulars use tabular oldstyle numerals
+============================================================
+> \box...=
+\hbox(9.03749+3.5625)x22.50002, direction TLT
+.\hbox(9.03749+3.5625)x22.50002, direction TLT
+..\vbox(9.03749+3.5625)x22.50002, direction TLT
+...\hbox(8.81996+3.78003)x22.50002, direction TLT
+....\glue(\tabskip) 0.0
+....\hbox(8.81996+3.78003)x22.50002, direction TLT
+.....\rule(8.81996+3.78003)x0.0
+.....\glue 6.0
+.....\glue 0.00002
+.....\TU/NewCMSans10-Regular.otf(4)/m/n/10.5 
+.....\TU/NewCMSans10-Regular.otf(4)/m/n/10.5 
+.....\glue 0.0 plus 1.0fil
+.....\glue 6.0
+....\glue(\tabskip) 0.0
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......OWHBOX{\begin{tabular}{l}10\end{tabular}}}
+============================================================
+============================================================
+TEST 5: nfssext-cfr does not overwrite a user macro set
+============================================================
+[\set preserved]
+============================================================
+============================================================
+TEST 6: Small caps with tabular numerals
+============================================================
+[[NewCMSans10-Regular.otf]:mode=node;script=latn;language=dflt;+tlig;+onum;+tnum;+hepftnum;+smcp; at 10.5pt]
+============================================================

@@ -1,0 +1,18 @@
+\input{regression-test}
+\documentclass{scrartcl}
+% KOMA-Script classes have their own sectioning code: titlesec is not loaded
+% unless titlesec=true is given explicitly.
+\usepackage{hep-acronym}
+\acronym{PDF}{portable document format}
+\begin{document}
+\makeatletter
+\START
+\TEST{titlesec is not loaded with KOMA-Script classes}{%
+  \TYPE{titlesec option: \ifhepacronym@titlesec true\else false\fi,
+    package: \ifcsname ver@titlesec.sty\endcsname\else not \fi loaded}%
+}
+\TEST{Sections with KOMA-Script classes}{%
+  \setbox0\vbox{\section{\PDF at the beginning}\section*{Starred}}%
+  \TYPE{section \thesection}%
+}
+\END

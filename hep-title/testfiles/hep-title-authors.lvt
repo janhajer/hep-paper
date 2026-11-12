@@ -1,0 +1,158 @@
+\input{regression-test}
+% The labels that the affiliations and labelled footnotes of this file write
+% to the .aux file, so that the affiliation marks are resolved in one run.
+\begin{filecontents*}[overwrite]{\jobname.aux}
+\relax
+\newlabel{fn}{{\textsuperscript {\TextOrMath {\textasteriskcentered }{*}}}{1}{}{footnote.1}{}}
+\newlabel{a}{{\textsuperscript {\normalfont a}}{1}{}{affiliation.1}{}}
+\newlabel{b}{{\textsuperscript {\normalfont b}}{1}{}{affiliation.2}{}}
+\newlabel{c}{{\textsuperscript {\normalfont c}}{1}{}{affiliation.3}{}}
+\newlabel{ea}{{\textsuperscript {\normalfont d}}{1}{}{affiliation.4}{}}
+\newlabel{eb}{{\textsuperscript {\normalfont e}}{1}{}{affiliation.5}{}}
+\end{filecontents*}
+\documentclass{article}
+\usepackage{hep-title}
+\input{hep-regression}
+
+\title{T}
+\editor[ea]{Eve}
+\editor[ea,eb]{Fay}
+\author[a,b]{Ann \email{ann@mail.com}}
+\author[b, fn]{Bob}
+\email[fn]{bob@mail.com}
+\author[c]{Cid \orcmail{0000-0002-1825-0097}{cid@mail.com}}
+\endorser[a]{Gus}
+\endorser[c]{Hal}
+\affiliation[a]{Affil A, City, Country}
+\affiliation[b]{Affil B}
+\affiliation[c]{Affil C}
+\affiliation[ea]{Affil D}
+\affiliation[eb]{Affil E}
+
+\begin{document}
+% Load the fonts before \START
+\setbox0\vbox{\normalfont
+  \LARGE$x$\Large$x$\large$x^x$x\itshape x\upshape\small$x^x$x\itshape x\upshape
+  \footnotesize$x$\scriptsize$x$\tiny$x$\normalsize$x$}
+\newbox\TESTauthorbox
+\newbox\TESTeditorbox
+\newbox\TESTendorserbox
+\newbox\TESTaffiliationbox
+\makeatletter
+\START
+
+% Typeset the title once and keep the author, editor and endorser lines and
+% the affiliation block as \maketitle typesets them.
+\let\TESTauthor\@author
+\def\@author{\global\setbox\TESTauthorbox\hbox{\TESTauthor}\copy\TESTauthorbox }
+\let\TESTeditorlist\hep@editorlist
+\def\hep@editorlist{\global\setbox\TESTeditorbox\hbox{\TESTeditorlist}\copy\TESTeditorbox }
+\let\TESTendorserlist\hep@endorserlist
+\def\hep@endorserlist{\global\setbox\TESTendorserbox\hbox{\TESTendorserlist}\copy\TESTendorserbox }
+\let\TESTmaketitlehookc\maketitlehookc
+\def\maketitlehookc{%
+  \global\setbox\TESTaffiliationbox\vbox{\TESTmaketitlehookc}\copy\TESTaffiliationbox }
+
+\TEST{Footnotes before the title}{%
+  \TYPE{footnote=\the\c@footnote}%
+  \TYPE{\meaning\@thanks}%
+}
+
+\TEST{\centering outside the title keeps the default \@flushglue}{%
+  \TYPE{\the\@flushglue}%
+}
+
+\TEST{Counters}{%
+  \TYPE{affil=\the\c@affil, Maxaffil=\the\c@Maxaffil,
+    authors=\the\c@authors, editors=\the\c@editors,
+    endorsers=\the\c@endorsers}%
+}
+
+\setbox0\vbox{\maketitle}
+
+\TEST{Footnotes after the title}{%
+  \TYPE{footnote=\the\c@footnote}%
+  \TYPE{\meaning\@thanks}%
+}
+
+\TEST{Author line: affiliation marks and email footnote marks}{%
+  \setbox0\box\TESTauthorbox \showbox0
+}
+
+\TEST{Editor line}{%
+  \setbox0\box\TESTeditorbox \showbox0
+}
+
+\TEST{Endorser line with two endorsers}{%
+  \setbox0\box\TESTendorserbox \showbox0
+}
+
+\TEST{Endorser and affiliation block}{%
+  \setbox0\box\TESTaffiliationbox \showbox0
+}
+
+\let\@author\TESTauthor
+\let\hep@editorlist\TESTeditorlist
+\let\hep@endorserlist\TESTendorserlist
+\let\maketitlehookc\TESTmaketitlehookc
+
+\TEST{Author line title: plural}{%
+  \SHOWVBOX{\@bspreauthor X\@bspostauthor}%
+}
+
+\TEST{Editor line title: plural}{%
+  \SHOWVBOX{\hep@pre@editor X\hep@post@editor}%
+}
+
+\TEST{Endorser line title: plural}{%
+  \SHOWVBOX{\hep@pre@endorser X\hep@post@endorser}%
+}
+
+\TEST{Line titles: singular, and no author title without editors}{%
+  \c@authors=1 \c@editors=1 \c@endorsers=1
+  \SHOWVBOX{\@bspreauthor X\@bspostauthor}%
+  \SHOWVBOX{\hep@pre@editor X\hep@post@editor}%
+  \SHOWVBOX{\hep@pre@endorser X\hep@post@endorser}%
+  \c@editors=0
+  \SHOWVBOX{\@bspreauthor X\@bspostauthor}%
+}
+
+\TEST{Customised titles, fonts and hooks}{%
+  \authortitle{Writer}{Writers}%
+  \authortitlefont{\bfseries}%
+  \preauthortitle{[}%
+  \postauthortitle{]~}%
+  \editortitle{Ed.}{Eds.}%
+  \editortitlefont{\bfseries}%
+  \preeditortitle{<}%
+  \posteditortitle{>~}%
+  \endorsertitle{End.}{Ends.}%
+  \endorsertitlefont{\bfseries}%
+  \preendorsertitle{(}%
+  \postendorsertitle{)~}%
+  \authorfont{\itshape}%
+  \editorfont{\itshape}%
+  \endorserfont{\itshape}%
+  \affiliationfont{\itshape}%
+  \SHOWVBOX{\@bspreauthor X\@bspostauthor}%
+  \SHOWVBOX{\hep@pre@editor X\hep@post@editor}%
+  \SHOWVBOX{\hep@pre@endorser X\hep@post@endorser}%
+  \SHOWHBOX{\Affilfont x}%
+  \preeditor{[}\posteditor{]}%
+  \preendorser{(}\postendorser{)}%
+  \SHOWHBOX{\hep@pre@editor X\hep@post@editor
+    \hep@pre@endorser X\hep@post@endorser}%
+}
+
+\TEST{Third endorser and third editor}{%
+  \endorser{Ian}%
+  \editor{Joe}%
+  \SHOWHBOX{\hep@endorserlist}%
+  \SHOWHBOX{\hep@editorlist}%
+}
+
+\TEST{Email after the title}{%
+  \setbox0\vbox{\maketitle\global\setbox1\hbox{\email{kim@mail.com}}}%
+  \showbox1
+}
+\END

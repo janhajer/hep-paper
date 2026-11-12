@@ -1,0 +1,11 @@
+% hep-paper with springer: abstract as environment in the preamble.
+\input{regression-test}
+\documentclass[twocolumn, epjc3]{svjour3}
+\usepackage{hep-paper}
+\input{journal-title}
+\begin{abstract}Abstract text.\end{abstract}
+\begin{document}
+\maketitle
+\section{Section}
+Text.
+\end{document}

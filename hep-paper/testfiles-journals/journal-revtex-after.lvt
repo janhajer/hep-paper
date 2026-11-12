@@ -1,0 +1,11 @@
+% hep-paper with revtex: abstract as environment directly after \maketitle.
+\input{regression-test}
+\documentclass[aps, prl, reprint, superscriptaddress, nofootinbib]{revtex4-2}
+\usepackage{hep-paper}
+\input{journal-title}
+\begin{document}
+\maketitle
+\begin{abstract}Abstract text.\end{abstract}
+\section{Section}
+Text.
+\end{document}

@@ -1,0 +1,83 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Bookmarks with hyper=false
+============================================================
+[Portable document format and PDF.]
+============================================================
+============================================================
+TEST 2: Bookmarks of sectioning commands without titlesec
+============================================================
+[Portable document format at the beginning]
+[Portable document format starred]
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line ....
+[2 Portable document format numbered]
+============================================================
+============================================================
+TEST 3: No links with hyper=false
+============================================================
+> \box...=
+\hbox(6.94444+1.94444)x252.88948
+.\OT1/cmr/m/n/10 p
+.\kern0.27779
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 d
+.\OT1/cmr/m/n/10 o
+.\kern0.27779
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 m
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 n
+.\kern-0.27779
+.\OT1/cmr/m/n/10 t
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 f
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 m
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 p
+.\kern0.27779
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 d
+.\OT1/cmr/m/n/10 o
+.\kern0.27779
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 m
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 n
+.\kern-0.27779
+.\OT1/cmr/m/n/10 t
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 f
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 m
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+! OK.
+<argument> ...\hbox {\PDF {} and \PDF }\showbox 0 
+l. ...}
+============================================================

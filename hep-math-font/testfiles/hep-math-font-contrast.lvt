@@ -1,0 +1,17 @@
+\input{regression-test}
+\documentclass{article}
+% mathsf=contrast in a sans-serif document: \mathsf selects the serif family,
+% repeating it has no further effect.
+\usepackage[sans]{hep-font}
+\usepackage[mathsf=contrast]{hep-math-font}
+\begin{document}
+% Load all fonts before the test, so font loading is not recorded.
+\setbox0\hbox{$a \mathsf{a} \mathserif{a} \mathbf{\mathsf{a}}$}
+\START
+\TEST{mathsf=contrast: sans document}{%
+  \setbox0\hbox{$a \mathsf{a} \mathsf{\mathsf{a}} \mathserif{a}$}\showbox0
+}
+\TEST{mathsf=contrast: combined with bold}{%
+  \setbox0\hbox{$\mathbf{\mathsf{a}} \mathsf{\mathbf{a}}$}\showbox0
+}
+\END

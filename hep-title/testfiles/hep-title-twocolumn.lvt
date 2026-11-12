@@ -1,0 +1,35 @@
+\input{regression-test}
+\documentclass[twocolumn]{article}
+\usepackage{hep-title}
+\input{hep-regression}
+
+\title{T}
+\author{A \email{a@mail.com}}
+\keywords{k}
+
+\begin{document}
+% Load the fonts before \START
+\setbox0\hbox{$x^x$\LARGE$x^x$\Large$x^x$\large$x^x$\small$x^x$
+  \footnotesize$x^x$\bfseries x}
+\makeatletter
+\START
+
+% abstract* typesets the title and the abstract across both columns
+\begin{abstract*}
+x
+\end{abstract*}
+
+\TEST{abstract* in two-column mode: title and abstract span both columns}{%
+  \def\@elt#1{\showbox#1}%
+  \@dbltoplist
+}
+
+\TEST{abstract* in two-column mode: title footnotes}{%
+  \TYPE{footnote=\the\c@footnote}%
+  \showlists
+}
+\TEST{abstract* in two-column mode: email and ORCID in the text}{%
+  \TYPE{email: \ifx\email\hep@email link\else footnote\fi,
+    orcid: \ifx\orcid\orcidlink link\else footnote\fi}%
+}
+\END

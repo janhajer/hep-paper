@@ -1,0 +1,37 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Class options
+============================================================
+font: 10pt
+serif: true
+hyperref: false
+date: false
+list: true
+font size: 10, secnumdepth: 0, tocdepth: 2
+============================================================
+============================================================
+TEST 2: Loaded packages and their options
+============================================================
+hep-cv: loaded []
+hep-font: loaded [size=10pt,sans=false,oldstyle,]
+hep-text: loaded []
+hep-reference: not loaded
+hyperref: not loaded
+phonenumbers: loaded [foreign,]
+titlesec: loaded [compact,]
+titletoc: loaded []
+dashrule: loaded []
+fancyhdr: loaded []
+lastpage: loaded []
+subfiles: loaded []
+textpos: loaded []
+anyfontsize: loaded []
+fontsize: loaded []
+graphicx: loaded []
+============================================================
+============================================================
+TEST 3: Title page and sections without hyperref
+============================================================
+done
+============================================================

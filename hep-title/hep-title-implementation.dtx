@@ -1,0 +1,1389 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019-2023 by Jan Hajer
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-title}[2026/11/12 v1.7 Extended title data: subtitles, series, preprints, affiliations, ORCID, keywords and abstracts]
+%<documentation>\ProvidesFile{hep-title-documentation.tex}[2026/11/12 v1.7 hep-title documentation]
+%
+%<*documentation>
+
+\RequirePackage[l2tabu, orthodox]{nag}
+
+\documentclass{ltxdoc}
+
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+\usepackage{hologo}
+
+\usepackage[parskip,oldstyle,font=10pt]{hep-paper}
+\bibliography{bibliography}
+
+\acronym{PDF}{portable document format}
+
+%</documentation>
+
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
+\begin{document}
+\DocInput{hep-title-implementation.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{1206}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.0}{2021/09/01}{Created the dedicated title package with series, subtitle, preprint placement, author, affiliation, email, editor, endorser, keyword, and abstract handling.}
+% \changes{v1.1}{2022/11/01}{Added keyword metadata, improved author, affiliation, editor, and endorser documentation, made affiliation output conditional, and fixed affiliation references.}
+% \changes{v1.2}{2023/07/01}{Refreshed package metadata and documentation formatting.}
+% \changes{v1.3}{2024/11/01}{Updated release metadata.}
+% \changes{v1.4}{2025/09/01}{Added reprint blocks, \cs{doi}, \cs{arxiv}, multiple preprint and reprint lines, \cs{placereprint}, ragged preprint font, and applied starred command definitions.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, expanded title documentation and README, and added fuller title tests.}
+% \changes{v1.6}{2026/11/11}{Measured the preprint and reprint boxes into lengths before placing them, because \cs{put} no longer accepts \software{calc} expressions, and dropped the \software{picture} package, stored the authors unexpanded and set the \PDF author, title, and keywords at \cs{maketitle} without overwriting user settings, dropping labelled footnotes and turning line breaks into spaces, made \cs{author} compatible with the \software{hyperref} option \texttt{pdfusetitle}, fixed the separator between two endorsers, removed spurious spaces before the author line, the \cs{orcmail} mark, and in \cs{reprint}, restricted the ragged affiliation margins to the affiliation block, made \cs{email} usable in \PDF strings, generated the editor and endorser macros from a common definition, added \cs{orcid}, which shares the footnote with \cs{email}, allowed \cs{email}, \cs{orcid}, \cs{orcmail}, and \cs{thanks} directly after \cs{author}, \cs{editor}, and \cs{endorser}, printed all authors if there are no affiliations, kept editors out of the author blocks, and removed a spurious space after the \cs{thanks} mark.}
+% \changes{v1.7}{2026/11/12}{Accepted the abstract also before \cs{maketitle}, in the preamble and in the command form \cs{abstract}\marg{text}, and placed it after the title.}
+%
+% \ifshort
+%<*documentation>
+% \fi
+%
+\GetFileInfo{hep-title.sty}
+
+\title{The \software{hep-title} package\thanks{This document corresponds to \software{hep-title}~\fileversion.}}
+\subtitle{Extended title data: subtitles, series, preprints, affiliations, ORCID, keywords and abstracts}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
+\date{\filedate}
+
+% \ifshort
+\begin{document}
+% \fi
+
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+
+\maketitle
+
+\begin{abstract}
+The \software{hep-title} package extends the title macros of the standard classes.
+It adds series and subtitle metadata, preprint and reprint blocks, DOI and arXiv helpers, author, editor, endorser, affiliation, email and ORCID helpers, date and abstract formatting, keywords, and two-column title-aware abstracts.
+\end{abstract}
+
+To use the \software{hep-title} package include it with "\usepackage{hep-title}".
+
+Most macros are intended for the use in the preamble.
+They are implemented using the \software{titling} \cite{titling} and \software{authblk} \cite{authblk} packages.
+
+\section{Macros}
+
+The \software{orcidlink} package \cite{orcidlink}, which is loaded by \software{hep-title}, always loads the \software{hyperref} package \cite{hyperref}.
+Hence, options for \software{hyperref} have to be given with "\hypersetup"\marg{options} or with "\PassOptionsToPackage"\marg{options}"{hyperref}" before \software{hep-title} is loaded; loading "\usepackage"\oarg{options}"{hyperref}" afterwards results in an option clash.
+"\maketitle" sets the \PDF title, author, and keywords according to the "\title"\marg{text}, "\subtitle"\marg{text}, "\author"\marg{text}, and "\keywords"\marg{keywords} information.
+Footnotes, "\thanks", "\email", "\orcid", "\orcmail", and "\orcidlink" are dropped, line breaks become spaces, and "\and" becomes a comma.
+Entries that have been set with "\hypersetup" are kept.
+In other \PDF strings, such as bookmarks, "\email" is replaced by the email address and "\orcid" is dropped.
+
+\subsection{Title}
+
+\DescribeMacro{\preseries}
+\DescribeMacro{\series}
+\DescribeMacro{\postseries}
+\DescribeMacro{\title}
+\DescribeMacro{\presubtitle}
+\DescribeMacro{\subtitle}
+\DescribeMacro{\postsubtitle}
+\DescribeMacro{\seriesfont}
+\DescribeMacro{\titlefont}
+\DescribeMacro{\subtitlefont}
+The "\series"\marg{series} places a series title above the usual title generated via "\title"\marg{title}.
+The "\subtitle"\marg{subtitle} macro places a subtitle below the usual title.
+The "\preseries", "\postseries", "\presubtitle", and "\postsubtitle" hooks adjust the surrounding material.
+The fonts and their size can be adjusted using the "\seriesfont"\marg{font}, "\titlefont"\marg{font}, and "\subtitlefont"\marg{font} macros.
+
+\subsection{Authors}
+
+\DescribeMacro{\author}
+\DescribeMacro{\authorfont}
+\DescribeMacro{\authortitle}
+\DescribeMacro{\authortitlefont}
+\DescribeMacro{\preauthortitle}
+\DescribeMacro{\postauthortitle}
+\DescribeMacro{\email}
+\DescribeMacro{\orcid}
+\DescribeMacro{\orcmail}
+\DescribeMacro{\affiliation}
+\DescribeMacro{\affiliationfont}
+In order to facilitate multiple authors with different affiliations the \software{authblk} package \cite{authblk} is extended.
+The author macro is extended to take an affiliation label "\author"\oarg{label}\marg{name}.
+The affiliation macro takes the corresponding label "\affiliation"\oarg{label}\marg{institution}.
+Additionally, the "\email"\marg{email} macro places a link containing the email address in typewriter font into a footnote, and the "\orcid"\marg{orcid} macro places the ORCID logo and identifier, linked to the ORCID record.
+Consecutive "\email" and "\orcid" macros share one footnote, so that "\author{Name \email{email} \orcid{orcid}}" gives a single footnote mark.
+They can be part of \marg{name} or follow "\author"\marg{name} in the preamble, \eg "\author{Name}\email{email}\orcid{orcid}"; this also holds for "\thanks"\marg{text}, which gets its own footnote, and for editors and endorsers.
+An "\email"\oarg{label}\marg{email} with label gets its own footnote, which can be referred to by the label.
+After the title, "\email" and "\orcid" print the link in the text.
+"\orcmail"\marg{orcid}\marg{email} is short for "\email"\marg{email}"\orcid"\marg{orcid}.
+If editors are present, the author line receives a title that can be adjusted using "\authortitle", "\authortitlefont", "\preauthortitle", and "\postauthortitle".
+The fonts can be adjusted using the "\authorfont"\marg{font} and "\affiliationfont"\marg{font} macros.
+The following lines add \eg two authors with different affiliations
+\begin{verbatim}
+\author[affil1]{Author one \email{email one}}
+\affiliation[affil1]{Affiliation one}
+\author[affil1,affil2]{Author two \email{email two}}
+\affiliation[affil2]{Affiliation two}
+\end{verbatim}
+
+\DescribeMacro{\editor}
+\DescribeMacro{\endorser}
+\DescribeMacro{\editorfont}
+\DescribeMacro{\endorserfont}
+\DescribeMacro{\preeditor}
+\DescribeMacro{\posteditor}
+\DescribeMacro{\preendorser}
+\DescribeMacro{\postendorser}
+Additionally the "\editor"\oarg{label}\marg{name} and "\endorser"\oarg{label}\marg{name} macros are provided that act similar to the "\author"\oarg{label}\marg{name} macros but place their content in a dedicated line.
+Their font and surrounding material can be adjusted by "\editorfont"\marg{font}, "\endorserfont"\marg{font}, "\preeditor"\marg{code}, "\posteditor"\marg{code}, "\preendorser"\marg{code}, and "\postendorser"\marg{code}.
+\DescribeMacro{\editortitle}
+\DescribeMacro{\endorsertitle}
+\DescribeMacro{\editortitlefont}
+\DescribeMacro{\endorsertitlefont}
+\DescribeMacro{\preeditortitle}
+\DescribeMacro{\posteditortitle}
+\DescribeMacro{\preendorsertitle}
+\DescribeMacro{\postendorsertitle}
+The titles of these lines can be adjusted using the "\editortitle"\marg{singular}\marg{plural} and "\endorsertitle"\marg{singular}\marg{plural} macros.
+Their font and surrounding material can be adjusted with "\editortitlefont"\marg{font}, "\endorsertitlefont"\allowbreak\marg{font}, "\preeditortitle"\marg{code}, "\posteditortitle"\marg{code}, "\preendorsertitle"\marg{code}, and "\postendorsertitle"\marg{code}.
+
+\subsection{Abstract}
+
+\DescribeEnv{abstract}
+\DescribeEnv{abstract*}
+\DescribeMacro{\keywords}
+The "abstract" environment is adjusted to not start with an indentation.
+Journals expect the abstract in different places, and all of them are accepted: after "\maketitle", before it in the document, or in the preamble, as environment or in the command form "\abstract"\marg{text}.
+An abstract given before the title is placed after it by "\maketitle".
+The "abstract*" environment takes care of placing the title as well.
+This is used in "twocolumn" documents if the abstract should span both columns.
+The "\keywords"\marg{keywords} macro appends an italic keyword line to the abstract.
+
+\DescribeMacro{\datefont}
+The date is empty by default and can be formatted with "\datefont"\marg{font}.
+
+\subsection{Preprint}
+
+\DescribeMacro{\preprint}
+\DescribeMacro{\arxiv}
+\DescribeMacro{\placepreprint}
+\DescribeMacro{\preprintfont}
+The "\preprint"\marg{number} macro places a preprint number in the upper right corner of the title page.
+The "\arxiv"\marg{id} macro adds an arXiv preprint link.
+The "\placepreprint" hook places the preprint block on the first page, and "\preprintfont" changes its font.
+
+\DescribeMacro{\reprint}
+\DescribeMacro{\doi}
+\DescribeMacro{\placereprint}
+\DescribeMacro{\reprintfont}
+The "\reprint"\marg{text} macro collects reprint or publication information for the upper left corner of the title page.
+The "\doi"\marg{id} helper adds a DOI link.
+The "\placereprint" hook places the reprint block on the first page, and "\reprintfont" changes its font.
+
+% \ifshort
+\printbibliography
+
+\end{document}
+%
+%</documentation>
+% \fi
+%
+% \StopEventually{
+% \printbibliography
+% \PrintChanges
+% }
+%
+% \appendix
+%
+% \section{Implementation}
+%
+%<*package>
+%
+% \begin{macro}{\hep@url@text}
+% Print a URL or email address in typewriter font without \software{hyperref}.
+% As for "\nolinkurl", the text is printed verbatim, so that characters such as "_", "#", "&", and "~" need no escaping.
+% The escaped characters "\%", "\#", "\&", "\_", "\$", and "\~" become the characters themselves.
+% The \software{hep-text} package defines the same macro, so define it only once.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\cs_if_exist:NF \hep@url@text {
+  \tl_new:N \l__hep_url_tl
+  \cs_generate_variant:Nn \tl_replace_all:Nnn { NnV }
+  \cs_new_protected:Npn \hep@url@text #1 {
+    \tl_set:Nn \l__hep_url_tl {#1}
+    \regex_replace_all:nnN { \cP. } { \cO\# } \l__hep_url_tl
+    \tl_replace_all:NnV \l__hep_url_tl { \# } \c_hash_str
+    \tl_replace_all:NnV \l__hep_url_tl { \% } \c_percent_str
+    \tl_replace_all:NnV \l__hep_url_tl { \& } \c_ampersand_str
+    \tl_replace_all:NnV \l__hep_url_tl { \_ } \c_underscore_str
+    \tl_replace_all:NnV \l__hep_url_tl { \$ } \c_dollar_str
+    \tl_replace_all:NnV \l__hep_url_tl { \~ } \c_tilde_str
+    \texttt { \tl_to_str:N \l__hep_url_tl }
+  }
+}
+\ExplSyntaxOff
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\online}
+% \begin{macro}{\email}
+% Provide the "\online"\marg{text}\marg{url} macro combining the features of the "\href" and the "\url" macros.
+% Define a macro for typesetting emails.
+%    \begin{macrocode}
+\providecommand*{\online}[2]{\hep@url@text{#2}}%
+\providecommand*{\hep@email}[1]{\online{mailto:#1}{#1}}
+\providecommand*{\email}{\hep@email}
+\AtBeginDocument{\@ifpackageloaded{hyperref}{%
+    \renewcommand*{\online}[2]{\href{#1}{\nolinkurl{#2}}}%
+  }{}
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\hep@multi@ref}
+% Transform reference list to list of references.
+%    \begin{macrocode}
+\newif\ifhep@first%
+\newcommand*{\hep@multi@ref}[1]{%
+  \hep@firsttrue%
+  \forcsvlist{%
+    \ifhep@first\hep@firstfalse\else\textsuperscript,\fi\ref%
+  }{#1}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\hep@contact}
+% \begin{macro}{\hep@contact@add}
+% \begin{macro}{\hep@contact@next}
+% \begin{macro}{\hep@contact@check}
+% \begin{macro}{\hep@contact@skip}
+% \begin{macro}{\hep@contact@flush}
+% Collect contact information, such as email addresses and ORCID links, for one footnote.
+% After each item the next token is inspected; another "\email" or "\orcid" continues the footnote, everything else places it.
+% Spaces are skipped while looking ahead and one space is restored after the footnote mark.
+%    \begin{macrocode}
+\newcommand*\hep@contact{}
+\newif\ifhep@contact@space
+\newcommand*\hep@contact@add[1]{%
+  \ifdefempty{\hep@contact}{%
+    \gdef\hep@contact{#1}%
+  }{%
+    \gappto\hep@contact{ #1}%
+  }%
+  \hep@contact@spacefalse%
+  \hep@contact@next%
+}
+\newcommand*\hep@contact@next{%
+  \futurelet\hep@contact@token\hep@contact@check%
+}
+\newcommand*\hep@contact@check{%
+  \let\hep@contact@do\hep@contact@flush%
+  \ifx\hep@contact@token\@sptoken%
+    \let\hep@contact@do\hep@contact@skip%
+  \fi%
+  \ifx\hep@contact@token\email\let\hep@contact@do\relax\fi%
+  \ifx\hep@contact@token\orcid\let\hep@contact@do\relax\fi%
+  \hep@contact@do%
+}
+\@firstofone{\def\hep@contact@skip} {%
+  \hep@contact@spacetrue\hep@contact@next%
+}
+\newcommand*\hep@contact@flush{%
+  \unskip\expandafter\hep@contact@thanks\expandafter{\hep@contact}%
+  \ifhep@contact@space\space\fi%
+}
+\newcommand*\hep@contact@thanks[1]{\gdef\hep@contact{}\thanks{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% Redefine the email macro for the title page.
+% In the preamble an email without label directly after "\author", "\editor", or "\endorser" is attached to this person.
+% An email with label gets its own footnote.
+%    \begin{macrocode}
+\DeclareDocumentCommand{\email}{O{}m}{%
+  \ifblank{#1}{%
+    \hep@person@attach{\email{#2}}{\hep@contact@add{\hep@email{#2}}}%
+  }{%
+    \unskip\thanks[#1]{\hep@email{#2}}%
+  }%
+}
+\providecommand*\hep@abstract@place{}
+\AtBeginDocument{
+  \let\hep@maketitle\maketitle
+  \renewcommand*\maketitle{%
+    \hep@maketitle\global\let\email\hep@email\global\let\orcid\orcidlink%
+    \hep@abstract@place
+  }
+}
+%    \end{macrocode}
+%
+% \subsection{Preprint and title}
+%
+% \subsubsection{Preprint and Reprint}
+%
+% \begin{macro}{\reprintfont}
+% Define the "\reprintfont" macro.
+%    \begin{macrocode}
+\let\hep@reprint@font\relax
+\newcommand*{\reprintfont}[1]{\def\hep@reprint@font{#1}}
+\reprintfont{\scshape\small}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\reprint}
+% \begin{macro}{\doi}
+% Define the "\preprint" macro using the \software{varwidth} package \cite{varwidth}.
+%    \begin{macrocode}
+\let\hep@reprint\relax
+\newcommand*\reprint[1]{%
+  \@ifundefined{hep@reprint}{%
+    \gdef\hep@reprint{#1}%
+  }{%
+    \apptocmd{\hep@reprint}{\\#1}{}{}%
+  }%
+}
+\newcommand*\doi[1]{\reprint{\textsc{doi}: \online{https://doi.org/#1}{#1}}}
+\newcommand*{\hep@reprint@box}{%
+  \begin{varwidth}{\textwidth}%
+    \hep@reprint@font\hep@reprint%
+  \end{varwidth}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\preprintfont}
+% Define the "\preprintfont" macro.
+%    \begin{macrocode}
+\let\hep@preprint@font\relax
+\newcommand*{\preprintfont}[1]{\def\hep@preprint@font{#1}}
+\preprintfont{\scshape\small\raggedleft}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\preprint}
+% \begin{macro}{\arxiv}
+% Define the "\preprint" macro using the \software{varwidth} package \cite{varwidth}.
+%    \begin{macrocode}
+\RequirePackage{etoolbox}
+\let\hep@preprint\relax
+\newcommand*\preprint[1]{%
+  \@ifundefined{hep@preprint}{%
+    \gdef\hep@preprint{#1}%
+  }{%
+    \apptocmd{\hep@preprint}{\\#1}{}{}%
+  }%
+}
+\newcommand*\arxiv[1]{%
+  \preprint{\textsc{arXiv}: \online{https://arxiv.org/abs/#1}{#1}}%
+}
+\RequirePackage{varwidth}
+\newcommand*{\hep@preprint@box}{%
+  \begin{varwidth}{\textwidth}%
+    \hep@preprint@font\hep@preprint%
+  \end{varwidth}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\placepreprint}
+% \begin{macro}{\placereprint}
+% Places a preprint number in the top right corner of the title page using the \software{calc} \cite{calc} and \software{atbegshi} \cite{atbegshi} packages.
+% The box dimensions are measured into lengths before they enter the "\put" coordinates, because \software{calc} expressions such as "\heightof" are no longer accepted there.
+%    \begin{macrocode}
+\RequirePackage{calc}
+\RequirePackage{atbegshi}
+\newlength{\hep@box@width}
+\newlength{\hep@box@height}
+\newcommand*{\placepreprint}{%
+  \AtBeginShipoutFirst{%
+    \settowidth{\hep@box@width}{\normalfont\hep@preprint@box}%
+    \settoheight{\hep@box@height}{\normalfont\hep@preprint@box}%
+    \put(
+      \textwidth+\oddsidemargin-\hep@box@width,
+      -2pt-\topmargin-\hep@box@height
+    ){\normalfont\hep@preprint@box}
+  }
+}
+\newcommand*{\placereprint}{%
+  \AtBeginShipoutFirst{%
+    \settoheight{\hep@box@height}{\normalfont\hep@reprint@box}%
+    \put(
+      \oddsidemargin      ,
+      -2pt-\topmargin-\hep@box@height
+    ){\normalfont\hep@reprint@box}
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \subsubsection{Series}
+%
+% \begin{macro}{\series}
+% Define a series title.
+%    \begin{macrocode}
+\newcommand{\preseries}[1]{\def\hep@pre@series{#1}}
+\newcommand*{\series}[1]{\def\hep@series{#1}}
+\newcommand{\postseries}[1]{\def\hep@post@series{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\seriesfont}
+% Allow to change the fontface of the series title.
+%    \begin{macrocode}
+\let\hep@series@font\relax
+\newcommand*{\seriesfont}[1]{\def\hep@series@font{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% Set the default series title layout.
+%    \begin{macrocode}
+\preseries{\begin{center}\Large\hep@series@font}
+\postseries{\par\end{center}}
+%    \end{macrocode}
+%
+% \subsubsection{Title}
+%
+% Extend the title using the \software{titling} package \cite{titling}.
+% Fix the footnote indent.
+%    \begin{macrocode}
+\RequirePackage{titling}
+\setlength{\thanksmarkwidth}{1.5em}
+%    \end{macrocode}
+%
+% \begin{macro}{\maketitlehooka}
+% Place the preprint and the series title using "\maketitlehooka".
+%    \begin{macrocode}
+\renewcommand*{\maketitlehooka}{%
+  \placereprint\placepreprint\vspace{-\bigskipamount}%
+  \@ifundefined{hep@series}{}{%
+    \hep@pre@series\hep@series\hep@post@series%
+  }%
+%   \vspace{-\bigskipamount}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\titlefont}
+% Allow to change the fontface of the the title.
+%    \begin{macrocode}
+\let\hep@title@font\relax
+\newcommand*{\titlefont}[1]{\def\hep@title@font{#1}}
+%    \end{macrocode}
+% \end{macro}
+% Set default title layout.
+%    \begin{macrocode}
+\pretitle{\begin{center}\LARGE\hep@title@font}
+\posttitle{\par\end{center}}
+%    \end{macrocode}
+
+% \subsubsection{Subtitle}
+%
+% \begin{macro}{\subtitle}
+% Define a subtitle.
+%    \begin{macrocode}
+\newcommand{\presubtitle}[1]{\def\hep@pre@sub@title{#1}}
+\newcommand*{\subtitle}[1]{\def\hep@sub@title{#1}}
+\newcommand{\postsubtitle}[1]{\def\hep@post@sub@title{#1}}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\subtitlefont}
+% Allow to change the fontface of the subtitle.
+%    \begin{macrocode}
+\let\hep@subtitle@font\relax
+\newcommand*{\subtitlefont}[1]{\def\hep@subtitle@font{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% Set default subtitle layout.
+%    \begin{macrocode}
+\presubtitle{\begin{center}\Large\hep@subtitle@font}
+\postsubtitle{\par\end{center}}
+%    \end{macrocode}
+%
+% \subsection{Authors, Editors and Endorsers}
+%
+% Enable the handling of multiple authors with different affiliations using the \software{authblk} package \cite{authblk}.
+% \software{authblk} defines the state of its author blocks only when an author starts a new block, which is not the case for the first author if an editor or endorser comes first.
+%    \begin{macrocode}
+\RequirePackage{authblk}
+\providecommand*\AB@as{}
+\providecommand*\AB@las{}
+\providecommand*\AB@lasx{\protect\Authand}
+\providecommand*\AB@au@str{}
+%    \end{macrocode}
+%
+% \subsubsection{Deferred entries}
+%
+% \begin{macro}{\hep\_person:nnn}
+% \begin{macro}{\hep\_person\_commit:}
+% \begin{macro}{\hep\_person\_attach:nn}
+% In the preamble an author, editor, or endorser is only stored, and added to its list by the next "\author", "\editor", "\endorser", or "\affiliation", or at the beginning of the document.
+% Until then, "\email", "\orcid", "\orcmail", and "\thanks" without label are appended to the stored name, so that they can follow "\author"\marg{name} instead of being part of \marg{name}.
+% In the document the entries are added immediately.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\tl_new:N \g__hep_person_tl
+\tl_new:N \g__hep_person_label_tl
+\tl_new:N \g__hep_person_name_tl
+\cs_new_protected:Npn \__hep_person_add:nnn #1#2#3
+  {
+    \str_if_eq:nnTF {#1} { author }
+      {
+        \hep_add_to_authors:n {#3}
+        \hep_author [#2] {#3}
+      }
+      { \hep@person@add {#1} {#2} {#3} }
+  }
+\cs_generate_variant:Nn \__hep_person_add:nnn { VVV }
+\cs_new_protected:Npn \hep_person_commit:
+  {
+    \tl_if_empty:NF \g__hep_person_tl
+      {
+        \__hep_person_add:VVV \g__hep_person_tl
+          \g__hep_person_label_tl \g__hep_person_name_tl
+        \tl_gclear:N \g__hep_person_tl
+      }
+  }
+\cs_new_protected:Npn \hep_person:nnn #1#2#3
+  {
+    \hep_person_commit:
+    \tl_gset:Nn \g__hep_person_tl {#1}
+    \tl_gset:Nn \g__hep_person_label_tl {#2}
+    \tl_gset:Nn \g__hep_person_name_tl {#3}
+    \cs_if_eq:NNT \@nodocument \relax { \hep_person_commit: }
+  }
+\cs_new_protected:Npn \hep_person_attach:nn #1#2
+  {
+    \tl_if_empty:NTF \g__hep_person_tl {#2}
+      { \tl_gput_right:Nn \g__hep_person_name_tl {#1} }
+  }
+\cs_new_eq:NN \hep@person \hep_person:nnn
+\cs_new_eq:NN \hep@person@commit \hep_person_commit:
+\cs_new_eq:NN \hep@person@attach \hep_person_attach:nn
+\AddToHook{begindocument/before}{\hep_person_commit:}
+\ExplSyntaxOff
+\RequirePackage{xpatch}
+\xpretocmd{\affil}{\hep@person@commit}{}{}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \subsubsection{Editors and endorsers}
+%
+% \begin{macro}{\hep@person@add}
+% Add a name with an optional list of labels to the list of editors or endorsers, similar to the "\author" macro of \software{authblk}.
+% The first argument is the kind of person.
+%    \begin{macrocode}
+\newcommand*\hep@person@add[3]{%
+  \ifnewaffil%
+    \addtocounter{affil}{1}%
+    \edef\AB@thenote{\arabic{affil}}%
+  \fi%
+  \if\relax#2\relax\else\setcounter{Maxaffil}{0}\fi%
+  \ifnum\value{#1s}>1\relax%
+    \@namedef{hep@#1@sep\number\value{#1s}}{\Authsep}%
+  \fi%
+  \addtocounter{#1s}{1}%
+  \begingroup%
+    \let\protect\@unexpandable@protect%
+    \let\and\AB@pand%
+    \def\thanks{\protect\thanks}\def\footnote{\protect\footnote}%
+    \let\\\authorcr%
+    \@temptokena=\expandafter\expandafter\expandafter{%
+      \csname hep@#1list\endcsname%
+    }%
+    \expandafter\xdef\csname hep@#1list\endcsname{%
+      \the\@temptokena%
+      \protect\@nameuse{hep@#1@sep\number\value{#1s}}%
+      \protect\Authfont#3%
+      \if\relax#2\relax\else\protect\hep@multi@ref{#2}\fi%
+    }%
+  \endgroup%
+  \ifnum\value{#1s}>2\relax%
+    \@namedef{hep@#1@sep\number\value{#1s}}{\Authands}%
+  \fi%
+  \newaffilfalse%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\hep@print@person}
+% Print the line of the given kind of persons, if there are any.
+%    \begin{macrocode}
+\newcommand*\hep@print@person[1]{%
+  \expandafter\ifx\csname hep@#1list\endcsname\AB@empty\else%
+    \@nameuse{hep@pre@#1}\@nameuse{hep@#1list}\@nameuse{hep@post@#1}%
+  \fi%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\hep@new@setter}
+% Define a macro \marg{name} that stores its argument in the macro \marg{internal}.
+% The argument may contain paragraphs.
+% "\def" is used, since "\newcommand" refuses names starting with "end", such as "\endorserfont".
+%    \begin{macrocode}
+\newcommand*\hep@new@setter[2]{%
+  \expandafter\long\expandafter\def\csname#1\endcsname##1{%
+    \@namedef{#2}{##1}%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\hep@new@person}
+% Define the user interface for a kind of person \marg{kind} with the line titles \marg{singular} and \marg{plural}:
+% the counter \meta{kind}"s", the macro "\"\meta{kind}\oarg{label}\marg{name}, the font macros "\"\meta{kind}"font" and "\"\meta{kind}"titlefont", the title macro "\"\meta{kind}"title"\marg{singular}\marg{plural}, and the hooks "\pre"\meta{kind}, "\post"\meta{kind}, "\pre"\meta{kind}"title", and "\post"\meta{kind}"title".
+% By default the line is centred and starts with the italic title, followed by a colon.
+%    \begin{macrocode}
+\newcommand*\hep@new@person[3]{%
+  \newcounter{#1s}%
+  \expandafter\let\csname hep@#1list\endcsname\AB@empty%
+  \@namedef{hep@#1@sep1}{}%
+  \@namedef{hep@#1@sep2}{\Authand}%
+  \expandafter\NewDocumentCommand\csname#1\endcsname{O{}m}{%
+    \hep@person{#1}{##1}{##2}%
+  }%
+  \hep@new@setter{#1font}{hep@#1@font}%
+  \hep@new@setter{pre#1}{hep@pre@#1}%
+  \hep@new@setter{post#1}{hep@post@#1}%
+  \hep@new@setter{#1titlefont}{hep@#1@title@font}%
+  \hep@new@setter{pre#1title}{hep@pre@#1@title}%
+  \hep@new@setter{post#1title}{hep@post@#1@title}%
+  \expandafter\def\csname#1title\endcsname##1##2{%
+    \@namedef{hep@#1@title}{##1}%
+    \@namedef{hep@#1@title@pl}{##2}%
+  }%
+  \@namedef{hep@#1@font}{}%
+  \@nameuse{#1title}{#2}{#3}%
+  \@nameuse{#1titlefont}{\itshape}%
+  \@nameuse{pre#1title}{\@nameuse{hep@#1@title@font}}%
+  \@nameuse{post#1title}{: }%
+  \@nameuse{pre#1}{%
+    \begin{center}%
+      \large\@nameuse{hep@#1@font}\lineskip.5em%
+      \begin{tabular}[t]{c}{%
+        \@nameuse{hep@pre@#1@title}%
+        \ifnum\value{#1s}>1\relax%
+          \@nameuse{hep@#1@title@pl}%
+        \else%
+          \@nameuse{hep@#1@title}%
+        \fi%
+        \@nameuse{hep@post@#1@title}%
+      }%
+  }%
+  \@nameuse{post#1}{\end{tabular}\par\end{center}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\editor}
+% \begin{macro}{\editorfont}
+% \begin{macro}{\preeditor}
+% \begin{macro}{\posteditor}
+% \begin{macro}{\editortitle}
+% \begin{macro}{\editortitlefont}
+% \begin{macro}{\preeditortitle}
+% \begin{macro}{\posteditortitle}
+% \begin{macro}{\endorser}
+% \begin{macro}{\endorserfont}
+% \begin{macro}{\preendorser}
+% \begin{macro}{\postendorser}
+% \begin{macro}{\endorsertitle}
+% \begin{macro}{\endorsertitlefont}
+% \begin{macro}{\preendorsertitle}
+% \begin{macro}{\postendorsertitle}
+% Define editors and endorsers.
+%    \begin{macrocode}
+\hep@new@person{editor}{Editor}{Editors}
+\hep@new@person{endorser}{Endorser}{Endorsers}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\maketitlehookb}
+% Show subtitle and editor.
+%    \begin{macrocode}
+\renewcommand*{\maketitlehookb}{%
+  \@ifundefined{hep@sub@title}{}{%
+    \hep@pre@sub@title\hep@sub@title\hep@post@sub@title%
+  }%
+  \smallskip%
+  \hep@print@person{editor}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsubsection{Authors}
+%
+% \begin{macro}{\author}
+% Allow absent author field.
+%    \begin{macrocode}
+% \author{}
+%    \end{macrocode}
+% \end{macro}
+%
+% Switch authblk to a label ref system for affiliations using the \software{xpatch} package \cite{xpatch}.
+%    \begin{macrocode}
+\RequirePackage{xpatch}
+\xpatchcmd{\author}{%
+  \protect\Authfont#2\AB@authnote{\AB@note}%
+}{%
+  \protect\Authfont#2%
+  \if\relax#1\relax\else\unskip\protect\hep@multi@ref{\AB@note}\fi%
+}{}{}
+%    \end{macrocode}
+%
+% \begin{macro}{\authorfont}
+% Allow to change the fontface of the individual parts of the title.
+%    \begin{macrocode}
+\let\hep@author@font\relax
+\newcommand*{\authorfont}[1]{\def\hep@author@font{#1}}
+\renewcommand*\Authfont{\hep@author@font}
+%    \end{macrocode}
+% \end{macro}
+%
+% Set default author fontface.
+%    \begin{macrocode}
+\newcommand*{\authortitle}[2]{%
+  \def\hep@author@title{#1}%
+  \def\hep@author@title@pl{#2}%
+}
+\newcommand*{\authortitlefont}[1]{\def\hep@author@title@font{#1}}
+\newcommand{\preauthortitle}[1]{\def\hep@pre@author@title{#1}}
+\newcommand{\postauthortitle}[1]{\def\hep@post@author@title{#1}}
+\authortitle{Author}{Authors}
+\authortitlefont{\itshape}
+\preauthortitle{\hep@author@title@font}
+\postauthortitle{: }
+\preauthor{%
+  \begin{center}%
+    \large\hep@author@font\lineskip.5em%
+    \begin{tabular}[t]{c}{%
+      \ifnum\value{editors}>0\relax%
+        \hep@pre@author@title%
+        \ifnum\value{authors}>1\relax%
+          \hep@author@title@pl\else\hep@author@title%
+        \fi\hep@post@author@title%
+      \fi%
+    }%
+}
+\postauthor{\end{tabular}\par\end{center}}
+%    \end{macrocode}
+%
+% \subsubsection{Affiliation}
+%
+% Patch the "\affiliation" macro to comply with the label ref system.
+%    \begin{macrocode}
+\newcounter{affiliation}
+\renewcommand*{\theaffiliation}{%
+  \textsuperscript{\normalfont\alph{affiliation}}%
+}
+\xpatchcmd{\affil}{%
+  \AB@affilnote{\AB@note}%
+}{%
+  \protect\refstepcounter{affiliation}\protect\label{\AB@note}%
+  \if\relax#1\relax\else\protect\theaffiliation\fi%
+}{}{}
+%    \end{macrocode}
+%
+% \begin{macro}{\affiliationfont}
+% Allow to change the fontface of affiliation.
+%    \begin{macrocode}
+\let\hep@affiliation@font\relax
+\newcommand*{\affiliationfont}[1]{\def\hep@affiliation@font{#1}}
+% \newif\ifhep@lining\hep@liningtrue
+% \ifhep@lining
+  \renewcommand*{\Affilfont}{\small\hep@affiliation@font}
+% \else
+%   \renewcommand*{\Affilfont}{\small\ostyle\hep@affiliation@font}
+% \fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\affiliation}
+% Define the "\affiliation" macro, ensure that linebreaks happen after a comma.
+%    \begin{macrocode}
+\newcommand*\hep@penalty{\if@twocolumn85\else50\fi}
+\newcommand*\hep@active@comma{,\penalty-\hep@penalty\relax}
+\newcommand*\hep@cat@comma@active{\catcode`\,\active}
+{\hep@cat@comma@active\gdef,{\hep@active@comma}}
+\newcommand*\hep@affil[1]{\endgroup\affil{#1}}
+\def\hep@affil@opt[#1]#2{\endgroup\affil[#1]{#2}}
+\DeclareRobustCommand\hep@affiliation{%
+  \@ifnextchar[{\hep@affil@opt}{\hep@affil}%
+}
+\newcommand*{\affiliation}{%
+  \begingroup\hep@cat@comma@active\hep@affiliation%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% Place endorser and affiliation.
+% The affiliations are typeset with flexible margins, so that the line breaks after commas are preferred; this setting is local to the affiliation block.
+%    \begin{macrocode}
+\renewcommand*{\maketitlehookc}{%
+  \hep@print@person{endorser}%
+%       \\[\affilsep]
+  \ifx\AB@affillist\AB@empty\else%
+    \ifnum\value{affil}>\value{Maxaffil}\relax%
+      \begingroup%
+        \@flushglue=0pt plus .5\linewidth%
+        \begin{center}\AB@affillist\end{center}%
+      \endgroup%
+    \fi%
+  \fi%
+}
+%    \end{macrocode}
+%
+% \begin{macro}{\@author}
+% Ensure that affiliation is not set directly below author.
+% Without affiliations the list of all authors is used, since \software{authblk} keeps only the last one in this case; it falls back to the author given before \software{hep-title} has been loaded.
+% The "\rlap" redefinition lives in a helper macro, so that "\@author" contains no parameter characters; \software{hyperref} copies "\@author" with the "pdfusetitle" option.
+%    \begin{macrocode}
+\newcommand*{\hep@no@rlap}{\def\rlap##1{##1}}
+\def\@author{%
+  \ifx\AB@affillist\AB@empty%
+    \ifx\AB@authlist\AB@empty\AB@author\else\AB@authlist\fi%
+  \else%
+    \ifnum\value{affil}>\value{Maxaffil}\relax%
+      \hep@no@rlap%
+      \AB@authlist%
+%       \\[\affilsep]\AB@affillist%
+    \else%
+      \AB@authors%
+    \fi%
+  \fi%
+}
+%    \end{macrocode}
+% \end{macro}
+% \subsubsection{PDF strings}
+%
+% \begin{macro}{\_\_hep\_pdf\_gobble\_opt:w}
+% \begin{macro}{\_\_hep\_pdf\_drop\_opt:w}
+% \begin{macro}{\_\_hep\_pdf\_newline:w}
+% Expandable replacements for PDF strings.
+% The first one removes a footnote-like command with an optional label, the second one keeps the mandatory argument and the third one turns a line break with optional star and length into a space.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\cs_new:Npn \__hep_pdf_gobble_opt:w #1
+  { \str_if_eq:nnT {#1} { [ } { \__hep_pdf_gobble_opt_aux:w } }
+\cs_new:Npn \__hep_pdf_gobble_opt_aux:w #1 ] #2 { }
+\cs_new:Npn \__hep_pdf_drop_opt:w #1
+  { \str_if_eq:nnTF {#1} { [ } { \__hep_pdf_drop_opt_aux:w } {#1} }
+\cs_new:Npn \__hep_pdf_drop_opt_aux:w #1 ] #2 {#2}
+\cs_new:Npn \__hep_pdf_newline:w #1
+  {
+    \str_if_eq:nnTF {#1} { * }
+      { \__hep_pdf_newline:w }
+      {
+        \str_if_eq:nnTF {#1} { [ }
+          { \__hep_pdf_newline_aux:w } { ~ #1 }
+      }
+  }
+\cs_new:Npn \__hep_pdf_newline_aux:w #1 ] #2 { ~ #2 }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \subsubsection{PDF document information}
+%
+% \begin{macro}{\g\_hep\_authors\_seq}
+% \begin{macro}{\hep\_author}
+% Collect the authors for the PDF document information.
+%    \begin{macrocode}
+\seq_new:N \g_hep_authors_seq
+\cs_new_eq:NN \hep_author \author
+\tl_new:N \l__hep_pdf_tl
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\_\_hep\_pdf\_normalise:N}
+% Remove the spaces in front of the commands that are dropped in PDF strings and around line breaks and "\and", and trim the spaces at both ends.
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_pdf_normalise:N #1
+  {
+    \clist_map_inline:nn
+      { \email, \thanks, \footnote, \orcid, \orcidlink, \orcmail, \\, \and }
+      { \tl_replace_all:Nnn #1 { ~ ##1 } {##1} }
+    \tl_replace_all:Nnn #1 { \\ ~ } { \\ }
+    \tl_replace_all:Nnn #1 { \and ~ } { \and }
+    \tl_trim_spaces:N #1
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\hep\_add\_to\_authors:n}
+% Store the author unexpanded, it is converted into a PDF string by \software{hyperref} when the title is made.
+%    \begin{macrocode}
+\cs_new_protected:Npn \hep_add_to_authors:n #1
+  {
+    \tl_set:Nn \l__hep_pdf_tl {#1}
+    \__hep_pdf_normalise:N \l__hep_pdf_tl
+    \seq_gput_right:NV \g_hep_authors_seq \l__hep_pdf_tl
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\author}
+% Patch author macro, the author is added to the lists by \cs{hep\_person\_commit:}.
+%    \begin{macrocode}
+\RenewDocumentCommand{\author}{O{}m}{
+  \hep_person:nnn {author} {#1} {#2}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\hep\_authors:}
+% \begin{macro}{\hep@authors}
+% Expandable list of the authors.
+%    \begin{macrocode}
+\cs_new:Npn \hep_authors:
+  {
+    \seq_use:Nnnn \g_hep_authors_seq
+      { ~ and ~ } { , ~ } { , ~ and ~ }
+  }
+\cs_new_eq:NN \hep@authors \hep_authors:
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\_\_hep\_pdf\_info:nn}
+% Set the PDF document information entry \marg{key} to \marg{value} unless it has been set by the user, \ie unless it is neither empty nor the value set by a previous call.
+%    \begin{macrocode}
+\tl_new:N \g__hep_pdf_author_tl
+\tl_new:N \g__hep_pdf_title_tl
+\tl_new:N \g__hep_pdf_keywords_tl
+\cs_new_protected:Npn \__hep_pdf_info:nn #1#2
+  {
+    \bool_lazy_or:nnT
+      { \tl_if_empty_p:c { @pdf #1 } }
+      { \tl_if_eq_p:cc { @pdf #1 } { g__hep_pdf_ #1 _tl } }
+      {
+        \hypersetup { pdf #1 = {#2} }
+        \tl_gset_eq:cc { g__hep_pdf_ #1 _tl } { @pdf #1 }
+      }
+  }
+\cs_generate_variant:Nn \__hep_pdf_info:nn { nV }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\_\_hep\_pdf\_info:}
+% Set the PDF title, author and keywords from "\title", "\subtitle", "\author" and "\keywords" similar to the "pdfusetitle" option of \software{hyperref}.
+% Footnote-like commands are dropped, line breaks become spaces and "\and" becomes a comma.
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_pdf_info:
+  {
+    \cs_gset_eq:NN \__hep_pdf_saved_hook: \pdfstringdefPreHook
+    \pdfstringdefDisableCommands
+      {
+        \cs_set_eq:NN \email \__hep_pdf_gobble_opt:w
+        \cs_set_eq:NN \thanks \__hep_pdf_gobble_opt:w
+        \cs_set_eq:NN \footnote \__hep_pdf_gobble_opt:w
+        \cs_set_eq:NN \orcidlink \use_none:n
+        \cs_set_eq:NN \orcid \use_none:n
+        \cs_set_eq:NN \orcmail \use_none:nn
+        \cs_set_eq:NN \\ \__hep_pdf_newline:w
+        \cs_set_eq:NN \newline \__hep_pdf_newline:w
+        \cs_set:Npn \and { , ~ }
+      }
+    \tl_if_in:NnF \@title { \@latex@error }
+      {
+        \tl_set_eq:NN \l__hep_pdf_tl \@title
+        \__hep_pdf_normalise:N \l__hep_pdf_tl
+        \@ifundefined { hep@sub@title } { }
+          { \tl_put_right:Nn \l__hep_pdf_tl { : ~ \hep@sub@title } }
+        \tl_put_right:Nn \l__hep_pdf_tl { \@empty }
+        \__hep_pdf_info:nV { title } \l__hep_pdf_tl
+      }
+    \seq_if_empty:NF \g_hep_authors_seq
+      {
+        \tl_set:Ne \l__hep_pdf_tl { \hep_authors: \exp_not:N \@empty }
+        \__hep_pdf_info:nV { author } \l__hep_pdf_tl
+      }
+    \@ifundefined { hep@key@words } { }
+      { \__hep_pdf_info:nn { keywords } { \hep@key@words } }
+    \cs_gset_eq:NN \pdfstringdefPreHook \__hep_pdf_saved_hook:
+  }
+\AddToHook{cmd/maketitle/before}[hep-title/pdfinfo]{
+  \@ifpackageloaded{hyperref}{\__hep_pdf_info:}{}
+}
+\ExplSyntaxOff
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\orcid}
+% \begin{macro}{\orcmail}
+% Load the \software{orcidlink} \cite{orcidlink} package, which also loads \software{hyperref}, and make the logo monochrome.
+% It is loaded after "\author" has been redefined, so that the "pdfusetitle" option of \software{hyperref} still sees the authors.
+% Define the "\orcid" macro that places the ORCID link in the footnote of the contact information, like "\email".
+% The "\orcmail" macro is kept for backward compatibility.
+%    \begin{macrocode}
+\RequirePackage{orcidlink}
+\colorlet{orcidlogocol}{black}
+\tikzset{
+  orcidlogo/.pic={
+    \fill[orcidlogocol] svg{M256,128c0,70.7-57.3,128-128,128C57.3,256,0,198.7,0,128C0,57.3,57.3,0,128,0C198.7,0,256,57.3,256,128z};
+    \fill[white] svg{M236,128 c0,59.6-48.4,108-108,108 C68.4,236,20,187.6,20,128 C20,68.4,68.4,20,128,20 C187.6,20,236,68.4,236,128z};
+    \fill[black] svg{M86.3,186.2H70.9V79.1h15.4v48.4V186.2z}
+    svg{M108.9,79.1h41.6c39.6,0,57,28.3,57,53.6c0,27.5-21.5,53.6-56.8,53.6h-41.8V79.1z M124.3,172.4h24.5c34.9,0,42.9-26.5,42.9-39.7c0-21.5-13.7-39.7-43.7-39.7h-23.7V172.4z}
+    svg{M88.7,56.8c0,5.5-4.5,10.1-10.1,10.1c-5.6,0-10.1-4.6-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1C84.2,46.7,88.7,51.3,88.7,56.8z};
+  }
+}
+\DeclareDocumentCommand{\orcid}{m}{%
+  \hep@person@attach{\orcid{#1}}{\hep@contact@add{\orcidlinkc{#1}}}%
+}
+\NewDocumentCommand{\orcmail}{mm}{\email{#2}\orcid{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% In PDF strings such as bookmarks the "\email" macro shows the address and the "\orcid" and "\orcmail" macros are dropped.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\pdfstringdefDisableCommands{
+  \cs_set_eq:NN \email \__hep_pdf_drop_opt:w
+  \cs_set_eq:NN \orcid \use_none:n
+  \cs_set_eq:NN \orcmail \use_none:nn
+}
+\ExplSyntaxOff
+%    \end{macrocode}
+%
+% \subsection{Date and Abstract}
+%
+% \subsubsection{Date}
+%
+% \begin{macro}{\date}
+% Allow absent date field.
+%    \begin{macrocode}
+\date{\vspace{-4ex}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\datefont}
+% Allow to change the fontface of the individual parts of the title.
+%    \begin{macrocode}
+\let\hep@date@font\relax
+\newcommand*{\datefont}[1]{\def\hep@date@font{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% Set the default "date" fontface.
+%    \begin{macrocode}
+\predate{\begin{center}\hep@date@font}
+\postdate{\par\end{center}}
+%    \end{macrocode}
+%
+% \subsubsection{Abstract}
+%
+% \begin{environment}{abstract*}
+% Add a "abstract*" environment for two column mode taking also care of placing the title using the \software{environ} \cite{environ} and \software{abstract} \cite{abstract} packages.
+% It is defined first, since the \software{abstract} package redefines the "abstract" environment.
+%    \begin{macrocode}
+\@ifundefined{abstract}{}{%
+  \if@twocolumn
+    \RequirePackage{environ}
+    \RequirePackage{abstract}
+    \renewcommand*{\abstitleskip}{-3ex}
+    \NewEnviron{abstract*}{%
+      \twocolumn[\maketitle\vspace{-5ex}%
+      \begin{onecolabstract}\noindent\BODY\end{onecolabstract}%
+      \vspace{.5cm}]\saythanks%
+    }%
+  \else
+    \newenvironment{abstract*}{%
+      \maketitle\begin{abstract}%
+    }{%
+      \end{abstract}%
+    }
+  \fi
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{environment}{abstract}
+% Adjust the "abstract" environment to not start with indentation.
+%    \begin{macrocode}
+  \let\hep@abstract\abstract%
+  \newcommand*\hep@abstract@begin{\hep@abstract\noindent\ignorespaces}%
+  \let\hep@abstract@end\endabstract
+  \let\hep@key@words\relax
+  \newcommand*{\keywords}[1]{\def\hep@key@words{#1}}
+  \AtBeginDocument{\@ifundefined{hep@key@words}{}{%
+    \let\hep@end@abstract\hep@abstract@end%
+    \renewcommand*\hep@abstract@end{
+      \par\medskip\noindent\textit{Keywords: \hep@key@words}%
+      \hep@end@abstract%
+    }%
+  }}
+%    \end{macrocode}
+%
+% \begin{macro}{\ifhep@title@made}
+% \begin{macro}{\hep@abstract@store}
+% \begin{macro}{\hep@abstract@collect}
+% Journals expect the abstract in different places: after "\maketitle" (\software{article}, \software{svjour3}), before it in the document (REV\hologo{TeX}, \software{amsart}), or in the preamble, either as environment or in the command form "\abstract"\marg{text} (\software{JHEP}, \software{JCAP}, PoS).
+% Accept all of them: before the title is made the abstract is only stored, collected by the \software{environ} package \cite{environ} if it is an environment, and "\maketitle" places it after the title.
+%    \begin{macrocode}
+  \newif\ifhep@title@made
+  \newif\ifhep@abstract@stored
+  \RequirePackage{environ}
+  \newcommand*\hep@abstract@name{abstract}
+  \newcommand\hep@abstract@store[1]{%
+    \gdef\hep@abstract@text{#1}%
+    \global\hep@abstract@storedtrue
+  }
+  \newcommand*\hep@abstract@collect{%
+    \Collect@Body\hep@abstract@store
+  }
+  \newif\ifhep@abstract@collecting
+  \renewcommand*\abstract{%
+    \ifhep@title@made
+      \hep@abstract@collectingfalse
+      \let\hep@abstract@next\hep@abstract@begin
+    \else
+      \ifx\@currenvir\hep@abstract@name
+        \hep@abstract@collectingtrue
+        \let\hep@abstract@next\hep@abstract@collect
+      \else
+        \let\hep@abstract@next\hep@abstract@store
+      \fi
+    \fi
+    \hep@abstract@next
+  }%
+  \renewcommand*\endabstract{%
+    \ifhep@abstract@collecting\else\hep@abstract@end\fi
+  }%
+  \renewcommand*\hep@abstract@place{%
+    \global\hep@title@madetrue
+    \ifhep@abstract@stored
+      \global\hep@abstract@storedfalse
+      \begin{abstract}\hep@abstract@text\end{abstract}%
+    \fi
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{environment}
+%
+% \subsection{Thanks}
+%
+% \begin{macro}{\thanks} Redefine thank to have a optional argument for a reference label.
+% In the preamble "\thanks" without label directly after "\author", "\editor", or "\endorser" is attached to this person.
+%    \begin{macrocode}
+\let\hep@thanks\thanks
+\AtEndDocument{\let\thanks\hep@thanks}
+\DeclareRobustCommand\thanks[2][]{%
+  \ifblank{#1}{%
+    \hep@person@attach{\thanks{#2}}{\hep@thanks@note{}{#2}}%
+  }{%
+    \hep@thanks@note{#1}{#2}%
+  }%
+}
+\newcommand\hep@thanks@note[2]{%
+  \AfterEndPreamble{%
+    \if\relax#1\relax%
+      \footnotemark%
+    \else%
+      \renewcommand*\thefootnote{\textsuperscript{\@fnsymbol\c@footnote}}%
+      \protect\refstepcounter{footnote}\protect\label{#1}%
+      \renewcommand*\thefootnote{\@arabic\c@footnote}%
+    \fi%
+    \protected@xdef\@thanks{%
+      \@thanks\protect\footnotetext[\the\c@footnote]{#2}%
+    }%
+    \if@twocolumn
+      \protected@xdef\@bs@thanks{%
+        \@bs@thanks\protect\footnotetext[\the\c@footnote]{#2}%
+      }%
+    \fi%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%</package>
+%
+% \section{Test}
+%
+%<*testone|testtwo>
+%
+%     \begin{macrocode}
+%<testone>\documentclass{article}
+%<testtwo>\documentclass[twocolumn]{article}
+
+%% \usepackage[lang=english]{hep-paper}
+\usepackage[math]{blindtext}
+\usepackage{hep-title}
+\usepackage{hyperref}
+\def\BackrefFootnoteTag{}\usepackage{footnotebackref}
+
+\doi{10.1234/5678}
+
+\arxiv{1234.5678}
+
+\preprint{Preprint}
+
+\series{Series}
+
+\title{Title}
+
+\subtitle{Subtitle}
+
+\editor[one]{First Editor}
+\editor[one,two,second]{Second Editor}
+\email[second]{second@mail.com}
+\editor[one,two,three]{Third Editor \email{third@mail.com}}
+
+\author[three,four]{First Author}
+\author[fourth, two,four,thanks]{Second Author}
+\email[fourth]{fifth@mail.com}
+\thanks[thanks]{Thanks}
+\author[two,three,four]{Third Author \email{sixth@mail.com}}
+\author{Fourth Author}
+
+\endorser[four]{First Endorser}
+\endorser[five]{Second Endorser}
+\endorser{Third Endorser}
+
+\affiliation[one]{First Affiliation}
+\affiliation[two]{Second Affiliation}
+\affiliation[three]{Third Affiliation}
+\affiliation[four]{Fourth Affiliation}
+\affiliation[five]{Fifth Affiliation}
+
+\date{Date}
+
+\keywords{Keyword 1, keyword 2, keyword 3}
+
+\begin{document}
+%<testone>
+%<testone> \maketitle
+
+%<testone>\begin{abstract}
+%<testtwo>\begin{abstract*}
+\blindtext
+%<testone>\end{abstract}
+%<testtwo>\end{abstract*}
+
+\noindent First page footnote.\footnote{Footnote}
+
+\blinddocument
+
+\end{document}
+%    \end{macrocode}
+%
+%</testone|testtwo>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-title` package
+
+Extended title data: subtitles, series, preprints, affiliations,
+ORCID, keywords and abstracts
+
+## Introduction
+
+The `hep-title` package extends the title macros of the standard classes
+with series and subtitle metadata, preprint and reprint blocks, DOI and
+arXiv helpers, author, editor, endorser, affiliation, email and ORCID
+helpers, date and abstract formatting, keywords, and two-column
+title-aware abstracts.
+
+To use the `hep-title` package include it with `\usepackage{hep-title}`.
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
+%
+% \Finale
+
+\endinput
+
+% \PrintIndex
+% makeindex -s gglo.ist -o hep-title-implementation.gls hep-title-implementation.glo
+% makeindex -s gglo.ist -o hep-title-implementation.ind hep-title-implementation.idx

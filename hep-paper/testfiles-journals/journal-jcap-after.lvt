@@ -1,0 +1,11 @@
+% hep-paper with jcap: abstract as environment directly after \maketitle.
+\input{regression-test}
+\documentclass[a4paper, 11pt]{article}
+\usepackage[jcap]{hep-paper}
+\input{journal-title}
+\begin{document}
+\maketitle
+\begin{abstract}Abstract text.\end{abstract}
+\section{Section}
+Text.
+\end{document}

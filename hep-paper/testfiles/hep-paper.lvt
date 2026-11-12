@@ -1,0 +1,9 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-paper}
+\begin{document}
+% Load all fonts before the test, so font loading is not recorded.
+\setbox0\hbox{Text $x^2 + \alpha$}
+\START
+\TEST{Text and math}{\setbox0\hbox{Text $x^2 + \alpha$}\showbox0}
+\END

@@ -1,0 +1,77 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Accents like vec
+============================================================
+> \box...=
+\hbox(9.64444+3.22556)x17.664
+.\mathon
+.\vbox(9.64444+0.0)x6.66669
+..\hbox(7.14444+0.0)x0.0, shifted 1.56395
+...\OML/cmssm/m/it/10 ~
+..\kern-4.44444
+..\hbox(6.94444+0.0)x6.66669
+...\U/hepalpha2/m/n/10 ^^@
+.\glue 1.66663
+.\U/hepalpha2/m/n/10 1
+.\vbox(6.7811+0.0)x4.71956, shifted 3.22556
+..\hbox(5.0311+0.0)x0.0, shifted -0.28856
+...\OML/cmssm/m/it/7 ~
+..\kern-3.1111
+..\hbox(4.8611+0.0)x4.21956
+...\U/hepalpha2/m/n/7 ^^[
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......WHBOX{$\dashedvec A \, x_{\dottedvec b}$}}
+> \box...=
+\hbox(9.64444+3.22556)x17.664
+.\mathon
+.\vbox(9.64444+0.0)x6.66669
+..\hbox(7.14444+0.0)x0.0, shifted 1.56395
+...\U/hepalpha2/m/n/10 |
+..\kern-4.44444
+..\hbox(6.94444+0.0)x6.66669
+...\U/hepalpha2/m/n/10 ^^@
+.\glue 1.66663
+.\U/hepalpha2/m/n/10 1
+.\vbox(6.7811+0.0)x4.71956, shifted 3.22556
+..\hbox(5.0311+0.0)x0.0, shifted -0.28856
+...\U/hepalpha2/m/n/7 }
+..\kern-3.1111
+..\hbox(4.8611+0.0)x4.21956
+...\U/hepalpha2/m/n/7 ^^[
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......WHBOX{$\dashedvec A \, x_{\dottedvec b}$}}
+============================================================
+============================================================
+TEST 2: Bold math version
+============================================================
+> \box...=
+\hbox(7.36111+0.0)x17.831
+.\mathon
+.\vbox(7.36111+0.0)x5.94366
+..\hbox(7.36111+0.0)x0.0, shifted 0.17018
+...\OML/cmssm/b/it/10 ~
+..\kern-4.58333
+..\hbox(4.58333+0.0)x5.94366
+...\U/hepalpha3/m/n/10 1
+.\vbox(7.36111+0.0)x5.94366
+..\hbox(7.36111+0.0)x0.0, shifted 0.17018
+...\U/hepalpha3/m/n/10 |
+..\kern-4.58333
+..\hbox(4.58333+0.0)x5.94366
+...\U/hepalpha3/m/n/10 1
+.\vbox(7.36111+0.0)x5.94366
+..\hbox(7.36111+0.0)x0.0, shifted 0.17018
+...\U/hepalpha3/m/n/10 }
+..\kern-4.58333
+..\hbox(4.58333+0.0)x5.94366
+...\U/hepalpha3/m/n/10 1
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......ldmath$\vec x \dashedvec x \dottedvec x$}}
+============================================================

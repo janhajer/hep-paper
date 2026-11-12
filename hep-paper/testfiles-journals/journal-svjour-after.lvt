@@ -1,0 +1,11 @@
+% hep-paper with the plain svjour3 class: abstract after \maketitle.
+\input{regression-test}
+\documentclass{svjour3}
+\usepackage{hep-paper}
+\input{journal-title}
+\begin{document}
+\maketitle
+\begin{abstract}Abstract text.\end{abstract}
+\section{Section}
+Text.
+\end{document}

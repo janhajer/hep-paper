@@ -1,0 +1,26 @@
+\input{regression-test}
+\documentclass{article}
+% Without links back to the first use and without titlesec the PDF strings
+% are the same.
+\usepackage{hyperref}
+\usepackage[hyper=false, titlesec=false]{hep-acronym}
+\acronym{PDF}{portable document format}
+\input{hep-regression}
+\begin{document}
+\START
+\TEST{Bookmarks with hyper=false}{%
+  \PDFSTRING{\PDFlong and \PDF.}%
+}
+\TEST{Bookmarks of sectioning commands without titlesec}{%
+  \SECTIONBOOKMARKS{%
+    \section{\PDFlong at the beginning}%
+    \section*{\PDFlong starred}%
+    \addcontentsline{toc}{section}{\PDFlong starred}%
+    \hypersetup{bookmarksnumbered}%
+    \section{\PDFlong numbered}%
+  }%
+}
+\TEST{No links with hyper=false}{%
+  \setbox0\hbox{\PDF{} and \PDF}\showbox0
+}
+\END

@@ -1,0 +1,10 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+\title {Title: Subtitle}
+\ShortTitle {Title}
+\FullConference {Full conference}
+\author {First author\\First affiliation\\E-mail: \email {first@email.com} }
+\author {Second author\thanks {Second thanks}\\First affiliation\\Second affiliation\\E-mail: \email {second@email.com} }
+\author {Third author\\Third affiliation}
+\abstract {Abstract text.\par \medskip \noindent \textit {Keywords:} First keyword, second keyword}
+\legacy_if_set_true:n {@titlepage}\__hep_jr_pos_maketitle: \legacy_if_set_false:n {@titlepage}

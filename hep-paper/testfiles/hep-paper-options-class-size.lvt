@@ -1,0 +1,17 @@
+% hep-paper: any point size given as class option, here the 14pt of
+% extarticle, becomes the default font size.
+\input{regression-test}
+\documentclass[14pt]{extarticle}
+\usepackage{hep-paper}
+\input{hep-regression}
+\begin{document}
+\makeatletter
+\START
+
+\TEST{Font size from the class option}{%
+  \TYPE{font: [\hep@font]}%
+  \TYPE{font size: \f@size}%
+}
+
+\makeatother
+\END

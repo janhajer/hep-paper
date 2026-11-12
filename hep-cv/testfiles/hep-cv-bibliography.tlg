@@ -1,0 +1,161 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Loaded packages
+============================================================
+ver@hep-cv.sty: defined
+ver@biblatex.sty: defined
+style: numeric-comp
+============================================================
+============================================================
+TEST 2: Helper macros
+============================================================
+setlengths: defined
+printcvdate: defined
+printindex: defined
+printissuedate: defined
+adjustOrgLocDat: defined
+cleardate: defined
+Jan: undefined
+mkbibshortyear: undefined
+============================================================
+============================================================
+TEST 3: Bibliography environments and headings
+============================================================
+blx@env@unnumbered: defined
+blx@env@numbered: defined
+blx@env@starrednumbered: defined
+blx@head@section: defined
+blx@head@subsection: defined
+blx@head@subsubsection: defined
+============================================================
+============================================================
+TEST 4: printcvdate: formatted end month, no space without end month
+============================================================
+> \box...=
+\hbox(6.70499+0.165)x89.18
+.\glue 0.0 plus 1.0fill
+.\hbox(0.0+0.0)x0.0
+..\hbox(0.0+0.0)x0.0
+.\T1/clm2/m/n/10 J
+.\T1/clm2/m/n/10 a
+.\T1/clm2/m/n/10 n
+.\T1/clm2/m/n/10 .
+.\glue 3.33 plus 1.67332 minus 1.10777
+.\T1/clm/m/n/10 2
+.\T1/clm/m/n/10 0
+.\T1/clm/m/n/10 2
+.\T1/clm/m/n/10 0
+.\T1/clm/m/n/10 ^^U (ligature --)
+.\T1/clm/m/n/10 J
+.\T1/clm/m/n/10 u
+.\T1/clm/m/n/10 n
+.\T1/clm/m/n/10 .
+.\glue 3.33 plus 1.67332 minus 1.10777
+.\T1/clm/m/n/10 2
+.\T1/clm/m/n/10 0
+.\T1/clm/m/n/10 2
+.\T1/clm/m/n/10 2
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.70499+0.165)x45.0
+.\glue 0.0 plus 1.0fill
+.\hbox(0.0+0.0)x0.0
+..\hbox(0.0+0.0)x0.0
+.\T1/clm/m/n/10 2
+.\T1/clm/m/n/10 0
+.\T1/clm/m/n/10 1
+.\T1/clm/m/n/10 8
+.\T1/clm/m/n/10 ^^U (ligature --)
+.\T1/clm/m/n/10 2
+.\T1/clm/m/n/10 0
+.\T1/clm/m/n/10 1
+.\T1/clm/m/n/10 9
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.04+0.165)x70.7
+.\glue 0.0 plus 1.0fill
+.\T1/clm2/m/n/10 S
+.\T1/clm2/m/n/10 i
+.\T1/clm2/m/n/10 n
+.\T1/clm2/m/n/10 c
+.\T1/clm2/m/n/10 e
+.\glue 3.33 plus 1.67 minus 1.11
+.\hbox(0.0+0.0)x0.0
+..\hbox(0.0+0.0)x0.0
+.\T1/clm2/m/n/10 J
+.\T1/clm2/m/n/10 u
+.\T1/clm2/m/n/10 l
+.\T1/clm2/m/n/10 .
+.\glue 3.33 plus 1.67332 minus 1.10777
+.\T1/clm/m/n/10 2
+.\T1/clm/m/n/10 0
+.\T1/clm/m/n/10 2
+.\T1/clm/m/n/10 2
+.\T1/clm/m/n/10 ^^U (ligature --)
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 5: cleardate: no date in organization+location+date
+============================================================
+> \box...=
+\hbox(7.04+2.01999)x147.51993
+.\T1/clm2/m/n/10 T
+.\kern-0.83
+.\T1/clm2/m/n/10 o
+.\kern-0.28
+.\T1/clm2/m/n/10 w
+.\T1/clm2/m/n/10 n
+.\T1/clm2/m/n/10 :
+.\glue 4.44 plus 3.34 minus 0.555
+.\T1/clm2/m/n/10 O
+.\T1/clm2/m/n/10 r
+.\T1/clm2/m/n/10 g
+.\T1/clm2/m/n/10 ,
+.\glue 3.33 plus 2.0875 minus 0.888
+.\T1/clm2/m/n/10 J
+.\T1/clm2/m/n/10 a
+.\T1/clm2/m/n/10 n
+.\T1/clm2/m/n/10 .
+.\glue 3.33 plus 1.67332 minus 1.10777
+.\T1/clm2/m/n/10 2
+.\T1/clm2/m/n/10 0
+.\T1/clm2/m/n/10 2
+.\T1/clm2/m/n/10 0
+.\T1/clm2/m/n/10 ^^U
+.\penalty 50
+.\T1/clm2/m/n/10 J
+.\T1/clm2/m/n/10 u
+.\T1/clm2/m/n/10 n
+.\T1/clm2/m/n/10 .
+.\glue 3.33 plus 1.67332 minus 1.10777
+.\T1/clm2/m/n/10 2
+.\T1/clm2/m/n/10 0
+.\T1/clm2/m/n/10 2
+.\T1/clm2/m/n/10 2
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.04+2.01999)x47.81
+.\T1/clm2/m/n/10 T
+.\kern-0.83
+.\T1/clm2/m/n/10 o
+.\kern-0.28
+.\T1/clm2/m/n/10 w
+.\T1/clm2/m/n/10 n
+.\T1/clm2/m/n/10 :
+.\glue 4.44 plus 3.34 minus 0.555
+.\T1/clm2/m/n/10 O
+.\T1/clm2/m/n/10 r
+.\T1/clm2/m/n/10 g
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

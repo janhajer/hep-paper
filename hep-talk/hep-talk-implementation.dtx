@@ -1,0 +1,1210 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019-2023 by Jan Hajer
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-talk}[2026/11/11 v1.6 Slides with overlays based on the article class, with colour themes]
+%<dark>\ProvidesPackage{hep-dark}[2026/11/11 v1.6 Dark color scheme]
+%<light>\ProvidesPackage{hep-light}[2026/11/11 v1.6 Light color scheme]
+%<blue>\ProvidesPackage{hep-blue}[2026/11/11 v1.6 Blue color scheme]
+%<metropolis>\ProvidesPackage{hep-metropolis}[2026/11/11 v1.6 Metropolis color scheme]
+%
+%<*documentation>
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass{ltxdoc}
+
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+\RequirePackage{hologo}
+
+\RequirePackage[parskip,oldstyle,font=10pt]{hep-paper}
+\bibliography{bibliography}
+%</documentation>
+
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
+\begin{document}
+\DocInput{hep-talk-implementation.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{768}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.0}{2019/01/01}{Created the lightweight slide package with slide geometry, overlay blocks, columns, rows, slides, title slide, themes, page numbers, and bibliography styling.}
+% \changes{v1.1}{2022/11/01}{Added the documented implementation for the v2.1 package suite with paper-width and aspect-ratio options, overlay support, blocks, columns, frames, title slides, themes, and citation blocks.}
+% \changes{v1.2}{2023/07/01}{Refreshed package metadata and documentation formatting.}
+% \changes{v1.3}{2024/11/01}{Added logo hooks, TikZ page numbers, robust row and column renewal, e-print-aware citations, bibliography frame headings, and bibliography block formatting.}
+% \changes{v1.4}{2025/09/01}{Applied starred command definitions consistently and preserved bibliography entry tail data in talk references.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, expanded talk documentation and README, and added README extraction to the installer.}
+% \changes{v1.6}{2026/11/11}{Provided light default colours, implemented \texttt{robustslide} with verbatim overlays, fixed the \texttt{hep-light} package information, loaded \software{hep-math} before \software{hep-math-font}, made hyperref anchors unique on overlay pages, kept the page number of a slide for all its overlays, printed the comma before the DOI only together with a DOI, removed the page colour from externalised figures, and reduced the space above the title on wide slides.}
+%
+% \ifshort
+%<*documentation>
+% \fi
+%
+\GetFileInfo{hep-talk.sty}
+
+\title{The \software{hep-talk} package\thanks{This document corresponds to \software{hep-talk}~\fileversion.}}
+\subtitle{Slides with overlays based on the article class, with colour themes}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
+\date{\filedate}
+
+% \ifshort
+\begin{document}
+% \fi
+
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+
+\maketitle
+
+\begin{abstract}
+The \software{hep-talk} package provides a lightweight slide system for HEP talks.
+It sets slide geometry from the requested paper width and aspect ratio, loads the HEP font, math-font, bibliography, title, and text modules, defines block, column, row, frame, and slide environments with overlay support, provides title-logo handling and slide page numbers, and ships dark, light, blue, and metropolis-inspired colour themes.
+\end{abstract}
+%
+\section{Introduction}
+
+The package can be loaded using "\usepackage{hep-talk}".
+
+\DescribeMacro{paperwidth}
+\DescribeMacro{ratio}
+The size of the slides is adjusted with the "paperwidth="\meta{dimension} option.
+The ratio can be adjusted with the "ratio="\meta{fraction} option, for example "ratio=9/16" or "ratio=.5625".
+
+\section{Macros and environments}
+
+\DescribeMacro{\newframe}
+New frames can be generated using the "\newframe"\oarg{title} macro.
+
+\DescribeEnv{slide}
+\DescribeEnv{robustslide}
+The "slide" and "robustslide" environments start a new frame and wrap its contents in the "overlays" environment of the \software{overlays} package \cite{overlays}.
+The "robustslide" environment reads its body verbatim, like "fragileoverlays", so that it can contain fragile material such as verbatim text.
+Their optional argument becomes the slide title.
+
+\DescribeEnv{block}
+The basic building block is the "\begin"\marg{block}\oarg{title} environment, that generates a block with attached title stretching over the whole page.
+It accepts a star that switches the overlay behaviour from "only" to "visible", an optional overlay specification, an optional title, and an optional width.
+
+\DescribeEnv{columns}
+The "\begin"\marg{columns}\oarg{title}\oarg{column} environment generates space for \meta{column} columns if \meta{column} is an integer and a single column with width \meta{column}"\linewidth" if \meta{column} is smaller than one.
+It uses the same star and overlay conventions as "block".
+
+\DescribeMacro{\column}
+The "\column"\oarg{title}\oarg{size} macro generates a new column.
+It uses the same star and overlay conventions as "block".
+In a "columns" environment with an integer \meta{column}, the column is "1/"\meta{size} of the line wide and defaults to "1/"\meta{column}.
+Otherwise \meta{size} is the column width as a fraction of the line width and defaults to \meta{column}.
+
+\DescribeMacro{\row}
+The "\row"\oarg{title} macro starts a new row in a "block" or "column".
+
+\DescribeMacro{\logo}
+\DescribeMacro{\prelogo}
+\DescribeMacro{\postlogo}
+The "\logo"\marg{code} macro stores title-page logo material.
+The "\prelogo" and "\postlogo" hooks adjust the material placed before and after it.
+
+\DescribeMacro{\citestyle}
+\DescribeMacro{\cite}
+Citations are formatted for slides using the \software{hep-bibliography} setup.
+The "\citestyle"\marg{citation} macro typesets small right-aligned citations in the structure colour.
+The "\cite" macro applies this style to "\autocite" and takes the same optional prenote and postnote.
+Citations show the author and year or the e-print number, also with the default numeric style of \software{hep-bibliography}.
+
+\section{Themes}
+
+The extracted "hep-dark", "hep-light", "hep-blue", and "hep-metropolis" files define the page, title, caption, block, structure, and highlight colours used by the package.
+They are loaded after \software{hep-talk}, for example with "\usepackage{hep-dark}".
+Without a theme, the colours of "hep-light" are used.
+
+% \ifshort
+\printbibliography
+
+\end{document}
+%
+%</documentation>
+% \fi
+%
+% \StopEventually{
+% \printbibliography
+% \PrintChanges
+% }
+%
+% \appendix
+%
+% \section{Implementation}
+%
+%<*package>
+%
+% \section{Options}
+%
+% Load the \software{kvoptions} package \cite{kvoptions} and define a "heptalk" namespace.
+%    \begin{macrocode}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=heptalk,
+  prefix=heptalk@
+}
+%    \end{macrocode}
+%
+% \begin{macro}{paperwidth}
+% Define a "paperwidth="\meta{dimension} option.
+% Default to \unit[16]{cm}.
+% \DoNotIndex{\DeclareStringOption}
+%    \begin{macrocode}
+\DeclareStringOption[16cm]{paperwidth}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{ratio}
+% Define a "ratio="\meta{fraction} option.
+% It is a fraction such as "9/16" or a decimal number such as ".5625".
+% Default to 3/4.
+%    \begin{macrocode}
+\DeclareStringOption[3/4]{ratio}
+%    \end{macrocode}
+% \end{macro}
+
+% \subsection{Process options}
+%
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+%    \end{macrocode}
+%
+% Load the \software{hep-paper} packages \cite{hep-paper}.
+% The \software{hep-math} package \cite{hep-math} is loaded before \software{hep-math-font}, as in \software{hep-paper}.
+%    \begin{macrocode}
+% \RequirePackage[sansserif, bibliography=authoryear]{hep-paper}
+\RequirePackage[oldstyle, sans]{hep-font}
+\RequirePackage{hep-math}
+\RequirePackage{hep-math-font}
+\RequirePackage{hep-bibliography}
+\RequirePackage{hep-title}
+% \RequirePackage{hep-float}
+\RequirePackage{hep-text}
+% \RequirePackage{hep-reference}
+% \RequirePackage{hep-acronym}
+%    \end{macrocode}
+% Compute the paper height with \software{l3fp}, which accepts fractions as well as decimal ratios.
+% The height is truncated to scaled points, like an integer multiplication followed by a division.
+%    \begin{macrocode}
+\setlength{\@tempdima}{\heptalk@paperwidth}
+\ExplSyntaxOn
+\edef\heptalk@paperheight{%
+  \fp_eval:n { trunc ( \@tempdima * ( \heptalk@ratio ) / 1sp ) } sp%
+}
+\ExplSyntaxOff
+%    \end{macrocode}
+% Reset the paper geometry.
+%    \begin{macrocode}
+\RequirePackage{geometry}
+\geometry{
+  reset,
+  paperwidth=\heptalk@paperwidth,
+  paperheight=\heptalk@paperheight,
+  margin=0pt,
+  ignoreheadfoot,
+  bottom=.02\paperwidth
+}
+%    \end{macrocode}
+
+% \section{Lengths}
+%
+% Set internal lengths.
+% Horizontal lengths.
+%    \begin{macrocode}
+\newlength{\hmargin}
+\setlength{\hmargin}{.0125\paperwidth}
+\setlength{\leftskip}{\hmargin}
+\setlength{\parindent}{0pt}
+%    \end{macrocode}
+% Vertical lengths
+%    \begin{macrocode}
+\newlength{\vmargin}
+\setlength{\vmargin}{%
+  .01\paperheight plus .1\paperheight minus .005\paperheight%
+}
+\setlength{\parskip}{\vmargin}
+%    \end{macrocode}
+% Adjust spacing around equations.
+%    \begin{macrocode}
+\g@addto@macro\normalsize{%
+  \setlength\abovedisplayskip{0pt}%
+  \setlength\abovedisplayshortskip{0pt}%
+  \setlength\belowdisplayskip{1ex}%
+  \setlength\belowdisplayshortskip{1ex}%
+}
+%    \end{macrocode}
+
+% \section{Colors}
+%
+% Colors managment is implemented using the \software{xcolor} package \cite{xcolor}.
+% Make the \software{overlays} package \cite{overlays} compatible.
+%    \begin{macrocode}
+\RequirePackage{xcolor}
+%    \end{macrocode}
+% Provide the colours of the light theme as defaults, so that a theme package loaded later overrides them.
+%    \begin{macrocode}
+\providecolor{PageBg}{gray}{1}
+\providecolor{PageFg}{gray}{0}
+\providecolor{TitleBg}{gray}{.8}
+\providecolor{TitleFg}{gray}{.1}
+\providecolor{CaptionBg}{gray}{.9}
+\providecolor{CaptionFg}{gray}{.2}
+\providecolor{BlockBg}{gray}{1}
+\providecolor{BlockFg}{gray}{0}
+\providecolor{Structure}{rgb}{1,.3,.3}
+\providecolor{Highlight}{rgb}{1,0,0}
+%    \end{macrocode}
+% Set the page colours at the beginning of the document.
+%    \begin{macrocode}
+\newcommand*{\globalcolor}[1]{%
+  \color{#1}\global\let\default@color\current@color%
+}
+\AtBeginDocument{%
+  \pagecolor{PageBg}%
+  \globalcolor{PageFg}%
+  \colorlet{background}{PageBg}%
+}
+%    \end{macrocode}
+% Externalised \software{TikZ} figures don't get the page colour.
+%    \begin{macrocode}
+\AtBeginDocument{\tikzifexternalizing{\nopagecolor}{}}
+%    \end{macrocode}
+
+% \section{Generic macros}
+
+% \begin{macro}{\calc}
+% \begin{macro}{\IfNoValueOrEmptyTF}
+% Internal macros
+%    \begin{macrocode}
+\ExplSyntaxOn
+  \cs_new_eq:NN \calc \fp_eval:n
+  \long\def\IfNoValueOrEmptyTF#1#2#3{%
+    \IfNoValueTF{#1}{#2}{\tl_if_empty:nTF{#1}{#2}{#3}}%
+  }
+\ExplSyntaxOff
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+
+% \section{Overlays}
+
+%
+% Overlay managment is provided by the "overlays" package \cite{overlays}.
+%    \begin{macrocode}
+\RequirePackage{overlays}
+%    \end{macrocode}
+%
+% \begin{macro}{\ifinoverl@yspec}
+% Pactch the internal "\ifinoverl@yspec" macro to adjust the global "\maxoverl@y" counter to the maximal overlay specifier found within its loop.
+% The end of a closed range such as "1-3" counts as well.
+% An open range such as "2-" ends at the current "\maxoverl@y" and does not increase it.
+%    \begin{macrocode}
+\def\ifinoverl@yspec#1#2{%
+  \global\let\inoverl@yspec\@secondoftwo
+  \foreach \i in {#2}{%
+    \afterassignment\getoverl@yspecb
+    \overl@yspeca=0\i\relax
+    \ifnum\maxoverl@y<\overl@yspeca%
+      \global\maxoverl@y=\overl@yspeca\else%
+    \fi%
+    \ifnum\maxoverl@y<\overl@yspecb%
+      \global\maxoverl@y=\overl@yspecb\else%
+    \fi%
+    \pgfmathtruncatemacro\result{%
+      (#1>=\overl@yspeca) && (#1<=\overl@yspecb)%
+    }%
+    \ifnum\result=1\relax
+      \breakforeach
+      \global\let\inoverl@yspec\@firstoftwo
+    \fi%
+  }%
+  \inoverl@yspec%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% Restore the footnote counter on every overlay, like the page and equation counters.
+%    \begin{macrocode}
+\savecounterbetweenoverlays{footnote}
+%    \end{macrocode}
+%
+% \begin{macro}{\hep@overlay@write}
+% Only the first overlay writes to the "aux" file, so that labels are not multiply defined and contents entries are not repeated.
+%    \begin{macrocode}
+\long\def\hep@overlay@write#1{%
+  \ifx#1\@auxout
+    \expandafter\@gobbletwo
+  \else
+    \expandafter\hep@protected@write\expandafter#1%
+  \fi
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{overlays}
+% Remove the mandatory argument from the "overlays" environment.
+%    \begin{macrocode}
+\RenewEnviron{overlays}{%
+  \s@vecounters
+  \s@veseries
+  \maxoverl@y=1%
+  \curoverl@y=0%
+  \loop
+    \advance\curoverl@y by 1%
+    \begingroup
+    \ifnum\curoverl@y>1
+      \let\hep@protected@write\protected@write
+      \let\protected@write\hep@overlay@write
+    \fi
+    \BODY
+    \endgroup
+  \ifnum\curoverl@y<\maxoverl@y%
+    \clearpage
+    \restores@vedcounters
+    \restores@vedseries
+    \repeat
+}
+%    \end{macrocode}
+% \end{macro}
+% redefine "only"
+%    \begin{macrocode}
+\let\hep@only\only
+\RenewDocumentCommand{\only}{d<>m}{%
+  \IfNoValueOrEmptyTF{#1}{#2}{\hep@only{#1}{#2}}%
+}
+\let\hep@visible\visible
+\RenewDocumentCommand{\visible}{d<>m}{%
+  \IfNoValueOrEmptyTF{#1}{#2}{\hep@visible{#1}{#2}}%
+}
+%    \end{macrocode}
+
+
+% \section{Blocks}
+%
+% \begin{macro}{\hep@block@width}
+% The internal block width
+%    \begin{macrocode}
+\newcommand*{\hep@block@width}[1]{%
+  \dimexpr#1\linewidth-2\fboxsep-2\leftskip\relax%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\hep@block}
+% The internal "\hep@block" macro.
+% \begin{enumerate}[nosep, label=\#\arabic*]
+%  \item mandatory star boolean switching between "visible" and "only"
+%  \item overlay number
+%  \item optional background color
+%  \item optional forground color
+%  \item optional width of the block
+%  \item mandatory text
+% \end{enumerate}
+%    \begin{macrocode}
+\NewDocumentCommand{\hep@block}{md<>O{BlockBg}O{BlockFg}O{1}m}{%
+  \IfNoValueOrEmptyTF{#2}{}{\IfBooleanTF{#1}{\visible<#2>}{\only<#2>}}%
+  \bgroup\textcolor{#4}{\colorbox{#3}{%
+  \begin{minipage}[t]{\hep@block@width{#5}}%
+    #6\strut%
+  \end{minipage}%
+  }}\egroup%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{hep@block@env}
+% The internal "hep@block@env" environment.
+% \begin{enumerate}[nosep, label=\#\arabic*]
+%  \item mandatory star boolean switching between "visible" and "only"
+%  \item overlay number
+%  \item optional background color
+%  \item optional forground color
+%  \item optional width of the block
+% \end{enumerate}
+%    \begin{macrocode}
+\newsavebox{\hep@saved@box}
+\NewDocumentEnvironment{hep@block@env}{%
+  md<>O{BlockBg}O{BlockFg}O{1}%
+}{%
+  \IfNoValueOrEmptyTF{#2}{}{%
+    \IfBooleanTF{#1}{\visible<#2>}{\only<#2>}%
+  }%
+  \bgroup\color{#4}%
+  \begin{lrbox}{\hep@saved@box}%
+  \begin{minipage}{\hep@block@width{#5}}%
+}{%
+  \end{minipage}\end{lrbox}%
+  \colorbox{#3}{\usebox{\hep@saved@box}}%
+  \egroup%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \subsection{Public Blocks}
+%
+% \begin{macro}{\hep@begin@block@env}
+% The internal "\hep@begin@block@env" macro starts a block with an optional title.
+% It is defined once, so that blocks can be nested.
+% \begin{enumerate}[nosep, label=\#\arabic*]
+%  \item mandatory star boolean switching between "visible" and "only"
+%  \item overlay number
+%  \item optional name of the block
+%  \item optional width of the block
+% \end{enumerate}
+%    \begin{macrocode}
+\NewDocumentCommand{\hep@begin@block@env}{md<>oO{1}}{%
+  \IfNoValueOrEmptyTF{#3}{}{%
+    \hep@block#1<#2>[CaptionBg][CaptionFg][#4]{#3}%
+    \setlength{\parskip}{0pt}\par\vspace{-1pt}%
+  }%
+  \begin{hep@block@env}#1<#2>[BlockBg][BlockFg][#4]%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{block}
+% The basic "block" environment.
+% \begin{enumerate}[nosep, label=\#\arabic*]
+%  \item star switching the "overlay" from "only" to "visible"
+%  \item overlay number
+%  \item optional name of the block
+%  \item optional width of the block
+% \end{enumerate}
+%    \begin{macrocode}
+\providecommand*{\row}{}
+\NewDocumentEnvironment{block}{sd<>oO{1}}{%
+  \RenewDocumentCommand{\row}{sd<>oO{1}}{%
+    \hep@end@block@env%
+    \hep@begin@block@env##1<##2>[##3][##4]%
+  }%
+  \hep@begin@block@env#1<#2>[#3][#4]%
+}{\hep@end@block@env}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\hep@end@block@env}
+% The internal "\hep@end@block@env" macro.
+%    \begin{macrocode}
+\newcommand*{\hep@end@block@env}{%
+  \end{hep@block@env}\setlength{\parskip}{\vmargin}\par%\par%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\hep@mini@page}
+% The private "\hep@mini@page" macro.
+% It is defined once, so that columns can be nested.
+% \begin{enumerate}[nosep, label=\#\arabic*]
+%  \item mandatory star argument
+%  \item overlay number
+%  \item width of the minipage
+%  \item mandatory name of the minipage
+% \end{enumerate}
+%    \begin{macrocode}
+\NewDocumentCommand{\hep@mini@page}{md<>mm}{%
+  \begin{minipage}[t]{%
+    \dimexpr#3\linewidth+#3\hmargin-\hmargin-.01pt\relax%
+  }%
+  \vspace{0pt}%
+  \IfBooleanTF{#1}{\begin{block}*<#2>[#4][1]}{%
+    \IfNoValueOrEmptyTF{#2}{}{\gdef\needs@space{#2}}%
+    \begin{block}<#2>[#4][1]%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{columns}
+% The "columns" environment.
+% \begin{enumerate}[nosep, label=\#\arabic*]
+%  \item star switching the "overaly" from "only" to "visible"
+%  \item overlay number
+%  \item optional name of the first column
+%  \item optional width of the first column
+% \end{enumerate}
+%    \begin{macrocode}
+\providecommand*{\column}{}
+\NewDocumentEnvironment{columns}{sd<>oO{2}}{%
+  \begin{minipage}{\linewidth-2\leftskip}%
+  \def\needs@space{}%
+%    \end{macrocode}
+%
+% check if the column width is larger than 1.
+%    \begin{macrocode}
+  \ifdim#4pt>1pt%
+    \def\hep@inverse{\calc{1/#4}}%
+%    \end{macrocode}
+%
+% \begin{macro}{\column}
+% The public "\column" macro.
+% \begin{enumerate}[nosep, label=\#\#\arabic*]
+%  \item star switching the "overlay" from "only" to "visible"
+%  \item overlay number
+%  \item optional name
+%  \item optional number \meta{n}, the column is $1/n$ of the line wide
+% \end{enumerate}
+%    \begin{macrocode}
+    \RenewDocumentCommand{\column}{sd<>oo}{%
+      \end{block}\end{minipage}%
+      \ifdefempty{\needs@space}{\hspace{\hmargin}}{%
+        \only<\needs@space>{\hspace{\hmargin}}%
+      }%
+      \gdef\needs@space{}%
+      \hep@mini@page##1<##2>{%
+        \IfNoValueOrEmptyTF{##4}{\hep@inverse}{\calc{1/##4}}%
+      }{##3}%
+    }%
+%    \end{macrocode}
+% \end{macro}
+%
+% start a new minipage.
+% The case that column width is smaller than 1.
+%    \begin{macrocode}
+    \hep@mini@page#1<#2>{\hep@inverse}{#3}%
+  \else%
+%    \end{macrocode}
+%
+% \begin{macro}{\column}
+% The public "\column" macro.
+% \begin{enumerate}[nosep, label=\#\#\arabic*]
+%  \item star switching the "overlay" from "only" to "visible"
+%  \item overlay number
+%  \item optional name
+%  \item optional width as a fraction of the line width
+% \end{enumerate}
+%    \begin{macrocode}
+    \RenewDocumentCommand{\column}{sd<>oo}{%
+      \end{block}\end{minipage}%
+      \ifdefempty{\needs@space}{\hspace{\hmargin}}{%
+        \only<\needs@space>{\hspace{\hmargin}}%
+      }%
+      \gdef\needs@space{}%
+      \hep@mini@page##1<##2>{%
+        \IfNoValueOrEmptyTF{##4}{#4}{##4}%
+      }{##3}%
+    }%
+%    \end{macrocode}
+% \end{macro}
+%
+% start a new minipage; end of check for argument size and end of the columns environment.
+%    \begin{macrocode}
+    \hep@mini@page#1<#2>{#4}{#3}%
+  \fi%
+}{\end{block}\end{minipage}\end{minipage}\par}%
+%    \end{macrocode}
+% \end{macro}
+%
+
+% \section{Frames}
+%
+% \begin{macro}{\newframe}
+% The "\newframe" macro
+%    \begin{macrocode}
+\NewDocumentCommand{\newframe}{o}{%
+  \clearpage%
+  \IfNoValueF{#1}{%
+    \leftskip=0pt%
+    \hep@block\BooleanFalse[TitleBg][TitleFg][1]{%
+      \hspace{\dimexpr\hmargin\relax}\LARGE\strut\Large#1\hspace{\hmargin}%
+    }%
+  }\par\leftskip=\hmargin%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{slide}
+% Define a "slide" macro that starts a new frame with overlays.
+% The overlays save the page counter when they start and restore it for every step, so clear the page first.
+% Then all steps of a slide share its page number and the next slide continues from there.
+%    \begin{macrocode}
+\newenvironment{slide}[1][]{%
+  \clearpage%
+  \overlays%
+  \newframe[#1]%
+}{%
+  \endoverlays%
+}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{robustslide}
+% \begin{macro}{\hep@robust@slide}
+% Define a "robustslide" environment for fragile content such as verbatim material.
+% Like the "fragileoverlays" environment of the \software{overlays} package, it writes its body verbatim to the file \meta{jobname}".vrb" using the \software{verbatim} package \cite{verbatim} and reads it back on each overlay of a "slide".
+%    \begin{macrocode}
+\RequirePackage{verbatim}
+\newwrite\hep@slide@out
+\newenvironment{robustslide}[1][]{%
+  \gdef\hep@slide@title{#1}%
+  \@bsphack
+  \immediate\openout\hep@slide@out=\jobname.vrb\relax
+  \let\do\@makeother\dospecials
+  \catcode`\^^M\active
+  \catcode`\^^I=12
+  \def\verbatim@processline{%
+    \immediate\write\hep@slide@out{\the\verbatim@line}%
+  }%
+  \verbatim@start
+}{%
+  \immediate\closeout\hep@slide@out
+  \@esphack
+  \aftergroup\hep@robust@slide
+}
+%    \end{macrocode}
+% After the end of the environment, when the category codes are restored, typeset the slide.
+%    \begin{macrocode}
+\newcommand*{\hep@robust@slide}{%
+  \begin{slide}[\hep@slide@title]%
+    \input{\jobname.vrb}%
+  \end{slide}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+
+
+% \begin{macro}{\logo}
+% The "\logo" macro
+%    \begin{macrocode}
+\renewcommand*\Affilfont{\normalsize}
+\newcommand*{\titlemargin}{.05\paperwidth}
+\newcommand*{\prelogo}[1]{\def\hep@pre@logo{#1}}
+\newcommand*{\logo}[1]{\def\hep@logo{#1}}
+\newcommand*{\postlogo}[1]{\def\hep@post@logo{#1}}
+\prelogo{\vfill\hfill}
+\postlogo{}
+%    \end{macrocode}
+% \end{macro}
+
+% \begin{macro}{\maketitle}
+% The "\maketitle" macro.
+% Wide slides get less space above the title, so that the logos stay on the page.
+%    \begin{macrocode}
+\AtBeginDocument{%
+  \ifdim\paperheight<.7\paperwidth
+    \def\hep@title@skip{3ex}%
+  \else
+    \def\hep@title@skip{10ex}%
+  \fi
+}
+%    \end{macrocode}
+% The title slide
+%    \begin{macrocode}
+\renewcommand*{\maketitle}{%
+  \newframe%
+  \strut\par\vspace{\hep@title@skip}\bgroup%
+    \leftskip=\titlemargin
+    \rightskip=\titlemargin
+    {\Huge\hep@title@font\thetitle\par}%
+    \vspace{.5ex}%
+    \@ifundefined{hep@sub@title}{}%
+      {\Large\hep@subtitle@font\hep@sub@title}\par%
+    \vspace{3ex}%
+    {\huge\hep@author@font\@author\vspace{1ex}\par}
+    \vspace{3ex}%
+    \normalsize\hep@date@font\@date\par%
+    \vspace{3ex}%
+    \@ifundefined{hep@logo}{}{%
+      \hep@pre@logo\hep@logo\hep@post@logo\par%
+    }%
+  \egroup%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\section}
+% The "\section" macro is adjusted using the "titlesec" package \cite{titlesec}
+%    \begin{macrocode}
+\RequirePackage{titlesec}
+\newcommand*{\sectionbreak}{\clearpage}
+\titleformat{\section}{\huge}{}{0pt}{%
+  \strut\vfill\centering\color{PageFg}%
+}[\vfill\strut\clearpage]
+%    \end{macrocode}
+% \end{macro}
+
+% \section{Content}
+%
+% The pagenumber is implemented using the "picture" \cite{picture} and "atbegshi" \cite{atbegshi} packages.
+% The overlays of a slide restore the page and other counters, so that \software{hyperref} \cite{hyperref} would create the same anchor names on several pages.
+% Use unique anchor names instead.
+%    \begin{macrocode}
+\AtBeginDocument{%
+  \@ifpackageloaded{hyperref}{\hypersetup{hypertexnames=false}}{}%
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+% \RequirePackage{picture}
+% \RequirePackage{atbegshi}
+\RequirePackage{tikz}
+\usetikzlibrary{fadings}
+\usetikzlibrary{external}
+\tikzfading[
+  name=fade out,
+  inner color=transparent!0,
+  outer color=transparent!80,
+]
+\tikzset{
+  pagenumber/.style={
+    font=\footnotesize,
+    anchor=south east,
+    outer sep=1ex,
+    circle,
+    inner sep=1pt,
+    text=Structure,
+    fill=PageBg,
+    path fading=fade out,
+  },
+}
+\AtBeginShipout{\AtBeginShipoutUpperLeftForeground{%
+  \ifnum\thepage>1%
+%     \put(\paperwidth-\widthof{\footnotesize\thepage}-\hmargin,%
+%         -\paperheight+\hmargin){%
+%       \footnotesize\color{Structure}\thepage%
+%     }%
+    \tikzset{external/export next=false}%
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[pagenumber] at (current page.south east){\thepage};%
+    \end{tikzpicture}
+  \fi%
+}}
+%    \end{macrocode}
+%
+% \begin{macro}{itemize}
+% \begin{macro}{description}
+% Lists
+%    \begin{macrocode}
+\setlist[itemize]{nosep, left=0pt, label=\color{Structure}\textbullet}
+\setlist[description]{nosep, font=\color{Structure}\normalfont}
+\setlist[enumerate]{nosep, font=\color{Structure}\arabic*}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+
+% \begin{macro}{\emph}
+% Empheses
+%    \begin{macrocode}
+\renewcommand*{\emph}[1]{\textcolor{Structure}{#1}}
+%    \end{macrocode}
+% \end{macro}
+% Equations
+%    \begin{macrocode}
+\mathtoolsset{showonlyrefs}
+%    \end{macrocode}
+
+% \section{Bibliography}
+%
+% Prepare the bibliography
+%    \begin{macrocode}
+% \ExecuteBibliographyOptions{
+%   maxcitenames=1,
+%   maxbibnames=5,
+%   dashed=false,
+%   uniquename=false,
+%   uniquelist=false
+% }
+% \DeclareNameAlias{sortname}{given-family}
+%    \end{macrocode}
+% \begin{macro}{cite}
+% Add the collaboration field to the citation macro.
+%    \begin{macrocode}
+% \renewbibmacro*{cite}{%
+%   \DeclareFieldFormat{eprint}{##1}%
+%   \iffieldundef{shorthand}{%
+%     \iffieldundef{eprint}{%
+%       \ifthenelse{%
+%         \ifnameundef{labelname}\OR\iffieldundef{labelyear}%
+%        }{%
+%         \usebibmacro{cite:label}%
+%         \setunit{\printdelim{nonameyeardelim}}%
+%       }{%
+%         \iffieldundef{collaboration}{%
+%           \printnames{labelname}%
+%          }{%
+%           \printfield{collaboration}%
+%          }\setunit{\printdelim{nameyeardelim}}%
+%       }\usebibmacro{cite:labeldate+extradate}%
+%     }{\printfield{eprint}}%
+%   }{\usebibmacro{cite:shorthand}}%
+% }
+% \renewbibmacro*{cite}{%
+%   \iffieldundef{shorthand}{%
+%     \ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}{%
+%       \usebibmacro{cite:label}%
+%       \setunit{\printdelim{nonameyeardelim}}}{%
+%         \iffieldundef{collaboration}{%
+%           \printnames{labelname}%
+%         }{%
+%           \printfield{collaboration}%
+%         }%
+%         \setunit{\printdelim{nameyeardelim}}%
+%       }%
+%      \usebibmacro{cite:labeldate+extradate}%
+%   }{\usebibmacro{cite:shorthand}}%
+% }
+%    \end{macrocode}
+% \end{macro}
+% The citation macros below use the label macros of the author-year styles.
+% Provide them for other styles, such as the default "numeric-comp" style of \software{hep-bibliography}, and provide the year of the entries.
+%    \begin{macrocode}
+\ExecuteBibliographyOptions{labeldateparts}
+\providebibmacro*{cite:label}{%
+  \iffieldundef{label}{%
+    \printtext[bibhyperref]{\printfield[citetitle]{labeltitle}}%
+  }{%
+    \printtext[bibhyperref]{\printfield{label}}%
+  }%
+}
+\providebibmacro*{cite:labeldate+extradate}{%
+  \iffieldundef{labelyear}{}{%
+    \printtext[bibhyperref]{\printlabeldateextra}%
+  }%
+}
+\providebibmacro*{cite:shorthand}{%
+  \printtext[bibhyperref]{\printfield{shorthand}}%
+}
+%    \end{macrocode}
+% clickable parencite
+%    \begin{macrocode}
+\DeclareCiteCommand{\parencite}[\mkbibbrackets]{\usebibmacro{prenote}}{%
+  \usebibmacro{citeindex}%
+  \printtext[bibhyperref]{\usebibmacro{cite}}%
+}{\multicitedelim}{\usebibmacro{postnote}}
+%    \end{macrocode}
+% \begin{macro}{\citestyle}
+% \begin{macro}{\cite}
+% small rightaligned Structure colored citations.
+% The "\cite" macro passes the optional pre- and postnote to "\autocite".
+%    \begin{macrocode}
+\newcommand*{\citestyle}[1]{%
+  \hfill{\scriptsize\normalfont\color{Structure}#1}%
+}
+\RenewDocumentCommand{\cite}{oom}{%
+  \citestyle{%
+    \IfNoValueTF{#1}{\autocite{#3}}{%
+      \IfNoValueTF{#2}{\autocite[#1]{#3}}{\autocite[#1][#2]{#3}}%
+    }%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% do not color the titles
+%    \begin{macrocode}
+\DeclareFieldFormat{title}{\enquote{#1}\isdot}
+\DeclareFieldFormat{booktitle}{\textit{#1}\isdot}
+\DeclareFieldFormat{journaltitle}{\textit{#1}\isdot}
+%    \end{macrocode}
+% put references in blocks
+%    \begin{macrocode}
+% \renewbibmacro{begentry}{%
+%   \vspace{-.3ex}%
+%   \block\relax%
+%   \setlength{\leftskip}{1.25em}%
+%   \setlength{\parindent}{-1.25em}%
+% }
+%    \end{macrocode}
+% close the blocks
+%    \begin{macrocode}
+% \renewbibmacro{finentry}{\endblock}
+%    \end{macrocode}
+%
+%
+%
+%
+% use eprint info for references
+%    \begin{macrocode}
+\newcommand*{\hep@talk@cite}{%
+  \iffieldundef{shorthand}{%
+    \iffieldundef{eprint}{%
+      \ifthenelse{%
+        \ifnameundef{labelname}\OR\iffieldundef{labelyear}%
+       }{%
+        \usebibmacro{cite:label}%
+        \setunit{\printdelim{nonameyeardelim}}%
+      }{%
+        \iffieldundef{collaboration}{%
+          \printnames{labelname}%
+         }{%
+          \printfield{collaboration}%
+         }\setunit{\printdelim{nameyeardelim}}%
+      }\usebibmacro{cite:labeldate+extradate}%
+    }{\texttt{\printfield{eprint}}}%
+  }{\usebibmacro{cite:shorthand}}%
+}
+%    \end{macrocode}
+% use eprint info for reference labeles
+%    \begin{macrocode}
+\newcommand*{\hep@talk@label}{%
+  \DeclareFieldFormat{eprint:arxiv}{%
+    \ifhyperref{%
+      \href{https://arxiv.org/\abx@arxivpath/##1}{\nolinkurl{##1}}%
+    }{%
+      \nolinkurl{##1}\iffieldundef{eprintclass}{}{%
+        \addspace\texttt{\mkbibbrackets{\thefield{eprintclass}}}%
+      }%
+    }%
+  }%
+  \DeclareFieldFormat{eprint:github}{%
+    \hep@bib@online{https://github.com/\thefield{eprintclass}/##1}{##1}%
+  }%
+  \iffieldundef{shorthand}{%
+    \iffieldundef{eprint}{%
+      \ifthenelse{%
+        \ifnameundef{labelname}\OR\iffieldundef{labelyear}%
+       }{%
+        \setunit{\printdelim{nonameyeardelim}}%
+      }{%
+        \iffieldundef{collaboration}{%
+          \printnames{labelname}%
+         }{%
+          \printfield{collaboration}%
+         }\setunit{\printdelim{nameyeardelim}}%
+      }
+      \usebibmacro{cite:labeldate+extradate}%
+    }{\usebibmacro{eprint}}%
+  }{\usebibmacro{cite:shorthand}}%
+}
+%    \end{macrocode}
+% remove eprint from entry
+%    \begin{macrocode}
+\newcommand*{\hep@talk@entry}{%
+  \DeclareFieldFormat{doi}{}%
+  \renewbibmacro{in:}{}%
+  \renewbibmacro{journal+issuetitle}{}%
+  \renewbibmacro{note+pages}{}%
+  \renewbibmacro{organization+location+date}{}%
+  \iffieldundef{eprint}{%
+    \ifthenelse{%
+      \ifnameundef{labelname}\OR\iffieldundef{labelyear}%
+    }{}{%
+      \iffieldundef{collaboration}{%
+        \DeclareNameFormat{sortname}{}%
+        \DeclareNameFormat{year}{}%
+        \DeclareFieldFormat{cite:labeldate+extradate}{}%
+        \DeclareFieldFormat{labelyear}{}%
+      }{%
+        \DeclareFieldFormat{collaboration}{}%
+      }%
+    }%
+    \DeclareFieldFormat{cite:labeldate+extradate}{}%
+  }{%
+    \DeclareFieldFormat{eprint:arxiv}{}%
+    \DeclareFieldFormat{eprint:github}{}%
+  }%
+}
+%    \end{macrocode}
+% Redefine the end of the entry line in the header. The comma is printed only together with a DOI, since preprints have none.
+%    \begin{macrocode}
+\newcommand*{\hep@talk@entry@tail}{%
+  \bibsentence%
+  \usebibmacro{in:}%
+  \usebibmacro{journal+issuetitle}%
+  \newunit%
+  \usebibmacro{note+pages}%
+  \iftoggle{bbx:doi}{%
+    \iffieldundef{doi}{}{\printunit{\addcomma\space}\printfield{doi}}%
+  }{}%
+  \setunit{}%
+}
+%    \end{macrocode}
+% redefine cite
+%    \begin{macrocode}
+\renewbibmacro*{cite}{%
+  \DeclareFieldFormat{eprint}{##1}%
+  \hep@talk@cite%
+}
+%    \end{macrocode}
+% put bib item in a block
+%    \begin{macrocode}
+\renewbibmacro{begentry}{%
+  \block[[\hep@talk@label]\hfill\hep@talk@entry@tail]%
+  \hep@talk@entry%
+}
+%    \end{macrocode}
+% close block
+%    \begin{macrocode}
+\renewbibmacro{finentry}{%
+  \endblock\filbreak%
+}
+%    \end{macrocode}
+% start a new frame for bibliography
+%    \begin{macrocode}
+\defbibheading{bibliography}[\refname]{%
+  \newframe[#1]%
+}
+%    \end{macrocode}
+% use small font for bibliography
+%    \begin{macrocode}
+\defbibenvironment{bibliography}{%
+  \small%
+%   start environment
+}{
+%   end environment
+}{
+%   item
+}
+%    \end{macrocode}
+%
+%</package>
+
+% \section{Themes}
+%
+% \subsection{Dark colors}
+%
+%<*dark>
+%
+%    \begin{macrocode}
+\definecolor{PageBg}{gray}{.3}
+\definecolor{PageFg}{gray}{.9}
+\definecolor{TitleBg}{gray}{.5}
+\definecolor{TitleFg}{gray}{1}
+\definecolor{CaptionBg}{gray}{.8}
+\definecolor{CaptionFg}{gray}{.2}
+\definecolor{BlockBg}{gray}{1}
+\definecolor{BlockFg}{gray}{0}
+\definecolor{seven}{HTML}{2980b9}
+\colorlet{Structure}{seven!70!white}
+\colorlet{Highlight}{red}
+%    \end{macrocode}
+%</dark>
+%
+% \subsection{Light colors}
+%
+%<*light>
+%    \begin{macrocode}
+\definecolor{PageBg}{gray}{1}
+\definecolor{PageFg}{gray}{0}
+\definecolor{TitleBg}{gray}{.8}
+\definecolor{TitleFg}{gray}{.1}
+\definecolor{CaptionBg}{gray}{.9}
+\definecolor{CaptionFg}{gray}{.2}
+\definecolor{BlockBg}{gray}{1}
+\definecolor{BlockFg}{gray}{0}
+\definecolor{seven}{HTML}{ff0000}
+\colorlet{Structure}{seven!70!white}
+\colorlet{Highlight}{red}
+%    \end{macrocode}
+%</light>
+%
+% \subsection{Blue}
+%
+%<*blue>
+%    \begin{macrocode}
+\definecolor{PageBg}{gray}{1}
+\definecolor{PageFg}{gray}{0}
+\definecolor{TitleBg}{gray}{1}
+\definecolor{TitleFg}{HTML}{3333b2}
+\definecolor{CaptionBg}{HTML}{262686}
+\definecolor{CaptionFg}{gray}{1}
+\definecolor{BlockBg}{HTML}{E9E9F3}
+\definecolor{BlockFg}{gray}{0}
+\definecolor{Structure}{HTML}{3333b2}
+\colorlet{Highlight}{red}
+%    \end{macrocode}
+%</blue>
+%
+% \subsection{Metropolis}
+%
+%<*metropolis>
+%    \begin{macrocode}
+\definecolor{mDarkTeal}{HTML}{23373b}
+\definecolor{mLightBrown}{HTML}{EB811B}
+
+\colorlet{PageBg}{black!2}
+\colorlet{PageFg}{mDarkTeal}
+\colorlet{TitleBg}{mDarkTeal}
+\colorlet{TitleFg}{black!2}
+\colorlet{CaptionFg}{mDarkTeal}
+\colorlet{CaptionBg}{PageBg!80!CaptionFg}
+\colorlet{BlockBg}{CaptionBg!50!PageBg}
+\colorlet{BlockFg}{mDarkTeal}
+\colorlet{Structure}{mLightBrown}
+\colorlet{Highlight}{mLightBrown}
+%    \end{macrocode}
+%</metropolis>
+
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-talk` package
+
+Slides with overlays based on the article class, with colour themes
+
+## Introduction
+
+The `hep-talk` package provides a lightweight slide system for HEP talks.
+It sets slide geometry from the requested paper width and aspect ratio,
+loads the HEP font, math-font, bibliography, title, and text modules, and
+defines block, column, row, frame, and slide environments with overlay
+support. It also provides title-logo handling, slide page numbers,
+slide-oriented citation and bibliography formatting, and dark, light,
+blue, and metropolis-inspired colour themes.
+
+It can be loaded with `\usepackage{hep-talk}`.
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
+%
+% \Finale
+%
+\endinput

@@ -1,0 +1,44 @@
+% Shared body of the load-order tests: load the packages listed in
+% \LOADORDER in that order, then record results that must not depend on it.
+\makeatletter
+\@for\hep@test@package:=\LOADORDER\do{%
+  \expandafter\usepackage\expandafter{\hep@test@package}%
+}
+\makeatother
+\acronym{PDF}{portable document format}
+\title{The \PDF{} title}
+\subtitle{with a subtitle}
+\author{Ann Author}
+\author{Bob Builder}
+\input{hep-regression}
+\begin{document}
+% Load all fonts before the test, so font loading is not recorded.
+\setbox0\hbox{$\mathsf{\mathbf{a}} \d x \cos x \alpha$ \textl{12} \eg{}
+  \PDF{} \underline{u} \bfseries\itshape b \sffamily s \ttfamily t}
+\setbox0\vbox{\section*{$x$}}
+\START
+\TEST{PDF strings}{%
+  \PDFSTRING{\PDF{} and \PDFlong{} at the beginning}%
+  \PDFSTRING{The \d x and $\cos x$ in math}%
+  \PDFSTRING{Numerals \textl{12}, \eg{} here, \underline{under}}%
+  \PDFSTRING{\online{https://example.org}{example.org} and $\mathbf{x}$}%
+  \UNICODEPDFSTRING{The $\alpha$-decay}%
+}
+\TEST{Section bookmarks}{%
+  \SECTIONBOOKMARKS{%
+    \section{\PDFlong in a title}%
+    \section{Math $\mathsf{x}$ and \d x}%
+  }%
+}
+\TEST{Document information}{%
+  \UseHook{cmd/maketitle/before}%
+  \PDFINFO{title}%
+  \PDFINFO{author}%
+}
+\TEST{Typesetting}{%
+  \SHOWHBOX{$\mathsf{\mathbf{a}} \d x$}%
+  % fontspec may number the font instances differently, so record the size
+  \setbox0\hbox{\eg{} \PDF{} \PDF}%
+  \TYPE{\the\wd0, \the\ht0, \the\dp0}%
+}
+\END

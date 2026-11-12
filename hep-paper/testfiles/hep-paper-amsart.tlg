@@ -1,0 +1,66 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Option values
+============================================================
+class: amsart
+paper: [a4]
+font: [default]
+lang: [british]
+symbols: [true]
+bibliography: [numeric-comp]
+serif: true
+lining: true
+parindent: true
+defaults: true
+title: true
+physics: true
+glossaries: true
+references: true
+eqnarray: true
+manualplacement: false
+beamer: false
+revtex: false
+jhep: false
+jcap: false
+pos: false
+springer: false
+amsart: true
+sissa: false
+journal: false
+============================================================
+============================================================
+TEST 2: Loaded packages and their options
+============================================================
+hep-math: loaded []
+hep-font: loaded [size=default,sans=false,lining=true,]
+hep-math-font: loaded [symbols=true,]
+geometry: not loaded
+parskip: not loaded
+hep-text: loaded [lang=british,]
+hep-float: loaded [global,]
+hep-title: not loaded
+hep-bibliography: loaded [style=numeric-comp,]
+biblatex: loaded [style=numeric-comp,datamodel=hep-bibliography,]
+hep-reference: loaded []
+hyperref: loaded []
+cleveref: loaded [noabbrev,nameinlink,]
+hep-acronym: loaded [titlesec=false,]
+titlesec: not loaded
+hep-revtex: not loaded
+hep-sissa: not loaded
+xpatch: loaded []
+============================================================
+============================================================
+TEST 3: Page geometry and font size
+============================================================
+paper: 614.295pt x 794.96999pt
+text: 360.0pt x 584.0pt
+font size: 10
+parindent: 12.0pt, parskip: 0.0pt
+============================================================
+============================================================
+TEST 4: hep-acronym without titlesec
+============================================================
+titlesec=false,
+============================================================

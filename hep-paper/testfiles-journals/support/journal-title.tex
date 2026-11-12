@@ -1,0 +1,28 @@
+% Title data of the abstract tests (journal-<class>-<abstract>.lvt),
+% written with the macros of hep-title, and the \TRACE helper.
+%
+% \TRACE prints the code that hep-journal has handed to the class, one
+% command per line, or whether hep-title has made the title.
+\title{Title}
+\subtitle{Subtitle}
+\author[a]{First author \email{first@email.com}}
+\author[a,b]{Second author}
+\email{second@email.com}
+\thanks{Second thanks}
+\author{Third author}
+\affiliation[a]{First affiliation}
+\affiliation[b]{Second affiliation}
+\affiliation{Third affiliation}
+\keywords{First keyword, second keyword}
+\ExplSyntaxOn
+\cs_new_protected:Npn \TRACE
+  {
+    \cs_if_exist:NTF \g__hep_jr_trace_seq
+      {
+        \seq_map_inline:Nn \g__hep_jr_trace_seq
+          { \TYPE { \tl_to_str:n {##1} } }
+      }
+      { \TYPE { title~made:~\legacy_if:nTF { hep@title@made } { yes } { no } } }
+  }
+\ExplSyntaxOff
+\AtEndDocument{\START\TRACE\END}

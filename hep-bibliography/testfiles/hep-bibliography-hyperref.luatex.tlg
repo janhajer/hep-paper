@@ -1,0 +1,1607 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Citations and links to the bibliography
+============================================================
+> \box...=
+\hbox(7.5+2.5)x21.67, direction TLT
+.\TU/lmr/m/n/10 [
+.\penalty 10000
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, shifted -12.0, direction TLT
+...\pdfdest name{cite.0:CMS:20} xyz
+...\penalty 10000
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@CMS}
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\penalty 10000
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, shifted -12.0, direction TLT
+...\pdfdest name{cite.0:Planck:21} xyz
+...\penalty 10000
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@Planck}
+.\TU/lmr/m/n/10 2
+.\pdfendlink
+.\TU/lmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+first citation: Planck 21, CMS 20
+> \box...=
+\hbox(7.5+2.5)x10.56, direction TLT
+.\TU/lmr/m/n/10 [
+.\penalty 10000
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, shifted -12.0, direction TLT
+...\pdfdest name{cite.0:CMS:22} xyz
+...\penalty 10000
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@CMS}
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\TU/lmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+first citation: CMS 20
+============================================================
+============================================================
+TEST 2: Clever citations
+============================================================
+> \box...=
+\hbox(7.5+2.5)x52.55, direction TLT
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 f
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 r
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 e
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 [
+.\penalty 10000
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, shifted -12.0, direction TLT
+...\pdfdest name{cite.0:Collab:23} xyz
+...\penalty 10000
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@Collab}
+.\TU/lmr/m/n/10 3
+.\pdfendlink
+.\TU/lmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x67.6, direction TLT
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 f
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 r
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 s
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 [
+.\penalty 10000
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, shifted -12.0, direction TLT
+...\pdfdest name{cite.0:Collab:24} xyz
+...\penalty 10000
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@Collab}
+.\TU/lmr/m/n/10 3
+.\pdfendlink
+.\penalty 10000
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, shifted -12.0, direction TLT
+...\pdfdest name{cite.0:Cacciari:25} xyz
+...\penalty 10000
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@Cacciari}
+.\TU/lmr/m/n/10 4
+.\pdfendlink
+.\TU/lmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x55.99, direction TLT
+.\TU/lmr/m/n/10 R
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 f
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 r
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 e
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 [
+.\penalty 10000
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, shifted -12.0, direction TLT
+...\pdfdest name{cite.0:Collab:26} xyz
+...\penalty 10000
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@Collab}
+.\TU/lmr/m/n/10 3
+.\pdfendlink
+.\TU/lmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 3: Bibliography entry: collaboration, report numbers, journal
+============================================================
+> \box...=
+\vbox(63.698+0.0)x345.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0
+.\glue(\parskip) 0.0
+.\hbox(7.5+2.5)x319.44, glue set - 0.06888, shifted 25.56, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(7.5+2.5)x0.0, direction TLT
+...\glue 0.0
+...\glue -15.56
+...\glue -10.0
+...\hbox(7.5+2.5)x15.56, glue set 5.0fil, direction TLT
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0:CMS:20}
+....\TU/lmr/m/n/10 [
+....\TU/lmr/m/n/10 1
+....\TU/lmr/m/n/10 ]
+....\pdfendlink
+...\glue 10.0
+..\penalty 0
+..\TU/lmr/m/it/10 C
+..\TU/lmr/m/it/10 M
+..\TU/lmr/m/it/10 S
+..\TU/lmr/m/n/10 .
+..\glue(\spaceskip) 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/n/10 “
+..\TU/lmr/m/n/10 O
+..\TU/lmr/m/n/10 b
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 s
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 r
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 v
+..\kern-0.56 (font)
+..\TU/lmr/m/n/10 a
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 i
+..\TU/lmr/m/n/10 o
+..\TU/lmr/m/n/10 n
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 o
+..\TU/lmr/m/n/10 f
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 a
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 N
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 w
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 B
+..\TU/lmr/m/n/10 o
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 s
+..\TU/lmr/m/n/10 o
+..\TU/lmr/m/n/10 n
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 t
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 a
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 M
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 s
+..\TU/lmr/m/n/10 s
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 o
+..\TU/lmr/m/n/10 f
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 1
+..\TU/lmr/m/n/10 2
+..\TU/lmr/m/n/10 5
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 G
+..\TU/lmr/m/n/10 e
+..\kern-0.83 (font)
+..\TU/lmr/m/n/10 V
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 w
+..\TU/lmr/m/n/10 i
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 h
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 h
+..\TU/lmr/m/n/10 e
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 C
+..\TU/lmr/m/n/10 M
+..\TU/lmr/m/n/10 S
+..\glue(\rightskip) 0.0
+.\penalty 15000
+.\glue(\baselineskip) 2.0
+.\hbox(7.5+2.5)x319.44, glue set 0.4436, shifted 25.56, direction TLT
+..\TU/lmr/m/n/10 E
+..\TU/lmr/m/n/10 x
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 p
+..\kern0.28 (font)
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 r
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 i
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 m
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 n
+..\kern-0.28 (font)
+..\TU/lmr/m/n/10 t
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 t
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 h
+..\TU/lmr/m/n/10 e
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 L
+..\TU/lmr/m/n/10 H
+..\TU/lmr/m/n/10 C
+..\TU/lmr/m/n/10 ”
+..\kern-1.39 (font)
+..\TU/lmr/m/n/10 .
+..\glue(\spaceskip) 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/n/10 I
+..\TU/lmr/m/n/10 n
+..\TU/lmr/m/n/10 :
+..\glue(\spaceskip) 3.33 plus 1.67331 minus 1.10448
+..\TU/lmr/m/it/10 P
+..\TU/lmr/m/it/10 h
+..\TU/lmr/m/it/10 y
+..\TU/lmr/m/it/10 s
+..\TU/lmr/m/it/10 .
+..\glue(\spaceskip) 3.58 plus 1.80072 minus 1.1862
+..\TU/lmr/m/it/10 L
+..\kern-0.51 (font)
+..\TU/lmr/m/it/10 e
+..\TU/lmr/m/it/10 t
+..\TU/lmr/m/it/10 t
+..\TU/lmr/m/it/10 .
+..\glue(\spaceskip) 3.58 plus 1.80072 minus 1.1862
+..\TU/lmr/m/it/10 B
+..\kern0.5 (italic)
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 7
+..\TU/lmr/m/n/10 1
+..\TU/lmr/m/n/10 6
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 (
+..\TU/lmr/m/n/10 2
+..\TU/lmr/m/n/10 0
+..\TU/lmr/m/n/10 1
+..\TU/lmr/m/n/10 2
+..\TU/lmr/m/n/10 )
+..\TU/lmr/m/n/10 ,
+..\glue(\spaceskip) 3.33 plus 1.66998 minus 1.10667
+..\TU/lmr/m/n/10 p
+..\TU/lmr/m/n/10 p
+..\TU/lmr/m/n/10 .
+..\penalty 10000
+..\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+..\TU/lmr/m/n/10 3
+..\TU/lmr/m/n/10 0
+..\TU/lmr/m/n/10 –
+..\penalty 50
+..\TU/lmr/m/n/10 6
+..\TU/lmr/m/n/10 1
+..\TU/lmr/m/n/10 .
+..\kern0.0 (italic)
+..\glue 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/sc/10 d
+..\TU/lmr/m/sc/10 o
+..\TU/lmr/m/sc/10 i
+..\kern0.0 (italic)
+..\TU/lmr/m/n/10 :
+..\glue(\rightskip) 0.0
+.\penalty 5000
+.\glue(\baselineskip) 2.55
+.\hbox(6.95+2.28)x319.44, glue set 0.48666, shifted 25.56, direction TLT
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://doi.org/10.1016/j.physletb.2012.08.021)>>}
+..\mathon
+..\TU/lmtt/m/n/10 1
+..\TU/lmtt/m/n/10 0
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 .
+..\penalty 200
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 1
+..\TU/lmtt/m/n/10 0
+..\TU/lmtt/m/n/10 1
+..\TU/lmtt/m/n/10 6
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 /
+..\penalty 200
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 j
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 .
+..\penalty 200
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 p
+..\TU/lmtt/m/n/10 h
+..\TU/lmtt/m/n/10 y
+..\TU/lmtt/m/n/10 s
+..\TU/lmtt/m/n/10 l
+..\TU/lmtt/m/n/10 e
+..\TU/lmtt/m/n/10 t
+..\TU/lmtt/m/n/10 b
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 .
+..\penalty 200
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 2
+..\TU/lmtt/m/n/10 0
+..\TU/lmtt/m/n/10 1
+..\TU/lmtt/m/n/10 2
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 .
+..\penalty 200
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 0
+..\TU/lmtt/m/n/10 8
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 .
+..\penalty 200
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 0
+..\TU/lmtt/m/n/10 2
+..\TU/lmtt/m/n/10 1
+..\mathoff
+..\pdfendlink
+..\TU/lmr/m/n/10 .
+..\glue(\spaceskip) 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 r
+..\TU/lmr/m/n/10 X
+..\TU/lmr/m/n/10 i
+..\TU/lmr/m/n/10 v
+..\TU/lmr/m/n/10 :
+..\glue(\spaceskip) 3.33 plus 1.67331 minus 1.10448
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://arxiv.org/abs/1207.7235)>>}
+..\mathon
+..\TU/lmtt/m/n/10 1
+..\TU/lmtt/m/n/10 2
+..\TU/lmtt/m/n/10 0
+..\TU/lmtt/m/n/10 7
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 .
+..\penalty 200
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 7
+..\TU/lmtt/m/n/10 2
+..\TU/lmtt/m/n/10 3
+..\TU/lmtt/m/n/10 5
+..\mathoff
+..\glue 3.33 plus 1.665 minus 1.11
+..\TU/lmtt/m/n/10 [
+..\TU/lmtt/m/n/10 h
+..\TU/lmtt/m/n/10 e
+..\TU/lmtt/m/n/10 p
+..\discretionary (penalty 50)
+...< \TU/lmtt/m/n/10 -
+...= \TU/lmtt/m/n/10 -
+..\TU/lmtt/m/n/10 e
+..\TU/lmtt/m/n/10 x
+..\TU/lmtt/m/n/10 ]
+..\kern0.0 (italic)
+..\pdfendlink
+..\TU/lmr/m/n/10 .
+..\glue(\spaceskip) 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/n/10 №
+..\TU/lmr/m/n/10 :
+..\kern0.0 (italic)
+..\glue(\rightskip) 0.0
+.\penalty 15000
+.\glue(\baselineskip) 2.78
+.\hbox(6.94+0.198)x319.44, glue set 114.591fil, shifted 25.56, direction TLT
+..\TU/lmr/m/sc/9 C
+..\TU/lmr/m/sc/9 M
+..\TU/lmr/m/sc/9 S
+..\discretionary (penalty 50)
+...< \TU/lmr/m/sc/9 -
+...= \TU/lmr/m/sc/9 -
+..\TU/lmr/m/sc/9 H
+..\TU/lmr/m/sc/9 I
+..\TU/lmr/m/sc/9 G
+..\discretionary (penalty 50)
+...< \TU/lmr/m/sc/9 -
+...= \TU/lmr/m/sc/9 -
+..\TU/lmr/m/sc/9 1
+..\TU/lmr/m/sc/9 2
+..\discretionary (penalty 50)
+...< \TU/lmr/m/sc/9 -
+...= \TU/lmr/m/sc/9 -
+..\TU/lmr/m/sc/9 0
+..\TU/lmr/m/sc/9 2
+..\TU/lmr/m/sc/9 8
+..\kern0.0 (italic)
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 n
+..\TU/lmr/m/n/10 d
+..\kern0.0 (italic)
+..\glue 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/sc/9 C
+..\TU/lmr/m/sc/9 E
+..\TU/lmr/m/sc/9 R
+..\TU/lmr/m/sc/9 N
+..\discretionary (penalty 50)
+...< \TU/lmr/m/sc/9 -
+...= \TU/lmr/m/sc/9 -
+..\TU/lmr/m/sc/9 P
+..\TU/lmr/m/sc/9 H
+..\discretionary (penalty 50)
+...< \TU/lmr/m/sc/9 -
+...= \TU/lmr/m/sc/9 -
+..\TU/lmr/m/sc/9 E
+..\TU/lmr/m/sc/9 P
+..\discretionary (penalty 50)
+...< \TU/lmr/m/sc/9 -
+...= \TU/lmr/m/sc/9 -
+..\TU/lmr/m/sc/9 2
+..\TU/lmr/m/sc/9 0
+..\TU/lmr/m/sc/9 1
+..\TU/lmr/m/sc/9 2
+..\discretionary (penalty 50)
+...< \TU/lmr/m/sc/9 -
+...= \TU/lmr/m/sc/9 -
+..\TU/lmr/m/sc/9 2
+..\TU/lmr/m/sc/9 2
+..\TU/lmr/m/sc/9 0
+..\kern0.0 (italic)
+..\TU/lmr/m/n/10 .
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 4: Bibliography entry: erratum
+============================================================
+> \box...=
+\vbox(54.0+0.0)x345.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0
+.\glue(\parskip) 0.0
+.\hbox(7.5+2.5)x319.44, glue set 0.5438, shifted 25.56, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(7.5+2.5)x0.0, direction TLT
+...\glue 0.0
+...\glue -15.56
+...\glue -10.0
+...\hbox(7.5+2.5)x15.56, glue set 5.0fil, direction TLT
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0:Cacciari:25}
+....\TU/lmr/m/n/10 [
+....\TU/lmr/m/n/10 4
+....\TU/lmr/m/n/10 ]
+....\pdfendlink
+...\glue 10.0
+..\penalty 0
+..\TU/lmr/m/n/10 M
+..\TU/lmr/m/n/10 .
+..\penalty 25
+..\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+..\TU/lmr/m/n/10 C
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 c
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 c
+..\TU/lmr/m/n/10 i
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 r
+..\TU/lmr/m/n/10 i
+..\TU/lmr/m/n/10 ,
+..\glue(\spaceskip) 3.33 plus 1.66998 minus 1.10667
+..\TU/lmr/m/n/10 G
+..\TU/lmr/m/n/10 .
+..\penalty 10000
+..\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+..\TU/lmr/m/n/10 P
+..\kern-0.83 (font)
+..\TU/lmr/m/n/10 .
+..\penalty 25
+..\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+..\TU/lmr/m/n/10 S
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 l
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 m
+..\TU/lmr/m/n/10 ,
+..\glue(\spaceskip) 3.33 plus 1.66998 minus 1.10667
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 n
+..\TU/lmr/m/n/10 d
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 G
+..\TU/lmr/m/n/10 .
+..\penalty 25
+..\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+..\TU/lmr/m/n/10 S
+..\TU/lmr/m/n/10 o
+..\kern-0.28 (font)
+..\TU/lmr/m/n/10 y
+..\kern-0.28 (font)
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 z
+..\TU/lmr/m/n/10 .
+..\glue(\spaceskip) 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/n/10 “
+..\TU/lmr/m/n/10 T
+..\TU/lmr/m/n/10 h
+..\TU/lmr/m/n/10 e
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 n
+..\kern-0.28 (font)
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 i
+..\TU/lmr/m/n/10 -
+..\mathon
+..\OML/cmm/m/it/10 k
+..\hbox(4.30556+0.0)x3.52084, shifted 1.49998, direction TLT
+...\OML/cmm/m/it/7 t
+..\mathoff
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 j
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 t
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 c
+..\TU/lmr/m/n/10 l
+..\TU/lmr/m/n/10 u
+..\TU/lmr/m/n/10 s
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 r
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 i
+..\TU/lmr/m/n/10 n
+..\TU/lmr/m/n/10 g
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 l
+..\TU/lmr/m/n/10 -
+..\discretionary (penalty 50)
+..\glue(\rightskip) 0.0
+.\penalty 15100
+.\glue(\baselineskip) 2.0
+.\hbox(7.5+2.5)x319.44, glue set 0.38269, shifted 25.56, direction TLT
+..\TU/lmr/m/n/10 g
+..\TU/lmr/m/n/10 o
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 r
+..\TU/lmr/m/n/10 i
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 h
+..\TU/lmr/m/n/10 m
+..\TU/lmr/m/n/10 ”
+..\kern-1.39 (font)
+..\TU/lmr/m/n/10 .
+..\glue(\spaceskip) 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/n/10 I
+..\TU/lmr/m/n/10 n
+..\TU/lmr/m/n/10 :
+..\glue(\spaceskip) 3.33 plus 1.67331 minus 1.10448
+..\TU/lmr/m/it/10 J
+..\TU/lmr/m/it/10 H
+..\TU/lmr/m/it/10 E
+..\TU/lmr/m/it/10 P
+..\kern0.72 (italic)
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 0
+..\TU/lmr/m/n/10 4
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 (
+..\TU/lmr/m/n/10 2
+..\TU/lmr/m/n/10 0
+..\TU/lmr/m/n/10 0
+..\TU/lmr/m/n/10 8
+..\TU/lmr/m/n/10 )
+..\TU/lmr/m/n/10 ,
+..\glue(\spaceskip) 3.33 plus 1.66998 minus 1.10667
+..\TU/lmr/m/n/10 p
+..\TU/lmr/m/n/10 .
+..\penalty 10000
+..\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+..\TU/lmr/m/n/10 6
+..\TU/lmr/m/n/10 3
+..\TU/lmr/m/n/10 .
+..\glue(\spaceskip) 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/n/10 E
+..\TU/lmr/m/n/10 r
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 r
+..\TU/lmr/m/n/10 a
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 u
+..\TU/lmr/m/n/10 m
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 “
+..\TU/lmr/m/n/10 E
+..\TU/lmr/m/n/10 r
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 r
+..\TU/lmr/m/n/10 a
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 u
+..\TU/lmr/m/n/10 m
+..\TU/lmr/m/n/10 ”
+..\kern-1.39 (font)
+..\TU/lmr/m/n/10 .
+..\glue(\spaceskip) 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/n/10 I
+..\TU/lmr/m/n/10 n
+..\TU/lmr/m/n/10 :
+..\glue(\spaceskip) 3.33 plus 1.67331 minus 1.10448
+..\TU/lmr/m/it/10 J
+..\TU/lmr/m/it/10 H
+..\TU/lmr/m/it/10 E
+..\TU/lmr/m/it/10 P
+..\kern0.72 (italic)
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 0
+..\TU/lmr/m/n/10 5
+..\glue(\rightskip) 0.0
+.\penalty 15000
+.\glue(\baselineskip) 2.0
+.\hbox(7.5+2.5)x319.44, glue set 266.1fil, shifted 25.56, direction TLT
+..\TU/lmr/m/n/10 (
+..\TU/lmr/m/n/10 2
+..\TU/lmr/m/n/10 0
+..\TU/lmr/m/n/10 0
+..\TU/lmr/m/n/10 9
+..\TU/lmr/m/n/10 )
+..\TU/lmr/m/n/10 ,
+..\glue(\spaceskip) 3.33 plus 1.66998 minus 1.10667
+..\TU/lmr/m/n/10 p
+..\TU/lmr/m/n/10 .
+..\penalty 10000
+..\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+..\TU/lmr/m/n/10 1
+..\TU/lmr/m/n/10 .
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 5: Collaboration instead of author
+============================================================
+> \box...=
+\hbox(7.05+1.94)x89.74005, direction TLT
+.\TU/lmr/m/it/10 P
+.\TU/lmr/m/it/10 a
+.\TU/lmr/m/it/10 r
+.\discretionary (penalty 50)
+..< \TU/lmr/m/it/10 -
+.\TU/lmr/m/it/10 t
+.\TU/lmr/m/it/10 i
+.\discretionary (penalty 50)
+..< \TU/lmr/m/it/10 -
+.\TU/lmr/m/it/10 c
+.\TU/lmr/m/it/10 l
+.\TU/lmr/m/it/10 e
+.\glue(\spaceskip) 3.58 plus 1.79 minus 1.19333
+.\TU/lmr/m/it/10 D
+.\TU/lmr/m/it/10 a
+.\TU/lmr/m/it/10 t
+.\TU/lmr/m/it/10 a
+.\glue(\spaceskip) 3.58 plus 1.79 minus 1.19333
+.\TU/lmr/m/it/10 G
+.\TU/lmr/m/it/10 r
+.\kern-0.51 (font)
+.\TU/lmr/m/it/10 o
+.\TU/lmr/m/it/10 u
+.\TU/lmr/m/it/10 p
+.\kern0.19 (italic)
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.05+2.05)x173.37001, direction TLT
+.\TU/lmr/m/n/10 M
+.\TU/lmr/m/n/10 .
+.\penalty 25
+.\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+.\TU/lmr/m/n/10 C
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 c
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 G
+.\TU/lmr/m/n/10 .
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+.\TU/lmr/m/n/10 P
+.\kern-0.83 (font)
+.\TU/lmr/m/n/10 .
+.\penalty 25
+.\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+.\TU/lmr/m/n/10 S
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 l
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 m
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 G
+.\TU/lmr/m/n/10 .
+.\penalty 25
+.\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+.\TU/lmr/m/n/10 S
+.\TU/lmr/m/n/10 o
+.\kern-0.28 (font)
+.\TU/lmr/m/n/10 y
+.\kern-0.28 (font)
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 z
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 6: No In: without journal
+============================================================
+> \box...=
+\hbox(0.0+0.0)x0.0, direction TLT
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.57+0.0)x15.56, direction TLT
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 7: Page numbers without leading zeros
+============================================================
+> \box...=
+\hbox(6.66+1.94)x36.67, direction TLT
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 .
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+.\TU/lmr/m/n/10 9
+.\TU/lmr/m/n/10 0
+.\TU/lmr/m/n/10 0
+.\TU/lmr/m/n/10 0
+.\TU/lmr/m/n/10 1
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.66+1.94)x21.67, direction TLT
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 .
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+.\TU/lmr/m/n/10 6
+.\TU/lmr/m/n/10 3
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.66+1.94)x16.67, direction TLT
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 .
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+.\TU/lmr/m/n/10 1
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.66+1.94)x42.23, direction TLT
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 .
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+.\TU/lmr/m/n/10 3
+.\TU/lmr/m/n/10 0
+.\TU/lmr/m/n/10 –
+.\penalty 50
+.\TU/lmr/m/n/10 6
+.\TU/lmr/m/n/10 1
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 8: URL and PubMed
+============================================================
+> \box...=
+\hbox(6.94+2.29)x199.65002, direction TLT
+.\TU/lmr/m/sc/10 u
+.\TU/lmr/m/sc/10 r
+.\TU/lmr/m/sc/10 l
+.\kern0.0 (italic)
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://www.example.org/path)>>}
+.\mathon
+.\TU/lmtt/m/n/10 w
+.\TU/lmtt/m/n/10 w
+.\TU/lmtt/m/n/10 w
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 .
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 x
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 m
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 l
+.\TU/lmtt/m/n/10 e
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 .
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 o
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 g
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 /
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 t
+.\TU/lmtt/m/n/10 h
+.\mathoff
+.\pdfendlink
+.\TU/lmr/m/n/10 .
+.\kern0.0 (italic)
+.\glue 4.44 plus 4.99498 minus 0.37
+.\TU/lmr/m/sc/10 p
+.\TU/lmr/m/sc/10 m
+.\TU/lmr/m/sc/10 c
+.\kern0.0 (italic)
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7654321)>>}
+.\mathon
+.\TU/lmtt/m/n/10 7
+.\TU/lmtt/m/n/10 6
+.\TU/lmtt/m/n/10 5
+.\TU/lmtt/m/n/10 4
+.\TU/lmtt/m/n/10 3
+.\TU/lmtt/m/n/10 2
+.\TU/lmtt/m/n/10 1
+.\mathoff
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94+2.29)x108.50002, direction TLT
+.\TU/lmr/m/sc/10 u
+.\TU/lmr/m/sc/10 r
+.\TU/lmr/m/sc/10 l
+.\kern0.0 (italic)
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(http://example.org/page)>>}
+.\mathon
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 x
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 m
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 l
+.\TU/lmtt/m/n/10 e
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 .
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 o
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 g
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 /
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 g
+.\TU/lmtt/m/n/10 e
+.\mathoff
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 9: Bibliography entry: URL and PubMed
+============================================================
+> \box...=
+\vbox(41.79+0.0)x345.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0
+.\glue(\parskip) 0.0
+.\hbox(7.5+2.5)x319.44, glue set - 0.30118, shifted 25.56, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(7.5+2.5)x0.0, direction TLT
+...\glue 0.0
+...\glue -15.56
+...\glue -10.0
+...\hbox(7.5+2.5)x15.56, glue set 5.0fil, direction TLT
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\TU/lmr/m/n/10 [
+....\TU/lmr/m/n/10 7
+....\TU/lmr/m/n/10 ]
+...\glue 10.0
+..\penalty 0
+..\TU/lmr/m/n/10 J
+..\TU/lmr/m/n/10 .
+..\penalty 25
+..\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+..\TU/lmr/m/n/10 D
+..\TU/lmr/m/n/10 o
+..\kern0.28 (font)
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 .
+..\glue(\spaceskip) 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/n/10 “
+..\TU/lmr/m/n/10 A
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 m
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 d
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 i
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 c
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 l
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 r
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 i
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 c
+..\TU/lmr/m/n/10 l
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 ”
+..\kern-1.39 (font)
+..\TU/lmr/m/n/10 .
+..\glue(\spaceskip) 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/n/10 I
+..\TU/lmr/m/n/10 n
+..\TU/lmr/m/n/10 :
+..\glue(\spaceskip) 3.33 plus 1.67331 minus 1.10448
+..\TU/lmr/m/it/10 N
+..\TU/lmr/m/it/10 a
+..\discretionary (penalty 50)
+...< \TU/lmr/m/it/10 -
+..\TU/lmr/m/it/10 t
+..\TU/lmr/m/it/10 u
+..\TU/lmr/m/it/10 r
+..\kern-0.51 (font)
+..\TU/lmr/m/it/10 e
+..\kern0.28 (italic)
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 1
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 (
+..\TU/lmr/m/n/10 2
+..\TU/lmr/m/n/10 0
+..\TU/lmr/m/n/10 2
+..\TU/lmr/m/n/10 1
+..\TU/lmr/m/n/10 )
+..\TU/lmr/m/n/10 ,
+..\glue(\spaceskip) 3.33 plus 1.66998 minus 1.10667
+..\TU/lmr/m/n/10 p
+..\TU/lmr/m/n/10 .
+..\penalty 10000
+..\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+..\TU/lmr/m/n/10 1
+..\TU/lmr/m/n/10 .
+..\kern0.0 (italic)
+..\glue 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/sc/10 u
+..\TU/lmr/m/sc/10 r
+..\TU/lmr/m/sc/10 l
+..\kern0.0 (italic)
+..\TU/lmr/m/n/10 :
+..\glue(\spaceskip) 3.33 plus 1.67331 minus 1.10448
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://www.example.org/path)>>}
+..\mathon
+..\TU/lmtt/m/n/10 w
+..\TU/lmtt/m/n/10 w
+..\TU/lmtt/m/n/10 w
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 .
+..\penalty 200
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 e
+..\TU/lmtt/m/n/10 x
+..\TU/lmtt/m/n/10 a
+..\TU/lmtt/m/n/10 m
+..\TU/lmtt/m/n/10 p
+..\TU/lmtt/m/n/10 l
+..\TU/lmtt/m/n/10 e
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 .
+..\penalty 200
+..\glue(\rightskip) 0.0
+.\penalty 25000
+.\glue(\baselineskip) 2.56
+.\hbox(6.94+2.29)x319.44, glue set 206.73fil, shifted 25.56, direction TLT
+..\TU/lmtt/m/n/10 o
+..\TU/lmtt/m/n/10 r
+..\TU/lmtt/m/n/10 g
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 /
+..\penalty 200
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 p
+..\TU/lmtt/m/n/10 a
+..\TU/lmtt/m/n/10 t
+..\TU/lmtt/m/n/10 h
+..\mathoff
+..\pdfendlink
+..\TU/lmr/m/n/10 .
+..\kern0.0 (italic)
+..\glue 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/sc/10 p
+..\TU/lmr/m/sc/10 m
+..\TU/lmr/m/sc/10 c
+..\kern0.0 (italic)
+..\TU/lmr/m/n/10 :
+..\glue(\spaceskip) 3.33 plus 1.67331 minus 1.10448
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7654321)>>}
+..\mathon
+..\TU/lmtt/m/n/10 7
+..\TU/lmtt/m/n/10 6
+..\TU/lmtt/m/n/10 5
+..\TU/lmtt/m/n/10 4
+..\TU/lmtt/m/n/10 3
+..\TU/lmtt/m/n/10 2
+..\TU/lmtt/m/n/10 1
+..\mathoff
+..\pdfendlink
+..\TU/lmr/m/n/10 .
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 10: Eprint types
+============================================================
+> \box...=
+\hbox(7.05+2.22)x87.61, direction TLT
+.\TU/lmr/m/n/10 G
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 H
+.\TU/lmr/m/n/10 u
+.\TU/lmr/m/n/10 b
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://github.com/user/repo)>>}
+.\mathon
+.\TU/lmtt/m/n/10 u
+.\TU/lmtt/m/n/10 s
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 r
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 /
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 o
+.\mathoff
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.05+2.29)x91.05, direction TLT
+.\TU/lmr/m/n/10 G
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 t
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 L
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 b
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://gitlab.com/group/repo)>>}
+.\mathon
+.\TU/lmtt/m/n/10 g
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 o
+.\TU/lmtt/m/n/10 u
+.\TU/lmtt/m/n/10 p
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 /
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 o
+.\mathoff
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94+2.22)x96.83, direction TLT
+.\TU/lmr/m/n/10 B
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 t
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 b
+.\TU/lmr/m/n/10 u
+.\TU/lmr/m/n/10 c
+.\kern-0.28 (font)
+.\TU/lmr/m/n/10 k
+.\kern-0.28 (font)
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://bitbucket.org/team/repo)>>}
+.\mathon
+.\TU/lmtt/m/n/10 t
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 m
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 /
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 o
+.\mathoff
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94+2.28)x92.18, direction TLT
+.\TU/lmr/m/n/10 L
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 u
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 c
+.\kern-0.28 (font)
+.\TU/lmr/m/n/10 h
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 d
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://launchpad.net/project)>>}
+.\mathon
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 o
+.\TU/lmtt/m/n/10 j
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 c
+.\TU/lmtt/m/n/10 t
+.\mathoff
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.05+2.28)x96.95, direction TLT
+.\TU/lmr/m/n/10 S
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 u
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 e
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 F
+.\kern-0.83 (font)
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://sourceforge.net/projects/project)>>}
+.\mathon
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 o
+.\TU/lmtt/m/n/10 j
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 c
+.\TU/lmtt/m/n/10 t
+.\mathoff
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.83+2.28)x89.15, direction TLT
+.\TU/lmr/m/n/10 H
+.\TU/lmr/m/n/10 E
+.\TU/lmr/m/n/10 P
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 F
+.\kern-0.83 (font)
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://project.hepforge.org)>>}
+.\mathon
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 o
+.\TU/lmtt/m/n/10 j
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 c
+.\TU/lmtt/m/n/10 t
+.\mathoff
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.16+2.22)x81.97, direction TLT
+.\TU/lmr/m/n/10 C
+.\TU/lmr/m/n/10 T
+.\kern-0.83 (font)
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 N
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://ctan.org/pkg/hep-paper)>>}
+.\mathon
+.\TU/lmtt/m/n/10 h
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 p
+.\glue(\thickmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 -
+.\glue(\thickmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 r
+.\mathoff
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.05+0.22)x63.28, direction TLT
+.\TU/lmr/m/n/10 C
+.\TU/lmr/m/n/10 D
+.\TU/lmr/m/n/10 S
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://cds.cern.ch/record/1234567)>>}
+.\mathon
+.\TU/lmtt/m/n/10 1
+.\TU/lmtt/m/n/10 2
+.\TU/lmtt/m/n/10 3
+.\TU/lmtt/m/n/10 4
+.\TU/lmtt/m/n/10 5
+.\TU/lmtt/m/n/10 6
+.\TU/lmtt/m/n/10 7
+.\mathoff
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.83+0.11)x91.87, direction TLT
+.\TU/lmr/m/n/10 H
+.\TU/lmr/m/n/10 E
+.\TU/lmr/m/n/10 P
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 D
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://www.hepdata.net/record/ins12345)>>}
+.\mathon
+.\TU/lmtt/m/n/10 i
+.\TU/lmtt/m/n/10 n
+.\TU/lmtt/m/n/10 s
+.\TU/lmtt/m/n/10 1
+.\TU/lmtt/m/n/10 2
+.\TU/lmtt/m/n/10 3
+.\TU/lmtt/m/n/10 4
+.\TU/lmtt/m/n/10 5
+.\mathoff
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 11: online and email
+============================================================
+> \box...=
+\hbox(6.11+2.29)x57.75, direction TLT
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://example.org)>>}
+.\mathon
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 x
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 m
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 l
+.\TU/lmtt/m/n/10 e
+.\glue(\medmuskip) 0.0
+.\TU/lmtt/m/n/10 .
+.\glue(\medmuskip) 0.0
+.\TU/lmtt/m/n/10 o
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 g
+.\mathoff
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.17+2.29)x84.0, direction TLT
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(mailto:name@example.org)>>}
+.\mathon
+.\TU/lmtt/m/n/10 n
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 m
+.\TU/lmtt/m/n/10 e
+.\glue(\medmuskip) 0.0
+.\TU/lmtt/m/n/10 @
+.\glue(\medmuskip) 0.0
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 x
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 m
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 l
+.\TU/lmtt/m/n/10 e
+.\glue(\medmuskip) 0.0
+.\TU/lmtt/m/n/10 .
+.\glue(\medmuskip) 0.0
+.\TU/lmtt/m/n/10 o
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 g
+.\mathoff
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\cite' on input line ....
+[Text CMS]
+[Text example.org]
+[Text name@example.org]
+[Text example.org]
+============================================================
+============================================================
+TEST 12: commalist
+============================================================
+> \box...=
+\hbox(4.48+0.11)x8.33, direction TLT
+.\TU/lmr/m/n/10 a
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94+0.11)x36.67, direction TLT
+.\TU/lmr/m/n/10 a
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 b
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94+1.93)x50.0, direction TLT
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 b
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 c
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94+0.11)x36.12, direction TLT
+.\TU/lmr/m/n/10 a
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 b
+.\TU/lmr/m/n/10 .
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(4.48+0.11)x8.33, direction TLT
+.\TU/lmr/m/n/10 a
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 13: Second refsection: first citation, zero page, eprint without class
+============================================================
+\blx@sectionciteorder@1=\count...
+Package biblatex Info: Reference section=1 on input line ....
+Package biblatex Info: Setting label 'refsection:1' on input line ....
+refsection 1: CMS 51
+> \box...=
+\hbox(6.66+1.94)x16.67, direction TLT
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 .
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+.\TU/lmr/m/n/10 0
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.05+2.22)x87.61, direction TLT
+.\TU/lmr/m/n/10 G
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 H
+.\TU/lmr/m/n/10 u
+.\TU/lmr/m/n/10 b
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://github.com/user/repo)>>}
+.\mathon
+.\TU/lmtt/m/n/10 u
+.\TU/lmtt/m/n/10 s
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 r
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 /
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 o
+.\mathoff
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+Package biblatex Info: Reference section=0 on input line ....
+refsection 0: CMS 20
+============================================================

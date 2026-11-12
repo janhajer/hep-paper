@@ -1,0 +1,192 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-text}
+\input{hep-regression}
+
+% Starts a paragraph and shows whether it is indented.
+\newcommand*{\SHOWINDENT}{%
+  \leavevmode
+  \setbox2\lastbox
+  \TYPE{[\ifvoid2 no indentation\else indentation \the\wd2\fi]}%
+}
+
+% Outer quotes must be activated before the test arguments are read.
+\MakeOuterQuote{"}
+
+\begin{document}
+
+% Load every font used below before \START, so that no engine-dependent
+% font loading lines end up in the .tlg file.
+\setbox0\vbox{%
+  \textnumero\textit{x}\textbf{x}\texttt{x}\software{x}\enquote{x}%
+  \enquote{\enquote{x}}\underline{x}$x$\textsuperscript{x}%
+  \begin{enumdescript}\item{x} x\end{enumdescript}%
+}
+
+\START
+
+\TEST{Foreign abbreviations (british)}{%
+  \TYPE{[\languagename]}%
+  \SHOWHBOX{\eg x}%
+  \SHOWHBOX{\ie, \cf. \vs}%
+}
+
+\TEST{Foreign abbreviations: font}{%
+  \renewcommand*\foreignabbrfont{\itshape}%
+  \SHOWHBOX{\eg x}%
+}
+
+\TEST{Foreign abbreviations inside enquote}{%
+  \SHOWHBOX{\enquote{see \eg} x}%
+}
+
+\TEST{Quotation marks}{%
+  \SHOWHBOX{\enquote{a \enquote{b}}}%
+  \SHOWHBOX{"a"}%
+}
+
+\TEST{Numero}{%
+  \SHOWHBOX{\no{12}}%
+}
+
+\TEST{Software names}{%
+  \SHOWHBOX{\software{Ab} x}%
+  \SHOWHBOX{\software[v1]{Ab} x}%
+}
+
+\TEST{Online and email without hyperref}{%
+  \SHOWHBOX{\online{https://a.b}{a.b}}%
+  \SHOWHBOX{\email{a@b}}%
+}
+
+% The fallback prints special characters verbatim, as \nolinkurl does.
+\TEST{Online and email without hyperref: special characters}{%
+  \SHOWHBOX{\email{a_b@c}}%
+  \SHOWHBOX{\online{https://a.b}{a#b&c~d\%e\_f}}%
+}
+
+\TEST{Prefix}{%
+  \SHOWHBOX{\prefix{pre}{x}}%
+}
+
+\TEST{Subsubparagraph}{%
+  \setbox0\vbox{\hsize=20em a\par\subsubparagraph b}\showbox0
+  \setbox0\vbox{a\par\subsubparagraph\SHOWINDENT}%
+}
+
+\TEST{Underline}{%
+  \TYPE{\meaning\underline}%
+  \SHOWHBOX{\underline{a b}}%
+}
+
+\TEST{Underline: line breaks}{%
+  \SHOWVBOX{\hsize=2em \raggedright\noindent\underline{aaa bbb}}%
+}
+
+% Text with macros that soul cannot process is underlined as a whole.
+\makeatletter
+\newcommand{\SOULSAFE}[1]{%
+  \hep@soul@if@safe{#1}{\TYPE{soul: \detokenize{#1}}}%
+    {\TYPE{whole: \detokenize{#1}}}%
+}
+\makeatother
+\TEST{Underline: text with macros unknown to soul}{%
+  \SOULSAFE{a b}%
+  \SOULSAFE{a \textbf{b} \"o $\alpha$ c\\d~e\%f\par g}%
+  \SOULSAFE{a \enquote{b c}}%
+  \SOULSAFE{a \eg b}%
+  \SOULSAFE{a \software{b}}%
+  \SOULSAFE{a \ref{b}}%
+  \SHOWHBOX{\underline{\enquote{a b} \eg c \software{d}}}%
+}
+
+\TEST{Inline list}{%
+  \SHOWHBOX{%
+    \begin{inlinelist}
+      \item a
+      \item b
+      \item c
+    \end{inlinelist}%
+  }%
+}
+
+\TEST{Enumerated description list}{%
+  \SHOWVBOX{%
+    \begin{enumdescript}
+      \item{A} a
+      \item[*]{B} b
+      \item{} c
+    \end{enumdescript}%
+  }%
+}
+
+\TEST{Enumerated description list: label options}{%
+  \SHOWVBOX{%
+    \begin{enumdescript}[label=\Roman*)]
+      \item{A} a
+    \end{enumdescript}%
+  }%
+}
+
+% A title starting with two equal characters is not empty.
+\TEST{Enumerated description list: title with repeated first letter}{%
+  \SHOWVBOX{%
+    \begin{enumdescript}
+      \item{oo} a
+    \end{enumdescript}%
+  }%
+}
+
+% Lists nested inside enumdescript keep their usual \item.
+\TEST{Enumerated description list: nested itemize}{%
+  \SHOWVBOX{%
+    \begin{enumdescript}
+      \item{A} a
+      \begin{itemize}
+        \item bc
+      \end{itemize}
+    \end{enumdescript}%
+  }%
+}
+
+\TEST{No indentation after lists}{%
+  \setbox0\vbox{\begin{itemize}\item a\end{itemize}\SHOWINDENT}%
+  \setbox0\vbox{\begin{enumerate}\item a\end{enumerate}\SHOWINDENT}%
+  \setbox0\vbox{\begin{description}\item[a] a\end{description}\SHOWINDENT}%
+  \setbox0\vbox{\begin{enumdescript}\item{a} a\end{enumdescript}\SHOWINDENT}%
+  \setbox0\vbox{\begin{inlinelist}\item a\end{inlinelist}\par\SHOWINDENT}%
+  \setbox0\vbox{\begin{itemize}\item a\end{itemize}\par\SHOWINDENT}%
+  \setbox0\vbox{\begin{quote}a\end{quote}\SHOWINDENT}%
+}
+
+\BEGINTEST{No indentation after verbatim}
+\setbox0\vbox{%
+\begin{verbatim}
+a
+\end{verbatim}
+\SHOWINDENT}
+\ENDTEST
+
+\TEST{Enumerated description list: nested enumdescript}{%
+  \SHOWVBOX{%
+    \begin{enumdescript}
+      \item{A} a
+      \begin{enumdescript}
+        \item{B} b
+        \begin{itemize}
+          \item c
+        \end{itemize}
+        \item{D} d
+      \end{enumdescript}
+      \item{E} e
+    \end{enumdescript}%
+  }%
+}
+
+% In math mode \underline keeps its standard meaning.
+\TEST{Underline in math mode}{%
+  \SHOWHBOX{$\underline{x}$}%
+  \SHOWHBOX{\underline{a $\underline{x}$}}%
+}
+
+\END

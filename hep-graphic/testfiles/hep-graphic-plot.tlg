@@ -1,0 +1,140 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Loaded packages
+============================================================
+hep-plot: yes
+hep-feynman: yes
+pgfplots: yes
+tikz-feynman: yes
+\tikzsetnextfilename: defined
+============================================================
+============================================================
+TEST 2: pgfplots settings
+============================================================
+width: \linewidth 
+height: \linewidth 
+1234567 printed as \pgfutilensuremath {1\,234\,567}
+/pgfplots/three panels: defined
+/pgfplots/contour legend: defined
+/pgfplots/contour legend x: defined
+/pgfplots/contour legend y: defined
+/pgfplots/contour plot x: defined
+/pgfplots/contour plot y: defined
+/pgfplots/error legend: defined
+/tikzfeynman/with arrow: defined
+/tikzfeynman/with reversed arrow: defined
+============================================================
+============================================================
+TEST 3: Colormap positions of the default cycle lists
+============================================================
+RainbowCycleLength 64, LineStyleCycleLength 64
+0,1000,500,250,750,125,875,375,625,62.5,937.5,187.5,812.5,312.5,687.5,437.5,562.5,31.25,968.75,93.75,906.25,156.25,843.75,218.75,781.25,281.25,718.75,343.75,656.25,406.25,593.75,468.75,531.25,15.625,984.375,46.875,953.125,78.125,921.875,109.375,890.625,140.625,859.375,171.875,828.125,203.125,796.875,234.375,765.625,265.625,734.375,296.875,703.125,328.125,671.875,359.375,640.625,390.625,609.375,421.875,578.125,453.125,546.875,484.375
+============================================================
+============================================================
+TEST 4: CreateSpacedColormapCycleList
+============================================================
+1: 0
+5: 0,1000,500,250,750
+9: 0,1000,500,250,750,125,875,375,625
+cycle list test five:
+/tikz/color/.define={.}{rgb}{0.55461,0.0,0.0},/tikz/color=.,
+/tikz/color/.define={.}{rgb}{0.14902,0.0,0.3098},/tikz/color=.,
+/tikz/color/.define={.}{rgb}{0.0,0.58801,0.13777},/tikz/color=.,
+/tikz/color/.define={.}{rgb}{0.8852,0.43225,0.0},/tikz/color=.,
+/tikz/color/.define={.}{rgb}{0.00038,0.19574,0.70598},/tikz/color=.,
+============================================================
+============================================================
+TEST 5: CreateLineStyleCycleList
+============================================================
+cycle list test one:
+solid
+cycle list test ten:
+solid
+line cap=round,dash pattern=on \LineStyleDashLength off \LineStyleGapLength 
+line cap=round,dash pattern=on \LineStyleDotLength off \LineStyleGapLength 
+line cap=round,dash pattern=on \LineStyleDashLength off \LineStyleGapLength on \LineStyleDotLength off \LineStyleGapLength 
+line cap=round,dash pattern=on \LineStyleDashLength off \LineStyleGapLength on \LineStyleDashLength off \LineStyleGapLength on \LineStyleDotLength off \LineStyleGapLength 
+line cap=round,dash pattern=on \LineStyleDashLength off \LineStyleGapLength on \LineStyleDotLength off \LineStyleGapLength on \LineStyleDotLength off \LineStyleGapLength 
+line cap=round,dash pattern=on \LineStyleDashLength off \LineStyleGapLength on \LineStyleDashLength off \LineStyleGapLength on \LineStyleDotLength off \LineStyleGapLength on \LineStyleDotLength off \LineStyleGapLength 
+line cap=round,dash pattern=on \LineStyleDashLength off \LineStyleGapLength on \LineStyleDashLength off \LineStyleGapLength on \LineStyleDashLength off \LineStyleGapLength on \LineStyleDotLength off \LineStyleGapLength 
+line cap=round,dash pattern=on \LineStyleDashLength off \LineStyleGapLength on \LineStyleDotLength off \LineStyleGapLength on \LineStyleDotLength off \LineStyleGapLength on \LineStyleDotLength off \LineStyleGapLength 
+line cap=round,dash pattern=on \LineStyleDashLength off \LineStyleGapLength on \LineStyleDashLength off \LineStyleGapLength on \LineStyleDashLength off \LineStyleGapLength on \LineStyleDotLength off \LineStyleGapLength on \LineStyleDotLength off \LineStyleGapLength 
+============================================================
+============================================================
+TEST 6: Predefined cycle lists
+============================================================
+cycle list marks:
+mark=-
+mark=|
+mark=Mercedes star flipped
+mark=Mercedes star
+mark=+
+mark=x
+mark=star
+mark=asterisk
+mark=10-pointed star
+cycle list vertical marks:
+mark=|
+mark=Mercedes star flipped
+mark=Mercedes star
+mark=x
+mark=star
+mark=asterisk
+mark=10-pointed star
+cycle list horizontal marks:
+mark=-
+mark=Mercedes star flipped
+mark=Mercedes star
+mark=x
+mark=star
+mark=asterisk
+mark=10-pointed star
+cycle list star marks:
+mark=Mercedes star flipped
+mark=Mercedes star
+mark=x
+mark=star
+mark=asterisk
+mark=10-pointed star
+============================================================
+============================================================
+TEST 7: cyclelistshift
+============================================================
+counter 1, cycle list shift 1
+cyclelistshift: wd 0.0pt, ht 0.0pt, dp 0.0pt
+in a group: counter 2, cycle list shift 2
+after the group: counter 2, cycle list shift 
+============================================================
+============================================================
+TEST 8: A plot with addlegendtitle
+============================================================
+axis: wd 68.81104pt, ht 40.35797pt, dp 0.0pt
+============================================================
+============================================================
+TEST 9: includepgf with options
+============================================================
+(hep-graphic-plot-rectangle.tikz)
+includepgf*: wd 56.90549pt, ht 28.45274pt, dp 0.0pt
+(hep-graphic-plot-rectangle.tikz)
+includepgf: wd 56.90549pt, ht 28.45274pt, dp 0.0pt
+(hep-graphic-plot-rectangle.tikz) (hep-graphic-plot-rectangle.tikz) (hep-graphic-plot-rectangle.tikz) (hep-graphic-plot-rectangle.tikz) (hep-graphic-plot-rectangle.tikz)
+includepgf[width=4cm]: wd 113.81097pt, ht 56.90549pt, dp 0.0pt
+width: \linewidth 
+============================================================
+============================================================
+TEST 10: PDF strings
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<def>-command' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\hep@graphic@path' on input line ....
+[text]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\vcenter' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\hbox' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\includegraphics' on input line ....
+[./x text]
+============================================================

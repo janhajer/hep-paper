@@ -1,0 +1,40 @@
+% hep-title: abstracts given before the title, in the conventions of the
+% journals, are stored and placed after the title by \maketitle.
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-title}
+\input{hep-regression}
+\makeatletter
+\AddToHook{env/abstract/begin}{%
+  \TYPE{begin abstract, title made: \ifhep@title@made yes\else no\fi}%
+}
+\makeatother
+\title{Title}
+\author{Author}
+\begin{document}
+% Typeset a title before the test, so font loading is not recorded.
+\setbox0\vbox{\maketitle\begin{abstract}Abstract.\end{abstract}}
+\makeatletter
+\global\hep@title@madefalse
+\START
+
+\TEST{Command form in the preamble or document}{%
+  \abstract{Command form.}%
+  \TYPE{stored: [\hep@abstract@text]}%
+  \setbox0\vbox{\maketitle}%
+}
+
+\TEST{Environment before the title}{%
+  \global\hep@title@madefalse
+  \begin{abstract}Environment.\end{abstract}%
+  \TYPE{stored: [\hep@abstract@text]}%
+  \setbox0\vbox{\maketitle}%
+}
+
+\TEST{Environment after the title}{%
+  \setbox0\vbox{\begin{abstract}After.\end{abstract}}%
+  \TYPE{stored: \ifhep@abstract@stored yes\else no\fi}%
+}
+
+\makeatother
+\END

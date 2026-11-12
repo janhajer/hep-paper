@@ -1,0 +1,46 @@
+% hep-cv class with the font=10pt, serif and hyperref=false options.
+\input{regression-test}
+\documentclass[font=10pt, serif, hyperref=false]{hep-cv}
+\author{First Last}
+\input{hep-regression}
+\makeatletter
+% \PACKAGES{list}: loaded or not, and the options it was loaded with
+\newcommand*{\PACKAGES}[1]{%
+  \@for\hep@test@name:=#1\do{%
+    \TYPE{\hep@test@name: \expandafter\ifx
+      \csname ver@\hep@test@name.sty\endcsname\relax not loaded\else
+      loaded [\unexpanded\expandafter\expandafter\expandafter
+        {\csname opt@\hep@test@name.sty\endcsname}]%
+      \fi}%
+  }%
+}
+\makeatother
+\begin{document}
+\makeatletter
+% Load all fonts before the test
+\setbox0\vbox{\maketitle\section{S}}
+\START
+
+\TEST{Class options}{%
+  \TYPE{font: \hepcv@font}%
+  \TYPE{serif: \ifhepcv@serif true\else false\fi}%
+  \TYPE{hyperref: \ifhepcv@hyperref true\else false\fi}%
+  \TYPE{date: \ifhepcv@date true\else false\fi}%
+  \TYPE{list: \ifhepcv@list true\else false\fi}%
+  \TYPE{font size: \f@size, secnumdepth: \the\c@secnumdepth,
+    tocdepth: \the\c@tocdepth}%
+}
+
+\TEST{Loaded packages and their options}{%
+  \PACKAGES{hep-cv,hep-font,hep-text,hep-reference,hyperref,phonenumbers,%
+    titlesec,titletoc,dashrule,fancyhdr,lastpage,subfiles,textpos,%
+    anyfontsize,fontsize,graphicx}%
+}
+
+\TEST{Title page and sections without hyperref}{%
+  \setbox0\vbox{\maketitle\section{Education}\section*{Starred}}%
+  \TYPE{done}%
+}
+
+\makeatother
+\END

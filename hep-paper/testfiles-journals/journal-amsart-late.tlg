@@ -1,0 +1,15 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+\title {Title: Subtitle}
+\author {First author}
+\address {First affiliation}
+\email {first@email.com}
+\author {Second author}
+\address {First affiliation}
+\address {Second affiliation}
+\email {second@email.com}
+\thanks {Second thanks}
+\author {Third author}
+\address {Third affiliation}
+\keywords {First keyword, second keyword}
+\maketitle 

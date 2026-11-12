@@ -1,0 +1,74 @@
+% hep-cv package with the date and list=false options: month macros and
+% unchanged lists.
+\input{regression-test}
+\documentclass{article}
+\usepackage[date, list=false]{hep-cv}
+\usepackage{hyperref}
+\input{hep-regression}
+\makeatletter
+% \DEFINED{list of macro names}
+\newcommand*{\DEFINED}[1]{%
+  \@for\hep@test@name:=#1\do{%
+    \TYPE{\hep@test@name: \expandafter\ifx
+      \csname\hep@test@name\endcsname\relax undefined\else defined\fi}%
+  }%
+}
+% \CVTEXT{code}: replace the two-column tabular of \cvline and \cventry by
+% a simple alignment, so that the box shows only the text of both columns
+\newcommand*{\CVTEXT}[1]{%
+  \begingroup
+    \def\hep@begin{\setbox0\vbox\bgroup\halign\bgroup####\tabskip1em&####\cr}%
+    \def\hep@end{\crcr\egroup\egroup\showbox0 }%
+    #1%
+  \endgroup
+}
+% \LIST{environment}{item}: the list parameters of the first level
+\newcommand*{\LIST}[2]{%
+  \setbox0\vbox{%
+    \begin{#1}#2%
+      \TYPE{#1: leftmargin \the\leftmargin, labelwidth \the\labelwidth,
+        labelsep \the\labelsep, topsep \the\topsep, itemsep \the\itemsep,
+        parsep \the\parsep}%
+    \end{#1}%
+  }%
+}
+\makeatother
+\begin{document}
+% Load all fonts before the test
+\setbox0\vbox{\May\begin{itemize}\item\end{itemize}}
+\START
+\makeatletter
+
+\TEST{Month macros}{%
+  \DEFINED{Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec}%
+  \setbox0\hbox{May}%
+  \TYPE{width of May: \the\wd0}%
+  \@for\hep@test@name:=Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec\do{%
+    \setbox0\hbox{\csname\hep@test@name\endcsname}%
+    \TYPE{\hep@test@name: \the\wd0}%
+  }%
+}
+
+\TEST{Month macros: letters spread evenly (May is wider than the box)}{%
+  \SHOWHBOX{\Jan}%
+  \SHOWHBOX{\May}%
+}
+
+\TEST{Month macros are robust and plain in PDF strings}{%
+  \TYPE{\meaning\Jan}%
+  \PDFSTRING{Since \Jan\ 2020 until \Dec\ 2021}%
+  \SECTIONBOOKMARKS{\section{Since \May\ 2020}}%
+  \edef\hep@test@name{\Jan}%
+  \TYPE{\meaning\hep@test@name}%
+}
+
+\TEST{Lists are not adjusted with list=false}{%
+  \LIST{itemize}{\item}%
+  \LIST{enumerate}{\item}%
+  \LIST{description}{\item[label]}%
+  \TYPE{enumdescript: \ifcsname enumdescript\endcsname defined\else
+    undefined\fi}%
+}
+
+\makeatother
+\END

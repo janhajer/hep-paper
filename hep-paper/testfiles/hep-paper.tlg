@@ -1,0 +1,28 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Text and math
+============================================================
+> \box...=
+\hbox(8.95389+0.84698)x56.63899
+.\T1/clm2/m/n/11 T
+.\kern-0.90201
+.\T1/clm2/m/n/11 e
+.\T1/clm2/m/n/11 x
+.\T1/clm2/m/n/11 t
+.\glue 3.586 plus 1.793 minus 1.19899
+.\mathon
+.\U/hepalpha0/m/n/11 1
+.\hbox(4.96208+0.0)x4.88457, shifted -3.9918
+..\U/hepalpha0/m/n/7.69997 6
+.\glue(\medmuskip) 2.4444 plus 1.2222 minus 1.8333
+.\OT1/lmr/m/n/11 +
+.\glue(\medmuskip) 2.4444 plus 1.2222 minus 1.8333
+.\U/hepalpha0/m/n/11 V
+.\kern0.04071
+.\mathoff
+! OK.
+<to be read again> 
+                   \endgroup 
+l. ......setbox0\hbox{Text $x^2 + \alpha$}\showbox0}
+============================================================

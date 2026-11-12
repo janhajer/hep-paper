@@ -1,0 +1,4 @@
+\input{regression-test}
+\documentclass{article}
+\def\LOADORDER{hep-graphic,hep-acronym,hep-reference,hep-bibliography,hep-title,hep-float,hep-text,hep-math-font,hep-font,hep-math,hyperref}
+\input{loadorder}

@@ -1,0 +1,67 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Option values
+============================================================
+class: beamer
+paper: [a4]
+font: [default]
+lang: [british]
+symbols: [true]
+bibliography: [numeric-comp]
+serif: false
+lining: true
+parindent: true
+defaults: true
+title: false
+physics: true
+glossaries: true
+references: false
+eqnarray: true
+manualplacement: false
+beamer: true
+revtex: false
+jhep: false
+jcap: false
+pos: false
+springer: false
+amsart: false
+sissa: false
+journal: false
+============================================================
+============================================================
+TEST 2: Loaded packages and their options
+============================================================
+hep-math: loaded []
+hep-font: loaded [size=default,sans=true,lining=true,]
+hep-math-font: loaded [symbols=true,]
+geometry: loaded [papersize={\beamer@paperwidth ,\beamer@paperheight },hmargin=1cm,vmargin=0cm,head=0.5cm,headsep=0pt,foot=0.5cm]
+parskip: not loaded
+hep-text: loaded [lang=british,]
+hep-float: loaded [global,]
+hep-title: not loaded
+hep-bibliography: loaded [style=numeric-comp,]
+biblatex: loaded [style=numeric-comp,datamodel=hep-bibliography,]
+hep-reference: not loaded
+hyperref: loaded [bookmarks=true,bookmarksopen=true,pdfborder={0 0 0},pdfhighlight={/N},linkbordercolor=[rgb]{0.5,0.5,0.5},implicit=false]
+cleveref: not loaded
+hep-acronym: loaded [titlesec=false,]
+titlesec: not loaded
+hep-revtex: not loaded
+hep-sissa: not loaded
+xpatch: loaded []
+============================================================
+============================================================
+TEST 3: Page geometry and font size
+============================================================
+paper: 364.19536pt x 273.14662pt
+text: 307.28987pt x 269.14662pt
+font size: 10.95
+parindent: 0.0pt, parskip: 0.0pt
+============================================================
+============================================================
+TEST 4: Beamer settings
+============================================================
+professionalfonts: true
+navigation symbols: 0.0pt
+============================================================

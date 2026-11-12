@@ -1,0 +1,45 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-title}
+\input{hep-regression}
+
+\preprint{CERN-TH-1}
+\arxiv{2611.01234}
+\reprint{Phys.\ Rev.\ D 1, 2}
+\doi{10.1103/a_b.1}
+\title{T}
+\author{A}
+
+\begin{document}
+% Load the fonts before \START
+\setbox0\hbox{$x^x$\normalfont\scshape\small x$x^x$\upshape x\ttfamily x\normalfont\large x$x^x$}
+\makeatletter
+% Show the material that is placed on the first page instead of storing it
+\def\AtBeginShipoutFirst#1{\setbox2\hbox{#1}\showbox2 }
+\START
+
+\TEST{Preprint and reprint lines: \preprint, \arxiv, \reprint, \doi}{%
+  \TYPE{\meaning\hep@preprint}%
+  \TYPE{\meaning\hep@reprint}%
+}
+
+\TEST{\placepreprint: upper right corner of the first page}{%
+  \placepreprint
+}
+
+\TEST{\placereprint: upper left corner of the first page}{%
+  \placereprint
+}
+
+\TEST{\maketitle places both blocks}{%
+  \def\AtBeginShipoutFirst#1{\TYPE{first page material}}%
+  \setbox0\vbox{\maketitle}%
+}
+
+\TEST{\preprintfont and \reprintfont}{%
+  \preprintfont{\large\raggedleft}%
+  \reprintfont{\large}%
+  \placepreprint
+  \placereprint
+}
+\END

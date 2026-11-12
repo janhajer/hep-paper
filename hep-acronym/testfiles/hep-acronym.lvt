@@ -1,0 +1,45 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-acronym}
+\acronym{PDF}{portable document format}
+\shortacronym{SM}{standard model}
+\longacronym{EFT}{effective field theory}[effective field theories]
+\longacronym{ELA}{{\em elan} vital}
+\longacronym{ELB}{\"elan vital}
+\longacronym{ELC}{élan vital}[élans vitaux]
+\acronym{XZ}{ex why}
+\acronymalternative{XZ}{XZalt}{alternative zed}
+% Acronym groups: declarations after \acronyms go to the new glossary.
+\acronyms{units}
+\acronym{GeV}{giga electron volt}
+\acronyms[experiments]{Experiments}
+\acronym{ATLAS}{a toroidal LHC apparatus}
+\begin{document}
+\START
+\TEST{First and subsequent use}{\setbox0\hbox{\PDF{} and \PDF}\showbox0}
+\TEST{Acronym groups}{%
+  \TYPE{\glsentrytype{PDF}, \glsentrytype{GeV}, \glsentrytype{ATLAS}}%
+  \makeatletter
+  \TYPE{\csname @glotype@units@title\endcsname,
+    \csname @glotype@experiments@title\endcsname}%
+  \makeatother
+  \TYPE{\glsentryshort{GeV}: \glsentrylong{GeV}}%
+}
+\TEST{Sentence case of long-only acronyms}{%
+  \setbox0\hbox{\sentence\ELA}\showbox0
+  \setbox0\hbox{\sentence\ELB}\showbox0
+  \setbox0\hbox{\sentence\ELC{} \sentence\ELCs}\showbox0
+}
+\TEST{Optional argument before the space}{%
+  \setbox0\hbox{\SM[s] \SMs[x] \EFT[s] \EFTs[y]}\showbox0
+}
+\TEST{Alternative long form}{%
+  \setbox0\hbox{\sentence\XZalt{} \XZaltlong. \XZ}\showbox0
+}
+% \sentence sets the space factor; following digits must not extend it.
+\TEST{Sentence marker followed by digits}{%
+  \setbox0\hbox{x\sentence12\xdef\SF{\the\spacefactor}}\TYPE{[\SF]}%
+  \setbox0\vbox{\begin{description}\item[12] x\end{description}}%
+  \TYPE{[description label 12 typeset]}%
+}
+\END

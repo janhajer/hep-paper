@@ -1,0 +1,930 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Foreign abbreviations (british)
+============================================================
+[british]
+> \box...=
+\hbox(4.53+2.06)x23.61, direction TLT
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 .
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 x
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.05+1.93)x45.61, direction TLT
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 f
+.\TU/lmr/m/n/10 .
+.\glue(\spaceskip) 4.44 plus 4.99498 minus 0.37
+.\TU/lmr/m/n/10 v
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 .
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 2: Foreign abbreviations: font
+============================================================
+> \box...=
+\hbox(4.42+2.05)x23.37001, direction TLT
+.\TU/lmr/m/it/10 e
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/it/10 g
+.\TU/lmr/m/n/10 .
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 x
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 3: Foreign abbreviations inside enquote
+============================================================
+> \box...=
+\hbox(6.94+2.06)x43.93001, direction TLT
+.\TU/lmr/m/n/10 ‘
+.\penalty 10000
+.\glue -0.0002
+.\glue 0.0002
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 e
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 .
+.\kern-1.39 (font)
+.\TU/lmr/m/n/10 ’
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 x
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 4: Quotation marks
+============================================================
+> \box...=
+\hbox(6.94+0.11)x29.39003, direction TLT
+.\TU/lmr/m/n/10 ‘
+.\penalty 10000
+.\glue -0.0002
+.\glue 0.0002
+.\TU/lmr/m/n/10 a
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 “
+.\penalty 10000
+.\glue -0.0002
+.\glue 0.0002
+.\TU/lmr/m/n/10 b
+.\TU/lmr/m/n/10 ”
+.\penalty 10000
+.\glue 0.50003
+.\TU/lmr/m/n/10 ’
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94+0.11)x10.56, direction TLT
+.\TU/lmr/m/n/10 ‘
+.\penalty 10000
+.\glue -0.0002
+.\glue 0.0002
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 ’
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 5: Numero
+============================================================
+> \box...=
+\hbox(6.95+0.1)x22.49, direction TLT
+.\TU/lmr/m/n/10 №
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 2
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 6: Software names
+============================================================
+> \box...=
+\hbox(6.444+0.0)x21.156, direction TLT
+.\TU/lmr/m/sc/9 A
+.\TU/lmr/m/sc/9 b
+.\kern0.0 (italic)
+.\penalty 10000
+.\glue(\spaceskip) 3.087 plus 1.5435 minus 1.029
+.\glue -3.087
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 x
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.444+0.099)x33.74702, direction TLT
+.\TU/lmr/m/sc/9 A
+.\TU/lmr/m/sc/9 b
+.\kern0.0 (italic)
+.\penalty 10000
+.\glue(\spaceskip) 3.087 plus 1.5435 minus 1.029
+.\TU/lmr/m/n/9 v
+.\TU/lmr/m/n/9 1
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 x
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 7: Online and email without hyperref
+============================================================
+> \box...=
+\hbox(6.11+0.06)x15.75, direction TLT
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 .
+.\TU/lmtt/m/n/10 b
+.\kern0.0 (italic)
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.17+0.06)x15.75, direction TLT
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 @
+.\TU/lmtt/m/n/10 b
+.\kern0.0 (italic)
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 8: Online and email without hyperref: special characters
+============================================================
+> \box...=
+\hbox(6.17+1.67)x26.25, direction TLT
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 _
+.\TU/lmtt/m/n/10 b
+.\TU/lmtt/m/n/10 @
+.\TU/lmtt/m/n/10 c
+.\kern0.0 (italic)
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94+1.67)x57.75, direction TLT
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 #
+.\TU/lmtt/m/n/10 b
+.\TU/lmtt/m/n/10 &
+.\TU/lmtt/m/n/10 c
+.\TU/lmtt/m/n/10 ~
+.\TU/lmtt/m/n/10 d
+.\TU/lmtt/m/n/10 %
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 _
+.\TU/lmtt/m/n/10 f
+.\kern0.0 (italic)
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 9: Prefix
+============================================================
+> \box...=
+\hbox(7.5+2.5)x30.31, direction TLT
+.\TU/lmr/m/n/10 (
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 e
+.\hbox(7.5+2.5)x7.22, direction TLT
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+...= \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 )
+.\penalty 0
+.\TU/lmr/m/n/10 x
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 10: Subsubparagraph
+============================================================
+> \box...=
+\vbox(30.48749+0.11)x200.0, direction TLT
+.\hbox(4.48+0.11)x200.0, glue set 180.0fil, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x15.0, direction TLT
+..\TU/lmr/m/n/10 a
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -300
+.\glue 14.00749 plus 4.31 minus 0.86198
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.95
+.\hbox(6.94+0.11)x200.0, glue set 194.44fil, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\TU/lmr/m/n/10 b
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+! OK.
+<argument> ...a\par \subsubparagraph b}\showbox 0 
+                                                  \setbox 0\vbox {a\par \sub...
+l. ...}
+[no indentation]
+============================================================
+============================================================
+TEST 11: Underline
+============================================================
+macro:->\protect \underline  
+> \box...=
+\hbox(6.94+3.23248)x13.89, direction TLT
+.\hbox(0.0+3.23248)x0.0, glue set - 5.25fil, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\kern-0.25
+..\leaders 5.5
+...\rule(-2.80147+3.23248)x*
+..\kern0.0
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\TU/lmr/m/n/10 a
+.\leaders 3.33 plus 1.665 minus 1.11
+..\rule(-2.80147+3.23248)x*
+.\kern0.0
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\hbox(0.0+3.23248)x0.0, glue set - 5.81fil, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\kern-0.25
+..\leaders 6.06
+...\rule(-2.80147+3.23248)x*
+..\kern0.0
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\TU/lmr/m/n/10 b
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 12: Underline: line breaks
+============================================================
+> \box...=
+\vbox(16.48+3.23248)x20.0, direction TLT
+.\hbox(4.48+3.23248)x20.0, glue set 5.0fil, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+3.23248)x0.0, glue set - 15.25fil, direction TLT
+...\hbox(0.0+0.0)x0.0, direction TLT
+...\kern-0.25
+...\leaders 15.5
+....\rule(-2.80147+3.23248)x*
+...\kern0.0
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 a
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty 300
+.\glue(\baselineskip) 1.82751
+.\hbox(6.94+3.23248)x20.0, glue set 1.66fil, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+3.23248)x0.0, glue set - 16.93fil, direction TLT
+...\hbox(0.0+0.0)x0.0, direction TLT
+...\kern-0.25
+...\leaders 17.18
+....\rule(-2.80147+3.23248)x*
+...\kern0.0
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\TU/lmr/m/n/10 b
+..\TU/lmr/m/n/10 b
+..\TU/lmr/m/n/10 b
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0 plus 1.0fil
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 13: Underline: text with macros unknown to soul
+============================================================
+soul: a b
+soul: a \textbf {b} \"o $\alpha $ c\\d~e\%f\par g
+whole: a \enquote {b c}
+whole: a \eg b
+whole: a \software {b}
+whole: a \ref {b}
+> \box...=
+\hbox(6.94+4.05989)x54.496, direction TLT
+.\mathon
+.\vbox(6.94+4.05989)x54.496, direction TLT
+..\hbox(6.94+2.06)x54.496, direction TLT
+...\TU/lmr/m/n/10 ‘
+...\penalty 10000
+...\glue -0.0002
+...\glue 0.0002
+...\TU/lmr/m/n/10 a
+...\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+...\TU/lmr/m/n/10 b
+...\TU/lmr/m/n/10 ’
+...\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+...\TU/lmr/m/n/10 e
+...\TU/lmr/m/n/10 .
+...\TU/lmr/m/n/10 g
+...\TU/lmr/m/n/10 .
+...\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+...\TU/lmr/m/n/10 c
+...\kern0.0 (italic)
+...\glue 3.33 plus 1.665 minus 1.11
+...\TU/lmr/m/sc/9 d
+...\kern0.0 (italic)
+...\penalty 10000
+...\glue(\spaceskip) 3.087 plus 1.5435 minus 1.029
+...\glue -3.087
+..\kern1.19994 (font)
+..\rule(0.39998+0.0)x*
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 14: Inline list
+============================================================
+> \box...=
+\hbox(7.5+2.5)x87.79004, direction TLT
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 )
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\glue 0.00002
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 )
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\glue 0.00002
+.\TU/lmr/m/n/10 b
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 )
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\glue 0.00002
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 .
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 15: Enumerated description list
+============================================================
+> \box...=
+\vbox(67.09+0.0)x345.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue -10.0 plus -4.0 minus -5.0
+.\glue 6.0 plus 2.0 minus 4.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\hbox(6.98+0.11)x320.0, glue set 296.31fil, shifted 25.0, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(6.66+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue -20.0
+...\glue -5.0
+...\hbox(6.66+0.0)x20.0, glue set 20.0fil, direction TLT
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.66+0.0)x0.0, glue set - 7.78fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/lmr/m/n/10 1
+.....\TU/lmr/m/n/10 .
+...\glue 5.0
+..\penalty 0
+..\TU/lmr/bx/n/10 A
+..\kern0.0 (italic)
+..\glue 10.0
+..\TU/lmr/m/n/10 a
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.39
+.\hbox(7.5+0.11)x320.0, glue set 296.26001fil, shifted 25.0, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(7.5+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue -20.0
+...\glue -5.0
+...\hbox(7.5+0.0)x20.0, glue set 20.0fil, direction TLT
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(7.5+0.0)x0.0, glue set - 5.0fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/lmr/m/n/10 *
+...\glue 5.0
+..\penalty 0
+..\TU/lmr/bx/n/10 B
+..\kern0.0 (italic)
+..\glue 10.0
+..\TU/lmr/m/n/10 b
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 5.23
+.\hbox(6.66+0.11)x320.0, glue set 315.56fil, shifted 25.0, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(6.66+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue -20.0
+...\glue -5.0
+...\hbox(6.66+0.0)x20.0, glue set 20.0fil, direction TLT
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.66+0.0)x0.0, glue set - 7.78fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/lmr/m/n/10 2
+.....\TU/lmr/m/n/10 .
+...\glue 5.0
+..\penalty 0
+..\TU/lmr/m/n/10 c
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 16: Enumerated description list: label options
+============================================================
+> \box...=
+\vbox(30.0+0.0)x345.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue -10.0 plus -4.0 minus -5.0
+.\glue 6.0 plus 2.0 minus 4.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\hbox(7.5+2.5)x320.0, glue set 296.31fil, shifted 25.0, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(7.5+2.5)x0.0, direction TLT
+...\glue 0.0
+...\glue -20.0
+...\glue -5.0
+...\hbox(7.5+2.5)x20.0, glue set 20.0fil, direction TLT
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(7.5+2.5)x0.0, glue set - 7.5fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/lmr/m/n/10 I
+.....\TU/lmr/m/n/10 )
+...\glue 5.0
+..\penalty 0
+..\TU/lmr/bx/n/10 A
+..\kern0.0 (italic)
+..\glue 10.0
+..\TU/lmr/m/n/10 a
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 17: Enumerated description list: title with repeated first letter
+============================================================
+> \box...=
+\vbox(26.77+0.0)x345.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue -10.0 plus -4.0 minus -5.0
+.\glue 6.0 plus 2.0 minus 4.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\hbox(6.66+0.11)x320.0, glue set 293.18fil, shifted 25.0, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(6.66+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue -20.0
+...\glue -5.0
+...\hbox(6.66+0.0)x20.0, glue set 20.0fil, direction TLT
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.66+0.0)x0.0, glue set - 7.78fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/lmr/m/n/10 1
+.....\TU/lmr/m/n/10 .
+...\glue 5.0
+..\penalty 0
+..\TU/lmr/bx/n/10 o
+..\kern0.32 (font)
+..\TU/lmr/bx/n/10 o
+..\kern0.0 (italic)
+..\glue 10.0
+..\TU/lmr/m/n/10 a
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 18: Enumerated description list: nested itemize
+============================================================
+> \box...=
+\vbox(47.09+0.0)x345.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue -10.0 plus -4.0 minus -5.0
+.\glue 6.0 plus 2.0 minus 4.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\hbox(6.98+0.11)x320.0, glue set 296.31fil, shifted 25.0, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(6.66+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue -20.0
+...\glue -5.0
+...\hbox(6.66+0.0)x20.0, glue set 20.0fil, direction TLT
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.66+0.0)x0.0, glue set - 7.78fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/lmr/m/n/10 1
+.....\TU/lmr/m/n/10 .
+...\glue 5.0
+..\penalty 0
+..\TU/lmr/bx/n/10 A
+..\kern0.0 (italic)
+..\glue 10.0
+..\TU/lmr/m/n/10 a
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 8.0 plus 4.0 minus 2.0
+.\glue -8.0 plus -4.0 minus -2.0
+.\glue 6.0 plus 3.0 minus 1.0
+.\glue(\parskip) 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.95
+.\hbox(6.94+0.11)x298.00003, glue set 287.72003fil, shifted 46.99997, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(3.75+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue -16.99997
+...\glue -5.0
+...\hbox(3.75+0.0)x16.99997, glue set 16.99997fil, direction TLT
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(3.75+0.0)x0.0, glue set - 7.78fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/lmr/m/n/10 •
+...\glue 5.0
+..\penalty 0
+..\TU/lmr/m/n/10 b
+..\kern0.28 (font)
+..\TU/lmr/m/n/10 c
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 4.0 plus 2.0 minus 1.0
+.\glue -4.0 plus -2.0 minus -1.0
+.\glue 8.0 plus 3.0 minus 2.0
+.\glue -8.11 plus -3.0 minus -2.0
+.\penalty -51
+.\glue 0.11
+.\glue 8.0 plus 3.0 minus 2.0
+.\glue -8.0 plus -3.0 minus -2.0
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 19: No indentation after lists
+============================================================
+[no indentation]
+[no indentation]
+[no indentation]
+[no indentation]
+[indentation 15.0pt]
+[no indentation]
+[no indentation]
+============================================================
+============================================================
+TEST 20: No indentation after verbatim
+============================================================
+[no indentation]
+============================================================
+============================================================
+TEST 21: Enumerated description list: nested enumdescript
+============================================================
+> \box...=
+\vbox(99.09+0.0)x345.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue -10.0 plus -4.0 minus -5.0
+.\glue 6.0 plus 2.0 minus 4.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\hbox(6.98+0.11)x320.0, glue set 296.31fil, shifted 25.0, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(6.66+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue -20.0
+...\glue -5.0
+...\hbox(6.66+0.0)x20.0, glue set 20.0fil, direction TLT
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.66+0.0)x0.0, glue set - 7.78fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/lmr/m/n/10 1
+.....\TU/lmr/m/n/10 .
+...\glue 5.0
+..\penalty 0
+..\TU/lmr/bx/n/10 A
+..\kern0.0 (italic)
+..\glue 10.0
+..\TU/lmr/m/n/10 a
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 8.0 plus 4.0 minus 2.0
+.\glue -8.0 plus -4.0 minus -2.0
+.\glue 6.0 plus 3.0 minus 1.0
+.\glue(\parskip) 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.95
+.\hbox(6.94+0.11)x298.00003, glue set 274.26004fil, shifted 46.99997, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(6.66+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue -16.99997
+...\glue -5.0
+...\hbox(6.66+0.0)x16.99997, glue set 16.99997fil, direction TLT
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.66+0.0)x0.0, glue set - 7.78fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/lmr/m/n/10 1
+.....\TU/lmr/m/n/10 .
+...\glue 5.0
+..\penalty 0
+..\TU/lmr/bx/n/10 B
+..\kern0.0 (italic)
+..\glue 10.0
+..\TU/lmr/m/n/10 b
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 4.0 plus 2.0 minus 2.0
+.\glue(\parskip) 0.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 7.41
+.\hbox(4.48+0.11)x279.30008, glue set 274.86008fil, shifted 65.69992, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(3.75+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue -13.69995
+...\glue -5.0
+...\hbox(3.75+0.0)x13.69995, glue set 13.69995fil, direction TLT
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(3.75+0.0)x0.0, glue set - 7.78fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/lmr/m/n/10 •
+...\glue 5.0
+..\penalty 0
+..\TU/lmr/m/n/10 c
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 2.0 plus 1.0 minus 1.0
+.\glue -2.11 plus -1.0 minus -1.0
+.\penalty -51
+.\glue 0.11
+.\glue 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.95
+.\hbox(6.94+0.11)x298.00003, glue set 273.62003fil, shifted 46.99997, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(6.66+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue -16.99997
+...\glue -5.0
+...\hbox(6.66+0.0)x16.99997, glue set 16.99997fil, direction TLT
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.66+0.0)x0.0, glue set - 7.78fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/lmr/m/n/10 2
+.....\TU/lmr/m/n/10 .
+...\glue 5.0
+..\penalty 0
+..\TU/lmr/bx/n/10 D
+..\kern0.0 (italic)
+..\glue 10.0
+..\TU/lmr/m/n/10 d
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 4.0 plus 2.0 minus 1.0
+.\glue -4.11 plus -2.0 minus -1.0
+.\penalty -51
+.\glue 0.11
+.\glue 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 5.09
+.\hbox(6.8+0.11)x320.0, glue set 298.0fil, shifted 25.0, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(6.66+0.0)x0.0, direction TLT
+...\glue 0.0
+...\glue -20.0
+...\glue -5.0
+...\hbox(6.66+0.0)x20.0, glue set 20.0fil, direction TLT
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.66+0.0)x0.0, glue set - 7.78fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/lmr/m/n/10 2
+.....\TU/lmr/m/n/10 .
+...\glue 5.0
+..\penalty 0
+..\TU/lmr/bx/n/10 E
+..\kern0.0 (italic)
+..\glue 10.0
+..\TU/lmr/m/n/10 e
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 22: Underline in math mode
+============================================================
+> \box...=
+\hbox(4.30554+1.9999)x5.71527, direction TLT
+.\mathon
+.\vbox(4.30554+1.9999)x5.71527, direction TLT
+..\hbox(4.30554+0.0)x5.71527, direction TLT
+...\OML/cmm/m/it/10 x
+..\kern1.19994 (font)
+..\rule(0.39998+0.0)x*
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(4.48+3.23248)x14.04527, direction TLT
+.\hbox(0.0+3.23248)x0.0, glue set - 5.25fil, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\kern-0.25
+..\leaders 5.5
+...\rule(-2.80147+3.23248)x*
+..\kern0.0
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\TU/lmr/m/n/10 a
+.\leaders 3.33 plus 1.665 minus 1.11
+..\rule(-2.80147+3.23248)x*
+.\kern0.0
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\hbox(0.0+3.23248)x0.0, glue set - 5.96527fil, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\kern-0.25
+..\leaders 6.21527
+...\rule(-2.80147+3.23248)x*
+..\kern0.0
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\hbox(4.30554+1.9999)x5.71527, direction TLT
+..\mathon
+..\vbox(4.30554+1.9999)x5.71527, direction TLT
+...\hbox(4.30554+0.0)x5.71527, direction TLT
+....\OML/cmm/m/it/10 x
+...\kern1.19994 (font)
+...\rule(0.39998+0.0)x*
+..\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

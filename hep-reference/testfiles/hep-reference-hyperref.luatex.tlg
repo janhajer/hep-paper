@@ -1,0 +1,87 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Bookmarks: disabled commands
+============================================================
+[First line second line]
+[First line second line]
+[First line second]
+[Title and more]
+[Title and more]
+[Title and more]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\alpha' on input line ....
+[Text x and \040here]
+============================================================
+============================================================
+TEST 2: Bookmarks: math replacements
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textepsilon' on input line ....
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textrightarrow' on input line ....
+[x]
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\003\265\041\222\000x]
+[\376\377\003\265\000,\000\040\041\222]
+============================================================
+============================================================
+TEST 3: Bookmarks: references and citations
+============================================================
+[See 1 here]
+[See 1 here]
+[See section 1 here]
+[See First section here]
+[See here]
+[See here]
+[See \(1\) here]
+[See\040\(1\)\040here]
+[See and , here]
+============================================================
+============================================================
+TEST 4: Sectioning commands: references and citations
+============================================================
+\protect \BOOKMARK [1][-]{section.1}{See\0401\040and\040}{}% 1
+\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {1}See \protect \ref  {sec:a} and \protect \cite  {key}}{\thepage }{section.1}\protected@file@percent }
+\protect \BOOKMARK [1][-]{section.2}{See\040section\0401\040and\040First\040section}{}% 2
+\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {2}See \autoref {sec:a} and \nameref {sec:a}}{\thepage }{section.2}\protected@file@percent }
+\protect \BOOKMARK [1][-]{section.3}{See\040\(1\)\040and\0401}{}% 3
+\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {3}See \protect \eqref  {eq:a} and \protect \ref  *{sec:a}}{\thepage }{section.3}\protected@file@percent }
+============================================================
+============================================================
+TEST 5: Sectioning commands: line break
+============================================================
+\protect \BOOKMARK [1][-]{section.4}{First\040line\040second\040line}{}% 4
+\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {4}First line\\second line}{\thepage }{section.4}\protected@file@percent }
+============================================================
+============================================================
+TEST 6: Document information: title with math
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\000T\000h\000e\000\040\003\265\041\222\0000\000\040\000l\000i\000m\000i\000t\000\040\000o\000f\000\040\000x]
+============================================================
+============================================================
+TEST 7: Document information: title and subject
+============================================================
+LaTeX Warning: No \author given.
+[The\040title\040with\040a\040break]
+[The\040subject]
+[]
+[]
+[]
+============================================================
+============================================================
+TEST 8: Document information: a title set by the user is kept
+============================================================
+[User\040title]
+============================================================

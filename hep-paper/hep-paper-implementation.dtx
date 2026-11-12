@@ -1,0 +1,2637 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019-2023 by Jan Hajer
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-paper}[2026/11/12 v2.7 Complete article preamble: fonts, math, title, references, floats, acronyms and bibliography]
+%<journal>\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+%<journal>\ProvidesPackage{hep-journal}[2026/11/12 v2.7 Title data for journal classes]
+%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2026/11/12 v2.7 HEP-Paper documentation]
+%
+%<*documentation>
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass{ltxdoc}
+
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+\usepackage{hologo}
+
+\usepackage[parskip,oldstyle,font=10pt]{hep-paper}
+\bibliography{bibliography}
+\acronym{PDF}{portable document format}
+\acronym{LM}{latin modern}
+%</documentation>
+
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
+\begin{document}
+\DocInput{hep-paper-implementation.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{1806}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.0}{2019/01/01}{Created the monolithic HEP publication style file.}
+% \changes{v1.1}{2020/01/01}{Converted the package to documented LaTeX source.}
+% \changes{v1.2}{2020/03/01}{Added package options for class, font, language, bibliography, citation, and compatibility controls.}
+% \changes{v1.3}{2020/05/01}{Added JHEP and JCAP options, RevTeX compatibility, improved acronym macros, math-font fixes, enumdescript and citation support, and moved the biblatex data model into its own file.}
+% \changes{v1.4}{2020/09/01}{Added automatic compatibility option selection, PubMed IDs, and bibliography and source-map updates.}
+% \changes{v1.5}{2020/10/01}{Reduced the number of math alphabets used in sans-serif mode, added subtitle and title options, and switched to standard class options.}
+% \changes{v1.6}{2020/12/01}{Added two-column mode and tests.}
+% \changes{v1.7}{2021/06/01}{Split title, acronym, and bibliography logic into dedicated style files and expanded the title macros.}
+% \changes{v1.8}{2021/08/01}{Expanded thanks and reference-label handling, refined the title page, reimplemented selected physics macros, and made \cs{mathrm} produce upright Greek.}
+% \changes{v2.0}{2021/09/01}{Split independent logic into the modular hep-font, hep-math-font, hep-text, hep-math, hep-bibliography, hep-acronym, hep-reference, hep-title, and hep-float packages.}
+% \changes{v2.1}{2022/11/01}{Integrated the new CV, ERC, reference, and talk packages and propagated the v1.1 fixes from the split-out modules.}
+% \changes{v2.2}{2023/07/01}{Added hep-graphic, hep-plot, and hep-feynman and propagated bibliography, float, font, math, acronym, and documentation updates from the modules.}
+% \changes{v2.3}{2024/11/01}{Propagated the v1.3 module updates, including the CV private and bibliography split, talk logo and citation updates, math-font Greek rework, and math, text, and font fixes.}
+% \changes{v2.4}{2025/09/01}{Propagated the v1.4 module updates, including TU-engine font setup, title reprint, DOI, and arXiv support, float local and global placement, and starred command definitions.}
+% \changes{v2.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, and refreshed the aggregate documentation and README for the modular package suite.}
+% \changes{v2.6}{2026/11/11}{Disabled the additional symbol fonts in PoS compatibility mode to stay within the 16 math families, kept hep-acronym from loading titlesec in the amsart and PoS compatibility modes, restored the command form of \cs{abstract} in the JCAP and JHEP compatibility modes, passed the float placement to hep-float as separate options, aliased the backref footnote counter for cleveref, loaded atbegshi explicitly, read the class options from \cs{@classoptionslist} even if files are loaded before the class, kept the class font size with the defaults option and in all compatibility modes, kept titlesec out of the beamer mode, fixed repeated \cs{subtitle} calls in the REV\TeX{} and SISSA modes, removed spurious spaces from \cs{useparindent}, and provided \cs{orcid} in the SISSA mode.}
+% \changes{v2.7}{2026/11/12}{Kept the title macros of hep-title in the JHEP, JCAP, REV\TeX, Springer, amsart, and PoS compatibility modes with the new hep-journal package, which hands the title data to the journal, accepted the abstract conventions of all journals, let the jhep and jcap options load the journal styles, made title=false restore the title macros of the journals, and fixed an endless loop of the REV\TeX{} mode without title.}
+%
+% \ifshort
+%<*documentation>
+% \fi
+%
+\GetFileInfo{hep-paper.sty}
+
+\title{The \software{hep-paper} package\thanks{This document corresponds to \software{hep-paper}~\fileversion.}}
+\subtitle{Complete article preamble: fonts, math, title, references, floats, acronyms and bibliography}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
+\date{\filedate}
+
+% \ifshort
+\begin{document}
+% \fi
+
+\maketitle
+
+\begin{abstract}
+The \software{hep-paper} package is the aggregate publication setup for the HEP package suite.
+It configures the page geometry, language, fonts, hyperlinks, title data, bibliography, acronyms, references, floats, text helpers, and math fonts by loading the corresponding modular packages with publication-oriented defaults.
+\end{abstract}
+
+\tableofcontents\clearpage
+
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+
+\section{Introduction}
+
+For usual publications it is enough to load additionally to the "article" class without optional arguments only the \software{hep-paper} package \cite{hep-paper}.
+\begin{verbatim}
+\documentclass{article}
+\usepackage{hep-paper}
+\end{verbatim}
+The most notable changes after loading the \software{hep-paper} package are the changes of some \hologo{LaTeX} defaults.
+The paper and font sizes are set to A4 and \unit[11]{pt}, respectively.
+Additionally, the paper geometry is adjusted using the \software{geometry} package \cite{geometry}.
+Furthermore, text and math fonts are configured with \software{hep-font} and \software{hep-math-font}, text helpers with \software{hep-text}, bibliographies with \software{hep-bibliography}, acronyms with \software{hep-acronym}, references and hyperlinks with \software{hep-reference}, titles with \software{hep-title}, and floats with \software{hep-float}.
+
+\subsection{Options}
+
+\DescribeMacro{paper}
+The "paper="\meta{format} option loads the specified paper format.
+The possible \meta{formats} are:
+"a0", "a1", "a2", "a3", "a4", "a5", "a6",
+"b0", "b1", "b2", "b3", "b4", "b5", "b6",
+"c0", "c1", "c2", "c3", "c4", "c5", "c6",
+"ansia", "ansib", "ansic", "ansid", "ansie",
+"letter", "executive", "legal".
+The default is "a4".
+
+\DescribeMacro{font}
+The "font="\meta{size} option loads the specified font size.
+The possible \meta{sizes} are:
+"8pt", "9pt", "10pt", "11pt", "12pt", "14pt", "17pt", "20pt".
+The default is \unit[11]{pt}.
+Font and paper size options of the document class, such as "12pt" or "letterpaper", replace these defaults, while explicit "font" and "paper" options of this package take precedence.
+
+\DescribeMacro{lang}
+The "lang"=\meta{name} option switches the document language.
+The default is "british".
+
+\DescribeMacro{sansserif}
+The "sansserif" option switches the document including math to sans serif font shape.
+
+\DescribeMacro{oldstyle}
+The "oldstyle" option activates the use of oldstyle text- (\texto{123}) in favour of lining- (\textl{123}) figures in text mode.
+
+\DescribeMacro{parskip}
+The "parskip" option changes how paragraphs are separated from each other using the \software{parskip} package \cite{parskip}.
+The \hologo{LaTeX} default is separation via indentation the "parskip" option switches to separation via vertical space.
+\footnote{Although the "parskip" option is used for this document, it is recommended only for very few document types such as technical manuals or answers to referees.}
+
+\DescribeMacro{symbols}
+The "symbols"=\meta{family} is passed to the \software{hep-math-font} package \cite{hep-math-font} and sets the family of the symbol fonts.
+"symbols=false" deactivates loading any additional symbol fonts.
+
+\subsubsection{Deactivation}
+
+The \software{hep-paper} package loads few bigger packages which have a large impact on the document.
+The deactivation options can prevent such and other adjustments.
+
+\DescribeMacro{defaults}
+The "defaults" option prevents the adjustment of the page geometry and the font size set by the document class.
+
+\DescribeMacro{title}
+The "title=false" option deactivates the title page adjustments.
+In the compatibility modes it switches back to the title macros of the journal class or style, see \cref{sec:journals}.
+
+\DescribeMacro{bibliography}
+The "bibliography"=\meta{key} option prevents the automatic loading of the \software{hep-bibliography} package \cite{hep-bibliography} if \meta{key}="false".
+
+\DescribeMacro{glossaries}
+The "glossaries=false" option deactivates acronyms and the use of the \software{hep-acronym} package \cite{hep-acronym}.
+
+\DescribeMacro{references}
+The "references=false" option prevents the \software{cleveref} package \cite{cleveref} from being loaded and deactivates further redefinitions of reference macros.
+
+\subsubsection{Compatibility}
+
+The compatibility options activate the compatibility mode for certain classes and packages used for publications in high energy physics.
+They are mostly suitable combinations of options described in the previous section.
+If \software{hep-paper} is able to detect the presence of such a class or package, \ie if it is loaded before the \software{hep-paper} package, the compatibility mode is activated automatically.
+
+\DescribeMacro{beamer}
+The "beamer" option activates the \software{beamer} \cite{beamer} compatibility mode.
+Like the "amsart" and "pos" options it keeps \software{hep-acronym} from loading \software{titlesec}, which does not support the sectioning commands of \software{beamer}.
+
+\DescribeMacro{jhep}
+The "jhep" option activates the \software{JHEP} \cite{jhep} compatibility mode.
+
+\DescribeMacro{jcap}
+The "jcap" option activates the \software{JCAP} \cite{jcap} compatibility mode.
+
+\DescribeMacro{revtex}
+The "revtex" option activates the REV\hologo{TeX} \cite{revtex} compatibility mode.
+
+\DescribeMacro{pos}
+The "pos" option activates the \software{PoS} compatibility mode.
+It implies "symbols=false", because the \software{PoS} class already uses most of the 16 math families available in pdf\hologo{LaTeX}.
+Like the "amsart" option it keeps \software{hep-acronym} from loading \software{titlesec}, which is incompatible with the sectioning code of these classes.
+
+\DescribeMacro{springer}
+The "springer" option activates the compatibility mode the "svjour" class \cite{svjour}.
+
+\DescribeMacro{amsart}
+The "amsart" option activates the compatibility mode for the "amsart" class.
+
+\subsubsection{Switching journals} \label{sec:journals}
+
+A document can be written with the "article" class and be switched to a journal by changing only the "\documentclass" line, or by adding the "jhep" or "jcap" option, which load the \software{JHEP} and \software{JCAP} styles.
+In all compatibility modes except "beamer" the title macros of \cref{sec:title} keep their meaning.
+The \software{hep-journal} package stores the title data and hands them to the macros of the journal when the title is made:
+\begin{description}
+\item[JHEP and JCAP] The affiliation labels become letters in the order of first use, emails become "\emailAdd", thanks become "\note", the series becomes the "\subheader", and the first arXiv number becomes the "\arxivnumber".
+Preprint numbers are placed in the header.
+\item[REV\hologo{TeX}] Every author is followed by the emails, thanks, and affiliations, which REV\hologo{TeX} merges if they are identical.
+Preprint and arXiv numbers become "\preprint"s.
+\item[Springer] For the EPJ style the emails and thanks become "\thankstext"s and the affiliations an "\institute" with labels, all referred to by "\thanksref".
+For the plain "svjour3" class every author is listed in the "\institute" together with the affiliations and emails.
+The keywords are placed in the abstract.
+\item[amsart] Every author is followed by an "\address" for each affiliation, the emails, and the thanks.
+\item[PoS] Every author gets one "\author" with the affiliations and emails.
+The series becomes "\FullConference" and the title "\ShortTitle", unless these are given, and the keywords are appended to the abstract.
+\end{description}
+The abstract can be placed according to the conventions of any of these journals: after "\maketitle" (\software{article}, \software{svjour3}), before "\maketitle" in the document (REV\hologo{TeX}, \software{amsart}), or in the preamble, either as environment or in the command form "\abstract"\marg{text} (\software{JHEP}, \software{JCAP}, \software{PoS}).
+An abstract that follows the title only after other material is placed in the title of the next run, if the journal expects the abstract before the title.
+The \software{PoS} class makes the title itself, at the beginning of the document, if the abstract is given in the preamble; otherwise the title is made by "\maketitle".
+Title data without counterpart in the journal, such as editors or ORCID identifiers in most journals, are ignored with a warning, and the layout macros of the title are ignored.
+Journal specific macros such as "\collaboration" or "\journalname" can be used in addition.
+With "title=false" the title data have to be given with the macros of the journal.
+
+\subsubsection{Reactivation}
+
+The \software{hep-paper} package deactivates unrecommended macros, which can be reactivated manually.
+
+\DescribeMacro{manualplacement}
+The "manualplacement" option reactivates manual float placement.
+
+\DescribeMacro{eqnarray}
+The "eqnarray" option reactivates the depreciated "eqnarray" environment.
+
+\section{Macros and environments}
+
+\DescribeMacro{twocolumn}
+\DescribeMacro{abstract*}
+If the global "twocolumn" option is present the page geometry is changed to cover almost the entire page.
+Additionally the "abstract*" environment is defined that generates a one column abstract and takes care of placing the title information.
+
+\subsection{Title page} \label{sec:title}
+
+\DescribeMacro{\series}
+The "\series"\marg{series} macro is defined using the \software{hep-title} package \cite{hep-title}.
+
+\DescribeMacro{\title}
+The \PDF meta information is set according to the "\title"\marg{text} and "\author"\marg{text} information.
+
+\DescribeMacro{\subtitle}
+The "\subtitle"\marg{subtitle} macro is defined.
+
+\DescribeMacro{\editor}
+\DescribeMacro{\author}
+\DescribeMacro{\affiliation}
+\DescribeMacro{\email}
+The following lines add \eg two authors with different affiliations
+\begin{verbatim}
+\author[1]{Author one \email{email one}}
+\affiliation[1]{Affiliation one}
+\author[2]{Author two \email{email two}}
+\affiliation[1,2]{Affiliation two}
+\end{verbatim}
+
+\DescribeMacro{\preprint}
+The "\preprint"\marg{numer} macro places a pre-print number in the upper right corner of the title page.
+
+\DescribeEnv{abstract}
+The "abstract" environment is adjusted to not start with an indentation.
+
+\DescribeMacro{\titlefont}
+\DescribeMacro{\subtitlefont}
+\DescribeMacro{\authorfont}
+\DescribeMacro{\affiliationfont}
+\DescribeMacro{\preprintfont}
+Various title font macros are defined, allowing to change the appearance of the "\maketitle" output.
+
+\subsection{Text}
+
+\DescribeMacro{inlinelist}
+\DescribeMacro{enumdescript}
+The "inlinelist" and "enumdescript" environments are defined.
+
+\DescribeMacro{\textsc}
+A bold versions \textbf{\textsc{Small Caps}} and a sans serif version of \textsf{\textsc{Small Caps}} is provided.
+
+\DescribeMacro{\underline}
+\DescribeMacro{\overline}
+The "\underline" macro is redefined to allow line-breaks.
+The "\overline" macro is extended to also \overline{overline} text outside of math environments.
+
+\DescribeMacro{\useparskip}
+\DescribeMacro{\useparindent}
+If the "parskip" option is activated the "\useparindent" macro switches to the usual parindent mode, while the "\useparskip" macro switches to the parskip mode.
+
+\subsubsection{References and footnotes}
+
+\DescribeMacro{\cref}
+References are extended with the \software{cleveref} package \cite{cleveref}, which allows to \eg just type "\cref"\marg{key}  in order to write \enquote{figure 1}.
+Furthermore, the \software{cleveref} package allows to reference multiple objects within one "\cref"\marg{key1,key2}.
+
+\DescribeMacro{\cite}
+Citations are adjusted to not start on a new line in order to avoid the repeated use of "~\cite"\marg{key}.
+
+\DescribeMacro{\ref}
+\DescribeMacro{\eqref}
+\DescribeMacro{\subref}
+References are also adjusted to not start on a new line.
+
+\DescribeMacro{\footnote}
+Footnotes are adjusted to swallow white space before the footnote mark and at the beginning of the footnote text.
+
+\subsubsection{Acronyms} \label{sec:acronyms}
+
+The \software{hep-acronym} package \cite{hep-acronym} is loaded.
+\DescribeMacro{\acronym}
+\DescribeMacro{\shortacronym}
+\DescribeMacro{\longacronym}
+The "\acronym"\meta{*}\oarg{typeset abbreviation} \marg{abbreviation}\meta{*}\marg{definition}\oarg{plural definition} macro generates the singular "\"\meta{abbreviation} and plural "\"\meta{abbreviation}"s" macros.
+The first star prevents the addition of an \enquote{s} to the abbreviation plural.
+The second star restores the \hologo{TeX} default of swallowing subsequent white space.
+The long form is only shown at the first appearance of these macros, later appearances generate the abbreviation with a hyperlink to the long form.
+The long form is never used in math mode.
+Capitalization at the beginning of paragraphs and sentences is (mostly) ensured.
+The "\shortacronym" and "\longacronym" macros are drop-in replacements of the "\acronym" macro showing only the short or long form of their acronym.
+
+\subsection{Math}
+
+The \software{hep-math} \cite{hep-math} and \software{hep-math-font} \cite{hep-math-font} packages are loaded.
+\DescribeMacro{\mathbf}
+Bold math, via "\mathbf" is improved, \ie ($ A  b  \Gamma \delta \mathbf A \mathbf b \mathbf \Gamma \mathbf \delta$).
+Macros switching to "bfseries" such as "\section"\marg{text} are ensured to also typeset math in bold.
+\DescribeMacro{\text}
+The "\text"\marg{text} macro makes it possible to write text within math mode, \ie ($ \text A  \text b  \text \Gamma \text \delta \text{\textbf A} \text{\textbf b} \text{\textbf \Gamma} \text{\textbf \delta}$).
+\DescribeMacro{\mathsf}
+The math sans serif alphabet is redefined to be italic sans serif if the main text is serif and italic serif if the main text is sans serif, \ie ($\mathsf A \mathsf b \mathsf \Gamma \mathsf \delta \mathbf{\mathsf A} \mathbf{\mathsf b} \mathbf{\mathsf \Gamma} \mathbf{\mathsf \delta}$).
+\DescribeMacro{\mathscr}
+The "\mathcal" font \ie ($\mathcal{ABCD}$) is accompanied by the "\mathscr" font \ie ($\mathscr{ABCD}$).
+\DescribeMacro{\mathbb}
+The "\mathbb" font is adjusted depending on the "sansserif" option \ie ($\mathbb{Ah1}$).
+\DescribeMacro{\mathfrak}
+Finally, the "\mathfrak" font is also available \ie ($\mathfrak{AaBb12}$).
+
+\DescribeMacro{\nicefrac}
+\DescribeMacro{\flatfrac}
+\DescribeMacro{\textfrac}
+The "\frac"\marg{number}\marg{number} macro is accompanied by "\nicefrac"\linebreak[1]\marg{number}\linebreak[1]\marg{number}, "\textfrac"\marg{number}\marg{number}, and "\flatfrac"\marg{number}\marg{number} leading to $\frac12$, $\nicefrac12$, \textfrac12, and $\flatfrac12$.
+\DescribeMacro{\diag}
+\DescribeMacro{\sgn}
+Diagonal matrix "\diag" and signum "\sgn" operators are defined.
+
+\DescribeMacro{\mathdef}
+The "\mathdef"\marg{name}\oarg{arguments}\marg{code} macro \prefix{re}{defines} macros only within math mode without changing the text mode definition.
+
+\DescribeMacro{\i}
+\DescribeMacro{\d}
+The imaginary unit $\i$ and the differential $\d$ are defined using this functionality.
+
+\DescribeMacro{\numberwithin}
+For longer paper it can be useful to re-number the equation in accordance with the section numbering "\numberwithin{equation}{section}".
+\DescribeMacro{subequations}
+In order to further reduce the size the of equation counter it can be useful to wrap "align" environments with multiple rows in a "subequations" environment.
+
+\DescribeMacro{\unit}
+\DescribeMacro{\inv}
+The correct spacing for units, \cf \cref{eq:greek}, is provided by the macro "\unit"\oarg{value} \marg{unit} which can also be used in text mode.
+The macro "\inv"\oarg{power}\marg{text} allows to avoid math mode also for inverse units such as \unit[5]{\inv{fb}} typeset via "\unit[5]{\inv{fb}}".
+
+Greek letters are adjusted to always be italic and upright in math and text mode, respectively, using the \software{hep-math-font} \cite{hep-math-font} package.
+This allows differentiations like
+\begin{align} \label{eq:greek}
+\sigma &= \unit[5]{fb} \ , & &\mbox{at \unit[5]{\sigma} C.L.} \ , & \mu &= \unit[5]{cm} \ , & l &= \unit[5]{\mu m} \ .
+\end{align}
+Additionally, Greek letters can also be directly typed using Unicode.
+
+\DescribeMacro{\ev}
+\DescribeMacro{\pdv}
+\DescribeMacro{\comm}
+\DescribeMacro{\order}
+The \software{hep-math} package \cite{hep-math} provides additional macros such as
+\begin{align}
+&\ev{\phi} \ ,
+&&\pdv[f]{x}[y]^2 \ ,
+&&\comm{A}{B} \ ,
+&&\order{x^2} \ ,
+&&\eval{x}_0^\infty \ ,
+&&\det(M)\ .
+\end{align}
+
+\DescribeMacro{\cancel}
+\DescribeMacro{\slashed}
+The "\cancel"\marg{characters} macro and the "\slashed" \marg{character} macro allow to $\cancel{\text{cancel}}$ math and use the Dirac slash notation \ie $\slashed \partial$, respectively.
+
+\DescribeMacro{\overleftright}
+A better looking over left right arrow is defined \ie $\overleftright{\partial}$.
+
+\subsection{Floats}
+
+\DescribeEnv{figure}
+\DescribeEnv{table}
+Automatic float placement is adjusted to place a single float at the top of pages and to reduce the number of float pages, using the \software{hep-float} package \cite{hep-float}.
+The most useful float placement is usually achieved by placing the float \emph{in front} of the paragraph it is referenced in first.
+
+\DescribeEnv{panels}
+\DescribeMacro{\panel}
+The "panels" environment provides sub-floats and takes as mandatory argument either the number of sub-floats (default~2) or the width of the first sub-float as fraction of the "\linewidth".
+Within the "\begin{panels}"\oarg{vertical alignment}\marg{width} environment the "\panel" macro initiates a new sub-float.
+In the case that the width of the first sub-float has been given as an optional argument to the "panels" environment the "\panel"\marg{width} macro takes the width of the next sub-float as mandatory argument.
+
+\DescribeMacro{\graphic}
+\DescribeMacro{\graphics}
+The "\graphic"\oarg{width}\marg{figure} macro is defined, which is a wrapper for the "\includegraphics"\marg{figure} macro and takes the figure width as fraction of the "\linewidth" as optional argument (default~1).
+If the graphics are located in a sub-folder its path can be indicated by "\graphics"\marg{subfolder}.
+
+\subsection{Bibliography} \label{sec:bibliography}
+
+\DescribeMacro{\bibliography}
+\DescribeMacro{\printbibliography}
+The \software{biblatex} package \cite{biblatex} is loaded for bibliography management.
+The user has to add the line "\bibliography"\marg{my.bib} to the preamble of the document and "\printbibliography" at the end of the document.
+The bibliography is generated by \software{Biber} \cite{biber}.
+\software{biblatex} is extended by the \software{hep-bibliography} package \cite{hep-bibliography} to be able to cope with the "collaboration" and "reportNumber" fields provided by \online{https://inspirehep.net}{inspirehep.net} and a bug in the volume number is fixed.
+Additionally, the PubMed IDs are recognized and \online{https://ctan.org}{ctan.org}, \online{https://github.com}{github.com}, \online{https://gitlab.com}{gitlab.com}, \online{https://bitbucket.org}{bitbucket.org}, \online{https://www.launchpad.net}{launchpad.net}, \online{https://sourceforge.net}{sourceforge.net}, and \online{https://hepforge.org}{hepforge.org} are valid "eprinttype"s.
+\DescribeMacro{erratum}
+Errata can be included using the "related" feature.
+\begin{verbatim}
+\article{key1,
+  ...,
+  relatedtype="erratum",
+  related="key2",
+}
+\article{key2,
+  ...,
+}
+\end{verbatim}
+
+\section{Conclusion}
+
+The \software{hep-paper} package provides a matching selection of preloaded packages and additional macros enabling the user to focus on the content instead of the layout by reducing the amount of manual tasks.
+The majority of the loaded packages are fairly lightweight, the others can be deactivated with package options.
+
+\DescribeMacro{arxiv-collector}
+\nolinkurl{arxiv.org} \cite{arxiv} requires the setup dependent "bbl" files instead of the original "bib" files, which causes trouble if the local \hologo{LaTeX} version differs from the one used by arXiv.
+The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates this problem by collecting all files necessary for publication on arXiv (including figures).
+
+% \ifshort
+\printbibliography
+
+\end{document}
+%
+%</documentation>
+% \fi
+%
+% \StopEventually{
+% \printbibliography
+% \PrintChanges
+% }
+%
+% \addtocontents{toc}{\protect\clearpage}
+% \clearpage
+% \appendix
+%
+% \section{Options}
+%
+%<*package>
+%
+% Load the \software{kvoptions} package \cite{kvoptions} and define a "hep" namespace.
+%    \begin{macrocode}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=hep,
+  prefix=hep@
+}
+%    \end{macrocode}
+%
+% \begin{macro}{paper}
+% Define a "paper="\meta{size} option.
+% Make A4 paper the default.
+%    \begin{macrocode}
+\DeclareStringOption[a4]{paper}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{font}
+% Define a "font="\meta{size} option.
+% Make \unit[11]{pt} the default font size.
+%    \begin{macrocode}
+\DeclareStringOption[11pt]{font}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{lang}
+% Define the "lang" option, which takes the values provided by the \software{babel} package \cite{babel}.
+% Make "british" the default language.
+%    \begin{macrocode}
+\DeclareStringOption[british]{lang}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{sansserif}
+% Define the option pair "serif" and "sansserif" controling the font shape of the whole document.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{serif}
+\DeclareComplementaryOption{sansserif}{serif}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{lining}
+% Define the "lining" option deactivating the use of text figures in text mode.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{lining}
+\DeclareComplementaryOption{oldstyle}{lining}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{parskip}
+% Define the option pair "parindent" and "parskip" controlling the separation of paragraphs.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{parindent}
+\DeclareComplementaryOption{parskip}{parindent}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{symbols}
+% Provide the "symbols" option allowing to switch the symbol font.
+%    \begin{macrocode}
+\DeclareStringOption[true]{symbols}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Deactivation}
+%
+% \begin{macro}{defaults}
+% Define the "defaults" option which deactivates the "paper" and "font" options and prevents the change of the class defaults by this package.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{defaults}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{title}
+% Provide the "title" option deactivating redefinitions of title macros.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{title}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{physics}
+% Provide the "physics" option for deactivating redefinition of physics macros.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{physics}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{bibliography}
+% Provide the "bibliography" option for passing a "style" string to the \software{biblatex} package \cite{biblatex} or disabling the automatic loading of "biblatex".
+%    \begin{macrocode}
+\DeclareStringOption[numeric-comp]{bibliography}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{glossaries}
+% Provide the "glossaries" option able to turn of the use of the \software{hep-acronym} package \cite{hep-acronym}.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{glossaries}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{references}
+% Provide the "references" option for preventing the \software{cleveref} package from being loaded redefinitions of reference macros.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{references}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Compatibility}
+%
+% \begin{macro}{beamer}
+% Provide the "beamer" option for \software{beamer} \cite{beamer} compatibility mode.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{beamer}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{revtex}
+% Provide the "revtex" option for REV\hologo{TeX} \cite{revtex} compatibility mode.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{revtex}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{jhep}
+% Provide the "jhep" option for JHEP \cite{jhep} compatibility mode.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{jhep}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{jcap}
+% Provide the "jcap" option for JCAP \cite{jcap} compatibility mode.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{jcap}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{pos}
+% Provide the "pos" option for PoS compatibility mode.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{pos}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{springer}
+% Provide the "springer" option for Springer compatibility mode.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{springer}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{amsart}
+% Provide the "amsart" option for AMS article compatibility mode.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{amsart}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Reactivation}
+%
+% \begin{macro}{eqnarray}
+% Provide the "eqnarray" option for reactivating the "eqnarray" environment.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{eqnarray}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{manualplacement}
+% Provide the "manualplacement" option for reactivating the manual placement of floats.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{manualplacement}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Class options}
+%
+% \begin{macro}{\hep@if@class@option}
+% Read the font and paper size from the class options stored in
+% "\@classoptionslist".
+% This happens before the package options are processed, so that the class options only change the defaults, while explicit "font" and "paper" options of this package take precedence.
+%    \begin{macrocode}
+\newcommand*{\hep@if@class@option}[1]{%
+  \ifx\@classoptionslist\relax
+    \in@false
+  \else
+    \@expandtwoargs\in@{,#1,}{,\@classoptionslist,}%
+  \fi
+  \ifin@
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi
+}
+\hep@if@class@option{a5paper}{\setkeys{hep}{paper=a5}}{}
+\hep@if@class@option{b5paper}{\setkeys{hep}{paper=b5}}{}
+\hep@if@class@option{letterpaper}{\setkeys{hep}{paper=letter}}{}
+\hep@if@class@option{legalpaper}{\setkeys{hep}{paper=legal}}{}
+\hep@if@class@option{executivepaper}{%
+  \setkeys{hep}{paper=executive}%
+}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\hep@class@size}
+% Take every class option of the form \meta{number}"pt", such as "10pt" or the "14pt" of the \software{extsizes} classes, as default "font" size, since the \software{hep-font} package accepts any positive point size.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\cs_new_protected:Npn \hep@class@size #1 {
+  \regex_match:nnT { \A [0-9]+ (\.[0-9]+)? pt \Z } {#1}
+    { \setkeys{hep}{font=#1} }
+}
+\ExplSyntaxOff
+\ifx\@classoptionslist\relax\else
+  \@for\hep@option:=\@classoptionslist\do{%
+    \expandafter\hep@class@size\expandafter{\hep@option}%
+  }
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Process options}
+%
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+%    \end{macrocode}
+%
+% \begin{macro}{\hep@class}
+% Store the name of the document class, the first class file in "\@filelist".
+% Files loaded before the class, for example with "\RequirePackage", are skipped.
+%    \begin{macrocode}
+\def\hep@get@class#1.cls#2\@nil{#1}
+\let\hep@class\@empty
+\@for\hep@file:=\@filelist\do{%
+  \ifx\hep@class\@empty
+    \@expandtwoargs\in@{.cls}{\hep@file}%
+    \ifin@
+      \edef\hep@class{\expandafter\hep@get@class\hep@file\@nil}%
+    \fi
+  \fi
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Set compatibility}
+%
+% Set the "amsart" compatibility options using the \software{xpatch} package \cite{xpatch}.
+%    \begin{macrocode}
+\@ifclassloaded{amsart}{\setkeys{hep}{amsart}}{}
+\ifhep@amsart
+  \setkeys{hep}{defaults}
+  \PassOptionsToPackage{titlesec=false}{hep-acronym}
+  \RequirePackage{xpatch}
+  \xpretocmd{\@adminfootnotes}{%
+    \ifdefined\BHFN@OldMakefntext\let\@makefntext\BHFN@OldMakefntext\fi
+  }{}{}
+\fi
+%    \end{macrocode}
+%
+% Set the "springer" compatibility options.
+%    \begin{macrocode}
+\@ifclassloaded{svjour}{\setkeys{hep}{springer}}{}
+\@ifclassloaded{svjour2}{\setkeys{hep}{springer}}{}
+\@ifclassloaded{svjour3}{\setkeys{hep}{springer}}{}
+\ifhep@springer
+  \setkeys{hep}{defaults}
+  \let\cl@chapter\undefined
+  \AtBeginDocument{%
+    \@ifpackageloaded{hyperref}{%
+      \pdfstringdefDisableCommands{\let\thanksref\@gobble}%
+    }{}%
+  }
+\fi
+%    \end{macrocode}
+%
+% Set the "pos" compatibility options.
+%    \begin{macrocode}
+\@ifclassloaded{PoS}{\setkeys{hep}{pos}}{}
+\ifhep@pos
+  \setkeys{hep}{%
+    defaults, references=false, font=default, symbols=false%
+  }
+  \PassOptionsToPackage{titlesec=false}{hep-acronym}
+  \DeclareRobustCommand\boldmath{\@nomath\boldmath\mathversion{bold}}
+  \PassOptionsToPackage{hidelinks}{hyperref}
+  \RequirePackage{hyperref}
+\fi
+%    \end{macrocode}
+%
+% Set the "beamer" compatibility options.
+%    \begin{macrocode}
+\@ifclassloaded{beamer}{\setkeys{hep}{beamer}}{}
+\ifhep@beamer
+  \setkeys{hep}{%
+    defaults, title=false, references=false, sansserif, font=default%
+  }
+  \PassOptionsToPackage{titlesec=false}{hep-acronym}
+  \@ifpackageloaded{beamerbasefont}{\usefonttheme{professionalfonts}}{}
+  \setbeamertemplate{navigation symbols}{}
+\fi
+%    \end{macrocode}
+%
+% Set the "revtex" compatibility options.
+%    \begin{macrocode}
+\@ifclassloaded{revtex4}{\setkeys{hep}{revtex}}{}
+\@ifclassloaded{revtex4-1}{\setkeys{hep}{revtex}}{}
+\@ifclassloaded{revtex4-2}{\setkeys{hep}{revtex}}{}
+\ifhep@revtex
+  \setkeys{hep}{
+    defaults,
+    font=default,
+    bibliography=false,
+    lang=american,
+  }
+  \RequirePackage{hep-revtex}
+\fi
+%    \end{macrocode}
+%
+% Define the SISSA conditional.
+% The "jhep" and "jcap" options load the \software{JHEP} and \software{JCAP} styles if they have not been loaded before.
+%    \begin{macrocode}
+\ifhep@jhep\RequirePackage{jheppub}\fi
+\ifhep@jcap\RequirePackage{jcappub}\fi
+\@ifpackageloaded{jheppub}{\setkeys{hep}{jhep}}{}
+\@ifpackageloaded{jcappub}{\setkeys{hep}{jcap}}{}
+\newif\ifhep@sissa
+\ifhep@jhep\hep@sissatrue
+\else
+  \ifhep@jcap\hep@sissatrue
+  \else\hep@sissafalse
+  \fi
+\fi
+%    \end{macrocode}
+%
+% Set the SISSA compatibility options.
+%    \begin{macrocode}
+\ifhep@sissa
+  \setkeys{hep}{defaults, bibliography=false}
+  \RequirePackage{hep-sissa}
+\fi
+\ifhep@jhep
+    \PassOptionsToPackage{\hep@paper paper}{geometry}
+    \RequirePackage{geometry}
+    \geometry{
+      offset=0in,
+      top=.1\paperheight,
+      textheight=.756\paperheight,
+      textwidth=.72\paperwidth,
+    }
+\fi
+%    \end{macrocode}
+%
+% \section{Math}
+%
+% Load the \software{hep-math} package \cite{hep-math}.
+%    \begin{macrocode}
+\ifhep@physics\RequirePackage{hep-math}\fi
+%    \end{macrocode}
+%
+% \section{Font} \label{sec:font}
+%
+% Load the \software{hep-font} package \cite{hep-font}.
+% The "defaults" option, also set by the compatibility modes, keeps the font size of the class.
+%    \begin{macrocode}
+\ifhep@defaults\setkeys{hep}{font=default}\fi
+\PassOptionsToPackage{
+  size=\hep@font,
+  sans=\ifhep@serif false\else true\fi,
+  lining=\ifhep@lining true\else false\fi
+}{hep-font}
+\RequirePackage{hep-font}
+%    \end{macrocode}
+%
+% \subsection{Math fonts}
+%
+% Load the \software{hep-math-font} package \cite{hep-math-font}.
+%    \begin{macrocode}
+\PassOptionsToPackage{symbols=\hep@symbols}{hep-math-font}
+\RequirePackage{hep-math-font}
+%    \end{macrocode}
+%
+% \section{Geometry}
+%
+% Load the \software{geometry} package \cite{geometry} and adjust the text width and height.
+% This step must happen after readjusting the font size in \cref{sec:font}.
+%    \begin{macrocode}
+\ifhep@defaults\else
+  \RequirePackage{geometry}
+  \geometry{\hep@paper paper, includeheadfoot}
+  \if@twocolumn
+    \geometry{hscale=.85, vscale=.925, vmarginratio=1:1}
+    \geometry{headsep=2ex, footskip=6ex}
+    \setlength{\columnsep}{1.1em}
+  \else
+    \geometry{hscale=.75, vscale=.8, vmarginratio=3:4}
+  \fi
+\fi
+%    \end{macrocode}
+%
+%\begin{macro}{\useparskip}
+%\begin{macro}{\useparindent}
+% Load the \software{parskip} package \cite{parskip} if requested and provide two commands switching between the two paragraph modes.
+%    \begin{macrocode}
+\ifhep@parindent\else
+\RequirePackage{parskip}
+\newcommand*{\useparskip}{%
+  \setlength{\parskip}{.5\baselineskip plus 2pt}%
+  \setlength{\parindent}{0pt}%
+}
+\newcommand*{\useparindent}{%
+  \setlength{\parskip}{0pt}%
+  \setlength{\parindent}{15pt}%
+  \if@twocolumn\setlength\parindent{1em}%
+  \else\setlength\parindent{1.5em}%
+  \fi
+}
+\fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \section{Text}
+%
+% Load the \software{hep-text} package \cite{hep-text}.
+%    \begin{macrocode}
+\PassOptionsToPackage{lang=\hep@lang}{hep-text}
+\RequirePackage{hep-text}
+%    \end{macrocode}
+%
+% \section{Floats}
+%
+% Adjust the \hologo{LaTeX} float placement defaults using the \software{hep-float} package \cite{hep-float}.
+%    \begin{macrocode}
+\ifhep@manualplacement
+  \PassOptionsToPackage{local}{hep-float}
+\else
+  \PassOptionsToPackage{global}{hep-float}
+\fi
+\RequirePackage{hep-float}
+%    \end{macrocode}
+%
+% \begin{macro}{\ifhep@journal}
+% Define a new journal conditional.
+%    \begin{macrocode}
+\newif\ifhep@journal
+\ifhep@sissa\hep@journaltrue
+\else\ifhep@revtex\hep@journaltrue
+  \else\ifhep@pos\hep@journaltrue
+    \else\ifhep@springer\hep@journaltrue
+      \else\hep@journalfalse
+      \fi
+    \fi
+  \fi
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% Prevent the \software{caption} package \cite{caption} from complaining about the journal classes and packages.
+%    \begin{macrocode}
+\ifhep@journal
+  \setlength\abovecaptionskip{\f@size\p@}
+  \setlength\belowcaptionskip{0\p@}
+  \long\def\@makecaption#1#2{%
+    \vskip\abovecaptionskip
+    \sbox\@tempboxa{#1: #2}%
+    \ifdim \wd\@tempboxa >\hsize
+      #1: #2\par
+    \else
+      \global \@minipagefalse
+      \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+    \fi
+    \vskip\belowcaptionskip%
+  }
+\fi
+%    \end{macrocode}
+%
+% \section{Title page}
+%
+% \begin{macro}{\hep@backend}
+% Adjust the title page using the \software{hep-title} package \cite{hep-title}.
+% In the compatibility modes, except for \software{beamer}, load instead the \software{hep-journal} package, which hands the title data to the journal class.
+%    \begin{macrocode}
+\ifhep@title
+  \ifhep@revtex\def\hep@backend{revtex}\else
+  \ifhep@jhep\def\hep@backend{jhep}\else
+  \ifhep@jcap\def\hep@backend{jcap}\else
+  \ifhep@springer\def\hep@backend{springer}\else
+  \ifhep@amsart\def\hep@backend{amsart}\else
+  \ifhep@pos\def\hep@backend{pos}\else
+  \let\hep@backend\@empty
+  \fi\fi\fi\fi\fi\fi
+  \ifx\hep@backend\@empty
+    \RequirePackage{hep-title}
+  \else
+    \RequirePackage[\hep@backend]{hep-journal}
+  \fi
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\hep@journal@abstract}
+% \software{hep-journal} writes an abstract that follows the title to the auxiliary file.
+% Ignore it if the document is switched to a mode without \software{hep-journal}.
+%    \begin{macrocode}
+\providecommand*\hep@journal@abstract[1]{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \section{Bibliography}
+%
+% Check if bibliography management is requested using the \software{pdftexcmds} package \cite{pdftexcmds}.
+% And load the \software{hep-bibliography} package \cite{hep-bibliography}
+%    \begin{macrocode}
+\RequirePackage{pdftexcmds}
+\ifnum\pdf@strcmp{\hep@bibliography}{false}=0\else
+  \PassOptionsToPackage{style=\hep@bibliography}{hep-bibliography}
+  \RequirePackage{hep-bibliography}
+\fi
+%    \end{macrocode}
+
+% \section{Hyperlinks, Footnotes and References} \label{sec:hyperlinks}
+%
+% Load the \software{hep-reference} package \cite{hep-reference}.
+%
+%    \begin{macrocode}
+\ifhep@references
+\RequirePackage{hep-reference}
+%    \end{macrocode}
+%
+% End of "references" conditional
+%    \begin{macrocode}
+\fi
+%    \end{macrocode}
+
+% \section{Acronyms}
+%
+% Define acronyms if not deactivated.
+% Acronyms are implemented in the \software{hep-acronym} package \cite{hep-acronym} and must be loaded after the \software{hyperref} package in \cref{sec:hyperlinks}.
+% Set the abbreviation style.
+%    \begin{macrocode}
+\ifhep@glossaries\RequirePackage{hep-acronym}\fi
+%    \end{macrocode}
+%
+%</package>
+%
+% \section{SISSA compatibility}
+%
+%<*sissa>
+%
+% The title data are handed to the \software{JHEP} and \software{JCAP} styles by the \software{hep-journal} package.
+%
+%\begin{macro}{\tableofcontents}
+%\begin{macro}{\listoffigures}
+%\begin{macro}{\listoftables}
+% Disable the "\tableofcontents", "\listoffigures", "\listoftables" macros since the "\maketitle" macro takes care of the journal style.
+%    \begin{macrocode}
+\let\hep@make@title\maketitle
+\def\maketitle{\hep@make@title\renewcommand*{\tableofcontents}{}}
+\renewcommand*{\listoffigures}{}
+\renewcommand*{\listoftables}{}
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%\end{macro}
+%
+% Ensure that hyperlinks are colored correctly.
+%    \begin{macrocode}
+\AtEndPreamble{
+  \hypersetup{
+    colorlinks=true,
+    linktocpage=true,
+    urlcolor=blue,
+    anchorcolor=blue,
+    citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    menucolor=blue
+  }
+}
+\AtEndPreamble{\@ifpackageloaded{cleveref}{\@cref@nameinlinkfalse}{}}
+\AtEndPreamble{\@ifpackageloaded{glossaries}{\glsdisablehyper}{}}
+\AtEndPreamble{\@ifpackageloaded{foreign}{
+  \renewcommand*{\foreignabbrfont}{}
+}{}}
+%    \end{macrocode}
+%
+% Adjust the lining style in the bibliography.
+%    \begin{macrocode}
+\@ifpackageloaded{nfssext-cfr}{\renewcommand{\bibnumfmt}[1]{[\textt{#1}]}}{}
+%    \end{macrocode}
+%
+%</sissa>
+%
+% \section{Revtex}
+%
+%<*revtex>
+%
+% Prevent adjustment of paper size.
+%    \begin{macrocode}
+\PassOptionsToPackage{size=default}{hep-font}
+%    \end{macrocode}
+%
+% Load the "hyperref" package \cite{hyperref} in order to avoid compilation errors.
+%    \begin{macrocode}
+\RequirePackage{hyperref}
+%    \end{macrocode}
+%
+% Allow definition of meta data in the preamble.
+%    \begin{macrocode}
+\frontmatter@init
+\let\frontmatter@init\@empty
+%    \end{macrocode}
+%
+% Prevent the abstract to move to the second page in preprint mode.
+%    \begin{macrocode}
+\RequirePackage{etoolbox}
+\patchcmd{\frontmatter@abstract@produce}{
+  \vskip200\p@\@plus1fil
+  \penalty-200\relax
+}{
+  \vskip225\p@\@plus1fil
+}{}{}
+%    \end{macrocode}
+%
+% Ensure that the hyperlinks are colored correctly using the software{xcolor} package \cite{xcolor}.
+%    \begin{macrocode}
+\RequirePackage{xcolor}
+\definecolor{linkcolor}{RGB}{46,48,146}
+\AtEndPreamble{
+\@ifpackageloaded{hyperref}{
+\hypersetup{
+  colorlinks=true,
+  linkcolor=linkcolor,
+  citecolor=linkcolor,
+  urlcolor=linkcolor,
+  linktocpage=true
+}}{}}
+\AtEndPreamble{\@ifpackageloaded{cleveref}{%
+  \@cref@nameinlinkfalse%
+  \crefalias{BackrefHyperFootnoteCounter}{footnote}%
+}{}}
+\AtEndPreamble{\@ifpackageloaded{glossaries}{\glsdisablehyper}{}}
+%    \end{macrocode}
+%
+% Without the \software{hep-journal} package set the PDF title when the title is made.
+% The default of a missing title is a warning, which must not be issued in a PDF string, where it loops if the \software{silence} package is loaded.
+%    \begin{macrocode}
+\ifhep@title\else
+  \pdfstringdefDisableCommands{\let\class@warn\@gobble}
+  \AddToHook{cmd/maketitle/before}{\hypersetup{pdftitle={\@title}}}
+\fi
+%    \end{macrocode}
+%
+% Ensure correct formatting of float captions using the \software{ragged2e} package \cite{ragged2e}.
+%    \begin{macrocode}
+\AtBeginDocument{\@ifpackageloaded{caption}{
+  \RequirePackage{ragged2e}
+  \DeclareCaptionFormat{revtex}{#1#2\justifying{#3}}
+  \captionsetup{font=small, format=revtex}
+  \captionsetup[sub]{font=small, format=plain}
+}{}}
+%    \end{macrocode}
+%
+% Fixing the names of figures and tables.
+%    \begin{macrocode}
+\AfterEndPreamble{
+  \renewcommand{\figurename}{FIG.}
+  \renewcommand{\tablename}{TABLE}
+}
+%    \end{macrocode}
+%
+%</revtex>
+%
+% \section{Journal title data}
+%
+%<*journal>
+%
+% The \software{hep-journal} package is loaded by \software{hep-paper} in the compatibility modes instead of \software{hep-title}.
+% It provides the user interface of \software{hep-title}, stores the title data instead of typesetting them, and hands them to the macros of the journal class or style when the title is made.
+% The option names the journal: "jhep", "jcap", "revtex", "springer", "amsart", or "pos".
+% Load the \software{environ} package \cite{environ}, define the messages and warn once for every macro without counterpart in the journal.
+%
+%    \begin{macrocode}
+\RequirePackage{environ}
+\ExplSyntaxOn
+\str_new:N \g__hep_jr_backend_str
+\DeclareOption*{\str_gset:Ne \g__hep_jr_backend_str {\CurrentOption}}
+\ProcessOptions\relax
+\msg_new:nnn { hep-journal } { unsupported }
+  { \iow_char:N\\#1~is~not~supported~by~the~#2~mode~and~ignored. }
+\msg_new:nnn { hep-journal } { no-author }
+  { \iow_char:N\\#1~without~preceding~\iow_char:N\\author~ignored. }
+\msg_new:nnn { hep-journal } { label }
+  { Affiliation~label~'#1'~is~not~defined. }
+\msg_new:nnn { hep-journal } { unused }
+  { Affiliation~'#1'~is~not~used~by~any~author. }
+\msg_new:nnn { hep-journal } { late-abstract }
+  {
+    The~abstract~comes~after~the~title~and~is~placed~there~in~the~
+    next~run.~Place~it~directly~after~\iow_char:N\\maketitle~to~
+    avoid~the~second~run.
+  }
+\msg_new:nnn { hep-journal } { no-title }
+  { The~title~has~not~been~made,~\iow_char:N\\maketitle~is~missing. }
+\clist_new:N \g__hep_jr_warned_clist
+\cs_new_protected:Npn \__hep_jr_unsupported:n #1
+  {
+    \clist_if_in:NnF \g__hep_jr_warned_clist {#1}
+      {
+        \clist_gput_right:Nn \g__hep_jr_warned_clist {#1}
+        \msg_warning:nnnV { hep-journal } { unsupported } {#1}
+          \g__hep_jr_backend_str
+      }
+  }
+\cs_generate_variant:Nn \msg_warning:nnnn { nnnV }
+%    \end{macrocode}
+%
+% \subsection{Storage}
+%
+% The title data are kept in global variables.
+% Every author \meta{n} has a name, a list of affiliation labels, and lists of email addresses, ORCID identifiers and thanks.
+% Affiliations without label get the labels "hep-affiliation-"\meta{n} and belong to the authors without label since the previous affiliation, as in \software{authblk}.
+%
+%    \begin{macrocode}
+\tl_new:N \g__hep_jr_title_tl
+\tl_new:N \g__hep_jr_short_title_tl
+\tl_new:N \g__hep_jr_subtitle_tl
+\tl_new:N \g__hep_jr_series_tl
+\tl_new:N \g__hep_jr_date_tl
+\bool_new:N \g__hep_jr_date_bool
+\tl_new:N \g__hep_jr_keywords_tl
+\seq_new:N \g__hep_jr_preprint_seq
+\seq_new:N \g__hep_jr_arxiv_seq
+\seq_new:N \g__hep_jr_reprint_seq
+\seq_new:N \g__hep_jr_doi_seq
+\seq_new:N \g__hep_jr_editor_seq
+\int_new:N \g__hep_jr_authors_int
+\int_new:N \g__hep_jr_current_int
+\prop_new:N \g__hep_jr_affil_prop
+\seq_new:N \g__hep_jr_affil_seq
+\seq_new:N \g__hep_jr_pending_seq
+\bool_new:N \g__hep_jr_after_affil_bool
+\int_new:N \g__hep_jr_affil_int
+\tl_new:N \g__hep_jr_abstract_tl
+\bool_new:N \g__hep_jr_abstract_bool
+\tl_new:N \g__hep_jr_aux_abstract_tl
+\bool_new:N \g__hep_jr_aux_abstract_bool
+\bool_new:N \g__hep_jr_made_bool
+\bool_new:N \g__hep_jr_pending_bool
+\seq_new:N \g__hep_jr_code_seq
+\seq_new:N \g__hep_jr_trace_seq
+\tl_new:N \l__hep_jr_name_tl
+\tl_new:N \l__hep_jr_before_tl
+\tl_new:N \l__hep_jr_after_tl
+\tl_new:N \l__hep_jr_opt_tl
+\tl_new:N \l__hep_jr_arg_tl
+\tl_new:N \l__hep_jr_arg_ii_tl
+\tl_new:N \l__hep_jr_label_tl
+\tl_new:N \l__hep_jr_tmp_tl
+\seq_new:N \l__hep_jr_tmp_seq
+\clist_new:N \l__hep_jr_tmp_clist
+\prop_new:N \l__hep_jr_letter_prop
+\int_new:N \l__hep_jr_tmp_int
+\quark_new:N \q__hep_jr_mark
+\quark_new:N \q__hep_jr_stop
+%    \end{macrocode}
+%
+% Save copies of the class macros that are replaced by the user interface, using "\NewCommandCopy" so that commands with optional arguments keep working.
+% They are restored before the data are handed to the class.
+%
+%    \begin{macrocode}
+\clist_const:Nn \c__hep_jr_class_clist
+  {
+    title, author, affiliation, email, thanks, keywords, date, subtitle,
+    preprint, abstract, endabstract, maketitle
+  }
+\clist_map_inline:Nn \c__hep_jr_class_clist
+  {
+    \cs_if_exist:cT {#1}
+      {
+        \exp_args:Ncc \NewCommandCopy
+          { __hep_jr_class_ #1 : } {#1}
+      }
+  }
+\cs_new_protected:Npn \__hep_jr_restore:
+  {
+    \clist_map_inline:Nn \c__hep_jr_class_clist
+      {
+        \cs_if_exist:cT { __hep_jr_class_ ##1 : }
+          { \cs_gset_eq:cc {##1} { __hep_jr_class_ ##1 : } }
+      }
+    \cs_if_exist:NF \__hep_jr_class_endabstract:
+      { \cs_undefine:N \endabstract }
+  }
+%    \end{macrocode}
+%
+% \subsection{Authors}
+%
+% Create a new author with labels \marg{labels} and name \marg{name}.
+% The contact information inside the name is moved to the lists of the author, while "\email", "\orcid", "\orcmail" and "\thanks" after "\author" are added to the last author.
+%
+%    \begin{macrocode}
+\cs_new:Npn \__hep_jr_field:nn #1#2
+  { g__hep_jr_author_ #1 _ #2 }
+\cs_new_protected:Npn \__hep_jr_new_author:nn #1#2
+  {
+    \int_gincr:N \g__hep_jr_authors_int
+    \int_gset_eq:NN \g__hep_jr_current_int \g__hep_jr_authors_int
+    \tl_set:Ne \l__hep_jr_tmp_tl { \int_use:N \g__hep_jr_current_int }
+    \tl_new:c { \__hep_jr_field:Vn \l__hep_jr_tmp_tl { name_tl } }
+    \clist_new:c { \__hep_jr_field:Vn \l__hep_jr_tmp_tl { labels_clist } }
+    \seq_new:c { \__hep_jr_field:Vn \l__hep_jr_tmp_tl { email_seq } }
+    \seq_new:c { \__hep_jr_field:Vn \l__hep_jr_tmp_tl { orcid_seq } }
+    \seq_new:c { \__hep_jr_field:Vn \l__hep_jr_tmp_tl { thanks_seq } }
+    \bool_if:NT \g__hep_jr_after_affil_bool
+      {
+        \seq_gclear:N \g__hep_jr_pending_seq
+        \bool_gset_false:N \g__hep_jr_after_affil_bool
+      }
+    \tl_if_blank:nTF {#1}
+      { \seq_gput_right:NV \g__hep_jr_pending_seq \l__hep_jr_tmp_tl }
+      {
+        \clist_gset:cn
+          { \__hep_jr_field:Vn \l__hep_jr_tmp_tl { labels_clist } } {#1}
+      }
+    \tl_set:Nn \l__hep_jr_name_tl {#2}
+    \__hep_jr_extract:NnN \email { 1 } \__hep_jr_email:nnn
+    \__hep_jr_extract:NnN \orcid { 1 } \__hep_jr_orcid:nnn
+    \__hep_jr_extract:NnN \orcmail { 2 } \__hep_jr_orcmail:nnn
+    \__hep_jr_extract:NnN \thanks { 1 } \__hep_jr_thanks:nnn
+    \tl_gset_eq:cN
+      { \__hep_jr_field:Vn \l__hep_jr_tmp_tl { name_tl } }
+      \l__hep_jr_name_tl
+  }
+\cs_generate_variant:Nn \__hep_jr_field:nn { V , e }
+\cs_new_protected:Npn \__hep_jr_add:nn #1#2
+  {
+    \int_compare:nNnTF \g__hep_jr_current_int > 0
+      {
+        \seq_gput_right:cn
+          { \__hep_jr_field:en { \int_use:N \g__hep_jr_current_int } {#1} }
+          {#2}
+      }
+      {
+        \int_compare:nNnT \g__hep_jr_current_int = 0
+          { \msg_warning:nnn { hep-journal } { no-author } {#1} }
+      }
+  }
+\cs_new_protected:Npn \__hep_jr_email:nnn #1#2#3
+  { \__hep_jr_add:nn { email_seq } {#2} }
+\cs_new_protected:Npn \__hep_jr_orcid:nnn #1#2#3
+  { \__hep_jr_add:nn { orcid_seq } {#2} }
+\cs_new_protected:Npn \__hep_jr_orcmail:nnn #1#2#3
+  {
+    \__hep_jr_add:nn { email_seq } {#3}
+    \__hep_jr_add:nn { orcid_seq } {#2}
+  }
+\cs_new_protected:Npn \__hep_jr_thanks:nnn #1#2#3
+  { \__hep_jr_add:nn { thanks_seq } {#2} }
+%    \end{macrocode}
+%
+% Remove the top level occurrences of the command "#1" with an optional and "#2" mandatory arguments from the name and pass the arguments to "#3".
+% The name is split at the command with a delimited argument, and the arguments are read with "\tl_head:N" and "\tl_tail:N".
+% The quark "\q__hep_jr_mark" protects the rest of the name from losing its braces.
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_extract:NnN #1#2#3
+  {
+    \tl_if_in:NnT \l__hep_jr_name_tl {#1}
+      {
+        \cs_set_protected:Npn \__hep_jr_split:w ##1 #1 ##2 \q__hep_jr_stop
+          {
+            \tl_set:Nn \l__hep_jr_before_tl {##1}
+            \tl_set:Nn \l__hep_jr_after_tl {##2}
+          }
+        \exp_after:wN \__hep_jr_split:w \l__hep_jr_name_tl
+          \q__hep_jr_mark \q__hep_jr_stop
+        \tl_clear:N \l__hep_jr_opt_tl
+        \tl_trim_spaces:N \l__hep_jr_after_tl
+        \exp_args:NV \tl_if_head_eq_charcode:nNT \l__hep_jr_after_tl [
+          {
+            \exp_after:wN \__hep_jr_opt:w \l__hep_jr_after_tl
+              \q__hep_jr_stop
+          }
+        \__hep_jr_arg:N \l__hep_jr_arg_tl
+        \tl_clear:N \l__hep_jr_arg_ii_tl
+        \int_compare:nNnT {#2} > 1
+          { \__hep_jr_arg:N \l__hep_jr_arg_ii_tl }
+        \tl_remove_all:Nn \l__hep_jr_after_tl { \q__hep_jr_mark }
+        \tl_trim_spaces:N \l__hep_jr_before_tl
+        \tl_trim_spaces:N \l__hep_jr_after_tl
+        \tl_set:Ne \l__hep_jr_name_tl
+          {
+            \exp_not:V \l__hep_jr_before_tl
+            \tl_if_empty:NF \l__hep_jr_after_tl
+              { \c_space_tl \exp_not:V \l__hep_jr_after_tl }
+          }
+        \use:e
+          {
+            \exp_not:N #3
+              { \exp_not:V \l__hep_jr_opt_tl }
+              { \exp_not:V \l__hep_jr_arg_tl }
+              { \exp_not:V \l__hep_jr_arg_ii_tl }
+          }
+        \__hep_jr_extract:NnN #1 {#2} #3
+      }
+  }
+\cs_new_protected:Npn \__hep_jr_opt:w [ #1 ] #2 \q__hep_jr_stop
+  {
+    \tl_set:Nn \l__hep_jr_opt_tl {#1}
+    \tl_set:Nn \l__hep_jr_after_tl {#2}
+  }
+\cs_new_protected:Npn \__hep_jr_arg:N #1
+  {
+    \tl_set:Ne #1 { \tl_head:N \l__hep_jr_after_tl }
+    \tl_if_eq:NNTF #1 \q__hep_jr_mark
+      { \tl_clear:N #1 }
+      {
+        \tl_set:Ne \l__hep_jr_after_tl
+          { \tl_tail:N \l__hep_jr_after_tl }
+      }
+  }
+%    \end{macrocode}
+%
+% \subsection{User interface}
+%
+% The commands of \software{hep-title} only store their arguments.
+% The layout commands of \software{hep-title} are ignored, unless the class defines a command with the same name.
+%
+%    \begin{macrocode}
+\RenewDocumentCommand \title { o m }
+  {
+    \tl_gset:Nn \g__hep_jr_title_tl {#2}
+    \IfValueTF {#1}
+      { \tl_gset:Nn \g__hep_jr_short_title_tl {#1} }
+      { \tl_gclear:N \g__hep_jr_short_title_tl }
+  }
+\DeclareDocumentCommand \subtitle { m }
+  { \tl_gset:Nn \g__hep_jr_subtitle_tl {#1} }
+\DeclareDocumentCommand \series { m }
+  { \tl_gset:Nn \g__hep_jr_series_tl {#1} }
+\RenewDocumentCommand \date { m }
+  {
+    \tl_gset:Nn \g__hep_jr_date_tl {#1}
+    \bool_gset_true:N \g__hep_jr_date_bool
+  }
+\DeclareDocumentCommand \keywords { m }
+  { \tl_gset:Nn \g__hep_jr_keywords_tl {#1} }
+\DeclareDocumentCommand \preprint { m }
+  { \seq_gput_right:Nn \g__hep_jr_preprint_seq {#1} }
+\DeclareDocumentCommand \arxiv { m }
+  { \seq_gput_right:Nn \g__hep_jr_arxiv_seq {#1} }
+\DeclareDocumentCommand \reprint { m }
+  { \seq_gput_right:Nn \g__hep_jr_reprint_seq {#1} }
+\DeclareDocumentCommand \doi { m }
+  { \seq_gput_right:Nn \g__hep_jr_doi_seq {#1} }
+\DeclareDocumentCommand \author { O{} m }
+  { \__hep_jr_new_author:nn {#1} {#2} }
+\cs_new_protected:Npn \__hep_jr_person:nn #1#2
+  {
+    \seq_gput_right:Nn \g__hep_jr_editor_seq {#1}
+    \int_gset:Nn \g__hep_jr_current_int { -1 }
+  }
+\DeclareDocumentCommand \editor { O{} m }
+  { \__hep_jr_person:nn { \editor } {#2} }
+\DeclareDocumentCommand \endorser { O{} m }
+  { \__hep_jr_person:nn { \endorser } {#2} }
+\DeclareDocumentCommand \affiliation { o m }
+  {
+    \tl_if_novalue:nTF {#1}
+      {
+        \int_gincr:N \g__hep_jr_affil_int
+        \tl_set:Ne \l__hep_jr_label_tl
+          { hep-affiliation- \int_use:N \g__hep_jr_affil_int }
+        \seq_map_inline:Nn \g__hep_jr_pending_seq
+          {
+            \clist_gput_right:cV
+              { \__hep_jr_field:nn {##1} { labels_clist } }
+              \l__hep_jr_label_tl
+          }
+        \bool_gset_true:N \g__hep_jr_after_affil_bool
+      }
+      { \tl_set:Ne \l__hep_jr_label_tl { \tl_trim_spaces:n {#1} } }
+    \prop_gput:NVn \g__hep_jr_affil_prop \l__hep_jr_label_tl {#2}
+    \seq_gput_right:NV \g__hep_jr_affil_seq \l__hep_jr_label_tl
+  }
+\cs_new_protected:Npn \__hep_jr_contact:nnn #1#2#3
+  {
+    \bool_if:NTF \g__hep_jr_made_bool {#3} { #1 { } {#2} { } }
+  }
+\DeclareDocumentCommand \email { o m }
+  {
+    \__hep_jr_contact:nnn \__hep_jr_email:nnn {#2}
+      { \hep@email {#2} }
+  }
+\DeclareDocumentCommand \orcid { m }
+  {
+    \__hep_jr_contact:nnn \__hep_jr_orcid:nnn {#1}
+      { \online { https://orcid.org/#1 } {#1} }
+  }
+\DeclareDocumentCommand \orcmail { m m }
+  { \email {#2} \orcid {#1} }
+\DeclareDocumentCommand \thanks { o m }
+  {
+    \bool_if:NTF \g__hep_jr_made_bool
+      { \__hep_jr_class_thanks: {#2} }
+      { \__hep_jr_thanks:nnn { } {#2} { } }
+  }
+\clist_map_inline:nn
+  {
+    seriesfont, titlefont, subtitlefont, authorfont, authortitlefont,
+    affiliationfont, editorfont, endorserfont, editortitlefont,
+    endorsertitlefont, datefont, preprintfont, reprintfont, preseries,
+    postseries, presubtitle, postsubtitle, preauthortitle,
+    postauthortitle, preeditor, posteditor, preendorser, postendorser,
+    preeditortitle, posteditortitle, preendorsertitle, postendorsertitle
+  }
+  { \cs_if_exist:cF {#1} { \cs_new_protected:cpn {#1} ##1 { } } }
+\clist_map_inline:nn { authortitle, editortitle, endorsertitle }
+  { \cs_if_exist:cF {#1} { \cs_new_protected:cpn {#1} ##1##2 { } } }
+\clist_map_inline:nn { placepreprint, placereprint }
+  { \cs_if_exist:cF {#1} { \cs_new_protected:cpn {#1} { } } }
+%    \end{macrocode}
+%
+% \subsection{Abstract}
+%
+% The abstract can be given in the preamble or in the document, as environment or in the command form "\abstract"\marg{text}, before or directly after "\maketitle".
+% Before the title is made the abstract is stored.
+% An abstract environment directly after "\maketitle" is stored as well and the title is made at the end of the environment.
+% An abstract later in the document is typeset by classes that allow this (\software{svjour3}); otherwise it is written to the auxiliary file and used in the next run.
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_store_abstract:n #1
+  {
+    \tl_gset:Nn \g__hep_jr_abstract_tl {#1}
+    \bool_gset_true:N \g__hep_jr_abstract_bool
+  }
+\cs_new_protected:Npn \hep@journal@abstract #1
+  {
+    \tl_gset:Nn \g__hep_jr_aux_abstract_tl {#1}
+    \bool_gset_true:N \g__hep_jr_aux_abstract_bool
+  }
+\cs_new_protected:Npn \__hep_jr_abstract:n #1
+  {
+    \bool_if:NTF \g__hep_jr_made_bool
+      { \__hep_jr_late_abstract:n {#1} }
+      {
+        \__hep_jr_store_abstract:n {#1}
+        \bool_if:NT \g__hep_jr_pending_bool
+          { \group_insert_after:N \__hep_jr_render: }
+      }
+  }
+\cs_new_protected:Npn \__hep_jr_late_abstract:n #1
+  {
+    \cs_if_exist_use:cF
+      { __hep_jr_ \g__hep_jr_backend_str _late_abstract:n }
+      {
+        \bool_if:NF \g__hep_jr_aux_abstract_bool
+          { \msg_warning:nn { hep-journal } { late-abstract } }
+        \iow_now:Ne \@auxout
+          { \exp_not:N \hep@journal@abstract { \exp_not:n {#1} } }
+        \use_none:n
+      }
+      {#1}
+  }
+\RenewEnviron { abstract }
+  { \exp_args:NV \__hep_jr_abstract:n \BODY }
+\cs_gset_eq:NN \__hep_jr_abstract_environment: \abstract
+\cs_gset_protected:Npn \abstract
+  {
+    \str_if_eq:VnTF \@currenvir { abstract }
+      { \__hep_jr_abstract_environment: }
+      {
+        \bool_if:NTF \g__hep_jr_made_bool
+          { \__hep_jr_late_abstract:n }
+          { \__hep_jr_store_abstract:n }
+      }
+  }
+\cs_gset_protected:cpn { abstract* }
+  { \maketitle \begin { abstract } }
+\cs_gset_protected:cpn { endabstract* } { \end { abstract } }
+%    \end{macrocode}
+%
+% Keep copies of the user commands, so that they can be reinstalled after the class commands have been used.
+%
+%    \begin{macrocode}
+\clist_map_inline:Nn \c__hep_jr_class_clist
+  {
+    \cs_if_exist:cT {#1}
+      {
+        \exp_args:Ncc \NewCommandCopy
+          { __hep_jr_user_ #1 : } {#1}
+      }
+  }
+\cs_new_protected:Npn \__hep_jr_install:n #1
+  {
+    \clist_map_inline:nn {#1}
+      { \cs_gset_eq:cc {##1} { __hep_jr_user_ ##1 : } }
+  }
+%    \end{macrocode}
+%
+% \subsection{Title}
+%
+% "\maketitle" looks ahead for an abstract environment, skipping spaces, paragraphs and the "\Hy@maketitle@end" of \software{hyperref}, which wraps "\maketitle".
+% The title is made by collecting the code for the class in a sequence, restoring the class macros, and running the code.
+% If \software{hyperref} has wrapped "\maketitle", the wrapper is kept around the class "\maketitle".
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_maketitle:
+  { \bool_if:NF \g__hep_jr_made_bool { \__hep_jr_peek: } }
+\cs_gset_eq:NN \maketitle \__hep_jr_maketitle:
+\bool_new:N \g__hep_jr_hyperref_bool
+\cs_new_protected:Npn \__hep_jr_peek:
+  {
+    \peek_remove_spaces:n
+      {
+        \cs_if_exist:NTF \Hy@maketitle@end
+          {
+            \peek_meaning_remove:NTF \Hy@maketitle@end
+              {
+                \bool_gset_true:N \g__hep_jr_hyperref_bool
+                \__hep_jr_peek:
+              }
+              { \__hep_jr_peek_next: }
+          }
+          { \__hep_jr_peek_next: }
+      }
+  }
+\cs_new_protected:Npn \__hep_jr_peek_next:
+  {
+    \peek_remove_spaces:n
+      {
+        \peek_meaning:NTF \par
+          { \__hep_jr_peek_par:w }
+          {
+            \peek_meaning:NTF \begin
+              { \__hep_jr_peek_begin:w }
+              { \__hep_jr_render: }
+          }
+      }
+  }
+\cs_new_protected:Npn \__hep_jr_peek_par:w \par { \__hep_jr_peek: }
+\cs_new_protected:Npn \__hep_jr_peek_begin:w \begin #1
+  {
+    \str_if_eq:nnTF {#1} { abstract }
+      {
+        \bool_gset_true:N \g__hep_jr_pending_bool
+        \begin {#1}
+      }
+      { \__hep_jr_render: \begin {#1} }
+  }
+\cs_new_protected:Npn \__hep_jr_emit:n #1
+  { \seq_gput_right:Nn \g__hep_jr_code_seq {#1} }
+\cs_generate_variant:Nn \__hep_jr_emit:n { e }
+\cs_new_protected:Npn \__hep_jr_prepare:
+  {
+    \bool_gset_true:N \g__hep_jr_made_bool
+    \bool_gset_false:N \g__hep_jr_pending_bool
+    \bool_if:NF \g__hep_jr_abstract_bool
+      {
+        \bool_if:NT \g__hep_jr_aux_abstract_bool
+          {
+            \exp_args:NV \__hep_jr_store_abstract:n
+              \g__hep_jr_aux_abstract_tl
+          }
+      }
+    \seq_gclear:N \g__hep_jr_code_seq
+    \seq_if_empty:NF \g__hep_jr_editor_seq
+      { \__hep_jr_unsupported:n { editor } }
+    \__hep_jr_check_labels:
+  }
+\cs_new_protected:Npn \__hep_jr_render:
+  {
+    \__hep_jr_prepare:
+    \use:c { __hep_jr_ \g__hep_jr_backend_str _code: }
+    \bool_if:NT \g__hep_jr_hyperref_bool
+      {
+        \bool_gset_false:N \g__hep_jr_hyperref_bool
+        \Hy@maketitle@end
+      }
+    \__hep_jr_run:
+  }
+\cs_new_protected:Npn \__hep_jr_run:
+  {
+    \__hep_jr_pdf_info:
+    \cs_gset_eq:NN \__hep_jr_wrapper: \maketitle
+    \__hep_jr_restore:
+    \cs_if_exist:NT \HyOrg@maketitle
+      {
+        \cs_if_eq:NNT \HyOrg@maketitle \__hep_jr_maketitle:
+          {
+            \cs_gset_eq:NN \HyOrg@maketitle \maketitle
+            \cs_gset_eq:NN \maketitle \__hep_jr_wrapper:
+          }
+      }
+    \__hep_jr_use_code:
+    \__hep_jr_after_title:
+  }
+\cs_new_protected:Npn \__hep_jr_use_code:
+  {
+    \seq_gconcat:NNN \g__hep_jr_trace_seq
+      \g__hep_jr_trace_seq \g__hep_jr_code_seq
+    \tl_set:Ne \l__hep_jr_tmp_tl
+      { \seq_use:Nn \g__hep_jr_code_seq { } }
+    \tl_use:N \l__hep_jr_tmp_tl
+  }
+\cs_new_protected:Npn \__hep_jr_after_title:
+  {
+    \__hep_jr_install:n { abstract, endabstract }
+    \cs_gset_protected:Npn \email ##1 { \hep@email {##1} }
+    \cs_gset_protected:Npn \orcid ##1
+      { \online { https://orcid.org/##1 } {##1} }
+  }
+\AddToHook { enddocument }
+  {
+    \bool_if:NF \g__hep_jr_made_bool
+      { \msg_warning:nn { hep-journal } { no-title } }
+  }
+%    \end{macrocode}
+%
+% \subsection{Labels}
+%
+% Warn about labels without affiliation and affiliations without author.
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_check_labels:
+  {
+    \seq_clear:N \l__hep_jr_tmp_seq
+    \int_step_inline:nn { \g__hep_jr_authors_int }
+      {
+        \clist_map_inline:cn { \__hep_jr_field:nn {##1} { labels_clist } }
+          {
+            \prop_if_in:NnF \g__hep_jr_affil_prop {####1}
+              { \msg_warning:nnn { hep-journal } { label } {####1} }
+            \seq_put_right:Nn \l__hep_jr_tmp_seq {####1}
+          }
+      }
+    \seq_map_inline:Nn \g__hep_jr_affil_seq
+      {
+        \seq_if_in:NnF \l__hep_jr_tmp_seq {##1}
+          { \msg_warning:nnn { hep-journal } { unused } {##1} }
+      }
+  }
+%    \end{macrocode}
+%
+% "\__hep_jr_labels:N" sets a sequence to all used labels in the order of first use.
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_labels:N #1
+  {
+    \seq_clear:N #1
+    \int_step_inline:nn { \g__hep_jr_authors_int }
+      {
+        \clist_map_inline:cn { \__hep_jr_field:nn {##1} { labels_clist } }
+          {
+            \prop_if_in:NnT \g__hep_jr_affil_prop {####1}
+              { \seq_if_in:NnF #1 {####1} { \seq_put_right:Nn #1 {####1} } }
+          }
+      }
+  }
+\cs_new:Npn \__hep_jr_name:n #1
+  { \exp_not:v { \__hep_jr_field:nn {#1} { name_tl } } }
+\cs_new:Npn \__hep_jr_affil:n #1
+  { \exp_not:e { \prop_item:Nn \g__hep_jr_affil_prop {#1} } }
+\cs_new:Npn \__hep_jr_full_title:
+  {
+    \exp_not:V \g__hep_jr_title_tl
+    \tl_if_empty:NF \g__hep_jr_subtitle_tl
+      { : ~ \exp_not:V \g__hep_jr_subtitle_tl }
+  }
+%    \end{macrocode}
+%
+% \subsection{PDF information}
+%
+% Set the PDF title, author and keywords unless set by the user.
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_pdf_info:
+  {
+    \cs_if_exist:NT \hypersetup
+      {
+        \tl_if_empty:cT { @pdftitle }
+          { \hypersetup { pdftitle = { \__hep_jr_full_title: } } }
+        \tl_if_empty:cT { @pdfauthor }
+          {
+            \seq_clear:N \l__hep_jr_tmp_seq
+            \int_step_inline:nn { \g__hep_jr_authors_int }
+              {
+                \seq_put_right:Ne \l__hep_jr_tmp_seq
+                  { \__hep_jr_name:n {##1} }
+              }
+            \hypersetup
+              {
+                pdfauthor =
+                  { \seq_use:Nnnn \l__hep_jr_tmp_seq
+                      { ~and~ } { ,~ } { ,~and~ } }
+              }
+          }
+        \tl_if_empty:NF \g__hep_jr_keywords_tl
+          {
+            \tl_if_empty:cT { @pdfkeywords }
+              { \hypersetup { pdfkeywords = \g__hep_jr_keywords_tl } }
+          }
+      }
+  }
+%    \end{macrocode}
+%
+% \subsection{Backends}
+%
+% Code shared by the backends and warnings for unsupported data.
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_emit_title:
+  {
+    \__hep_jr_emit:e
+      {
+        \exp_not:N \title
+        \tl_if_empty:NF \g__hep_jr_short_title_tl
+          { [ \exp_not:V \g__hep_jr_short_title_tl ] }
+        { \__hep_jr_full_title: }
+      }
+  }
+\cs_new_protected:Npn \__hep_jr_emit_date:
+  {
+    \bool_if:NT \g__hep_jr_date_bool
+      {
+        \__hep_jr_emit:e
+          { \exp_not:N \date { \exp_not:V \g__hep_jr_date_tl } }
+      }
+  }
+\cs_new_protected:Npn \__hep_jr_emit_keywords:
+  {
+    \tl_if_empty:NF \g__hep_jr_keywords_tl
+      {
+        \__hep_jr_emit:e
+          { \exp_not:N \keywords { \exp_not:V \g__hep_jr_keywords_tl } }
+      }
+  }
+\cs_new_protected:Npn \__hep_jr_emit_abstract:
+  {
+    \bool_if:NT \g__hep_jr_abstract_bool
+      {
+        \__hep_jr_emit:e
+          {
+            \exp_not:N \begin { abstract }
+            \exp_not:V \g__hep_jr_abstract_tl
+            \exp_not:N \end { abstract }
+          }
+      }
+  }
+\cs_new:Npn \__hep_jr_arxiv_link:n #1
+  {
+    \exp_not:N \href { https://arxiv.org/abs/#1 }
+      { \exp_not:N \nolinkurl {#1} }
+  }
+\cs_new_protected:Npn \__hep_jr_no_series:
+  {
+    \tl_if_empty:NF \g__hep_jr_series_tl
+      { \__hep_jr_unsupported:n { series } }
+  }
+\cs_new_protected:Npn \__hep_jr_no_preprint:
+  {
+    \seq_if_empty:NF \g__hep_jr_preprint_seq
+      { \__hep_jr_unsupported:n { preprint } }
+    \seq_if_empty:NF \g__hep_jr_arxiv_seq
+      { \__hep_jr_unsupported:n { arxiv } }
+  }
+\cs_new_protected:Npn \__hep_jr_no_reprint:
+  {
+    \seq_if_empty:NF \g__hep_jr_reprint_seq
+      { \__hep_jr_unsupported:n { reprint } }
+    \seq_if_empty:NF \g__hep_jr_doi_seq
+      { \__hep_jr_unsupported:n { doi } }
+  }
+\cs_new_protected:Npn \__hep_jr_no_orcid:
+  {
+    \int_step_inline:nn { \g__hep_jr_authors_int }
+      {
+        \seq_if_empty:cF { \__hep_jr_field:nn {##1} { orcid_seq } }
+          { \__hep_jr_unsupported:n { orcid } }
+      }
+  }
+\cs_new_protected:Npn \__hep_jr_no_date:
+  {
+    \bool_if:NT \g__hep_jr_date_bool
+      { \__hep_jr_unsupported:n { date } }
+  }
+%    \end{macrocode}
+%
+% \subsubsection{JHEP and JCAP}
+%
+% The labels become letters in the order of first use, thanks become "\note"s with numbers and emails "\emailAdd"s.
+% The series becomes the "\subheader", the first arXiv number the "\arxivnumber".
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_sissa_code:
+  {
+    \__hep_jr_no_reprint:
+    \__hep_jr_no_orcid:
+    \__hep_jr_no_date:
+    \tl_if_empty:NF \g__hep_jr_series_tl
+      {
+        \__hep_jr_emit:e
+          { \exp_not:N \subheader { \exp_not:V \g__hep_jr_series_tl } }
+      }
+    \__hep_jr_emit_title:
+    \__hep_jr_labels:N \l__hep_jr_tmp_seq
+    \prop_clear:N \l__hep_jr_letter_prop
+    \seq_map_indexed_inline:Nn \l__hep_jr_tmp_seq
+      {
+        \prop_put:Nne \l__hep_jr_letter_prop {##2}
+          { \int_to_alph:n {##1} }
+      }
+    \int_zero:N \l__hep_jr_tmp_int
+    \int_step_inline:nn { \g__hep_jr_authors_int }
+      {
+        \clist_clear:N \l__hep_jr_tmp_clist
+        \clist_map_inline:cn { \__hep_jr_field:nn {##1} { labels_clist } }
+          {
+            \prop_get:NnNT \l__hep_jr_letter_prop {####1}
+              \l__hep_jr_label_tl
+              {
+                \clist_put_right:NV \l__hep_jr_tmp_clist
+                  \l__hep_jr_label_tl
+              }
+          }
+        \seq_map_inline:cn { \__hep_jr_field:nn {##1} { thanks_seq } }
+          {
+            \int_incr:N \l__hep_jr_tmp_int
+            \clist_put_right:Ne \l__hep_jr_tmp_clist
+              { \int_use:N \l__hep_jr_tmp_int }
+          }
+        \__hep_jr_emit:e
+          {
+            \exp_not:N \author
+            \clist_if_empty:NF \l__hep_jr_tmp_clist
+              { [ \clist_use:Nn \l__hep_jr_tmp_clist { , } ] }
+            { \__hep_jr_name:n {##1} }
+          }
+      }
+    \seq_map_indexed_inline:Nn \l__hep_jr_tmp_seq
+      {
+        \__hep_jr_emit:e
+          {
+            \exp_not:N \affiliation [ \int_to_alph:n {##1} ]
+              { \__hep_jr_affil:n {##2} }
+          }
+      }
+    \int_zero:N \l__hep_jr_tmp_int
+    \int_step_inline:nn { \g__hep_jr_authors_int }
+      {
+        \seq_map_inline:cn { \__hep_jr_field:nn {##1} { thanks_seq } }
+          {
+            \int_incr:N \l__hep_jr_tmp_int
+            \__hep_jr_emit:e
+              {
+                \exp_not:N \note [ \int_use:N \l__hep_jr_tmp_int ]
+                  { \exp_not:n {####1} }
+              }
+          }
+        \seq_map_inline:cn { \__hep_jr_field:nn {##1} { email_seq } }
+          { \__hep_jr_emit:n { \emailAdd {####1} } }
+      }
+    \__hep_jr_sissa_preprint:
+    \seq_if_empty:NF \g__hep_jr_arxiv_seq
+      {
+        \__hep_jr_emit:e
+          {
+            \exp_not:N \arxivnumber
+              { \seq_item:Nn \g__hep_jr_arxiv_seq { 1 } }
+          }
+      }
+    \__hep_jr_emit_keywords:
+    \bool_if:NT \g__hep_jr_abstract_bool
+      {
+        \__hep_jr_emit:e
+          { \exp_not:N \abstract { \exp_not:V \g__hep_jr_abstract_tl } }
+      }
+    \__hep_jr_emit:n { \maketitle }
+  }
+\cs_new_eq:NN \__hep_jr_jhep_code: \__hep_jr_sissa_code:
+\cs_new_eq:NN \__hep_jr_jcap_code: \__hep_jr_sissa_code:
+%    \end{macrocode}
+%
+% Preprint numbers and further arXiv numbers are placed right aligned in the header, by "\preprint" in \software{JHEP} and appended to "\@fpheader" in \software{JCAP}.
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_sissa_preprint:
+  {
+    \seq_set_eq:NN \l__hep_jr_tmp_seq \g__hep_jr_preprint_seq
+    \seq_map_indexed_inline:Nn \g__hep_jr_arxiv_seq
+      {
+        \int_compare:nNnT {##1} > 1
+          {
+            \seq_put_right:Ne \l__hep_jr_tmp_seq
+              { arXiv:~ \__hep_jr_arxiv_link:n {##2} }
+          }
+      }
+    \seq_if_empty:NF \l__hep_jr_tmp_seq
+      {
+        \tl_set:Ne \l__hep_jr_tmp_tl
+          {
+            \exp_not:N \begin { tabular } [ t ] { @ { } r @ { } }
+            \seq_use:Nn \l__hep_jr_tmp_seq { \\ }
+            \exp_not:N \end { tabular }
+          }
+        \cs_if_exist:NTF \__hep_jr_class_preprint:
+          {
+            \__hep_jr_emit:e
+              { \exp_not:N \preprint { \exp_not:V \l__hep_jr_tmp_tl } }
+          }
+          {
+            \__hep_jr_emit:e
+              {
+                \exp_not:N \g@addto@macro \exp_not:N \@fpheader
+                  { \exp_not:N \hfill \exp_not:V \l__hep_jr_tmp_tl }
+              }
+          }
+      }
+  }
+%    \end{macrocode}
+%
+% \subsubsection{REV\hologo{TeX}}
+%
+% Every author is followed by the emails, thanks and affiliations.
+% REV\hologo{TeX} merges identical affiliations.
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_revtex_code:
+  {
+    \__hep_jr_no_series:
+    \__hep_jr_no_reprint:
+    \__hep_jr_no_orcid:
+    \__hep_jr_emit_title:
+    \int_step_inline:nn { \g__hep_jr_authors_int }
+      {
+        \__hep_jr_emit:e { \exp_not:N \author { \__hep_jr_name:n {##1} } }
+        \seq_map_inline:cn { \__hep_jr_field:nn {##1} { email_seq } }
+          { \__hep_jr_emit:n { \email {####1} } }
+        \seq_map_inline:cn { \__hep_jr_field:nn {##1} { thanks_seq } }
+          { \__hep_jr_emit:n { \thanks {####1} } }
+        \bool_set_false:N \l_tmpa_bool
+        \clist_map_inline:cn { \__hep_jr_field:nn {##1} { labels_clist } }
+          {
+            \prop_if_in:NnT \g__hep_jr_affil_prop {####1}
+              {
+                \bool_set_true:N \l_tmpa_bool
+                \__hep_jr_emit:e
+                  { \exp_not:N \affiliation { \__hep_jr_affil:n {####1} } }
+              }
+          }
+        \bool_if:NF \l_tmpa_bool
+          {
+            \prop_if_empty:NF \g__hep_jr_affil_prop
+              { \__hep_jr_emit:n { \noaffiliation } }
+          }
+      }
+    \seq_map_inline:Nn \g__hep_jr_preprint_seq
+      { \__hep_jr_emit:n { \preprint {##1} } }
+    \seq_map_inline:Nn \g__hep_jr_arxiv_seq
+      {
+        \__hep_jr_emit:e
+          { \exp_not:N \preprint { arXiv:~ \__hep_jr_arxiv_link:n {##1} } }
+      }
+    \__hep_jr_emit_date:
+    \__hep_jr_emit_keywords:
+    \__hep_jr_emit_abstract:
+    \__hep_jr_emit:n { \maketitle }
+  }
+%    \end{macrocode}
+%
+% \subsubsection{AMS article}
+%
+% Every author is followed by an "\address" per affiliation, the emails and thanks.
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_amsart_code:
+  {
+    \__hep_jr_no_series:
+    \__hep_jr_no_preprint:
+    \__hep_jr_no_reprint:
+    \__hep_jr_no_orcid:
+    \__hep_jr_emit_title:
+    \int_step_inline:nn { \g__hep_jr_authors_int }
+      {
+        \__hep_jr_emit:e { \exp_not:N \author { \__hep_jr_name:n {##1} } }
+        \clist_map_inline:cn { \__hep_jr_field:nn {##1} { labels_clist } }
+          {
+            \prop_if_in:NnT \g__hep_jr_affil_prop {####1}
+              {
+                \__hep_jr_emit:e
+                  { \exp_not:N \address { \__hep_jr_affil:n {####1} } }
+              }
+          }
+        \seq_map_inline:cn { \__hep_jr_field:nn {##1} { email_seq } }
+          { \__hep_jr_emit:n { \email {####1} } }
+        \seq_map_inline:cn { \__hep_jr_field:nn {##1} { thanks_seq } }
+          { \__hep_jr_emit:n { \thanks {####1} } }
+      }
+    \__hep_jr_emit_date:
+    \__hep_jr_emit_keywords:
+    \__hep_jr_emit_abstract:
+    \__hep_jr_emit:n { \maketitle }
+  }
+%    \end{macrocode}
+%
+% \subsubsection{Springer}
+%
+% The \software{svjour3} class takes the abstract after "\maketitle" with the keywords inside.
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_springer_code:
+  {
+    \__hep_jr_no_series:
+    \__hep_jr_no_preprint:
+    \__hep_jr_no_reprint:
+    \__hep_jr_no_orcid:
+    \__hep_jr_emit:e
+      {
+        \exp_not:N \title
+        { \exp_not:V \g__hep_jr_title_tl }
+        \tl_if_empty:NF \g__hep_jr_subtitle_tl
+          { \exp_not:N \subtitle { \exp_not:V \g__hep_jr_subtitle_tl } }
+      }
+    \cs_if_exist:NTF \thankstext
+      { \__hep_jr_springer_epj: }
+      { \__hep_jr_springer_plain: }
+    \__hep_jr_emit_date:
+    \__hep_jr_emit:n { \maketitle }
+    \bool_if:NT \g__hep_jr_abstract_bool
+      {
+        \__hep_jr_emit:e
+          {
+            \exp_not:N \begin { abstract }
+            \exp_not:V \g__hep_jr_abstract_tl
+            \tl_if_empty:NF \g__hep_jr_keywords_tl
+              {
+                \exp_not:N \keywords
+                  { \exp_not:V \g__hep_jr_keywords_tl }
+              }
+            \exp_not:N \end { abstract }
+          }
+      }
+  }
+%    \end{macrocode}
+%
+% The EPJ style uses "\thanksref", "\thankstext" and labelled institutes.
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_springer_epj:
+  {
+    \__hep_jr_labels:N \l__hep_jr_tmp_seq
+    \tl_clear:N \l__hep_jr_tmp_tl
+    \int_zero:N \l__hep_jr_tmp_int
+    \int_step_inline:nn { \g__hep_jr_authors_int }
+      {
+        \clist_clear:N \l__hep_jr_tmp_clist
+        \seq_map_inline:cn { \__hep_jr_field:nn {##1} { email_seq } }
+          {
+            \int_incr:N \l__hep_jr_tmp_int
+            \clist_put_right:Ne \l__hep_jr_tmp_clist
+              { hep-note- \int_use:N \l__hep_jr_tmp_int }
+            \__hep_jr_emit:e
+              {
+                \exp_not:N \thankstext
+                  { hep-note- \int_use:N \l__hep_jr_tmp_int }
+                  { e-mail:~ \exp_not:N \hep@email { \exp_not:n {####1} } }
+              }
+          }
+        \seq_map_inline:cn { \__hep_jr_field:nn {##1} { thanks_seq } }
+          {
+            \int_incr:N \l__hep_jr_tmp_int
+            \clist_put_right:Ne \l__hep_jr_tmp_clist
+              { hep-note- \int_use:N \l__hep_jr_tmp_int }
+            \__hep_jr_emit:e
+              {
+                \exp_not:N \thankstext
+                  { hep-note- \int_use:N \l__hep_jr_tmp_int }
+                  { \exp_not:n {####1} }
+              }
+          }
+        \clist_map_inline:cn { \__hep_jr_field:nn {##1} { labels_clist } }
+          {
+            \prop_if_in:NnT \g__hep_jr_affil_prop {####1}
+              {
+                \clist_put_right:Nn \l__hep_jr_tmp_clist
+                  { hep-inst-####1 }
+              }
+          }
+        \tl_put_right:Ne \l__hep_jr_tmp_tl
+          {
+            \int_compare:nNnF {##1} = 1 { \exp_not:N \and }
+            \__hep_jr_name:n {##1}
+            \clist_if_empty:NF \l__hep_jr_tmp_clist
+              {
+                \exp_not:N \thanksref
+                  { \clist_use:Nn \l__hep_jr_tmp_clist { , } }
+              }
+          }
+      }
+    \__hep_jr_emit:e { \exp_not:N \author { \exp_not:V \l__hep_jr_tmp_tl } }
+    \seq_if_empty:NF \l__hep_jr_tmp_seq
+      {
+        \__hep_jr_emit:e
+          {
+            \exp_not:N \institute
+              {
+                \seq_map_indexed_function:NN \l__hep_jr_tmp_seq
+                  \__hep_jr_springer_institute:nn
+              }
+          }
+      }
+  }
+\cs_new:Npn \__hep_jr_springer_institute:nn #1#2
+  {
+    \int_compare:nNnF {#1} = 1 { \exp_not:N \and }
+    \__hep_jr_affil:n {#2} \exp_not:N \label { hep-inst-#2 }
+  }
+%    \end{macrocode}
+%
+% The plain \software{svjour3} class lists every author with affiliations, emails and thanks in "\institute", separated by "\at".
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_springer_plain:
+  {
+    \tl_clear:N \l__hep_jr_tmp_tl
+    \tl_clear:N \l__hep_jr_label_tl
+    \int_step_inline:nn { \g__hep_jr_authors_int }
+      {
+        \tl_put_right:Ne \l__hep_jr_tmp_tl
+          {
+            \int_compare:nNnF {##1} = 1 { \exp_not:N \and }
+            \__hep_jr_name:n {##1}
+          }
+        \seq_clear:N \l__hep_jr_tmp_seq
+        \clist_map_inline:cn { \__hep_jr_field:nn {##1} { labels_clist } }
+          {
+            \prop_if_in:NnT \g__hep_jr_affil_prop {####1}
+              {
+                \seq_put_right:Ne \l__hep_jr_tmp_seq
+                  { \__hep_jr_affil:n {####1} }
+              }
+          }
+        \seq_map_inline:cn { \__hep_jr_field:nn {##1} { email_seq } }
+          {
+            \seq_put_right:Nn \l__hep_jr_tmp_seq
+              { \email {####1} }
+          }
+        \seq_map_inline:cn { \__hep_jr_field:nn {##1} { thanks_seq } }
+          { \seq_put_right:Nn \l__hep_jr_tmp_seq {####1} }
+        \tl_put_right:Ne \l__hep_jr_label_tl
+          {
+            \int_compare:nNnF {##1} = 1 { \exp_not:N \and }
+            \__hep_jr_name:n {##1}
+            \exp_not:N \at
+            \seq_use:Nn \l__hep_jr_tmp_seq { \\ }
+          }
+      }
+    \__hep_jr_emit:e { \exp_not:N \author { \exp_not:V \l__hep_jr_tmp_tl } }
+    \__hep_jr_emit:e
+      { \exp_not:N \institute { \exp_not:V \l__hep_jr_label_tl } }
+  }
+\cs_new_protected:Npn \__hep_jr_springer_late_abstract:n #1
+  {
+    \__hep_jr_class_abstract: #1
+    \cs_if_exist_use:N \__hep_jr_class_endabstract:
+  }
+%    \end{macrocode}
+%
+% \subsubsection{PoS}
+%
+% Every author gets one "\author" with affiliations and emails.
+% The series becomes "\FullConference", the title "\ShortTitle", unless they are given, and the keywords are appended to the abstract.
+% The class makes the title at the beginning of the document.
+% If the abstract is known by then, the title is made there and "\maketitle" does nothing.
+% Otherwise the data are handed over at the beginning of the document and the abstract and the title follow at "\maketitle".
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_pos_code:
+  {
+    \__hep_jr_no_preprint:
+    \__hep_jr_no_reprint:
+    \__hep_jr_no_orcid:
+    \__hep_jr_no_date:
+    \__hep_jr_emit:e { \exp_not:N \title { \__hep_jr_full_title: } }
+    \legacy_if:nF { @shorttitle }
+      {
+        \__hep_jr_emit:e
+          {
+            \exp_not:N \ShortTitle
+              {
+                \tl_if_empty:NTF \g__hep_jr_short_title_tl
+                  { \exp_not:V \g__hep_jr_title_tl }
+                  { \exp_not:V \g__hep_jr_short_title_tl }
+              }
+          }
+      }
+    \legacy_if:nF { @conf }
+      {
+        \tl_if_empty:NF \g__hep_jr_series_tl
+          {
+            \__hep_jr_emit:e
+              {
+                \exp_not:N \FullConference
+                  { \exp_not:V \g__hep_jr_series_tl }
+              }
+          }
+      }
+    \int_step_inline:nn { \g__hep_jr_authors_int }
+      {
+        \seq_clear:N \l__hep_jr_tmp_seq
+        \seq_put_right:Ne \l__hep_jr_tmp_seq
+          {
+            \__hep_jr_name:n {##1}
+            \seq_map_function:cN
+              { \__hep_jr_field:nn {##1} { thanks_seq } }
+              \__hep_jr_pos_thanks:n
+          }
+        \clist_map_inline:cn { \__hep_jr_field:nn {##1} { labels_clist } }
+          {
+            \prop_if_in:NnT \g__hep_jr_affil_prop {####1}
+              {
+                \seq_put_right:Ne \l__hep_jr_tmp_seq
+                  { \__hep_jr_affil:n {####1} }
+              }
+          }
+        \seq_if_empty:cF { \__hep_jr_field:nn {##1} { email_seq } }
+          {
+            \seq_put_right:Ne \l__hep_jr_tmp_seq
+              {
+                E-mail:~
+                \seq_map_function:cN
+                  { \__hep_jr_field:nn {##1} { email_seq } }
+                  \__hep_jr_pos_email:n
+              }
+          }
+        \__hep_jr_emit:e
+          {
+            \exp_not:N \author
+              { \seq_use:Nn \l__hep_jr_tmp_seq { \\ } }
+          }
+      }
+  }
+\cs_new:Npn \__hep_jr_pos_thanks:n #1
+  { \exp_not:N \thanks { \exp_not:n {#1} } }
+\cs_new:Npn \__hep_jr_pos_email:n #1
+  { \exp_not:N \email { \exp_not:n {#1} } \c_space_tl }
+\cs_new_protected:Npn \__hep_jr_pos_abstract:
+  {
+    \__hep_jr_emit:e
+      {
+        \exp_not:N \abstract
+          {
+            \bool_if:NT \g__hep_jr_abstract_bool
+              { \exp_not:V \g__hep_jr_abstract_tl }
+            \tl_if_empty:NF \g__hep_jr_keywords_tl
+              {
+                \exp_not:N \par \exp_not:N \medskip \exp_not:N \noindent
+                \exp_not:N \textit { Keywords: }
+                \c_space_tl \exp_not:V \g__hep_jr_keywords_tl
+              }
+          }
+      }
+  }
+\str_if_eq:VnT \g__hep_jr_backend_str { pos }
+  {
+    \cs_gset_eq:NN \__hep_jr_pos_maketitle: \auto@maketitle
+    \AddToHook { begindocument }
+      {
+        \bool_if:NF \g__hep_jr_abstract_bool
+          {
+            \bool_if:NT \g__hep_jr_aux_abstract_bool
+              {
+                \exp_args:NV \__hep_jr_store_abstract:n
+                  \g__hep_jr_aux_abstract_tl
+              }
+          }
+        \bool_if:NTF \g__hep_jr_abstract_bool
+          {
+            \__hep_jr_prepare:
+            \__hep_jr_pos_code:
+            \__hep_jr_pos_abstract:
+            \__hep_jr_run:
+          }
+          {
+            \seq_gclear:N \g__hep_jr_code_seq
+            \__hep_jr_pos_code:
+            \legacy_if_gset_true:n { @abstract }
+            \cs_gset_eq:NN \auto@maketitle \prg_do_nothing:
+            \cs_gset_protected:Npn \__hep_jr_pos_code:
+              {
+                \__hep_jr_pos_abstract:
+                \__hep_jr_emit:n
+                  {
+                    \legacy_if_set_true:n { @titlepage }
+                    \__hep_jr_pos_maketitle:
+                    \legacy_if_set_false:n { @titlepage }
+                  }
+              }
+            \__hep_jr_restore:
+            \__hep_jr_use_code:
+            \__hep_jr_install:n
+              {
+                title, author, affiliation, email, thanks, keywords,
+                date, subtitle, preprint, abstract, endabstract
+              }
+            \cs_gset_eq:NN \maketitle \__hep_jr_maketitle:
+          }
+      }
+  }
+\ExplSyntaxOff
+%    \end{macrocode}
+%
+%</journal>
+%
+% \section{Tests}
+%
+% The journal test documents share their title data, written with the macros of \software{hep-title}, so that only the class differs.
+%
+% \subsection{JHEP}
+%
+%<*testJHEP>
+%
+%    \begin{macrocode}
+\documentclass[a4paper, 11pt]{article}
+\usepackage[jhep, lang=english]{hep-paper}
+%    \end{macrocode}
+%
+%</testJHEP>
+%
+% \subsection{JCAP}
+%
+%<*testJCAP>
+%
+%    \begin{macrocode}
+\documentclass[a4paper, 11pt]{article}
+\usepackage[jcap, lang=english]{hep-paper}
+%    \end{macrocode}
+%
+%</testJCAP>
+%
+% \subsection{AMSArt}
+%
+%<*testAMSArt>
+%
+%    \begin{macrocode}
+\documentclass{amsart}
+\usepackage[lang=english]{hep-paper}
+%    \end{macrocode}
+%
+%</testAMSArt>
+%
+% \subsection{PoS}
+%
+% The series becomes the full conference information.
+%
+%<*testPoS>
+%
+%    \begin{macrocode}
+\documentclass{PoS}
+\usepackage[lang=english]{hep-paper}
+\series{Full conference}
+%    \end{macrocode}
+%
+%</testPoS>
+%
+% \subsection{RevTeX}
+%
+%<*testRevTeX>
+%
+%    \begin{macrocode}
+\documentclass[
+ aps,
+ prl,
+ reprint,
+ nofootinbib,
+ nobibnotes,
+ superscriptaddress,
+ preprintnumbers,
+]{revtex4-2}
+\usepackage{hep-paper}
+%    \end{macrocode}
+%
+%</testRevTeX>
+%
+% \subsection{Springer}
+%
+%<*testSpringer>
+%
+%    \begin{macrocode}
+\documentclass[twocolumn,epjc3]{svjour3}
+\usepackage[lang=english]{hep-paper}
+\journalname{Journal name}
+%    \end{macrocode}
+%
+%</testSpringer>
+%
+% \subsection{Common part}
+%
+%<*testJHEP|testJCAP|testAMSArt|testPoS|testRevTeX|testSpringer>
+%
+%    \begin{macrocode}
+\usepackage[math]{blindtext}
+
+\title{Title}
+\subtitle{Subtitle}
+
+\author[a]{First author \email{first@email.com}}
+\author[a,b]{Second author}
+\email{second@email.com}
+\thanks{Second thanks}
+\affiliation[a]{First affiliation}
+\affiliation[b]{Second affiliation}
+
+\keywords{First keyword, second keyword}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\blindtext
+\end{abstract}
+
+\Blinddocument
+
+\end{document}
+%    \end{macrocode}
+%
+%</testJHEP|testJCAP|testAMSArt|testPoS|testRevTeX|testSpringer>
+%
+% \subsection{Beamer}
+%
+%<*testBeamer>
+%
+%    \begin{macrocode}
+\documentclass{beamer}
+
+\usepackage[lang=english]{hep-paper}
+\usepackage[math]{blindtext}
+
+\title{Title}
+\subtitle{Subtitle}
+\author{Author}
+\institute{Institute}
+\date{Event}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Frame title}
+\blindtext
+\end{frame}
+
+\end{document}
+%    \end{macrocode}
+%
+%</testBeamer>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-paper` package
+
+Complete article preamble: fonts, math, title, references, floats,
+acronyms and bibliography
+
+## Introduction
+
+The `hep-paper` package is the aggregate publication setup for the HEP
+package suite. It configures the page geometry, language, fonts,
+hyperlinks, title data, bibliography, acronyms, references, floats, text
+helpers, and math fonts by loading the corresponding modular packages
+with publication-oriented defaults.
+
+For usual publications it is enough to load additionally to the `article`
+class without optional arguments only the `hep-paper` package.
+
+    \documentclass{article}
+    \usepackage{hep-paper}
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
+%
+% \Finale
+%
+\endinput
+
+% \PrintIndex
+% makeindex -s gglo.ist -o hep-paper-implementation.gls hep-paper-implementation.glo
+% makeindex -s gglo.ist -o hep-paper-implementation.ind hep-paper-implementation.idx
+
+% \begin{macro}{\refstepcounter@...}
+% Adjust the "cleveref" "\refstepcounter@noarg" and "\refstepcounter@optarg" to use the "\@currentlabel" in order to fix problems with "\subref".
+%    \begin{macrocode}
+% \def\refstepcounter@noarg#1{%
+%   \cref@old@refstepcounter{#1}%
+%   \cref@constructprefix{#1}{\cref@result}%
+%   \@ifundefined{cref@#1@alias}%
+%     {\def\@tempa{#1}}%
+%     {\def\@tempa{\csname cref@#1@alias\endcsname}}%
+%   \protected@edef\cref@currentlabel{%
+%     [\@tempa][\arabic{#1}][\cref@result]%
+%     \noexpand\@currentlabel%
+%   }% changed
+% }
+%
+% \def\refstepcounter@optarg[#1]#2{%
+%   \cref@old@refstepcounter{#2}%
+%   \cref@constructprefix{#2}{\cref@result}%
+%   \@ifundefined{cref@#1@alias}%
+%     {\def\@tempa{#1}}%
+%     {\def\@tempa{\csname cref@#1@alias\endcsname}}%
+%   \protected@edef\cref@currentlabel{%
+%     [\@tempa][\arabic{#2}][\cref@result]%
+%     \noexpand\@currentlabel% changed
+%   }%
+% }
+% %    \end{macrocode}
+% % \end{macro}
+%
+%
+% \RequirePackage{contour}
+% \renewcommand*{\ULdepth}{1.8pt}
+% \contourlength{0.8pt}
+% \newcommand*{\myuline}[1]{%
+%   \uline{\phantom{#1}}\llap{\contour{white}{#1}}%
+% }
+
+% \begin{macro}{\mathpzc}
+% Define the "\mathpzc" math script font based on the Zapf Chancery PostScript font.
+%    \begin{macrocode}
+% \DeclareFontFamily{OT1}{pzc}{}
+% \DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.15] pzcmi7t}{}
+% \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+%    \end{macrocode}
+% \end{macro}

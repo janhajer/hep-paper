@@ -1,0 +1,135 @@
+% hep-erc: loaded packages, title data, proposal counter, section
+% numbering, month macros and bookmarks.
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-erc}
+\input{hep-regression}
+\makeatletter
+% \PACKAGES{list}: loaded or not, and the options it was loaded with
+\newcommand*{\PACKAGES}[1]{%
+  \@for\hep@test@name:=#1\do{%
+    \TYPE{\hep@test@name: \expandafter\ifx
+      \csname ver@\hep@test@name.sty\endcsname\relax not loaded\else
+      loaded [\unexpanded\expandafter\expandafter\expandafter
+        {\csname opt@\hep@test@name.sty\endcsname}]%
+      \fi}%
+  }%
+}
+\makeatother
+\author{First Last}
+\title{Title}
+\begin{document}
+\makeatletter
+% Load all fonts before the test
+\setbox0\vbox{\May\begin{abstract}Text\end{abstract}\section{S}%
+  \subsection{S}\maketitle}
+\START
+
+\TEST{Loaded packages and their options}{%
+  \PACKAGES{hep-font,hep-math-font,hep-text,hep-bibliography,hep-acronym,%
+    hep-reference,hep-title,hep-float,geometry,titlesec,titleps,lastpage,%
+    enumitem,hep-cv,tabulary,tikz,standalone}%
+}
+
+\TEST{Page geometry}{%
+  \TYPE{paper: \the\paperwidth\space x \the\paperheight}%
+  \TYPE{text: \the\textwidth\space x \the\textheight}%
+  \TYPE{headsep: \the\headsep, footskip: \the\footskip}%
+}
+
+\TEST{Duration in months as date}{%
+  \TYPE{\meaning\months}%
+  \TYPE{\@date}%
+  \renewcommand*{\months}{48}%
+  \TYPE{\@date}%
+}
+
+\TEST{Proposal counter}{%
+  \TYPE{\theproposal}%
+  \setcounter{proposal}{1}%
+  \TYPE{\theproposal}%
+  \setcounter{proposal}{2}%
+  \TYPE{\theproposal}%
+  \TYPE{\csname cref@proposal@name\endcsname,
+    \csname cref@proposal@name@plural\endcsname}%
+}
+
+\TEST{Abstract name}{%
+  \TYPE{\abstractname}%
+  \setbox0\vbox{\begin{abstract}Text\end{abstract}}%
+  \TYPE{abstract done}%
+}
+
+\TEST{Section numbering}{%
+  \setcounter{section}{1}\setcounter{subsection}{2}%
+  \TYPE{\thesection}%
+  \TYPE{\thesubsection}%
+}
+
+\TEST{Bookmarks: sectioning commands}{%
+  \setcounter{section}{0}%
+  \SECTIONBOOKMARKS{%
+    \section{Extended synopsis}%
+    \subsection{State of the art}%
+    \section*{Starred}%
+    \hypersetup{bookmarksnumbered}%
+    \section{Methodology}%
+    \subsection{Work plan}%
+  }%
+}
+
+\TEST{Page header: family name of the author}{%
+  \SHOWHBOX{\heperc@tail{\AB@author}}%
+}
+
+\TEST{Section labels: bare letter in references, decorated heading}{%
+  \setcounter{section}{0}%
+  \setbox0\vbox{\section{Intro}\TYPE{label: \@currentlabel}}%
+  \setbox0\hbox{\@seccntformat{section}}%
+  \setbox2\hbox{Section a:\quad}%
+  \TYPE{heading label is `Section a:':
+    \ifdim\wd0=\wd2 true\else false\fi}%
+  \setbox0\hbox{\@seccntformat{subsection}}%
+  \setbox2\hbox{a.0\quad}%
+  \TYPE{subsection label is `a.0':
+    \ifdim\wd0=\wd2 true\else false\fi}%
+}
+
+\TEST{Page header: thanks marks and missing subtitle}{%
+  \TYPE{subtitle: [\heperc@head@subtitle]}%
+  \begingroup
+  \def\AB@author{\protect\Authfont\protect\AB@setsep
+    First Last\protect\thanks{Funded.}}%
+  \setbox0\hbox{\heperc@head@author}%
+  \setbox2\hbox{Last}%
+  \TYPE{author is `Last': \ifdim\wd0=\wd2 true\else false\fi}%
+  \endgroup
+  \subtitle{Acronym}%
+  \TYPE{subtitle: [\heperc@head@subtitle]}%
+}
+
+\TEST{Month macros}{%
+  \setbox0\hbox{May}%
+  \TYPE{width of May: \the\wd0}%
+  \@for\hep@test@name:=Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec\do{%
+    \setbox0\hbox{\csname\hep@test@name\endcsname}%
+    \TYPE{\hep@test@name: \the\wd0}%
+  }%
+  \SHOWHBOX{\May}%
+}
+
+\TEST{Month macros are robust and plain in PDF strings}{%
+  \TYPE{\meaning\Jan}%
+  \PDFSTRING{Since \Jan\ 2020 until \Dec\ 2021}%
+  \SECTIONBOOKMARKS{\section{Since \May\ 2020}}%
+  \edef\hep@test@name{\Jan}%
+  \TYPE{\meaning\hep@test@name}%
+}
+
+\TEST{CV macros}{%
+  \TYPE{\meaning\cvline}%
+  \TYPE{\meaning\cventry}%
+}
+
+\makeatother
+\END

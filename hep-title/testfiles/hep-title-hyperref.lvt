@@ -1,0 +1,112 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-title}% loads hyperref through orcidlink
+\hypersetup{unicode=false}% readable PDF strings
+\input{hep-regression}
+
+\title{The Title\thanks{Title thanks}}
+\subtitle{The Subtitle}
+\series{The Series}
+\author{Ann Author \email{ann@mail.com}}
+\author{Bob Author}
+\affiliation{Affil}
+\keywords{one, two}
+
+\ExplSyntaxOn
+\newcommand*{\RESETAUTHORS}{\seq_gclear:N \g_hep_authors_seq}
+\ExplSyntaxOff
+% The PDF author entry that \maketitle generates from the \author list #1
+% (\maketitle itself is tested once; typesetting it each time would collect
+% too many footnotes)
+\newcommand*{\TITLEAUTHOR}[1]{%
+  \RESETAUTHORS#1%
+  \UseHook{cmd/maketitle/before}%
+  \PDFINFO{author}%
+}
+
+\begin{document}
+% Load the fonts before \START
+\setbox0\hbox{$x^x$\LARGE$x^x$\Large$x^x$\large$x^x$\small$x^x$
+  \footnotesize$x^x$}
+\makeatletter
+\START
+
+\TEST{Document information before \maketitle}{%
+  \PDFINFO{title}\PDFINFO{author}\PDFINFO{subject}\PDFINFO{keywords}%
+}
+
+\TEST{Document information after \maketitle}{%
+  \setbox0\vbox{\maketitle}%
+  \PDFINFO{title}\PDFINFO{author}\PDFINFO{subject}\PDFINFO{keywords}%
+}
+
+\TEST{PDF author: one, two and three authors}{%
+  \TITLEAUTHOR{\author{Ann}}%
+  \TITLEAUTHOR{\author{Ann}\author{Bob}}%
+  \TITLEAUTHOR{\author{Ann}\author{Bob}\author{Cid}}%
+}
+
+\TEST{PDF author: footnotes, emails and ORCID links are dropped}{%
+  \TITLEAUTHOR{\author{Ann \email{ann@mail.com}}\author{Bob}}%
+  \TITLEAUTHOR{\author{Ann\email{ann@mail.com}}\author{Bob}}%
+  \TITLEAUTHOR{\author{Ann \thanks{Thanks}}\author{Bob}}%
+  \TITLEAUTHOR{\author{Ann \footnote{Footnote}}\author{Bob}}%
+  \TITLEAUTHOR{\author{Ann \orcidlink{0000-0002-1825-0097}}\author{Bob}}%
+  \TITLEAUTHOR{\author{Ann \orcmail{0000-0002-1825-0097}{ann@mail.com}}%
+    \author{Bob}}%
+  \TITLEAUTHOR{\author{Ann \email{ann@mail.com} \orcid{0000-0002-1825-0097}}%
+    \author{Bob}}%
+}
+
+\TEST{PDF author: labelled email and thanks}{%
+  \TITLEAUTHOR{\author{Ann \email[x]{ann@mail.com}}\author{Bob}}%
+  \TITLEAUTHOR{\author{Ann \thanks[y]{Thanks}}\author{Bob}}%
+}
+
+\TEST{PDF author: line break, tie and accents}{%
+  \TITLEAUTHOR{\author{Ann\\Author}\author{Bob}}%
+  \TITLEAUTHOR{\author{A.~Ann}\author{Bob}}%
+  \TITLEAUTHOR{\author{Ren\'e M\"uller}\author{Bob}}%
+}
+
+\TEST{PDF author: formatting, links, \and and line breaks with arguments}{%
+  \TITLEAUTHOR{\author{Ann \textbf{Author}}\author{Bob}}%
+  \TITLEAUTHOR{\author{Ann \href{https://example.org}{Author}}\author{Bob}}%
+  \TITLEAUTHOR{\author{Ann \and Bob}\author{Cid}}%
+  \TITLEAUTHOR{\author{Ann \\[2pt] Author}\author{Bob\\*Author}}%
+  \TITLEAUTHOR{\author[a]{Ann \email[x]{ann@mail.com}\thanks{T}}%
+    \author[b]{Bob \orcidlink{0000-0002-1825-0097}}}%
+}
+
+\TEST{PDF information set by the user is kept by \maketitle}{%
+  \hypersetup{pdfauthor={Custom Author}, pdftitle={Custom Title},
+    pdfkeywords={custom}}%
+  \PDFINFO{author}%
+  \TITLEAUTHOR{\author{Ann}}%
+  \PDFINFO{title}\PDFINFO{keywords}%
+  \hypersetup{pdfauthor={}, pdftitle={}, pdfkeywords={}}%
+}
+
+\TEST{PDF title: footnotes and line breaks}{%
+  \title{A\\Title \thanks[x]{Thanks} with \textbf{bold}\thanks{More}}%
+  \UseHook{cmd/maketitle/before}%
+  \PDFINFO{title}%
+}
+
+\TEST{PDF strings of the email and ORCID macros}{%
+  \PDFSTRING{Contact: \email{ann@mail.com}}%
+  \PDFSTRING{Contact: \orcmail{0000-0002-1825-0097}{ann@mail.com}}%
+  \PDFSTRING{\orcidlink{0000-0002-1825-0097}}%
+  \PDFSTRING{Contact: \email{ann@mail.com} \orcid{0000-0002-1825-0097}}%
+}
+
+\TEST{Bookmarks of a section with an email address}{%
+  \SECTIONBOOKMARKS{\section{Contact \email{ann@mail.com}}}%
+}
+
+\TEST{PDF author with Unicode PDF strings}{%
+  \hypersetup{unicode=true}%
+  \TITLEAUTHOR{\author{Ann \email{ann@mail.com}}\author{Bob}}%
+}
+
+\END

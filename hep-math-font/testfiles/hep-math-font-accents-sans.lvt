@@ -1,0 +1,18 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage[sans]{hep-font}
+\usepackage{hep-math-font}
+\input{hep-regression}
+\begin{document}
+% Load all fonts before the test, so font loading is not recorded.
+\setbox0\hbox{$\vec x \dashedvec x \dottedvec x
+  x_{\dashedvec x_{\dottedvec x}}$\boldmath$\vec x \dashedvec x$}
+\START
+% In sans-serif documents \vec and the dashed and dotted accents use the
+% sans-serif math italic fonts.
+\TEST{Accents like vec}{%
+  \SHOWHBOX{$\vec A \, x_{\vec b}$}%
+  \SHOWHBOX{$\dashedvec A \, x_{\dottedvec b}$}}
+\TEST{Bold math version}{%
+  \SHOWHBOX{\boldmath$\vec x \dashedvec x \dottedvec x$}}
+\END

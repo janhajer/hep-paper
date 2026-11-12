@@ -1,0 +1,859 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Moving arguments: text and math definitions
+============================================================
+[\protect \i  \protect \d  \protect \overline  {x} $\protect \i  \protect \d  x \protect \overline  {x}$]
+[$\protect \oset {a}{b}\protect \oset {\leftarrow }{x}\protect \oset {\rightarrow }{x}\protect \oset {\leftrightarrow }{x}$]
+[$\protect \diag  x\protect \sgn  x\protect \tr  x\protect \Tr  x\protect \rank  x\protect \Re  x\protect \Im  x$]
+[$\sin x\protect \cos  x\protect \tan  x\protect \arccsc  x$]
+============================================================
+============================================================
+TEST 2: Moving arguments: fractions, units, derivatives
+============================================================
+[\unit [5]{GeV} \unit {\GeV } \protect \inv {fb} \protect \inv [2]{cm}]
+[\protect \ensuremath  {\nicefrac {\protect \text  {1}}{\protect \text  {2}}} $\nicefrac 12\flatfrac 12\flatfrac *12$]
+[$\mathop {}\protect \!x\protect \d  x \derivative [f]x \derivative *xf \mathop {}\protect \!\partial x \partialderivative [f]x[y]$]
+[$\mathop {}\protect \!\delta x \functionalderivative [F]x \protect \cancel  {x}$]
+============================================================
+============================================================
+TEST 3: Moving arguments: delimiters and bra-ket
+============================================================
+[$\protect \abs  x\norm x\norm [2]x\evaluated x_0^1\protect \order  x$]
+[$\protect \commutator  xy\protect \poissonbracket  xy\protect \poissonbracket  xy$]
+[$\bra x\protect \ket  x\protect \braket  xy\ketbra xy$]
+[$\protect \matrixelement  xyz\expectationvalue x\expectationvalue [\Omega ]x\expectationvalue [0]{x}$]
+[$\protect \column  {x,y}\protect \row  {x,y}$]
+[$x^\protect \transpose  y^\protect \transpose  \protect \slashed  {p} \protect \slashed  \mathop {}\protect \!\partial $]
+============================================================
+============================================================
+TEST 4: Bookmarks: mathdef macros (text and math meaning)
+============================================================
+[The i and d in text]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[Math idx]
+[Over text]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[Over x]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[Vectors \(x,y\) and \(x,y\)]
+============================================================
+============================================================
+TEST 5: Bookmarks: accents and operators
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\partial' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[b and ]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[x and x]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[Sine sin x]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[Cosine cos x]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[Operators diag \(a\) and Re z]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[tan x arccsc x log x lim x lim inf x op x]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[Pr and Pr[x |y]]
+============================================================
+============================================================
+TEST 6: Bookmarks: fractions and units
+============================================================
+[Unit GeV and GeV]
+[Value 5 GeV]
+[Keyval GeV/s]
+[Quantity 5 GeV]
+[Inverse fb\136-1 and 5 fb\136-1 and cm\136-2]
+[Fraction m/s and 5 m/s]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[Fractions 1/2, 1/2, 1/2]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[Fractions a/b, a/b]
+============================================================
+============================================================
+TEST 7: Bookmarks: derivatives
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\mathop' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\leavevmode@ifvmode' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                \kern -1.66702pt
+(hyperref)                removed on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\mathop' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\leavevmode@ifvmode' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                \kern -1.66702pt
+(hyperref)                removed on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\partial' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\mathop' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\leavevmode@ifvmode' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                \kern -1.66702pt
+(hyperref)                removed on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\delta' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[x and x and x]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\derivative' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\derivative' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[[f]x and xf]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\partialderivative' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\functionalderivative' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[[f]x and [F]x]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[x]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\partial' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[p and ]
+============================================================
+============================================================
+TEST 8: Bookmarks: delimiters and bra-ket
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\norm' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\norm' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[x, x, [2]x]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\evaluated' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `superscript' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[x01, x]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[xy, xy, xy]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\bra' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\ketbra' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[x, x, xy, xy]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\expectationvalue' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\expectationvalue' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[xyz, x, [0]x]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `superscript' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `superscript' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[x\136T and \(x,y\)\136T]
+============================================================
+============================================================
+TEST 9: Bookmarks: Unicode
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\new@ifnextchar' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\0005\000\040\000G\000e\000V\000,\000\040\0001\000/\0002\000,\000\040\000x]
+============================================================
+============================================================
+TEST 10: Bookmarks: sectioning commands
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\mathop' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\leavevmode@ifvmode' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                \kern -1.66702pt
+(hyperref)                removed on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[Differential x and unit 5 GeV]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\derivative' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[Derivative [f]x and xy]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[Optional x]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[The d and i]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `superscript' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[Transpose x\136T and p]
+============================================================
+============================================================
+TEST 11: Table of contents and list of figures
+============================================================
+(hep-math-hyperref.toc)
+> \box...=
+\vbox(105.1662+3.81944)x200.0, direction TLT
+.\hbox(10.0512+0.1728)x200.0, glue set 136.68323fil, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\kern0.0
+...\penalty 10000
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\hbox(0.0+0.0)x0.0, shifted -18.0, direction TLT
+.....\pdfdest name{section*.3} xyz
+.....\penalty 10000
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\TU/lmr/bx/n/14.4 C
+..\TU/lmr/bx/n/14.4 o
+..\TU/lmr/bx/n/14.4 n
+..\discretionary (penalty 50)
+...< \TU/lmr/bx/n/14.4 -
+...= \kern-0.4464 (font)
+..\TU/lmr/bx/n/14.4 t
+..\TU/lmr/bx/n/14.4 e
+..\TU/lmr/bx/n/14.4 n
+..\kern-0.4464 (font)
+..\TU/lmr/bx/n/14.4 t
+..\TU/lmr/bx/n/14.4 s
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty 10000
+.\glue 9.913 plus 0.86198
+.\glue -9.913 plus -0.86198
+.\glue 10.0 plus 1.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.8272
+.\hbox(7.0+0.11)x200.0, glue set 19.23277fil, direction TLT
+..\glue(\leftskip) 15.0
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\glue -15.0
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+..\hbox(6.55+0.0)x15.0, glue set 9.25fil, direction TLT
+...\TU/lmr/bx/n/10 1
+...\glue 0.0 plus 1.0fil
+..\TU/lmr/bx/n/10 D
+..\TU/lmr/bx/n/10 i
+..\discretionary (penalty 50)
+...< \TU/lmr/bx/n/10 f
+...< \TU/lmr/bx/n/10 -
+...> \TU/lmr/bx/n/10 f
+...= \TU/lmr/bx/n/10 ﬀ
+..\TU/lmr/bx/n/10 e
+..\TU/lmr/bx/n/10 r
+..\discretionary (penalty 50)
+...< \TU/lmr/bx/n/10 -
+..\TU/lmr/bx/n/10 e
+..\TU/lmr/bx/n/10 n
+..\discretionary (penalty 50)
+...< \TU/lmr/bx/n/10 -
+...= \kern-0.32 (font)
+..\TU/lmr/bx/n/10 t
+..\TU/lmr/bx/n/10 i
+..\TU/lmr/bx/n/10 a
+..\TU/lmr/bx/n/10 l
+..\glue(\spaceskip) 3.83 plus 1.915 minus 1.27667
+..\mathon
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\glue -1.66663
+..\glue(\thinmuskip) 1.66663
+..\OML/cmm/m/it/10 d
+..\OML/cmm/m/it/10 x
+..\mathoff
+..\glue(\spaceskip) 3.83 plus 1.915 minus 1.27667
+..\TU/lmr/bx/n/10 a
+..\TU/lmr/bx/n/10 n
+..\TU/lmr/bx/n/10 d
+..\glue(\spaceskip) 3.83 plus 1.915 minus 1.27667
+..\TU/lmr/bx/n/10 u
+..\TU/lmr/bx/n/10 n
+..\TU/lmr/bx/n/10 i
+..\TU/lmr/bx/n/10 t
+..\glue(\spaceskip) 3.83 plus 1.915 minus 1.27667
+..\mathon
+..\OT1/cmr/m/n/10 5
+..\mathoff
+..\penalty 10000
+..\kern1.66702
+..\hbox(6.97+0.11)x22.04, direction TLT
+...\TU/lmr/bx/n/10 G
+...\TU/lmr/bx/n/10 e
+...\kern-0.96 (font)
+...\TU/lmr/bx/n/10 V
+..\pdfendlink
+..\penalty 10000
+..\glue 0.0 plus 1.0fil
+..\penalty 10000
+..\hbox(6.55+0.0)x15.50003, glue set 9.75003fil, direction TLT
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\TU/lmr/bx/n/10 1
+...\kern-1.0
+...\kern1.0
+..\penalty 10000
+..\glue(\parfillskip) -15.50003
+..\glue(\rightskip) 15.50003
+.\penalty -300
+.\glue 10.0 plus 1.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\lineskip) 1.0
+.\hbox(13.70952+6.85951)x200.0, glue set 49.7341fil, direction TLT
+..\glue(\leftskip) 15.0
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\glue -15.0
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2}
+..\hbox(6.55+0.0)x15.0, glue set 9.25fil, direction TLT
+...\TU/lmr/bx/n/10 2
+...\glue 0.0 plus 1.0fil
+..\TU/lmr/bx/n/10 D
+..\TU/lmr/bx/n/10 e
+..\TU/lmr/bx/n/10 r
+..\TU/lmr/bx/n/10 i
+..\TU/lmr/bx/n/10 v
+..\kern-0.64 (font)
+..\TU/lmr/bx/n/10 a
+..\discretionary (penalty 50)
+...< \TU/lmr/bx/n/10 -
+..\TU/lmr/bx/n/10 t
+..\TU/lmr/bx/n/10 i
+..\TU/lmr/bx/n/10 v
+..\kern-0.32 (font)
+..\TU/lmr/bx/n/10 e
+..\glue(\spaceskip) 3.83 plus 1.915 minus 1.27667
+..\mathon
+..\hbox(13.70952+6.85951)x13.32013, direction TLT
+...\hbox(13.70952+6.85951)x13.32013, direction TLT
+....\hbox(13.70952+6.85951)x13.32013, direction TLT
+.....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+.....\vbox(13.70952+6.85951)x10.92014, direction TLT
+......\hbox(6.94444+1.94444)x10.92014, glue set 0.70485fil, direction TLT
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+.......\hbox(0.0+0.0)x0.0, direction TLT
+.......\glue -1.66663
+.......\glue(\thinmuskip) 1.66663
+.......\OML/cmm/m/it/10 d
+.......\kern-1.66667 (font)
+.......\OML/cmm/m/it/10 f
+.......\kern1.0764 (italic)
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+......\kern2.12064 (font)
+......\rule(0.39998+0.0)x*
+......\kern2.21507 (font)
+......\hbox(6.94444+0.0)x10.92014, direction TLT
+.......\hbox(0.0+0.0)x0.0, direction TLT
+.......\glue -1.66663
+.......\glue(\thinmuskip) 1.66663
+.......\OML/cmm/m/it/10 d
+.......\hbox(4.30554+0.0)x5.71527, direction TLT
+........\hbox(0.0+0.0)x0.0, direction TLT
+........\OML/cmm/m/it/10 x
+.....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+..\mathoff
+..\glue(\spaceskip) 3.83 plus 1.915 minus 1.27667
+..\TU/lmr/bx/n/10 a
+..\TU/lmr/bx/n/10 n
+..\TU/lmr/bx/n/10 d
+..\glue(\spaceskip) 3.83 plus 1.915 minus 1.27667
+..\mathon
+..\OMS/cmsy/m/n/10 h
+..\glue 0.55554
+..\OML/cmm/m/it/10 x
+..\glue 1.11108
+..\OMS/cmsy/m/n/10 j
+..\glue 1.11108
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\OML/cmm/m/it/10 y
+..\kern0.35878 (italic)
+..\glue 0.55554
+..\OMS/cmsy/m/n/10 i
+..\mathoff
+..\pdfendlink
+..\penalty 10000
+..\glue 0.0 plus 1.0fil
+..\penalty 10000
+..\hbox(6.55+0.0)x15.50003, glue set 9.75003fil, direction TLT
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\TU/lmr/bx/n/10 1
+...\kern-1.0
+...\kern1.0
+..\penalty 10000
+..\glue(\parfillskip) -15.50003
+..\glue(\rightskip) 15.50003
+.\penalty -300
+.\glue 10.0 plus 1.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\lineskip) 1.0
+.\hbox(8.43597+0.11)x200.0, glue set 120.98994fil, direction TLT
+..\glue(\leftskip) 15.0
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\glue -15.0
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.3}
+..\hbox(6.55+0.11)x15.0, glue set 9.25fil, direction TLT
+...\TU/lmr/bx/n/10 3
+...\glue 0.0 plus 1.0fil
+..\TU/lmr/bx/n/10 O
+..\TU/lmr/bx/n/10 v
+..\kern-0.32 (font)
+..\TU/lmr/bx/n/10 e
+..\TU/lmr/bx/n/10 r
+..\glue(\spaceskip) 3.83 plus 1.915 minus 1.27667
+..\hbox(8.43597+0.0)x0.0, glue set - 20.53001fil, direction TLT
+...\hbox(0.0+0.0)x0.0, direction TLT
+...\kern-0.25
+...\leaders 20.78001
+....\rule(8.43597+-7.99196)x*
+...\kern0.0
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\TU/lmr/bx/n/10 t
+..\TU/lmr/bx/n/10 e
+..\TU/lmr/bx/n/10 x
+..\TU/lmr/bx/n/10 t
+..\pdfendlink
+..\penalty 10000
+..\glue 0.0 plus 1.0fil
+..\penalty 10000
+..\hbox(6.55+0.0)x15.50003, glue set 9.75003fil, direction TLT
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\TU/lmr/bx/n/10 1
+...\kern-1.0
+...\kern1.0
+..\penalty 10000
+..\glue(\parfillskip) -15.50003
+..\glue(\rightskip) 15.50003
+.\penalty -300
+.\glue 10.0 plus 1.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 3.9175
+.\hbox(7.9725+3.81944)x200.0, glue set 73.29567fil, direction TLT
+..\glue(\leftskip) 15.0
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\glue -15.0
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.4}
+..\hbox(6.56+0.0)x15.0, glue set 9.25fil, direction TLT
+...\TU/lmr/bx/n/10 4
+...\glue 0.0 plus 1.0fil
+..\TU/lmr/bx/n/10 T
+..\kern-0.96 (font)
+..\TU/lmr/bx/n/10 r
+..\TU/lmr/bx/n/10 a
+..\TU/lmr/bx/n/10 n
+..\TU/lmr/bx/n/10 s
+..\discretionary (penalty 50)
+...< \TU/lmr/bx/n/10 -
+..\TU/lmr/bx/n/10 p
+..\kern0.32 (font)
+..\TU/lmr/bx/n/10 o
+..\TU/lmr/bx/n/10 s
+..\TU/lmr/bx/n/10 e
+..\glue(\spaceskip) 3.83 plus 1.915 minus 1.27667
+..\mathon
+..\OML/cmm/m/it/10 x
+..\hbox(4.34358+0.0)x5.02779, shifted -3.62892, direction TLT
+...\hbox(3.01389+1.3297)x4.52779, shifted -1.3297, direction TLT
+....\mathon
+....\U/msa/m/n/7 |
+....\mathoff
+..\mathoff
+..\glue(\spaceskip) 3.83 plus 1.915 minus 1.27667
+..\TU/lmr/bx/n/10 a
+..\TU/lmr/bx/n/10 n
+..\TU/lmr/bx/n/10 d
+..\glue(\spaceskip) 3.83 plus 1.915 minus 1.27667
+..\mathon
+..\hbox(6.18056+3.81944)x5.03125, direction TLT
+...\hbox(6.18056+3.81944)x5.03125, direction TLT
+....\hbox(7.5+2.5)x5.03125, glue set 0.01563fil, shifted 1.31944, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern0.0
+.....\hbox(7.5+2.5)x5.00002, direction TLT
+......\mathon
+......\OML/cmm/m/it/10 =
+......\mathoff
+.....\kern0.0
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(4.30554+1.94444)x0.0, glue set - 5.03125fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(4.30554+1.94444)x5.03125, direction TLT
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(4.30554+1.94444)x5.03125, direction TLT
+.......\mathon
+.......\OML/cmm/m/it/10 p
+.......\mathoff
+......\glue 0.0 plus 1.0fil minus 1.0fil
+..\mathoff
+..\pdfendlink
+..\penalty 10000
+..\glue 0.0 plus 1.0fil
+..\penalty 10000
+..\hbox(6.55+0.0)x15.50003, glue set 9.75003fil, direction TLT
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\TU/lmr/bx/n/10 1
+...\kern-1.0
+...\kern1.0
+..\penalty 10000
+..\glue(\parfillskip) -15.50003
+..\glue(\rightskip) 15.50003
+! OK.
+<argument> ...e =20em\tableofcontents }\showbox 0 
+                                                  \setbox 0\vbox {\hsize =20...
+l. ...}
+(hep-math-hyperref.lof)
+> \box...=
+\vbox(47.07799+2.5)x200.0, direction TLT
+.\penalty -300
+.\glue 15.08499 plus 4.31 minus 0.86198
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(10.08+2.8944)x200.0, glue set 96.99686fil, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\kern0.0
+...\penalty 10000
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\hbox(0.0+0.0)x0.0, shifted -18.0, direction TLT
+.....\pdfdest name{section*.4} xyz
+.....\penalty 10000
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\TU/lmr/bx/n/14.4 L
+..\TU/lmr/bx/n/14.4 i
+..\TU/lmr/bx/n/14.4 s
+..\TU/lmr/bx/n/14.4 t
+..\glue(\spaceskip) 5.4 plus 2.7 minus 1.8
+..\TU/lmr/bx/n/14.4 o
+..\TU/lmr/bx/n/14.4 f
+..\glue(\spaceskip) 5.4 plus 2.7 minus 1.8
+..\TU/lmr/bx/n/14.4 F
+..\TU/lmr/bx/n/14.4 i
+..\TU/lmr/bx/n/14.4 g
+..\discretionary (penalty 50)
+...< \TU/lmr/bx/n/14.4 -
+..\TU/lmr/bx/n/14.4 u
+..\TU/lmr/bx/n/14.4 r
+..\TU/lmr/bx/n/14.4 e
+..\TU/lmr/bx/n/14.4 s
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty 10000
+.\glue 9.913 plus 0.86198
+.\glue 0.0 plus 0.2
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 1.6056
+.\hbox(7.5+2.5)x200.0, glue set 77.84943fill, direction TLT
+..\glue(\leftskip) 38.00003
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x15.0, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\penalty 10000
+..\glue -38.00003
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1}
+..\hbox(6.66+0.0)x23.00003, glue set 18.00003fil, direction TLT
+...\TU/lmr/m/n/10 1
+...\glue 0.0 plus 1.0fil
+..\TU/lmr/m/n/10 K
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 t
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\mathon
+..\glue 1.11108
+..\OMS/cmsy/m/n/10 j
+..\glue 1.11108
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\OML/cmm/m/it/10 x
+..\glue 0.55554
+..\OMS/cmsy/m/n/10 i
+..\mathoff
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 n
+..\TU/lmr/m/n/10 d
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\mathon
+..\OMS/cmsy/m/n/10 j
+..\OML/cmm/m/it/10 x
+..\OMS/cmsy/m/n/10 j
+..\mathoff
+..\pdfendlink
+..\penalty 10000
+..\leaders 0.0 plus 1.0fill
+...\hbox(1.06+0.0)x7.77988, direction TLT
+....\mathon
+....\kern2.49994 (italic)
+....\hbox(1.06+0.0)x2.78, direction TLT
+.....\TU/lmr/m/n/10 .
+....\kern2.49994 (italic)
+....\mathoff
+..\penalty 10000
+..\hbox(6.66+0.0)x15.50003, glue set 10.50003fil, direction TLT
+...\glue 0.0 plus 1.0fil
+...\pdfcolorstack 0 push {0 g 0 G}
+...\TU/lmr/m/n/10 1
+...\kern-1.0
+...\kern1.0
+..\pdfcolorstack 0 pop
+..\penalty 10000
+..\glue(\parfillskip) -25.50003
+..\glue(\rightskip) 25.50003
+! OK.
+<argument> ...ize =20em\listoffigures }\showbox 0 
+l. ...}
+============================================================

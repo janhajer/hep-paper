@@ -1,0 +1,1060 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019-2026 by Jan Hajer
+% -----------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%
+%<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
+%<package>\ProvidesPackage{hep-font}[2026/11/11 v2.1 Latin Modern and New Computer Modern text fonts with numeral styles and Greek letters]
+%<documentation>\ProvidesFile{hep-font-documentation.tex}[2026/11/11 v2.1 hep-font documentation]
+%
+%<*documentation>
+\documentclass{ltxdoc}
+
+\renewcommand*\theCodelineNo{\rmfamily\tstyle\footnotesize\arabic{CodelineNo}}
+\AtBeginEnvironment{macrocode}{\renewcommand*{\ttdefault}{clmt}}
+\renewcommand*{\MacroFont}{\codestyle}
+\AtBeginDocument{\DeleteShortVerb{\|}}
+\AtBeginDocument{\MakeShortVerb{\"}}
+\renewcommand*{\MakePrivateLetters}{\makeatletter\catcode`\_=11\catcode`\:=11\relax}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+
+\usepackage{hologo}
+\usepackage{array}
+
+\usepackage[parskip,oldstyle,font=10pt]{hep-paper}
+\bibliography{bibliography}
+\acronym{CM}{computer modern}
+\acronym{LM}{latin modern}
+\acronym{NCM}{new computer modern}
+\acronym{NFSS}{new font selection scheme}
+\acronym{LGR}{local Greek}
+\acronym{TOC}{table of contents}
+%</documentation>
+
+%<*driver>
+\expandafter\newif\csname ifshort\endcsname
+\shortfalse
+\begin{document}
+\DocInput{hep-font-implementation.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{524}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.0}{2021/09/01}{Created the dedicated font package with size, family, numeral, encoding, microtype, Latin Modern and Computer Modern, small-caps, and upright italic handling.}
+% \changes{v1.1}{2022/11/01}{Added size and sans-serif options, class font-size detection, dynamic size loading, code and verbatim styling, safer option passing, and namespaced font-shape helpers.}
+% \changes{v1.2}{2023/07/01}{Disabled size overrides under jheppub, added tabular figures to table-of-contents and float contexts, introduced \cs{codestyle}, and refreshed documentation and README formatting.}
+% \changes{v1.3}{2024/11/01}{Made equation numbers use table-style figures.}
+% \changes{v1.4}{2025/09/01}{Split pdfLaTeX and TU-engine font setup, using iftex, fontspec, unicode-math, and fontsetup for LuaLaTeX and XeLaTeX, and applied starred command definitions.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, refreshed the documentation and README, replaced engine markup that broke documentation builds, and updated the checksum.}
+% \changes{v2.0}{2026/10/07}{Separated text from math fonts: dropped fontsetup and unicode-math, loaded New Computer Modern text faces directly, kept the class font size by default, provided a proportional typewriter and an uncial font, scoped the tabular figures in contents entries, declared the LGR families of cfr-lm before substituting them, silenced the info messages of nfssext-cfr, and kept nfssext-cfr from overwriting user macros named \cs{set}.}
+% \changes{v2.1}{2026/11/11}{Left contents entries alone that do not take two arguments, such as those of amsart, made all warning macros redefined by silence robust, and restricted the tabular lining numerals from whole floats to tabulars, so that captions keep the numerals of the text. Made the text commands, the declarations, \cs{code} and the Greek letters work in hyperref bookmarks.}
+%
+% \ifshort
+%<*documentation>
+% \fi
+%
+\GetFileInfo{hep-font.sty}
+
+\title{The \software{hep-font} package\thanks{This document corresponds to \software{hep-font}~\fileversion.}}
+\subtitle{Latin Modern and New Computer Modern text fonts with numeral styles and Greek letters}
+\author{Jan Hajer \email{jan.hajer@tecnico.ulisboa.pt}}
+\date{\filedate}
+
+% \ifshort
+\begin{document}
+% \fi
+
+\newgeometry{vscale=.8, vmarginratio=3:4, includeheadfoot, left=11em, marginparwidth=4.6cm, marginparsep=3mm, right=7em}
+
+\maketitle
+
+\begin{abstract}
+The \software{hep-font} package sets up the text fonts for the HEP package suite.
+It keeps or sets the document font size, switches between serif and sans-serif documents, chooses lining or oldstyle numerals, and provides Greek letters in text.
+With \hologo{pdfLaTeX} it uses \LM extended by \CM shapes, with \hologo{LuaLaTeX} and \hologo{XeLaTeX} it uses \NCM.
+The package configures text only; the matching math fonts are provided by the \software{hep-math-font} package.
+\end{abstract}
+
+The package is loaded using "\usepackage{hep-font}".
+When the \software{hep-math-font} package is used as well, it has to be loaded after this package.
+
+\section{Options}
+
+\DescribeMacro{size}
+The "size="\meta{size} option sets the document font size, for example "size=10.5pt", using the \software{fontsize} package.
+The default "size=default" keeps the font size chosen by the document class.
+Sizes that are not positive point sizes are reported as errors.
+
+\DescribeMacro{sans}
+\DescribeMacro{serif}
+The "sans" option switches the main text to the sans-serif font, the default "serif" option keeps the serif font.
+
+\DescribeMacro{oldstyle}
+\DescribeMacro{lining}
+The "oldstyle" option switches to oldstyle numerals such as 123 in text mode instead of the default lining numerals such as \textl{123}.
+Numerals in math mode are always lining.
+
+\section{Fonts}
+
+The fonts depend on the engine, see \cref{tab:fonts}.
+\begin{table}
+\begin{tabular}{@{}l>{\raggedright}p{.36\linewidth}>{\raggedright\arraybackslash}p{.36\linewidth}@{}}
+\toprule
+Role & \hologo{pdfLaTeX} & \hologo{LuaLaTeX} and \hologo{XeLaTeX} \\
+\midrule
+Text & \LM via \software{cfr-lm} & \NCM roman, sans and mono \\
+Greek & CB Greek via \LGR & \NCM \\
+Small caps & \CM bold and sans small caps & \NCM \\
+\bottomrule
+\end{tabular}
+\caption{Text fonts used by the different engines.}
+\label{tab:fonts}
+\end{table}
+
+For \hologo{pdfLaTeX} the "T1" and \LGR font encodings are loaded with the \software{fontenc} package \cite{fontenc}, together with the \software{inputenc} package \cite{inputenc} and the "utf8" option.
+The \LM fonts are loaded using the \software{cfr-lm} package \cite{cfr-lm}, which extends the \LaTeX{} \NFSS with the \software{nfssext-cfr} package \cite{nfssext-cfr}.
+Some restrictions of \CM fonts are lifted with the \software{fix-cm} package \cite{fix-cm} and the text companion fonts are loaded \cite{textcomp}.
+
+\DescribeMacro{\textsc}
+Bold \textbf{\textsc{Small Caps}} and sans-serif \textsf{\textsc{Small Caps}} are taken from the \CM fonts \cite{cm}, using the \software{sansmathfonts} \cite{sansmathfonts}, \software{hfoldsty} \cite{hfoldsty} and \software{slantsc} \cite{slantsc} packages.
+
+\DescribeMacro{\textui}
+A sans-serif upright italic font is provided using the \software{sansmathfonts} package \cite{sansmathfonts}.
+
+For \hologo{LuaLaTeX} and \hologo{XeLaTeX} the \NCM text fonts are loaded with the \software{fontspec} package \cite{fontspec}.
+Below \unit[9]{pt} the optical sizes designed for \unit[8]{pt} are used.
+Slanted roman and typewriter text uses synthetic slanting, as the \software{fontsetup} package \cite{fontsetup} did previously.
+\DescribeMacro{\uncial}
+\DescribeMacro{\textuncial}
+The uncial font is available via "\uncial" and "\textuncial"\marg{text}.
+
+In both cases the \software{microtype} \cite{microtype} optimisations are activated.
+
+\section{Macros}
+
+\DescribeMacro{\textl}
+\DescribeMacro{\texto}
+\DescribeMacro{\textp}
+\DescribeMacro{\textt}
+The numeral style can be changed locally with "\textl"\marg{text} for lining, "\texto"\marg{text} for oldstyle, "\textp"\marg{text} for proportional and "\textt"\marg{text} for tabular numerals.
+\DescribeMacro{\textpl}
+\DescribeMacro{\textpo}
+\DescribeMacro{\texttl}
+\DescribeMacro{\textto}
+The combinations are available as "\textpl", "\textpo", "\texttl" and "\textto".
+\DescribeMacro{\lstyle}
+\DescribeMacro{\ostyle}
+\DescribeMacro{\pstyle}
+\DescribeMacro{\tstyle}
+The corresponding declarations are "\lstyle", "\ostyle", "\pstyle", "\tstyle", "\plstyle", "\postyle", "\tlstyle" and "\tostyle".
+
+\DescribeMacro{\tmstyle}
+\DescribeMacro{\tvstyle}
+The "\tmstyle" declaration selects the usual fixed-width typewriter font and "\tvstyle" selects the proportional \LM typewriter font.
+With \hologo{LuaLaTeX} and \hologo{XeLaTeX} the proportional typewriter font does not contain Greek letters.
+
+\DescribeMacro{\codestyle}
+\DescribeMacro{\code}
+The "\codestyle" declaration selects fixed-width typewriter with lining numerals and is used for verbatim text.
+The "\code"\marg{code} macro typesets its argument verbatim in this style.
+
+\DescribeMacro{\alpha}
+Greek letters such as "\alpha" and "\Gamma" typeset text Greek outside of math, using the \software{alphabeta} package \cite{alphabeta}, \eg \alpha\beta\Gamma.
+In math mode they keep their usual meaning.
+Hyphenation and other language settings are left to language packages.
+
+\DescribeMacro{\tableofcontents}
+Entries of the \TOC, tabulars and equation numbers use tabular numerals, which are lining or oldstyle like the numerals of the text.
+Tabulars are covered whether they are inside a float or not, while float captions keep the proportional numerals of the text.
+With \hologo{XeLaTeX} the regular and italic serif faces of \NCM keep proportional oldstyle numerals, since the order of their OpenType features cannot be changed there.
+The equation counter itself is not changed, so that references and hyperlinks are unaffected.
+
+The macros can be used in sectioning titles together with the \software{hyperref} package \cite{hyperref}.
+Its bookmarks keep the argument of the text commands such as "\textl" and ignore the declarations such as "\ostyle", and the Greek letters become Unicode characters.
+In bookmarks and document information "\code" keeps its argument as it is, including underscores, but as a verbatim command it cannot be used in sectioning titles.
+
+% \ifshort
+\printbibliography
+
+\end{document}
+%
+%</documentation>
+% \fi
+%
+% \StopEventually{
+% \printbibliography
+% \PrintChanges
+% }
+%
+% \appendix
+%
+% \section{Implementation}
+%
+%<*package>
+%
+% \subsection{Options}
+%
+% Define a "hepfont" namespace for the options using the \software{kvoptions} package \cite{kvoptions}.
+%    \begin{macrocode}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=hepfont,
+  prefix=hepfont@
+}
+%    \end{macrocode}
+%
+% \begin{macro}{size}
+% Define the "size" option, which keeps the class font size by default.
+%    \begin{macrocode}
+\DeclareStringOption[default]{size}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{sans}
+% \begin{macro}{serif}
+% Define the "sans" option switching to sans serif font.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{sans}
+\DeclareComplementaryOption{serif}{sans}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{lining}
+% \begin{macro}{oldstyle}
+% Define the "lining" option deactivating the use of oldstyle figures in text mode.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{lining}
+\DeclareComplementaryOption{oldstyle}{lining}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% Process options.
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+%    \end{macrocode}
+%
+% Validate an explicit size already here, but change the size only after the fonts are set up.
+% Otherwise fractional sizes can lead to spurious font substitutions.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\str_if_eq:VnF \hepfont@size {default} {
+  \exp_args:NnV \regex_match:nnTF
+    {\A [0-9]+ (\.[0-9]+)? pt \Z} \hepfont@size {
+    \dim_compare:nNnF {\hepfont@size} > {0pt} {
+      \PackageError{hep-font}{Font~size~must~be~positive}
+        {Use~size=default~or~e.g.~size=11pt.}
+    }
+  }{
+    \PackageError{hep-font}{Invalid~font~size~'\hepfont@size'}
+      {Use~size=default~or~e.g.~size=11pt.}
+  }
+}
+\ExplSyntaxOff
+%    \end{macrocode}
+%
+% Distinguish the engines using the \software{iftex} package \cite{iftex}.
+%    \begin{macrocode}
+\RequirePackage{iftex}
+%    \end{macrocode}
+%
+% \subsection{Unicode engines}
+%
+% Load the \NCM text fonts with the \software{fontspec} package \cite{fontspec}.
+% The numeral style is set per text family and not as a global default, so that math fonts loaded later do not inherit oldstyle numerals.
+%    \begin{macrocode}
+\iftutex
+  \RequirePackage{fontspec}
+  \ifhepfont@lining
+    \def\hepfont@numbers{Lining}
+  \else
+    \def\hepfont@numbers{OldStyle}
+  \fi
+%    \end{macrocode}
+%
+% Use the regular, italic and bold faces and the \unit[8]{pt} optical sizes below \unit[9]{pt}.
+% Slanted roman and typewriter text is slanted synthetically.
+%    \begin{macrocode}
+  \setmainfont{NewCM10-Regular.otf}[
+    Numbers=\hepfont@numbers,
+    SlantedFont=NewCM10-Regular.otf,
+    SlantedFeatures={FakeSlant=.25},
+    BoldSlantedFont=NewCM10-Bold.otf,
+    BoldSlantedFeatures={FakeSlant=.25},
+    SizeFeatures={
+      {Size=-9,Font=NewCM08-Regular.otf,ItalicFont=NewCM08-Italic.otf},
+      {Size=9-,Font=NewCM10-Regular.otf,ItalicFont=NewCM10-Italic.otf}
+    }
+  ]
+  \setsansfont{NewCMSans10-Regular.otf}[
+    Numbers=\hepfont@numbers,
+    SlantedFont=NewCMSans10-Oblique.otf,
+    BoldSlantedFont=NewCMSans10-BoldOblique.otf,
+    SizeFeatures={
+      {Size=-9,Font=NewCMSans08-Regular.otf,
+        ItalicFont=NewCMSans08-Oblique.otf},
+      {Size=9-,Font=NewCMSans10-Regular.otf,
+        ItalicFont=NewCMSans10-Oblique.otf}
+    }
+  ]
+  \setmonofont{NewCMMono10-Regular.otf}[
+    Numbers=\hepfont@numbers,
+    SlantedFont=NewCMMono10-Regular.otf,
+    SlantedFeatures={FakeSlant=.25},
+    BoldSlantedFont=NewCMMono10-Bold.otf,
+    BoldSlantedFeatures={FakeSlant=.25}
+  ]
+%    \end{macrocode}
+%
+% \begin{macro}{\uncial}
+% \begin{macro}{\textuncial}
+% Provide the uncial font.
+%    \begin{macrocode}
+  \newfontfamily\uncial{NewCMUncial10-Regular.otf}[
+    Numbers=\hepfont@numbers,
+    BoldFont=NewCMUncial10-Bold.otf,
+    SlantedFont=NewCMUncial10-Regular.otf,
+    SlantedFeatures={FakeSlant=.25},
+    BoldSlantedFont=NewCMUncial10-Bold.otf,
+    BoldSlantedFeatures={FakeSlant=.25}
+  ]
+  \DeclareTextFontCommand{\textuncial}{\uncial}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% Define the proportional \LM typewriter font used by "\tvstyle".
+% It does not contain Greek letters.
+%    \begin{macrocode}
+  \newfontfamily\hepfont@vmono{lmmonoprop10-regular.otf}[
+    Numbers=\hepfont@numbers,
+    ItalicFont=lmmonoprop10-oblique.otf,
+    BoldFont=lmmonoproplt10-bold.otf,
+    BoldItalicFont=lmmonoproplt10-boldoblique.otf
+  ]
+%    \end{macrocode}
+%
+% Switch to the sans-serif font if requested.
+%    \begin{macrocode}
+  \ifhepfont@sans
+    \renewcommand*{\familydefault}{\sfdefault}
+  \fi
+%    \end{macrocode}
+%
+% \begin{macro}{\hepfont@pnum}
+% \begin{macro}{\hepfont@tnum}
+% The OpenType features are applied in the order of the lookups in the font, not in the order in which they are requested.
+% The regular and italic \NCM serif faces list "tnum" before "onum", so that "tnum" leaves the lining digits alone and "onum" then replaces them with the proportional oldstyle digits, although the fonts contain tabular oldstyle digits.
+% With \hologo{LuaTeX} define the "hepftnum" feature, which the \software{luaotfload} package \cite{luaotfload} appends after the lookups of the font, and which replaces the proportional by the tabular oldstyle digits.
+% Fonts without these glyphs are unaffected.
+% \hologo{XeTeX} offers no such hook and keeps the proportional digits.
+%    \begin{macrocode}
+  \ifluatex
+    \directlua{
+      local data = {}
+      for _, digit in ipairs{"zero", "one", "two", "three", "four",
+          "five", "six", "seven", "eight", "nine"} do
+        data[digit .. ".oldstyle"] = digit .. ".taboldstyle"
+      end
+      fonts.handlers.otf.addfeature{
+        name = "hepftnum", type = "substitution", data = data
+      }
+    }
+    \def\hepfont@pnum{Numbers=Proportional,RawFeature=-hepftnum}
+    \def\hepfont@tnum{Numbers=Monospaced,RawFeature=+hepftnum}
+  \else
+    \def\hepfont@pnum{Numbers=Proportional}
+    \def\hepfont@tnum{Numbers=Monospaced}
+  \fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\pstyle}
+% \begin{macro}{\tstyle}
+% \begin{macro}{\ostyle}
+% \begin{macro}{\lstyle}
+% Provide the numeral declarations of the \software{cfr-lm} package also for the Unicode engines.
+% They are local to the current group and cannot be used as math alphabets.
+%    \begin{macrocode}
+  \DeclareRobustCommand{\pstyle}{%
+    \not@math@alphabet\pstyle\relax
+    \expandafter\addfontfeatures\expandafter{\hepfont@pnum}%
+  }
+  \DeclareRobustCommand{\tstyle}{%
+    \not@math@alphabet\tstyle\relax
+    \expandafter\addfontfeatures\expandafter{\hepfont@tnum}%
+  }
+  \DeclareRobustCommand{\ostyle}{%
+    \not@math@alphabet\ostyle\relax
+    \addfontfeatures{Numbers=OldStyle}%
+  }
+  \DeclareRobustCommand{\lstyle}{%
+    \not@math@alphabet\lstyle\relax
+    \addfontfeatures{Numbers=Lining}%
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\postyle}
+% \begin{macro}{\plstyle}
+% \begin{macro}{\tostyle}
+% \begin{macro}{\tlstyle}
+% Combine the numeral declarations.
+%    \begin{macrocode}
+  \DeclareRobustCommand{\postyle}{\pstyle\ostyle}
+  \DeclareRobustCommand{\plstyle}{\pstyle\lstyle}
+  \DeclareRobustCommand{\tostyle}{\tstyle\ostyle}
+  \DeclareRobustCommand{\tlstyle}{\tstyle\lstyle}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\tmstyle}
+% \begin{macro}{\tvstyle}
+% Select the fixed-width and the proportional typewriter fonts.
+%    \begin{macrocode}
+  \DeclareRobustCommand{\tmstyle}{\ttfamily}
+  \DeclareRobustCommand{\tvstyle}{\ttfamily\hepfont@vmono}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\textl}
+% \begin{macro}{\texto}
+% \begin{macro}{\textp}
+% \begin{macro}{\textt}
+% \begin{macro}{\textpl}
+% \begin{macro}{\textpo}
+% \begin{macro}{\texttl}
+% \begin{macro}{\textto}
+% Define the text commands taking the text as argument.
+%    \begin{macrocode}
+  \DeclareTextFontCommand{\textl}{\lstyle}
+  \DeclareTextFontCommand{\texto}{\ostyle}
+  \DeclareTextFontCommand{\textp}{\pstyle}
+  \DeclareTextFontCommand{\textt}{\tstyle}
+  \DeclareTextFontCommand{\textpl}{\plstyle}
+  \DeclareTextFontCommand{\textpo}{\postyle}
+  \DeclareTextFontCommand{\texttl}{\tlstyle}
+  \DeclareTextFontCommand{\textto}{\tostyle}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\hep@lining@style}
+% Provide lining numerals for other packages of the suite, \eg for units typeset by the \software{hep-math} package.
+%    \begin{macrocode}
+  \protected\def\hep@lining@style{\lstyle}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{pdf\TeX}
+%
+% Load the "utf8" input encoding \cite{inputenc} and the "T1" font encoding \cite{fontenc}.
+%    \begin{macrocode}
+\else
+  \PassOptionsToPackage{utf8}{inputenc}
+  \RequirePackage{inputenc}
+  \def\hepfont@encoding{T1}
+  \PassOptionsToPackage{\hepfont@encoding}{fontenc}
+  \RequirePackage{fontenc}
+  \ifhepfont@sans
+    \renewcommand*{\familydefault}{\sfdefault}
+  \fi
+%    \end{macrocode}
+%
+% Silence the expected messages of the \software{nfssext-cfr} package \cite{nfssext-cfr} using the \software{silence} \cite{silence} and \software{etoolbox} \cite{etoolbox} packages.
+% The \software{silence} package redefines the warning macros with "\def\sl@PackageName", which breaks if a warning is expanded within an "\edef".
+% This happens for instance with undefined references in the \software{svjour3} "\thanksref" macro.
+% Therefore make them robust.
+%    \begin{macrocode}
+  \RequirePackage{etoolbox}
+  \RequirePackage{silence}
+  \robustify\PackageWarning
+  \robustify\PackageWarningNoLine
+  \robustify\ClassWarning
+  \robustify\ClassWarningNoLine
+  \robustify\@latex@warning
+  \robustify\@latex@warning@no@line
+  \robustify\@font@warning
+  \robustify\sl@StoreMessage
+  \WarningFilter{nfssext-cfr}
+    {Patching font initialisation macro for serif.}
+  \WarningFilter{nfssext-cfr}
+    {Patching font initialisation macro for sans.}
+  \WarningFilter{nfssext-cfr}
+    {Patching font initialisation macro for typewriter.}
+  \WarningFilter{nfssext-cfr}
+    {Overwriting kernel definition of \swshape (new)}
+%    \end{macrocode}
+%
+% Load the \LM fonts using the \software{cfr-lm} package \cite{cfr-lm}, whose default are oldstyle numerals.
+%    \begin{macrocode}
+  \ifhepfont@lining
+    \PassOptionsToPackage{rm={lining},sf={lining},tt={lining}}{cfr-lm}
+  \fi
+  \RequirePackage{cfr-lm}
+%    \end{macrocode}
+%
+% \begin{macro}{\exfs@info}
+% Each switch of the numeral style loads a font family, and \software{nfssext-cfr} writes an info message to the log file for every switch.
+% Drop these messages, but keep them as warnings in the "debug" mode of \software{nfssext-cfr}.
+% Its real warnings are not affected.
+% The macro is only defined at the beginning of the document.
+% The code avoids \TeX\ conditionals, since "\ifexfs@debug" is undefined in the skipped Unicode branch.
+%    \begin{macrocode}
+  \ExplSyntaxOn
+  \hook_gput_code:nnn { begindocument/before } { hep-font } {
+    \cs_if_exist:NT \exfs@info {
+      \RenewDocumentCommand \exfs@info { O{nfssext-cfr} m } {
+        \legacy_if:nT { exfs@debug }
+          { \PackageWarning {#1} { Info:~#2 } }
+      }
+    }
+  }
+  \hook_gset_rule:nnnn { begindocument/before }
+    { nfssext-cfr } { before } { hep-font }
+  \ExplSyntaxOff
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\exfs@merge@families}
+% \begin{macro}{\hepfont_cfr_set:}
+% The \software{nfssext-cfr} package combines numeral styles with "\exfs@merge@families", which stores its list of font variants globally in "\set".
+% In oldstyle mode every switch such as "\tstyle" therefore overwrites user macros of this name, for example the "\set" of \software{hep-math}, also during the measuring pass of the "align" environment, which typesets the equation number.
+% Rename the list to "\hepfont@exfs@set" with the \software{xpatch} package \cite{xpatch}, repeating the patch until no "\set" is left.
+% The macro is only defined at the beginning of the document, so the patch runs in the same hook as above.
+%    \begin{macrocode}
+  \RequirePackage{xpatch}
+  \ExplSyntaxOn
+  \cs_new_protected:Npn \hepfont_cfr_set: {
+    \xpatchcmd \exfs@merge@families { \set } { \hepfont@exfs@set }
+      { \hepfont_cfr_set: } { }
+  }
+  \hook_gput_code:nnn { begindocument/before } { hep-font } {
+    \cs_if_exist:NT \exfs@merge@families { \hepfont_cfr_set: }
+  }
+  \ExplSyntaxOff
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\hep@lining@style}
+% The \software{cfr-lm} package encodes the numeral style in the font family name, where a "j" marks oldstyle numerals.
+% Remove this marker from the current \LM family and keep the other choices.
+% Other font families use the original "\lstyle".
+%    \begin{macrocode}
+  \ExplSyntaxOn
+  \cs_set_eq:NN \hepfont_cfr_lstyle: \lstyle
+  \cs_set_protected:Npn \hep@lining@style {
+    \tl_set:Nx \l_tmpa_tl { \f@family }
+    \exp_args:NnV \regex_match:nnTF { \A clm } \l_tmpa_tl {
+      \regex_replace_once:nnN { \A ( clm [^j]* ) j } { \1 } \l_tmpa_tl
+      \fontfamily { \tl_use:N \l_tmpa_tl }
+      \selectfont
+    }{\hepfont_cfr_lstyle:}
+  }
+  \ExplSyntaxOff
+%    \end{macrocode}
+% \end{macro}
+%
+% Lift restrictions of the \CM fonts \cite{fix-cm} and load the text companion fonts \cite{textcomp}.
+%    \begin{macrocode}
+  \RequirePackage{fix-cm}
+  \RequirePackage{textcomp}
+%    \end{macrocode}
+%
+% \begin{macro}{\hepfont@sc@shapes}
+% \begin{macro}{\textsc}
+% Store the current series and shape, so that the font state can be restored after the setup.
+%    \begin{macrocode}
+  \edef\hepfont@restore{%
+    \noexpand\fontseries{\f@series}\noexpand\fontshape{\f@shape}%
+  }
+  \rmfamily
+%    \end{macrocode}
+% The \LM fonts have no bold small caps.
+% Declare them for the serif families with proportional and tabular lining and oldstyle numerals, since the numeral declarations such as "\tstyle", which the \TOC uses, switch between these families.
+% The font definitions of each family are loaded first, so that they cannot overwrite the declarations later.
+% The italic small caps are the slanted ones.
+%    \begin{macrocode}
+  \newcommand*{\hepfont@sc@shapes}[2]{%
+    \begingroup\fontfamily{#1}\selectfont\endgroup
+    \hepfont@sc@shape{#1}{b}{sc}{#2/bx/sc}%
+    \hepfont@sc@shape{#1}{bx}{sc}{#2/bx/sc}%
+    \hepfont@sc@shape{#1}{b}{scsl}{#2/bx/scsl}%
+    \hepfont@sc@shape{#1}{bx}{scsl}{#2/bx/scsl}%
+    \hepfont@sc@shape{#1}{b}{scit}{#2/bx/scsl}%
+    \hepfont@sc@shape{#1}{bx}{scit}{#2/bx/scsl}%
+  }
+  \newcommand*{\hepfont@sc@shape}[4]{%
+    \DeclareFontShape{\hepfont@encoding}{#1}{#2}{#3}{<->ssub*#4}{}%
+  }
+%    \end{macrocode}
+% Bold small caps with lining numerals are taken from the \CM fonts.
+% The \software{slantsc} package \cite{slantsc} combines the small caps with the slanted and italic shapes.
+%    \begin{macrocode}
+  \ifhepfont@lining
+    \RequirePackage{slantsc}
+  \fi
+  \hepfont@sc@shapes{clm2}{cmr}
+  \hepfont@sc@shapes{clm}{cmr}
+%    \end{macrocode}
+% Bold small caps with oldstyle numerals are taken from the \software{hfoldsty} fonts \cite{hfoldsty}.
+%    \begin{macrocode}
+  \DeclareFontFamily{\hepfont@encoding}{hfor}{}
+  \DeclareFontShape{\hepfont@encoding}{hfor}{bx}{sc}{
+    <-6>hfoxc0500<6-7>hfoxc0600<7-8>hfoxc0700<8-9>hfoxc0800
+    <9-10>hfoxc0900<10-12>hfoxc1000<12-17>hfoxc1200<17->hfoxc1728
+  }{}
+  \DeclareFontShape{\hepfont@encoding}{hfor}{bx}{scsl}{
+    <-6>hfooc0500<6-7>hfooc0600<7-8>hfooc0700<8-9>hfooc0800
+    <9-10>hfooc0900<10-12>hfooc1000<12-17>hfooc1200<17->hfooc1728
+  }{}
+  \hepfont@sc@shapes{clm2j}{hfor}
+  \hepfont@sc@shapes{clmj}{hfor}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\hepfont@sf@shapes}
+% \begin{macro}{\hepfont@sf@shape}
+% \begin{macro}{\textui}
+% The sans-serif small caps and the upright italic shape are taken from the \CM sans fonts of the \software{sansmathfonts} package \cite{sansmathfonts}.
+% These small caps have lining numerals only.
+% Declare the shapes for the sans-serif families with proportional and tabular lining and oldstyle numerals, since the numeral declarations such as "\tstyle" switch between these families.
+% The font definitions of each family are loaded first, so that they cannot overwrite the declarations later.
+%    \begin{macrocode}
+  \newcommand*{\hepfont@sf@shapes}[1]{%
+    \begingroup\fontfamily{#1}\selectfont\endgroup
+    \hepfont@sf@shape{#1}{m}{sc}{<->ssub*xcmss/m/sc}%
+    \hepfont@sf@shape{#1}{b}{sc}{<->ssub*xcmss/bx/sc}%
+    \hepfont@sf@shape{#1}{bx}{sc}{<->ssub*xcmss/bx/sc}%
+    \hepfont@sf@shape{#1}{m}{scit}{<->ssub*xcmss/m/scit}%
+    \hepfont@sf@shape{#1}{b}{scit}{<->ssub*xcmss/bx/scit}%
+    \hepfont@sf@shape{#1}{bx}{scit}{<->ssub*xcmss/bx/scit}%
+    \hepfont@sf@shape{#1}{m}{scsl}{<->ssub*xcmss/m/scit}%
+    \hepfont@sf@shape{#1}{b}{scsl}{<->ssub*xcmss/bx/scit}%
+    \hepfont@sf@shape{#1}{bx}{scsl}{<->ssub*xcmss/bx/scit}%
+    \hepfont@sf@shape{#1}{m}{ui}{<->cmssu10}%
+  }
+  \newcommand*{\hepfont@sf@shape}[4]{%
+    \DeclareFontShape{\hepfont@encoding}{#1}{#2}{#3}{#4}{}%
+  }
+  \hepfont@sf@shapes{clm2s}
+  \hepfont@sf@shapes{clms}
+  \hepfont@sf@shapes{clm2js}
+  \hepfont@sf@shapes{clmjs}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% Leave the serif family, which was selected for the small caps declarations, again.
+% Otherwise the rest of the preamble and the hooks of the beginning of the document measure lengths such as "ex" in the serif font, even in sans-serif documents.
+% Select the default family with the stored series and shape, as "\normalfont" does at the beginning of the document.
+%    \begin{macrocode}
+  \fontfamily{\familydefault}\hepfont@restore\selectfont
+\fi
+%    \end{macrocode}
+%
+% \subsection{Greek letters}
+%
+% Load the \software{alphabeta} package \cite{alphabeta}, which lets the Greek letter macros typeset text Greek outside of math.
+%    \begin{macrocode}
+\RequirePackage{alphabeta}
+%    \end{macrocode}
+%
+% \begin{macro}{\hepfont_greek_wrap:nn}
+% With the Unicode engines a math font package such as \software{unicode-math} \cite{unicode-math} can redefine the Greek letter macros at the beginning of the document.
+% Wrap them afterwards, so that they select the text command "\text"\meta{name} in text mode and their saved math meaning in math mode.
+% The separate name for the saved meaning prevents recursion if another package also wraps them.
+% The \software{hyperref} package does not expand protected macros in bookmarks, therefore record that the letters stand for the text commands there, see \cref{sec:pdfstring}.
+%    \begin{macrocode}
+\iftutex
+  \ExplSyntaxOn
+  \cs_new_protected:Npn \hepfont_greek_wrap:nn #1#2 {
+    \cs_gset_eq:cc {hepfont_math_#1:}{#1}
+    \cs_gset_protected:cpn {#1}
+      {\TextOrMath{\use:c {text#2}}{\use:c {hepfont_math_#1:}}}
+    \tl_gput_right:Nn \g_hepfont_greek_pdfstring_tl
+      {\cs_set_eq:cc {#1}{text#2}}
+  }
+%    \end{macrocode}
+% \end{macro}
+% Wrap the letters and the variants which correspond to a different text letter.
+%    \begin{macrocode}
+  \AddToHook{begindocument/end}{
+    \clist_map_inline:nn {
+      Alpha, Beta, Gamma, Delta, Epsilon, Zeta, Eta, Theta, Iota, Kappa,
+      Lambda, Mu, Nu, Xi, Omicron, Pi, Rho, Sigma, Tau, Upsilon, Phi,
+      Chi, Psi, Omega, alpha, beta, gamma, delta, epsilon, zeta, eta,
+      theta, iota, kappa, lambda, mu, nu, xi, omicron, pi, rho, sigma,
+      tau, upsilon, phi, chi, psi, omega
+    }{\hepfont_greek_wrap:nn {#1}{#1}}
+    \hepfont_greek_wrap:nn {varsigma}{finalsigma}
+    \hepfont_greek_wrap:nn {varepsilon}{epsilon}
+    \hepfont_greek_wrap:nn {varphi}{phi}
+    \hepfont_greek_wrap:nn {vartheta}{thetasymbol}
+    \hepfont_greek_wrap:nn {varrho}{rhosymbol}
+    \hepfont_greek_wrap:nn {varpi}{pisymbol}
+  }
+  \ExplSyntaxOff
+\fi
+%    \end{macrocode}
+%
+% \begin{macro}{\hepfont_lgr_substitute:nn}
+% With \hologo{pdfLaTeX} text Greek uses the \LGR encoding.
+% The \software{cfr-lm} package does not provide \LGR fonts, so substitute each of its families with the matching CB Greek family.
+% Declaring the family first prevents \LaTeX{} from searching for a non-existing font definition file such as \file{LGRclm.fd}, which would otherwise be reported by \software{latexmk}.
+%    \begin{macrocode}
+\ifpdftex
+  \ExplSyntaxOn
+  \cs_new_protected:Npn \hepfont_lgr_substitute:nn #1#2 {
+    \clist_map_inline:nn {#1} {
+      \DeclareFontFamily{LGR}{##1}{}
+      \DeclareFontFamilySubstitution{LGR}{##1}{#2}
+    }
+  }
+%    \end{macrocode}
+% \end{macro}
+% Map the numeral and width variants of the serif, sans-serif and typewriter families.
+%    \begin{macrocode}
+  \hepfont_lgr_substitute:nn
+    {clm, clmj, clm2, clm2j, clmd, clmdj, clm2d, clm2dj}{lmr}
+  \hepfont_lgr_substitute:nn
+    {clms, clmjs, clm2s, clm2js, clmqs, clmjqs, clm2qs, clm2jqs}{lmss}
+  \hepfont_lgr_substitute:nn
+    {clmt, clmjt, clm2t, clm2jt, clmv, clmjv, clm2v, clm2jv}{lmtt}
+  \ExplSyntaxOff
+%    \end{macrocode}
+% The CB Greek typewriter font has no bold face.
+% Use the bold serif face instead, keeping the weight.
+%    \begin{macrocode}
+  \input{lgrlmtt.fd}
+  \DeclareFontShape{LGR}{lmtt}{b}{n}{<->ssub*lmr/bx/n}{}
+  \DeclareFontShape{LGR}{lmtt}{bx}{n}{<->ssub*lmr/bx/n}{}
+  \DeclareFontShape{LGR}{lmtt}{b}{it}{<->ssub*lmr/bx/it}{}
+  \DeclareFontShape{LGR}{lmtt}{bx}{it}{<->ssub*lmr/bx/it}{}
+  \DeclareFontShape{LGR}{lmtt}{b}{sl}{<->ssub*lmr/bx/sl}{}
+  \DeclareFontShape{LGR}{lmtt}{bx}{sl}{<->ssub*lmr/bx/sl}{}
+\fi
+%    \end{macrocode}
+%
+% \subsection{Font size}
+%
+% Change the font size if requested, now that the fonts are set up.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\str_if_eq:VnF \hepfont@size {default}
+  {\RequirePackage{fontsize}\changefontsize{\hepfont@size}}
+\ExplSyntaxOff
+%    \end{macrocode}
+%
+% \subsection{Micro-typography}
+%
+% Activate the \software{microtype} optimisations \cite{microtype}.
+%    \begin{macrocode}
+\RequirePackage{microtype}
+%    \end{macrocode}
+%
+% \subsection{Table of contents}
+%
+% \begin{macro}{\@dottedtocline}
+% Use tabular numerals in \TOC entries.
+% Appending "\tstyle" to "\normalfont" also covers page numbers for which the class resets the font.
+% The group keeps the change local to the entry.
+%    \begin{macrocode}
+\AddToHook{cmd/@dottedtocline/before}
+  {\begingroup\appto\normalfont{\tstyle}\tstyle}
+\AddToHook{cmd/@dottedtocline/after}{\endgroup}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\hepfont_toc_wrap:n}
+% \begin{macro}{\hepfont_toc_wrap_aux:n}
+% The book and report classes define entries such as "\l@chapter" which pass their two arguments on to "\@dottedtocline" implicitly.
+% An after hook would take these arguments, therefore wrap the entries such that they take both arguments and pass them on within a group.
+% Entries with a different signature, such as the argument-less "\l@section" of \software{amsart}, are left alone.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\cs_new_protected:Npn \hepfont_toc_wrap:n #1 {
+  \cs_if_exist:cT {l@#1} {
+    \str_if_eq:eeT
+      { \exp_args:Nc \cs_argument_spec:N {l@#1} }
+      { \c_hash_str 1 \c_hash_str 2 }
+      { \hepfont_toc_wrap_aux:n {#1} }
+  }
+}
+\cs_new_protected:Npn \hepfont_toc_wrap_aux:n #1 {
+  \cs_gset_eq:cc {hepfont_toc_saved_#1:}{l@#1}
+  \cs_gset_protected:cpn {l@#1} ##1##2 {
+    \group_begin:
+    \appto\normalfont{\tstyle}\tstyle
+    \use:c {hepfont_toc_saved_#1:}{##1}{##2}
+    \group_end:
+  }
+}
+\AddToHook{begindocument/end}{
+  \clist_map_inline:nn {section, chapter, part}{\hepfont_toc_wrap:n {#1}}
+}
+\ExplSyntaxOff
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \subsection{Code}
+%
+% \begin{macro}{\codestyle}
+% Use fixed-width typewriter with lining numerals for code and verbatim text.
+%    \begin{macrocode}
+\newcommand*{\codestyle}{\ttfamily\tmstyle\lstyle}
+\let\verbatim@font\codestyle
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\code}
+% Typeset the argument verbatim using the \software{xparse} package \cite{xparse}.
+% Remember whether this definition is used, as a "\code" macro of another package can take different arguments.
+%    \begin{macrocode}
+\RequirePackage{xparse}
+\ExplSyntaxOn
+\bool_new:N \g_hepfont_code_bool
+\cs_if_exist:NF \code {\bool_gset_true:N \g_hepfont_code_bool}
+\ExplSyntaxOff
+\ProvideDocumentCommand{\code}{v}{{\codestyle #1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Tables and equations}
+%
+% \begin{environment}{tabular}
+% Use tabular numerals in tabulars, whether they are inside a float or not.
+% They keep the lining or oldstyle numerals of the surrounding text.
+% Captions and the remaining float contents keep the numerals of the text.
+% The hooks run inside the group of the environment, so the setting stays local.
+%    \begin{macrocode}
+\AddToHook{env/tabular/begin}{\tstyle}
+\AddToHook{env/tabular*/begin}{\tstyle}
+\AddToHook{env/tabularx/begin}{\tstyle}
+\AddToHook{env/tabulary/begin}{\tstyle}
+\AddToHook{env/longtable/begin}{\tstyle}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{macro}{\maketag@@@}
+% \begin{macro}{\@eqnnum}
+% Use tabular numerals for the equation numbers, lining or oldstyle following the package option, using the \software{xpatch} package \cite{xpatch}.
+% The style is applied where the number is typeset and not in "\theequation", so that references and hyperlinks are unaffected.
+%    \begin{macrocode}
+\RequirePackage{xpatch}
+\ifhepfont@lining
+\AtBeginDocument{%
+  \@ifpackageloaded{amsmath}{%
+    \xpatchcmd{\maketag@@@}{\normalfont}{\normalfont\tlstyle}{}{%
+      \PackageWarning{hep-font}{Could not patch the equation numbers}%
+    }%
+  }{%
+    \xpatchcmd{\@eqnnum}{\normalfont}{\normalfont\tlstyle}{}{%
+      \PackageWarning{hep-font}{Could not patch the equation numbers}%
+    }%
+  }%
+}
+\else
+\AtBeginDocument{%
+  \@ifpackageloaded{amsmath}{%
+    \xpatchcmd{\maketag@@@}{\normalfont}{\normalfont\tstyle\ostyle}{}{%
+      \PackageWarning{hep-font}{Could not patch the equation numbers}%
+    }%
+  }{%
+    \xpatchcmd{\@eqnnum}{\normalfont}{\normalfont\tstyle\ostyle}{}{%
+      \PackageWarning{hep-font}{Could not patch the equation numbers}%
+    }%
+  }%
+}
+\fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \subsection{Bookmarks}
+% \label{sec:pdfstring}
+%
+% \begin{macro}{\hepfont_pdfstring:}
+% The \software{hyperref} package \cite{hyperref} turns sectioning titles into bookmarks by expansion.
+% It does not know the font commands of this package and of \software{nfssext-cfr}, whose expansion either breaks the bookmark or leaves font internals in it.
+% Keep only the argument of the text commands and drop the declarations.
+% With \hologo{pdfLaTeX} \software{nfssext-cfr} defines them only at the beginning of the document, so define them also if they do not exist yet, which covers document information set in the preamble.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\tl_new:N \g_hepfont_greek_pdfstring_tl
+\cs_new_protected:Npn \hepfont_pdfstring: {
+  \clist_map_inline:nn {
+    textl, texto, textp, textt, textpl, textpo, texttl, textto,
+    textui, textuncial
+  }{\cs_set_eq:cN {##1}\use:n}
+  \clist_map_inline:nn {
+    lstyle, ostyle, pstyle, tstyle, plstyle, postyle, tlstyle,
+    tostyle, tmstyle, tvstyle, codestyle, uishape, uncial
+  }{\cs_set_eq:cN {##1}\prg_do_nothing:}
+%    \end{macrocode}
+% The verbatim argument of "\code" has already been read when the bookmark is created.
+% Turn it into a string, so that characters such as the underscore are kept.
+%    \begin{macrocode}
+  \bool_if:NT \g_hepfont_code_bool
+    {\cs_set:Npn \code ##1 {\tl_to_str:n {##1}}}
+%    \end{macrocode}
+% With the Unicode engines the Greek letters are protected, use the text commands instead.
+% With \hologo{pdfLaTeX} \software{hyperref} already handles the definitions of \software{alphabeta}.
+%    \begin{macrocode}
+  \tl_use:N \g_hepfont_greek_pdfstring_tl
+}
+%    \end{macrocode}
+% \end{macro}
+% Register the definitions with \software{hyperref}, whether it is loaded before or after this package.
+%    \begin{macrocode}
+\cs_new_protected:Npn \hepfont_pdfstring_setup:
+  {\pdfstringdefDisableCommands{\hepfont_pdfstring:}}
+\IfPackageLoadedTF{hyperref}{\hepfont_pdfstring_setup:}
+  {\AddToHook{package/hyperref/after}{\hepfont_pdfstring_setup:}}
+\ExplSyntaxOff
+%    \end{macrocode}
+%
+%</package>
+%
+% \section{Test}
+%
+%<*test>
+%
+%    \begin{macrocode}
+\documentclass{article}
+
+\usepackage[oldstyle]{hep-font}
+
+\newcommand*{\specimen}{
+  Latin Abc; Greek \alpha\beta\gamma\Gamma\Delta\Omega; 0123456789.\par
+}
+
+\begin{document}
+
+\tableofcontents
+
+\section{Text fonts and numerals}
+
+Oldstyle 0123456789 and lining \textl{0123456789} numerals.
+
+Tabular \textt{0123456789} and proportional \textp{0123456789} numerals.
+
+\section{Families and shapes}
+
+{\rmfamily\specimen{\itshape\specimen}{\bfseries\specimen}}
+{\sffamily\specimen{\itshape\specimen}{\bfseries\specimen}}
+{\ttfamily\specimen{\itshape\specimen}{\bfseries\specimen}}
+
+\textbf{\textsc{Bold Small Caps}} and \textsf{\textsc{Sans Small Caps}}.
+
+\section{Code}
+
+Code \code{\alpha 0123456789} and math numerals $1234567890$.
+
+\begin{equation}
+  E = m c^2
+\end{equation}
+
+\end{document}
+%    \end{macrocode}
+%
+%</test>
+%
+% \section{Readme}
+%
+%<*readme>
+%
+%    \begin{macrocode}
+# The `hep-font` package
+
+Latin Modern and New Computer Modern text fonts with numeral styles
+and Greek letters
+
+## Introduction
+
+The `hep-font` package sets up the text fonts for the HEP package suite.
+It keeps or sets the document font size, switches between serif and
+sans-serif documents, chooses lining or oldstyle numerals, and provides
+Greek letters in text. With pdfLaTeX it uses Latin Modern extended by
+Computer Modern shapes, with LuaLaTeX and XeLaTeX it uses New Computer
+Modern. The matching math fonts are provided by the `hep-math-font`
+package.
+
+The package is loaded using `\usepackage{hep-font}`.
+
+## Author
+
+Jan Hajer
+
+## License
+
+This file may be distributed and/or modified under the conditions of the
+`LaTeX` Project Public License, either version 1.3c of this license or
+(at your option) any later version. The latest version of this license is
+in `http://www.latex-project.org/lppl.txt` and version 1.3c or later is
+part of all distributions of LaTeX version 2005/12/01 or later.
+%    \end{macrocode}
+%
+%</readme>
+%
+% \Finale
+
+\endinput
+
+% \PrintIndex
+% makeindex -s gglo.ist -o hep-font-implementation.gls hep-font-implementation.glo
+% makeindex -s gglo.ist -o hep-font-implementation.ind hep-font-implementation.idx

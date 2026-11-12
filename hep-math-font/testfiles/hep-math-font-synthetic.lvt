@@ -1,0 +1,32 @@
+\input{regression-test}
+\documentclass{article}
+% synthetic=false: no slanted copies (pdfTeX), the bold sans-serif
+% calligraphic and the bold script capitals are the medium ones (pdfTeX),
+% and the upright script capitals are the italic ones (all engines).
+\usepackage{hep-font}
+\usepackage[synthetic=false]{hep-math-font}
+\begin{document}
+% Load all fonts before the test, so font loading is not recorded.
+\setbox0\hbox{$\mathsf{\mathcal{A}} \mathbf{\mathsf{\mathcal{A}}} \mathsf{\partial} \mathbf{\mathcal{A}}
+  \mathscr{A} \mathbf{\mathscr{A}} \mathup{\mathscr{A}} \mathbfup{\mathcal{A}}$}
+\START
+\makeatletter
+\TEST{synthetic=false}{%
+  \TYPE{synthetic: \ifhepmathfont@synthetic true\else false\fi}%
+}
+\TEST{Bold sans-serif calligraphic capitals are the medium ones}{%
+  \setbox0\hbox{$\mathsf{\mathcal{A}} \mathbf{\mathsf{\mathcal{A}}}$}\showbox0
+}
+\TEST{Serif calligraphic capitals keep their weights}{%
+  \setbox0\hbox{$\mathcal{A} \mathbf{\mathcal{A}}$}\showbox0
+}
+\TEST{Upright script capitals are the italic ones}{%
+  \setbox0\hbox{$\mathscr{A} \mathup{\mathscr{A}}$}\showbox0
+}
+\TEST{Bold script capitals}{%
+  \setbox0\hbox{$\mathbf{\mathscr{A}} \mathbfup{\mathscr{A}}$}\showbox0
+}
+\TEST{Upright calligraphic capitals keep their weights}{%
+  \setbox0\hbox{$\mathup{\mathcal{A}} \mathbfup{\mathcal{A}}$}\showbox0
+}
+\END

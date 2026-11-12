@@ -1,0 +1,14 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Title and author stored by hyperref
+============================================================
+macro:->The Title\thanks {Title thanks}\\second line
+macro:->Bob Author
+============================================================
+============================================================
+TEST 2: Document information after \maketitle and the first page
+============================================================
+[The Title second line]
+[Ann Author and Bob Author]
+============================================================

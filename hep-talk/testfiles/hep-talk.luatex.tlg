@@ -1,0 +1,610 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Options and page size
+============================================================
+paperwidth: 16cm, ratio: 3/4
+paper: 455.24408pt x 341.43306pt
+text: 455.24408pt x 329.14455pt
+hmargin: 5.68915pt, vmargin: 3.41245pt plus 34.14539pt minus 1.70883pt
+============================================================
+============================================================
+TEST 2: Loaded packages and their options
+============================================================
+hep-font: loaded [oldstyle,sans]
+hep-math-font: loaded []
+hep-bibliography: loaded []
+biblatex: loaded [style=numeric-comp,datamodel=hep-bibliography,]
+hep-title: loaded []
+hep-text: loaded []
+hep-math: loaded []
+geometry: loaded []
+xcolor: loaded []
+overlays: loaded []
+titlesec: loaded []
+tikz: loaded []
+hyperref: loaded []
+hep-reference: not loaded
+hep-acronym: not loaded
+hep-float: not loaded
+============================================================
+============================================================
+TEST 3: Theme colours
+============================================================
+PageBg: gray 0.3
+PageFg: gray 0.9
+TitleBg: gray 0.5
+TitleFg: gray 1
+CaptionBg: gray 0.8
+CaptionFg: gray 0.2
+BlockBg: gray 1
+BlockFg: gray 0
+Structure: rgb 0.41255,0.65137,0.80785
+Highlight: rgb 1,0,0
+============================================================
+============================================================
+TEST 4: Redefined macros
+============================================================
+macro:#1->\textcolor {Structure}{#1}
+macro:#1->\hfill {\scriptsize \normalfont \color {Structure}#1}
+\protected macro:->\__cmd_start:nNNnnn {oom}\cite  \cite code {\__cmd_grab_D:w []\__cmd_grab_D:w []\__cmd_grab_m_1:w }{}{}
+\protected macro:->\__cmd_start:nNNnnn {d<>m}\only  \only code {\__cmd_grab_D:w <>\__cmd_grab_m_1:w }{}{}
+\protected macro:->\__cmd_start:nNNnnn {d<>m}\visible  \visible code {\__cmd_grab_D:w <>\__cmd_grab_m_1:w }{}{}
+============================================================
+============================================================
+TEST 5: Logo macros
+============================================================
+undefined
+macro:->\vfill \hfill 
+macro:->
+macro:->LOGO
+macro:->PRE
+macro:->POST
+title done
+============================================================
+============================================================
+TEST 6: only and visible without overlay specification
+============================================================
+> \box...=
+\hbox(6.94+0.11)x24.31, direction TLT
+.\TU/NewCMSans10-Regular.otf(0)/m/n/10 a
+.\TU/NewCMSans10-Regular.otf(0)/m/n/10 b
+.\discretionary (penalty 50)
+..< \TU/NewCMSans10-Regular.otf(0)/m/n/10 -
+..= \kern0.28 (font)
+.\TU/NewCMSans10-Regular.otf(0)/m/n/10 c
+.\TU/NewCMSans10-Regular.otf(0)/m/n/10 d
+.\TU/NewCMSans10-Regular.otf(0)/m/n/10 e
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 7: Slides: overlays are counted
+============================================================
+overlay 1 of 1
+overlay 2 of 3
+overlay 3 of 3
+overlay 1 of 1
+============================================================
+============================================================
+TEST 8: Blocks, rows and columns
+============================================================
+overlay 1 of 1
+overlay 2 of 3
+overlay 3 of 3
+done
+============================================================
+============================================================
+TEST 9: Overlays: closed ranges count, open ranges do not
+============================================================
+overlay 1 of 3
+overlay 2 of 3
+overlay 3 of 3
+overlay 1 of 2
+overlay 2 of 4
+overlay 3 of 4
+overlay 4 of 4
+============================================================
+============================================================
+TEST 10: Overlays: footnote counter and aux file
+============================================================
+Package microtype Info: Character `textless ' is missing
+(microtype)             in font `TU/hep-sanstext/b/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textgreater ' is missing
+(microtype)             in font `TU/hep-sanstext/b/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textless ' is missing
+(microtype)             in font `TU/hep-sanstext/b/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textgreater ' is missing
+(microtype)             in font `TU/hep-sanstext/b/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textless ' is missing
+(microtype)             in font `TU/hep-sanstext/b/it/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textgreater ' is missing
+(microtype)             in font `TU/hep-sanstext/b/it/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textless ' is missing
+(microtype)             in font `TU/hep-sanstext/b/it/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textgreater ' is missing
+(microtype)             in font `TU/hep-sanstext/b/it/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquotedblleft ' is missing
+(microtype)             in font `TU/hep-euler/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquotedblright ' is missing
+(microtype)             in font `TU/hep-euler/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `AE ' is missing
+(microtype)             in font `TU/hep-euler/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `quotesinglbase ' is missing
+(microtype)             in font `TU/hep-euler/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `quotedblbase ' is missing
+(microtype)             in font `TU/hep-euler/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `guilsinglleft ' is missing
+(microtype)             in font `TU/hep-euler/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `guilsinglright ' is missing
+(microtype)             in font `TU/hep-euler/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `guillemotleft ' is missing
+(microtype)             in font `TU/hep-euler/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `guillemotright ' is missing
+(microtype)             in font `TU/hep-euler/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textexclamdown ' is missing
+(microtype)             in font `TU/hep-euler/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquestiondown ' is missing
+(microtype)             in font `TU/hep-euler/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquotedblleft ' is missing
+(microtype)             in font `TU/hep-euler/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquotedblright ' is missing
+(microtype)             in font `TU/hep-euler/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `AE ' is missing
+(microtype)             in font `TU/hep-euler/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `quotesinglbase ' is missing
+(microtype)             in font `TU/hep-euler/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `quotedblbase ' is missing
+(microtype)             in font `TU/hep-euler/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `guilsinglleft ' is missing
+(microtype)             in font `TU/hep-euler/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `guilsinglright ' is missing
+(microtype)             in font `TU/hep-euler/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `guillemotleft ' is missing
+(microtype)             in font `TU/hep-euler/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `guillemotright ' is missing
+(microtype)             in font `TU/hep-euler/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textexclamdown ' is missing
+(microtype)             in font `TU/hep-euler/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquestiondown ' is missing
+(microtype)             in font `TU/hep-euler/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `A' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `F' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `J' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `K' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `L' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `T' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `V' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `W' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `X' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `Y' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `k' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `r' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `v' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `w' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `x' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `y' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `1' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `4' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `7' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `.' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `,' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `:' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `;' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `!' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `?' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `@' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `~ (= ~)' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `%' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `*' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `+' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `(' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `)' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `/' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `-' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textendash ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textemdash ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquoteleft ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquoteright ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquotedblleft ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquotedblright ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `AE ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `_' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textbackslash ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `quotesinglbase ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `quotedblbase ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `guilsinglleft ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `guilsinglright ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `guillemotleft ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `guillemotright ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textexclamdown ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquestiondown ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textbraceleft ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textbraceright ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textless ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textgreater ' is missing
+(microtype)             in font `TU/hep-accent/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `A' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `F' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `J' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `K' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `L' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `T' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `V' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `W' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `X' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `Y' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `k' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `r' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `v' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `w' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `x' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `y' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `1' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `4' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `7' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `.' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `,' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `:' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `;' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `!' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `?' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `@' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `~ (= ~)' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `%' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `*' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `+' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `(' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `)' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `/' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `-' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textendash ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textemdash ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquoteleft ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquoteright ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquotedblleft ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquotedblright ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `AE ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `_' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textbackslash ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `quotesinglbase ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `quotedblbase ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `guilsinglleft ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `guilsinglright ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `guillemotleft ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `guillemotright ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textexclamdown ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textquestiondown ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textbraceleft ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textbraceright ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textless ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textgreater ' is missing
+(microtype)             in font `TU/hep-accent/m/n/6'.
+(microtype)             Ignoring protrusion settings for this character.
+overlay 1: footnote 1, aux writes active
+overlay 2: footnote 1, aux writes suppressed
+============================================================
+============================================================
+TEST 11: Nested blocks and columns
+============================================================
+done
+============================================================
+============================================================
+TEST 12: Frames
+============================================================
+done
+============================================================
+============================================================
+TEST 13: robustslide: verbatim body and overlays
+============================================================
+(hep-talk.vrb
+overlay 1 of 1
+) (hep-talk.vrb
+overlay 2 of 2
+)
+============================================================
+============================================================
+TEST 14: Citation style
+============================================================
+> \box...=
+\hbox(5.25+1.75)x7.40599, direction TLT
+.\glue 0.0 plus 1.0fill
+.\pdfcolorstack 0 push {0.41255 0.65137 0.80785 rg 0.41255 0.65137 0.80785 RG}
+.\TU/NewCMSans10-Regular.otf(0)/m/n/7 [
+.\TU/NewCMSans10-Regular.otf(0)/m/n/7 
+.\TU/NewCMSans10-Regular.otf(0)/m/n/7 ]
+.\pdfcolorstack 0 pop
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 15: Citations: optional arguments
+============================================================
+\autocite{a}
+\autocite[p. 3]{b}
+\autocite[see][p. 3]{c}
+============================================================
+============================================================
+TEST 16: Citations: label macros of the numeric default style
+============================================================
+style: numeric-comp
+cite:label: defined
+cite:labeldate+extradate: defined
+cite:shorthand: defined
+labeldateparts: true
+============================================================
+============================================================
+TEST 17: Bibliography macros
+============================================================
+macro:->\DeclareFieldFormat {eprint}{##1}\hep@talk@cite 
+macro:->\block [[\hep@talk@label ]\hfill \hep@talk@entry@tail ]\hep@talk@entry 
+============================================================
+============================================================
+TEST 18: Bookmarks: sections
+============================================================
+[Introduction]
+[Results with emphasis]
+============================================================
+============================================================
+TEST 19: Document information
+============================================================
+[\376\377\000T\000a\000l\000k\000\040\000t\000i\000t\000l\000e\000:\000\040\000T\000a\000l\000k\000\040\000s\000u\000b\000t\000i\000t\000l\000e]
+[\376\377\000F\000i\000r\000s\000t\000\040\000L\000a\000s\000t]
+============================================================
+============================================================
+TEST 20: Overlays on shipped pages
+============================================================
+[2
+] [2
+]
+page 3
+============================================================

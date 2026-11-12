@@ -1,0 +1,54 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[sans,oldstyle,size=10.5pt]{hep-font}
+\input{hep-regression}
+
+% A user macro named \set, as defined by hep-math
+\newcommand*{\set}[1]{\{#1\}}
+\let\SAVEDSET\set
+
+\newcommand*{\NUMERALS}{1\textl{2}{\tstyle 3}\texttl{4}}
+\newcommand*{\SETMATERIAL}{%
+  \begin{align}\set{x}\end{align}%
+  {\tstyle 1}{\ostyle 2}{\lstyle 3}{\pstyle 4}\texttl{5}\textpo{6}}
+\makeatletter
+\newcommand*{\EQUATIONNUMBER}{\maketag@@@{(\theequation)}}
+\makeatother
+
+\begin{document}
+% Load all fonts before the test, so font loading is not recorded.
+\setbox0\hbox{\NUMERALS\EQUATIONNUMBER\begin{tabular}{l}10\end{tabular}}
+\setbox0\vbox{\hsize=20em \SETMATERIAL}
+\setbox0\hbox{\tstyle\scshape 1}
+\let\set\SAVEDSET
+\setcounter{equation}{10}
+\START
+
+\TEST{Options: sans, size}{%
+  \TYPE{[\familydefault]}%
+  \TYPE{[\csname f@size\endcsname]}%
+}
+
+\TEST{Oldstyle numerals in text, lining on request}{\SHOWHBOX{\NUMERALS}}
+
+\TEST{Equation numbers use tabular oldstyle numerals (amsmath)}{%
+  \SHOWHBOX{\EQUATIONNUMBER}}
+
+\TEST{Tabulars use tabular oldstyle numerals}{%
+  \SHOWHBOX{\begin{tabular}{l}10\end{tabular}}}
+
+% nfssext-cfr stores its list of variants globally in \set whenever an
+% oldstyle family switches numerals, e.g. in the equation tag that align
+% typesets while measuring.
+\TEST{nfssext-cfr does not overwrite a user macro set}{%
+  \setbox0\vbox{\hsize=20em \SETMATERIAL}%
+  \ifx\set\SAVEDSET\TYPE{[\string\set\space preserved]}%
+  \else\TYPE{[\string\set\space overwritten: \meaning\set]}\fi
+}
+
+% The small caps are declared for every sans-serif numeral family on pdfTeX.
+\TEST{Small caps with tabular numerals}{%
+  {\tstyle\scshape\TYPE{[\fontname\font]}}}
+
+\END

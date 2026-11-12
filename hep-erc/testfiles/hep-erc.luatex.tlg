@@ -1,0 +1,138 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Loaded packages and their options
+============================================================
+hep-font: loaded [oldstyle,]
+hep-math-font: loaded []
+hep-text: loaded []
+hep-bibliography: loaded []
+hep-acronym: loaded []
+hep-reference: loaded []
+hep-title: loaded []
+hep-float: loaded []
+geometry: loaded []
+titlesec: loaded [compact,tiny,pagestyles,]
+titleps: not loaded
+lastpage: loaded []
+enumitem: loaded [inline,]
+hep-cv: loaded []
+tabulary: loaded []
+tikz: loaded []
+standalone: loaded []
+============================================================
+============================================================
+TEST 2: Page geometry
+============================================================
+paper: 597.50787pt x 845.04684pt
+text: 483.69687pt x 759.6886pt
+headsep: 4.31pt, footskip: 24.0pt
+============================================================
+============================================================
+TEST 3: Duration in months as date
+============================================================
+macro:->60
+60\ months
+48\ months
+============================================================
+============================================================
+TEST 4: Proposal counter
+============================================================
+B0
+B1
+B2
+part, parts
+============================================================
+============================================================
+TEST 5: Abstract name
+============================================================
+Proposal summary
+abstract done
+============================================================
+============================================================
+TEST 6: Section numbering
+============================================================
+a
+a.2
+============================================================
+============================================================
+TEST 7: Bookmarks: sectioning commands
+============================================================
+[Extended synopsis]
+[State of the art]
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line ....
+[b Methodology]
+[b.1 Work plan]
+============================================================
+============================================================
+TEST 8: Page header: family name of the author
+============================================================
+> \box...=
+\hbox(6.83+0.11)x19.08, direction TLT
+.\TU/NewCM10-Regular.otf(0)/m/n/10 L
+.\TU/NewCM10-Regular.otf(0)/m/n/10 a
+.\TU/NewCM10-Regular.otf(0)/m/n/10 s
+.\TU/NewCM10-Regular.otf(0)/m/n/10 t
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 9: Section labels: bare letter in references, decorated heading
+============================================================
+label: a
+heading label is `Section a:': true
+subsection label is `a.0': true
+============================================================
+============================================================
+TEST 10: Page header: thanks marks and missing subtitle
+============================================================
+subtitle: []
+author is `Last': true
+subtitle: [Acronym]
+============================================================
+============================================================
+TEST 11: Month macros
+============================================================
+width of May: 19.17pt
+Jan: 19.17pt
+Feb: 19.17pt
+Mar: 19.17pt
+Apr: 19.17pt
+May: 19.17pt
+Jun: 19.17pt
+Jul: 19.17pt
+Aug: 19.17pt
+Sep: 19.17pt
+Oct: 19.17pt
+Nov: 19.17pt
+Dec: 19.17pt
+> \box...=
+\hbox(6.83+2.05)x19.17, direction TLT
+.\hbox(6.83+2.05)x19.17, glue set - 0.14fil, direction TLT
+..\glue 0.0 plus 1.0fil minus 1.0fil
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/m/n/10 M
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/m/n/10 a
+..\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/m/n/10 y
+..\glue 0.0 plus 1.0fil minus 1.0fil
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 12: Month macros are robust and plain in PDF strings
+============================================================
+\protected macro:->\heperc@month {Jan}
+[Since Jan 2020 until Dec 2021]
+[Since May 2020]
+macro:->\Jan 
+============================================================
+============================================================
+TEST 13: CV macros
+============================================================
+macro:->\@protected@testopt \cvline \\cvline {}
+macro:->\@protected@testopt \cventry \\cventry {}
+============================================================

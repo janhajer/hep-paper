@@ -1,0 +1,67 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Option values
+============================================================
+class: article
+paper: [letter]
+font: [12pt]
+lang: [british]
+symbols: [true]
+bibliography: [numeric-comp]
+serif: true
+lining: true
+parindent: true
+defaults: false
+title: true
+physics: true
+glossaries: true
+references: true
+eqnarray: true
+manualplacement: false
+beamer: false
+revtex: false
+jhep: false
+jcap: false
+pos: false
+springer: false
+amsart: false
+sissa: false
+journal: false
+============================================================
+============================================================
+TEST 2: Loaded packages and their options
+============================================================
+hep-math: loaded []
+hep-font: loaded [size=12pt,sans=false,lining=true,]
+hep-math-font: loaded [symbols=true,]
+geometry: loaded []
+parskip: not loaded
+hep-text: loaded [lang=british,]
+hep-float: loaded [global,]
+hep-title: loaded []
+hep-bibliography: loaded [style=numeric-comp,]
+biblatex: loaded [style=numeric-comp,datamodel=hep-bibliography,]
+hep-reference: loaded []
+hyperref: loaded []
+cleveref: loaded [noabbrev,nameinlink,]
+hep-acronym: loaded []
+titlesec: loaded []
+hep-revtex: not loaded
+hep-sissa: not loaded
+xpatch: loaded []
+============================================================
+============================================================
+TEST 3: Page geometry and font size
+============================================================
+paper: 614.295pt x 794.96999pt
+text: 522.1545pt x 681.97368pt
+font size: 12
+parindent: 18.0pt, parskip: 0.0pt plus 1.0pt
+============================================================
+============================================================
+TEST 4: Two-column geometry
+============================================================
+columnsep: 12.92287pt
+headsep: 10.344pt, footskip: 31.03198pt
+============================================================

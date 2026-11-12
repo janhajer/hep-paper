@@ -1,0 +1,9 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+\title {Title}\subtitle {Subtitle}
+\thankstext {hep-note-1}{e-mail: \hep@email {first@email.com}}
+\thankstext {hep-note-2}{e-mail: \hep@email {second@email.com}}
+\thankstext {hep-note-3}{Second thanks}
+\author {First author\thanksref {hep-note-1,hep-inst-a}\and Second author\thanksref {hep-note-2,hep-note-3,hep-inst-a,hep-inst-b}\and Third author\thanksref {hep-inst-hep-affiliation-1}}
+\institute {First affiliation\label {hep-inst-a}\and Second affiliation\label {hep-inst-b}\and Third affiliation\label {hep-inst-hep-affiliation-1}}
+\maketitle 

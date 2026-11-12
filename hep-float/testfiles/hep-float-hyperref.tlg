@@ -1,0 +1,353 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: List of figures
+============================================================
+(hep-float-hyperref.lof)
+> \box...=
+\vbox(70.97214+2.5)x200.0003
+.\penalty -300
+.\glue 15.0694 plus 4.30554 minus 0.86108
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(9.99998+2.79999)x200.0003, glue set 97.0454fil
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+..\hbox(0.0+0.0)x0.0
+...\kern 0.0
+...\penalty 10000
+...\hbox(0.0+0.0)x0.0
+....\hbox(0.0+0.0)x0.0, shifted -18.0
+.....\pdfdest name{section*.3} xyz
+.....\penalty 10000
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\OT1/cmr/bx/n/14.4 L
+..\OT1/cmr/bx/n/14.4 i
+..\OT1/cmr/bx/n/14.4 s
+..\OT1/cmr/bx/n/14.4 t
+..\glue 5.4 plus 2.7 minus 1.79999
+..\OT1/cmr/bx/n/14.4 o
+..\OT1/cmr/bx/n/14.4 f
+..\glue 5.4 plus 2.7 minus 1.79999
+..\OT1/cmr/bx/n/14.4 F
+..\OT1/cmr/bx/n/14.4 i
+..\OT1/cmr/bx/n/14.4 g
+..\OT1/cmr/bx/n/14.4 u
+..\OT1/cmr/bx/n/14.4 r
+..\OT1/cmr/bx/n/14.4 e
+..\OT1/cmr/bx/n/14.4 s
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty 10000
+.\glue 9.90276 plus 0.86108
+.\glue 0.0 plus 0.2
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 2.25557
+.\hbox(6.94444+1.94444)x200.0003, glue set 45.5518fill
+..\glue(\leftskip) 38.00008
+..\hbox(0.0+0.0)x15.00002
+..\hbox(0.0+0.0)x0.0
+..\penalty 10000
+..\glue -38.00008
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.caption.1}
+..\hbox(6.44444+0.0)x23.00006, glue set 18.00005fil
+...\OT1/cmr/m/n/10 1
+...\glue 0.0 plus 1.0fil
+..\OT1/cmr/m/n/10 P
+..\OT1/cmr/m/n/10 l
+..\OT1/cmr/m/n/10 a
+..\OT1/cmr/m/n/10 i
+..\OT1/cmr/m/n/10 n
+..\glue 3.33333 plus 1.66666 minus 1.11111
+..\OT1/cmr/m/n/10 c
+..\OT1/cmr/m/n/10 a
+..\OT1/cmr/m/n/10 p
+..\OT1/cmr/m/n/10 t
+..\OT1/cmr/m/n/10 i
+..\OT1/cmr/m/n/10 o
+..\OT1/cmr/m/n/10 n
+..\glue 3.33333 plus 1.66666 minus 1.11111
+..\OT1/cmr/m/n/10 w
+..\OT1/cmr/m/n/10 i
+..\OT1/cmr/m/n/10 t
+..\OT1/cmr/m/n/10 h
+..\glue 3.33333 plus 1.66666 minus 1.11111
+..\mathon
+..\OML/cmm/m/it/10 m
+..\hbox(4.78334+0.0)x7.58473, shifted 1.49998
+...\OML/cmm/m/it/7 H
+..\mathoff
+..\pdfendlink
+..\penalty 10000
+..\leaders 0.0 plus 1.0fill
+...\hbox(1.05554+0.0)x7.77766
+....\mathon
+....\kern 2.49994
+....\hbox(1.05554+0.0)x2.77779
+.....\OT1/cmr/m/n/10 .
+....\kern 2.49994
+....\mathoff
+..\penalty 10000
+..\hbox(6.44444+0.0)x15.50005, glue set 10.50003fil
+...\glue 0.0 plus 1.0fil
+...\OT1/cmr/m/n/10 1
+...\kern -1.0
+...\kern 1.0
+..\penalty 10000
+..\glue(\parfillskip) -25.50006
+..\glue(\rightskip) 25.50006
+.\glue 0.0 plus 0.2
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 3.11111
+.\hbox(6.94444+0.0)x200.0003, glue set 129.1946fill
+..\glue(\leftskip) 38.00008
+..\hbox(0.0+0.0)x15.00002
+..\hbox(0.0+0.0)x0.0
+..\penalty 10000
+..\glue -38.00008
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.caption.2}
+..\hbox(6.44444+0.0)x23.00006, glue set 18.00005fil
+...\OT1/cmr/m/n/10 2
+...\glue 0.0 plus 1.0fil
+..\OT1/cmr/m/n/10 ^^L (ligature fi)
+..\OT1/cmr/m/n/10 r
+..\OT1/cmr/m/n/10 s
+..\OT1/cmr/m/n/10 t
+..\pdfendlink
+..\penalty 10000
+..\leaders 0.0 plus 1.0fill
+...\hbox(1.05554+0.0)x7.77766
+....\mathon
+....\kern 2.49994
+....\hbox(1.05554+0.0)x2.77779
+.....\OT1/cmr/m/n/10 .
+....\kern 2.49994
+....\mathoff
+..\penalty 10000
+..\hbox(6.44444+0.0)x15.50005, glue set 10.50003fil
+...\glue 0.0 plus 1.0fil
+...\OT1/cmr/m/n/10 1
+...\kern -1.0
+...\kern 1.0
+..\penalty 10000
+..\glue(\parfillskip) -25.50006
+..\glue(\rightskip) 25.50006
+.\glue 0.0 plus 0.2
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.5
+.\hbox(7.5+2.5)x200.0003, glue set 66.0278fill
+..\glue(\leftskip) 38.00008
+..\hbox(0.0+0.0)x15.00002
+..\hbox(0.0+0.0)x0.0
+..\penalty 10000
+..\glue -38.00008
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.caption.3}
+..\hbox(6.44444+0.0)x23.00006, glue set 18.00005fil
+...\OT1/cmr/m/n/10 4
+...\glue 0.0 plus 1.0fil
+..\OT1/cmr/m/n/10 P
+..\kern-0.27779
+..\OT1/cmr/m/n/10 a
+..\OT1/cmr/m/n/10 n
+..\OT1/cmr/m/n/10 e
+..\OT1/cmr/m/n/10 l
+..\OT1/cmr/m/n/10 s
+..\glue 3.33333 plus 1.66666 minus 1.11111
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.caption.3}
+..\OT1/cmr/m/n/10 (
+..\OT1/cmr/m/n/10 a
+..\hbox(0.0+0.0)x0.0
+..\OT1/cmr/m/n/10 )
+..\pdfendlink
+..\glue 3.33333 plus 1.66666 minus 1.11111
+..\OT1/cmr/m/n/10 a
+..\OT1/cmr/m/n/10 n
+..\OT1/cmr/m/n/10 d
+..\glue 3.33333 plus 1.66666 minus 1.11111
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.caption.3}
+..\OT1/cmr/m/n/10 (
+..\OT1/cmr/m/n/10 b
+..\hbox(0.0+0.0)x0.0
+..\OT1/cmr/m/n/10 )
+..\pdfendlink
+..\pdfendlink
+..\penalty 10000
+..\leaders 0.0 plus 1.0fill
+...\hbox(1.05554+0.0)x7.77766
+....\mathon
+....\kern 2.49994
+....\hbox(1.05554+0.0)x2.77779
+.....\OT1/cmr/m/n/10 .
+....\kern 2.49994
+....\mathoff
+..\penalty 10000
+..\hbox(6.44444+0.0)x15.50005, glue set 10.50003fil
+...\glue 0.0 plus 1.0fil
+...\OT1/cmr/m/n/10 1
+...\kern -1.0
+...\kern 1.0
+..\penalty 10000
+..\glue(\parfillskip) -25.50006
+..\glue(\rightskip) 25.50006
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 2: List of tables
+============================================================
+(hep-float-hyperref.lot)
+> \box...=
+\vbox(46.97214+0.0)x200.0003
+.\penalty -300
+.\glue 15.0694 plus 4.30554 minus 0.86108
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(9.99998+0.0)x200.0003, glue set 104.15375fil
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+..\hbox(0.0+0.0)x0.0
+...\kern 0.0
+...\penalty 10000
+...\hbox(0.0+0.0)x0.0
+....\hbox(0.0+0.0)x0.0, shifted -18.0
+.....\pdfdest name{section*.4} xyz
+.....\penalty 10000
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\OT1/cmr/bx/n/14.4 L
+..\OT1/cmr/bx/n/14.4 i
+..\OT1/cmr/bx/n/14.4 s
+..\OT1/cmr/bx/n/14.4 t
+..\glue 5.4 plus 2.7 minus 1.79999
+..\OT1/cmr/bx/n/14.4 o
+..\OT1/cmr/bx/n/14.4 f
+..\glue 5.4 plus 2.7 minus 1.79999
+..\OT1/cmr/bx/n/14.4 T
+..\kern-1.35
+..\OT1/cmr/bx/n/14.4 a
+..\OT1/cmr/bx/n/14.4 b
+..\OT1/cmr/bx/n/14.4 l
+..\OT1/cmr/bx/n/14.4 e
+..\OT1/cmr/bx/n/14.4 s
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty 10000
+.\glue 9.90276 plus 0.86108
+.\glue 0.0 plus 0.2
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 5.05556
+.\hbox(6.94444+0.0)x200.0003, glue set 104.19455fill
+..\glue(\leftskip) 38.00008
+..\hbox(0.0+0.0)x15.00002
+..\hbox(0.0+0.0)x0.0
+..\penalty 10000
+..\glue -38.00008
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.caption.4}
+..\hbox(6.44444+0.0)x23.00006, glue set 18.00005fil
+...\OT1/cmr/m/n/10 1
+...\glue 0.0 plus 1.0fil
+..\OT1/cmr/m/n/10 ^^L (ligature fi)
+..\OT1/cmr/m/n/10 r
+..\OT1/cmr/m/n/10 s
+..\OT1/cmr/m/n/10 t
+..\glue 3.33333 plus 1.66666 minus 1.11111
+..\OT1/cmr/m/n/10 t
+..\OT1/cmr/m/n/10 a
+..\OT1/cmr/m/n/10 b
+..\OT1/cmr/m/n/10 l
+..\OT1/cmr/m/n/10 e
+..\pdfendlink
+..\penalty 10000
+..\leaders 0.0 plus 1.0fill
+...\hbox(1.05554+0.0)x7.77766
+....\mathon
+....\kern 2.49994
+....\hbox(1.05554+0.0)x2.77779
+.....\OT1/cmr/m/n/10 .
+....\kern 2.49994
+....\mathoff
+..\penalty 10000
+..\hbox(6.44444+0.0)x15.50005, glue set 10.50003fil
+...\glue 0.0 plus 1.0fil
+...\OT1/cmr/m/n/10 1
+...\kern -1.0
+...\kern 1.0
+..\penalty 10000
+..\glue(\parfillskip) -25.50006
+..\glue(\rightskip) 25.50006
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 3: Anchors of the captions
+============================================================
+lof/figure: \protect \numberline {1}{\ignorespaces plain}
+plain: 1, figure.caption.5
+lof/figure: \protect \numberline {2}{\ignorespaces first}
+first: 2, figure.caption.6
+lof/figure: \protect \numberline {3}{\ignorespaces second}
+second: 3, figure.caption.6
+sub a: 4a, figure.caption.7
+sub b: 4b, figure.caption.7
+lof/figure: \protect \numberline {4}{\ignorespaces main}
+main: 4, figure.caption.7
+lot/table: \protect \numberline {1}{\ignorespaces first table}
+first table: 1, table.caption.8
+lot/table: \protect \numberline {2}{\ignorespaces second table}
+second table: 2, table.caption.8
+============================================================
+============================================================
+TEST 4: Optional short caption in figures
+============================================================
+lof/figure: \protect \numberline {5}{\ignorespaces short}
+lof/figure: \protect \numberline {6}{\ignorespaces short first}
+lof/figure: \protect \numberline {7}{\ignorespaces short second}
+lot/table: \protect \numberline {3}{\ignorespaces short first}
+============================================================
+============================================================
+TEST 5: PDF strings of caption texts
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[Plain caption with mH]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\@ifnextchar' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\@ifnextchar' on input line ....
+[Panels fig:a and fig:b]
+[Figure 4 and 4a]
+============================================================
+============================================================
+TEST 6: Links to figures and panels
+============================================================
+> \box...=
+\hbox(7.5+2.5)x12.77782
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.caption.3}
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 a
+.\hbox(0.0+0.0)x0.0
+.\OT1/cmr/m/n/10 )
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.44444+0.0)x10.00003
+.\OT1/cmr/m/n/10 4
+.\OT1/cmr/m/n/10 a
+.\hbox(0.0+0.0)x0.0
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

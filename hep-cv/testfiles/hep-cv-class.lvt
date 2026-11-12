@@ -1,0 +1,189 @@
+% hep-cv class: options, stored title, contact and letter data, PDF
+% information, title page, letter, abstract, sectioning and subfiles.
+\input{regression-test}
+\documentclass{hep-cv}
+\author{First Last}
+\input{hep-regression}
+\makeatletter
+% \PACKAGES{list}: loaded or not, and the options it was loaded with
+\newcommand*{\PACKAGES}[1]{%
+  \@for\hep@test@name:=#1\do{%
+    \TYPE{\hep@test@name: \expandafter\ifx
+      \csname ver@\hep@test@name.sty\endcsname\relax not loaded\else
+      loaded [\unexpanded\expandafter\expandafter\expandafter
+        {\csname opt@\hep@test@name.sty\endcsname}]%
+      \fi}%
+  }%
+}
+% \LABELWIDTH{sectioning command}{font}: the width of the label (dashes
+% and space before the title), i.e. the natural width of the title line
+% minus the width of the title
+\newcommand*{\LABELWIDTH}[2]{%
+  \setbox0\vbox{#1{X}\unskip\unskip\unpenalty\unpenalty
+    \global\setbox1\lastbox}%
+  \setbox0\hbox{\unhcopy1}%
+  \setbox2\hbox{#2X}%
+  \TYPE{\string#1: \the\dimexpr\wd0-\wd2\relax}%
+}
+\makeatother
+\begin{document}
+\makeatletter
+% The document information set at the beginning of the document
+\edef\hepcvtitle{\@pdftitle}
+% Load all fonts before the test
+\setbox0\vbox{%
+  \maketitle
+  \photo{example-image}\maketitle
+  \begin{abstract}Text \textit{text} \textbf{text}\end{abstract}%
+  \section{S}\subsection{S}\subsubsection{S}\paragraph{S}x
+  {\addressfont\textbf{x}}%
+}
+\global\let\hep@photo\@undefined
+\START
+
+\TEST{Class options}{%
+  \TYPE{font: \hepcv@font}%
+  \TYPE{serif: \ifhepcv@serif true\else false\fi}%
+  \TYPE{hyperref: \ifhepcv@hyperref true\else false\fi}%
+  \TYPE{date: \ifhepcv@date true\else false\fi}%
+  \TYPE{list: \ifhepcv@list true\else false\fi}%
+  \TYPE{font size: \f@size, secnumdepth: \the\c@secnumdepth,
+    tocdepth: \the\c@tocdepth}%
+}
+
+\TEST{Loaded packages and their options}{%
+  \PACKAGES{hep-cv,hep-font,hep-text,hep-reference,hyperref,phonenumbers,%
+    titlesec,titletoc,dashrule,fancyhdr,lastpage,subfiles,textpos,%
+    anyfontsize,fontsize,graphicx}%
+}
+
+\TEST{Font macros}{%
+  \TYPE{\meaning\titlefont}%
+  \TYPE{\meaning\HUGE}%
+  \TYPE{\meaning\infofont}%
+  \TYPE{\meaning\addressfont}%
+}
+
+\TEST{Stored address, contact and title lines}{%
+  \TYPE{address: \ifdefined\hep@address\meaning\hep@address
+    \else undefined\fi}%
+  \address{Street 1\\City}%
+  \TYPE{address: \meaning\hep@address}%
+  \TYPE{contact: \meaning\hep@contact@lines}%
+  \addcontactline{\href{mailto:first@example.org}{first@example.org}}%
+  \addcontactline{\phonenumber{+41 61 123 45 67}}%
+  \TYPE{contact: \meaning\hep@contact@lines}%
+  \TYPE{title lines: \meaning\hep@title@lines}%
+  \addtitleline{Born}{1 January 2000}%
+  \addtitleline{Nationality}{Swiss}%
+  \TYPE{title lines: \meaning\hep@title@lines}%
+  \photo{example-image}%
+  \TYPE{photo: \meaning\hep@photo}%
+  \global\let\hep@photo\@undefined
+}
+
+\TEST{CV part and document information}{%
+  \TYPE{part: \meaning\hep@part}%
+  \TYPE{[\hepcvtitle]}%
+  \PDFINFO{title}%
+  \PDFINFO{author}%
+  \cvpart{Publications}%
+  \TYPE{part: \meaning\hep@part}%
+  \PDFINFO{title}%
+}
+
+\TEST{Title page: short name, long name, photo}{%
+  \hypersetup{pdftitle={\@author~---~\hep@part}}%
+  \PDFINFO{title}%
+  \setbox0\vbox{\maketitle}%
+  \TYPE{short name done}%
+  \PDFINFO{title}%
+  \author{{Firstname Lastname}}%
+  \setbox0\vbox{\maketitle}%
+  \TYPE{long name done}%
+  \author{First Last}%
+  \address{Street 1\\City}%
+  \addcontactline{first@example.org}%
+  \addtitleline{Born}{1 January 2000}%
+  \photo{example-image}%
+  \setbox0\vbox{\maketitle}%
+  \TYPE{photo done}%
+  \global\let\hep@photo\@undefined
+}
+
+\TEST{Abstract}{%
+  \TYPE{\abstractname}%
+  \setbox0\vbox{\begin{abstract}Text\end{abstract}}%
+  \TYPE{abstract done}%
+}
+
+\TEST{Letter without and with opening and closing}{%
+  \setbox0\vbox{\begin{letter}Text\end{letter}}%
+  \opening{Dear committee,}%
+  \closing{Yours sincerely,}%
+  \TYPE{opening: \meaning\hep@opening}%
+  \TYPE{closing: \meaning\hep@closing}%
+  \setbox0\vbox{\begin{letter}Text\end{letter}}%
+  \TYPE{letter done}%
+}
+
+\TEST{Letter title and closing}{%
+  \opening{Dear committee,}%
+  \closing{Yours sincerely,}%
+  \setbox0\vbox{\makelettertitle}%
+  \TYPE{title: \the\ht0}%
+  \setbox0\vbox{\makeletterclosing}%
+  \TYPE{closing: \the\ht0}%
+}
+
+\TEST{Page styles}{%
+  \TYPE{plain: \ifcsname ps@plain\endcsname defined\else undefined\fi}%
+  \TYPE{name: \ifcsname ps@name\endcsname defined\else undefined\fi}%
+  \TYPE{both: \ifcsname ps@both\endcsname defined\else undefined\fi}%
+}
+
+\TEST{Subfiles: insubfile}{%
+  % in the main document: ignored
+  \SHOWHBOX{a\insubfile{X}b}%
+  % in a subfile compiled on its own (subfiles class loaded): emitted
+  \begingroup
+    \expandafter\def\csname ver@subfiles.cls\endcsname{}%
+    \SHOWHBOX{a\insubfile{X}b}%
+  \endgroup
+}
+
+\TEST{Starred section titles start after the left column}{%
+  \LABELWIDTH{\section*}{\Large}
+  \LABELWIDTH{\subsection*}{\large}
+  \LABELWIDTH{\subsubsection*}{\normalsize}
+  \TYPE{left + separator: \the\dimexpr\hep@left@width
+    +\hep@seperator@width\relax}%
+}
+
+\TEST{Bookmarks: sectioning commands}{%
+  \SECTIONBOOKMARKS{%
+    \section{Education}%
+    \section*{Starred section}%
+    \subsection{Subsection}%
+    \subsection*{Starred subsection}%
+    \subsubsection{Subsubsection}%
+    \paragraph{Paragraph}x%
+    \setcounter{secnumdepth}{2}%
+    \hypersetup{bookmarksnumbered}%
+    \section{Numbered}%
+    \subsection{Numbered subsection}%
+  }%
+}
+
+\TEST{Bookmarks: PDF strings}{%
+  \PDFSTRING{Curriculum Vit\ae{} --- \textit{italic}}%
+  \UNICODEPDFSTRING{Curriculum Vit\ae{} --- \textit{italic}}%
+}
+
+\TEST{Data macros: no spurious spaces}{%
+  \SHOWHBOX{a\address{x}b\addcontactline{x}c\addtitleline{x}{y}d%
+    \photo{x}e\cvpart{x}f\opening{x}g\closing{x}h}%
+}
+
+\makeatother
+\END

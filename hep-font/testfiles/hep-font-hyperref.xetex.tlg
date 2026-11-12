@@ -1,0 +1,185 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Bookmarks: small caps and Greek
+============================================================
+[Abc and Abc]
+[\376\377\003\261\000-\000d\000e\000c\000a\000y\000\040\000a\000n\000d\000\040\003\223]
+[\376\377\003\261\003\262\003\223\003\251]
+[\376\377\003\302\003\265\003\306\003\321\003\361\003\326]
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\000T\000h\000e\000\040\003\261\000\040\000i\000n\000\040\000m\000a\000t\000h]
+============================================================
+============================================================
+TEST 2: Bookmarks: numeral and typewriter declarations
+============================================================
+[1 lining]
+[2 oldstyle]
+[3456 numerals]
+[78 numerals]
+[abc typewriter]
+[d uncial]
+============================================================
+============================================================
+TEST 3: Bookmarks: code
+============================================================
+[a_b verbatim]
+[\alpha ^2 verbatim]
+============================================================
+============================================================
+TEST 4: Bookmarks: numeral commands
+============================================================
+[1234]
+[1234]
+[12]
+[d uncial]
+============================================================
+============================================================
+TEST 5: Bookmarks: sectioning commands
+============================================================
+[Abc 1]
+Package fontspec Info: 
+(fontspec)             Font family 'NewCM10-Regular.otf(2)' created for font 'NewCM10-Regular.otf' with options [Ligatures=TeX,UprightFont={NewCM10-Regular.otf},UprightFeatures={SizeFeatures={{Size={-8},Font={NewCM08-Regular.otf}},{Size={8},Font={NewCM08-Regular.otf}}, {Size={8-},Font={NewCM10-Regular.otf}},}},ItalicFont={NewCM10-Italic.otf},ItalicFeatures={SizeFeatures={{Size={-8},Font={NewCM08-Italic.otf}},{Size={8},Font={NewCM08-Italic.otf}}, {Size={8-},Font={NewCM10-Italic.otf}},}},BoldFont={NewCM10-Bold.otf},BoldFeatures={SizeFeatures={{Size={0-},Font={NewCM10-Bold.otf}},}},BoldItalicFont={NewCM10-BoldItalic.otf},BoldItalicFeatures={SizeFeatures={{Size={0-},Font={NewCM10-BoldItalic.otf}},}},SlantedFont={NewCM10-Regular.otf},SlantedFeatures={SizeFeatures={{Size={-8},FakeSlant={0.25},Font={NewCM08-Regular.otf}},{Size={8},FakeSlant={0.25},Font={NewCM08-Regular.otf}},{Size={8-},FakeSlant={0.25},Font={NewCM10-Regular.otf}},}},BoldSlantedFont={NewCM10-Bold.otf},BoldSlantedFeatures={SizeFeatures={{Size={0-},FakeSlant={0.25},Font={NewCM10-Bold.otf}},}},SwashFont={NewCM10-Regular.otf},SwashFeatures={SizeFeatures={{Size={-8},Font={NewCM08-Regular.otf}},{Size={8},Font={NewCM08-Regular.otf}},{Size={8-},Font={NewCM10-Regular.otf}},}},BoldSwashFont={NewCM10-Bold.otf},BoldSwashFeatures={SizeFeatures={{Size={0-},Font={NewCM10-Bold.otf}},}},Numbers=Lining,SlantedFont=NewCM10-Regular.otf,SlantedFeatures={FakeSlant=.25},BoldSlantedFont=NewCM10-Bold.otf,BoldSlantedFeatures={FakeSlant=.25},SizeFeatures={ {Size=-9,Font=NewCM08-Regular.otf,ItalicFont=NewCM08-Italic.otf}, {Size=9-,Font=NewCM10-Regular.otf,ItalicFont=NewCM10-Italic.otf} },Numbers=Lining].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.: <-9>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;+lnum;mapping=tex-text;"<9->"[NewCM10-Regular.otf]/OT:script=latn;language=dflt;+lnum;mapping=tex-text;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: <-9>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;+lnum;+smcp;mapping=tex-text;"<9->"[NewCM10-Regular.otf]/OT:script=latn;language=dflt;+lnum;+smcp;mapping=tex-text;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.: <0->"[NewCM10-Bold.otf]/OT:script=latn;language=dflt;+lnum;mapping=tex-text;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: <0->"[NewCM10-Bold.otf]/OT:script=latn;language=dflt;+lnum;+smcp;mapping=tex-text;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.: <-8>"[NewCM08-Italic.otf]/OT:script=latn;language=dflt;+lnum;mapping=tex-text;"<8>"[NewCM08-Italic.otf]/OT:script=latn;language=dflt;+lnum;mapping=tex-text;"<8->"[NewCM10-Italic.otf]/OT:script=latn;language=dflt;+lnum;mapping=tex-text;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.: <-8>"[NewCM08-Italic.otf]/OT:script=latn;language=dflt;+lnum;+smcp;mapping=tex-text;"<8>"[NewCM08-Italic.otf]/OT:script=latn;language=dflt;+lnum;+smcp;mapping=tex-text;"<8->"[NewCM10-Italic.otf]/OT:script=latn;language=dflt;+lnum;+smcp;mapping=tex-text;"
+(fontspec)             - 'slanted' (m/sl) with NFSS spec.: <-8>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;slant=.25;slant=0.25;+lnum;mapping=tex-text;"<8>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;slant=.25;slant=0.25;+lnum;mapping=tex-text;"<8->"[NewCM10-Regular.otf]/OT:script=latn;language=dflt;slant=.25;slant=0.25;+lnum;mapping=tex-text;"
+(fontspec)             - 'slanted small caps'  (m/scsl) with NFSS spec.: <-8>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;slant=.25;slant=0.25;+lnum;+smcp;mapping=tex-text;"<8>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;slant=.25;slant=0.25;+lnum;+smcp;mapping=tex-text;"<8->"[NewCM10-Regular.otf]/OT:script=latn;language=dflt;slant=.25;slant=0.25;+lnum;+smcp;mapping=tex-text;"
+(fontspec)             - 'swash' (m/sw) with NFSS spec.: <-8>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;+lnum;mapping=tex-text;"<8>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;+lnum;mapping=tex-text;"<8->"[NewCM10-Regular.otf]/OT:script=latn;language=dflt;+lnum;mapping=tex-text;"
+(fontspec)             -  (m/scsw) with NFSS spec.: <-8>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;+lnum;+smcp;mapping=tex-text;"<8>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;+lnum;+smcp;mapping=tex-text;"<8->"[NewCM10-Regular.otf]/OT:script=latn;language=dflt;+lnum;+smcp;mapping=tex-text;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.: <0->"[NewCM10-BoldItalic.otf]/OT:script=latn;language=dflt;+lnum;mapping=tex-text;"
+(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: <0->"[NewCM10-BoldItalic.otf]/OT:script=latn;language=dflt;+lnum;+smcp;mapping=tex-text;"
+(fontspec)             - 'bold slanted' (b/sl) with NFSS spec.: <0->"[NewCM10-Bold.otf]/OT:script=latn;language=dflt;slant=.25;slant=0.25;+lnum;mapping=tex-text;"
+(fontspec)             - 'bold slanted small caps'  (b/scsl) with NFSS spec.: <0->"[NewCM10-Bold.otf]/OT:script=latn;language=dflt;slant=.25;slant=0.25;+lnum;+smcp;mapping=tex-text;"
+(fontspec)             - 'bold swash' (b/sw) with NFSS spec.: <0->"[NewCM10-Bold.otf]/OT:script=latn;language=dflt;+lnum;mapping=tex-text;"
+(fontspec)             -  (b/scsw) with NFSS spec.: <0->"[NewCM10-Bold.otf]/OT:script=latn;language=dflt;+lnum;+smcp;mapping=tex-text;"
+[12 numerals Abc]
+Package fontspec Info: 
+(fontspec)             Font family 'NewCM10-Regular.otf(3)' created for font 'NewCM10-Regular.otf' with options [Ligatures=TeX,UprightFont={NewCM10-Regular.otf},UprightFeatures={SizeFeatures={{Size={-8},Font={NewCM08-Regular.otf}},{Size={8},Font={NewCM08-Regular.otf}}, {Size={8-},Font={NewCM10-Regular.otf}},}},ItalicFont={NewCM10-Italic.otf},ItalicFeatures={SizeFeatures={{Size={-8},Font={NewCM08-Italic.otf}},{Size={8},Font={NewCM08-Italic.otf}}, {Size={8-},Font={NewCM10-Italic.otf}},}},BoldFont={NewCM10-Bold.otf},BoldFeatures={SizeFeatures={{Size={0-},Font={NewCM10-Bold.otf}},}},BoldItalicFont={NewCM10-BoldItalic.otf},BoldItalicFeatures={SizeFeatures={{Size={0-},Font={NewCM10-BoldItalic.otf}},}},SlantedFont={NewCM10-Regular.otf},SlantedFeatures={SizeFeatures={{Size={-8},FakeSlant={0.25},Font={NewCM08-Regular.otf}},{Size={8},FakeSlant={0.25},Font={NewCM08-Regular.otf}},{Size={8-},FakeSlant={0.25},Font={NewCM10-Regular.otf}},}},BoldSlantedFont={NewCM10-Bold.otf},BoldSlantedFeatures={SizeFeatures={{Size={0-},FakeSlant={0.25},Font={NewCM10-Bold.otf}},}},SwashFont={NewCM10-Regular.otf},SwashFeatures={SizeFeatures={{Size={-8},Font={NewCM08-Regular.otf}},{Size={8},Font={NewCM08-Regular.otf}},{Size={8-},Font={NewCM10-Regular.otf}},}},BoldSwashFont={NewCM10-Bold.otf},BoldSwashFeatures={SizeFeatures={{Size={0-},Font={NewCM10-Bold.otf}},}},Numbers=Lining,SlantedFont=NewCM10-Regular.otf,SlantedFeatures={FakeSlant=.25},BoldSlantedFont=NewCM10-Bold.otf,BoldSlantedFeatures={FakeSlant=.25},SizeFeatures={ {Size=-9,Font=NewCM08-Regular.otf,ItalicFont=NewCM08-Italic.otf}, {Size=9-,Font=NewCM10-Regular.otf,ItalicFont=NewCM10-Italic.otf} },Numbers=OldStyle].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.: <-9>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;+onum;mapping=tex-text;"<9->"[NewCM10-Regular.otf]/OT:script=latn;language=dflt;+onum;mapping=tex-text;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: <-9>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;+onum;+smcp;mapping=tex-text;"<9->"[NewCM10-Regular.otf]/OT:script=latn;language=dflt;+onum;+smcp;mapping=tex-text;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.: <0->"[NewCM10-Bold.otf]/OT:script=latn;language=dflt;+onum;mapping=tex-text;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: <0->"[NewCM10-Bold.otf]/OT:script=latn;language=dflt;+onum;+smcp;mapping=tex-text;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.: <-8>"[NewCM08-Italic.otf]/OT:script=latn;language=dflt;+onum;mapping=tex-text;"<8>"[NewCM08-Italic.otf]/OT:script=latn;language=dflt;+onum;mapping=tex-text;"<8->"[NewCM10-Italic.otf]/OT:script=latn;language=dflt;+onum;mapping=tex-text;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.: <-8>"[NewCM08-Italic.otf]/OT:script=latn;language=dflt;+onum;+smcp;mapping=tex-text;"<8>"[NewCM08-Italic.otf]/OT:script=latn;language=dflt;+onum;+smcp;mapping=tex-text;"<8->"[NewCM10-Italic.otf]/OT:script=latn;language=dflt;+onum;+smcp;mapping=tex-text;"
+(fontspec)             - 'slanted' (m/sl) with NFSS spec.: <-8>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;slant=.25;slant=0.25;+onum;mapping=tex-text;"<8>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;slant=.25;slant=0.25;+onum;mapping=tex-text;"<8->"[NewCM10-Regular.otf]/OT:script=latn;language=dflt;slant=.25;slant=0.25;+onum;mapping=tex-text;"
+(fontspec)             - 'slanted small caps'  (m/scsl) with NFSS spec.: <-8>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;slant=.25;slant=0.25;+onum;+smcp;mapping=tex-text;"<8>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;slant=.25;slant=0.25;+onum;+smcp;mapping=tex-text;"<8->"[NewCM10-Regular.otf]/OT:script=latn;language=dflt;slant=.25;slant=0.25;+onum;+smcp;mapping=tex-text;"
+(fontspec)             - 'swash' (m/sw) with NFSS spec.: <-8>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;+onum;mapping=tex-text;"<8>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;+onum;mapping=tex-text;"<8->"[NewCM10-Regular.otf]/OT:script=latn;language=dflt;+onum;mapping=tex-text;"
+(fontspec)             -  (m/scsw) with NFSS spec.: <-8>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;+onum;+smcp;mapping=tex-text;"<8>"[NewCM08-Regular.otf]/OT:script=latn;language=dflt;+onum;+smcp;mapping=tex-text;"<8->"[NewCM10-Regular.otf]/OT:script=latn;language=dflt;+onum;+smcp;mapping=tex-text;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.: <0->"[NewCM10-BoldItalic.otf]/OT:script=latn;language=dflt;+onum;mapping=tex-text;"
+(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: <0->"[NewCM10-BoldItalic.otf]/OT:script=latn;language=dflt;+onum;+smcp;mapping=tex-text;"
+(fontspec)             - 'bold slanted' (b/sl) with NFSS spec.: <0->"[NewCM10-Bold.otf]/OT:script=latn;language=dflt;slant=.25;slant=0.25;+onum;mapping=tex-text;"
+(fontspec)             - 'bold slanted small caps'  (b/scsl) with NFSS spec.: <0->"[NewCM10-Bold.otf]/OT:script=latn;language=dflt;slant=.25;slant=0.25;+onum;+smcp;mapping=tex-text;"
+(fontspec)             - 'bold swash' (b/sw) with NFSS spec.: <0->"[NewCM10-Bold.otf]/OT:script=latn;language=dflt;+onum;mapping=tex-text;"
+(fontspec)             -  (b/scsw) with NFSS spec.: <0->"[NewCM10-Bold.otf]/OT:script=latn;language=dflt;+onum;+smcp;mapping=tex-text;"
+[Old 2 and 3]
+[Starred]
+============================================================
+============================================================
+TEST 6: Document information
+============================================================
+[\376\377\000A\000b\000c\000\040\003\261]
+============================================================
+============================================================
+TEST 7: Table of contents with hyperlinks
+============================================================
+(hep-font-hyperref.toc)
+\tf@toc=\write...
+> \box...=
+\vbox(44.03679+0.21999)x200.0
+.\hbox(10.03679+0.15839)x200.0, glue set 135.27202fil
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+..\hbox(0.0+0.0)x0.0
+...\kern 0.0
+...\penalty 10000
+...\hbox(0.0+0.0)x0.0
+....\hbox(0.0+0.0)x0.0, shifted -18.0
+.....\special{pdf:dest (section*.2) [@thispage /XYZ @xpos @ypos null]}
+.....\penalty 10000
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/b/n/14.4 Contents
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty 10000
+.\glue 9.913 plus 0.86198
+.\glue -9.913 plus -0.86198
+.\glue 10.0 plus 1.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.87161
+.\hbox(6.97+0.10999)x200.0, glue set 117.59996fil
+..\glue(\leftskip) 15.0
+..\glue -15.0
+..\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(section.1)>>>>}
+..\hbox(6.55+0.0)x15.0, glue set 9.25fil
+...\TU/NewCM10-Regular.otf(1)/b/n/10 1
+...\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(1)/b/n/10 Section
+..\glue 3.83 plus 1.915 minus 1.27666
+..\TU/NewCM10-Regular.otf(1)/b/n/10 10
+..\special{pdf:eann}
+..\penalty 10000
+..\glue 0.0 plus 1.0fil
+..\penalty 10000
+..\hbox(6.55+0.0)x15.50003, glue set 9.75003fil
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\TU/NewCM10-Regular.otf(1)/b/n/10 1
+...\kern -1.0
+...\kern 1.0
+..\penalty 10000
+..\glue(\parfillskip) -15.50003
+..\glue(\rightskip) 15.50003
+.\glue 0.0 plus 0.2
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.83002
+.\hbox(7.06+0.21999)x200.0, glue set 86.43994fill
+..\glue(\leftskip) 38.00003
+..\hbox(0.0+0.0)x15.0
+..\hbox(0.0+0.0)x0.0
+..\penalty 10000
+..\glue -38.00003
+..\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subsection.1.1)>>>>}
+..\hbox(6.66+0.0)x23.00003, glue set 10.22003fil
+...\TU/NewCM10-Regular.otf(1)/m/n/10 1.1
+...\glue 0.0 plus 1.0fil
+..\TU/NewCM10-Regular.otf(1)/m/n/10 Subsection
+..\glue 3.33 plus 1.665 minus 1.11
+..\TU/NewCM10-Regular.otf(1)/m/n/10 10
+..\special{pdf:eann}
+..\penalty 10000
+..\leaders 0.0 plus 1.0fill
+...\hbox(1.06+0.0)x7.77988
+....\mathon
+....\kern 2.49994
+....\hbox(1.06+0.0)x2.78
+.....\TU/NewCM10-Regular.otf(1)/m/n/10 .
+....\kern 2.49994
+....\mathoff
+..\penalty 10000
+..\hbox(6.66+0.0)x15.50003, glue set 10.50003fil
+...\glue 0.0 plus 1.0fil
+...\TU/NewCM10-Regular.otf(1)/m/n/10 1
+...\kern -1.0
+...\kern 1.0
+..\penalty 10000
+..\glue(\parfillskip) -25.50003
+..\glue(\rightskip) 25.50003
+! OK.
+<argument> ...e =20em\tableofcontents }\showbox 0 
+l. ...}
+============================================================

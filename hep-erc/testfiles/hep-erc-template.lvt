@@ -1,0 +1,44 @@
+% hep-erc: the extracted proposal header hep-erc-header.tex as used by the
+% B1 and B2 templates: title data, document information and the title
+% followed by the abstract.
+\input{regression-test}
+\documentclass{article}
+\input{hep-erc-header}
+\input{hep-regression}
+\begin{document}
+\makeatletter
+% Load all fonts before the test
+\setbox0\vbox{\maketitle\begin{abstract}\abstracttext\end{abstract}\section{S}}
+\START
+
+\TEST{Header data}{%
+  \TYPE{proposal: \theproposal}%
+  \TYPE{date: \@date}%
+  \TYPE{months: \months}%
+  \TYPE{subtitle: \hep@sub@title}%
+}
+
+\TEST{Document information}{%
+  \PDFINFO{title}%
+  \PDFINFO{author}%
+}
+
+\TEST{B2: title and abstract}{%
+  \setcounter{proposal}{2}%
+  \setbox0\vbox{\maketitle\begin{abstract}\abstracttext\end{abstract}}%
+  \TYPE{title done}%
+  \PDFINFO{title}%
+}
+
+\TEST{Bookmarks: B1 sections}{%
+  \setcounter{section}{0}%
+  \SECTIONBOOKMARKS{%
+    \section{Extended Synopsis of the scientific proposal}%
+    \section{Curriculum Vit\ae}%
+    \subsection*{Education}%
+    \section{Early achievements track-record}%
+  }%
+}
+
+\makeatother
+\END

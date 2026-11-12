@@ -1,0 +1,29 @@
+% hep-cv class with the standard 12pt option and a text width changed by
+% geometry after the class.
+\input{regression-test}
+\documentclass[12pt]{hep-cv}
+\usepackage[margin=5cm]{geometry}
+\author{First Last}
+\input{hep-regression}
+\begin{document}
+\makeatletter
+% Load all fonts before the test
+\setbox0\vbox{\maketitle\section{S}\cvline[L]{M}\cventry[L]{T}[o]}
+\START
+
+\TEST{Size option}{%
+  \TYPE{font: \hepcv@font, font size: \f@size}%
+  \TYPE{hep-font options: \csname opt@hep-font.sty\endcsname}%
+}
+
+\TEST{CV lines fill the text width set by geometry}{%
+  \setbox0\hbox{\cvline[L]{M}}%
+  \TYPE{textwidth: \the\textwidth, cvline: \the\wd0}%
+  \setbox0\hbox{\cventry[L]{T}[o]}%
+  \TYPE{cventry: \the\wd0}%
+  \setbox0\vbox{\begin{abstract}Text\end{abstract}}%
+  \TYPE{abstract done}%
+}
+
+\makeatother
+\END

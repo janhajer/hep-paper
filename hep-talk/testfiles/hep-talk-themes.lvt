@@ -1,0 +1,53 @@
+% hep-talk: the paperwidth and ratio options, the default colours (without
+% theme) and the four colour themes.
+\input{regression-test}
+\documentclass{article}
+\usepackage[paperwidth=20cm, ratio=9/16]{hep-talk}
+\makeatletter
+% \RECORD{theme}: store the colours defined by the theme
+\newcommand*{\RECORD}[1]{%
+  \def\hep@test@colours{}%
+  \@for\hep@test@name:=PageBg,PageFg,TitleBg,TitleFg,CaptionBg,CaptionFg,%
+    BlockBg,BlockFg,Structure,Highlight\do{%
+    \extractcolorspecs{\hep@test@name}\hep@test@model\hep@test@spec
+    \edef\hep@test@colours{\hep@test@colours
+      \hep@test@name: \hep@test@model\space\hep@test@spec^^J}%
+  }%
+  \expandafter\let\csname hep@test@#1\endcsname\hep@test@colours
+  \expandafter\edef\csname hep@test@#1@version\endcsname{%
+    \ifcsname ver@#1.sty\endcsname
+      \expandafter\ifx\csname ver@#1.sty\endcsname\@empty
+        empty version string\else provided\fi
+    \else not provided\fi}%
+}
+\makeatother
+\RECORD{hep-talk}
+\usepackage{hep-dark}\RECORD{hep-dark}
+\usepackage{hep-light}\RECORD{hep-light}
+\usepackage{hep-blue}\RECORD{hep-blue}
+\usepackage{hep-metropolis}\RECORD{hep-metropolis}
+\input{hep-regression}
+\begin{document}
+\makeatletter
+\START
+
+\TEST{Options and page size}{%
+  \TYPE{paperwidth: \heptalk@paperwidth, ratio: \heptalk@ratio}%
+  \TYPE{paper: \the\paperwidth\space x \the\paperheight}%
+  \TYPE{hmargin: \the\hmargin, vmargin: \the\vmargin}%
+}
+
+\TEST{Theme package information}{%
+  \@for\hep@test@name:=hep-dark,hep-light,hep-blue,hep-metropolis\do{%
+    \TYPE{\hep@test@name: \csname hep@test@\hep@test@name @version\endcsname}%
+  }%
+}
+
+\TEST{Theme colours}{%
+  \@for\hep@test@name:=hep-talk,hep-dark,hep-light,hep-blue,hep-metropolis\do{%
+    \TYPE{\hep@test@name:^^J\csname hep@test@\hep@test@name\endcsname}%
+  }%
+}
+
+\makeatother
+\END

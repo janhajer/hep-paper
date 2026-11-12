@@ -1,0 +1,849 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Foreign abbreviations (british)
+============================================================
+[british]
+> \box...=
+\hbox(4.30554+1.94444)x23.61116
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 .
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 x
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94444+1.94444)x45.61119
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 f
+.\OT1/cmr/m/n/10 .
+.\glue 4.44444 plus 4.99997 minus 0.37036
+.\OT1/cmr/m/n/10 v
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 .
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 2: Foreign abbreviations: font
+============================================================
+> \box...=
+\hbox(4.30554+1.94444)x23.36662
+.\OT1/cmr/m/it/10 e
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/it/10 g
+.\OT1/cmr/m/n/10 .
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 x
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 3: Foreign abbreviations inside enquote
+============================================================
+> \box...=
+\hbox(6.94444+1.94444)x45.33339
+.\OT1/cmr/m/n/10 `
+.\penalty 10000
+.\glue -0.0002
+.\glue 0.0002
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 e
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 '
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 x
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 4: Quotation marks
+============================================================
+> \box...=
+\hbox(6.94444+0.0)x29.94455
+.\OT1/cmr/m/n/10 `
+.\penalty 10000
+.\glue -0.0002
+.\glue 0.0002
+.\OT1/cmr/m/n/10 a
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 \
+.\penalty 10000
+.\glue -0.0002
+.\glue 0.0002
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 "
+.\penalty 10000
+.\glue 0.50003
+.\OT1/cmr/m/n/10 '
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94444+0.0)x10.55559
+.\OT1/cmr/m/n/10 `
+.\penalty 10000
+.\glue -0.0002
+.\glue 0.0002
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 '
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 5: Numero
+============================================================
+> \box...=
+\hbox(6.8872+0.0)x22.49779
+.\TS1/cmr/m/n/10 ^^9b
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 2
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 6: Software names
+============================================================
+> \box...=
+\hbox(6.14998+0.0)x21.15604
+.\OT1/cmr/m/sc/9 A
+.\OT1/cmr/m/sc/9 b
+.\kern 0.0
+.\penalty 10000
+.\glue 3.08331 plus 1.54166 minus 1.02777
+.\glue -3.08331
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 x
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.14998+0.0)x33.74623
+.\OT1/cmr/m/sc/9 A
+.\OT1/cmr/m/sc/9 b
+.\kern 0.0
+.\penalty 10000
+.\glue 3.08331 plus 1.54166 minus 1.02777
+.\OT1/cmr/m/n/9 v
+.\OT1/cmr/m/n/9 1
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 x
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 7: Online and email without hyperref
+============================================================
+> \box...=
+\hbox(6.11111+0.0)x15.74986
+.\OT1/cmtt/m/n/10 a
+.\OT1/cmtt/m/n/10 .
+.\OT1/cmtt/m/n/10 b
+.\kern 0.0
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.11111+0.0)x15.74986
+.\OT1/cmtt/m/n/10 a
+.\OT1/cmtt/m/n/10 @
+.\OT1/cmtt/m/n/10 b
+.\kern 0.0
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 8: Online and email without hyperref: special characters
+============================================================
+> \box...=
+\hbox(6.11111+0.95135)x26.24977
+.\OT1/cmtt/m/n/10 a
+.\OT1/cmtt/m/n/10 _
+.\OT1/cmtt/m/n/10 b
+.\OT1/cmtt/m/n/10 @
+.\OT1/cmtt/m/n/10 c
+.\kern 0.0
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.94444+0.95135)x57.7495
+.\OT1/cmtt/m/n/10 a
+.\OT1/cmtt/m/n/10 #
+.\OT1/cmtt/m/n/10 b
+.\OT1/cmtt/m/n/10 &
+.\OT1/cmtt/m/n/10 c
+.\OT1/cmtt/m/n/10 ~
+.\OT1/cmtt/m/n/10 d
+.\OT1/cmtt/m/n/10 %
+.\OT1/cmtt/m/n/10 e
+.\OT1/cmtt/m/n/10 _
+.\OT1/cmtt/m/n/10 f
+.\kern 0.0
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 9: Prefix
+============================================================
+> \box...=
+\hbox(7.5+2.5)x30.30562
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\hbox(7.5+2.5)x7.22223
+..\OT1/cmr/m/n/10 -
+..\OT1/cmr/m/n/10 )
+.\penalty 0
+.\OT1/cmr/m/n/10 x
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 10: Subsubparagraph
+============================================================
+> \box...=
+\vbox(30.29855+0.0)x200.0003
+.\hbox(4.30554+0.0)x200.0003, glue set 180.00029fil
+..\hbox(0.0+0.0)x15.0
+..\OT1/cmr/m/n/10 a
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -300
+.\glue 13.99301 plus 4.30554 minus 0.86108
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 5.05556
+.\hbox(6.94444+0.0)x200.0003, glue set 194.44473fil
+..\OT1/cmr/m/n/10 b
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+! OK.
+<argument> ...a\par \subsubparagraph b}\showbox 0 
+                                                  \setbox 0\vbox {a\par \sub...
+l. ...}
+[no indentation]
+============================================================
+============================================================
+TEST 11: Underline
+============================================================
+macro:->\protect \underline  
+> \box...=
+\hbox(6.94444+3.22914)x13.88892
+.\hbox(0.0+3.22914)x0.0, glue set - 5.25002fil
+..\hbox(0.0+0.0)x0.0
+..\kern -0.25
+..\leaders 5.50002
+...\rule(-2.79857+3.22914)x*
+..\kern 0.0
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\OT1/cmr/m/n/10 a
+.\leaders 3.33333 plus 1.66666 minus 1.11111
+..\rule(-2.79857+3.22914)x*
+.\kern 0.0
+.\hbox(0.0+0.0)x0.0
+.\hbox(0.0+3.22914)x0.0, glue set - 5.80557fil
+..\hbox(0.0+0.0)x0.0
+..\kern -0.25
+..\leaders 6.05557
+...\rule(-2.79857+3.22914)x*
+..\kern 0.0
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\OT1/cmr/m/n/10 b
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 12: Underline: line breaks
+============================================================
+> \box...=
+\vbox(16.30554+3.22914)x20.00003
+.\hbox(4.30554+3.22914)x20.00003, glue set 4.99998fil
+..\hbox(0.0+3.22914)x0.0, glue set - 15.25005fil
+...\hbox(0.0+0.0)x0.0
+...\kern -0.25
+...\leaders 15.50005
+....\rule(-2.79857+3.22914)x*
+...\kern 0.0
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\OT1/cmr/m/n/10 a
+..\OT1/cmr/m/n/10 a
+..\OT1/cmr/m/n/10 a
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty 300
+.\glue(\baselineskip) 1.82642
+.\hbox(6.94444+3.22914)x20.00003, glue set 1.66666fil
+..\hbox(0.0+0.0)x0.0
+..\hbox(0.0+3.22914)x0.0, glue set - 16.91672fil
+...\hbox(0.0+0.0)x0.0
+...\kern -0.25
+...\leaders 17.16672
+....\rule(-2.79857+3.22914)x*
+...\kern 0.0
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\OT1/cmr/m/n/10 b
+..\OT1/cmr/m/n/10 b
+..\OT1/cmr/m/n/10 b
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0 plus 1.0fil
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 13: Underline: text with macros unknown to soul
+============================================================
+soul: a b
+soul: a \textbf {b} \"o $\alpha $ c\\d~e\%f\par g
+whole: a \enquote {b c}
+whole: a \eg b
+whole: a \software {b}
+whole: a \ref {b}
+> \box...=
+\hbox(6.94444+3.94434)x54.50893
+.\mathon
+.\vbox(6.94444+3.94434)x54.50893
+..\hbox(6.94444+1.94444)x54.50893
+...\OT1/cmr/m/n/10 `
+...\penalty 10000
+...\glue -0.0002
+...\glue 0.0002
+...\OT1/cmr/m/n/10 a
+...\glue 3.33333 plus 1.66666 minus 1.11111
+...\OT1/cmr/m/n/10 b
+...\OT1/cmr/m/n/10 '
+...\glue 3.33333 plus 1.66666 minus 1.11111
+...\OT1/cmr/m/n/10 e
+...\OT1/cmr/m/n/10 .
+...\OT1/cmr/m/n/10 g
+...\OT1/cmr/m/n/10 .
+...\glue 3.33333 plus 1.66666 minus 1.11111
+...\OT1/cmr/m/n/10 c
+...\kern 0.0
+...\glue 3.33333 plus 1.66666 minus 1.11111
+...\OT1/cmr/m/sc/9 d
+...\kern 0.0
+...\penalty 10000
+...\glue 3.08331 plus 1.54166 minus 1.02777
+...\glue -3.08331
+..\kern1.19994
+..\rule(0.39998+0.0)x*
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 14: Inline list
+============================================================
+> \box...=
+\hbox(7.5+2.5)x87.77798
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 )
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\glue 0.00002
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 )
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\glue 0.00002
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 )
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\glue 0.00002
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 .
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 15: Enumerated description list
+============================================================
+> \box...=
+\vbox(66.86111+0.0)x345.0
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue -10.0 plus -4.0 minus -5.0
+.\glue 6.0 plus 2.0 minus 4.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\hbox(6.86111+0.0)x319.99997, glue set 296.30554fil, shifted 25.00003
+..\hbox(6.44444+0.0)x0.0
+...\glue 0.0
+...\glue -20.00003
+...\glue -5.0
+...\hbox(6.44444+0.0)x20.00003, glue set 20.00003fil
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.44444+0.0)x0.0, glue set - 7.7778fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\OT1/cmr/m/n/10 1
+.....\OT1/cmr/m/n/10 .
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/bx/n/10 A
+..\kern 0.0
+..\glue 10.00002
+..\OT1/cmr/m/n/10 a
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.5
+.\hbox(7.5+0.0)x319.99997, glue set 296.26387fil, shifted 25.00003
+..\hbox(7.5+0.0)x0.0
+...\glue 0.0
+...\glue -20.00003
+...\glue -5.0
+...\hbox(7.5+0.0)x20.00003, glue set 20.00003fil
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(7.5+0.0)x0.0, glue set - 5.00002fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\OT1/cmr/m/n/10 *
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/bx/n/10 B
+..\kern 0.0
+..\glue 10.00002
+..\OT1/cmr/m/n/10 b
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 5.55556
+.\hbox(6.44444+0.0)x319.99997, glue set 315.55553fil, shifted 25.00003
+..\hbox(6.44444+0.0)x0.0
+...\glue 0.0
+...\glue -20.00003
+...\glue -5.0
+...\hbox(6.44444+0.0)x20.00003, glue set 20.00003fil
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.44444+0.0)x0.0, glue set - 7.7778fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\OT1/cmr/m/n/10 2
+.....\OT1/cmr/m/n/10 .
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/m/n/10 c
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 16: Enumerated description list: label options
+============================================================
+> \box...=
+\vbox(30.0+0.0)x345.0
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue -10.0 plus -4.0 minus -5.0
+.\glue 6.0 plus 2.0 minus 4.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\hbox(7.5+2.5)x319.99997, glue set 296.30554fil, shifted 25.00003
+..\hbox(7.5+2.5)x0.0
+...\glue 0.0
+...\glue -20.00003
+...\glue -5.0
+...\hbox(7.5+2.5)x20.00003, glue set 20.00003fil
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(7.5+2.5)x0.0, glue set - 7.50002fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\OT1/cmr/m/n/10 I
+.....\OT1/cmr/m/n/10 )
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/bx/n/10 A
+..\kern 0.0
+..\glue 10.00002
+..\OT1/cmr/m/n/10 a
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 17: Enumerated description list: title with repeated first letter
+============================================================
+> \box...=
+\vbox(26.44444+0.0)x345.0
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue -10.0 plus -4.0 minus -5.0
+.\glue 6.0 plus 2.0 minus 4.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\hbox(6.44444+0.0)x319.99997, glue set 293.18056fil, shifted 25.00003
+..\hbox(6.44444+0.0)x0.0
+...\glue 0.0
+...\glue -20.00003
+...\glue -5.0
+...\hbox(6.44444+0.0)x20.00003, glue set 20.00003fil
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.44444+0.0)x0.0, glue set - 7.7778fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\OT1/cmr/m/n/10 1
+.....\OT1/cmr/m/n/10 .
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/bx/n/10 o
+..\kern0.31944
+..\OT1/cmr/bx/n/10 o
+..\kern 0.0
+..\glue 10.00002
+..\OT1/cmr/m/n/10 a
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 18: Enumerated description list: nested itemize
+============================================================
+> \box...=
+\vbox(46.86111+0.0)x345.0
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue -10.0 plus -4.0 minus -5.0
+.\glue 6.0 plus 2.0 minus 4.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\hbox(6.86111+0.0)x319.99997, glue set 296.30554fil, shifted 25.00003
+..\hbox(6.44444+0.0)x0.0
+...\glue 0.0
+...\glue -20.00003
+...\glue -5.0
+...\hbox(6.44444+0.0)x20.00003, glue set 20.00003fil
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.44444+0.0)x0.0, glue set - 7.7778fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\OT1/cmr/m/n/10 1
+.....\OT1/cmr/m/n/10 .
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/bx/n/10 A
+..\kern 0.0
+..\glue 10.00002
+..\OT1/cmr/m/n/10 a
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 8.0 plus 4.0 minus 2.0
+.\glue -8.0 plus -4.0 minus -2.0
+.\glue 6.0 plus 3.0 minus 1.0
+.\glue(\parskip) 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 5.05556
+.\hbox(6.94444+0.0)x297.99997, glue set 287.72217fil, shifted 47.00003
+..\hbox(4.37393+0.0)x0.0
+...\glue 0.0
+...\glue -17.0
+...\glue -5.0
+...\hbox(4.37393+0.0)x17.0, glue set 17.0fil
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(4.37393+0.0)x0.0, glue set - 4.99878fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TS1/cmr/m/n/10 ^^88
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/m/n/10 b
+..\kern0.27779
+..\OT1/cmr/m/n/10 c
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 4.0 plus 2.0 minus 1.0
+.\glue -4.0 plus -2.0 minus -1.0
+.\glue 8.0 plus 3.0 minus 2.0
+.\glue -8.0 plus -3.0 minus -2.0
+.\penalty -51
+.\glue 8.0 plus 3.0 minus 2.0
+.\glue -8.0 plus -3.0 minus -2.0
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 19: No indentation after lists
+============================================================
+[no indentation]
+[no indentation]
+[no indentation]
+[no indentation]
+[indentation 15.0pt]
+[no indentation]
+[no indentation]
+============================================================
+============================================================
+TEST 20: No indentation after verbatim
+============================================================
+[no indentation]
+============================================================
+============================================================
+TEST 21: Enumerated description list: nested enumdescript
+============================================================
+> \box...=
+\vbox(98.86111+0.0)x345.0
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue -10.0 plus -4.0 minus -5.0
+.\glue 6.0 plus 2.0 minus 4.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\hbox(6.86111+0.0)x319.99997, glue set 296.30554fil, shifted 25.00003
+..\hbox(6.44444+0.0)x0.0
+...\glue 0.0
+...\glue -20.00003
+...\glue -5.0
+...\hbox(6.44444+0.0)x20.00003, glue set 20.00003fil
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.44444+0.0)x0.0, glue set - 7.7778fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\OT1/cmr/m/n/10 1
+.....\OT1/cmr/m/n/10 .
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/bx/n/10 A
+..\kern 0.0
+..\glue 10.00002
+..\OT1/cmr/m/n/10 a
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 8.0 plus 4.0 minus 2.0
+.\glue -8.0 plus -4.0 minus -2.0
+.\glue 6.0 plus 3.0 minus 1.0
+.\glue(\parskip) 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 5.05556
+.\hbox(6.94444+0.0)x297.99997, glue set 274.26387fil, shifted 47.00003
+..\hbox(6.44444+0.0)x0.0
+...\glue 0.0
+...\glue -17.0
+...\glue -5.0
+...\hbox(6.44444+0.0)x17.0, glue set 17.0fil
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.44444+0.0)x0.0, glue set - 7.7778fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\OT1/cmr/m/n/10 1
+.....\OT1/cmr/m/n/10 .
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/bx/n/10 B
+..\kern 0.0
+..\glue 10.00002
+..\OT1/cmr/m/n/10 b
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 4.0 plus 2.0 minus 2.0
+.\glue(\parskip) 0.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 7.62607
+.\hbox(4.37393+0.0)x279.3, glue set 274.85556fil, shifted 65.7
+..\hbox(4.37393+0.0)x0.0
+...\glue 0.0
+...\glue -13.69997
+...\glue -5.0
+...\hbox(4.37393+0.0)x13.69997, glue set 13.69997fil
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(4.37393+0.0)x0.0, glue set - 4.99878fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TS1/cmr/m/n/10 ^^88
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/m/n/10 c
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 2.0 plus 1.0 minus 1.0
+.\glue -2.0 plus -1.0 minus -1.0
+.\penalty -51
+.\glue 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 5.05556
+.\hbox(6.94444+0.0)x297.99997, glue set 273.62498fil, shifted 47.00003
+..\hbox(6.44444+0.0)x0.0
+...\glue 0.0
+...\glue -17.0
+...\glue -5.0
+...\hbox(6.44444+0.0)x17.0, glue set 17.0fil
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.44444+0.0)x0.0, glue set - 7.7778fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\OT1/cmr/m/n/10 2
+.....\OT1/cmr/m/n/10 .
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/bx/n/10 D
+..\kern 0.0
+..\glue 10.00002
+..\OT1/cmr/m/n/10 d
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 4.0 plus 2.0 minus 1.0
+.\glue -4.0 plus -2.0 minus -1.0
+.\penalty -51
+.\glue 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 5.13889
+.\hbox(6.86111+0.0)x319.99997, glue set 298.0fil, shifted 25.00003
+..\hbox(6.44444+0.0)x0.0
+...\glue 0.0
+...\glue -20.00003
+...\glue -5.0
+...\hbox(6.44444+0.0)x20.00003, glue set 20.00003fil
+....\penalty 10000
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.44444+0.0)x0.0, glue set - 7.7778fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\OT1/cmr/m/n/10 2
+.....\OT1/cmr/m/n/10 .
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/bx/n/10 E
+..\kern 0.0
+..\glue 10.00002
+..\OT1/cmr/m/n/10 e
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 22: Underline in math mode
+============================================================
+> \box...=
+\hbox(4.30554+1.9999)x5.71527
+.\mathon
+.\vbox(4.30554+1.9999)x5.71527
+..\hbox(4.30554+0.0)x5.71527
+...\OML/cmm/m/it/10 x
+..\kern1.19994
+..\rule(0.39998+0.0)x*
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(4.30554+3.22914)x14.04861
+.\hbox(0.0+3.22914)x0.0, glue set - 5.25002fil
+..\hbox(0.0+0.0)x0.0
+..\kern -0.25
+..\leaders 5.50002
+...\rule(-2.79857+3.22914)x*
+..\kern 0.0
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\OT1/cmr/m/n/10 a
+.\leaders 3.33333 plus 1.66666 minus 1.11111
+..\rule(-2.79857+3.22914)x*
+.\kern 0.0
+.\hbox(0.0+0.0)x0.0
+.\hbox(0.0+3.22914)x0.0, glue set - 5.96527fil
+..\hbox(0.0+0.0)x0.0
+..\kern -0.25
+..\leaders 6.21527
+...\rule(-2.79857+3.22914)x*
+..\kern 0.0
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\hbox(4.30554+1.9999)x5.71527
+..\mathon
+..\vbox(4.30554+1.9999)x5.71527
+...\hbox(4.30554+0.0)x5.71527
+....\OML/cmm/m/it/10 x
+...\kern1.19994
+...\rule(0.39998+0.0)x*
+..\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

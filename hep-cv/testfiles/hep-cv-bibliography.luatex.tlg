@@ -1,0 +1,161 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Loaded packages
+============================================================
+ver@hep-cv.sty: defined
+ver@biblatex.sty: defined
+style: numeric-comp
+============================================================
+============================================================
+TEST 2: Helper macros
+============================================================
+setlengths: defined
+printcvdate: defined
+printindex: defined
+printissuedate: defined
+adjustOrgLocDat: defined
+cleardate: defined
+Jan: undefined
+mkbibshortyear: undefined
+============================================================
+============================================================
+TEST 3: Bibliography environments and headings
+============================================================
+blx@env@unnumbered: defined
+blx@env@numbered: defined
+blx@env@starrednumbered: defined
+blx@head@section: defined
+blx@head@subsection: defined
+blx@head@subsubsection: defined
+============================================================
+============================================================
+TEST 4: printcvdate: formatted end month, no space without end month
+============================================================
+> \box...=
+\hbox(6.83+0.22)x89.18, direction TLT
+.\glue 0.0 plus 1.0fill
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+.\TU/NewCM10-Regular.otf(0)/m/n/10 J
+.\TU/NewCM10-Regular.otf(0)/m/n/10 a
+.\TU/NewCM10-Regular.otf(0)/m/n/10 n
+.\TU/NewCM10-Regular.otf(0)/m/n/10 .
+.\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+.\TU/NewCM10-Regular.otf(1)/m/n/10 2
+.\TU/NewCM10-Regular.otf(1)/m/n/10 0
+.\TU/NewCM10-Regular.otf(1)/m/n/10 2
+.\TU/NewCM10-Regular.otf(1)/m/n/10 0
+.\TU/NewCM10-Regular.otf(1)/m/n/10 –
+.\TU/NewCM10-Regular.otf(1)/m/n/10 J
+.\TU/NewCM10-Regular.otf(1)/m/n/10 u
+.\TU/NewCM10-Regular.otf(1)/m/n/10 n
+.\TU/NewCM10-Regular.otf(1)/m/n/10 .
+.\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+.\TU/NewCM10-Regular.otf(1)/m/n/10 2
+.\TU/NewCM10-Regular.otf(1)/m/n/10 0
+.\TU/NewCM10-Regular.otf(1)/m/n/10 2
+.\TU/NewCM10-Regular.otf(1)/m/n/10 2
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.66+0.22)x45.0, direction TLT
+.\glue 0.0 plus 1.0fill
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+.\TU/NewCM10-Regular.otf(1)/m/n/10 2
+.\TU/NewCM10-Regular.otf(1)/m/n/10 0
+.\TU/NewCM10-Regular.otf(1)/m/n/10 1
+.\TU/NewCM10-Regular.otf(1)/m/n/10 8
+.\TU/NewCM10-Regular.otf(1)/m/n/10 –
+.\TU/NewCM10-Regular.otf(1)/m/n/10 2
+.\TU/NewCM10-Regular.otf(1)/m/n/10 0
+.\TU/NewCM10-Regular.otf(1)/m/n/10 1
+.\TU/NewCM10-Regular.otf(1)/m/n/10 9
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.06+0.22)x70.7, direction TLT
+.\glue 0.0 plus 1.0fill
+.\TU/NewCM10-Regular.otf(0)/m/n/10 S
+.\TU/NewCM10-Regular.otf(0)/m/n/10 i
+.\TU/NewCM10-Regular.otf(0)/m/n/10 n
+.\TU/NewCM10-Regular.otf(0)/m/n/10 c
+.\TU/NewCM10-Regular.otf(0)/m/n/10 e
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\hbox(0.0+0.0)x0.0, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+.\TU/NewCM10-Regular.otf(0)/m/n/10 J
+.\TU/NewCM10-Regular.otf(0)/m/n/10 u
+.\TU/NewCM10-Regular.otf(0)/m/n/10 l
+.\TU/NewCM10-Regular.otf(0)/m/n/10 .
+.\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+.\TU/NewCM10-Regular.otf(1)/m/n/10 2
+.\TU/NewCM10-Regular.otf(1)/m/n/10 0
+.\TU/NewCM10-Regular.otf(1)/m/n/10 2
+.\TU/NewCM10-Regular.otf(1)/m/n/10 2
+.\TU/NewCM10-Regular.otf(1)/m/n/10 –
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 5: cleardate: no date in organization+location+date
+============================================================
+> \box...=
+\hbox(7.05+2.06)x143.09999, direction TLT
+.\TU/NewCM10-Regular.otf(0)/m/n/10 T
+.\kern-0.83 (font)
+.\TU/NewCM10-Regular.otf(0)/m/n/10 o
+.\kern-0.28 (font)
+.\TU/NewCM10-Regular.otf(0)/m/n/10 w
+.\TU/NewCM10-Regular.otf(0)/m/n/10 n
+.\TU/NewCM10-Regular.otf(0)/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+.\TU/NewCM10-Regular.otf(0)/m/n/10 O
+.\TU/NewCM10-Regular.otf(0)/m/n/10 r
+.\TU/NewCM10-Regular.otf(0)/m/n/10 g
+.\TU/NewCM10-Regular.otf(0)/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/NewCM10-Regular.otf(0)/m/n/10 J
+.\TU/NewCM10-Regular.otf(0)/m/n/10 a
+.\TU/NewCM10-Regular.otf(0)/m/n/10 n
+.\TU/NewCM10-Regular.otf(0)/m/n/10 .
+.\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+.\TU/NewCM10-Regular.otf(0)/m/n/10 2
+.\TU/NewCM10-Regular.otf(0)/m/n/10 0
+.\TU/NewCM10-Regular.otf(0)/m/n/10 2
+.\TU/NewCM10-Regular.otf(0)/m/n/10 0
+.\TU/NewCM10-Regular.otf(0)/m/n/10 –
+.\penalty 50
+.\TU/NewCM10-Regular.otf(0)/m/n/10 J
+.\TU/NewCM10-Regular.otf(0)/m/n/10 u
+.\TU/NewCM10-Regular.otf(0)/m/n/10 n
+.\TU/NewCM10-Regular.otf(0)/m/n/10 .
+.\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+.\TU/NewCM10-Regular.otf(0)/m/n/10 2
+.\TU/NewCM10-Regular.otf(0)/m/n/10 0
+.\TU/NewCM10-Regular.otf(0)/m/n/10 2
+.\TU/NewCM10-Regular.otf(0)/m/n/10 2
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.05+2.06)x47.81, direction TLT
+.\TU/NewCM10-Regular.otf(0)/m/n/10 T
+.\kern-0.83 (font)
+.\TU/NewCM10-Regular.otf(0)/m/n/10 o
+.\kern-0.28 (font)
+.\TU/NewCM10-Regular.otf(0)/m/n/10 w
+.\TU/NewCM10-Regular.otf(0)/m/n/10 n
+.\TU/NewCM10-Regular.otf(0)/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+.\TU/NewCM10-Regular.otf(0)/m/n/10 O
+.\TU/NewCM10-Regular.otf(0)/m/n/10 r
+.\TU/NewCM10-Regular.otf(0)/m/n/10 g
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

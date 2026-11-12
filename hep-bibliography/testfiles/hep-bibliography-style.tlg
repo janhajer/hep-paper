@@ -1,0 +1,107 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Style
+============================================================
+style: numeric
+cite:comp undefined, cite:init undefined, cbx@tempcntb undefined
+============================================================
+============================================================
+TEST 2: Citations
+============================================================
+> \box...=
+\hbox(7.5+2.5)x21.66672
+.\OT1/cmr/m/n/10 [
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@CMS}
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@Collab}
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 3: Clever citations
+============================================================
+> \box...=
+\hbox(7.5+2.5)x52.55562
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 f
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 [
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@CMS}
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x90.389
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 f
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 [
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@CMS}
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@Collab}
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 .
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x56.00006
+.\OT1/cmr/m/n/10 R
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 f
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 [
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@CMS}
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

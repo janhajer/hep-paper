@@ -1,0 +1,393 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: List of figures
+============================================================
+(hep-float-hyperref.lof)
+> \box...=
+\vbox(71.07799+2.5)x200.0, direction TLT
+.\penalty -300
+.\glue 15.08499 plus 4.31 minus 0.86198
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(10.08+2.8944)x200.0, glue set 96.99686fil, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\kern0.0
+...\penalty 10000
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\hbox(0.0+0.0)x0.0, shifted -18.0, direction TLT
+.....\pdfdest name{section*.3} xyz
+.....\penalty 10000
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\TU/lmr/bx/n/14.4 L
+..\TU/lmr/bx/n/14.4 i
+..\TU/lmr/bx/n/14.4 s
+..\TU/lmr/bx/n/14.4 t
+..\glue(\spaceskip) 5.4 plus 2.7 minus 1.8
+..\TU/lmr/bx/n/14.4 o
+..\TU/lmr/bx/n/14.4 f
+..\glue(\spaceskip) 5.4 plus 2.7 minus 1.8
+..\TU/lmr/bx/n/14.4 F
+..\TU/lmr/bx/n/14.4 i
+..\TU/lmr/bx/n/14.4 g
+..\discretionary (penalty 50)
+...< \TU/lmr/bx/n/14.4 -
+..\TU/lmr/bx/n/14.4 u
+..\TU/lmr/bx/n/14.4 r
+..\TU/lmr/bx/n/14.4 e
+..\TU/lmr/bx/n/14.4 s
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty 10000
+.\glue 9.913 plus 0.86198
+.\glue 0.0 plus 0.2
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 2.1656
+.\hbox(6.94+1.94)x200.0, glue set 45.53508fill, direction TLT
+..\glue(\leftskip) 38.00003
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x15.0, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\penalty 10000
+..\glue -38.00003
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.caption.1}
+..\hbox(6.66+0.0)x23.00003, glue set 18.00003fil, direction TLT
+...\TU/lmr/m/n/10 1
+...\glue 0.0 plus 1.0fil
+..\TU/lmr/m/n/10 P
+..\TU/lmr/m/n/10 l
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 i
+..\TU/lmr/m/n/10 n
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 c
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 p
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 i
+..\TU/lmr/m/n/10 o
+..\TU/lmr/m/n/10 n
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 w
+..\TU/lmr/m/n/10 i
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 h
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\mathon
+..\OML/cmm/m/it/10 m
+..\hbox(4.78334+0.0)x7.58473, shifted 1.49998, direction TLT
+...\OML/cmm/m/it/7 H
+..\mathoff
+..\pdfendlink
+..\penalty 10000
+..\leaders 0.0 plus 1.0fill
+...\hbox(1.06+0.0)x7.77988, direction TLT
+....\mathon
+....\kern2.49994 (italic)
+....\hbox(1.06+0.0)x2.78, direction TLT
+.....\TU/lmr/m/n/10 .
+....\kern2.49994 (italic)
+....\mathoff
+..\penalty 10000
+..\hbox(6.66+0.0)x15.50003, glue set 10.50003fil, direction TLT
+...\glue 0.0 plus 1.0fil
+...\TU/lmr/m/n/10 1
+...\kern-1.0
+...\kern1.0
+..\penalty 10000
+..\glue(\parfillskip) -25.50003
+..\glue(\rightskip) 25.50003
+.\glue 0.0 plus 0.2
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 3.01
+.\hbox(7.05+0.11)x200.0, glue set 129.18994fill, direction TLT
+..\glue(\leftskip) 38.00003
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x15.0, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\penalty 10000
+..\glue -38.00003
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.caption.2}
+..\hbox(6.66+0.0)x23.00003, glue set 18.00003fil, direction TLT
+...\TU/lmr/m/n/10 2
+...\glue 0.0 plus 1.0fil
+..\TU/lmr/m/n/10 ﬁ
+..\TU/lmr/m/n/10 r
+..\TU/lmr/m/n/10 s
+..\TU/lmr/m/n/10 t
+..\pdfendlink
+..\penalty 10000
+..\leaders 0.0 plus 1.0fill
+...\hbox(1.06+0.0)x7.77988, direction TLT
+....\mathon
+....\kern2.49994 (italic)
+....\hbox(1.06+0.0)x2.78, direction TLT
+.....\TU/lmr/m/n/10 .
+....\kern2.49994 (italic)
+....\mathoff
+..\penalty 10000
+..\hbox(6.66+0.0)x15.50003, glue set 10.50003fil, direction TLT
+...\glue 0.0 plus 1.0fil
+...\TU/lmr/m/n/10 1
+...\kern-1.0
+...\kern1.0
+..\penalty 10000
+..\glue(\parfillskip) -25.50003
+..\glue(\rightskip) 25.50003
+.\glue 0.0 plus 0.2
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.39
+.\hbox(7.5+2.5)x200.0, glue set 66.01994fill, direction TLT
+..\glue(\leftskip) 38.00003
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x15.0, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\penalty 10000
+..\glue -38.00003
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.caption.3}
+..\hbox(6.77+0.0)x23.00003, glue set 18.00003fil, direction TLT
+...\TU/lmr/m/n/10 4
+...\glue 0.0 plus 1.0fil
+..\TU/lmr/m/n/10 P
+..\kern-0.28 (font)
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 n
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 l
+..\TU/lmr/m/n/10 s
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.caption.3}
+..\TU/lmr/m/n/10 (
+..\TU/lmr/m/n/10 a
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\TU/lmr/m/n/10 )
+..\pdfendlink
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 n
+..\TU/lmr/m/n/10 d
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.caption.3}
+..\TU/lmr/m/n/10 (
+..\TU/lmr/m/n/10 b
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\TU/lmr/m/n/10 )
+..\pdfendlink
+..\pdfendlink
+..\penalty 10000
+..\leaders 0.0 plus 1.0fill
+...\hbox(1.06+0.0)x7.77988, direction TLT
+....\mathon
+....\kern2.49994 (italic)
+....\hbox(1.06+0.0)x2.78, direction TLT
+.....\TU/lmr/m/n/10 .
+....\kern2.49994 (italic)
+....\mathoff
+..\penalty 10000
+..\hbox(6.66+0.0)x15.50003, glue set 10.50003fil, direction TLT
+...\glue 0.0 plus 1.0fil
+...\TU/lmr/m/n/10 1
+...\kern-1.0
+...\kern1.0
+..\penalty 10000
+..\glue(\parfillskip) -25.50003
+..\glue(\rightskip) 25.50003
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 2: List of tables
+============================================================
+(hep-float-hyperref.lot)
+> \box...=
+\vbox(47.07799+0.11)x200.0, direction TLT
+.\penalty -300
+.\glue 15.08499 plus 4.31 minus 0.86198
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(10.08+0.0864)x200.0, glue set 104.12485fil, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\kern0.0
+...\penalty 10000
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\hbox(0.0+0.0)x0.0, shifted -18.0, direction TLT
+.....\pdfdest name{section*.4} xyz
+.....\penalty 10000
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\TU/lmr/bx/n/14.4 L
+..\TU/lmr/bx/n/14.4 i
+..\TU/lmr/bx/n/14.4 s
+..\TU/lmr/bx/n/14.4 t
+..\glue(\spaceskip) 5.4 plus 2.7 minus 1.8
+..\TU/lmr/bx/n/14.4 o
+..\TU/lmr/bx/n/14.4 f
+..\glue(\spaceskip) 5.4 plus 2.7 minus 1.8
+..\TU/lmr/bx/n/14.4 T
+..\kern-1.35359 (font)
+..\TU/lmr/bx/n/14.4 a
+..\discretionary (penalty 50)
+...< \TU/lmr/bx/n/14.4 -
+..\TU/lmr/bx/n/14.4 b
+..\TU/lmr/bx/n/14.4 l
+..\TU/lmr/bx/n/14.4 e
+..\TU/lmr/bx/n/14.4 s
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty 10000
+.\glue 9.913 plus 0.86198
+.\glue 0.0 plus 0.2
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.8636
+.\hbox(7.05+0.11)x200.0, glue set 104.18994fill, direction TLT
+..\glue(\leftskip) 38.00003
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x15.0, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\penalty 10000
+..\glue -38.00003
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.caption.4}
+..\hbox(6.66+0.0)x23.00003, glue set 18.00003fil, direction TLT
+...\TU/lmr/m/n/10 1
+...\glue 0.0 plus 1.0fil
+..\TU/lmr/m/n/10 ﬁ
+..\TU/lmr/m/n/10 r
+..\TU/lmr/m/n/10 s
+..\TU/lmr/m/n/10 t
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 a
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 b
+..\TU/lmr/m/n/10 l
+..\TU/lmr/m/n/10 e
+..\pdfendlink
+..\penalty 10000
+..\leaders 0.0 plus 1.0fill
+...\hbox(1.06+0.0)x7.77988, direction TLT
+....\mathon
+....\kern2.49994 (italic)
+....\hbox(1.06+0.0)x2.78, direction TLT
+.....\TU/lmr/m/n/10 .
+....\kern2.49994 (italic)
+....\mathoff
+..\penalty 10000
+..\hbox(6.66+0.0)x15.50003, glue set 10.50003fil, direction TLT
+...\glue 0.0 plus 1.0fil
+...\TU/lmr/m/n/10 1
+...\kern-1.0
+...\kern1.0
+..\penalty 10000
+..\glue(\parfillskip) -25.50003
+..\glue(\rightskip) 25.50003
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 3: Anchors of the captions
+============================================================
+lof/figure: \protect \numberline {1}{\ignorespaces plain}
+plain: 1, figure.caption.5
+lof/figure: \protect \numberline {2}{\ignorespaces first}
+first: 2, figure.caption.6
+lof/figure: \protect \numberline {3}{\ignorespaces second}
+second: 3, figure.caption.6
+sub a: 4a, figure.caption.7
+sub b: 4b, figure.caption.7
+lof/figure: \protect \numberline {4}{\ignorespaces main}
+main: 4, figure.caption.7
+lot/table: \protect \numberline {1}{\ignorespaces first table}
+first table: 1, table.caption.8
+lot/table: \protect \numberline {2}{\ignorespaces second table}
+second table: 2, table.caption.8
+============================================================
+============================================================
+TEST 4: Optional short caption in figures
+============================================================
+lof/figure: \protect \numberline {5}{\ignorespaces short}
+lof/figure: \protect \numberline {6}{\ignorespaces short first}
+lof/figure: \protect \numberline {7}{\ignorespaces short second}
+lot/table: \protect \numberline {3}{\ignorespaces short first}
+============================================================
+============================================================
+TEST 5: PDF strings of caption texts
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[Plain caption with mH]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\@ifnextchar' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\@ifnextchar' on input line ....
+[Panels fig:a and fig:b]
+[Figure 4 and 4a]
+============================================================
+============================================================
+TEST 6: Links to figures and panels
+============================================================
+> \box...=
+\hbox(7.5+2.5)x12.78, direction TLT
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.caption.3}
+.\TU/lmr/m/n/10 (
+.\TU/lmr/m/n/10 a
+.\hbox(0.0+0.0)x0.0, direction TLT
+.\TU/lmr/m/n/10 )
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.77+0.11)x10.0, direction TLT
+.\TU/lmr/m/n/10 4
+.\TU/lmr/m/n/10 a
+.\hbox(0.0+0.0)x0.0, direction TLT
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

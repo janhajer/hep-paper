@@ -1,0 +1,639 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Package options and settings
+============================================================
+biblatex: yes, style: numeric-comp, hyperref: no
+============================================================
+============================================================
+TEST 2: Citations without hyperref
+============================================================
+> \box...=
+\hbox(7.5+2.5)x21.67, direction TLT
+.\TU/lmr/m/n/10 [
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x52.55, direction TLT
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 f
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 r
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 e
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 [
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x71.04001, direction TLT
+.\TU/lmr/m/n/10 R
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 f
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 r
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 s
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 [
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 3: Bibliography entry without hyperref
+============================================================
+> \box...=
+\vbox(63.698+0.0)x345.0, direction TLT
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0
+.\glue(\parskip) 0.0
+.\hbox(7.5+2.5)x324.44, glue set 0.16852, shifted 20.56, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(7.5+2.5)x0.0, direction TLT
+...\glue 0.0
+...\glue -10.56
+...\glue -10.0
+...\hbox(7.5+2.5)x10.56, direction TLT
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\TU/lmr/m/n/10 [
+....\TU/lmr/m/n/10 1
+....\TU/lmr/m/n/10 ]
+...\glue 10.0
+..\penalty 0
+..\TU/lmr/m/it/10 C
+..\TU/lmr/m/it/10 M
+..\TU/lmr/m/it/10 S
+..\TU/lmr/m/n/10 .
+..\glue(\spaceskip) 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/n/10 “
+..\TU/lmr/m/n/10 O
+..\TU/lmr/m/n/10 b
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 s
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 r
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 v
+..\kern-0.56 (font)
+..\TU/lmr/m/n/10 a
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 i
+..\TU/lmr/m/n/10 o
+..\TU/lmr/m/n/10 n
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 o
+..\TU/lmr/m/n/10 f
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 a
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 N
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 w
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 B
+..\TU/lmr/m/n/10 o
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 s
+..\TU/lmr/m/n/10 o
+..\TU/lmr/m/n/10 n
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 t
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 a
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 M
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 s
+..\TU/lmr/m/n/10 s
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 o
+..\TU/lmr/m/n/10 f
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 1
+..\TU/lmr/m/n/10 2
+..\TU/lmr/m/n/10 5
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 G
+..\TU/lmr/m/n/10 e
+..\kern-0.83 (font)
+..\TU/lmr/m/n/10 V
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 w
+..\TU/lmr/m/n/10 i
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 h
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 h
+..\TU/lmr/m/n/10 e
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 C
+..\TU/lmr/m/n/10 M
+..\TU/lmr/m/n/10 S
+..\glue(\rightskip) 0.0
+.\penalty 15000
+.\glue(\baselineskip) 2.0
+.\hbox(7.5+2.5)x324.44, glue set 0.69006, shifted 20.56, direction TLT
+..\TU/lmr/m/n/10 E
+..\TU/lmr/m/n/10 x
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 p
+..\kern0.28 (font)
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 r
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 i
+..\discretionary (penalty 50)
+...< \TU/lmr/m/n/10 -
+..\TU/lmr/m/n/10 m
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 n
+..\kern-0.28 (font)
+..\TU/lmr/m/n/10 t
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 t
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 h
+..\TU/lmr/m/n/10 e
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 L
+..\TU/lmr/m/n/10 H
+..\TU/lmr/m/n/10 C
+..\TU/lmr/m/n/10 ”
+..\kern-1.39 (font)
+..\TU/lmr/m/n/10 .
+..\glue(\spaceskip) 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/n/10 I
+..\TU/lmr/m/n/10 n
+..\TU/lmr/m/n/10 :
+..\glue(\spaceskip) 3.33 plus 1.67331 minus 1.10448
+..\TU/lmr/m/it/10 P
+..\TU/lmr/m/it/10 h
+..\TU/lmr/m/it/10 y
+..\TU/lmr/m/it/10 s
+..\TU/lmr/m/it/10 .
+..\glue(\spaceskip) 3.58 plus 1.80072 minus 1.1862
+..\TU/lmr/m/it/10 L
+..\kern-0.51 (font)
+..\TU/lmr/m/it/10 e
+..\TU/lmr/m/it/10 t
+..\TU/lmr/m/it/10 t
+..\TU/lmr/m/it/10 .
+..\glue(\spaceskip) 3.58 plus 1.80072 minus 1.1862
+..\TU/lmr/m/it/10 B
+..\kern0.5 (italic)
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 7
+..\TU/lmr/m/n/10 1
+..\TU/lmr/m/n/10 6
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 (
+..\TU/lmr/m/n/10 2
+..\TU/lmr/m/n/10 0
+..\TU/lmr/m/n/10 1
+..\TU/lmr/m/n/10 2
+..\TU/lmr/m/n/10 )
+..\TU/lmr/m/n/10 ,
+..\glue(\spaceskip) 3.33 plus 1.66998 minus 1.10667
+..\TU/lmr/m/n/10 p
+..\TU/lmr/m/n/10 p
+..\TU/lmr/m/n/10 .
+..\penalty 10000
+..\glue(\spaceskip) 3.33 plus 1.66832 minus 1.10777
+..\TU/lmr/m/n/10 3
+..\TU/lmr/m/n/10 0
+..\TU/lmr/m/n/10 –
+..\penalty 50
+..\TU/lmr/m/n/10 6
+..\TU/lmr/m/n/10 1
+..\TU/lmr/m/n/10 .
+..\kern0.0 (italic)
+..\glue 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/sc/10 d
+..\TU/lmr/m/sc/10 o
+..\TU/lmr/m/sc/10 i
+..\kern0.0 (italic)
+..\TU/lmr/m/n/10 :
+..\glue(\rightskip) 0.0
+.\penalty 5000
+.\glue(\baselineskip) 2.55
+.\hbox(6.95+2.28)x324.44, glue set 0.65321, shifted 20.56, direction TLT
+..\TU/lmtt/m/n/10 1
+..\TU/lmtt/m/n/10 0
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 .
+..\penalty 200
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 1
+..\TU/lmtt/m/n/10 0
+..\TU/lmtt/m/n/10 1
+..\TU/lmtt/m/n/10 6
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 /
+..\penalty 200
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 j
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 .
+..\penalty 200
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 p
+..\TU/lmtt/m/n/10 h
+..\TU/lmtt/m/n/10 y
+..\TU/lmtt/m/n/10 s
+..\TU/lmtt/m/n/10 l
+..\TU/lmtt/m/n/10 e
+..\TU/lmtt/m/n/10 t
+..\TU/lmtt/m/n/10 b
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 .
+..\penalty 200
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 2
+..\TU/lmtt/m/n/10 0
+..\TU/lmtt/m/n/10 1
+..\TU/lmtt/m/n/10 2
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 .
+..\penalty 200
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 0
+..\TU/lmtt/m/n/10 8
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 .
+..\penalty 200
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 0
+..\TU/lmtt/m/n/10 2
+..\TU/lmtt/m/n/10 1
+..\mathoff
+..\TU/lmr/m/n/10 .
+..\glue(\spaceskip) 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 r
+..\TU/lmr/m/n/10 X
+..\TU/lmr/m/n/10 i
+..\TU/lmr/m/n/10 v
+..\TU/lmr/m/n/10 :
+..\glue(\spaceskip) 3.33 plus 1.67331 minus 1.10448
+..\mathon
+..\TU/lmtt/m/n/10 1
+..\TU/lmtt/m/n/10 2
+..\TU/lmtt/m/n/10 0
+..\TU/lmtt/m/n/10 7
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 .
+..\penalty 200
+..\glue(\medmuskip) 0.0 plus 1.66663
+..\TU/lmtt/m/n/10 7
+..\TU/lmtt/m/n/10 2
+..\TU/lmtt/m/n/10 3
+..\TU/lmtt/m/n/10 5
+..\mathoff
+..\glue 3.33 plus 1.665 minus 1.11
+..\TU/lmtt/m/n/10 [
+..\TU/lmtt/m/n/10 h
+..\TU/lmtt/m/n/10 e
+..\TU/lmtt/m/n/10 p
+..\discretionary (penalty 50)
+...< \TU/lmtt/m/n/10 -
+...= \TU/lmtt/m/n/10 -
+..\TU/lmtt/m/n/10 e
+..\TU/lmtt/m/n/10 x
+..\TU/lmtt/m/n/10 ]
+..\kern0.0 (italic)
+..\TU/lmr/m/n/10 .
+..\glue(\spaceskip) 3.33 plus 1.67497 minus 1.10338
+..\TU/lmr/m/n/10 №
+..\TU/lmr/m/n/10 :
+..\kern0.0 (italic)
+..\glue(\rightskip) 0.0
+.\penalty 15000
+.\glue(\baselineskip) 2.78
+.\hbox(6.94+0.198)x324.44, glue set 119.591fil, shifted 20.56, direction TLT
+..\TU/lmr/m/sc/9 C
+..\TU/lmr/m/sc/9 M
+..\TU/lmr/m/sc/9 S
+..\discretionary (penalty 50)
+...< \TU/lmr/m/sc/9 -
+...= \TU/lmr/m/sc/9 -
+..\TU/lmr/m/sc/9 H
+..\TU/lmr/m/sc/9 I
+..\TU/lmr/m/sc/9 G
+..\discretionary (penalty 50)
+...< \TU/lmr/m/sc/9 -
+...= \TU/lmr/m/sc/9 -
+..\TU/lmr/m/sc/9 1
+..\TU/lmr/m/sc/9 2
+..\discretionary (penalty 50)
+...< \TU/lmr/m/sc/9 -
+...= \TU/lmr/m/sc/9 -
+..\TU/lmr/m/sc/9 0
+..\TU/lmr/m/sc/9 2
+..\TU/lmr/m/sc/9 8
+..\kern0.0 (italic)
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 n
+..\TU/lmr/m/n/10 d
+..\kern0.0 (italic)
+..\glue 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/sc/9 C
+..\TU/lmr/m/sc/9 E
+..\TU/lmr/m/sc/9 R
+..\TU/lmr/m/sc/9 N
+..\discretionary (penalty 50)
+...< \TU/lmr/m/sc/9 -
+...= \TU/lmr/m/sc/9 -
+..\TU/lmr/m/sc/9 P
+..\TU/lmr/m/sc/9 H
+..\discretionary (penalty 50)
+...< \TU/lmr/m/sc/9 -
+...= \TU/lmr/m/sc/9 -
+..\TU/lmr/m/sc/9 E
+..\TU/lmr/m/sc/9 P
+..\discretionary (penalty 50)
+...< \TU/lmr/m/sc/9 -
+...= \TU/lmr/m/sc/9 -
+..\TU/lmr/m/sc/9 2
+..\TU/lmr/m/sc/9 0
+..\TU/lmr/m/sc/9 1
+..\TU/lmr/m/sc/9 2
+..\discretionary (penalty 50)
+...< \TU/lmr/m/sc/9 -
+...= \TU/lmr/m/sc/9 -
+..\TU/lmr/m/sc/9 2
+..\TU/lmr/m/sc/9 2
+..\TU/lmr/m/sc/9 0
+..\kern0.0 (italic)
+..\TU/lmr/m/n/10 .
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 4: URL, PubMed and eprints without hyperref
+============================================================
+> \box...=
+\hbox(6.94+2.29)x199.65002, direction TLT
+.\TU/lmr/m/sc/10 u
+.\TU/lmr/m/sc/10 r
+.\TU/lmr/m/sc/10 l
+.\kern0.0 (italic)
+.\TU/lmr/m/n/10 :
+.\kern0.0 (italic)
+.\glue 4.44 plus 3.32999 minus 0.555
+.\TU/lmtt/m/n/10 w
+.\TU/lmtt/m/n/10 w
+.\TU/lmtt/m/n/10 w
+.\TU/lmtt/m/n/10 .
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 x
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 m
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 l
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 .
+.\TU/lmtt/m/n/10 o
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 g
+.\TU/lmtt/m/n/10 /
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 t
+.\TU/lmtt/m/n/10 h
+.\kern0.0 (italic)
+.\TU/lmr/m/n/10 .
+.\kern0.0 (italic)
+.\glue 4.44 plus 4.99498 minus 0.37
+.\TU/lmr/m/sc/10 p
+.\TU/lmr/m/sc/10 m
+.\TU/lmr/m/sc/10 c
+.\kern0.0 (italic)
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+.\mathon
+.\TU/lmtt/m/n/10 7
+.\TU/lmtt/m/n/10 6
+.\TU/lmtt/m/n/10 5
+.\TU/lmtt/m/n/10 4
+.\TU/lmtt/m/n/10 3
+.\TU/lmtt/m/n/10 2
+.\TU/lmtt/m/n/10 1
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.05+2.22)x87.61, direction TLT
+.\TU/lmr/m/n/10 G
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 H
+.\TU/lmr/m/n/10 u
+.\TU/lmr/m/n/10 b
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+.\mathon
+.\TU/lmtt/m/n/10 u
+.\TU/lmtt/m/n/10 s
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 r
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 /
+.\glue(\medmuskip) 0.0 plus 1.66663
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 o
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.83+2.28)x89.15, direction TLT
+.\TU/lmr/m/n/10 H
+.\TU/lmr/m/n/10 E
+.\TU/lmr/m/n/10 P
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 F
+.\kern-0.83 (font)
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 :
+.\glue(\spaceskip) 4.44 plus 3.32999 minus 0.555
+.\mathon
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 o
+.\TU/lmtt/m/n/10 j
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 c
+.\TU/lmtt/m/n/10 t
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 5: Report numbers in a citation inside braces
+============================================================
+> \box...=
+\hbox(6.94+0.198)x202.069, direction TLT
+.\TU/lmr/m/sc/9 C
+.\TU/lmr/m/sc/9 M
+.\TU/lmr/m/sc/9 S
+.\discretionary (penalty 50)
+..< \TU/lmr/m/sc/9 -
+..= \TU/lmr/m/sc/9 -
+.\TU/lmr/m/sc/9 H
+.\TU/lmr/m/sc/9 I
+.\TU/lmr/m/sc/9 G
+.\discretionary (penalty 50)
+..< \TU/lmr/m/sc/9 -
+..= \TU/lmr/m/sc/9 -
+.\TU/lmr/m/sc/9 1
+.\TU/lmr/m/sc/9 2
+.\discretionary (penalty 50)
+..< \TU/lmr/m/sc/9 -
+..= \TU/lmr/m/sc/9 -
+.\TU/lmr/m/sc/9 0
+.\TU/lmr/m/sc/9 2
+.\TU/lmr/m/sc/9 8
+.\kern0.0 (italic)
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\kern0.0 (italic)
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/sc/9 C
+.\TU/lmr/m/sc/9 E
+.\TU/lmr/m/sc/9 R
+.\TU/lmr/m/sc/9 N
+.\discretionary (penalty 50)
+..< \TU/lmr/m/sc/9 -
+..= \TU/lmr/m/sc/9 -
+.\TU/lmr/m/sc/9 P
+.\TU/lmr/m/sc/9 H
+.\discretionary (penalty 50)
+..< \TU/lmr/m/sc/9 -
+..= \TU/lmr/m/sc/9 -
+.\TU/lmr/m/sc/9 E
+.\TU/lmr/m/sc/9 P
+.\discretionary (penalty 50)
+..< \TU/lmr/m/sc/9 -
+..= \TU/lmr/m/sc/9 -
+.\TU/lmr/m/sc/9 2
+.\TU/lmr/m/sc/9 0
+.\TU/lmr/m/sc/9 1
+.\TU/lmr/m/sc/9 2
+.\discretionary (penalty 50)
+..< \TU/lmr/m/sc/9 -
+..= \TU/lmr/m/sc/9 -
+.\TU/lmr/m/sc/9 2
+.\TU/lmr/m/sc/9 2
+.\TU/lmr/m/sc/9 0
+.\kern0.0 (italic)
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 6: online and email without hyperref
+============================================================
+> \box...=
+\hbox(6.11+2.29)x57.75, direction TLT
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 x
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 m
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 l
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 .
+.\TU/lmtt/m/n/10 o
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 g
+.\kern0.0 (italic)
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.17+2.29)x84.0, direction TLT
+.\TU/lmtt/m/n/10 n
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 m
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 @
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 x
+.\TU/lmtt/m/n/10 a
+.\TU/lmtt/m/n/10 m
+.\TU/lmtt/m/n/10 p
+.\TU/lmtt/m/n/10 l
+.\TU/lmtt/m/n/10 e
+.\TU/lmtt/m/n/10 .
+.\TU/lmtt/m/n/10 o
+.\TU/lmtt/m/n/10 r
+.\TU/lmtt/m/n/10 g
+.\kern0.0 (italic)
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

@@ -1,0 +1,82 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-font}
+\usepackage{hyperref}
+
+% Helpers \PDFSTRING, \SECTIONBOOKMARKS, \PDFINFO etc.
+\input{hep-regression}
+
+% The contents lines that hyperref writes for a section and a subsection
+\begin{filecontents*}[overwrite]{\jobname.toc}
+\contentsline {section}{\numberline {1}Section 10}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Subsection 10}{1}{subsection.1.1}%
+\end{filecontents*}
+
+\begin{document}
+% Load all fonts before the test, so font loading is not recorded. The
+% contents are only read here, \tableofcontents would empty the file.
+\makeatletter
+\setbox0\vbox{%
+  \section{\textsc{Abc} 1}\subsection{\textsc{Abc} 1}\@input{\jobname.toc}}
+\makeatother
+\START
+
+\TEST{Bookmarks: small caps and Greek}{%
+  \PDFSTRING{\textsc{Abc} and \textbf{\textsc{Abc}}}%
+  \UNICODEPDFSTRING{\alpha-decay and \Gamma}%
+  \UNICODEPDFSTRING{\alpha\beta\Gamma\Omega}%
+  \UNICODEPDFSTRING{\varsigma\varepsilon\varphi\vartheta\varrho\varpi}%
+  \UNICODEPDFSTRING{The $\alpha$ in math}%
+}
+
+% hep-font tells hyperref to drop the numeral and typewriter declarations
+% (pdfTeX: of nfssext-cfr), whose expansion would leave font internals in
+% the string.
+\TEST{Bookmarks: numeral and typewriter declarations}{%
+  \PDFSTRING{{\lstyle 1} lining}%
+  \PDFSTRING{{\ostyle 2} oldstyle}%
+  \PDFSTRING{{\pstyle 3}{\tstyle 4}{\plstyle 5}{\postyle 6} numerals}%
+  \PDFSTRING{{\tlstyle 7}{\tostyle 8} numerals}%
+  \PDFSTRING{{\tmstyle a}{\tvstyle b}{\codestyle c} typewriter}%
+  \ifdefined\uncial \PDFSTRING{{\uncial d} uncial}\fi
+}
+
+% \code takes a verbatim argument and cannot be used in sectioning titles,
+% but its PDF string keeps the argument, e.g. for \hypersetup.
+\TEST{Bookmarks: code}{%
+  \PDFSTRING{\code{a_b} verbatim}%
+  \PDFSTRING{\code{\alpha^2} verbatim}%
+}
+
+% Without hep-font the text commands \textl etc. break \pdfstringdef with
+% "Argument of \@tforloop has an extra }".
+\TEST{Bookmarks: numeral commands}{%
+  \PDFSTRING{\textl{1}\texto{2}\textp{3}\textt{4}}%
+  \PDFSTRING{\textpl{1}\textpo{2}\texttl{3}\textto{4}}%
+  \PDFSTRING{\texorpdfstring{\textl{1}\texto{2}}{12}}%
+  \ifdefined\textui \PDFSTRING{\textui{ui} upright italic}\fi
+  \ifdefined\textuncial \PDFSTRING{\textuncial{d} uncial}\fi
+}
+
+\TEST{Bookmarks: sectioning commands}{%
+  \SECTIONBOOKMARKS{%
+    \section{\textsc{Abc} 1}%
+    \subsection{\textl{12} numerals \textsc{Abc}}%
+    \subsection{Old {\ostyle 2} and \texto{3}}%
+    \section*{\textsc{Starred}}%
+    \addcontentsline{toc}{section}{\textsc{Starred}}%
+  }%
+}
+
+\TEST{Document information}{%
+  \hypersetup{pdftitle={\textsc{Abc} \alpha}}%
+  \PDFINFO{title}
+}
+
+% Section entries are wrapped, subsection entries use \@dottedtocline;
+% both get tabular numerals, the hyperlinks are kept.
+\TEST{Table of contents with hyperlinks}{%
+  \setbox0\vbox{\hsize=20em\tableofcontents}\showbox0
+}
+
+\END

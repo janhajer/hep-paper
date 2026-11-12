@@ -1,0 +1,116 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{hep-reference}
+
+% The labels that a previous run would have written
+\begin{filecontents*}[overwrite]{\jobname.aux}
+\relax
+\newlabel{sec:a}{{1}{1}{First section}{section.1}{}}
+\newlabel{sec:a@cref}{{[section][1][]1}{[1][1][]1}{}{}{}}
+\newlabel{eq:a}{{1}{1}{}{equation.1}{}}
+\newlabel{eq:a@cref}{{[equation][1][]1}{[1][1][]1}{}{}{}}
+\bibcite{key}{1}
+\end{filecontents*}
+
+\input{hep-regression}
+
+% Shows what \protected@write would write to the .aux file (contents
+% lines, bookmarks) by writing it immediately to the log.
+\makeatletter
+\newcommand*{\SHOWWRITES}[1]{%
+  \begingroup
+    \long\def\protected@write##1##2##3{%
+      \begingroup
+        \let\thepage\relax
+        ##2%
+        \let\protect\@unexpandable@protect
+        \edef\reserved@a{\immediate\write\m@ne{##3}}%
+        \reserved@a
+      \endgroup
+    }%
+    \setbox0\vbox{#1}%
+  \endgroup
+}
+\makeatother
+
+\begin{document}
+
+% Load the fonts before \START
+\setbox0\vbox{\LARGE x\large x\footnotesize x$x$\normalsize $x$\footnote{x}}
+
+\START
+
+\TEST{Bookmarks: disabled commands}{%
+  \PDFSTRING{First line\\second line}%
+  \PDFSTRING{First line\\ second line}%
+  \PDFSTRING{First line \unskip second}%
+  \PDFSTRING{Title\thanks{thanks} and more}%
+  \PDFSTRING{Title\footnote{footnote} and more}%
+  \PDFSTRING{Title\footnote[7]{footnote} and more}%
+  \PDFSTRING{Text \ensuremath{x} and \ensuremath{\alpha} here}%
+}
+
+\TEST{Bookmarks: math replacements}{%
+  \PDFSTRING{$\varepsilon \to x$}%
+  \UNICODEPDFSTRING{$\varepsilon \to x$}%
+  \UNICODEPDFSTRING{\varepsilon, \to}%
+}
+
+\TEST{Bookmarks: references and citations}{%
+  \PDFSTRING{See \ref{sec:a} here}%
+  \PDFSTRING{See \ref*{sec:a} here}%
+  \PDFSTRING{See \autoref{sec:a} here}%
+  \PDFSTRING{See \nameref{sec:a} here}%
+  \PDFSTRING{See \cite{key} here}%
+  \PDFSTRING{See \cite[p.~5]{key} here}%
+  \PDFSTRING{See \eqref{eq:a} here}%
+  \UNICODEPDFSTRING{See \eqref{eq:a} here}%
+  \PDFSTRING{See \cite{key} and \cite[a][b]{key}, here}%
+}
+
+\TEST{Sectioning commands: references and citations}{%
+  \SHOWWRITES{%
+    \section{See \ref{sec:a} and \cite{key}}%
+    \section{See \autoref{sec:a} and \nameref{sec:a}}%
+    \section{See \eqref{eq:a} and \ref*{sec:a}}%
+  }%
+}
+
+\TEST{Sectioning commands: line break}{%
+  \SHOWWRITES{%
+    \section{First line\\second line}%
+  }%
+}
+
+% Use the hook of \maketitle directly, since \maketitle can only be used
+% once.
+\TEST{Document information: title with math}{%
+  \title{The $\varepsilon \to 0$ limit of \ensuremath{x}}%
+  \UseHook{cmd/maketitle/before}%
+  \PDFINFO{title}%
+}
+
+\TEST{Document information: title and subject}{%
+  % A title set before is kept, so reset it.
+  \hypersetup{pdftitle={}}%
+  \setbox0\vbox{%
+    \title{The title\\with a break\thanks{Thanks}}%
+    \subject{The subject}%
+    \maketitle
+  }%
+  \PDFINFO{title}%
+  \PDFINFO{subject}%
+  \PDFINFO{author}%
+  \PDFINFO{creator}%
+  \PDFINFO{producer}%
+}
+
+\TEST{Document information: a title set by the user is kept}{%
+  \hypersetup{pdftitle={User title}}%
+  \title{Other title}%
+  \UseHook{cmd/maketitle/before}%
+  \PDFINFO{title}%
+}
+
+\END

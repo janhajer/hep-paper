@@ -1,0 +1,85 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Loaded packages
+============================================================
+hep-cv-private.sty: defined
+hep-cv-bibliography.sty: defined
+============================================================
+============================================================
+TEST 2: Bibliography filters
+============================================================
+work: defined
+visit: defined
+education: defined
+lecture: defined
+tutorial: defined
+master-supervision: defined
+PhD: defined
+master: defined
+funding-individual: defined
+funding-project: defined
+funding-participation: defined
+organization: defined
+seminar: defined
+conference: defined
+contributions: defined
+student: defined
+preprint: defined
+journal: defined
+proceedings: defined
+editor: defined
+community: defined
+software: defined
+thesis: defined
+main: defined
+work: macro:->test {\xifinlistcs \blx@flt@item {blx@keyw@\the \c@refsection @work}}
+PhD: macro:->test {\xifinlistcs \blx@flt@item {blx@keyw@\the \c@refsection @PhD}} and  not test {\xifinlistcs \blx@flt@item {blx@keyw@\the \c@refsection @supervision}}
+============================================================
+============================================================
+TEST 3: Bibliography macros and environments
+============================================================
+presentationstyle: defined
+work: defined
+visit: defined
+education: defined
+student: defined
+course: defined
+funding: defined
+talk: defined
+publication: defined
+main: defined
+============================================================
+============================================================
+TEST 4: Indico e-print formats
+============================================================
+CERN: defined
+INFN: defined
+IJS: defined
+DESY: defined
+FNAL: defined
+Edinburgh: defined
+CNRS: defined
+IIHE: defined
+IRMP: defined
+MITP: defined
+LIP: defined
+cern: defined
+infn: defined
+ijs: defined
+desy: defined
+fnal: defined
+edinburgh: defined
+cnrs: defined
+iihe: defined
+irmp: defined
+mitp: defined
+lip: defined
+============================================================
+============================================================
+TEST 5: Indico e-print without hep-bibliography and hyperref
+============================================================
+hyperref: no
+[indico.cern.ch/event/67890]
+[/contributions/12345]
+============================================================

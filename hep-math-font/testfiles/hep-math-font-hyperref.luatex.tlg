@@ -1,0 +1,277 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Bookmarks: math alphabets
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\000x]
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\000a\000b\000c]
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\000a\000b\000c\000d]
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\000a\000b\000c\000d]
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\000a\000b]
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\000a\000b\000c]
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\000x]
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\000x]
+============================================================
+============================================================
+TEST 2: Bookmarks: decorative alphabets
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\000R\000L\000H\000g]
+============================================================
+============================================================
+TEST 3: Bookmarks: Greek letters
+============================================================
+[\376\377\003\261\000-\000d\000e\000c\000a\000y]
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\003\261\000s\000\040\000r\000u\000n\000n\000i\000n\000g]
+[\376\377\003\261\003\262\003\223\003\251]
+[\376\377\003\302\003\265\003\306\003\321\003\361\003\326]
+[\376\377\003\365\003\325\003\360\003\364]
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\042\002\042\007\001\061\002\067\041\023\001\047]
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\003\261\003\262]
+============================================================
+============================================================
+TEST 4: Bookmarks: texorpdfstring
+============================================================
+[\376\377\000x\000\040\000f\000i\000e\000l\000d]
+[\376\377\003\261\000\040\000f\000i\000e\000l\000d]
+============================================================
+============================================================
+TEST 5: Bookmarks: sectioning commands
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[The x field]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[The x field]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textalpha' on input line ....
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textpartial' on input line ....
+[The s and \040terms]
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+[The R numbers]
+============================================================
+============================================================
+TEST 6: Document information
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\000T\000h\000e\000\040\000x\000\040\000f\000i\000e\000l\000d]
+============================================================
+============================================================
+TEST 7: Table of contents with math
+============================================================
+(hep-math-font-hyperref.toc)
+\tf@toc=\write...
+> \box...=
+\vbox(44.03679+0.11)x200.0, direction TLT
+.\hbox(10.03679+0.1584)x200.0, glue set 135.27202fil, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\glue 0.0
+..\hbox(0.0+0.0)x0.0, direction TLT
+...\kern0.0
+...\penalty 10000
+...\hbox(0.0+0.0)x0.0, direction TLT
+....\hbox(0.0+0.0)x0.0, shifted -18.0, direction TLT
+.....\pdfdest name{section*.3} xyz
+.....\penalty 10000
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\TU/NewCM10-Regular.otf(0)/b/n/14.4 C
+..\TU/NewCM10-Regular.otf(0)/b/n/14.4 o
+..\TU/NewCM10-Regular.otf(0)/b/n/14.4 n
+..\discretionary (penalty 50)
+...< \TU/NewCM10-Regular.otf(0)/b/n/14.4 -
+...= \kern-0.4608 (font)
+..\TU/NewCM10-Regular.otf(0)/b/n/14.4 t
+..\TU/NewCM10-Regular.otf(0)/b/n/14.4 e
+..\TU/NewCM10-Regular.otf(0)/b/n/14.4 n
+..\kern-0.4608 (font)
+..\TU/NewCM10-Regular.otf(0)/b/n/14.4 t
+..\TU/NewCM10-Regular.otf(0)/b/n/14.4 s
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty 10000
+.\glue 9.913 plus 0.86198
+.\glue -9.913 plus -0.86198
+.\glue 10.0 plus 1.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.8416
+.\hbox(7.0+0.08)x200.0, glue set 114.74995fil, direction TLT
+..\glue(\leftskip) 15.0
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\glue -15.0
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+..\hbox(6.55+0.0)x15.0, glue set 9.25fil, direction TLT
+...\TU/NewCM10-Regular.otf(1)/b/n/10 1
+...\glue 0.0 plus 1.0fil
+..\kern-0.4
+..\TU/NewCM10-Regular.otf(1)/b/n/10 T
+..\TU/NewCM10-Regular.otf(1)/b/n/10 h
+..\TU/NewCM10-Regular.otf(1)/b/n/10 e
+..\glue(\spaceskip) 3.83 plus 1.915 minus 1.27667
+..\mathon
+..\TU/hep-serif/m/n/10 𝒙
+..\mathoff
+..\glue(\spaceskip) 3.83 plus 1.915 minus 1.27667
+..\TU/NewCM10-Regular.otf(1)/b/n/10 ﬁ
+..\TU/NewCM10-Regular.otf(1)/b/n/10 e
+..\TU/NewCM10-Regular.otf(1)/b/n/10 l
+..\TU/NewCM10-Regular.otf(1)/b/n/10 d
+..\pdfendlink
+..\penalty 10000
+..\glue 0.0 plus 1.0fil
+..\penalty 10000
+..\hbox(6.55+0.0)x15.50003, glue set 9.75003fil, direction TLT
+...\glue 0.0 plus 1.0fil minus 1.0fil
+...\TU/NewCM10-Regular.otf(1)/b/n/10 1
+...\kern-1.0
+...\kern1.0
+..\penalty 10000
+..\glue(\parfillskip) -15.50003
+..\glue(\rightskip) 15.50003
+.\glue 0.0 plus 0.2
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.87
+.\hbox(7.05+0.11)x200.0, glue set 98.04994fill, direction TLT
+..\glue(\leftskip) 38.00003
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x15.0, direction TLT
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\penalty 10000
+..\glue -38.00003
+..\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.1.1}
+..\hbox(6.66+0.0)x23.00003, glue set 10.22003fil, direction TLT
+...\TU/NewCM10-Regular.otf(1)/m/n/10 1
+...\TU/NewCM10-Regular.otf(1)/m/n/10 .
+...\TU/NewCM10-Regular.otf(1)/m/n/10 1
+...\glue 0.0 plus 1.0fil
+..\kern-0.36
+..\TU/NewCM10-Regular.otf(1)/m/n/10 T
+..\TU/NewCM10-Regular.otf(1)/m/n/10 h
+..\TU/NewCM10-Regular.otf(1)/m/n/10 e
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\mathon
+..\TU/hep-serif/m/n/10 𝒙
+..\mathoff
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/NewCM10-Regular.otf(1)/m/n/10 ﬁ
+..\TU/NewCM10-Regular.otf(1)/m/n/10 e
+..\TU/NewCM10-Regular.otf(1)/m/n/10 l
+..\TU/NewCM10-Regular.otf(1)/m/n/10 d
+..\pdfendlink
+..\penalty 10000
+..\leaders 0.0 plus 1.0fill
+...\hbox(1.06+0.0)x7.77988, direction TLT
+....\mathon
+....\kern2.49994 (italic)
+....\hbox(1.06+0.0)x2.78, direction TLT
+.....\TU/NewCM10-Regular.otf(1)/m/n/10 .
+....\kern2.49994 (italic)
+....\mathoff
+..\penalty 10000
+..\hbox(6.66+0.0)x15.50003, glue set 10.50003fil, direction TLT
+...\glue 0.0 plus 1.0fil
+...\TU/NewCM10-Regular.otf(1)/m/n/10 1
+...\kern-1.0
+...\kern1.0
+..\penalty 10000
+..\glue(\parfillskip) -25.50003
+..\glue(\rightskip) 25.50003
+! OK.
+<argument> ...e =20em\tableofcontents }\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 8: Greek variants in bookmarks
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\003\365\003\265\003\325\003\306\003\230\003\364]
+============================================================

@@ -1,0 +1,22 @@
+\input{regression-test}
+\documentclass{article}
+% An empty style disables the loading of biblatex
+\usepackage[style=]{hep-bibliography}
+\input{hep-regression}
+
+\begin{document}
+\setbox0\hbox{\texttt{x}}
+\START
+
+\TEST{biblatex is not loaded}{%
+  \TYPE{style: [\csname hepbib@style\endcsname],
+    biblatex: \csname @ifpackageloaded\endcsname{biblatex}{yes}{no}}%
+}
+
+\TEST{Macros independent of biblatex}{%
+  \SHOWHBOX{\online{https://example.org}{example.org}}%
+  \SHOWHBOX{\email{name@example.org}}%
+  \SHOWHBOX{\begin{commalist}\item a \item b \item c\end{commalist}}%
+}
+
+\END

@@ -1,0 +1,78 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: synthetic=false
+============================================================
+synthetic: false
+============================================================
+============================================================
+TEST 2: Bold sans-serif calligraphic capitals are the medium ones
+============================================================
+> \box...=
+\hbox(6.83481+0.23645)x17.09262
+.\mathon
+.\U/hepdecor4/m/n/10 ^^c3
+.\kern0.49542
+.\U/hepdecor4/m/n/10 ^^c3
+.\kern0.49542
+.\mathoff
+! OK.
+<argument> ...\mathsf {\mathcal {A}}}$}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 3: Serif calligraphic capitals keep their weights
+============================================================
+> \box...=
+\hbox(6.86111+0.0)x17.19199
+.\mathon
+.\U/hepdecor4/m/n/10 ^^8f
+.\U/hepdecor4/m/n/10 ^^a9
+.\mathoff
+! OK.
+<argument> ... \mathbf {\mathcal {A}}$}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 4: Upright script capitals are the italic ones
+============================================================
+> \box...=
+\hbox(6.99998+0.0)x20.63556
+.\mathon
+.\U/hepscript/m/n/10 ^^@
+.\kern2.29253
+.\U/hepscript/m/n/10 ^^@
+.\kern2.29253
+.\mathoff
+! OK.
+<argument> ... \mathup {\mathscr {A}}$}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 5: Bold script capitals
+============================================================
+> \box...=
+\hbox(6.99998+0.0)x20.63556
+.\mathon
+.\U/hepscript/m/n/10 ^^@
+.\kern2.29253
+.\U/hepscript/m/n/10 ^^@
+.\kern2.29253
+.\mathoff
+! OK.
+<argument> ...mathbfup {\mathscr {A}}$}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 6: Upright calligraphic capitals keep their weights
+============================================================
+> \box...=
+\hbox(7.0221+0.0)x16.56465
+.\mathon
+.\U/hepscript/m/n/10 h
+.\U/hepscript/m/n/10 ^^82
+.\mathoff
+! OK.
+<argument> ...mathbfup {\mathcal {A}}$}\showbox 0 
+l. ...}
+============================================================

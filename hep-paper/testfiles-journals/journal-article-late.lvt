@@ -1,0 +1,11 @@
+% hep-paper with article: abstract as environment after other material (moved to the title in the next run).
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-paper}
+\input{journal-title}
+\begin{document}
+\maketitle
+\section{Section}
+\begin{abstract}Abstract text.\end{abstract}
+Text.
+\end{document}

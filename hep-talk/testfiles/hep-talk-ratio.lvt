@@ -1,0 +1,18 @@
+% hep-talk: decimal and fractional ratio options
+\input{regression-test}
+\documentclass{article}
+\usepackage[paperwidth=16cm, ratio=.5625]{hep-talk}
+\input{hep-regression}
+\begin{document}
+\START
+
+\makeatletter
+\TEST{Decimal ratio}{%
+  \TYPE{ratio: \heptalk@ratio}%
+  \TYPE{paper: \the\paperwidth\space x \the\paperheight}%
+  \setlength{\@tempdima}{16cm*9/16}%
+  \TYPE{same as 9/16: \ifdim\@tempdima=\paperheight true\else false\fi}%
+}
+\makeatother
+
+\END

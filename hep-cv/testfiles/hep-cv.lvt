@@ -1,0 +1,98 @@
+% hep-cv package with the article class: widths, \cvline, \cventry,
+% lists and the month macros.
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-cv}
+\input{hep-regression}
+\makeatletter
+% \DEFINED{list of macro names}
+\newcommand*{\DEFINED}[1]{%
+  \@for\hep@test@name:=#1\do{%
+    \TYPE{\hep@test@name: \expandafter\ifx
+      \csname\hep@test@name\endcsname\relax undefined\else defined\fi}%
+  }%
+}
+% \CVTEXT{code}: replace the two-column tabular of \cvline and \cventry by
+% a simple alignment, so that the box shows only the text of both columns
+\newcommand*{\CVTEXT}[1]{%
+  \begingroup
+    \def\hep@begin{\setbox0\vbox\bgroup\halign\bgroup####\tabskip1em&####\cr}%
+    \def\hep@end{\crcr\egroup\egroup\showbox0 }%
+    #1%
+  \endgroup
+}
+% \LIST{environment}{item}: the list parameters of the first level
+\newcommand*{\LIST}[2]{%
+  \setbox0\vbox{%
+    \begin{#1}#2%
+      \TYPE{#1: leftmargin \the\leftmargin, labelwidth \the\labelwidth,
+        labelsep \the\labelsep, topsep \the\topsep, itemsep \the\itemsep,
+        parsep \the\parsep}%
+    \end{#1}%
+  }%
+}
+\makeatother
+\begin{document}
+% Load all fonts before the test
+\setbox0\vbox{\cventry[left]{Title}[one][two]*[three][four]\textit{x}%
+  \begin{itemize}\item\end{itemize}}
+\START
+\makeatletter
+
+\TEST{Default widths}{%
+  \TYPE{left: \the\hep@left@width, separator: \the\hep@seperator@width,
+    main: \the\hep@main@width, textwidth: \the\textwidth}%
+}
+
+\TEST{setleftwidth and setseperatorwidth}{%
+  \setleftwidth{3cm}%
+  \TYPE{left: \the\hep@left@width, separator: \the\hep@seperator@width,
+    main: \the\hep@main@width}%
+  \setseperatorwidth{1em}%
+  \TYPE{left: \the\hep@left@width, separator: \the\hep@seperator@width,
+    main: \the\hep@main@width}%
+}
+
+\TEST{setleftwidth and setseperatorwidth: no spurious spaces}{%
+  \SHOWHBOX{a\setleftwidth{2.8cm}b\setseperatorwidth{4mm}c}%
+}
+
+\TEST{Main width follows the line width at use time}{%
+  \begingroup
+    \setlength{\linewidth}{300pt}%
+    \setbox0\hbox{\cvline[L]{M}\xdef\hep@test@name{\the\hep@main@width}}%
+    \TYPE{line: \the\linewidth, main: \hep@test@name, cvline: \the\wd0}%
+  \endgroup
+}
+
+\TEST{cvline}{%
+  \setbox0\vbox{\cvline[L]{M}}%
+  \showbox0
+}
+
+\TEST{cvline text}{%
+  \CVTEXT{\cvline[left]{main}}%
+  \CVTEXT{\cvline{main without left}}%
+}
+
+\TEST{cventry: alternating shapes, punctuation, starred arguments}{%
+  \CVTEXT{\cventry[left]{Title}}%
+  \CVTEXT{\cventry[left]{Title}[one]}%
+  \CVTEXT{\cventry[left]{Title}[one][two][three]}%
+  \CVTEXT{\cventry[left]{Title}[one]*[two][three]}%
+  \CVTEXT{\cventry{Title}*[one]}%
+}
+
+\TEST{Lists}{%
+  \LIST{itemize}{\item}%
+  \LIST{enumerate}{\item}%
+  \LIST{description}{\item[label]}%
+  \LIST{enumdescript}{\item{label}}%
+}
+
+\TEST{Month macros only with the date option}{%
+  \DEFINED{Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec}%
+}
+
+\makeatother
+\END

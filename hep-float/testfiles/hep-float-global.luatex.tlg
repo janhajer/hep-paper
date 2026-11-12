@@ -1,0 +1,20 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Placement arguments are ignored
+============================================================
+type and placement: 62, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+type and placement: 62, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+type and placement: 62, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+type and placement: 62, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+type and placement: 94, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+type and placement: 94, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+============================================================
+============================================================
+TEST 2: figures and tables
+============================================================
+type and placement: 62, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+type and placement: 62, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+type and placement: 94, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+type and placement: 94, size: 9, leftskip: 0.0pt plus 1.0fil, rightskip: 0.0pt plus 1.0fil
+============================================================

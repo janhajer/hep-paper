@@ -1,0 +1,73 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-title}
+\input{hep-regression}
+
+% Authors without affiliations; \email, \orcid, \orcmail and \thanks directly after
+% \author, \editor and \endorser instead of in their argument
+\title{T}
+\author{Ann}
+\email{ann@mail.com}
+\author{Bob}
+\orcmail{0000-0002-1825-0097}{bob@mail.com}
+\author{Cid \email{cid@mail.com}}
+\thanks{Funded}
+\author{Dan \email{dan@mail.com} \orcid{0000-0001-5109-3700}}
+\author{Eli}\email{eli@mail.com}\orcid{0000-0003-1415-9269}
+\editor{Eve}\email{eve@mail.com}
+\editor{Fay}
+\endorser{Gus}\email{gus@mail.com}
+
+\begin{document}
+% Load the fonts before \START
+\setbox0\hbox{$x^x$\large$x^x$\small$x^x$}
+\makeatletter
+\START
+
+\TEST{No footnote marks before the title}{%
+  \TYPE{footnote=\the\c@footnote}%
+  \TYPE{\meaning\@thanks}%
+}
+
+\TEST{Counters}{%
+  \TYPE{affil=\the\c@affil, Maxaffil=\the\c@Maxaffil,
+    authors=\the\c@authors, editors=\the\c@editors,
+    endorsers=\the\c@endorsers}%
+}
+
+\TEST{Stored lines}{%
+  \TYPE{\meaning\AB@authlist}%
+  \TYPE{\meaning\hep@editorlist}%
+  \TYPE{\meaning\hep@endorserlist}%
+}
+
+\TEST{All authors without affiliations}{%
+  \SHOWHBOX{\let\thanks\@gobble\let\email\@gobble
+    \let\orcmail\@gobbletwo\let\orcid\@gobble\@author}%
+}
+
+\TEST{Consecutive \email and \orcid share one footnote}{%
+  \SHOWHBOX{Dan \email{dan@mail.com} \orcid{0000-0001-5109-3700} and}%
+  \TYPE{footnote=\the\c@footnote}%
+  \TYPE{\meaning\@thanks}%
+  \SHOWHBOX{Eve \orcmail{0000-0001-5109-3700}{eve@mail.com}}%
+  \TYPE{footnote=\the\c@footnote}%
+  \SHOWHBOX{Fay \email{fay@mail.com}\thanks{Funded}}%
+  \TYPE{footnote=\the\c@footnote}%
+  \global\let\@thanks\@empty
+}
+
+\TEST{A single author without affiliation}{%
+  \begingroup
+    \def\AB@authlist{}\def\AB@author{\AB@blk@and Ann}%
+    \SHOWHBOX{\@author}%
+    \def\AB@authlist{\Authfont Ann}%
+    \SHOWHBOX{\@author}%
+  \endgroup
+}
+
+\TEST{Entries in the document are added immediately}{%
+  \author{Dan}%
+  \TYPE{authors=\the\c@authors}%
+}
+\END

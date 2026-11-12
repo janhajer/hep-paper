@@ -1,0 +1,41 @@
+% Helpers for the regression tests of the hep-paper bundle.
+%
+% Load with \input{hep-regression} after \input{regression-test} and the
+% packages under test, before \START. All helpers print to the log, so
+% they end up in the .tlg file.
+%
+%   \SHOWHBOX{material}       \showbox of an \hbox
+%   \SHOWVBOX{material}       \showbox of a 20em wide \vbox
+%   \PDFSTRING{text}          the PDF string of text (\pdfstringdef,
+%                             unicode=false, so the result is readable)
+%   \UNICODEPDFSTRING{text}   the same with the unicode setting of hyperref
+%   \SECTIONBOOKMARKS{code}   the bookmark texts that sectioning commands
+%                             in code write to the outlines (typeset in a
+%                             discarded box)
+%   \PDFINFO{key}             the document information entry key (title,
+%                             author, subject, keywords) set by hyperref
+\makeatletter
+\newcommand*{\SHOWHBOX}[1]{\setbox0\hbox{#1}\showbox0 }
+\newcommand*{\SHOWVBOX}[1]{\setbox0\vbox{\hsize=20em #1}\showbox0 }
+\newcommand*{\PDFSTRING}[1]{%
+  \begingroup
+    \Hy@unicodefalse
+    \pdfstringdef\hep@test@string{#1}%
+    \TYPE{[\hep@test@string]}%
+  \endgroup
+}
+\newcommand*{\UNICODEPDFSTRING}[1]{%
+  \begingroup
+    \pdfstringdef\hep@test@string{#1}%
+    \TYPE{[\hep@test@string]}%
+  \endgroup
+}
+\newcommand*{\SECTIONBOOKMARKS}[1]{%
+  \begingroup
+    \Hy@unicodefalse
+    \def\HyPsd@SanitizeForOutFile##1{\TYPE{[##1]}}%
+    \setbox0\vbox{#1}%
+  \endgroup
+}
+\newcommand*{\PDFINFO}[1]{\TYPE{[\csname @pdf#1\endcsname]}}
+\makeatother

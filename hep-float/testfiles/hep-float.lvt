@@ -1,0 +1,321 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-float}
+\input{hep-regression}
+
+\makeatletter
+% Placement bits and type of the float box that is being built
+\newcommand*{\SHOWFLOAT}{%
+  \TYPE{type and placement: \the\count\@currbox,
+    size: \f@size,
+    leftskip: \the\leftskip, rightskip: \the\rightskip}%
+}
+% Width and vertical alignment of the current panel or minipage
+\newcommand*{\SHOWWIDTH}[1]{\TYPE{#1: linewidth \the\linewidth}}
+% A panel with two lines (shows whether it is top or bottom aligned)
+\newcommand*{\TWOLINES}{\rule{1pt}{10pt}\par\rule{1pt}{10pt}}
+% The size of box 0
+\newcommand*{\SHOWSIZE}[1]{%
+  \TYPE{#1: wd \the\wd0, ht \the\ht0, dp \the\dp0}%
+}
+% Whether a package is loaded
+\newcommand*{\SHOWLOADED}[1]{\TYPE{#1: \@ifpackageloaded{#1}{yes}{no}}}
+\newcommand*{\SHOWLABEL}{\TYPE{label: \@currentlabel}}
+\newcommand*{\SHOWGRAPHICSPATH}{%
+  \TYPE{graphicspath: \ifdefined\Ginput@path\meaning\Ginput@path
+    \else undefined\fi}%
+}
+% Typeset the figures and tables environments into box 0 instead of a
+% float, in order to measure them
+\newcommand*{\NOFLOATS}{%
+  \renewenvironment{figure}[1][]{\global\setbox0\hbox\bgroup}{\egroup}%
+  \renewenvironment{table}[1][]{\global\setbox0\hbox\bgroup}{\egroup}%
+}
+% Print the contents lines instead of writing them
+\newcommand*{\SHOWCONTENTSLINES}{%
+  \def\addcontentsline##1##2##3{%
+    \protected@edef\hep@test@line{##3}%
+    \TYPE{##1/##2: \detokenize\expandafter{\hep@test@line}}%
+  }%
+}
+\makeatother
+
+\begin{document}
+% Load the fonts used by the tabular test
+\setbox0\hbox{\begin{tabular}{rl}
+  \toprule \header{a} & \multirow{2}{*}{x} \\ \bottomrule
+\end{tabular}}
+\START
+
+\TEST{Float placement parameters}{%
+  \TYPE{bottomnumber \the\value{bottomnumber},
+    topnumber \the\value{topnumber},
+    dbltopnumber \the\value{dbltopnumber}}%
+  \TYPE{textfraction \textfraction,
+    topfraction \topfraction,
+    dbltopfraction \dbltopfraction,
+    floatpagefraction \floatpagefraction}%
+  \SHOWLOADED{booktabs}\SHOWLOADED{multirow}\SHOWLOADED{subcaption}%
+  \SHOWLOADED{graphicx}\SHOWLOADED{calc}%
+}
+
+\TEST{Float environments: placement, centring and size}{%
+  \begin{figure}\SHOWFLOAT\end{figure}%
+  \begin{figure}[h]\SHOWFLOAT\end{figure}%
+  \begin{figure}[tbp]\SHOWFLOAT\end{figure}%
+  \begin{figure}[!b]\SHOWFLOAT\end{figure}%
+  \begin{figure*}\SHOWFLOAT\end{figure*}%
+  \begin{figure*}[t]\SHOWFLOAT\end{figure*}%
+  \begin{table}\SHOWFLOAT\end{table}%
+  \begin{table}[h]\SHOWFLOAT\end{table}%
+  \begin{table*}[p]\SHOWFLOAT\end{table*}%
+}
+
+\TEST{raggedright restores the usual alignment}{%
+  \begin{figure}\raggedright\SHOWFLOAT\end{figure}%
+  \begin{table}\raggedright\SHOWFLOAT\end{table}%
+}
+
+\TEST{figures: equal widths}{%
+  \begin{figures}{2}%
+    \SHOWWIDTH{first}\caption{one}%
+    \TYPE{after caption: \thefigure}%
+    \figure
+    \SHOWWIDTH{second}\caption{two}%
+    \TYPE{after caption: \thefigure}%
+  \end{figures}%
+  \begin{figures}{3}%
+    \SHOWWIDTH{first}\figure\SHOWWIDTH{second}\figure\SHOWWIDTH{third}%
+  \end{figures}%
+}
+
+\TEST{figures: given widths}{%
+  \begin{figures}{.3}%
+    \SHOWWIDTH{.3}\caption{one}%
+    \figure{.7}%
+    \SHOWWIDTH{.7}\caption{two}%
+  \end{figures}%
+}
+
+\TEST{figures: spacing macros}{%
+  \TYPE{figurehspace \figurehspace, figurevspace \figurevspace}%
+  \renewcommand*{\figurehspace}{0}%
+  \renewcommand*{\figurevspace}{2pt}%
+  \begin{figures}{2}%
+    \SHOWWIDTH{hspace 0}\caption{one}%
+    \figure
+    \SHOWWIDTH{hspace 0}%
+  \end{figures}%
+  \begin{figures}{.5}%
+    \SHOWWIDTH{hspace 0}\figure{.5}\SHOWWIDTH{hspace 0}%
+  \end{figures}%
+}
+
+\TEST{figures: only the first caption of a panel adds figurevspace}{%
+  \NOFLOATS
+  \renewcommand*{\figurevspace}{20pt}%
+  \begin{figures}{2}\caption{one}\end{figures}%
+  \SHOWSIZE{one caption}%
+  \begin{figures}{2}\caption{one}\caption{two}\end{figures}%
+  \SHOWSIZE{two captions}%
+  \begin{figures}{2}\caption{one}\figure\caption{two}\end{figures}%
+  \SHOWSIZE{two panels}%
+}
+
+\TEST{figures: vertical alignment and vertical space}{%
+  \NOFLOATS
+  \begin{figures}{2}\rule{1pt}{10pt}\figure\TWOLINES\end{figures}%
+  \SHOWSIZE{default b}%
+  \begin{figures}{2}\rule{1pt}{10pt}\figure[t]\TWOLINES%
+  \end{figures}%
+  \SHOWSIZE{b, t}%
+  \begin{figures}[t]{2}\rule{1pt}{10pt}\figure[t]\TWOLINES%
+  \end{figures}%
+  \SHOWSIZE{t, t}%
+  \begin{figures}[t]{.5}\rule{1pt}{10pt}\figure[t]{.5}\TWOLINES%
+  \end{figures}%
+  \SHOWSIZE{fraction t, t}%
+  \begin{figures}{2}\rule{1pt}{10pt}\caption{x}\end{figures}%
+  \SHOWSIZE{caption}%
+  \renewcommand*{\figurevspace}{20pt}%
+  \begin{figures}{2}\rule{1pt}{10pt}\caption{x}\end{figures}%
+  \SHOWSIZE{caption, figurevspace 20pt}%
+}
+
+\TEST{figure works again after figures}{%
+  \begin{figures}{2}\figure\end{figures}%
+  \begin{figure}[h]\SHOWFLOAT\end{figure}%
+  \TYPE{\meaning\figure}%
+}
+
+\TEST{tables: widths, centring and captions}{%
+  \TYPE{tablehspace \tablehspace, tablevspace \tablevspace}%
+  \begin{tables}{2}%
+    \SHOWWIDTH{first}\SHOWFLOAT\caption{one}%
+    \TYPE{after caption: \thetable}%
+    \table
+    \SHOWWIDTH{second}\SHOWFLOAT\caption{two}%
+    \TYPE{after caption: \thetable}%
+  \end{tables}%
+  \begin{tables}{.4}%
+    \SHOWWIDTH{.4}\SHOWFLOAT
+    \table{.6}%
+    \SHOWWIDTH{.6}\SHOWFLOAT
+  \end{tables}%
+  \renewcommand*{\tablehspace}{0}%
+  \renewcommand*{\tablevspace}{3pt}%
+  \begin{tables}{2}%
+    \SHOWWIDTH{hspace 0}\caption{three}%
+    \table\SHOWWIDTH{hspace 0}%
+  \end{tables}%
+  \TYPE{\meaning\table}%
+}
+
+\TEST{tables: vertical alignment and vertical space}{%
+  \NOFLOATS
+  \begin{tables}{2}\rule{1pt}{10pt}\table[t]\TWOLINES%
+  \end{tables}%
+  \SHOWSIZE{b, t}%
+  \begin{tables}[t]{2}\rule{1pt}{10pt}\table[t]\TWOLINES%
+  \end{tables}%
+  \SHOWSIZE{t, t}%
+  \begin{tables}{2}\rule{1pt}{10pt}\caption{x}\end{tables}%
+  \SHOWSIZE{caption}%
+  \renewcommand*{\tablevspace}{20pt}%
+  \begin{tables}{2}\rule{1pt}{10pt}\caption{x}\end{tables}%
+  \SHOWSIZE{caption, tablevspace 20pt}%
+}
+
+\TEST{panels: widths and subcaptions}{%
+  \TYPE{panelhspace \panelhspace, panelvspace \panelvspace}%
+  \begin{figure}%
+    \begin{panels}{2}%
+      \SHOWWIDTH{first}\caption{one}\label{fig:one}%
+      \SHOWLABEL
+      \TYPE{belowcaptionskip \the\belowcaptionskip}%
+      \panel
+      \SHOWWIDTH{second}\caption{two}%
+      \SHOWLABEL%
+    \end{panels}%
+    \caption{both}%
+    \SHOWLABEL
+    \TYPE{belowcaptionskip \the\belowcaptionskip}%
+  \end{figure}%
+  \begin{table}%
+    \begin{panels}{.25}%
+      \SHOWWIDTH{.25}\caption{one}%
+      \panel{.75}%
+      \SHOWWIDTH{.75}\caption{two}%
+      \SHOWLABEL%
+    \end{panels}%
+  \end{table}%
+  \begin{figure}%
+    \renewcommand*{\panelhspace}{0}%
+    \renewcommand*{\panelvspace}{1pt}%
+    \begin{panels}{3}%
+      \SHOWWIDTH{hspace 0}%
+      \TYPE{belowcaptionskip \the\belowcaptionskip}%
+      \panel\panel
+    \end{panels}%
+  \end{figure}%
+}
+
+\TEST{panels: vertical alignment}{%
+  \begin{figure}%
+    \setbox0\hbox{%
+      \begin{panels}{2}\rule{1pt}{10pt}\panel\TWOLINES\end{panels}%
+    }%
+    \SHOWSIZE{default b}%
+    \setbox0\hbox{%
+      \begin{panels}[t]{2}\rule{1pt}{10pt}\panel\TWOLINES%
+      \end{panels}%
+    }%
+    \SHOWSIZE{t, default}%
+    \setbox0\hbox{%
+      \begin{panels}{2}\rule{1pt}{10pt}\panel[t]\TWOLINES%
+      \end{panels}%
+    }%
+    \SHOWSIZE{default, t}%
+    \setbox0\hbox{%
+      \begin{panels}{.5}\rule{1pt}{10pt}\panel[t]{.5}\TWOLINES%
+      \end{panels}%
+    }%
+    \SHOWSIZE{fraction default, t}%
+    \setbox0\hbox{%
+      \begin{panels}[t]{2}\rule{1pt}{10pt}\panel[b]\TWOLINES%
+      \end{panels}%
+    }%
+    \SHOWSIZE{t, b}%
+  \end{figure}%
+}
+
+% Each panels environment defines its own \panel, so that they can be nested.
+\TEST{panels: nested}{%
+  \begin{figure}%
+    \begin{panels}{2}%
+      \SHOWWIDTH{outer first}%
+      \begin{panels}{2}%
+        \SHOWWIDTH{inner first}%
+        \panel
+        \SHOWWIDTH{inner second}%
+      \end{panels}%
+      \panel
+      \SHOWWIDTH{outer second}%
+      \begin{panels}{.25}%
+        \SHOWWIDTH{inner .25}%
+        \panel{.75}%
+        \SHOWWIDTH{inner .75}%
+      \end{panels}%
+    \end{panels}%
+  \end{figure}%
+}
+
+\TEST{Captions written to the lists of figures and tables}{%
+  \SHOWCONTENTSLINES
+  \begin{figure}\caption{plain}\end{figure}%
+  \begin{figures}{2}\caption{first}\figure\caption{second}\end{figures}%
+  \begin{tables}{2}\caption{first}\table\caption{second}\end{tables}%
+  \begin{figures}{2}\caption*{unnumbered}\figure\caption[short]{long}%
+  \end{figures}%
+  \begin{tables}{2}\caption[short]{long}\table\caption*{unnumbered}%
+  \end{tables}%
+  \begin{figure}%
+    \begin{panels}{2}\caption{sub a}\panel\caption{sub b}\end{panels}%
+    \caption{main}%
+  \end{figure}%
+}
+
+\TEST{graphic and graphics}{%
+  \showboxdepth=2 %
+  \setbox0\vbox{\hsize=100pt \linewidth=100pt
+    \graphic{example-image-1x1}}%
+  \SHOWSIZE{graphic}%
+  \setbox0\vbox{\hsize=100pt \linewidth=100pt
+    \graphic[.5]{example-image-1x1}}%
+  \SHOWSIZE{graphic[.5]}%
+  \showbox0 %
+  \SHOWGRAPHICSPATH
+  \graphics{figures}%
+  \SHOWGRAPHICSPATH
+  \graphics{figures/sub}%
+  \SHOWGRAPHICSPATH
+}
+
+% The name of the externalised file is cleared after the graphic, so that it
+% does not name a later tikzpicture.
+\TEST{graphic: name of the externalised file}{%
+  \def\tikzsetnextfilename#1{\TYPE{next file name: [#1]}}%
+  \renewcommand*{\includegraphics}[2][]{\TYPE{graphic: #2}}%
+  \setbox0\vbox{\graphic{example-image-1x1}}%
+}
+
+\TEST{header in tabulars}{%
+  \setbox0\hbox{\begin{tabular}{rl}
+    \toprule \header{a} & \header{bbb} \\ \midrule
+    \multirow{2}{*}{x} & y \\ & z \\ \bottomrule
+  \end{tabular}}%
+  \SHOWSIZE{tabular}%
+  \TYPE{\meaning\header}%
+}
+
+\END

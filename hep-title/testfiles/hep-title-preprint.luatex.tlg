@@ -1,0 +1,339 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Preprint and reprint lines: \preprint , \arxiv , \reprint , \doi 
+============================================================
+macro:->CERN-TH-1\\\textsc {arXiv}: \online {https://arxiv.org/abs/2611.01234}{2611.01234}
+macro:->Phys.\ Rev.\ D 1, 2\\\textsc {doi}: \online {https://doi.org/10.1103/a_b.1}{10.1103/a_b.1}
+============================================================
+============================================================
+TEST 2: \placepreprint : upper right corner of the first page
+============================================================
+> \box...=
+\hbox(0.0+35.47101)x0.0, direction TLT
+.\hbox(11.2355+6.2355)x0.0, glue set - 407.0fil, shifted 29.2355, direction TLT
+..\kern325.84694
+..\vbox(11.2355+6.2355)x81.15306, direction TLT
+...\hbox(6.345+0.198)x81.15306, glue set 26.69406fil, direction TLT
+....\kern0.0
+....\glue(\leftskip) 0.0 plus 1.0fil
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x0.0, direction TLT
+....\TU/lmr/m/sc/9 C
+....\TU/lmr/m/sc/9 E
+....\TU/lmr/m/sc/9 R
+....\TU/lmr/m/sc/9 N
+....\discretionary (penalty 50)
+.....< \TU/lmr/m/sc/9 -
+.....= \TU/lmr/m/sc/9 -
+....\TU/lmr/m/sc/9 T
+....\TU/lmr/m/sc/9 H
+....\discretionary (penalty 50)
+.....< \TU/lmr/m/sc/9 -
+.....= \TU/lmr/m/sc/9 -
+....\TU/lmr/m/sc/9 1
+....\penalty 10000
+....\glue(\parfillskip) 0.0
+....\glue(\rightskip) 0.0
+....\kern0.0
+...\glue 0.0
+...\glue 4.655
+...\hbox(6.147+0.126)x81.15306, direction TLT
+....\kern0.0
+....\glue(\leftskip) 0.0 plus 1.0fil
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x0.0, direction TLT
+....\TU/lmr/m/sc/9 a
+....\TU/lmr/m/sc/9 r
+....\TU/lmr/m/sc/9 X
+....\TU/lmr/m/sc/9 i
+....\TU/lmr/m/sc/9 v
+....\kern0.0 (italic)
+....\TU/lmr/m/sc/9 :
+....\glue(\spaceskip) 4.536 plus 3.40201 minus 0.567
+....\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://arxiv.org/abs/2611.01234)>>}
+....\mathon
+....\TU/lmtt/m/sc/9 2
+....\TU/lmtt/m/sc/9 6
+....\TU/lmtt/m/sc/9 1
+....\TU/lmtt/m/sc/9 1
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/sc/9 .
+....\penalty 700
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/sc/9 0
+....\TU/lmtt/m/sc/9 1
+....\TU/lmtt/m/sc/9 2
+....\TU/lmtt/m/sc/9 3
+....\TU/lmtt/m/sc/9 4
+....\mathoff
+....\pdfendlink
+....\penalty 10000
+....\glue(\parfillskip) 0.0
+....\glue(\rightskip) 0.0
+....\kern0.0
+..\glue 0.0 plus 1.0fil minus 1.0fil
+! OK.
+\AtBeginShipoutFirst ...box 2\hbox {#1}\showbox 2 
+l. ...}
+============================================================
+============================================================
+TEST 3: \placereprint : upper left corner of the first page
+============================================================
+> \box...=
+\hbox(0.0+36.002)x0.0, direction TLT
+.\hbox(11.501+6.50099)x0.0, glue set - 144.89008fil, shifted 29.501, direction TLT
+..\kern62.0
+..\vbox(11.501+6.50099)x82.89008, direction TLT
+...\hbox(6.147+1.737)x82.89008, glue set 3.6811fil, direction TLT
+....\kern0.0
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x0.0, direction TLT
+....\TU/lmr/m/sc/9 P
+....\TU/lmr/m/sc/9 h
+....\TU/lmr/m/sc/9 y
+....\TU/lmr/m/sc/9 s
+....\TU/lmr/m/sc/9 .
+....\glue(\spaceskip) 3.402 plus 1.701 minus 1.134
+....\TU/lmr/m/sc/9 R
+....\TU/lmr/m/sc/9 e
+....\TU/lmr/m/sc/9 v
+....\TU/lmr/m/sc/9 .
+....\glue(\spaceskip) 3.402 plus 1.701 minus 1.134
+....\TU/lmr/m/sc/9 D
+....\glue(\spaceskip) 3.402 plus 1.6993 minus 1.13513
+....\TU/lmr/m/sc/9 1
+....\TU/lmr/m/sc/9 ,
+....\glue(\spaceskip) 3.402 plus 2.12625 minus 0.9072
+....\TU/lmr/m/sc/9 2
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+....\kern0.0
+...\glue 3.017
+...\hbox(6.246+0.855)x82.89008, direction TLT
+....\kern0.0
+....\TU/lmr/m/sc/9 d
+....\TU/lmr/m/sc/9 o
+....\TU/lmr/m/sc/9 i
+....\kern0.0 (italic)
+....\TU/lmr/m/sc/9 :
+....\glue(\spaceskip) 4.536 plus 3.40201 minus 0.567
+....\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://doi.org/10.1103/a_b.1)>>}
+....\mathon
+....\TU/lmtt/m/sc/9 1
+....\TU/lmtt/m/sc/9 0
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/sc/9 .
+....\penalty 700
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/sc/9 1
+....\TU/lmtt/m/sc/9 1
+....\TU/lmtt/m/sc/9 0
+....\TU/lmtt/m/sc/9 3
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/sc/9 /
+....\penalty 700
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/sc/9 a
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/sc/9 _
+....\penalty 700
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/sc/9 b
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/sc/9 .
+....\penalty 700
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/sc/9 1
+....\mathoff
+....\pdfendlink
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+....\kern0.0
+..\glue 0.0 plus 1.0fil minus 1.0fil
+! OK.
+\AtBeginShipoutFirst ...box 2\hbox {#1}\showbox 2 
+l. ...}
+============================================================
+============================================================
+TEST 4: \maketitle places both blocks
+============================================================
+first page material
+first page material
+============================================================
+============================================================
+TEST 5: \preprintfont and \reprintfont 
+============================================================
+> \box...=
+\hbox(0.0+40.616)x0.0, direction TLT
+.\hbox(13.808+8.808)x0.0, glue set - 407.0fil, shifted 31.808, direction TLT
+..\kern301.40405
+..\vbox(13.808+8.808)x105.59595, direction TLT
+...\hbox(8.448+0.252)x105.59595, glue set 40.66396fil, direction TLT
+....\kern0.0
+....\glue(\leftskip) 0.0 plus 1.0fil
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x0.0, direction TLT
+....\TU/lmr/m/n/12 C
+....\TU/lmr/m/n/12 E
+....\TU/lmr/m/n/12 R
+....\TU/lmr/m/n/12 N
+....\discretionary (penalty 50)
+.....< \TU/lmr/m/n/12 -
+.....= \TU/lmr/m/n/12 -
+....\TU/lmr/m/n/12 T
+....\TU/lmr/m/n/12 H
+....\discretionary (penalty 50)
+.....< \TU/lmr/m/n/12 -
+.....= \TU/lmr/m/n/12 -
+....\TU/lmr/m/n/12 1
+....\penalty 10000
+....\glue(\parfillskip) 0.0
+....\glue(\rightskip) 0.0
+....\kern0.0
+...\glue 0.0
+...\glue 5.552
+...\hbox(8.196+0.168)x105.59595, direction TLT
+....\kern0.0
+....\glue(\leftskip) 0.0 plus 1.0fil
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x0.0, direction TLT
+....\TU/lmr/m/sc/12 a
+....\TU/lmr/m/sc/12 r
+....\TU/lmr/m/sc/12 X
+....\TU/lmr/m/sc/12 i
+....\TU/lmr/m/sc/12 v
+....\kern0.0 (italic)
+....\TU/lmr/m/n/12 :
+....\glue(\spaceskip) 5.216 plus 3.91199 minus 0.652
+....\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://arxiv.org/abs/2611.01234)>>}
+....\mathon
+....\TU/lmtt/m/n/12 2
+....\TU/lmtt/m/n/12 6
+....\TU/lmtt/m/n/12 1
+....\TU/lmtt/m/n/12 1
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/n/12 .
+....\penalty 700
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/n/12 0
+....\TU/lmtt/m/n/12 1
+....\TU/lmtt/m/n/12 2
+....\TU/lmtt/m/n/12 3
+....\TU/lmtt/m/n/12 4
+....\mathoff
+....\pdfendlink
+....\penalty 10000
+....\glue(\parfillskip) 0.0
+....\glue(\rightskip) 0.0
+....\kern0.0
+..\glue 0.0 plus 1.0fil minus 1.0fil
+! OK.
+\AtBeginShipoutFirst ...box 2\hbox {#1}\showbox 2 
+l. ...}
+> \box...=
+\hbox(0.0+42.728)x0.0, direction TLT
+.\hbox(14.864+9.864)x0.0, glue set - 169.56392fil, shifted 32.864, direction TLT
+..\kern62.0
+..\vbox(14.864+9.864)x107.56392, direction TLT
+...\hbox(8.328+2.448)x107.56392, glue set 16.27989fil, direction TLT
+....\kern0.0
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x0.0, direction TLT
+....\TU/lmr/m/n/12 P
+....\TU/lmr/m/n/12 h
+....\kern-0.324 (font)
+....\TU/lmr/m/n/12 y
+....\TU/lmr/m/n/12 s
+....\TU/lmr/m/n/12 .
+....\glue(\spaceskip) 3.912 plus 1.956 minus 1.304
+....\TU/lmr/m/n/12 R
+....\TU/lmr/m/n/12 e
+....\TU/lmr/m/n/12 v
+....\TU/lmr/m/n/12 .
+....\glue(\spaceskip) 3.912 plus 1.956 minus 1.304
+....\TU/lmr/m/n/12 D
+....\glue(\spaceskip) 3.912 plus 1.95403 minus 1.3053
+....\TU/lmr/m/n/12 1
+....\TU/lmr/m/n/12 ,
+....\glue(\spaceskip) 3.912 plus 2.44499 minus 1.0432
+....\TU/lmr/m/n/12 2
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+....\kern0.0
+...\glue 3.224
+...\hbox(8.328+2.4)x107.56392, direction TLT
+....\kern0.0
+....\TU/lmr/m/sc/12 d
+....\TU/lmr/m/sc/12 o
+....\TU/lmr/m/sc/12 i
+....\kern0.0 (italic)
+....\TU/lmr/m/n/12 :
+....\glue(\spaceskip) 5.216 plus 3.91199 minus 0.652
+....\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 1]} action user{/Subtype/Link/A<</Type/Action/S/URI/URI(https://doi.org/10.1103/a_b.1)>>}
+....\mathon
+....\TU/lmtt/m/n/12 1
+....\TU/lmtt/m/n/12 0
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/n/12 .
+....\penalty 700
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/n/12 1
+....\TU/lmtt/m/n/12 1
+....\TU/lmtt/m/n/12 0
+....\TU/lmtt/m/n/12 3
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/n/12 /
+....\penalty 700
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/n/12 a
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/n/12 _
+....\penalty 700
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/n/12 b
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/n/12 .
+....\penalty 700
+....\glue(\medmuskip) 0.0
+....\TU/lmtt/m/n/12 1
+....\mathoff
+....\pdfendlink
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+....\kern0.0
+..\glue 0.0 plus 1.0fil minus 1.0fil
+! OK.
+\AtBeginShipoutFirst ...box 2\hbox {#1}\showbox 2 
+l. ...}
+============================================================

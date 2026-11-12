@@ -1,0 +1,11 @@
+% hep-paper with jhep: abstract as environment after other material (moved to the title in the next run).
+\input{regression-test}
+\documentclass[a4paper, 11pt]{article}
+\usepackage[jhep]{hep-paper}
+\input{journal-title}
+\begin{document}
+\maketitle
+\section{Section}
+\begin{abstract}Abstract text.\end{abstract}
+Text.
+\end{document}

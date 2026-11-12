@@ -1,0 +1,23 @@
+% hep-paper: REVTeX compatibility mode with title=false, which keeps the
+% title macros of REVTeX. A document without title used to loop forever,
+% because the missing title, a warning, ended up in the PDF title.
+\input{regression-test}
+\documentclass{revtex4-2}
+\usepackage[title=false]{hep-paper}
+\input{hep-regression}
+\begin{document}
+% Make the title and ship out a page before the test, so font loading is
+% not recorded. Both looped without title.
+\setbox0\vbox{\maketitle}
+\shipout\hbox{}
+\makeatletter
+\START
+
+\TEST{Native title macros}{%
+  \TYPE{hep-title: \@ifpackageloaded{hep-title}{loaded}{not loaded}}%
+  \TYPE{hep-journal: \@ifpackageloaded{hep-journal}{loaded}{not loaded}}%
+  \PDFINFO{title}%
+}
+
+\makeatother
+\END

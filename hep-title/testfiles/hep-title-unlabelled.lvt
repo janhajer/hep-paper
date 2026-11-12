@@ -1,0 +1,38 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-title}
+\input{hep-regression}
+
+% authblk style: authors and affiliations without labels
+\title{T}
+\author{Ann}
+\editor{Eve}% between an author and its affiliation
+\affiliation{Affil X}
+\author{Bob}
+\affiliation{Affil Y}
+\author{Cid}
+\affiliation{Affil Z}
+
+\begin{document}
+% Load the fonts before \START
+\setbox0\hbox{$x^x$\large$x^x$\small$x^x$}
+\makeatletter
+\START
+
+\TEST{Counters}{%
+  \TYPE{affil=\the\c@affil, Maxaffil=\the\c@Maxaffil,
+    authors=\the\c@authors}%
+}
+
+\TEST{Author line without affiliation marks}{%
+  \SHOWHBOX{\@author}%
+}
+
+\TEST{Editor line}{%
+  \TYPE{\meaning\hep@editorlist}%
+}
+
+\TEST{Affiliation block without marks}{%
+  \setbox0\vbox{\hsize=\textwidth\maketitlehookc}\showbox0
+}
+\END

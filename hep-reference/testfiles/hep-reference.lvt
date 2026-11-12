@@ -1,0 +1,163 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{hep-reference}
+
+% Named equation-like references
+\eqcrefname{claim}{claim}
+\eqcrefname{law}{law}[lawz]
+
+% The labels that a previous run would have written
+\begin{filecontents*}[overwrite]{\jobname.aux}
+\relax
+\newlabel{sec:a}{{1}{1}{First section}{section.1}{}}
+\newlabel{sec:a@cref}{{[section][1][]1}{[1][1][]1}{}{}{}}
+\newlabel{sec:c}{{3}{1}{Third section}{section.3}{}}
+\newlabel{sec:c@cref}{{[section][3][]3}{[1][1][]1}{}{}{}}
+\newlabel{sec:e}{{5}{1}{Fifth section}{section.5}{}}
+\newlabel{sec:e@cref}{{[section][5][]5}{[1][1][]1}{}{}{}}
+\newlabel{eq:a}{{1}{1}{}{equation.1}{}}
+\newlabel{eq:a@cref}{{[equation][1][]1}{[1][1][]1}{}{}{}}
+\newlabel{eq:b}{{2}{1}{}{equation.2}{}}
+\newlabel{eq:b@cref}{{[equation][2][]2}{[1][1][]1}{}{}{}}
+\newlabel{eq:c}{{3}{1}{}{equation.3}{}}
+\newlabel{eq:c@cref}{{[equation][3][]3}{[1][1][]1}{}{}{}}
+\newlabel{it:a}{{1}{1}{}{Item.1}{}}
+\newlabel{it:a@cref}{{[enumi][1][]1}{[1][1][]1}{}{}{}}
+\newlabel{cl:a}{{1}{1}{}{claim.1}{}}
+\newlabel{cl:a@cref}{{[claim][1][]1}{[1][1][]1}{}{}{}}
+\newlabel{cl:c}{{3}{1}{}{claim.3}{}}
+\newlabel{cl:c@cref}{{[claim][3][]3}{[1][1][]1}{}{}{}}
+\newlabel{law:a}{{1}{1}{}{law.1}{}}
+\newlabel{law:a@cref}{{[law][1][]1}{[1][1][]1}{}{}{}}
+\newlabel{law:c}{{3}{1}{}{law.3}{}}
+\newlabel{law:c@cref}{{[law][3][]3}{[1][1][]1}{}{}{}}
+\newlabel{tl}{{\protecting {{Some text}}}{1}{Some text}{tl}{}}
+\bibcite{key}{1}
+\end{filecontents*}
+
+\input{hep-regression}
+
+% Shows what \protected@write would write to the .aux file by writing it
+% immediately to the log.
+\makeatletter
+\newcommand*{\SHOWWRITES}[1]{%
+  \begingroup
+    \long\def\protected@write##1##2##3{%
+      \begingroup
+        \let\thepage\relax
+        ##2%
+        \let\protect\@unexpandable@protect
+        \edef\reserved@a{\immediate\write\m@ne{##3}}%
+        \reserved@a
+      \endgroup
+    }%
+    \setbox0\vbox{#1}%
+  \endgroup
+}
+\makeatother
+
+\begin{document}
+
+% Load the fonts before \START
+\setbox0\vbox{\footnote{x}\textit{x}\textbf{x}$x$}
+
+\START
+
+\TEST{No line break before ref}{%
+  \SHOWHBOX{a \ref{sec:a}}%
+  \SHOWHBOX{a\ref{sec:a}}%
+}
+
+\TEST{No line break before cite}{%
+  \SHOWHBOX{a \cite{key}}%
+  \SHOWHBOX{a \cite[p.~2]{key}}%
+}
+
+\TEST{No line break before eqref, which uses labelcref}{%
+  \SHOWHBOX{a \eqref{eq:a}}%
+  \SHOWHBOX{\eqref{eq:a,eq:c}}%
+}
+
+\TEST{cref: names and conjunctions}{%
+  \SHOWHBOX{\cref{sec:a}}%
+  \SHOWHBOX{\cref{sec:a,sec:c}}%
+  \SHOWHBOX{\cref{sec:a,sec:c,sec:e}}%
+  \SHOWHBOX{\cref{it:a}}%
+}
+
+\TEST{labelcrefrange}{%
+  \SHOWHBOX{\labelcrefrange{eq:a}{eq:c}}%
+}
+
+\TEST{eqcrefname: default plural}{%
+  \SHOWHBOX{\cref{cl:a}}%
+  \SHOWHBOX{\cref{cl:a,cl:c}}%
+  \SHOWHBOX{\labelcref{cl:a}}%
+}
+
+\TEST{eqcrefname: explicit plural}{%
+  \SHOWHBOX{\cref{law:a,law:c}}%
+}
+
+\TEST{eqcrefname: spaces}{%
+  \SHOWHBOX{a\eqcrefname{rule}{rule}b}%
+}
+
+\TEST{Footnote: no space before the mark and at the beginning}{%
+  \SHOWHBOX{a \footnote{ b}}%
+}
+
+\TEST{Footnote: optional argument}{%
+  \SHOWHBOX{a\footnote[7]{b}}%
+}
+
+% The footnote text may contain paragraphs.
+\makeatletter
+\TEST{Footnote: paragraphs in the text}{%
+  \long\def\@foot@note#1{\TYPE{\detokenize{#1}}}%
+  \footnote{b\par c}%
+}
+\makeatother
+
+\TEST{Footnote: label of the backlink}{%
+  \SHOWWRITES{a\footnote{b}}%
+}
+
+\TEST{textlabel: label}{%
+  \SHOWWRITES{\textlabel{tl}{Some text}}%
+  \SHOWWRITES{\textlabel[\textbf]{tl}[\textit]{Some text}}%
+}
+
+\TEST{textlabel: target and text}{%
+  \SHOWHBOX{\textlabel{tl}[\textit]{a}}%
+}
+
+\TEST{textlabel: references}{%
+  \SHOWHBOX{a \ref{tl}}%
+  \SHOWHBOX{\nameref{tl}}%
+}
+
+% The PDF subject is set before \maketitle, from \subject or, if a class such
+% as scrartcl defines \subject, from its \@subject.
+\makeatletter
+\TEST{PDF subject}{%
+  \title{Title}%
+  \subject{Physics}%
+  \UseHook{cmd/maketitle/before}%
+  \TYPE{[\@pdfsubject]}%
+  \let\hep@subject\@undefined
+  \def\@subject{Class}%
+  \UseHook{cmd/maketitle/before}%
+  \TYPE{[\@pdfsubject]}%
+}
+\makeatother
+
+\TEST{usecommand}{%
+  \usecommand{\TYPE{[#1]}}{x}%
+  \usecommand[2]{\TYPE{[#1-#2]}}{x}{y}%
+  \usecommand[0]{\TYPE{[none]}}%
+  \usecommand[1]{\usecommand{\TYPE{[##1]}}{inner}\TYPE{[#1]}}{outer}%
+}
+
+\END

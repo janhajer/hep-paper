@@ -1,0 +1,77 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Accents like vec
+============================================================
+> \box...=
+\hbox(9.91+3.518)x17.32364, direction TLT
+.\mathon
+.\vbox(9.91+0.0)x6.77, direction TLT
+..\hbox(7.47+0.0)x0.0, shifted 7.65001, direction TLT
+...\TU/NewCMSansMath-Regular.otf(1)/m/n/10 ⃗
+..\kern-4.5 (font)
+..\hbox(6.94+0.0)x6.77, direction TLT
+...\TU/hep-sans/m/n/10 𝐴
+.\glue 1.66663
+.\TU/hep-sans/m/n/10 𝑥
+.\vbox(6.93701+0.021)x4.27701, shifted 3.49701, direction TLT
+..\hbox(5.229+0.0)x0.0, shifted 3.976, direction TLT
+...\TU/NewCMSansMath-Regular.otf(1)/m/n/7 ⃗
+..\kern-3.15 (font)
+..\hbox(4.858+0.021)x3.71701, direction TLT
+...\TU/hep-sans/m/n/7 𝑏
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......WHBOX{$\dashedvec A \, x_{\dottedvec b}$}}
+> \box...=
+\hbox(9.91+3.518)x17.32364, direction TLT
+.\mathon
+.\vbox(9.91+0.0)x6.77, direction TLT
+..\hbox(7.47+0.0)x0.0, shifted 7.65001, direction TLT
+...\TU/hep-accent/m/n/10 
+..\kern-4.5 (font)
+..\hbox(6.94+0.0)x6.77, direction TLT
+...\TU/hep-sans/m/n/10 𝐴
+.\glue 1.66663
+.\TU/hep-sans/m/n/10 𝑥
+.\vbox(6.93701+0.021)x4.27701, shifted 3.49701, direction TLT
+..\hbox(5.229+0.0)x0.0, shifted 3.976, direction TLT
+...\TU/hep-accent/m/n/7 
+..\kern-3.15 (font)
+..\hbox(4.858+0.021)x3.71701, direction TLT
+...\TU/hep-sans/m/n/7 𝑏
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......WHBOX{$\dashedvec A \, x_{\dottedvec b}$}}
+============================================================
+============================================================
+TEST 2: Bold math version
+============================================================
+> \box...=
+\hbox(7.34+0.0)x18.11998, direction TLT
+.\mathon
+.\vbox(7.34+0.0)x6.04, direction TLT
+..\hbox(7.12+0.0)x0.0, shifted 6.11, direction TLT
+...\TU/NewCMMath-Bold.otf(1)/m/n/10 ⃗
+..\kern-4.5 (font)
+..\hbox(4.72+0.0)x6.04, direction TLT
+...\TU/hep-sans/m/n/10 𝒙
+.\vbox(7.34+0.0)x6.04, direction TLT
+..\hbox(7.12+0.0)x0.0, shifted 6.11, direction TLT
+...\TU/hep-accent/m/n/10 
+..\kern-4.5 (font)
+..\hbox(4.72+0.0)x6.04, direction TLT
+...\TU/hep-sans/m/n/10 𝒙
+.\vbox(7.34+0.0)x6.04, direction TLT
+..\hbox(7.12+0.0)x0.0, shifted 6.11, direction TLT
+...\TU/hep-accent/m/n/10 
+..\kern-4.5 (font)
+..\hbox(4.72+0.0)x6.04, direction TLT
+...\TU/hep-sans/m/n/10 𝒙
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ......ldmath$\vec x \dashedvec x \dottedvec x$}}
+============================================================

@@ -1,0 +1,174 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Class options
+============================================================
+font: 11pt
+serif: false
+hyperref: true
+date: false
+list: true
+font size: 11, secnumdepth: 0, tocdepth: 2
+============================================================
+============================================================
+TEST 2: Loaded packages and their options
+============================================================
+hep-cv: loaded []
+hep-font: loaded [size=11pt,sans=true,oldstyle,]
+hep-text: loaded []
+hep-reference: loaded []
+hyperref: loaded []
+phonenumbers: loaded [foreign,]
+titlesec: loaded [compact,]
+titletoc: loaded []
+dashrule: loaded []
+fancyhdr: loaded []
+lastpage: loaded []
+subfiles: loaded []
+textpos: loaded []
+anyfontsize: loaded []
+fontsize: loaded []
+graphicx: loaded []
+============================================================
+============================================================
+TEST 3: Font macros
+============================================================
+macro:->\HUGE 
+macro:->\protect \HUGE  
+macro:->\small 
+macro:->\itshape \small 
+============================================================
+============================================================
+TEST 4: Stored address, contact and title lines
+============================================================
+address: undefined
+address: \long macro:->Street 1\\City
+contact: macro:->
+contact: macro:->\href {mailto:first@example.org}{first@example.org}\\\phonenumber {+41 61 123 45 67}
+title lines: macro:->
+title lines: macro:->\cvline [Born]{1 January 2000}\cvline [Nationality]{Swiss}
+photo: \long macro:->example-image
+============================================================
+============================================================
+TEST 5: CV part and document information
+============================================================
+part: \long macro:->Curriculum Vit^^e6
+[\376\377\000F\000i\000r\000s\000t\000\040\000L\000a\000s\000t\000\040\040\024\000\040\000C\000u\000r\000r\000i\000c\000u\000l\000u\000m\000\040\000V\000i\000t\000\346]
+[\376\377\000F\000i\000r\000s\000t\000\040\000L\000a\000s\000t\000\040\040\024\000\040\000C\000u\000r\000r\000i\000c\000u\000l\000u\000m\000\040\000V\000i\000t\000\346]
+[First\040Last]
+part: \long macro:->Publications
+[\376\377\000F\000i\000r\000s\000t\000\040\000L\000a\000s\000t\000\040\040\024\000\040\000P\000u\000b\000l\000i\000c\000a\000t\000i\000o\000n\000s]
+============================================================
+============================================================
+TEST 6: Title page: short name, long name, photo
+============================================================
+[\376\377\000F\000i\000r\000s\000t\000\040\000L\000a\000s\000t\000\040\040\024\000\040\000P\000u\000b\000l\000i\000c\000a\000t\000i\000o\000n\000s]
+short name done
+[\376\377\000F\000i\000r\000s\000t\000\040\000L\000a\000s\000t\000\040\040\024\000\040\000P\000u\000b\000l\000i\000c\000a\000t\000i\000o\000n\000s]
+long name done
+File: example-image.pdf Graphic file (type pdf)
+<use example-image.pdf>
+Package luatex.def Info: example-image.pdf  used on input line ....
+(luatex.def)             Requested size: 79.6678pt x 59.75066pt.
+Underfull \hbox (badness 10000) in paragraph at lines ...
+\hbox(0.0+0.0)x253.95111, direction TLT
+.\penalty -10000
+.\glue(\rightskip) 0.0
+photo done
+============================================================
+============================================================
+TEST 7: Abstract
+============================================================
+Summary
+abstract done
+============================================================
+============================================================
+TEST 8: Letter without and with opening and closing
+============================================================
+Package microtype Info: Character `textless ' is missing
+(microtype)             in font `TU/NewCMSans10-Regular.otf(0)/b/n/11'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textgreater ' is missing
+(microtype)             in font `TU/NewCMSans10-Regular.otf(0)/b/n/11'.
+(microtype)             Ignoring protrusion settings for this character.
+opening: \long macro:->Dear committee,
+closing: \long macro:->Yours sincerely,
+letter done
+============================================================
+============================================================
+TEST 9: Letter title and closing
+============================================================
+title: 70.63028pt
+closing: 32.834pt
+============================================================
+============================================================
+TEST 10: Page styles
+============================================================
+plain: defined
+name: defined
+both: defined
+============================================================
+============================================================
+TEST 11: Subfiles: insubfile
+============================================================
+> \box...=
+\hbox(7.634+0.121)x10.978, direction TLT
+.\TU/NewCMSans10-Regular.otf(0)/m/n/11 a
+.\TU/NewCMSans10-Regular.otf(0)/m/n/11 b
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.634+0.121)x18.315, direction TLT
+.\TU/NewCMSans10-Regular.otf(0)/m/n/11 a
+.\TU/NewCMSans10-Regular.otf(0)/m/n/11 X
+.\TU/NewCMSans10-Regular.otf(0)/m/n/11 b
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 12: Starred section titles start after the left column
+============================================================
+\section*: 91.04889pt
+\subsection*: 91.04889pt
+\subsubsection*: 91.04889pt
+left + separator: 91.04889pt
+============================================================
+============================================================
+TEST 13: Bookmarks: sectioning commands
+============================================================
+[Education]
+[Subsection]
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line ....
+[1 Numbered]
+[1.1 Numbered subsection]
+============================================================
+============================================================
+TEST 14: Bookmarks: PDF strings
+============================================================
+[Curriculum Vit\346 \204 italic]
+[\376\377\000C\000u\000r\000r\000i\000c\000u\000l\000u\000m\000\040\000V\000i\000t\000\346\000\040\040\024\000\040\000i\000t\000a\000l\000i\000c]
+============================================================
+============================================================
+TEST 15: Data macros: no spurious spaces
+============================================================
+> \box...=
+\hbox(7.755+2.266)x41.29399, direction TLT
+.\TU/NewCMSans10-Regular.otf(0)/m/n/11 a
+.\TU/NewCMSans10-Regular.otf(0)/m/n/11 b
+.\discretionary (penalty 50)
+..< \TU/NewCMSans10-Regular.otf(0)/m/n/11 -
+..= \kern0.308 (font)
+.\TU/NewCMSans10-Regular.otf(0)/m/n/11 c
+.\TU/NewCMSans10-Regular.otf(0)/m/n/11 d
+.\TU/NewCMSans10-Regular.otf(0)/m/n/11 e
+.\discretionary (penalty 50)
+..< \TU/NewCMSans10-Regular.otf(0)/m/n/11 -
+.\TU/NewCMSans10-Regular.otf(0)/m/n/11 f
+.\TU/NewCMSans10-Regular.otf(0)/m/n/11 g
+.\TU/NewCMSans10-Regular.otf(0)/m/n/11 h
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

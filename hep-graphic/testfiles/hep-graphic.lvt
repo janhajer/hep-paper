@@ -1,0 +1,75 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{hep-graphic}
+\input{hep-regression}
+
+% A TikZ picture of 2cm x 1cm and one of 1cm x 1cm in a subfolder
+\begin{filecontents*}[overwrite]{hep-graphic-rectangle.tikz}
+\begin{tikzpicture}
+\draw[line width=0pt] (0,0) rectangle (2,1);
+\end{tikzpicture}
+\end{filecontents*}
+
+\makeatletter
+\newcommand*{\SHOWSIZE}[1]{%
+  \TYPE{#1: wd \the\wd0, ht \the\ht0, dp \the\dp0}%
+}
+\newcommand*{\SHOWPATH}{\TYPE{graphic path: \hep@graphic@path}}
+\newcommand*{\SHOWLOADED}[1]{\TYPE{#1: \@ifpackageloaded{#1}{yes}{no}}}
+\newcommand*{\SHOWDEFINED}[1]{%
+  \TYPE{\string#1: \ifdefined#1defined\else undefined\fi}%
+}
+\makeatother
+
+\begin{document}
+% Load the picture once, so that file and font loading is not logged
+\setbox0\hbox{\tikz\draw (0,0) -- (1,1);}
+\setbox0\hbox{\includegraphics{hep-graphic-rectangle.tikz}}
+\setbox0\hbox{$\displaystyle x^{x^x}$}
+\START
+
+\TEST{Loaded packages and options}{%
+  \SHOWLOADED{tikz}\SHOWLOADED{tikzscale}\SHOWLOADED{pgfplots}%
+  \SHOWLOADED{hep-plot}\SHOWLOADED{hep-feynman}%
+  \SHOWDEFINED\tikzexternalize
+}
+
+\TEST{Macros that includepgf needs}{%
+  % \includepgf calls \tikzsetnextfilename (provided as no-op without the
+  % TikZ external library) and, without star, \pgfplotsset if defined
+  \SHOWDEFINED\tikzsetnextfilename
+  \SHOWDEFINED\pgfplotsset
+  \SHOWDEFINED\graphicpath
+  \SHOWDEFINED\includepgf
+  \SHOWDEFINED\includefeynman
+}
+
+\TEST{graphicpath}{%
+  \SHOWPATH
+  \graphicpath{figures}%
+  \SHOWPATH
+  \graphicpath{.}%
+  \SHOWPATH
+}
+
+\TEST{includepgf*}{%
+  \setbox0\hbox{\includepgf*{hep-graphic-rectangle.tikz}}%
+  \SHOWSIZE{includepgf*}%
+  \setbox0\hbox{\includepgf*{hep-graphic-rectangle}}%
+  \SHOWSIZE{includepgf* without extension}%
+  \setbox0\hbox{\includepgf{hep-graphic-rectangle}}%
+  \SHOWSIZE{includepgf without pgfplots}%
+  \setbox0\hbox{\includepgf[width=4cm]{hep-graphic-rectangle}}%
+  \SHOWSIZE{includepgf[width=4cm] without pgfplots}%
+  \setbox0\hbox{\includegraphics{hep-graphic-rectangle.tikz}}%
+  \SHOWSIZE{includegraphics}%
+}
+
+\TEST{includefeynman}{%
+  \setbox0\hbox{$\includefeynman{hep-graphic-rectangle.tikz}$}%
+  \SHOWSIZE{includefeynman}%
+  \setbox0\hbox{$\displaystyle a = \includefeynman{hep-graphic-rectangle.tikz}$}%
+  \SHOWSIZE{in a formula}%
+}
+
+\END

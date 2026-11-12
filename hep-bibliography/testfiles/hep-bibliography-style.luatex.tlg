@@ -1,0 +1,119 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Style
+============================================================
+style: numeric
+cite:comp undefined, cite:init undefined, cbx@tempcntb undefined
+============================================================
+============================================================
+TEST 2: Citations
+============================================================
+> \box...=
+\hbox(7.5+2.5)x21.67, direction TLT
+.\TU/lmr/m/n/10 [
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@CMS}
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@Collab}
+.\TU/lmr/m/n/10 2
+.\pdfendlink
+.\TU/lmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 3: Clever citations
+============================================================
+> \box...=
+\hbox(7.5+2.5)x52.55, direction TLT
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 f
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 r
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 e
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 [
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@CMS}
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\TU/lmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x90.38, direction TLT
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 f
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 r
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 s
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 [
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@CMS}
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@Collab}
+.\TU/lmr/m/n/10 2
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 .
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x55.99, direction TLT
+.\TU/lmr/m/n/10 R
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 f
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 r
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 e
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 [
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[0 1 0]} action goto name{cite.0@CMS}
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\TU/lmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

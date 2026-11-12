@@ -1,0 +1,480 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Title block: series, title, subtitle, author, empty default date
+============================================================
+> \box...=
+\vbox(162.77788+0.0)x200.0003
+.\glue 0.0 plus 1.0fil
+.\penalty -10000
+.\glue 0.0 plus 1.0fil
+.\penalty -10000
+.\hbox(0.0+0.0)x0.0
+.\glue 20.00003
+.\rule(0.0+0.0)x*
+.\penalty 10000
+.\glue 0.0
+.\glue 0.0
+.\glue -12.0 plus -4.0 minus -4.0
+.\glue 0.0
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 8.16
+.\hbox(9.84+0.0)x200.0003, glue set 96.08354fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/m/n/14.4 S
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+.\glue -10.0 plus -3.0 minus -5.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 10.19444
+.\hbox(11.80556+0.0)x200.0003, glue set 94.23216fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/m/n/17.28 T
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+.\glue -10.0 plus -3.0 minus -5.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 8.16
+.\hbox(9.84+0.0)x200.0003, glue set 94.71521fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/m/n/14.4 U
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+.\glue 3.0 plus 1.0 minus 1.0
+.\glue 0.0
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue -10.0 plus -4.0 minus -5.0
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 5.8
+.\hbox(8.2+0.0)x200.0003, glue set 95.59604fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+...\glue 0.0
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/m/n/12 A
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+.\glue -10.0 plus -3.0 minus -5.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+.\glue -17.22217
+.\glue 0.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 12.0
+.\hbox(0.0+0.0)x200.0003, glue set 100.00015fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+.\glue 15.00002
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 2: Series, title, subtitle and date fonts
+============================================================
+> \box...=
+\vbox(17.84+0.0)x200.0003
+.\glue -12.0 plus -4.0 minus -4.0
+.\glue 0.0
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(9.84+0.0)x200.0003, glue set 96.04012fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/m/it/14.4 S
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+> \box...=
+\vbox(31.856+0.0)x200.0003
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(11.856+0.0)x200.0003, glue set 93.24017fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/bx/n/17.28 T
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+> \box...=
+\vbox(32.83998+0.0)x200.0003
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(9.83998+0.0)x200.0003, glue set 94.14021fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/m/sc/14.4 U
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+.\glue 3.0 plus 1.0 minus 1.0
+.\glue 0.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.83331+0.0)x7.50002
+.\OT1/cmr/m/sl/10 A
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\vbox(26.14998+0.0)x200.0003
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(6.14998+0.0)x200.0003, glue set 96.46754fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/m/n/9 D
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 3: Series and subtitle hooks
+============================================================
+> \box...=
+\hbox(7.5+2.5)x11.11115
+.\vadjust
+..\glue -12.0 plus -4.0 minus -4.0
+..\glue 0.0
+.\OT1/cmr/m/n/10 [
+.\OT1/cmr/m/n/10 S
+.\OT1/cmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x15.27782
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 U
+.\OT1/cmr/m/n/10 )
+.\vadjust
+..\glue 3.0 plus 1.0 minus 1.0
+..\glue 0.0
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 4: Abstract without indentation and with keywords
+============================================================
+> \box...=
+\vbox(56.67506+0.0)x200.0003
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(6.25+0.0)x200.0003, glue set 79.6302fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/bx/n/9 A
+..\OT1/cmr/bx/n/9 b
+..\OT1/cmr/bx/n/9 s
+..\OT1/cmr/bx/n/9 t
+..\OT1/cmr/bx/n/9 r
+..\OT1/cmr/bx/n/9 a
+..\OT1/cmr/bx/n/9 c
+..\OT1/cmr/bx/n/9 t
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\glue -5.32494
+.\glue 0.0
+.\glue 0.0
+.\glue 0.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+.\glue -10.0 plus -3.0 minus -5.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 7.12502
+.\hbox(3.87498+0.0)x150.00024, glue set 145.11833fil, shifted 25.00003
+..\kern -13.87491
+..\hbox(0.0+0.0)x13.87491
+...\glue 13.87491
+...\glue -20.00003
+...\glue -5.0
+...\hbox(0.0+0.0)x20.00003, glue set 20.00003fil
+....\pdfcolorstack 0 push {0 g 0 G}
+....\glue 0.0 plus 1.0fil
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/m/n/9 x
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\glue 6.0 plus 2.0 minus 2.0
+.\glue 0.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.75
+.\hbox(6.25+1.75)x150.00024, glue set 78.99515fil, shifted 25.00003
+..\OT1/cmr/m/it/9 K
+..\OT1/cmr/m/it/9 e
+..\OT1/cmr/m/it/9 y
+..\OT1/cmr/m/it/9 w
+..\OT1/cmr/m/it/9 o
+..\OT1/cmr/m/it/9 r
+..\kern-0.47224
+..\OT1/cmr/m/it/9 d
+..\OT1/cmr/m/it/9 s
+..\OT1/cmr/m/it/9 :
+..\glue 4.25005 plus 2.83337 minus 0.47221
+..\OT1/cmr/m/it/9 k
+..\OT1/cmr/m/it/9 1
+..\OT1/cmr/m/it/9 ,
+..\glue 3.3056 plus 1.77086 minus 0.75555
+..\OT1/cmr/m/it/9 k
+..\OT1/cmr/m/it/9 2
+..\kern 1.21388
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 6.0 plus 3.0 minus 3.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 5: abstract* in one-column mode: title and abstract
+============================================================
+maketitle
+> \box...=
+\vbox(56.67506+0.0)x200.0003
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(6.25+0.0)x200.0003, glue set 79.6302fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0
+....\pdfcolorstack 0 push {0 g 0 G}
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/bx/n/9 A
+..\OT1/cmr/bx/n/9 b
+..\OT1/cmr/bx/n/9 s
+..\OT1/cmr/bx/n/9 t
+..\OT1/cmr/bx/n/9 r
+..\OT1/cmr/bx/n/9 a
+..\OT1/cmr/bx/n/9 c
+..\OT1/cmr/bx/n/9 t
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\glue -5.32494
+.\glue 0.0
+.\glue 0.0
+.\glue 0.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+.\glue -10.0 plus -3.0 minus -5.0
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 7.12502
+.\hbox(3.87498+0.0)x150.00024, glue set 145.11833fil, shifted 25.00003
+..\kern -13.87491
+..\hbox(0.0+0.0)x13.87491
+...\glue 13.87491
+...\glue -20.00003
+...\glue -5.0
+...\hbox(0.0+0.0)x20.00003, glue set 20.00003fil
+....\pdfcolorstack 0 push {0 g 0 G}
+....\glue 0.0 plus 1.0fil
+....\pdfcolorstack 0 pop
+...\glue 5.0
+..\penalty 0
+..\OT1/cmr/m/n/9 x
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\glue 6.0 plus 2.0 minus 2.0
+.\glue 0.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.75
+.\hbox(6.25+1.75)x150.00024, glue set 78.99515fil, shifted 25.00003
+..\OT1/cmr/m/it/9 K
+..\OT1/cmr/m/it/9 e
+..\OT1/cmr/m/it/9 y
+..\OT1/cmr/m/it/9 w
+..\OT1/cmr/m/it/9 o
+..\OT1/cmr/m/it/9 r
+..\kern-0.47224
+..\OT1/cmr/m/it/9 d
+..\OT1/cmr/m/it/9 s
+..\OT1/cmr/m/it/9 :
+..\glue 4.25005 plus 2.83337 minus 0.47221
+..\OT1/cmr/m/it/9 k
+..\OT1/cmr/m/it/9 1
+..\OT1/cmr/m/it/9 ,
+..\glue 3.3056 plus 1.77086 minus 0.75555
+..\OT1/cmr/m/it/9 k
+..\OT1/cmr/m/it/9 2
+..\kern 1.21388
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 6.0 plus 3.0 minus 3.0
+! OK.
+\SHOWVBOX ...x 0\vbox {\hsize =20em #1}\showbox 0 
+l. ...}
+============================================================

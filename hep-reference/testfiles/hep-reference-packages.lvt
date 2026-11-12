@@ -1,0 +1,93 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{subcaption}
+\usepackage{hep-text}
+\usepackage{hep-title}
+\usepackage{hep-reference}
+
+% The labels that a previous run would have written
+\begin{filecontents*}[overwrite]{\jobname.aux}
+\relax
+\newlabel{aff:a}{{\textsuperscript {\normalfont a}}{1}{}{affiliation.1}{}}
+\newlabel{aff:a@cref}{{[affiliation][1][]\textsuperscript {\normalfont a}}{[1][1][]1}{}{}{}}
+\newlabel{aff:b}{{\textsuperscript {\normalfont b}}{1}{}{affiliation.2}{}}
+\newlabel{aff:b@cref}{{[affiliation][2][]\textsuperscript {\normalfont b}}{[1][1][]1}{}{}{}}
+\newlabel{aff:c}{{\textsuperscript {\normalfont c}}{1}{}{affiliation.3}{}}
+\newlabel{aff:c@cref}{{[affiliation][3][]\textsuperscript {\normalfont c}}{[1][1][]1}{}{}{}}
+\newlabel{aff:e}{{\textsuperscript {\normalfont e}}{1}{}{affiliation.5}{}}
+\newlabel{aff:e@cref}{{[affiliation][5][]\textsuperscript {\normalfont e}}{[1][1][]1}{}{}{}}
+\newlabel{il:a}{{{{i)}}}{1}{}{Item.1}{}}
+\newlabel{il:a@cref}{{[inlinelisti][1][]{{i)}}}{[1][1][]1}{}{}{}}
+\newlabel{fig:a}{{1a}{1}{a}{figure.caption.1}{}}
+\newlabel{fig:a@cref}{{[subfigure][1][1]1a}{[1][1][]1}{}{}{}}
+\newlabel{sub@fig:a}{{a}{1}{a}{figure.caption.1}{}}
+\newlabel{sub@fig:a@cref}{{[subfigure][1][1]1a}{[1][1][]1}{}{}{}}
+\end{filecontents*}
+
+\input{hep-regression}
+
+% Shows what \protected@write would write to the .aux file by writing it
+% immediately to the log.
+\makeatletter
+\newcommand*{\SHOWWRITES}[1]{%
+  \begingroup
+    \long\def\protected@write##1##2##3{%
+      \begingroup
+        \let\thepage\relax
+        ##2%
+        \let\protect\@unexpandable@protect
+        \edef\reserved@a{\immediate\write\m@ne{##3}}%
+        \reserved@a
+      \endgroup
+    }%
+    \setbox0\vbox{#1}%
+  \endgroup
+}
+\makeatother
+
+\begin{document}
+
+% Load the fonts before \START
+\setbox0\vbox{\textsuperscript{x}$x$\footnotesize x}
+
+\START
+
+\TEST{subcaption: subref without line break}{%
+  \SHOWHBOX{a \subref{fig:a}}%
+}
+
+\TEST{subcaption: subcref}{%
+  \SHOWHBOX{\subcref{fig:a}}%
+}
+
+\TEST{hep-text: label in an inline list}{%
+  \SHOWWRITES{%
+    \begin{inlinelist}
+      \item\label{il:a} a
+    \end{inlinelist}%
+  }%
+}
+
+\TEST{hep-text: reference to an inline list item}{%
+  \SHOWHBOX{\cref{il:a}}%
+}
+
+\TEST{hep-title: affiliation references}{%
+  \SHOWHBOX{\labelcref{aff:a}}%
+  \SHOWHBOX{\labelcref{aff:a,aff:c}}%
+  \SHOWHBOX{\labelcref{aff:a,aff:c,aff:e}}%
+  \SHOWHBOX{\labelcref{aff:a,aff:b,aff:c}}%
+}
+
+% Use the hook of \maketitle directly to avoid typesetting the title.
+\TEST{hep-title: document information}{%
+  \title{The title}%
+  \subtitle{The subtitle}%
+  \keywords{one, two}%
+  \UseHook{cmd/maketitle/before}%
+  \PDFINFO{title}%
+  \PDFINFO{keywords}%
+}
+
+\END
