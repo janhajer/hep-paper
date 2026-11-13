@@ -1,0 +1,21 @@
+% Compatibility options whose class or style is not available are ignored
+% with a warning instead of failing.
+\input{regression-test}
+\documentclass{article}
+\usepackage[beamer,revtex,jhep,jcap,pos,springer,amsart,koma]{hep-paper}
+\begin{document}
+\START
+\makeatletter
+\TEST{ignored compatibility options}{%
+  \TYPE{beamer \ifhep@beamer true\else false\fi}%
+  \TYPE{revtex \ifhep@revtex true\else false\fi}%
+  \TYPE{jhep \ifhep@jhep true\else false\fi}%
+  \TYPE{jcap \ifhep@jcap true\else false\fi}%
+  \TYPE{pos \ifhep@pos true\else false\fi}%
+  \TYPE{springer \ifhep@springer true\else false\fi}%
+  \TYPE{amsart \ifhep@amsart true\else false\fi}%
+  \TYPE{koma \ifhep@koma true\else false\fi}%
+  \TYPE{hep-title \@ifpackageloaded{hep-title}{loaded}{not loaded}}%
+}
+\makeatother
+\END

@@ -18,8 +18,8 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
-%<package>\ProvidesPackage{hep-acronym}[2026/11/11 v1.6 Acronyms based on glossaries-extra with sentence-aware capitalisation and first-use links]
-%<documentation>\ProvidesFile{hep-acronym-documentation.tex}[2026/11/11 v1.6 HEP-acronym documentation]
+%<package>\ProvidesPackage{hep-acronym}[2026/11/13 v1.6 Acronyms based on glossaries-extra with sentence-aware capitalisation and first-use links]
+%<documentation>\ProvidesFile{hep-acronym-documentation.tex}[2026/11/13 v1.6 HEP-acronym documentation]
 %
 %<*documentation>
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -69,13 +69,13 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2021/09/01}{Created the dedicated acronym package with glossaries-extra based acronym declarations, sentence-aware use, short and long variants, reset and dummy helpers, and acronym groups.}
-% \changes{v1.1}{2022/11/01}{Added \cs{sentence}, forced long-form acronym commands, conditional PDF-string disabling without hyperref, safer option passing, and title-case tests.}
-% \changes{v1.2}{2023/07/01}{Added the \option{hyper} option, alternative long-form acronyms, math-mode acronym atom wrapping, and refreshed documentation and README formatting.}
-% \changes{v1.3}{2024/11/01}{Renamed the sentence-state helper, applied starred command definitions, corrected release dates, and disabled the table/list acronym reset patch.}
-% \changes{v1.4}{2025/09/01}{Updated release metadata.}
-% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, and expanded the abstract, user documentation, README, and examples.}
-% \changes{v1.6}{2026/11/11}{Added the \option{titlesec} option for classes with their own sectioning code, which still capitalise acronyms at the beginning of numbered section titles, fixed an infinite loop in nested description lists, ended the line after \cs{glsreset} in the enforced first forms, kept \cs{sentence} from setting the space factor outside horizontal mode, and improved the \software{hyperref} support: \PDF strings are defined independently of the package loading order, for all acronym variants and without stray spaces, capitalised at the beginning of bookmarks, and the contents lists neither consume the first use nor nest links, nor do the texts of links.}
+% \changes{v1.0}{2021/09/01}{First release on CTAN: acronyms based on glossaries-extra with sentence-aware use, short and long variants, reset and dummy helpers, and acronym groups.}
+% \changes{v1.1}{2022/11/01}{Added \cs{sentence} and forced long-form acronym commands, and disabled PDF strings only when hyperref is missing.}
+% \changes{v1.2}{2023/07/01}{Added the \option{hyper} option, alternative long-form acronyms, and acronyms in math mode.}
+% \changes{v1.3}{2024/11/01}{Stopped resetting acronyms in tables and lists, and applied starred command definitions.}
+% \changes{v1.4}{2025/09/01}{Released without changes.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement and expanded the documentation, README, and examples.}
+% \changes{v1.6}{2026/11/13}{Added the \option{titlesec} option for classes with their own sectioning code, which still capitalise acronyms at the beginning of numbered section titles, fixed an infinite loop in nested description lists, ended the line after \cs{glsreset} in the enforced first forms, kept \cs{sentence} from setting the space factor outside horizontal mode, and improved the \software{hyperref} support: \PDF strings are defined independently of the package loading order, for all acronym variants and without stray spaces, capitalised at the beginning of bookmarks, and the contents lists neither consume the first use nor nest links, nor do the texts of links.}
 %
 % \ifshort
 %<*documentation>

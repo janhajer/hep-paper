@@ -1,0 +1,42 @@
+\input{regression-test}
+\documentclass{article}
+% Copies of the alphabet commands and Greek letter macros made with \let
+% in the preamble and with \AtBeginDocument select the composable
+% commands, not the kernel ones (which picked wrong glyphs on pdfTeX).
+\usepackage{hep-math-font}
+\let\preamblemat\mathbf
+\let\preamblesf\mathbfsf
+\AtBeginDocument{%
+  \let\mat\mathbf
+  \let\rep\mathbf
+  \let\matup\mathup
+  \let\Lam\Lambda
+  \let\al\alpha
+}
+\newcommand*{\SAME}[2]{\TYPE{\string#1: \ifx#1#2same\else different\fi}}
+\newcommand*{\SAMEWIDTH}[2]{%
+  \setbox0\hbox{$#1$}\setbox2\hbox{$#2$}%
+  \TYPE{\detokenize{#1}: \ifdim\wd0=\wd2 same\else different\fi}%
+}
+\begin{document}
+\setbox0\hbox{$\mathbf{U1}\mathup{U}\Lambda\alpha$}
+\input{hep-regression}
+\START
+\TEST{copies made with let}{%
+  \SAME\preamblemat\mathbf
+  \SAME\preamblesf\mathbfsf
+  \SAME\mat\mathbf
+  \SAME\rep\mathbf
+  \SAME\matup\mathup
+  \SAME\Lam\Lambda
+  \SAME\al\alpha
+}
+\TEST{copies typeset like the commands}{%
+  \SAMEWIDTH{\mat{U1\Lambda}}{\mathbf{U1\Lambda}}
+  \SAMEWIDTH{\preamblemat{U1}}{\mathbf{U1}}
+  \SAMEWIDTH{\mathsf{\mat{x}}}{\mathbfsf{x}}
+}
+\TEST{copy of bold}{%
+  \SHOWHBOX{$\mat{U}\mat{1}$}
+}
+\END

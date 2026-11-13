@@ -135,7 +135,8 @@ TEST 1: Title block: series, title, subtitle, author, empty default date
 ....\pdfcolorstack 0 pop
 ...\glue 5.0
 ..\penalty 0
-..\TU/lmr/m/n/12 A
+..\hbox(8.568+0.0)x8.808, direction TLT
+...\TU/lmr/m/n/12 A
 ..\penalty 10000
 ..\glue(\parfillskip) 0.0
 ..\glue(\rightskip) 0.0 plus 1.0fil

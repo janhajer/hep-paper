@@ -412,7 +412,7 @@ TEST 11: Table of contents and list of figures
 ============================================================
 (hep-math-hyperref.toc)
 > \box...=
-\vbox(104.8935+3.81944)x200.0003
+\vbox(97.88005+3.81944)x200.0003
 .\hbox(9.87999+0.0)x200.0003, glue set 136.71873fil
 ..\hbox(0.0+0.0)x0.0
 ...\glue 0.0
@@ -506,8 +506,8 @@ TEST 11: Table of contents and list of figures
 .\glue 10.00002 plus 1.0
 .\glue(\parskip) 0.0 plus 1.0
 .\glue(\parskip) 0.0
-.\glue(\lineskip) 1.0
-.\hbox(13.70952+6.85951)x200.0003, glue set 47.39275fil
+.\glue(\baselineskip) 2.67783
+.\hbox(9.32217+3.44841)x200.0003, glue set 49.61528fil
 ..\glue(\leftskip) 15.00002
 ..\hbox(0.0+0.0)x0.0
 ..\glue -15.00002
@@ -529,33 +529,32 @@ TEST 11: Table of contents and list of figures
 ..\OT1/cmr/bx/n/10 e
 ..\glue 3.83331 plus 1.91666 minus 1.27777
 ..\mathon
-..\hbox(13.70952+6.85951)x13.32013
-...\hbox(13.70952+6.85951)x13.32013
-....\hbox(13.70952+6.85951)x13.32013
-.....\hbox(0.0+0.0)x1.2, shifted -2.5
-.....\vbox(13.70952+6.85951)x10.92014
-......\hbox(6.94444+1.94444)x10.92014, glue set 0.70485fil
-.......\glue 0.0 plus 1.0fil minus 1.0fil
+..\hbox(9.32217+3.44841)x11.0976
+...\hbox(9.32217+3.44841)x11.0976
+....\hbox(0.0+0.0)x1.2, shifted -2.5
+....\vbox(9.32217+3.44841)x8.6976
+.....\hbox(4.8611+1.3611)x8.6976, glue set 0.57117fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(0.0+0.0)x0.0
+......\glue -1.36574
+......\glue(\thinmuskip) 1.36574
+......\OML/cmm/m/it/7 d
+......\kern-1.29167
+......\OML/cmm/m/it/7 f
+......\kern0.78473
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern0.39998
+.....\rule(0.39998+0.0)x*
+.....\kern0.88731
+.....\hbox(4.8611+0.0)x8.6976
+......\hbox(0.0+0.0)x0.0
+......\glue -1.36574
+......\glue(\thinmuskip) 1.36574
+......\OML/cmm/m/it/7 d
+......\hbox(3.01389+0.0)x4.53473
 .......\hbox(0.0+0.0)x0.0
-.......\glue -1.66663
-.......\glue(\thinmuskip) 1.66663
-.......\OML/cmm/m/it/10 d
-.......\kern-1.66667
-.......\OML/cmm/m/it/10 f
-.......\kern1.0764
-.......\glue 0.0 plus 1.0fil minus 1.0fil
-......\kern2.12064
-......\rule(0.39998+0.0)x*
-......\kern2.21507
-......\hbox(6.94444+0.0)x10.92014
-.......\hbox(0.0+0.0)x0.0
-.......\glue -1.66663
-.......\glue(\thinmuskip) 1.66663
-.......\OML/cmm/m/it/10 d
-.......\hbox(4.30554+0.0)x5.71527
-........\hbox(0.0+0.0)x0.0
-........\OML/cmm/m/it/10 x
-.....\hbox(0.0+0.0)x1.2, shifted -2.5
+.......\OML/cmm/m/it/7 x
+....\hbox(0.0+0.0)x1.2, shifted -2.5
 ..\mathoff
 ..\glue 3.83331 plus 1.91666 minus 1.27777
 ..\OT1/cmr/bx/n/10 a
@@ -591,7 +590,7 @@ TEST 11: Table of contents and list of figures
 .\glue 10.00002 plus 1.0
 .\glue(\parskip) 0.0 plus 1.0
 .\glue(\parskip) 0.0
-.\glue(\lineskip) 1.0
+.\glue(\baselineskip) 0.10718
 .\hbox(8.44441+0.0)x200.0003, glue set 118.6617fil
 ..\glue(\leftskip) 15.00002
 ..\hbox(0.0+0.0)x0.0

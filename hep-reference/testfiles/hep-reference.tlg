@@ -25,7 +25,46 @@ l. ...}
 l. ...}
 ============================================================
 ============================================================
-TEST 2: No line break before cite
+TEST 2: Wider skips before ref and cite are kept
+============================================================
+> \box...=
+\hbox(6.44444+0.0)x16.11115
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 .
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/I/C[1 0 0]} action goto name{section.1}
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.44444+0.0)x20.00005
+.\OT1/cmr/m/n/10 a
+.\glue 10.00002
+.\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/I/C[1 0 0]} action goto name{section.1}
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.5+2.5)x35.55563
+.\OT1/cmr/m/n/10 a
+.\glue 20.00003
+.\OT1/cmr/m/n/10 [
+.\hbox(6.44444+0.0)x5.00002
+..\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/I/C[0 1 0]} action goto name{cite.key}
+..\OT1/cmr/m/n/10 1
+..\pdfendlink
+.\OT1/cmr/m/n/10 ]
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 3: No line break before cite
 ============================================================
 > \box...=
 \hbox(7.5+2.5)x18.88893
@@ -64,7 +103,7 @@ l. ...}
 l. ...}
 ============================================================
 ============================================================
-TEST 3: No line break before eqref, which uses labelcref
+TEST 4: No line break before eqref, which uses labelcref
 ============================================================
 > \box...=
 \hbox(7.5+2.5)x21.11116
@@ -105,7 +144,7 @@ l. ...}
 l. ...}
 ============================================================
 ============================================================
-TEST 4: cref: names and conjunctions
+TEST 5: cref: names and conjunctions
 ============================================================
 > \box...=
 \hbox(6.67859+0.0)x38.38895
@@ -203,7 +242,7 @@ l. ...}
 l. ...}
 ============================================================
 ============================================================
-TEST 5: labelcrefrange
+TEST 6: labelcrefrange
 ============================================================
 > \box...=
 \hbox(7.5+2.5)x41.1112
@@ -229,7 +268,7 @@ TEST 5: labelcrefrange
 l. ...}
 ============================================================
 ============================================================
-TEST 6: eqcrefname: default plural
+TEST 7: eqcrefname: default plural
 ============================================================
 > \box...=
 \hbox(7.5+2.5)x39.44453
@@ -289,7 +328,7 @@ l. ...}
 l. ...}
 ============================================================
 ============================================================
-TEST 7: eqcrefname: explicit plural
+TEST 8: eqcrefname: explicit plural
 ============================================================
 > \box...=
 \hbox(7.5+2.5)x70.83347
@@ -321,7 +360,7 @@ TEST 7: eqcrefname: explicit plural
 l. ...}
 ============================================================
 ============================================================
-TEST 8: eqcrefname: spaces
+TEST 9: eqcrefname: spaces
 ============================================================
 > \box...=
 \hbox(6.94444+0.0)x10.55559
@@ -332,7 +371,7 @@ TEST 8: eqcrefname: spaces
 l. ...}
 ============================================================
 ============================================================
-TEST 9: Footnote: no space before the mark and at the beginning
+TEST 10: Footnote: no space before the mark and at the beginning
 ============================================================
 LaTeX Warning: Hyper reference `bhfn:2' on page 1 undefined on input line ....
 > \box...=
@@ -384,7 +423,7 @@ LaTeX Warning: Hyper reference `bhfn:2' on page 1 undefined on input line ....
 l. ...}
 ============================================================
 ============================================================
-TEST 10: Footnote: optional argument
+TEST 11: Footnote: optional argument
 ============================================================
 LaTeX Warning: Hyper reference `bhfn:3' on page 1 undefined on input line ....
 > \box...=
@@ -436,29 +475,29 @@ LaTeX Warning: Hyper reference `bhfn:3' on page 1 undefined on input line ....
 l. ...}
 ============================================================
 ============================================================
-TEST 11: Footnote: paragraphs in the text
+TEST 12: Footnote: paragraphs in the text
 ============================================================
 \ignorespaces b\par c
 ============================================================
 ============================================================
-TEST 12: Footnote: label of the backlink
+TEST 13: Footnote: label of the backlink
 ============================================================
 \newlabel{bhfn:4}{{4}{\thepage }{}{BackrefHyperFootnoteCounter.4}{}}
 \newlabel{bhfn:4@cref}{{[BackrefHyperFootnoteCounter][4][]4}{[1][1][]\thepage }{}{}{}}
 LaTeX Warning: Hyper reference `bhfn:4' on page 1 undefined on input line ....
 ============================================================
 ============================================================
-TEST 13: textlabel: label
+TEST 14: textlabel: label
 ============================================================
-\newlabel{tl}{{\protecting {{Some text}}}{\thepage }{Some text}{tl}{}}
-\newlabel{tl}{{\protecting {\textbf {Some text}}}{\thepage }{Some text}{tl}{}}
+\newlabel{tl}{{\protecting {{Some text}}}{\thepage }{Some text}{tl}{}}\newlabel{tl@cref}{{[textlabel][2][]\protecting {{Some text}}}{[1][1][]\thepage }{}{}{}}
+\newlabel{tl}{{\protecting {\textbf {Some text}}}{\thepage }{Some text}{tl}{}}\newlabel{tl@cref}{{[textlabel][4][]\protecting {\textbf {Some text}}}{[1][1][]\thepage }{}{}{}}
 ============================================================
 ============================================================
-TEST 14: textlabel: target and text
+TEST 15: textlabel: target and text
 ============================================================
 > \box...=
 \hbox(4.30554+0.0)x5.87822
-.\write1{\newlabel{tl}{{\protecting {{a}}}{\thepage }{a}{tl}{}}}
+.\write1{\newlabel{tl}{{\protecting {{a}}}{\thepage }{a}{tl}{}}\newlabel{tl@cref}{{[textlabel][6][]\protecting {{a}}}{[1][1][]\thepage }{}{}{}}}
 .\pdfdest name{tl} xyz
 .\penalty 10000
 .\OT1/cmr/m/it/10 a
@@ -468,7 +507,7 @@ TEST 14: textlabel: target and text
 l. ...}
 ============================================================
 ============================================================
-TEST 15: textlabel: references
+TEST 16: textlabel: references
 ============================================================
 > \box...=
 \hbox(6.83331+0.0)x52.5001
@@ -505,15 +544,66 @@ l. ...}
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
 l. ...}
+> \box...=
+\hbox(6.94444+0.0)x110.30577
+.\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/I/C[1 0 0]} action goto name{tl}
+.\OT1/cmr/m/n/10 S
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 m
+.\OT1/cmr/m/n/10 e
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 x
+.\OT1/cmr/m/n/10 t
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/I/C[1 0 0]} action goto name{tm}
+.\OT1/cmr/m/n/10 M
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 x
+.\OT1/cmr/m/n/10 t
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(6.83331+0.0)x52.5001
+.\OT1/cmr/m/n/10 a
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/I/C[1 0 0]} action goto name{tl}
+.\OT1/cmr/m/n/10 S
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 m
+.\OT1/cmr/m/n/10 e
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 x
+.\OT1/cmr/m/n/10 t
+.\pdfendlink
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
 ============================================================
 ============================================================
-TEST 16: PDF subject
+TEST 17: PDF subject
 ============================================================
 [Physics]
 [Class]
 ============================================================
 ============================================================
-TEST 17: usecommand
+TEST 18: usecommand
 ============================================================
 [x]
 [x-y]

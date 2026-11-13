@@ -1,0 +1,20 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: formula
+============================================================
+> \box...=
+\hbox(6.85724+0.0)x21.031
+.\mathon
+.\hbox(6.85724+0.0)x14.59697
+..\OT1/lmr/bx/n/10 U
+..\OT1/lmr/bx/n/10 1
+.\OML/lmm/m/it/10 ^^K
+.\kern0.03702
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+Errors before \START:
+! Package hep-math-font Error: The virtual fonts were generated for another

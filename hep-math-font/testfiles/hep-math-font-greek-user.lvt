@@ -1,0 +1,40 @@
+\input{regression-test}
+\documentclass{article}
+% Greek letter macros redefined in the preamble or with \AtBeginDocument
+% keep their new meaning, and copies made with \let in the preamble select
+% the glyphs of hep-math-font.
+\usepackage{hep-font}
+\usepackage{hep-math-font}
+\usepackage{hyperref}
+\let\vareps\varepsilon
+\renewcommand{\epsilon}{\varepsilon}
+\AtBeginDocument{\renewcommand{\phi}{\varphi}}
+\newcommand*{\SAME}[2]{\TYPE{\string#1: \ifx#1#2same\else different\fi}}
+\newcommand*{\SAMEWIDTH}[2]{%
+  \setbox0\hbox{$#1$}\setbox2\hbox{$#2$}%
+  \TYPE{\detokenize{#1}: \ifdim\wd0=\wd2 same\else different\fi}%
+}
+\begin{document}
+\setbox0\hbox{$\alpha\epsilon$}
+\input{hep-regression}
+\START
+\TEST{redefinitions kept}{%
+  \TYPE{\meaning\epsilon}
+  \TYPE{\meaning\phi}
+  \SAME\vareps\varepsilon
+}
+\TEST{redefinitions typeset}{%
+  \SAMEWIDTH{\epsilon}{\varepsilon}
+  \SAMEWIDTH{\phi}{\varphi}
+  \SAMEWIDTH{\vareps}{\varepsilon}
+  \SAMEWIDTH{\mathbf{\epsilon}}{\mathbf{\varepsilon}}
+  \SAMEWIDTH{\mathsf{\vareps}}{\mathsf{\varepsilon}}
+}
+\TEST{other letters unchanged}{%
+  \SHOWHBOX{$\alpha\mathbf{\beta}$}
+}
+\TEST{bookmarks}{%
+  \PDFSTRING{$\epsilon\phi\varepsilon\alpha$}
+  \UNICODEPDFSTRING{$\epsilon\phi\varepsilon\alpha$}
+}
+\END

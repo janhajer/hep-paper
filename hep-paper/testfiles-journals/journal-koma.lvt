@@ -1,0 +1,5 @@
+% Compile the generated koma test document of hep-paper. The configuration
+% halts on the first error, so a failing document never reaches \END.
+\input{regression-test}
+\AtEndDocument{\START\TYPE{hep-paper-test-koma compiled}\END}
+\input{hep-paper-test-koma}

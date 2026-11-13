@@ -1,0 +1,11 @@
+% hep-paper with koma: abstract as environment before \maketitle.
+\input{regression-test}
+\documentclass{scrartcl}
+\usepackage{hep-paper}
+\input{journal-title}
+\begin{document}
+\begin{abstract}Abstract text.\end{abstract}
+\maketitle
+\section{Section}
+Text.
+\end{document}

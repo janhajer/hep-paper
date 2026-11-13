@@ -1,0 +1,17 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: formula
+============================================================
+> \box...=
+\hbox(6.86+0.17)x21.2, direction TLT
+.\mathon
+.\TU/hep-serif/m/n/10 𝑼
+.\kern1.05 (italic)
+.\TU/hep-serif/m/n/10 𝟏
+.\TU/hep-serif/m/n/10 𝛼
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

@@ -1,0 +1,29 @@
+\input{regression-test}
+\documentclass{article}
+% Missing generated fonts: an empty \hepmathfont@vfversion counts as a
+% missing hep-math-font-vf.def (pdfTeX), the accent font name points to a
+% font that does not exist (LuaTeX, XeTeX). The package warns before
+% \START and falls back to the standard alphabets and to \vec.
+\makeatletter
+\def\hepmathfont@vfversion{}
+\def\hepmathfont@accentfont{hep-math-font-missing.ttf}
+\makeatother
+\usepackage{hep-math-font}
+\let\mat\mathbf
+\begin{document}
+\setbox0\hbox{$\mathbf{U1}\mathbfsf{x}\mathbftt{t}\mathserif{s}
+  \mathbb{R}\mathfrak{g}\mathscr{L}\vec{v}\alpha$}
+\input{hep-regression}
+\START
+\TEST{commands}{%
+  \TYPE{\ifx\mat\mathbf same\else different\fi}%
+  \TYPE{\ifx\mathbfup\mathbf same\else different\fi}%
+  \TYPE{\ifx\mathsfup\mathsf same\else different\fi}%
+  \TYPE{\meaning\dashedvec}%
+  \TYPE{\meaning\dottedvec}%
+}
+\TEST{formulas}{%
+  \SHOWHBOX{$\mathbf{U1}\mathbfsf{x}$}
+  \SHOWHBOX{$\dashedvec{v}\dottedvec{w}$}
+}
+\END

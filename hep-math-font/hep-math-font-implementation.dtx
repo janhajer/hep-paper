@@ -18,8 +18,8 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
-%<package>\ProvidesPackage{hep-math-font}[2026/11/11 v2.1 Composable math alphabets that follow the text font, and dashed and dotted vector accents]
-%<documentation>\ProvidesFile{hep-math-font-documentation.tex}[2026/11/11 v2.1 hep-math-font documentation]
+%<package>\ProvidesPackage{hep-math-font}[2026/11/13 v2.0 Composable math alphabets that follow the text font, and dashed and dotted vector accents]
+%<documentation>\ProvidesFile{hep-math-font-documentation.tex}[2026/11/13 v2.0 hep-math-font documentation]
 %
 %<*documentation>
 \documentclass{ltxdoc}
@@ -60,7 +60,7 @@
 %
 % \fi
 %
-% \CheckSum{1294}
+% \CheckSum{1488}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -78,14 +78,13 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2021/09/01}{Created the dedicated math-font package with serif and sans-serif math switching, Greek text and math handling, symbol package selection, and math alphabets.}
-% \changes{v1.1}{2022/11/01}{Protected Greek redefinitions, adjusted symbol-package documentation, and refined sans-serif and MinionPro handling.}
-% \changes{v1.2}{2023/07/01}{Added \cs{mathsftext}, fixed symbols option processing, and refreshed documentation and README formatting.}
-% \changes{v1.3}{2024/11/01}{Reworked Greek handling with fixmath and alphabeta, added \cs{hep@greek}, added nfssext-cfr LGR substitutions, and made symbol and math-alphabet loading conditional.}
-% \changes{v1.4}{2025/09/01}{Simplified the Greek-letter implementation, removed older Unicode and case-list code, updated LGR substitution handling, and applied starred command definitions.}
-% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, refreshed math-font documentation and README, restored an active checksum, removed the active \cs{mathsf} digit wrapper, made math digits lining symbols, and routed \cs{mathsf} digits through a matching lining digit font.}
-% \changes{v2.0}{2026/10/07}{Made the math alphabet commands composable: bold, upright and the serif, sans-serif and typewriter families combine in any order. Added \cs{mathserif} and the combined commands, the mathsf option, physical New Computer Modern faces for the Unicode engines, and virtual fonts with their generator script for pdfLaTeX. With symbols=true \cs{mathbb} is composable as well and uses AMS, DSSerif and bboldx for pdfLaTeX, and the RSFS script and Euler fraktur share one virtual font family.}
-% \changes{v2.1}{2026/11/11}{Replaced most fallback shapes: CM Unicode provides the bold typewriter Greek and the upright variant Greek letters and the upright serif theta for pdfLaTeX, the New Computer Modern blackboard of mathalpha replaces the AMS and DSSerif blackboard, and the remaining shapes are slanted, unless the new synthetic option is false. Added \cs{ell} and \cs{hbar} to the alphabets, and bold dotless letters for the Unicode engines. Corrected the text extracted from the sans-serif math italic Greek and other glyphs with misleading names. Added the proportional option, on by default, which sets the typewriter Latin letters and digits in the Latin Modern proportional typewriter. URLs typeset by the url package keep the letters and digits of their text font. With symbols=true and ams \cs{mathcal} is composable and uses the calligraphic capitals of the serif and sans-serif math fonts, and for pdfLaTeX the \CM calligraphic capitals in the serif and the Zapf Chancery capitals in the sans-serif family. Made \cs{mathscr} composable, with Euler script as upright \cs{mathcal}. Made the alphabets and Greek letters work in hyperref bookmarks. Added the vector accents \cs{dashedvec} and \cs{dottedvec} with a dashed and a dotted shaft, derived from the glyphs of \cs{vec} and collected in the TrueType font hepaccent.}
+% \changes{v1.0}{2021/09/01}{First release on CTAN: serif and sans-serif math, Greek letters in text and math, symbol package selection, and math alphabets.}
+% \changes{v1.1}{2022/11/01}{Protected the Greek letter macros and refined sans-serif and MinionPro handling.}
+% \changes{v1.2}{2023/07/01}{Added \cs{mathsftext} and fixed the processing of the symbols option.}
+% \changes{v1.3}{2024/11/01}{Reworked the Greek letters with fixmath and alphabeta, substituted the LGR fonts of nfssext-cfr, and loaded symbol fonts and math alphabets only when needed.}
+% \changes{v1.4}{2025/09/01}{Simplified the Greek letters and applied starred command definitions.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, made math digits lining, and set \cs{mathsf} digits in a matching lining font.}
+% \changes{v2.0}{2026/11/13}{Made the math alphabet commands composable: bold, upright and the serif, sans-serif and typewriter families combine in any order. Added \cs{mathserif} and the combined commands, the mathsf option, physical New Computer Modern faces for the Unicode engines, and virtual fonts with their generator script for pdfLaTeX. With symbols=true \cs{mathbb} is composable as well and uses AMS, DSSerif and bboldx for pdfLaTeX, and the RSFS script and Euler fraktur share one virtual font family. Replaced most fallback shapes: CM Unicode provides the bold typewriter Greek and the upright variant Greek letters and the upright serif theta for pdfLaTeX, the New Computer Modern blackboard of mathalpha replaces the AMS and DSSerif blackboard, and the remaining shapes are slanted, unless the new synthetic option is false. Added \cs{ell} and \cs{hbar} to the alphabets, and bold dotless letters for the Unicode engines. Corrected the text extracted from the sans-serif math italic Greek and other glyphs with misleading names. Added the proportional option, on by default, which sets the typewriter Latin letters and digits in the Latin Modern proportional typewriter. URLs typeset by the url package keep the letters and digits of their text font. With symbols=true and ams \cs{mathcal} is composable and uses the calligraphic capitals of the serif and sans-serif math fonts, and for pdfLaTeX the \CM calligraphic capitals in the serif and the Zapf Chancery capitals in the sans-serif family. Made \cs{mathscr} composable, with Euler script as upright \cs{mathcal}. Made the alphabets and Greek letters work in hyperref bookmarks. Added the vector accents \cs{dashedvec} and \cs{dottedvec} with a dashed and a dotted shaft, derived from the glyphs of \cs{vec} and collected in the TrueType font hepaccent. Defined the alphabet commands and the Greek letter macros already when the package is loaded and again at the beginning of the document, so that copies made with \cs{let} in the preamble or with \cs{AtBeginDocument} no longer select wrong glyphs, and kept Greek letter macros redefined in the preamble. Without the generated fonts the package keeps the standard math alphabets and the vector accents fall back to \cs{vec}, and fonts generated for another version of the package are an error.}
 %
 % \ifshort
 %<*documentation>
@@ -137,6 +136,8 @@ The blackboard alphabet of the default "symbols" option is described below.
 The "\mathbf"\marg{math} command adds bold and "\mathup"\marg{math} adds upright, "\mathit"\marg{math} returns to italic.
 The "\mathrm" command is a synonym of "\mathup" and therefore preserves the family and the weight.
 This deliberately differs from the usual meaning of resetting to medium upright serif and makes "\mathrm" composable.
+The commands are defined when the package is loaded and again at the beginning of the document, so copies such as "\let\mat\mathbf" work both in the preamble and in "\AtBeginDocument".
+The same holds for the Greek letter macros, and redefinitions such as "\renewcommand{\epsilon}{\varepsilon}" in the preamble are kept.
 
 \DescribeMacro{\mathserif}
 \DescribeMacro{\mathsf}
@@ -340,8 +341,17 @@ python3 hep-math-font-vf.py
 The script reads the glyph table from \file{hep-math-font.sty} in the current directory and writes the \TFM and \VF files, the accent font, the encoding files \file{hep-math-font.enc} and \file{hepaccent.enc} and the two map files there.
 It requires the fontTools library, the \software{kpsewhich}, \software{pltotf} and \software{vptovf} programs and the fonts listed above.
 
+The script also writes the file \file{hep-math-font-vf.def}, which records the version of the package file the fonts were generated from.
 For a local installation all generated files have to be placed next to the document.
-In a TDS tree the \TFM files belong into \file{fonts/tfm/public/hep-math-font}, the \VF files into \file{fonts/vf/public/hep-math-font}, the accent font into \file{fonts/truetype/public/hep-math-font}, the encoding files into \file{fonts/enc/dvips/hep-math-font} and the map files into \file{fonts/map/pdftex/hep-math-font}.
+In a TDS tree \file{hep-math-font-vf.def} belongs next to the package file into \file{tex/latex/hep-math-font}, the \TFM files into \file{fonts/tfm/public/hep-math-font}, the \VF files into \file{fonts/vf/public/hep-math-font}, the accent font into \file{fonts/truetype/public/hep-math-font}, the encoding files into \file{fonts/enc/dvips/hep-math-font} and the map files into \file{fonts/map/pdftex/hep-math-font}.
+
+Without the generated fonts the package still works, with fewer features.
+If \hologo{pdfLaTeX} does not find \file{hep-math-font-vf.def}, the package warns and keeps the standard math alphabets, which use the \LM fonts of the main family.
+They are not composable, the combined commands select the nearest standard alphabet, the decorative alphabets are the \AMS blackboard, Euler fraktur and RSFS, and the Greek letters are not affected by the alphabet commands.
+If the file belongs to another version of the package file, the virtual fonts may contain other glyphs than the package expects.
+This is an error, after which the package also keeps the standard math alphabets.
+If the accent font is missing, the vector accents fall back to "\vec" with a warning.
+The math fonts, operators and symbols of all engines are not affected.
 
 % \ifshort
 \printbibliography
@@ -423,6 +433,19 @@ In a TDS tree the \TFM files belong into \file{fonts/tfm/public/hep-math-font}, 
     {Use~symbols=true,~false,~ams,~or~minion.}
 }
 %    \end{macrocode}
+%
+% \begin{macro}{\ifhepmathfont@vf}
+% \begin{macro}{\ifhepmathfont@accents}
+% The composable alphabets of \hologo{pdfTeX} need the generated virtual fonts and the vector accents of all engines the generated accent font.
+% Both flags are cleared below if these fonts are not available, see \cref{sec:fallback}.
+%    \begin{macrocode}
+\newif\ifhepmathfont@vf
+\hepmathfont@vftrue
+\newif\ifhepmathfont@accents
+\hepmathfont@accentstrue
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
 %
 % \subsection{State}
 %
@@ -851,23 +874,40 @@ In a TDS tree the \TFM files belong into \file{fonts/tfm/public/hep-math-font}, 
 % Like the script families it is allocated past the limit of the \LaTeX\ kernel at the beginning of the document.
 % \software{luaotfload} only reads the accent attachments of its math table with the math script, which is passed directly, because \software{fontspec} only recognises scripts with features.
 % Each accent selects the shape matching the math font of the math version, whose vector accent is used by "\vec", and is fixed in size like "\vec".
+% Without the accent font the accents fall back to "\vec" with a warning.
+% The name of the font is a macro, so that the tests can simulate a missing font.
 %    \begin{macrocode}
-  \newfontfamily\hep@accentmath{hepaccent.ttf}[
-    NFSSFamily=hep-accent, RawFeature={script=math}]
-  \AddToHook{begindocument}{
-    \new@mathgroup \symhepaccent
-    \new@symbolfont \symhepaccent {TU}{hep-accent}{m}{n}
-  }
-  \cs_new:Npn \__hep_math_accent_shape: {
-    \str_if_eq:VnTF \math@version {bold} {2}
-      {\str_if_eq:VnTF \g__hep_main_family_tl {sans} {1}{0}}
-  }
-  \cs_new_protected:Npn \hep_math_accent:nnn #1#2#3 {
-    \cs_new_protected:cpn {#1} {
-      \Umathaccent fixed~0~\symhepaccent
-        \int_eval:n {#3+\__hep_math_accent_shape:}\scan_stop:
+  \providecommand*\hepmathfont@accentfont{hepaccent.ttf}
+  \IfFontExistsTF{\hepmathfont@accentfont}{}{
+    \hepmathfont@accentsfalse
+    \PackageWarningNoLine{hep-math-font}{
+      The~accent~font~\hepmathfont@accentfont\space
+      was~not~found.\MessageBreak
+      The~vector~accents~fall~back~to~\protect\vec.\MessageBreak
+      Install~the~fonts~of~hep-math-font
     }
   }
+  \ifhepmathfont@accents
+    \newfontfamily\hep@accentmath{\hepmathfont@accentfont}[
+      NFSSFamily=hep-accent, RawFeature={script=math}]
+    \AddToHook{begindocument}{
+      \new@mathgroup \symhepaccent
+      \new@symbolfont \symhepaccent {TU}{hep-accent}{m}{n}
+    }
+    \cs_new:Npn \__hep_math_accent_shape: {
+      \str_if_eq:VnTF \math@version {bold} {2}
+        {\str_if_eq:VnTF \g__hep_main_family_tl {sans} {1}{0}}
+    }
+    \cs_new_protected:Npn \hep_math_accent:nnn #1#2#3 {
+      \cs_new_protected:cpn {#1} {
+        \Umathaccent fixed~0~\symhepaccent
+          \int_eval:n {#3+\__hep_math_accent_shape:}\scan_stop:
+      }
+    }
+  \else
+    \cs_new_protected:Npn \hep_math_accent:nnn #1#2#3
+      {\cs_new_protected:cpn {#1} {\vec}}
+  \fi
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -914,6 +954,111 @@ In a TDS tree the \TFM files belong into \file{fonts/tfm/public/hep-math-font}, 
       {\RequirePackage{MnSymbol}}
       {\RequirePackage{amssymb}}
   }
+%    \end{macrocode}
+%
+% \subsubsection{Generated fonts}
+% \label{sec:fallback}
+%
+% \begin{macro}{\hepmathfont@vfversion}
+% The generator script writes the file \file{hep-math-font-vf.def} next to the virtual fonts, which defines "\hepmathfont@vfversion" as the date, version and description of the package file whose glyph tables the fonts were generated from.
+% The file is installed with the package.
+% If it is missing, so are the fonts presumably, and the package falls back to the standard math alphabets with a warning.
+% If its version differs from that of this package file, the fonts may have other slots than the glyph table and would select wrong glyphs.
+% This is an error, after which the package also falls back to the standard math alphabets.
+% The version contains spaces, so the file is read with the standard category codes.
+% An empty "\hepmathfont@vfversion" defined before the package is loaded counts as missing fonts.
+%    \begin{macrocode}
+  \ExplSyntaxOff
+  \@ifundefined{hepmathfont@vfversion}
+    {\InputIfFileExists{hep-math-font-vf.def}{}{}}{}
+  \@ifundefined{hepmathfont@vfversion}{\def\hepmathfont@vfversion{}}{}
+  \ExplSyntaxOn
+  \tl_if_empty:NTF \hepmathfont@vfversion {
+    \hepmathfont@vffalse
+    \PackageWarningNoLine{hep-math-font}{
+      The~virtual~fonts~for~pdfLaTeX~were~not~found.\MessageBreak
+      The~math~alphabets~are~not~composable~and~the\MessageBreak
+      vector~accents~fall~back~to~\protect\vec.\MessageBreak
+      Install~the~fonts~of~hep-math-font
+    }
+  }{
+    \str_if_eq:eeF {\hepmathfont@vfversion}
+      {\use:c {ver@hep-math-font.sty}} {
+      \hepmathfont@vffalse
+      \PackageError{hep-math-font}{
+        The~virtual~fonts~were~generated~for~another\MessageBreak
+        version~of~hep-math-font.sty
+      }{
+        Generate~them~again~with~hep-math-font-vf.py~or~install~the
+        ~package~again.~The~document~uses~the~standard~math
+        ~alphabets~instead.
+      }
+    }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\__hep_math_tounicode:nn}
+% \begin{macro}{\__hep_math_tounicode:w}
+% Some source fonts name their glyphs after the characters of a text encoding, so that the text extracted from the document would be wrong.
+% Map the glyphs "#2", given as \meta{glyph}"="\meta{hexadecimal character} pairs, of the font "#1" to the correct Unicode characters, which only affects this font.
+%    \begin{macrocode}
+  \cs_new_protected:Npn \__hep_math_tounicode:nn #1#2 {
+    \clist_map_inline:nn {#2}
+      {\__hep_math_tounicode:w #1 / ##1 \q_stop}
+  }
+  \cs_new_protected:Npn \__hep_math_tounicode:w #1 / #2 = #3 \q_stop
+    {\pdfglyphtounicode {tfm:#1/#2}{#3}}
+  \cs_generate_variant:Nn \__hep_math_tounicode:nn {nV}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\c__hep_math_oml_clist}
+% The \CM sans-serif math italic fonts and their slanted copies carry the glyph names of the T1 encoding in the slots of the OML encoding.
+% The sans-serif \AMS blackboard does the same, the \AMS kappa symbol is named as the ordinary kappa, and the \LM math italic Delta and mu are named as the increment and micro signs.
+%    \begin{macrocode}
+  \clist_const:Nn \c__hep_math_oml_clist {
+    grave=0393, acute=0394, circumflex=0398, tilde=039B,
+    dieresis=039E, hungarumlaut=03A0, ring=03A3, caron=03A5,
+    breve=03A6, macron=03A8, dotaccent=03A9, cedilla=03B1,
+    ogonek=03B2, quotesinglbase=03B3, guilsinglleft=03B4,
+    guilsinglright=03F5, quotedblleft=03B6, quotedblright=03B7,
+    quotedblbase=03B8, guillemotleft=03B9, guillemotright=03BA,
+    endash=03BB, emdash=03BC, cwm=03BD, perthousand=03BE,
+    dotlessi=03C0, dotlessj=03C1, ff=03C3, fi=03C4, fl=03C5,
+    ffi=03D5, ffl=03C7, space=03C8, exclam=03C9, quotedbl=03B5,
+    numbersign=03D1, dollar=03D6, percent=03F1, ampersand=03C2,
+    quoteright=03C6, parenleft=21BC, parenright=21BD,
+    asterisk=21C0, plus=21C1, period=25B9, slash=25C3,
+    colon=002E, semicolon=002C, equal=002F, question=22C6,
+    at=2202, bracketleft=266D, backslash=266E, bracketright=266F,
+    asciicircum=2323, underscore=2322, quoteleft=2113,
+    braceleft=0131, bar=0237, braceright=2118
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\__hep_math_tounicode_sizes:n}
+% Correct the glyph names of these fonts at all sizes, where "#1" is empty for the installed fonts and "hepslant-" for the slanted copies.
+%    \begin{macrocode}
+  \cs_new_protected:Npn \__hep_math_tounicode_sizes:n #1 {
+    \int_step_inline:nnn {5}{10} {
+      \__hep_math_tounicode:nV {#1cmssmi##1} \c__hep_math_oml_clist
+      \__hep_math_tounicode:nV {#1cmssmib##1} \c__hep_math_oml_clist
+      \__hep_math_tounicode:nn {#1ssmsbm##1}{braceleft=03F0}
+      \__hep_math_tounicode:nn {#1msbm##1}{kappa=03F0}
+      \__hep_math_tounicode:nn {#1lmmi##1}{Delta=0394, mu=03BC}
+      \__hep_math_tounicode:nn {#1lmmib##1}{Delta=0394, mu=03BC}
+    }
+  }
+  \__hep_math_tounicode_sizes:n {}
+%    \end{macrocode}
+% \end{macro}
+%
+% The rest of the \hologo{pdfTeX} setup uses the virtual fonts.
+%    \begin{macrocode}
+  \ifhepmathfont@vf
 %    \end{macrocode}
 %
 % \subsubsection{Decorative alphabets}
@@ -1079,64 +1224,10 @@ In a TDS tree the \TFM files belong into \file{fonts/tfm/public/hep-math-font}, 
   \pdfmapfile{=hep-math-font\ifhepmathfont@synthetic\else-fallback\fi.map}
 %    \end{macrocode}
 %
-% \begin{macro}{\__hep_math_tounicode:nn}
-% \begin{macro}{\__hep_math_tounicode:w}
-% Some source fonts name their glyphs after the characters of a text encoding, so that the text extracted from the document would be wrong.
-% Map the glyphs "#2", given as \meta{glyph}"="\meta{hexadecimal character} pairs, of the font "#1" to the correct Unicode characters, which only affects this font.
+% Correct the glyph names of the slanted copies of these fonts as well.
 %    \begin{macrocode}
-  \cs_new_protected:Npn \__hep_math_tounicode:nn #1#2 {
-    \clist_map_inline:nn {#2}
-      {\__hep_math_tounicode:w #1 / ##1 \q_stop}
-  }
-  \cs_new_protected:Npn \__hep_math_tounicode:w #1 / #2 = #3 \q_stop
-    {\pdfglyphtounicode {tfm:#1/#2}{#3}}
-  \cs_generate_variant:Nn \__hep_math_tounicode:nn {nV}
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-%
-% \begin{macro}{\c__hep_math_oml_clist}
-% The \CM sans-serif math italic fonts and their slanted copies carry the glyph names of the T1 encoding in the slots of the OML encoding.
-% The sans-serif \AMS blackboard does the same, the \AMS kappa symbol is named as the ordinary kappa, and the \LM math italic Delta and mu are named as the increment and micro signs.
-%    \begin{macrocode}
-  \clist_const:Nn \c__hep_math_oml_clist {
-    grave=0393, acute=0394, circumflex=0398, tilde=039B,
-    dieresis=039E, hungarumlaut=03A0, ring=03A3, caron=03A5,
-    breve=03A6, macron=03A8, dotaccent=03A9, cedilla=03B1,
-    ogonek=03B2, quotesinglbase=03B3, guilsinglleft=03B4,
-    guilsinglright=03F5, quotedblleft=03B6, quotedblright=03B7,
-    quotedblbase=03B8, guillemotleft=03B9, guillemotright=03BA,
-    endash=03BB, emdash=03BC, cwm=03BD, perthousand=03BE,
-    dotlessi=03C0, dotlessj=03C1, ff=03C3, fi=03C4, fl=03C5,
-    ffi=03D5, ffl=03C7, space=03C8, exclam=03C9, quotedbl=03B5,
-    numbersign=03D1, dollar=03D6, percent=03F1, ampersand=03C2,
-    quoteright=03C6, parenleft=21BC, parenright=21BD,
-    asterisk=21C0, plus=21C1, period=25B9, slash=25C3,
-    colon=002E, semicolon=002C, equal=002F, question=22C6,
-    at=2202, bracketleft=266D, backslash=266E, bracketright=266F,
-    asciicircum=2323, underscore=2322, quoteleft=2113,
-    braceleft=0131, bar=0237, braceright=2118
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\__hep_math_tounicode_sizes:n}
-% Correct the glyph names of these fonts at all sizes, where "#1" is empty for the installed fonts and "hepslant-" for the slanted copies.
-%    \begin{macrocode}
-  \cs_new_protected:Npn \__hep_math_tounicode_sizes:n #1 {
-    \int_step_inline:nnn {5}{10} {
-      \__hep_math_tounicode:nV {#1cmssmi##1} \c__hep_math_oml_clist
-      \__hep_math_tounicode:nV {#1cmssmib##1} \c__hep_math_oml_clist
-      \__hep_math_tounicode:nn {#1ssmsbm##1}{braceleft=03F0}
-      \__hep_math_tounicode:nn {#1msbm##1}{kappa=03F0}
-      \__hep_math_tounicode:nn {#1lmmi##1}{Delta=0394, mu=03BC}
-      \__hep_math_tounicode:nn {#1lmmib##1}{Delta=0394, mu=03BC}
-    }
-  }
-  \__hep_math_tounicode_sizes:n {}
   \__hep_math_tounicode_sizes:n {hepslant-}
 %    \end{macrocode}
-% \end{macro}
 %
 % The CM Unicode fonts distinguish the Greek Delta, Omega and mu from the increment, ohm and micro signs by a suffix of the glyph name, which \hologo{pdfTeX} drops.
 %    \begin{macrocode}
@@ -1323,9 +1414,65 @@ In a TDS tree the \TFM files belong into \file{fonts/tfm/public/hep-math-font}, 
         {#2}
     }
   }
-  \ExplSyntaxOff
 %    \end{macrocode}
 % \end{macro}
+%
+% \subsubsection{Fallback}
+%
+% Without the virtual fonts the glyph table registers nothing and the vector accents are the ordinary one.
+%    \begin{macrocode}
+  \else
+    \cs_new_protected:Npn \hep_math_glyph:nnnnnnn #1#2#3#4#5#6#7 {}
+    \cs_new_protected:Npn \hep_math_bb_glyph:nn #1#2 {}
+    \cs_new_protected:Npn \hep_math_accent:nnn #1#2#3
+      {\cs_new_protected:cpn {#1} {\vec}}
+%    \end{macrocode}
+% The standard math alphabets use the \LM fonts of the main family.
+% Upright is the operator font, the serif family keeps the italic shape in sans-serif documents, and the combined commands select the nearest standard alphabet.
+%    \begin{macrocode}
+    \tl_set:Ne \l_tmpa_tl
+      {\str_if_eq:VnTF \g__hep_main_family_tl {sans} {lmss}{lmr}}
+    \cs_new_protected:Npn \__hep_math_standard:NNnnn #1#2#3#4#5 {
+      \use:e {
+        \exp_not:N \DeclareMathAlphabet \exp_not:N #1
+          {OT1}{#2}{#3}{#4}
+        \exp_not:N \SetMathAlphabet \exp_not:N #1
+          {bold}{OT1}{#2}{#5}{#4}
+      }
+    }
+    \__hep_math_standard:NNnnn \mathbf \l_tmpa_tl {bx}{n}{bx}
+    \__hep_math_standard:NNnnn \mathit \l_tmpa_tl {m}{it}{bx}
+    \tl_set:Nn \l_tmpb_tl {lmss}
+    \__hep_math_standard:NNnnn \mathsf \l_tmpb_tl {m}{n}{bx}
+    \__hep_math_standard:NNnnn \mathbfsf \l_tmpb_tl {bx}{n}{bx}
+    \tl_set:Nn \l_tmpb_tl {lmtt}
+    \__hep_math_standard:NNnnn \mathtt \l_tmpb_tl {m}{n}{b}
+    \__hep_math_standard:NNnnn \mathbftt \l_tmpb_tl {b}{n}{b}
+    \str_if_eq:VnTF \g__hep_main_family_tl {sans} {
+      \tl_set:Nn \l_tmpb_tl {lmr}
+      \__hep_math_standard:NNnnn \mathserif \l_tmpb_tl {m}{it}{bx}
+    }{\cs_gset_eq:NN \mathserif \mathnormal}
+    \cs_gset_eq:NN \mathup \mathrm
+    \cs_gset_eq:NN \mathbfrm \mathbf
+    \cs_gset_eq:NN \mathbfup \mathbf
+    \cs_gset_eq:NN \mathsfup \mathsf
+    \cs_gset_eq:NN \mathsftext \mathsf
+    \cs_gset_eq:NN \mathbfsfup \mathbfsf
+    \cs_gset_eq:NN \mathttup \mathtt
+    \cs_gset_eq:NN \mathbfttup \mathbftt
+%    \end{macrocode}
+% The decorative alphabets are the \AMS blackboard and Euler fraktur and the RSFS script, unless the symbol fonts already provide them.
+%    \begin{macrocode}
+    \str_if_eq:VnF \hepmathfont@symbols {false} {
+      \cs_if_exist:NF \mathbb {\DeclareMathAlphabet \mathbb {U}{msb}{m}{n}}
+      \cs_if_exist:NF \mathfrak
+        {\DeclareMathAlphabet \mathfrak {U}{euf}{m}{n}}
+      \cs_if_exist:NF \mathscr
+        {\DeclareMathAlphabet \mathscr {U}{rsfs}{m}{n}}
+    }
+  \fi
+  \ExplSyntaxOff
+%    \end{macrocode}
 %
 % \begin{macro}{\bm}
 % Load the \software{bm} package \cite{bm} without reserving additional math families.
@@ -1347,12 +1494,17 @@ In a TDS tree the \TFM files belong into \file{fonts/tfm/public/hep-math-font}, 
 %
 % \begin{macro}{\hep_math_greek_record:nnn}
 % \begin{macro}{\g__hep_greek_pdfstring_tl}
+% \begin{macro}{\g__hep_greek_clist}
 % A Greek letter macro "#2" selects the glyph in slot "#1" in math and the text command "\text#3" in text.
 % The math variants such as "\varepsilon" typeset the ordinary text letters.
 % The protected macros are not expanded in bookmarks, therefore collect the code that lets them stand for the text commands there, see \cref{sec:pdfstring}.
+% Macros that have been redefined since are left to their new meaning.
+% Also collect the names of the macros.
 %    \begin{macrocode}
 \tl_new:N \g__hep_greek_pdfstring_tl
+\clist_new:N \g__hep_greek_clist
 \cs_new_protected:Npn \hep_math_greek_record:nnn #1#2#3 {
+  \clist_gput_right:Nn \g__hep_greek_clist {#2}
   \tl_gput_right:Nn \g__hep_greek_setup_tl {
     \tl_if_empty:nTF {#3}
       {\cs_gset_protected:cpn {#2}{\use:c {hep_math_char_#1:}}}
@@ -1362,11 +1514,14 @@ In a TDS tree the \TFM files belong into \file{fonts/tfm/public/hep-math-font}, 
       }
   }
   \tl_if_empty:nF {#3} {
-    \tl_gput_right:Nn \g__hep_greek_pdfstring_tl
-      {\cs_set_eq:cc {#2}{text#3}}
+    \tl_gput_right:Nn \g__hep_greek_pdfstring_tl {
+      \cs_if_eq:ccT {#2}{__hep_greek_#2:}
+        {\cs_set_eq:cc {#2}{text#3}}
+    }
   }
 }
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 %
@@ -1474,6 +1629,27 @@ In a TDS tree the \TFM files belong into \file{fonts/tfm/public/hep-math-font}, 
 \__hep_math_named:nnnnn {ell/}{2113}{2113}{2113}{2113}
 \__hep_math_named:nnnnn {hbar/}{0127}{210F}{0127}{210F}
 %    \end{macrocode}
+%
+% \begin{macro}{\g__hep_greek_user_tl}
+% Define the Greek letter macros already now, so that copies such as "\let\vareps\varepsilon" in the preamble select the glyphs of this package, and remember these definitions.
+% The macros are defined again at the beginning of the document, after \software{unicode-math} and \software{alphabeta} have defined their own.
+% A letter that the preamble or a package loaded later has redefined, \eg with "\renewcommand{\epsilon}{\varepsilon}", keeps its new meaning, so collect the code that restores it.
+%    \begin{macrocode}
+\tl_use:N \g__hep_greek_setup_tl
+\clist_map_inline:Nn \g__hep_greek_clist
+  {\cs_gset_eq:cc {__hep_greek_#1:}{#1}}
+\tl_new:N \g__hep_greek_user_tl
+\AddToHook{begindocument/before}{
+  \clist_map_inline:Nn \g__hep_greek_clist {
+    \cs_if_eq:ccF {#1}{__hep_greek_#1:} {
+      \cs_gset_eq:cc {__hep_greek_user_#1:}{#1}
+      \tl_gput_right:Nn \g__hep_greek_user_tl
+        {\cs_gset_eq:cc {#1}{__hep_greek_user_#1:}}
+    }
+  }
+}
+%    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\__hep_math_accent:nnn}
 % Define the accent "#1" whose shaft has the pattern "#2" in the next slot of the virtual fonts.
@@ -1735,54 +1911,10 @@ In a TDS tree the \TFM files belong into \file{fonts/tfm/public/hep-math-font}, 
 %
 % \subsection{User commands}
 %
-% Define the user commands at the end of the beginning of the document, after \software{unicode-math} has defined its own commands.
-% Determine the main family again and define the Greek letter macros.
-% The math fonts were selected for the main family detected when the package was loaded, so warn if it has changed since.
-%    \begin{macrocode}
-\AddToHook{begindocument/end}{
-  \tl_set_eq:NN \l_tmpa_tl \g__hep_main_family_tl
-  \hep_math_detect_family:
-  \tl_if_eq:NNF \l_tmpa_tl \g__hep_main_family_tl {
-    \PackageWarningNoLine{hep-math-font}{
-      The~main~family~changed~from~\l_tmpa_tl\space
-      to~\g__hep_main_family_tl\space
-      after~loading~the~package.\MessageBreak
-      Load~hep-font~and~set~\protect\familydefault\space
-      before~hep-math-font
-    }
-  }
-  \tl_set_eq:NN \l__hep_text_family_tl \g__hep_main_family_tl
-  \tl_use:N \g__hep_greek_setup_tl
-%    \end{macrocode}
-% \begin{macro}{\mathcal}
-% \begin{macro}{\mathscr}
-% \begin{macro}{\mathbb}
-% \begin{macro}{\mathfrak}
-% The decorative alphabets restore the original math codes of the input characters within their argument.
-% For "symbols=true" the blackboard alphabet and for "symbols=true" and "ams" the calligraphic and script alphabets are composable instead.
-%    \begin{macrocode}
-  \clist_map_inline:nn {mathcal, mathscr, mathbb, mathfrak} {
-    \cs_if_exist:cT {#1} {
-      \cs_gset_eq:cc {hep_native_#1:}{#1}
-      \cs_gset_protected:cpn {#1} ##1 {
-        \group_begin:
-        \__hep_math_native:
-        \use:c {hep_native_#1:}{##1}
-        \group_end:
-      }
-    }
-  }
-  \str_if_eq:VnT \hepmathfont@symbols {true}
-    {\cs_gset_protected:Npn \mathbb #1 {\hep_math_modify:nn {bb}{#1}}}
-  \exp_args:NnV \clist_if_in:nnT {true, ams} \hepmathfont@symbols {
-    \cs_gset_protected:Npn \mathcal #1 {\hep_math_modify:nn {cal}{#1}}
-    \cs_gset_protected:Npn \mathscr #1 {\hep_math_modify:nn {scr}{#1}}
-  }
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
+% \begin{macro}{\__hep_math_commands:}
+% Collect the definitions of the alphabet commands in a function.
+% It is used when the package is loaded, so that copies made with "\let" in the preamble select the composable commands.
+% \software{unicode-math} defines its own commands at the beginning of the document, therefore the function is used again afterwards, see below.
 % \begin{macro}{\mathbf}
 % \begin{macro}{\mathup}
 % \begin{macro}{\mathrm}
@@ -1793,15 +1925,17 @@ In a TDS tree the \TFM files belong into \file{fonts/tfm/public/hep-math-font}, 
 % \begin{macro}{\mathserif}
 % Define the composable commands.
 %    \begin{macrocode}
-  \cs_gset_protected:Npn \mathbf #1 {\hep_math_modify:nn {bold}{#1}}
-  \cs_gset_protected:Npn \mathup #1 {\hep_math_modify:nn {up}{#1}}
+\cs_new_protected:Npn \__hep_math_commands: {
+  \cs_gset_protected:Npn \mathbf ##1 {\hep_math_modify:nn {bold}{##1}}
+  \cs_gset_protected:Npn \mathup ##1 {\hep_math_modify:nn {up}{##1}}
   \cs_gset_eq:NN \mathrm \mathup
-  \cs_gset_protected:Npn \mathit #1 {\hep_math_modify:nn {it}{#1}}
-  \cs_gset_protected:Npn \mathnormal #1
-    {\group_begin:\hep_math_initialize: #1\group_end:}
-  \cs_gset_protected:Npn \mathsf #1 {\hep_math_modify:nn {sf}{#1}}
-  \cs_gset_protected:Npn \mathtt #1 {\hep_math_modify:nn {mono}{#1}}
-  \cs_gset_protected:Npn \mathserif #1 {\hep_math_modify:nn {serif}{#1}}
+  \cs_gset_protected:Npn \mathit ##1 {\hep_math_modify:nn {it}{##1}}
+  \cs_gset_protected:Npn \mathnormal ##1
+    {\group_begin:\hep_math_initialize: ##1\group_end:}
+  \cs_gset_protected:Npn \mathsf ##1 {\hep_math_modify:nn {sf}{##1}}
+  \cs_gset_protected:Npn \mathtt ##1 {\hep_math_modify:nn {mono}{##1}}
+  \cs_gset_protected:Npn \mathserif ##1
+    {\hep_math_modify:nn {serif}{##1}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1822,18 +1956,23 @@ In a TDS tree the \TFM files belong into \file{fonts/tfm/public/hep-math-font}, 
 % \begin{macro}{\mathbfttup}
 % Define the combined commands.
 %    \begin{macrocode}
-  \cs_gset_protected:Npn \mathbfrm #1 {\hep_math_modify:nn {bold,up}{#1}}
+  \cs_gset_protected:Npn \mathbfrm ##1
+    {\hep_math_modify:nn {bold,up}{##1}}
   \cs_gset_eq:NN \mathbfup \mathbfrm
-  \cs_gset_protected:Npn \mathbfsf #1 {\hep_math_modify:nn {bold,sf}{#1}}
-  \cs_gset_protected:Npn \mathsfup #1 {\hep_math_modify:nn {sf,up}{#1}}
+  \cs_gset_protected:Npn \mathbfsf ##1
+    {\hep_math_modify:nn {bold,sf}{##1}}
+  \cs_gset_protected:Npn \mathsfup ##1
+    {\hep_math_modify:nn {sf,up}{##1}}
   \cs_gset_eq:NN \mathsftext \mathsfup
-  \cs_gset_protected:Npn \mathbfsfup #1
-    {\hep_math_modify:nn {bold,sf,up}{#1}}
-  \cs_gset_protected:Npn \mathbftt #1
-    {\hep_math_modify:nn {bold,mono}{#1}}
-  \cs_gset_protected:Npn \mathttup #1 {\hep_math_modify:nn {mono,up}{#1}}
-  \cs_gset_protected:Npn \mathbfttup #1
-    {\hep_math_modify:nn {bold,mono,up}{#1}}
+  \cs_gset_protected:Npn \mathbfsfup ##1
+    {\hep_math_modify:nn {bold,sf,up}{##1}}
+  \cs_gset_protected:Npn \mathbftt ##1
+    {\hep_math_modify:nn {bold,mono}{##1}}
+  \cs_gset_protected:Npn \mathttup ##1
+    {\hep_math_modify:nn {mono,up}{##1}}
+  \cs_gset_protected:Npn \mathbfttup ##1
+    {\hep_math_modify:nn {bold,mono,up}{##1}}
+}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1844,13 +1983,95 @@ In a TDS tree the \TFM files belong into \file{fonts/tfm/public/hep-math-font}, 
 % \end{macro}
 % \end{macro}
 % \end{macro}
+% \end{macro}
+% Define the commands now.
+% Without the virtual fonts of \hologo{pdfTeX} the standard commands defined above are kept.
+%    \begin{macrocode}
+\ifhepmathfont@vf
+  \__hep_math_commands:
+\else
+  \cs_gset_eq:NN \__hep_math_commands: \prg_do_nothing:
+\fi
+%    \end{macrocode}
+%
+% Define the decorative alphabets, the Greek letter macros and again the alphabet commands at the beginning of the document, after \software{unicode-math} has defined its own commands.
+% The code of this package for the hook "begindocument" runs before the code of packages loaded later and of the preamble, \eg the code added with "\AtBeginDocument".
+% Copies of the commands made there, such as "\let\mat\mathbf", therefore also select the composable commands.
+% With the kernel alphabet commands they would select a font of the \LaTeX\ kernel with the math codes of this package and therefore wrong glyphs.
+% The \software{alphabeta} package also defines the Greek letter macros at the beginning of the document, so the code of this package follows its code and that of \software{unicode-math}.
+%    \begin{macrocode}
+\DeclareHookRule{begindocument}{hep-math-font}{after}{unicode-math}
+\DeclareHookRule{begindocument}{hep-math-font}{after}{alphabeta}
+\AddToHook{begindocument}{
+  \tl_use:N \g__hep_greek_setup_tl
+  \tl_use:N \g__hep_greek_user_tl
+%    \end{macrocode}
+% \begin{macro}{\mathcal}
+% \begin{macro}{\mathscr}
+% \begin{macro}{\mathbb}
+% \begin{macro}{\mathfrak}
+% The decorative alphabets restore the original math codes of the input characters within their argument.
+% For "symbols=true" the blackboard alphabet and for "symbols=true" and "ams" the calligraphic and script alphabets are composable instead.
+% Without the virtual fonts of \hologo{pdfTeX} they are kept.
+%    \begin{macrocode}
+  \ifhepmathfont@vf
+    \clist_map_inline:nn {mathcal, mathscr, mathbb, mathfrak} {
+      \cs_if_exist:cT {#1} {
+        \cs_gset_eq:cc {hep_native_#1:}{#1}
+        \cs_gset_protected:cpn {#1} ##1 {
+          \group_begin:
+          \__hep_math_native:
+          \use:c {hep_native_#1:}{##1}
+          \group_end:
+        }
+      }
+    }
+    \str_if_eq:VnT \hepmathfont@symbols {true}
+      {\cs_gset_protected:Npn \mathbb #1 {\hep_math_modify:nn {bb}{#1}}}
+    \exp_args:NnV \clist_if_in:nnT {true, ams} \hepmathfont@symbols {
+      \cs_gset_protected:Npn \mathcal #1 {\hep_math_modify:nn {cal}{#1}}
+      \cs_gset_protected:Npn \mathscr #1 {\hep_math_modify:nn {scr}{#1}}
+    }
+  \fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% Define the alphabet commands.
+%    \begin{macrocode}
+  \__hep_math_commands:
+}
+%    \end{macrocode}
+%
+% Determine the main family again at the end of the beginning of the document.
+% The math fonts were selected for the main family detected when the package was loaded, so warn if it has changed since.
+% The Greek letter macros are not defined again here, so that redefinitions with "\AtBeginDocument" are kept; \software{hep-font} does not wrap them when this package is loaded.
+%    \begin{macrocode}
+\AddToHook{begindocument/end}{
+  \tl_set_eq:NN \l_tmpa_tl \g__hep_main_family_tl
+  \hep_math_detect_family:
+  \tl_if_eq:NNF \l_tmpa_tl \g__hep_main_family_tl {
+    \PackageWarningNoLine{hep-math-font}{
+      The~main~family~changed~from~\l_tmpa_tl\space
+      to~\g__hep_main_family_tl\space
+      after~loading~the~package.\MessageBreak
+      Load~hep-font~and~set~\protect\familydefault\space
+      before~hep-math-font
+    }
+  }
+  \tl_set_eq:NN \l__hep_text_family_tl \g__hep_main_family_tl
+%    \end{macrocode}
 % Initialise every inline and display formula.
 % Also initialise the document itself, so that the state is defined when a document replaces "\everymath" or uses an alphabet command outside math.
+% Without the virtual fonts of \hologo{pdfTeX} the formulas keep their math codes.
 %    \begin{macrocode}
-  \everymath\expandafter{\the\everymath\hep_math_initialize:}
-  \everydisplay\expandafter{\the\everydisplay\hep_math_initialize:}
-  \bool_gset_true:N \g__hep_cache_bool
-  \hep_math_initialize:
+  \ifhepmathfont@vf
+    \everymath\expandafter{\the\everymath\hep_math_initialize:}
+    \everydisplay\expandafter{\the\everydisplay\hep_math_initialize:}
+    \bool_gset_true:N \g__hep_cache_bool
+    \hep_math_initialize:
+  \fi
 }
 %    \end{macrocode}
 %
@@ -1932,15 +2153,21 @@ In a TDS tree the \TFM files belong into \file{fonts/tfm/public/hep-math-font}, 
 %    \end{macrocode}
 %
 % \begin{macro}{\hep_math_pdfstring_variants:}
+% \begin{macro}{\__hep_math_pdfstring_variant:nnn}
 % The Unicode strings distinguish the epsilon and phi symbols and the theta symbol from the ordinary letters.
-% Other packages, such as \software{hep-font}, let these macros stand for the ordinary letters, so register the definitions at the beginning of the document after theirs.
+% Other packages let these macros stand for the ordinary letters, so register the definitions at the beginning of the document after theirs.
+% Only letters that stand for the ordinary text letters are changed, so letters that have been redefined keep their new meaning.
 %    \begin{macrocode}
 \cs_new_protected:Npn \hep_math_pdfstring_variants: {
   \legacy_if:nT {Hy@unicode} {
-    \cs_set_eq:NN \epsilon \textepsilonsymbol
-    \cs_set_eq:NN \phi \textphisymbol
-    \cs_set_eq:NN \varTheta \textThetasymbol
+    \__hep_math_pdfstring_variant:nnn {epsilon}{epsilon}{epsilonsymbol}
+    \__hep_math_pdfstring_variant:nnn {phi}{phi}{phisymbol}
+    \__hep_math_pdfstring_variant:nnn {varTheta}{Theta}{Thetasymbol}
   }
+}
+\cs_new_protected:Npn \__hep_math_pdfstring_variant:nnn #1#2#3 {
+  \cs_if_eq:ccT {#1}{text#2}
+    {\cs_set_eq:cc {#1}{text#3}}
 }
 \AddToHook{begindocument/before}{
   \IfPackageLoadedT{hyperref}
@@ -1948,6 +2175,7 @@ In a TDS tree the \TFM files belong into \file{fonts/tfm/public/hep-math-font}, 
 }
 \ExplSyntaxOff
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 %</package>
@@ -1970,7 +2198,8 @@ Run this script in the directory containing hep-math-font.sty.
 It reads the glyph tables from that file and writes the hepalpha,
 hepdecor, hepscript and hepbb TFM and VF files there, with the TFM files
 of their re-encoded and slanted base fonts, the TrueType font of the
-accents, two encodings and two map files.
+accents, two encodings, two map files and hep-math-font-vf.def, which
+records the version of the package file.
 Requires Python 3 with fontTools, kpsewhich, pltotf and vptovf.
 """
 from functools import lru_cache
@@ -3085,6 +3314,7 @@ def blackboard(chars):
 %    \end{macrocode}
 %
 % Read the package, write all fonts, the encoding of the generated base fonts and the two map files.
+% Finally record the date, version and description of the package file, which the package compares with its own, see \cref{sec:fallback}.
 %    \begin{macrocode}
 def main():
     sty = (ROOT / 'hep-math-font.sty').read_text()
@@ -3101,6 +3331,14 @@ def main():
     for suffix, index in (('', 0), ('-fallback', 1)):
         (ROOT / f'{ENCODING}{suffix}.map').write_text(
             ''.join(lines[index] + '\n' for lines in MAPS.values()))
+    version = re.search(r'\\ProvidesPackage\{hep-math-font\}\[([^]]*)\]',
+                        sty)
+    if not version:
+        raise SystemExit('Missing \\ProvidesPackage in hep-math-font.sty')
+    (ROOT / 'hep-math-font-vf.def').write_text(
+        '% Generated by hep-math-font-vf.py: the version of the\n'
+        '% hep-math-font.sty the virtual fonts were generated from.\n'
+        '\\def\\hepmathfont@vfversion{' + version.group(1) + '}\n')
     shutil.rmtree(TEMP)
     print('Built the hepalpha, hepdecor, hepscript and hepbb fonts '
           'and the accent font')

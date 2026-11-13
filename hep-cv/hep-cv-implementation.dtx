@@ -18,12 +18,12 @@
 % \iffalse
 
 %<package|class|bibliography>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
-%<package>\ProvidesPackage{hep-cv}[2026/11/11 v1.6 Curricula vitae, cover letters and publication lists]
-%<bibliography>\ProvidesPackage{hep-cv-bibliography}[2026/11/11 v1.6 Publication lists for curricula vitae]
-%<class>\ProvidesClass{hep-cv}[2026/11/11 v1.6 Curricula vitae, cover letters and publication lists]
-%<documentation>\ProvidesFile{hep-cv-documentation.tex}[2026/11/11 v1.6 HEP-CV documentation]
-%<test-sty>\ProvidesFile{hep-cv-test-sty.tex}[2026/11/11 v1.6 HEP-CV package test]
-%<test-cls>\ProvidesFile{hep-cv-test-cls.tex}[2026/11/11 v1.6 HEP-CV class test]
+%<package>\ProvidesPackage{hep-cv}[2026/11/13 v1.6 Curricula vitae, cover letters and publication lists]
+%<bibliography>\ProvidesPackage{hep-cv-bibliography}[2026/11/13 v1.6 Publication lists for curricula vitae]
+%<class>\ProvidesClass{hep-cv}[2026/11/13 v1.6 Curricula vitae, cover letters and publication lists]
+%<documentation>\ProvidesFile{hep-cv-documentation.tex}[2026/11/13 v1.6 HEP-CV documentation]
+%<test-sty>\ProvidesFile{hep-cv-test-sty.tex}[2026/11/13 v1.6 HEP-CV package test]
+%<test-cls>\ProvidesFile{hep-cv-test-cls.tex}[2026/11/13 v1.6 HEP-CV class test]
 %
 %<*documentation>
 %
@@ -76,13 +76,11 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2019/01/01}{Created the CV package with left-column layout, CV entries, list styling, title, photo, contact, letter, and bibliography helpers.}
-% \changes{v1.1}{2022/11/01}{Added the documented CV implementation with standalone loading, paper, font, language, and list options, contact and title helpers, and cover-letter support.}
-% \changes{v1.2}{2023/07/01}{Refreshed package metadata and documentation formatting.}
-% \changes{v1.3}{2024/11/01}{Added class, package, and bibliography extraction, class tests, month helpers, title-page, contact, and photo support, page styles, \cs{cvpart}, \cs{insubfile}, and CV bibliography integration.}
-% \changes{v1.4}{2025/09/01}{Updated release metadata and applied starred command definitions throughout the CV helpers.}
-% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, and expanded the abstract, package and class documentation, README, and examples.}
-% \changes{v1.6}{2026/11/11}{Fixed spurious spaces, made the month macros robust with PDF-string fallbacks and measured their width at use time, documented the date option correctly, and fixed the class \cs{HUGE}, PDF title, \cs{cvpart} PDF update, letter defaults and starred sections without \software{hyperref}, and made \cs{insubfile} test for the \software{subfiles} class, so that it also works in the body of subfiles.}
+% \changes{v1.2}{2020/01/02}{Added to the hep-paper repository with release v2.1: CV layout with a left column, CV entries, standalone loading, paper, font, language, and list options, title, photo, contact, and bibliography helpers, and cover letters.}
+% \changes{v1.3}{2024/11/01}{Added the hep-cv class and the hep-cv-bibliography package, month helpers, title pages, page styles, \cs{cvpart}, and \cs{insubfile}.}
+% \changes{v1.4}{2025/09/01}{Applied starred command definitions.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement and expanded the documentation, README, and examples.}
+% \changes{v1.6}{2026/11/13}{First release on CTAN. Fixed spurious spaces, made the month macros robust with PDF-string fallbacks and measured their width at use time, documented the date option correctly, and fixed the class \cs{HUGE}, PDF title, \cs{cvpart} PDF update, letter defaults and starred sections without \software{hyperref}, and made \cs{insubfile} test for the \software{subfiles} class, so that it also works in the body of subfiles. Renamed the internal \cs{printindex} of the bibliography to \cs{printcvindex}, which clashed with the index packages.}
 %
 % \ifshort
 %<*documentation>
@@ -1441,10 +1439,11 @@ The "date" option described above can also be given to the bibliography module, 
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\printindex}
+% \begin{macro}{\printcvindex}
 % Print index label in the left column.
+% The name differs from "\printindex", which prints the index with \software{makeidx} or \software{imakeidx}.
 %    \begin{macrocode}
-\newcommand*{\printindex}{%
+\newcommand*{\printcvindex}{%
   \printtext[labelnumberwidth]{%
     \printfield{labelprefix}\tstyle\printfield{labelnumber}%
   }%
@@ -1531,7 +1530,7 @@ The "date" option described above can also be given to the bibliography module, 
 %    \begin{macrocode}
 \defbibenvironment{numbered}{%
   \cleardate
-  \list{\printindex\printcvdate}{\setlengths}%
+  \list{\printcvindex\printcvdate}{\setlengths}%
   \renewcommand*{\makelabel}[1]{\hss##1}%
 }{\endlist}{\item}
 %    \end{macrocode}
@@ -1542,7 +1541,7 @@ The "date" option described above can also be given to the bibliography module, 
 \defbibenvironment{starrednumbered}{%
   \cleardate
   \list{%
-    \printindex%
+    \printcvindex%
     \ifkeyword{main5}{\hfill\textborn}{}%
     \printcvdate%
   }{\setlengths}%

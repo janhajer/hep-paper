@@ -814,35 +814,34 @@ l. ...}
 TEST 15: Derivatives
 ============================================================
 > \box...=
-\hbox(13.70952+6.85951)x13.32013, direction TLT
+\hbox(9.32217+3.44841)x11.0976, direction TLT
 .\mathon
-.\hbox(13.70952+6.85951)x13.32013, direction TLT
-..\hbox(13.70952+6.85951)x13.32013, direction TLT
-...\hbox(13.70952+6.85951)x13.32013, direction TLT
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-....\vbox(13.70952+6.85951)x10.92014, direction TLT
-.....\hbox(6.94444+1.94444)x10.92014, glue set 0.70485fil, direction TLT
-......\glue 0.0 plus 1.0fil minus 1.0fil
+.\hbox(9.32217+3.44841)x11.0976, direction TLT
+..\hbox(9.32217+3.44841)x11.0976, direction TLT
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+...\vbox(9.32217+3.44841)x8.6976, direction TLT
+....\hbox(4.8611+1.3611)x8.6976, glue set 0.57117fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 d
+.....\kern-1.29167 (font)
+.....\OML/cmm/m/it/7 f
+.....\kern0.78473 (italic)
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\kern0.39998 (font)
+....\rule(0.39998+0.0)x*
+....\kern0.88731 (font)
+....\hbox(4.8611+0.0)x8.6976, direction TLT
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 d
+.....\hbox(3.01389+0.0)x4.53473, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 d
-......\kern-1.66667 (font)
-......\OML/cmm/m/it/10 f
-......\kern1.0764 (italic)
-......\glue 0.0 plus 1.0fil minus 1.0fil
-.....\kern2.12064 (font)
-.....\rule(0.39998+0.0)x*
-.....\kern2.21507 (font)
-.....\hbox(6.94444+0.0)x10.92014, direction TLT
-......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 d
-......\hbox(4.30554+0.0)x5.71527, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\OML/cmm/m/it/10 x
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+......\OML/cmm/m/it/7 x
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
 .\mathoff
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
@@ -881,34 +880,35 @@ l. ...}
 .\mathon
 .\hbox(9.63164+3.44841)x16.00159, direction TLT
 ..\hbox(9.63164+3.44841)x16.00159, direction TLT
-...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-...\vbox(9.63164+3.44841)x13.6016, direction TLT
-....\hbox(5.17056+1.3611)x13.6016, glue set 0.53876fil, direction TLT
-.....\glue 0.0 plus 1.0fil minus 1.0fil
-.....\hbox(0.0+0.0)x0.0, direction TLT
-.....\glue -1.36574
-.....\glue(\thinmuskip) 1.36574
-.....\OML/cmm/m/it/7 d
-.....\hbox(2.15277+0.0)x3.67714, shifted -3.01779, direction TLT
-......\OML/cmm/m/it/5 n
-......\glue -1.22685
-.....\OML/cmm/m/it/7 f
-.....\kern0.78473 (italic)
-.....\glue 0.0 plus 1.0fil minus 1.0fil
-....\kern0.39998 (font)
-....\rule(0.39998+0.0)x*
-....\kern0.88731 (font)
-....\hbox(4.8611+0.0)x13.6016, direction TLT
-.....\hbox(0.0+0.0)x0.0, direction TLT
-.....\glue -1.36574
-.....\glue(\thinmuskip) 1.36574
-.....\OML/cmm/m/it/7 d
-.....\hbox(3.01389+0.0)x4.53473, direction TLT
+...\hbox(9.63164+3.44841)x16.00159, direction TLT
+....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+....\vbox(9.63164+3.44841)x13.6016, direction TLT
+.....\hbox(5.17056+1.3611)x13.6016, glue set 0.53876fil, direction TLT
+......\glue 0.0 plus 1.0fil minus 1.0fil
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\OML/cmm/m/it/7 x
-.....\hbox(2.15277+0.0)x4.90399, shifted -1.99998, direction TLT
-......\OML/cmm/m/it/5 n
-...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+......\glue -1.36574
+......\glue(\thinmuskip) 1.36574
+......\OML/cmm/m/it/7 d
+......\hbox(2.15277+0.0)x3.67714, shifted -3.01779, direction TLT
+.......\OML/cmm/m/it/5 n
+.......\glue -1.22685
+......\OML/cmm/m/it/7 f
+......\kern0.78473 (italic)
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern0.39998 (font)
+.....\rule(0.39998+0.0)x*
+.....\kern0.88731 (font)
+.....\hbox(4.8611+0.0)x13.6016, direction TLT
+......\hbox(0.0+0.0)x0.0, direction TLT
+......\glue -1.36574
+......\glue(\thinmuskip) 1.36574
+......\OML/cmm/m/it/7 d
+......\hbox(3.01389+0.0)x4.53473, direction TLT
+.......\hbox(0.0+0.0)x0.0, direction TLT
+.......\OML/cmm/m/it/7 x
+......\hbox(2.15277+0.0)x4.90399, shifted -1.99998, direction TLT
+.......\OML/cmm/m/it/5 n
+....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
 .\mathoff
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
@@ -979,32 +979,31 @@ l. ...}
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
 l. ...}
 > \box...=
-\hbox(13.70952+6.85951)x19.29239, direction TLT
+\hbox(8.79842+3.44841)x17.06985, direction TLT
 .\mathon
-.\hbox(13.70952+6.85951)x13.32013, direction TLT
-..\hbox(13.70952+6.85951)x13.32013, direction TLT
-...\hbox(13.70952+6.85951)x13.32013, direction TLT
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-....\vbox(13.70952+6.85951)x10.92014, direction TLT
-.....\hbox(6.94444+0.0)x10.92014, glue set 2.85764fil, direction TLT
-......\glue 0.0 plus 1.0fil minus 1.0fil
+.\hbox(8.79842+3.44841)x11.0976, direction TLT
+..\hbox(8.79842+3.44841)x11.0976, direction TLT
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+...\vbox(8.79842+3.44841)x8.6976, direction TLT
+....\hbox(4.8611+0.0)x8.6976, glue set 2.26736fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 d
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\kern1.23732 (font)
+....\rule(0.39998+0.0)x*
+....\kern0.88731 (font)
+....\hbox(4.8611+0.0)x8.6976, direction TLT
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 d
+.....\hbox(3.01389+0.0)x4.53473, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 d
-......\glue 0.0 plus 1.0fil minus 1.0fil
-.....\kern4.06508 (font)
-.....\rule(0.39998+0.0)x*
-.....\kern2.21507 (font)
-.....\hbox(6.94444+0.0)x10.92014, direction TLT
-......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 d
-......\hbox(4.30554+0.0)x5.71527, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\OML/cmm/m/it/10 x
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+......\OML/cmm/m/it/7 x
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
 .\OML/cmm/m/it/10 f
 .\kern1.0764 (italic)
 .\mathoff
@@ -1013,221 +1012,326 @@ l. ...}
 l. ...}
 ============================================================
 ============================================================
-TEST 16: Partial derivatives
+TEST 16: Derivatives: math style
 ============================================================
 > \box...=
-\hbox(13.70952+6.85951)x14.23683, direction TLT
+\hbox(10.33333+0.0)x15.21313, direction TLT
 .\mathon
-.\hbox(13.70952+6.85951)x14.23683, direction TLT
-..\hbox(13.70952+6.85951)x14.23683, direction TLT
-...\hbox(13.70952+6.85951)x14.23683, direction TLT
+.\OML/cmm/m/it/10 e
+.\hbox(6.7044+2.4095)x10.55687, shifted -3.62892, direction TLT
+..\hbox(0.0+0.0)x1.2, shifted -1.75, direction TLT
+..\vbox(6.7044+2.4095)x7.65688, direction TLT
+...\hbox(3.47221+0.97221)x7.65688, glue set 0.49481fil, direction TLT
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(0.0+0.0)x0.0, direction TLT
+....\glue -1.22685
+....\glue(\thinmuskip) 1.22685
+....\OML/cmm/m/it/5 d
+....\kern-1.0417 (font)
+....\OML/cmm/m/it/5 f
+....\kern0.59029 (italic)
+....\glue 0.0 plus 1.0fil minus 1.0fil
+...\kern0.33998 (font)
+...\rule(0.33998+0.0)x*
+...\kern0.51729 (font)
+...\hbox(3.47221+0.0)x7.65688, direction TLT
+....\hbox(0.0+0.0)x0.0, direction TLT
+....\glue -1.22685
+....\glue(\thinmuskip) 1.22685
+....\OML/cmm/m/it/5 d
+....\hbox(2.15277+0.0)x3.95836, direction TLT
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\OML/cmm/m/it/5 x
+..\hbox(0.0+0.0)x1.2, shifted -1.75, direction TLT
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(9.63164+3.44841)x16.00159, direction TLT
+.\mathon
+.\hbox(9.63164+3.44841)x16.00159, direction TLT
+..\hbox(9.63164+3.44841)x16.00159, direction TLT
+...\hbox(9.63164+3.44841)x16.00159, direction TLT
 ....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-....\vbox(13.70952+6.85951)x11.83684, direction TLT
-.....\hbox(6.94444+1.94444)x11.83684, direction TLT
+....\vbox(9.63164+3.44841)x13.6016, direction TLT
+.....\hbox(5.17056+1.3611)x13.6016, glue set 0.53876fil, direction TLT
+......\glue 0.0 plus 1.0fil minus 1.0fil
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\OML/cmm/m/it/10 f
-......\kern1.0764 (italic)
-.....\kern2.12064 (font)
+......\glue -1.36574
+......\glue(\thinmuskip) 1.36574
+......\OML/cmm/m/it/7 d
+......\hbox(2.15277+0.0)x3.67714, shifted -3.01779, direction TLT
+.......\OML/cmm/m/it/5 n
+.......\glue -1.22685
+......\OML/cmm/m/it/7 f
+......\kern0.78473 (italic)
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern0.39998 (font)
 .....\rule(0.39998+0.0)x*
-.....\kern2.21507 (font)
-.....\hbox(6.94444+0.0)x11.83684, glue set 0.1285fil, direction TLT
-......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern0.88731 (font)
+.....\hbox(4.8611+0.0)x13.6016, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\hbox(4.30554+0.0)x5.71527, direction TLT
+......\glue -1.36574
+......\glue(\thinmuskip) 1.36574
+......\OML/cmm/m/it/7 d
+......\hbox(3.01389+0.0)x4.53473, direction TLT
 .......\hbox(0.0+0.0)x0.0, direction TLT
-.......\OML/cmm/m/it/10 x
-......\glue 0.0 plus 1.0fil minus 1.0fil
+.......\OML/cmm/m/it/7 x
+......\hbox(2.15277+0.0)x4.90399, shifted -1.99998, direction TLT
+.......\OML/cmm/m/it/5 n
 ....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
 .\mathoff
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
 l. ...}
 > \box...=
-\hbox(14.9051+8.80396)x25.10602, direction TLT
+\hbox(9.32217+3.44841)x11.78511, direction TLT
 .\mathon
-.\hbox(14.9051+8.80396)x25.10602, direction TLT
-..\hbox(14.9051+8.80396)x25.10602, direction TLT
-...\hbox(14.9051+8.80396)x25.10602, direction TLT
+.\hbox(9.32217+3.44841)x11.78511, direction TLT
+..\hbox(9.32217+3.44841)x11.78511, direction TLT
+...\hbox(9.32217+3.44841)x11.78511, direction TLT
 ....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-....\vbox(14.9051+8.80396)x22.70602, direction TLT
-.....\hbox(8.14003+1.94444)x22.70602, glue set 3.8744fil, direction TLT
-......\glue 0.0 plus 1.0fil minus 1.0fil
+....\vbox(9.32217+3.44841)x9.38512, direction TLT
+.....\hbox(4.8611+1.3611)x9.38512, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\hbox(8.14003+0.0)x3.12039, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\hbox(4.51111+0.0)x3.12039, shifted -3.62892, direction TLT
-........\OT1/cmr/m/n/7 2
-........\glue -1.36574
-......\OML/cmm/m/it/10 f
-......\kern1.0764 (italic)
-......\glue 0.0 plus 1.0fil minus 1.0fil
-.....\kern2.12064 (font)
+......\glue -1.36574
+......\glue(\thinmuskip) 1.36574
+......\OML/cmm/m/it/7 @
+......\kern0.43056 (italic)
+......\OML/cmm/m/it/7 f
+......\kern0.78473 (italic)
+.....\kern0.39998 (font)
 .....\rule(0.39998+0.0)x*
-.....\kern2.21507 (font)
-.....\hbox(6.94444+1.94444)x22.70602, direction TLT
+.....\kern0.88731 (font)
+.....\hbox(4.8611+0.0)x9.38512, glue set 0.07468fil, direction TLT
+......\glue 0.0 plus 1.0fil minus 1.0fil
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\hbox(4.30554+0.0)x5.71527, direction TLT
+......\glue -1.36574
+......\glue(\thinmuskip) 1.36574
+......\OML/cmm/m/it/7 @
+......\kern0.43056 (italic)
+......\hbox(3.01389+0.0)x4.53473, direction TLT
 .......\hbox(0.0+0.0)x0.0, direction TLT
-.......\OML/cmm/m/it/10 x
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\OML/cmm/m/it/10 y
-......\kern0.35878 (italic)
+.......\OML/cmm/m/it/7 x
+......\glue 0.0 plus 1.0fil minus 1.0fil
 ....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
 .\mathoff
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
 l. ...}
+============================================================
+============================================================
+TEST 17: Partial derivatives
+============================================================
 > \box...=
-\hbox(14.9051+6.85951)x18.46597, direction TLT
+\hbox(9.32217+3.44841)x11.78511, direction TLT
 .\mathon
-.\hbox(14.9051+6.85951)x18.46597, direction TLT
-..\hbox(14.9051+6.85951)x18.46597, direction TLT
-...\hbox(14.9051+6.85951)x18.46597, direction TLT
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-....\vbox(14.9051+6.85951)x16.06598, direction TLT
-.....\hbox(8.14003+1.94444)x16.06598, glue set 0.55438fil, direction TLT
-......\glue 0.0 plus 1.0fil minus 1.0fil
+.\hbox(9.32217+3.44841)x11.78511, direction TLT
+..\hbox(9.32217+3.44841)x11.78511, direction TLT
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+...\vbox(9.32217+3.44841)x9.38512, direction TLT
+....\hbox(4.8611+1.3611)x9.38512, direction TLT
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\OML/cmm/m/it/7 f
+.....\kern0.78473 (italic)
+....\kern0.39998 (font)
+....\rule(0.39998+0.0)x*
+....\kern0.88731 (font)
+....\hbox(4.8611+0.0)x9.38512, glue set 0.07468fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\hbox(3.01389+0.0)x4.53473, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\hbox(8.14003+0.0)x3.12039, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\hbox(4.51111+0.0)x3.12039, shifted -3.62892, direction TLT
-........\OT1/cmr/m/n/7 3
-........\glue -1.36574
-......\OML/cmm/m/it/10 f
-......\kern1.0764 (italic)
-......\glue 0.0 plus 1.0fil minus 1.0fil
-.....\kern2.12064 (font)
-.....\rule(0.39998+0.0)x*
-.....\kern1.75952 (font)
-.....\hbox(7.4+0.0)x16.06598, direction TLT
-......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\hbox(4.30554+0.0)x5.71527, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\OML/cmm/m/it/10 x
-......\hbox(7.4+0.0)x4.48613, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\hbox(4.51111+0.0)x4.48613, shifted -2.88889, direction TLT
-........\OT1/cmr/m/n/7 3
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+......\OML/cmm/m/it/7 x
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
 .\mathoff
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
 l. ...}
 > \box...=
-\hbox(14.9051+8.80396)x34.07828, direction TLT
+\hbox(10.70108+4.80951)x20.64354, direction TLT
 .\mathon
-.\hbox(14.9051+8.80396)x34.07828, direction TLT
-..\hbox(14.9051+8.80396)x34.07828, direction TLT
-...\hbox(14.9051+8.80396)x34.07828, direction TLT
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-....\vbox(14.9051+8.80396)x31.67828, direction TLT
-.....\hbox(8.14003+1.94444)x31.67828, glue set 8.36053fil, direction TLT
-......\glue 0.0 plus 1.0fil minus 1.0fil
+.\hbox(10.70108+4.80951)x20.64354, direction TLT
+..\hbox(10.70108+4.80951)x20.64354, direction TLT
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+...\vbox(10.70108+4.80951)x18.24355, direction TLT
+....\hbox(6.24+1.3611)x18.24355, glue set 3.09123fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\hbox(6.24+0.0)x2.67598, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\hbox(8.14003+0.0)x3.12039, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\hbox(4.51111+0.0)x3.12039, shifted -3.62892, direction TLT
-........\OT1/cmr/m/n/7 5
-........\glue -1.36574
-......\OML/cmm/m/it/10 f
-......\kern1.0764 (italic)
-......\glue 0.0 plus 1.0fil minus 1.0fil
-.....\kern2.12064 (font)
-.....\rule(0.39998+0.0)x*
-.....\kern1.75952 (font)
-.....\hbox(7.4+1.94444)x31.67828, direction TLT
+......\hbox(3.22221+0.0)x2.67598, shifted -3.01779, direction TLT
+.......\OT1/cmr/m/n/5 2
+.......\glue -1.22685
+.....\OML/cmm/m/it/7 f
+.....\kern0.78473 (italic)
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\kern0.39998 (font)
+....\rule(0.39998+0.0)x*
+....\kern0.88731 (font)
+....\hbox(4.8611+1.3611)x18.24355, direction TLT
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\hbox(3.01389+0.0)x4.53473, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\hbox(4.30554+0.0)x5.71527, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\OML/cmm/m/it/10 x
-......\hbox(7.4+0.0)x4.48613, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\hbox(4.51111+0.0)x4.48613, shifted -2.88889, direction TLT
-........\OT1/cmr/m/n/7 2
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\OML/cmm/m/it/10 y
-......\kern0.35878 (italic)
-......\hbox(7.4+0.0)x4.48613, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\hbox(4.51111+0.0)x4.48613, shifted -2.88889, direction TLT
-........\OT1/cmr/m/n/7 3
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+......\OML/cmm/m/it/7 x
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\OML/cmm/m/it/7 y
+.....\kern0.25116 (italic)
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
 .\mathoff
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
 l. ...}
 > \box...=
-\hbox(14.9051+8.80396)x31.07828, direction TLT
+\hbox(10.70108+3.44841)x15.53859, direction TLT
 .\mathon
-.\hbox(14.9051+8.80396)x25.10602, direction TLT
-..\hbox(14.9051+8.80396)x25.10602, direction TLT
-...\hbox(14.9051+8.80396)x25.10602, direction TLT
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-....\vbox(14.9051+8.80396)x22.70602, direction TLT
-.....\hbox(8.14003+0.0)x22.70602, glue set 6.86053fil, direction TLT
-......\glue 0.0 plus 1.0fil minus 1.0fil
+.\hbox(10.70108+3.44841)x15.53859, direction TLT
+..\hbox(10.70108+3.44841)x15.53859, direction TLT
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+...\vbox(10.70108+3.44841)x13.1386, direction TLT
+....\hbox(6.24+1.3611)x13.1386, glue set 0.53876fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\hbox(6.24+0.0)x2.67598, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\hbox(8.14003+0.0)x3.12039, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\hbox(4.51111+0.0)x3.12039, shifted -3.62892, direction TLT
-........\OT1/cmr/m/n/7 2
-........\glue -1.36574
-......\glue 0.0 plus 1.0fil minus 1.0fil
-.....\kern4.06508 (font)
-.....\rule(0.39998+0.0)x*
-.....\kern2.21507 (font)
-.....\hbox(6.94444+1.94444)x22.70602, direction TLT
+......\hbox(3.22221+0.0)x2.67598, shifted -3.01779, direction TLT
+.......\OT1/cmr/m/n/5 3
+.......\glue -1.22685
+.....\OML/cmm/m/it/7 f
+.....\kern0.78473 (italic)
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\kern0.39998 (font)
+....\rule(0.39998+0.0)x*
+....\kern0.52621 (font)
+....\hbox(5.2222+0.0)x13.1386, direction TLT
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\hbox(3.01389+0.0)x4.53473, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\hbox(4.30554+0.0)x5.71527, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\OML/cmm/m/it/10 x
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\OML/cmm/m/it/10 y
-......\kern0.35878 (italic)
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+......\OML/cmm/m/it/7 x
+.....\hbox(5.2222+0.0)x3.90283, direction TLT
+......\hbox(0.0+0.0)x0.0, direction TLT
+......\hbox(3.22221+0.0)x3.90283, shifted -1.99998, direction TLT
+.......\OT1/cmr/m/n/5 3
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(10.70108+4.80951)x28.4492, direction TLT
+.\mathon
+.\hbox(10.70108+4.80951)x28.4492, direction TLT
+..\hbox(10.70108+4.80951)x28.4492, direction TLT
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+...\vbox(10.70108+4.80951)x26.04921, direction TLT
+....\hbox(6.24+1.3611)x26.04921, glue set 6.99406fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\hbox(6.24+0.0)x2.67598, direction TLT
+......\hbox(0.0+0.0)x0.0, direction TLT
+......\hbox(3.22221+0.0)x2.67598, shifted -3.01779, direction TLT
+.......\OT1/cmr/m/n/5 5
+.......\glue -1.22685
+.....\OML/cmm/m/it/7 f
+.....\kern0.78473 (italic)
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\kern0.39998 (font)
+....\rule(0.39998+0.0)x*
+....\kern0.52621 (font)
+....\hbox(5.2222+1.3611)x26.04921, direction TLT
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\hbox(3.01389+0.0)x4.53473, direction TLT
+......\hbox(0.0+0.0)x0.0, direction TLT
+......\OML/cmm/m/it/7 x
+.....\hbox(5.2222+0.0)x3.90283, direction TLT
+......\hbox(0.0+0.0)x0.0, direction TLT
+......\hbox(3.22221+0.0)x3.90283, shifted -1.99998, direction TLT
+.......\OT1/cmr/m/n/5 2
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\OML/cmm/m/it/7 y
+.....\kern0.25116 (italic)
+.....\hbox(5.2222+0.0)x3.90283, direction TLT
+......\hbox(0.0+0.0)x0.0, direction TLT
+......\hbox(3.22221+0.0)x3.90283, shifted -1.99998, direction TLT
+.......\OT1/cmr/m/n/5 3
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(10.17732+4.80951)x26.6158, direction TLT
+.\mathon
+.\hbox(10.17732+4.80951)x20.64354, direction TLT
+..\hbox(10.17732+4.80951)x20.64354, direction TLT
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+...\vbox(10.17732+4.80951)x18.24355, direction TLT
+....\hbox(6.24+0.0)x18.24355, glue set 5.43327fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\hbox(6.24+0.0)x2.67598, direction TLT
+......\hbox(0.0+0.0)x0.0, direction TLT
+......\hbox(3.22221+0.0)x2.67598, shifted -3.01779, direction TLT
+.......\OT1/cmr/m/n/5 2
+.......\glue -1.22685
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\kern1.23732 (font)
+....\rule(0.39998+0.0)x*
+....\kern0.88731 (font)
+....\hbox(4.8611+1.3611)x18.24355, direction TLT
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\hbox(3.01389+0.0)x4.53473, direction TLT
+......\hbox(0.0+0.0)x0.0, direction TLT
+......\OML/cmm/m/it/7 x
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\OML/cmm/m/it/7 y
+.....\kern0.25116 (italic)
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
 .\OML/cmm/m/it/10 f
 .\kern1.0764 (italic)
 .\mathoff
@@ -1236,284 +1340,278 @@ l. ...}
 l. ...}
 ============================================================
 ============================================================
-TEST 17: Partial derivatives: symbolic orders
+TEST 18: Partial derivatives: symbolic orders
 ============================================================
 > \box...=
-\hbox(13.70952+6.85951)x19.42317, direction TLT
+\hbox(9.63164+3.44841)x16.53975, direction TLT
 .\mathon
-.\hbox(13.70952+6.85951)x19.42317, direction TLT
-..\hbox(13.70952+6.85951)x19.42317, direction TLT
-...\hbox(13.70952+6.85951)x19.42317, direction TLT
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-....\vbox(13.70952+6.85951)x17.02318, direction TLT
-.....\hbox(6.94444+1.94444)x17.02318, glue set 0.55438fil, direction TLT
-......\glue 0.0 plus 1.0fil minus 1.0fil
+.\hbox(9.63164+3.44841)x16.53975, direction TLT
+..\hbox(9.63164+3.44841)x16.53975, direction TLT
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+...\vbox(9.63164+3.44841)x14.13976, direction TLT
+....\hbox(5.17056+1.3611)x14.13976, glue set 0.53876fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\hbox(5.17056+0.0)x3.67714, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\hbox(6.6428+0.0)x4.07759, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\hbox(3.01389+0.0)x4.07759, shifted -3.62892, direction TLT
-........\OML/cmm/m/it/7 n
-........\glue -1.36574
-......\OML/cmm/m/it/10 f
-......\kern1.0764 (italic)
-......\glue 0.0 plus 1.0fil minus 1.0fil
-.....\kern2.12064 (font)
-.....\rule(0.39998+0.0)x*
-.....\kern2.21507 (font)
-.....\hbox(6.94444+0.0)x17.02318, direction TLT
+......\hbox(2.15277+0.0)x3.67714, shifted -3.01779, direction TLT
+.......\OML/cmm/m/it/5 n
+.......\glue -1.22685
+.....\OML/cmm/m/it/7 f
+.....\kern0.78473 (italic)
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\kern0.39998 (font)
+....\rule(0.39998+0.0)x*
+....\kern0.88731 (font)
+....\hbox(4.8611+0.0)x14.13976, direction TLT
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\hbox(3.01389+0.0)x4.53473, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\hbox(4.30554+0.0)x5.71527, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\OML/cmm/m/it/10 x
-......\hbox(5.90277+0.0)x5.44333, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\hbox(3.01389+0.0)x5.44333, shifted -2.88889, direction TLT
-........\OML/cmm/m/it/7 n
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+......\OML/cmm/m/it/7 x
+.....\hbox(4.15276+0.0)x4.90399, direction TLT
+......\hbox(0.0+0.0)x0.0, direction TLT
+......\hbox(2.15277+0.0)x4.90399, shifted -1.99998, direction TLT
+.......\OML/cmm/m/it/5 n
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
 .\mathoff
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
 l. ...}
 > \box...=
-\hbox(14.9051+8.80396)x35.03548, direction TLT
+\hbox(10.81223+4.80951)x29.45036, direction TLT
 .\mathon
-.\hbox(14.9051+8.80396)x35.03548, direction TLT
-..\hbox(14.9051+8.80396)x35.03548, direction TLT
-...\hbox(14.9051+8.80396)x35.03548, direction TLT
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-....\vbox(14.9051+8.80396)x32.63548, direction TLT
-.....\hbox(8.14003+1.94444)x32.63548, glue set 3.298fil, direction TLT
-......\glue 0.0 plus 1.0fil minus 1.0fil
+.\hbox(10.81223+4.80951)x29.45036, direction TLT
+..\hbox(10.81223+4.80951)x29.45036, direction TLT
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+...\vbox(10.81223+4.80951)x27.05037, direction TLT
+....\hbox(6.35115+1.3611)x27.05037, glue set 2.72316fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\hbox(6.35115+0.0)x12.21895, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\hbox(8.14003+0.0)x14.20264, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\hbox(4.51111+0.83334)x14.20264, shifted -3.62892, direction TLT
-........\OML/cmm/m/it/7 n
-........\OT1/cmr/m/n/7 +
-........\OT1/cmr/m/n/7 2
-........\glue -1.36574
-......\OML/cmm/m/it/10 f
-......\kern1.0764 (italic)
-......\glue 0.0 plus 1.0fil minus 1.0fil
-.....\kern2.12064 (font)
-.....\rule(0.39998+0.0)x*
-.....\kern1.75952 (font)
-.....\hbox(7.4+1.94444)x32.63548, direction TLT
+......\hbox(3.33336+0.83336)x12.21895, shifted -3.01779, direction TLT
+.......\OML/cmm/m/it/5 n
+.......\OT1/cmr/m/n/5 +
+.......\OT1/cmr/m/n/5 2
+.......\glue -1.22685
+.....\OML/cmm/m/it/7 f
+.....\kern0.78473 (italic)
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\kern0.39998 (font)
+....\rule(0.39998+0.0)x*
+....\kern0.52621 (font)
+....\hbox(5.2222+1.3611)x27.05037, direction TLT
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\hbox(3.01389+0.0)x4.53473, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\hbox(4.30554+0.0)x5.71527, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\OML/cmm/m/it/10 x
-......\hbox(5.90277+0.0)x5.44333, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\hbox(3.01389+0.0)x5.44333, shifted -2.88889, direction TLT
-........\OML/cmm/m/it/7 n
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\OML/cmm/m/it/10 y
-......\kern0.35878 (italic)
-......\hbox(7.4+0.0)x4.48613, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\hbox(4.51111+0.0)x4.48613, shifted -2.88889, direction TLT
-........\OT1/cmr/m/n/7 2
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+......\OML/cmm/m/it/7 x
+.....\hbox(4.15276+0.0)x4.90399, direction TLT
+......\hbox(0.0+0.0)x0.0, direction TLT
+......\hbox(2.15277+0.0)x4.90399, shifted -1.99998, direction TLT
+.......\OML/cmm/m/it/5 n
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\OML/cmm/m/it/7 y
+.....\kern0.25116 (italic)
+.....\hbox(5.2222+0.0)x3.90283, direction TLT
+......\hbox(0.0+0.0)x0.0, direction TLT
+......\hbox(3.22221+0.0)x3.90283, shifted -1.99998, direction TLT
+.......\OT1/cmr/m/n/5 2
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
 .\mathoff
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
 l. ...}
 > \box...=
-\hbox(15.2551+8.80396)x44.9152, direction TLT
+\hbox(10.95108+4.93327)x37.49107, direction TLT
 .\mathon
-.\hbox(15.2551+8.80396)x44.9152, direction TLT
-..\hbox(15.2551+8.80396)x44.9152, direction TLT
-...\hbox(15.2551+8.80396)x44.9152, direction TLT
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-....\vbox(15.2551+8.80396)x42.51521, direction TLT
-.....\hbox(8.49002+1.94444)x42.51521, glue set 3.71292fil, direction TLT
-......\glue 0.0 plus 1.0fil minus 1.0fil
+.\hbox(10.95108+4.93327)x37.49107, direction TLT
+..\hbox(10.95108+4.93327)x37.49107, direction TLT
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+...\vbox(10.95108+4.93327)x35.09108, direction TLT
+....\hbox(6.49+1.3611)x35.09108, glue set 2.85661fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\hbox(6.49+0.0)x19.99275, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\hbox(8.49002+0.0)x23.25253, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\hbox(4.8611+0.83334)x23.25253, shifted -3.62892, direction TLT
-........\OML/cmm/m/it/7 a
-........\OT1/cmr/m/n/7 +
-........\OML/cmm/m/it/7 b
-........\OT1/cmr/m/n/7 +
-........\OT1/cmr/m/n/7 1
-........\glue -1.36574
-......\OML/cmm/m/it/10 f
-......\kern1.0764 (italic)
-......\glue 0.0 plus 1.0fil minus 1.0fil
-.....\kern2.12064 (font)
-.....\rule(0.39998+0.0)x*
-.....\kern1.40953 (font)
-.....\hbox(7.74998+1.94444)x42.51521, direction TLT
+......\hbox(3.47221+0.83336)x19.99275, shifted -3.01779, direction TLT
+.......\OML/cmm/m/it/5 a
+.......\OT1/cmr/m/n/5 +
+.......\OML/cmm/m/it/5 b
+.......\OT1/cmr/m/n/5 +
+.......\OT1/cmr/m/n/5 1
+.......\glue -1.22685
+.....\OML/cmm/m/it/7 f
+.....\kern0.78473 (italic)
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\kern0.39998 (font)
+....\rule(0.39998+0.0)x*
+....\kern0.39998 (font)
+....\hbox(5.4722+1.3611)x35.09108, direction TLT
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\hbox(3.01389+0.0)x4.53473, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\hbox(4.30554+0.0)x5.71527, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\OML/cmm/m/it/10 x
-......\hbox(5.90277+0.0)x4.83765, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\hbox(3.01389+0.0)x4.83765, shifted -2.88889, direction TLT
-........\OML/cmm/m/it/7 a
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\OML/cmm/m/it/10 y
-......\kern0.35878 (italic)
-......\hbox(7.74998+0.0)x4.01666, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\hbox(4.8611+0.0)x4.01666, shifted -2.88889, direction TLT
-........\OML/cmm/m/it/7 b
-......\OML/cmm/m/it/10 @
-......\kern0.55554 (italic)
-......\OML/cmm/m/it/10 z
-......\kern0.4398 (italic)
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-.\mathoff
-! OK.
-\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
-l. ...}
-============================================================
-============================================================
-TEST 18: Functional and user-defined derivatives
-============================================================
-> \box...=
-\hbox(13.70952+6.85951)x15.04236, direction TLT
-.\mathon
-.\hbox(13.70952+6.85951)x15.04236, direction TLT
-..\hbox(13.70952+6.85951)x15.04236, direction TLT
-...\hbox(13.70952+6.85951)x15.04236, direction TLT
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-....\vbox(13.70952+6.85951)x12.64236, direction TLT
-.....\hbox(6.94444+0.0)x12.64236, direction TLT
+......\OML/cmm/m/it/7 x
+.....\hbox(4.15276+0.0)x4.37215, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 ^^N
-......\kern0.37846 (italic)
-......\OML/cmm/m/it/10 F
-......\kern1.3889 (italic)
-.....\kern4.06508 (font)
-.....\rule(0.39998+0.0)x*
-.....\kern2.21507 (font)
-.....\hbox(6.94444+0.0)x12.64236, glue set 1.0521fil, direction TLT
-......\glue 0.0 plus 1.0fil minus 1.0fil
+......\hbox(2.15277+0.0)x4.37215, shifted -1.99998, direction TLT
+.......\OML/cmm/m/it/5 a
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\OML/cmm/m/it/7 y
+.....\kern0.25116 (italic)
+.....\hbox(5.4722+0.0)x3.66667, direction TLT
 ......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 ^^N
-......\kern0.37846 (italic)
-......\hbox(4.30554+0.0)x5.71527, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\OML/cmm/m/it/10 x
-......\glue 0.0 plus 1.0fil minus 1.0fil
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-.\mathoff
-! OK.
-\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
-l. ...}
-> \box...=
-\hbox(13.70952+6.85951)x16.9292, direction TLT
-.\mathon
-.\hbox(13.70952+6.85951)x16.9292, direction TLT
-..\hbox(13.70952+6.85951)x16.9292, direction TLT
-...\hbox(13.70952+6.85951)x16.9292, direction TLT
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-....\vbox(13.70952+6.85951)x14.5292, direction TLT
-.....\hbox(6.94444+1.94444)x14.5292, direction TLT
-......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 D
-......\kern0.27779 (italic)
-......\OML/cmm/m/it/10 f
-......\kern1.0764 (italic)
-.....\kern2.12064 (font)
-.....\rule(0.39998+0.0)x*
-.....\kern2.3262 (font)
-.....\hbox(6.83331+0.0)x14.5292, glue set 0.1285fil, direction TLT
-......\glue 0.0 plus 1.0fil minus 1.0fil
-......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OML/cmm/m/it/10 D
-......\kern0.27779 (italic)
-......\hbox(4.30554+0.0)x5.71527, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\OML/cmm/m/it/10 x
-......\glue 0.0 plus 1.0fil minus 1.0fil
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-.\mathoff
-! OK.
-\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
-l. ...}
-> \box...=
-\hbox(14.9051+8.80396)x30.04358, direction TLT
-.\mathon
-.\hbox(14.9051+8.80396)x30.04358, direction TLT
-..\hbox(14.9051+8.80396)x30.04358, direction TLT
-...\hbox(14.9051+8.80396)x30.04358, direction TLT
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
-....\vbox(14.9051+8.80396)x27.64359, direction TLT
-.....\hbox(8.14003+1.94444)x27.64359, glue set 5.1088fil, direction TLT
-......\glue 0.0 plus 1.0fil minus 1.0fil
-......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OMS/cmsy/m/n/10 r
-......\hbox(8.14003+0.0)x3.12039, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\hbox(4.51111+0.0)x3.12039, shifted -3.62892, direction TLT
-........\OT1/cmr/m/n/7 2
-........\glue -1.36574
-......\OML/cmm/m/it/10 f
-......\kern1.0764 (italic)
-......\glue 0.0 plus 1.0fil minus 1.0fil
-.....\kern2.12064 (font)
-.....\rule(0.39998+0.0)x*
-.....\kern2.3262 (font)
-.....\hbox(6.83331+1.94444)x27.64359, direction TLT
-......\hbox(0.0+0.0)x0.0, direction TLT
-......\glue -1.66663
-......\glue(\thinmuskip) 1.66663
-......\OMS/cmsy/m/n/10 r
-......\hbox(4.30554+0.0)x5.71527, direction TLT
-.......\hbox(0.0+0.0)x0.0, direction TLT
-.......\OML/cmm/m/it/10 x
-......\OMS/cmsy/m/n/10 r
-......\OML/cmm/m/it/10 y
-......\kern0.35878 (italic)
-....\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+......\hbox(3.47221+0.0)x3.66667, shifted -1.99998, direction TLT
+.......\OML/cmm/m/it/5 b
+.....\OML/cmm/m/it/7 @
+.....\kern0.43056 (italic)
+.....\OML/cmm/m/it/7 z
+.....\kern0.28703 (italic)
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
 .\mathoff
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
 l. ...}
 ============================================================
 ============================================================
-TEST 19: Cancel and slash
+TEST 19: Functional and user-defined derivatives
+============================================================
+> \box...=
+\hbox(8.79842+3.44841)x12.4365, direction TLT
+.\mathon
+.\hbox(8.79842+3.44841)x12.4365, direction TLT
+..\hbox(8.79842+3.44841)x12.4365, direction TLT
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+...\vbox(8.79842+3.44841)x10.0365, direction TLT
+....\hbox(4.8611+0.0)x10.0365, direction TLT
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 ^^N
+.....\kern0.25381 (italic)
+.....\OML/cmm/m/it/7 F
+.....\kern1.07639 (italic)
+....\kern1.23732 (font)
+....\rule(0.39998+0.0)x*
+....\kern0.88731 (font)
+....\hbox(4.8611+0.0)x10.0365, glue set 0.80661fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 ^^N
+.....\kern0.25381 (italic)
+.....\hbox(3.01389+0.0)x4.53473, direction TLT
+......\hbox(0.0+0.0)x0.0, direction TLT
+......\OML/cmm/m/it/7 x
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(9.32217+3.44841)x13.83784, direction TLT
+.\mathon
+.\hbox(9.32217+3.44841)x13.83784, direction TLT
+..\hbox(9.32217+3.44841)x13.83784, direction TLT
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+...\vbox(9.32217+3.44841)x11.43785, direction TLT
+....\hbox(4.8611+1.3611)x11.43785, direction TLT
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 D
+.....\kern0.21527 (italic)
+.....\OML/cmm/m/it/7 f
+.....\kern0.78473 (italic)
+....\kern0.39998 (font)
+....\rule(0.39998+0.0)x*
+....\kern0.96507 (font)
+....\hbox(4.78334+0.0)x11.43785, glue set 0.07468fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OML/cmm/m/it/7 D
+.....\kern0.21527 (italic)
+.....\hbox(3.01389+0.0)x4.53473, direction TLT
+......\hbox(0.0+0.0)x0.0, direction TLT
+......\OML/cmm/m/it/7 x
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(10.70108+4.80951)x24.60262, direction TLT
+.\mathon
+.\hbox(10.70108+4.80951)x24.60262, direction TLT
+..\hbox(10.70108+4.80951)x24.60262, direction TLT
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+...\vbox(10.70108+4.80951)x22.20262, direction TLT
+....\hbox(6.24+1.3611)x22.20262, glue set 4.081fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OMS/cmsy/m/n/7 r
+.....\hbox(6.24+0.0)x2.67598, direction TLT
+......\hbox(0.0+0.0)x0.0, direction TLT
+......\hbox(3.22221+0.0)x2.67598, shifted -3.01779, direction TLT
+.......\OT1/cmr/m/n/5 2
+.......\glue -1.22685
+.....\OML/cmm/m/it/7 f
+.....\kern0.78473 (italic)
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\kern0.39998 (font)
+....\rule(0.39998+0.0)x*
+....\kern0.96507 (font)
+....\hbox(4.78334+1.3611)x22.20262, direction TLT
+.....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue -1.36574
+.....\glue(\thinmuskip) 1.36574
+.....\OMS/cmsy/m/n/7 r
+.....\hbox(3.01389+0.0)x4.53473, direction TLT
+......\hbox(0.0+0.0)x0.0, direction TLT
+......\OML/cmm/m/it/7 x
+.....\OMS/cmsy/m/n/7 r
+.....\OML/cmm/m/it/7 y
+.....\kern0.25116 (italic)
+...\hbox(0.0+0.0)x1.2, shifted -2.5, direction TLT
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 20: Cancel and slash
 ============================================================
 > \box...=
 \hbox(7.15277+0.34723)x5.71527, direction TLT
@@ -1614,7 +1712,7 @@ l. ...}
 l. ...}
 ============================================================
 ============================================================
-TEST 20: Absolute value and norm
+TEST 21: Absolute value and norm
 ============================================================
 > \box...=
 \hbox(7.5+2.5)x11.27084, direction TLT
@@ -1681,7 +1779,7 @@ l. ...}
 l. ...}
 ============================================================
 ============================================================
-TEST 21: Evaluation and order
+TEST 22: Evaluation and order
 ============================================================
 > \box...=
 \hbox(7.5+2.5)x21.732, direction TLT
@@ -1734,7 +1832,7 @@ l. ...}
 l. ...}
 ============================================================
 ============================================================
-TEST 22: Pairs and commutators
+TEST 23: Pairs and commutators
 ============================================================
 > \box...=
 \hbox(7.5+2.5)x20.97685, direction TLT
@@ -1829,7 +1927,7 @@ l. ...}
 l. ...}
 ============================================================
 ============================================================
-TEST 23: Bra-ket notation
+TEST 24: Bra-ket notation
 ============================================================
 > \box...=
 \hbox(7.5+2.5)x15.15967, direction TLT
@@ -1929,7 +2027,7 @@ l. ...}
 l. ...}
 ============================================================
 ============================================================
-TEST 24: Matrix elements and expectation values
+TEST 25: Matrix elements and expectation values
 ============================================================
 > \box...=
 \hbox(7.5+2.5)x34.95596, direction TLT
@@ -2013,7 +2111,7 @@ l. ...}
 l. ...}
 ============================================================
 ============================================================
-TEST 25: Column and row vectors
+TEST 26: Column and row vectors
 ============================================================
 > \box...=
 \hbox(14.5001+9.50012)x20.43758, direction TLT
@@ -2103,7 +2201,7 @@ l. ...}
 l. ...}
 ============================================================
 ============================================================
-TEST 26: Undocumented helpers: probability, set, units fraction
+TEST 27: Undocumented helpers: probability, set, units fraction
 ============================================================
 > \box...=
 \hbox(7.5+2.5)x36.69904, direction TLT
@@ -2172,7 +2270,7 @@ l. ...}
 l. ...}
 ============================================================
 ============================================================
-TEST 27: Equation numbers within sections
+TEST 28: Equation numbers within sections
 ============================================================
 2.9
 3.1

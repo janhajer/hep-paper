@@ -18,9 +18,9 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
-%<package>\ProvidesPackage{hep-bibliography}[2026/11/11 v1.6 Biblatex setup with INSPIRE fields, eprint links, errata and citation back-links]
-%<datamodel>\ProvidesFile{hep-bibliography.dbx}[2026/11/11 v1.6 HEP-Bibliography biblatex data model]
-%<documentation>\ProvidesFile{hep-bibliography-documentation.tex}[2026/11/11 v1.6 HEP-Bibliography documentation]
+%<package>\ProvidesPackage{hep-bibliography}[2026/11/13 v1.6 Biblatex setup with INSPIRE fields, eprint links, errata and citation back-links]
+%<datamodel>\ProvidesFile{hep-bibliography.dbx}[2026/11/13 v1.6 HEP-Bibliography biblatex data model]
+%<documentation>\ProvidesFile{hep-bibliography-documentation.tex}[2026/11/13 v1.6 HEP-Bibliography documentation]
 %
 %<*documentation>
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -52,7 +52,7 @@
 %
 % \fi
 %
-% \CheckSum{418}
+% \CheckSum{468}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -70,13 +70,13 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2021/09/01}{Created the dedicated biblatex package with InspireHEP fields, source maps, errata handling, citation back-links, and HEP e-print formats.}
+% \changes{v1.0}{2021/09/01}{First release on CTAN: biblatex setup with InspireHEP fields, source maps, errata, citation back-links, and HEP e-print formats.}
 % \changes{v1.1}{2022/11/01}{Passed biblatex options before loading the package and corrected the SourceForge e-print alias.}
-% \changes{v1.2}{2023/07/01}{Reworked bibliography back-links through citation targets, stripped leading zeros from page ranges, namespaced source-map and e-print helpers, added CDS and HEPData e-print formats, and refreshed documentation and README formatting.}
-% \changes{v1.3}{2024/11/01}{Stopped globally wrapping \cs{printbibliography} in \cs{sloppy} and restored release metadata.}
-% \changes{v1.4}{2025/09/01}{Applied starred command definitions consistently and expanded the bibliography test entry.}
-% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, and expanded the abstract, user documentation, README, and examples to cover bibliography setup, InspireHEP fields, source maps, back-links, e-print formats, and errata.}
-% \changes{v1.6}{2026/11/11}{Fixed the HEPForge, code-hosting, and repository e-print links, report numbers inside braces, the separation of URLs and PubMed IDs, styles other than numeric-comp, empty styles, links in PDF strings, and spurious spaces.}
+% \changes{v1.2}{2023/07/01}{Reworked bibliography back-links through citation targets, stripped leading zeros from page ranges, and added CDS and HEPData e-print formats.}
+% \changes{v1.3}{2024/11/01}{Stopped globally wrapping \cs{printbibliography} in \cs{sloppy}.}
+% \changes{v1.4}{2025/09/01}{Applied starred command definitions consistently.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement and expanded the documentation, README, and examples.}
+% \changes{v1.6}{2026/11/13}{Fixed the HEPForge, code-hosting, and repository e-print links, report numbers inside braces, the separation of URLs and PubMed IDs, styles other than numeric-comp, empty styles, links in PDF strings, and spurious spaces. Printed \cs{online} without \software{hyperref} like \software{hep-text}, so that URLs may contain special characters.}
 %
 % \ifshort
 %<*documentation>
@@ -177,12 +177,42 @@ Errata can be included using the "related" feature.
 \ProcessKeyvalOptions*
 %    \end{macrocode}
 %
+% \begin{macro}{\hep@url@text}
+% Print a URL or email address in typewriter font without \software{hyperref}.
+% As for "\nolinkurl", the text is printed verbatim, so that characters such as "_", "#", "&", and "~" need no escaping.
+% The escaped characters "\%", "\#", "\&", "\_", "\$", and "\~" become the characters themselves.
+% Macros in the text, such as the fields of \software{biblatex}, are expanded first.
+% The \software{hep-text} and \software{hep-title} packages define the same macro, so define it only once.
+%    \begin{macrocode}
+\ExplSyntaxOn
+\cs_if_exist:NF \hep@url@text {
+  \tl_new:N \l__hep_url_tl
+  \cs_generate_variant:Nn \tl_replace_all:Nnn { NnV }
+  \cs_new_protected:Npn \hep@url@text #1 {
+    \tl_set:Nn \l__hep_url_tl {#1}
+    \regex_replace_all:nnN { \cP. } { \cO\# } \l__hep_url_tl
+    \protected@edef \l__hep_url_tl { \l__hep_url_tl }
+    \tl_remove_all:Nn \l__hep_url_tl { \protect }
+    \tl_replace_all:NnV \l__hep_url_tl { \# } \c_hash_str
+    \tl_replace_all:NnV \l__hep_url_tl { \% } \c_percent_str
+    \tl_replace_all:NnV \l__hep_url_tl { \& } \c_ampersand_str
+    \tl_replace_all:NnV \l__hep_url_tl { \_ } \c_underscore_str
+    \tl_replace_all:NnV \l__hep_url_tl { \$ } \c_dollar_str
+    \tl_replace_all:NnV \l__hep_url_tl { \~ } \c_tilde_str
+    \texttt { \tl_to_str:N \l__hep_url_tl }
+  }
+}
+\ExplSyntaxOff
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\online}
 % \begin{macro}{\email}
-% Define the "\online"\marg{text}\marg{url} macro combining the features of the "\href" and the "\url" macros.
+% Define the "\online"\marg{url}\marg{text} macro combining the features of the "\href" and the "\url" macros.
 % Define a macro for typesetting emails.
+% The \software{hep-text} and \software{hep-title} packages define the same macros, so whichever package is loaded first gives the same result.
 %    \begin{macrocode}
-\providecommand*{\online}[2]{\texttt{#2}}%
+\providecommand*{\online}[2]{\hep@url@text{#2}}%
 \providecommand*{\hep@email}[1]{\online{mailto:#1}{#1}}
 \providecommand*\email{\hep@email}
 \AtBeginDocument{\@ifpackageloaded{hyperref}{%

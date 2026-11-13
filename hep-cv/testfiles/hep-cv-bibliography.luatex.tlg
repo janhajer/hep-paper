@@ -12,7 +12,7 @@ TEST 2: Helper macros
 ============================================================
 setlengths: defined
 printcvdate: defined
-printindex: defined
+printcvindex: defined
 printissuedate: defined
 adjustOrgLocDat: defined
 cleardate: defined

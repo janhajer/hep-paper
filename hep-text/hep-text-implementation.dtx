@@ -18,9 +18,9 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
-%<package>\ProvidesPackage{hep-text}[2026/11/11 v1.6 Text utilities: language setup, abbreviations, links, breakable underlining and compact lists]
-%<documentation>\ProvidesFile{hep-text-documentation.tex}[2026/11/11 v1.6 HEP-Text documentation]
-%<documentation>\ProvidesFile{hep-text-text.tex}[2026/11/11 v1.6 HEP-Text tests]
+%<package>\ProvidesPackage{hep-text}[2026/11/13 v1.6 Text utilities: language setup, abbreviations, links, breakable underlining and compact lists]
+%<documentation>\ProvidesFile{hep-text-documentation.tex}[2026/11/13 v1.6 HEP-Text documentation]
+%<documentation>\ProvidesFile{hep-text-text.tex}[2026/11/13 v1.6 HEP-Text tests]
 %
 %<*documentation>
 
@@ -66,7 +66,7 @@
 %
 % \fi
 %
-% \CheckSum{400}
+% \CheckSum{406}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -84,13 +84,13 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2021/09/01}{Created the dedicated text package with language and quotation support, foreign abbreviations, text helpers, list environments, and line-breakable underlining.}
-% \changes{v1.1}{2022/11/01}{Disabled styling of foreign abbreviations by default, made software names safe in PDF strings, added subsubparagraph, and tightened enumdescript internals.}
-% \changes{v1.2}{2023/07/01}{Updated documentation formatting, package metadata, and README wrapping.}
-% \changes{v1.3}{2024/11/01}{Switched line-breakable underlining from soulutf8 to soul and adjusted list example layout.}
+% \changes{v1.0}{2021/09/01}{First release on CTAN: language and quotation support, foreign abbreviations, text helpers, list environments, and line-breakable underlining.}
+% \changes{v1.1}{2022/11/01}{Disabled styling of foreign abbreviations by default, made software names safe in PDF strings, and added \cs{subsubparagraph}.}
+% \changes{v1.2}{2023/07/01}{Refreshed the documentation.}
+% \changes{v1.3}{2024/11/01}{Switched line-breakable underlining from soulutf8 to soul.}
 % \changes{v1.4}{2025/09/01}{Applied starred command definitions consistently.}
-% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, expanded the user documentation, README, and tests, and added no-indent-after-list handling.}
-% \changes{v1.6}{2026/11/11}{Restored underline in math mode, made underline, online links, email addresses, and foreign abbreviations safe in PDF strings, fixed the empty-title test of enumdescript, and stopped enumdescript from changing the items of nested lists.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, suppressed the indentation after lists, and expanded the documentation and README.}
+% \changes{v1.6}{2026/11/13}{Restored underline in math mode, made underline, online links, email addresses, and foreign abbreviations safe in PDF strings, fixed the empty-title test of enumdescript, and stopped enumdescript from changing the items of nested lists.}
 %
 % \ifshort
 %<*documentation>
@@ -379,7 +379,8 @@ If \software{hyperref} is loaded, software names, online links, email addresses,
 % Print a URL or email address in typewriter font without \software{hyperref}.
 % As for "\nolinkurl", the text is printed verbatim, so that characters such as "_", "#", "&", and "~" need no escaping.
 % The escaped characters "\%", "\#", "\&", "\_", "\$", and "\~" become the characters themselves.
-% The \software{hep-title} package defines the same macro, so define it only once.
+% Macros in the text, such as the fields of \software{biblatex}, are expanded first.
+% The \software{hep-title} and \software{hep-bibliography} packages define the same macro, so define it only once.
 %    \begin{macrocode}
 \ExplSyntaxOn
 \cs_if_exist:NF \hep@url@text {
@@ -388,6 +389,8 @@ If \software{hyperref} is loaded, software names, online links, email addresses,
   \cs_new_protected:Npn \hep@url@text #1 {
     \tl_set:Nn \l__hep_url_tl {#1}
     \regex_replace_all:nnN { \cP. } { \cO\# } \l__hep_url_tl
+    \protected@edef \l__hep_url_tl { \l__hep_url_tl }
+    \tl_remove_all:Nn \l__hep_url_tl { \protect }
     \tl_replace_all:NnV \l__hep_url_tl { \# } \c_hash_str
     \tl_replace_all:NnV \l__hep_url_tl { \% } \c_percent_str
     \tl_replace_all:NnV \l__hep_url_tl { \& } \c_ampersand_str

@@ -18,8 +18,8 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
-%<package>\ProvidesPackage{hep-font}[2026/11/11 v2.1 Latin Modern and New Computer Modern text fonts with numeral styles and Greek letters]
-%<documentation>\ProvidesFile{hep-font-documentation.tex}[2026/11/11 v2.1 hep-font documentation]
+%<package>\ProvidesPackage{hep-font}[2026/11/13 v2.0 Latin Modern and New Computer Modern text fonts with numeral styles and Greek letters]
+%<documentation>\ProvidesFile{hep-font-documentation.tex}[2026/11/13 v2.0 hep-font documentation]
 %
 %<*documentation>
 \documentclass{ltxdoc}
@@ -57,7 +57,7 @@
 %
 % \fi
 %
-% \CheckSum{524}
+% \CheckSum{525}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -75,14 +75,13 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2021/09/01}{Created the dedicated font package with size, family, numeral, encoding, microtype, Latin Modern and Computer Modern, small-caps, and upright italic handling.}
-% \changes{v1.1}{2022/11/01}{Added size and sans-serif options, class font-size detection, dynamic size loading, code and verbatim styling, safer option passing, and namespaced font-shape helpers.}
-% \changes{v1.2}{2023/07/01}{Disabled size overrides under jheppub, added tabular figures to table-of-contents and float contexts, introduced \cs{codestyle}, and refreshed documentation and README formatting.}
-% \changes{v1.3}{2024/11/01}{Made equation numbers use table-style figures.}
-% \changes{v1.4}{2025/09/01}{Split pdfLaTeX and TU-engine font setup, using iftex, fontspec, unicode-math, and fontsetup for LuaLaTeX and XeLaTeX, and applied starred command definitions.}
-% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, refreshed the documentation and README, replaced engine markup that broke documentation builds, and updated the checksum.}
-% \changes{v2.0}{2026/10/07}{Separated text from math fonts: dropped fontsetup and unicode-math, loaded New Computer Modern text faces directly, kept the class font size by default, provided a proportional typewriter and an uncial font, scoped the tabular figures in contents entries, declared the LGR families of cfr-lm before substituting them, silenced the info messages of nfssext-cfr, and kept nfssext-cfr from overwriting user macros named \cs{set}.}
-% \changes{v2.1}{2026/11/11}{Left contents entries alone that do not take two arguments, such as those of amsart, made all warning macros redefined by silence robust, and restricted the tabular lining numerals from whole floats to tabulars, so that captions keep the numerals of the text. Made the text commands, the declarations, \cs{code} and the Greek letters work in hyperref bookmarks.}
+% \changes{v1.0}{2021/09/01}{First release on CTAN: font size, family, numerals, encodings, microtype, Latin Modern and Computer Modern, small caps, and upright italics.}
+% \changes{v1.1}{2022/11/01}{Added size and sans-serif options, class font-size detection, and code and verbatim styling.}
+% \changes{v1.2}{2023/07/01}{Disabled size overrides under jheppub, added tabular figures to the table of contents and floats, and introduced \cs{codestyle}.}
+% \changes{v1.3}{2024/11/01}{Made equation numbers use tabular figures.}
+% \changes{v1.4}{2025/09/01}{Split the pdfLaTeX font setup from the LuaLaTeX and XeLaTeX setup, which uses fontspec, unicode-math, and fontsetup, and applied starred command definitions.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement and refreshed the documentation and README.}
+% \changes{v2.0}{2026/11/13}{Separated text from math fonts: dropped fontsetup and unicode-math, loaded New Computer Modern text faces directly, kept the class font size by default, provided a proportional typewriter and an uncial font, scoped the tabular figures in contents entries, declared the LGR families of cfr-lm before substituting them, silenced the info messages of nfssext-cfr, and kept nfssext-cfr from overwriting user macros named \cs{set}. Left contents entries alone that do not take two arguments, such as those of amsart, made all warning macros redefined by silence robust, and restricted the tabular lining numerals from whole floats to tabulars, so that captions keep the numerals of the text. Made the text commands, the declarations, \cs{code} and the Greek letters work in hyperref bookmarks. Left the Greek letter macros to \software{hep-math-font} when it is loaded.}
 %
 % \ifshort
 %<*documentation>
@@ -731,8 +730,10 @@ In bookmarks and document information "\code" keeps its argument as it is, inclu
 %    \end{macrocode}
 % \end{macro}
 % Wrap the letters and the variants which correspond to a different text letter.
+% The \software{hep-math-font} package defines these macros itself, so leave them alone if it is loaded.
 %    \begin{macrocode}
   \AddToHook{begindocument/end}{
+    \IfPackageLoadedF{hep-math-font}{
     \clist_map_inline:nn {
       Alpha, Beta, Gamma, Delta, Epsilon, Zeta, Eta, Theta, Iota, Kappa,
       Lambda, Mu, Nu, Xi, Omicron, Pi, Rho, Sigma, Tau, Upsilon, Phi,
@@ -746,6 +747,7 @@ In bookmarks and document information "\code" keeps its argument as it is, inclu
     \hepfont_greek_wrap:nn {vartheta}{thetasymbol}
     \hepfont_greek_wrap:nn {varrho}{rhosymbol}
     \hepfont_greek_wrap:nn {varpi}{pisymbol}
+    }
   }
   \ExplSyntaxOff
 \fi

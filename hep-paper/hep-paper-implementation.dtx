@@ -18,10 +18,10 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
-%<package>\ProvidesPackage{hep-paper}[2026/11/12 v2.7 Complete article preamble: fonts, math, title, references, floats, acronyms and bibliography]
+%<package>\ProvidesPackage{hep-paper}[2026/11/13 v2.6 Complete article preamble: fonts, math, title, references, floats, acronyms and bibliography]
 %<journal>\NeedsTeXFormat{LaTeX2e}[2022-06-01]
-%<journal>\ProvidesPackage{hep-journal}[2026/11/12 v2.7 Title data for journal classes]
-%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2026/11/12 v2.7 HEP-Paper documentation]
+%<journal>\ProvidesPackage{hep-journal}[2026/11/13 v2.6 Title data for journal classes]
+%<documentation>\ProvidesFile{hep-paper-documentation.tex}[2026/11/13 v2.6 HEP-Paper documentation]
 %
 %<*documentation>
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -54,7 +54,7 @@
 %
 % \fi
 %
-% \CheckSum{1806}
+% \CheckSum{2033}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -72,23 +72,21 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2019/01/01}{Created the monolithic HEP publication style file.}
-% \changes{v1.1}{2020/01/01}{Converted the package to documented LaTeX source.}
+% \changes{v1.1}{2020/01/01}{First release on CTAN: a documented style file for publications in high energy physics.}
 % \changes{v1.2}{2020/03/01}{Added package options for class, font, language, bibliography, citation, and compatibility controls.}
 % \changes{v1.3}{2020/05/01}{Added JHEP and JCAP options, RevTeX compatibility, improved acronym macros, math-font fixes, enumdescript and citation support, and moved the biblatex data model into its own file.}
-% \changes{v1.4}{2020/09/01}{Added automatic compatibility option selection, PubMed IDs, and bibliography and source-map updates.}
+% \changes{v1.4}{2020/08/01}{Added automatic compatibility option selection, PubMed IDs, and bibliography and source-map updates.}
 % \changes{v1.5}{2020/10/01}{Reduced the number of math alphabets used in sans-serif mode, added subtitle and title options, and switched to standard class options.}
-% \changes{v1.6}{2020/12/01}{Added two-column mode and tests.}
+% \changes{v1.6}{2020/12/01}{Added two-column mode.}
 % \changes{v1.7}{2021/06/01}{Split title, acronym, and bibliography logic into dedicated style files and expanded the title macros.}
 % \changes{v1.8}{2021/08/01}{Expanded thanks and reference-label handling, refined the title page, reimplemented selected physics macros, and made \cs{mathrm} produce upright Greek.}
-% \changes{v2.0}{2021/09/01}{Split independent logic into the modular hep-font, hep-math-font, hep-text, hep-math, hep-bibliography, hep-acronym, hep-reference, hep-title, and hep-float packages.}
-% \changes{v2.1}{2022/11/01}{Integrated the new CV, ERC, reference, and talk packages and propagated the v1.1 fixes from the split-out modules.}
-% \changes{v2.2}{2023/07/01}{Added hep-graphic, hep-plot, and hep-feynman and propagated bibliography, float, font, math, acronym, and documentation updates from the modules.}
-% \changes{v2.3}{2024/11/01}{Propagated the v1.3 module updates, including the CV private and bibliography split, talk logo and citation updates, math-font Greek rework, and math, text, and font fixes.}
-% \changes{v2.4}{2025/09/01}{Propagated the v1.4 module updates, including TU-engine font setup, title reprint, DOI, and arXiv support, float local and global placement, and starred command definitions.}
-% \changes{v2.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, and refreshed the aggregate documentation and README for the modular package suite.}
-% \changes{v2.6}{2026/11/11}{Disabled the additional symbol fonts in PoS compatibility mode to stay within the 16 math families, kept hep-acronym from loading titlesec in the amsart and PoS compatibility modes, restored the command form of \cs{abstract} in the JCAP and JHEP compatibility modes, passed the float placement to hep-float as separate options, aliased the backref footnote counter for cleveref, loaded atbegshi explicitly, read the class options from \cs{@classoptionslist} even if files are loaded before the class, kept the class font size with the defaults option and in all compatibility modes, kept titlesec out of the beamer mode, fixed repeated \cs{subtitle} calls in the REV\TeX{} and SISSA modes, removed spurious spaces from \cs{useparindent}, and provided \cs{orcid} in the SISSA mode.}
-% \changes{v2.7}{2026/11/12}{Kept the title macros of hep-title in the JHEP, JCAP, REV\TeX, Springer, amsart, and PoS compatibility modes with the new hep-journal package, which hands the title data to the journal, accepted the abstract conventions of all journals, let the jhep and jcap options load the journal styles, made title=false restore the title macros of the journals, and fixed an endless loop of the REV\TeX{} mode without title.}
+% \changes{v2.0}{2021/09/01}{Split independent logic into the modular hep-font, hep-math-font, hep-text, hep-math, hep-bibliography, hep-acronym, hep-title, and hep-float packages.}
+% \changes{v2.1}{2022/11/01}{Added the hep-reference package and included the v1.1 updates of the modules.}
+% \changes{v2.2}{2023/07/01}{Added hep-graphic, hep-plot, and hep-feynman and included the v1.2 updates of the modules.}
+% \changes{v2.3}{2024/11/01}{Included the v1.3 updates of the modules, among them the reworked Greek letters of hep-math-font.}
+% \changes{v2.4}{2025/09/01}{Included the v1.4 updates of the modules, among them the font setup for LuaLaTeX and XeLaTeX, reprint, DOI, and arXiv lines in the title, and local and global float placement.}
+% \changes{v2.5}{2026/08/01}{Raised the LaTeX format requirement and refreshed the documentation and README.}
+% \changes{v2.6}{2026/11/13}{Disabled the additional symbol fonts in PoS compatibility mode to stay within the 16 math families, kept hep-acronym from loading titlesec in the amsart and PoS compatibility modes, restored the command form of \cs{abstract} in the JCAP and JHEP compatibility modes, passed the float placement to hep-float as separate options, aliased the backref footnote counter for cleveref, loaded atbegshi explicitly, read the class options from \cs{@classoptionslist} even if files are loaded before the class, kept the class font size with the defaults option and in all compatibility modes, kept titlesec out of the beamer mode, fixed repeated \cs{subtitle} calls in the REV\TeX{} and SISSA modes, removed spurious spaces from \cs{useparindent}, and provided \cs{orcid} in the SISSA mode. Kept the title macros of hep-title in the JHEP, JCAP, REV\TeX, Springer, amsart, and PoS compatibility modes with the new hep-journal package, which hands the title data to the journal, accepted the abstract conventions of all journals, let the jhep and jcap options load the journal styles, made title=false restore the title macros of the journals, fixed an endless loop of the REV\TeX{} mode without title, added the koma compatibility mode for the KOMA-Script classes, and ignored compatibility options with a warning if their class or style is not available.}
 %
 % \ifshort
 %<*documentation>
@@ -192,6 +190,8 @@ The "references=false" option prevents the \software{cleveref} package \cite{cle
 The compatibility options activate the compatibility mode for certain classes and packages used for publications in high energy physics.
 They are mostly suitable combinations of options described in the previous section.
 If \software{hep-paper} is able to detect the presence of such a class or package, \ie if it is loaded before the \software{hep-paper} package, the compatibility mode is activated automatically.
+Classes are always loaded before, so the options are only needed for the \software{JHEP} and \software{JCAP} styles, which they load.
+An option is ignored with a warning if its class or style is not available.
 
 \DescribeMacro{beamer}
 The "beamer" option activates the \software{beamer} \cite{beamer} compatibility mode.
@@ -217,6 +217,10 @@ The "springer" option activates the compatibility mode the "svjour" class \cite{
 \DescribeMacro{amsart}
 The "amsart" option activates the compatibility mode for the "amsart" class.
 
+\DescribeMacro{koma}
+The "koma" option activates the compatibility mode for the \software{KOMA-Script} classes "scrartcl", "scrreprt", and "scrbook" \cite{koma-script}.
+It keeps the font size and the type area of the class and, like the "amsart" option, keeps \software{hep-acronym} from loading \software{titlesec}, which is not recommended with these classes.
+
 \subsubsection{Switching journals} \label{sec:journals}
 
 A document can be written with the "article" class and be switched to a journal by changing only the "\documentclass" line, or by adding the "jhep" or "jcap" option, which load the \software{JHEP} and \software{JCAP} styles.
@@ -233,6 +237,10 @@ The keywords are placed in the abstract.
 \item[amsart] Every author is followed by an "\address" for each affiliation, the emails, and the thanks.
 \item[PoS] Every author gets one "\author" with the affiliations and emails.
 The series becomes "\FullConference" and the title "\ShortTitle", unless these are given, and the keywords are appended to the abstract.
+\item[KOMA-Script] The series becomes the "\subject", preprint and arXiv numbers are placed in the "\titlehead", and the subtitle is passed on.
+The authors get the letters of their affiliations, unless there is only one affiliation, and their emails and thanks as footnotes.
+The affiliations are listed in "\publishers", below the authors and the date.
+The abstract and the keywords follow the title, and an abstract later in the document is typeset where it stands.
 \end{description}
 The abstract can be placed according to the conventions of any of these journals: after "\maketitle" (\software{article}, \software{svjour3}), before "\maketitle" in the document (REV\hologo{TeX}, \software{amsart}), or in the preamble, either as environment or in the command form "\abstract"\marg{text} (\software{JHEP}, \software{JCAP}, \software{PoS}).
 An abstract that follows the title only after other material is placed in the title of the next run, if the journal expects the abstract before the title.
@@ -642,6 +650,13 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{koma}
+% Provide the "koma" option for \software{KOMA-Script} compatibility mode.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{koma}
+%    \end{macrocode}
+% \end{macro}
+%
 % \subsection{Reactivation}
 %
 % \begin{macro}{eqnarray}
@@ -729,6 +744,34 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % \subsection{Set compatibility}
 %
+% \begin{macro}{\hep@compatibility}
+% The classes are detected below, so the compatibility options for classes are not needed.
+% Ignore the option "#1" with a warning if none of the classes "#2" is loaded, since the compatibility mode would fail with any other class.
+%    \begin{macrocode}
+\newcommand*\hep@compatibility[2]{%
+  \csname ifhep@#1\endcsname
+    \@tempswafalse
+    \@for\hep@tempa:=#2\do{\@ifclassloaded{\hep@tempa}{\@tempswatrue}{}}%
+    \if@tempswa\else
+      \PackageWarningNoLine{hep-paper}{%
+        Option `#1' ignored, since none of the classes\MessageBreak
+        #2 is loaded.\MessageBreak
+        The compatibility mode is selected automatically\MessageBreak
+        if one of them is loaded%
+      }%
+      \setkeys{hep}{#1=false}%
+    \fi
+  \fi
+}
+\hep@compatibility{amsart}{amsart}
+\hep@compatibility{koma}{scrartcl,scrreprt,scrbook}
+\hep@compatibility{springer}{svjour,svjour2,svjour3}
+\hep@compatibility{pos}{PoS}
+\hep@compatibility{beamer}{beamer}
+\hep@compatibility{revtex}{revtex4,revtex4-1,revtex4-2}
+%    \end{macrocode}
+% \end{macro}
+%
 % Set the "amsart" compatibility options using the \software{xpatch} package \cite{xpatch}.
 %    \begin{macrocode}
 \@ifclassloaded{amsart}{\setkeys{hep}{amsart}}{}
@@ -739,6 +782,18 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   \xpretocmd{\@adminfootnotes}{%
     \ifdefined\BHFN@OldMakefntext\let\@makefntext\BHFN@OldMakefntext\fi
   }{}{}
+\fi
+%    \end{macrocode}
+%
+% Set the "koma" compatibility options.
+% The type area of the class is kept, since \software{geometry} is only loaded without the "defaults" option.
+%    \begin{macrocode}
+\@ifclassloaded{scrartcl}{\setkeys{hep}{koma}}{}
+\@ifclassloaded{scrreprt}{\setkeys{hep}{koma}}{}
+\@ifclassloaded{scrbook}{\setkeys{hep}{koma}}{}
+\ifhep@koma
+  \setkeys{hep}{defaults}
+  \PassOptionsToPackage{titlesec=false}{hep-acronym}
 \fi
 %    \end{macrocode}
 %
@@ -803,9 +858,20 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % Define the SISSA conditional.
 % The "jhep" and "jcap" options load the \software{JHEP} and \software{JCAP} styles if they have not been loaded before.
+% These styles are distributed by the journals, so ignore the options with a warning if the styles are not installed.
 %    \begin{macrocode}
-\ifhep@jhep\RequirePackage{jheppub}\fi
-\ifhep@jcap\RequirePackage{jcappub}\fi
+\newcommand*\hep@sissa@style[2]{%
+  \csname ifhep@#1\endcsname
+    \IfFileExists{#2.sty}{\RequirePackage{#2}}{%
+      \PackageWarningNoLine{hep-paper}{%
+        Option `#1' ignored, since #2.sty is not installed%
+      }%
+      \setkeys{hep}{#1=false}%
+    }%
+  \fi
+}
+\hep@sissa@style{jhep}{jheppub}
+\hep@sissa@style{jcap}{jcappub}
 \@ifpackageloaded{jheppub}{\setkeys{hep}{jhep}}{}
 \@ifpackageloaded{jcappub}{\setkeys{hep}{jcap}}{}
 \newif\ifhep@sissa
@@ -972,8 +1038,9 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
   \ifhep@springer\def\hep@backend{springer}\else
   \ifhep@amsart\def\hep@backend{amsart}\else
   \ifhep@pos\def\hep@backend{pos}\else
+  \ifhep@koma\def\hep@backend{koma}\else
   \let\hep@backend\@empty
-  \fi\fi\fi\fi\fi\fi
+  \fi\fi\fi\fi\fi\fi\fi
   \ifx\hep@backend\@empty
     \RequirePackage{hep-title}
   \else
@@ -1162,7 +1229,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 % The \software{hep-journal} package is loaded by \software{hep-paper} in the compatibility modes instead of \software{hep-title}.
 % It provides the user interface of \software{hep-title}, stores the title data instead of typesetting them, and hands them to the macros of the journal class or style when the title is made.
-% The option names the journal: "jhep", "jcap", "revtex", "springer", "amsart", or "pos".
+% The option names the journal: "jhep", "jcap", "revtex", "springer", "amsart", "pos", or "koma".
 % Load the \software{environ} package \cite{environ}, define the messages and warn once for every macro without counterpart in the journal.
 %
 %    \begin{macrocode}
@@ -1512,7 +1579,8 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 % The abstract can be given in the preamble or in the document, as environment or in the command form "\abstract"\marg{text}, before or directly after "\maketitle".
 % Before the title is made the abstract is stored.
 % An abstract environment directly after "\maketitle" is stored as well and the title is made at the end of the environment.
-% An abstract later in the document is typeset by classes that allow this (\software{svjour3}); otherwise it is written to the auxiliary file and used in the next run.
+% An abstract later in the document is typeset by classes that allow this (\software{svjour3} and the \software{KOMA-Script} classes); otherwise it is written to the auxiliary file and used in the next run.
+% Classes without abstract, such as \software{scrbook}, get the environment as well, and the abstract is ignored with a warning.
 %
 %    \begin{macrocode}
 \cs_new_protected:Npn \__hep_jr_store_abstract:n #1
@@ -1548,6 +1616,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
       }
       {#1}
   }
+\cs_if_exist:NF \abstract { \newenvironment { abstract } { } { } }
 \RenewEnviron { abstract }
   { \exp_args:NV \__hep_jr_abstract:n \BODY }
 \cs_gset_eq:NN \__hep_jr_abstract_environment: \abstract
@@ -2393,6 +2462,177 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
           }
       }
   }
+%    \end{macrocode}
+%
+% \subsubsection{KOMA-Script}
+%
+% The series becomes the "\subject" and the preprint and arXiv numbers are placed right aligned in the "\titlehead".
+% The authors are separated by "\and" and get the letters of their affiliations in the order of first use, unless there is only one affiliation, and their emails and thanks as "\thanks".
+% The affiliations are listed in "\publishers", which follows the authors and the date.
+% The abstract follows the title, with the keywords appended.
+% The \software{scrbook} class has no abstract.
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_koma_code:
+  {
+    \__hep_jr_no_reprint:
+    \__hep_jr_no_orcid:
+    \tl_if_empty:NF \g__hep_jr_series_tl
+      {
+        \__hep_jr_emit:e
+          { \exp_not:N \subject { \exp_not:V \g__hep_jr_series_tl } }
+      }
+    \__hep_jr_koma_titlehead:
+    \__hep_jr_emit:e
+      { \exp_not:N \title { \exp_not:V \g__hep_jr_title_tl } }
+    \tl_if_empty:NF \g__hep_jr_subtitle_tl
+      {
+        \__hep_jr_emit:e
+          { \exp_not:N \subtitle { \exp_not:V \g__hep_jr_subtitle_tl } }
+      }
+    \__hep_jr_labels:N \l__hep_jr_tmp_seq
+    \prop_clear:N \l__hep_jr_letter_prop
+    \int_compare:nNnT { \seq_count:N \l__hep_jr_tmp_seq } > 1
+      {
+        \seq_map_indexed_inline:Nn \l__hep_jr_tmp_seq
+          {
+            \prop_put:Nne \l__hep_jr_letter_prop {##2}
+              { \int_to_alph:n {##1} }
+          }
+      }
+    \tl_clear:N \l__hep_jr_tmp_tl
+    \int_step_inline:nn { \g__hep_jr_authors_int }
+      {
+        \clist_clear:N \l__hep_jr_tmp_clist
+        \clist_map_inline:cn { \__hep_jr_field:nn {##1} { labels_clist } }
+          {
+            \prop_get:NnNT \l__hep_jr_letter_prop {####1}
+              \l__hep_jr_label_tl
+              {
+                \clist_put_right:NV \l__hep_jr_tmp_clist
+                  \l__hep_jr_label_tl
+              }
+          }
+        \tl_put_right:Ne \l__hep_jr_tmp_tl
+          {
+            \int_compare:nNnF {##1} = 1 { \exp_not:N \and }
+            \__hep_jr_name:n {##1}
+            \clist_if_empty:NF \l__hep_jr_tmp_clist
+              {
+                \exp_not:N \textsuperscript
+                  { \clist_use:Nn \l__hep_jr_tmp_clist { , } }
+              }
+            \seq_map_function:cN
+              { \__hep_jr_field:nn {##1} { email_seq } }
+              \__hep_jr_koma_email:n
+            \seq_map_function:cN
+              { \__hep_jr_field:nn {##1} { thanks_seq } }
+              \__hep_jr_pos_thanks:n
+          }
+      }
+    \__hep_jr_emit:e { \exp_not:N \author { \exp_not:V \l__hep_jr_tmp_tl } }
+    \__hep_jr_emit_date:
+    \seq_if_empty:NF \l__hep_jr_tmp_seq
+      {
+        \__hep_jr_emit:e
+          {
+            \exp_not:N \publishers
+              {
+                \seq_map_indexed_function:NN \l__hep_jr_tmp_seq
+                  \__hep_jr_koma_affil:nn
+              }
+          }
+      }
+    \__hep_jr_emit:n { \maketitle }
+    \cs_if_exist:NTF \__hep_jr_class_abstract:
+      {
+        \bool_if:NT \g__hep_jr_abstract_bool
+          {
+            \__hep_jr_emit:e
+              {
+                \exp_not:N \begin { abstract }
+                \exp_not:V \g__hep_jr_abstract_tl
+                \__hep_jr_koma_keywords:
+                \exp_not:N \end { abstract }
+              }
+          }
+      }
+      {
+        \bool_if:NT \g__hep_jr_abstract_bool
+          { \__hep_jr_unsupported:n { abstract } }
+      }
+    \bool_if:nT
+      {
+        ! \bool_if_p:N \g__hep_jr_abstract_bool
+        || ! \cs_if_exist_p:N \__hep_jr_class_abstract:
+      }
+      {
+        \tl_if_empty:NF \g__hep_jr_keywords_tl
+          { \__hep_jr_unsupported:n { keywords } }
+      }
+  }
+\cs_new:Npn \__hep_jr_koma_email:n #1
+  {
+    \exp_not:N \thanks
+      { E-mail:~ \exp_not:N \hep@email { \exp_not:n {#1} } }
+  }
+\cs_new:Npn \__hep_jr_koma_affil:nn #1#2
+  {
+    \int_compare:nNnF {#1} = 1 { \exp_not:N \par }
+    \int_compare:nNnT { \seq_count:N \l__hep_jr_tmp_seq } > 1
+      { \exp_not:N \textsuperscript { \int_to_alph:n {#1} } }
+    \__hep_jr_affil:n {#2}
+  }
+\cs_new:Npn \__hep_jr_koma_keywords:
+  {
+    \tl_if_empty:NF \g__hep_jr_keywords_tl
+      {
+        \exp_not:N \par \exp_not:N \medskip \exp_not:N \noindent
+        \exp_not:N \textit { Keywords: }
+        \c_space_tl \exp_not:V \g__hep_jr_keywords_tl
+      }
+  }
+%    \end{macrocode}
+%
+% Preprint and arXiv numbers are listed right aligned in the title head.
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_koma_titlehead:
+  {
+    \seq_set_eq:NN \l__hep_jr_tmp_seq \g__hep_jr_preprint_seq
+    \seq_map_inline:Nn \g__hep_jr_arxiv_seq
+      {
+        \seq_put_right:Ne \l__hep_jr_tmp_seq
+          { arXiv:~ \__hep_jr_arxiv_link:n {##1} }
+      }
+    \seq_if_empty:NF \l__hep_jr_tmp_seq
+      {
+        \__hep_jr_emit:e
+          {
+            \exp_not:N \titlehead
+              {
+                \exp_not:N \hfill
+                \exp_not:N \begin { tabular } [ t ] { @ { } r @ { } }
+                \seq_use:Nn \l__hep_jr_tmp_seq { \\ }
+                \exp_not:N \end { tabular }
+              }
+          }
+      }
+  }
+%    \end{macrocode}
+%
+% An abstract later in the document is typeset where it stands.
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \__hep_jr_koma_late_abstract:n #1
+  {
+    \cs_if_exist:NTF \__hep_jr_class_abstract:
+      {
+        \__hep_jr_class_abstract: #1
+        \__hep_jr_class_endabstract:
+      }
+      { \__hep_jr_unsupported:n { abstract } }
+  }
 \ExplSyntaxOff
 %    \end{macrocode}
 %
@@ -2480,9 +2720,24 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 %
 %</testSpringer>
 %
+% \subsection{KOMA-Script}
+%
+% The series becomes the subject and the preprint number is placed in the title head.
+%
+%<*testKOMA>
+%
+%    \begin{macrocode}
+\documentclass{scrartcl}
+\usepackage[lang=english]{hep-paper}
+\series{Series}
+\preprint{PREPRINT-1}
+%    \end{macrocode}
+%
+%</testKOMA>
+%
 % \subsection{Common part}
 %
-%<*testJHEP|testJCAP|testAMSArt|testPoS|testRevTeX|testSpringer>
+%<*testJHEP|testJCAP|testAMSArt|testPoS|testRevTeX|testSpringer|testKOMA>
 %
 %    \begin{macrocode}
 \usepackage[math]{blindtext}
@@ -2512,7 +2767,7 @@ The \software{arxiv-collector} python script \cite{arxiv-collector} alleviates t
 \end{document}
 %    \end{macrocode}
 %
-%</testJHEP|testJCAP|testAMSArt|testPoS|testRevTeX|testSpringer>
+%</testJHEP|testJCAP|testAMSArt|testPoS|testRevTeX|testSpringer|testKOMA>
 %
 % \subsection{Beamer}
 %

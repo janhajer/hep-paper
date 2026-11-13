@@ -6,8 +6,11 @@ dofile(maindir .. "/support/common.lua")
 -- The pdfTeX virtual fonts and the accent font are generated from the
 -- glyph tables in hep-math-font.sty by hep-math-font-vf.py (python3 with
 -- fontTools). They are installed with the package and shipped in the TDS
--- zip.
-installfiles = {"*.sty", "*.tfm", "*.vf", "*.enc", "*.map", "*.ttf"}
+-- zip, together with hep-math-font-vf.def, which records the version of the
+-- style file the fonts were generated from (the package falls back to the
+-- standard math alphabets if it is missing or differs).
+installfiles = {"*.sty", "hep-math-font-vf.def", "*.tfm", "*.vf", "*.enc",
+                "*.map", "*.ttf"}
 tdslocations = {
   "fonts/truetype/public/hep-math-font/*.ttf",
   "fonts/tfm/public/hep-math-font/*.tfm",
@@ -21,7 +24,8 @@ packtdszip = true
 -- unpacks this one as a dependency, so the result is cached and reused as
 -- long as the style file and the generator are unchanged.
 local fontcache = maindir .. "/build/font-cache"
-local fontglobs = {"*.tfm", "*.vf", "*.enc", "*.map", "*.ttf"}
+local fontglobs = {"*.tfm", "*.vf", "*.enc", "*.map", "*.ttf",
+                   "hep-math-font-vf.def"}
 local fontinputs = {"hep-math-font.sty", "hep-math-font-vf.py"}
 
 local function content(path)

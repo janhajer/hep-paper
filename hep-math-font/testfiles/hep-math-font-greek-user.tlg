@@ -1,0 +1,55 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: redefinitions kept
+============================================================
+macro:->\varepsilon 
+macro:->\varphi 
+\vareps: same
+============================================================
+============================================================
+TEST 2: redefinitions typeset
+============================================================
+\epsilon : same
+\phi : same
+\vareps : same
+\mathbf {\epsilon }: same
+\mathsf {\vareps }: same
+============================================================
+============================================================
+TEST 3: other letters unchanged
+============================================================
+> \box...=
+\hbox(6.94359+1.94444)x13.3715
+.\mathon
+.\U/hepalpha0/m/n/10 V
+.\kern0.03702
+.\U/hepalpha1/m/n/10 W
+.\kern0.34029
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================
+============================================================
+TEST 4: bookmarks
+============================================================
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textepsilon' on input line ....
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textphi' on input line ....
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textepsilon' on input line ....
+Package hyperref Warning: Glyph not defined in PD1 encoding,
+(hyperref)                removing `\textalpha' on input line ....
+[]
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line ....
+[\376\377\003\265\003\306\003\265\003\261]
+============================================================

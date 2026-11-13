@@ -18,8 +18,8 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
-%<package>\ProvidesPackage{hep-erc}[2026/11/11 v1.6 HEP-ERC style file]
-%<documentation>\ProvidesFile{hep-erc-documentation.tex}[2026/11/11 v1.6 hep-erc documentation]
+%<package>\ProvidesPackage{hep-erc}[2026/11/13 v1.6 HEP-ERC style file]
+%<documentation>\ProvidesFile{hep-erc-documentation.tex}[2026/11/13 v1.6 hep-erc documentation]
 %
 %<*documentation>
 \documentclass{ltxdoc}
@@ -50,7 +50,7 @@
 %
 % \fi
 %
-% \CheckSum{368}
+% \CheckSum{296}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -68,13 +68,11 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2021/09/01}{Created the ERC proposal package with hep-paper defaults, A4 proposal geometry, proposal counters, proposal summary formatting, section headings, month markers, and extracted header, B1, and B2 templates.}
-% \changes{v1.1}{2022/11/01}{Added the documented implementation and proposal templates for the v2.1 package suite.}
-% \changes{v1.2}{2023/07/01}{Refreshed package metadata and documentation formatting.}
-% \changes{v1.3}{2024/11/01}{Updated release metadata.}
-% \changes{v1.4}{2025/09/01}{Corrected package metadata wording and applied starred command definitions to proposal helpers.}
-% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, completed the abstract, user documentation, and README, and added README extraction to the installer.}
-% \changes{v1.6}{2026/11/11}{Removed a stray brace and invalid \software{hep-cv} options, passed the \software{titlesec} options before it is loaded, and made the month macros robust with PDF-string fallbacks and their width measured at use time, and typeset the abstract of the B1 and B2 templates, which printed it in brackets.}
+% \changes{v1.0}{2021/09/01}{Added to the hep-paper repository with release v2.1: ERC proposals with hep-paper defaults, A4 proposal geometry, counters, summary formatting, section headings, month markers, and header, B1, and B2 templates.}
+% \changes{v1.3}{2024/11/01}{Released without changes.}
+% \changes{v1.4}{2025/09/01}{Corrected the package description and applied starred command definitions.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement and completed the documentation and README.}
+% \changes{v1.6}{2026/11/13}{Removed a stray brace and invalid \software{hep-cv} options, passed the \software{titlesec} options before it is loaded, and made the month macros robust with PDF-string fallbacks and their width measured at use time, and typeset the abstract of the B1 and B2 templates, which printed it in brackets. Set the templates in 11pt, the minimum font size of ERC proposals, and took the month macros from \software{hep-cv}, so that both packages can be used together.}
 %
 % \ifshort
 %<*documentation>
@@ -122,7 +120,7 @@ The extracted B2 template sets this counter to "2".
 \DescribeMacro{\Oct}
 \DescribeMacro{\Nov}
 \DescribeMacro{\Dec}
-The month macros are compact table helpers that spread the month name evenly across the width of \enquote{May} in the current font and are intended for work-plan and Gantt-style tables.
+The month macros of the \software{hep-cv} package \cite{hep-cv}, loaded with its "date" option, are compact table helpers that spread the month name evenly across the width of \enquote{May} in the current font and are intended for work-plan and Gantt-style tables.
 They are robust and print the plain month name in PDF strings such as bookmarks.
 
 \DescribeMacro{hep-erc-header}
@@ -279,9 +277,12 @@ The header contains the common package loading, title data, month setting, and a
 %
 % \subsection{Curriculum Vitae}
 %
-% Load the \software{hep-cv} package \cite{hep-cv}.
+% Load the \software{hep-cv} package \cite{hep-cv} with the "date" option, which defines the month macros "\Jan" to "\Dec".
+% If \software{hep-cv} has already been loaded without this option, define them with its "\hep@date@setup".
 %    \begin{macrocode}
+\PassOptionsToPackage{date}{hep-cv}
 \RequirePackage{hep-cv}
+\ifdefined\Jan\else\hep@date@setup\fi
 %    \end{macrocode}
 %
 % Enable variable width table using the \software{tabulary} \cite{tabulary} package.
@@ -289,72 +290,6 @@ The header contains the common package loading, title data, month setting, and a
 \RequirePackage{tabulary}
 \setlength{\tymin}{4.5em}
 %    \end{macrocode}
-%
-% \subsection{Dates in CV}
-%
-% \begin{macro}{\heperc@longest@month}
-% \begin{macro}{\heperc@spread@even}
-% \begin{macro}{\heperc@month}
-% Define macros of equally distributed month names.
-% The width of the longest month name is measured each time in the current font.
-%    \begin{macrocode}
-\newlength{\heperc@longest@month}
-\newcommand*{\heperc@spread@even}[1]{\@tfor\next:=#1\do{\hfil\next}}
-\newcommand*{\heperc@month}[1]{%
-  \settowidth{\heperc@longest@month}{May}%
-  \makebox[\heperc@longest@month][c]{\heperc@spread@even{#1}}%
-}
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-%
-% \begin{macro}{\Jan}
-% \begin{macro}{\Feb}
-% \begin{macro}{\Mar}
-% \begin{macro}{\Apr}
-% \begin{macro}{\May}
-% \begin{macro}{\Jun}
-% \begin{macro}{\Jul}
-% \begin{macro}{\Aug}
-% \begin{macro}{\Sep}
-% \begin{macro}{\Oct}
-% \begin{macro}{\Nov}
-% \begin{macro}{\Dec}
-% Apply macros of equally distributed month names.
-% They are robust and print the plain month name in PDF strings such as bookmarks.
-%    \begin{macrocode}
-\RequirePackage{etoolbox}
-\newrobustcmd*{\Jan}{\heperc@month{Jan}}
-\newrobustcmd*{\Feb}{\heperc@month{Feb}}
-\newrobustcmd*{\Mar}{\heperc@month{Mar}}
-\newrobustcmd*{\Apr}{\heperc@month{Apr}}
-\newrobustcmd*{\May}{\heperc@month{May}}
-\newrobustcmd*{\Jun}{\heperc@month{Jun}}
-\newrobustcmd*{\Jul}{\heperc@month{Jul}}
-\newrobustcmd*{\Aug}{\heperc@month{Aug}}
-\newrobustcmd*{\Sep}{\heperc@month{Sep}}
-\newrobustcmd*{\Oct}{\heperc@month{Oct}}
-\newrobustcmd*{\Nov}{\heperc@month{Nov}}
-\newrobustcmd*{\Dec}{\heperc@month{Dec}}
-\pdfstringdefDisableCommands{%
-  \def\Jan{Jan}\def\Feb{Feb}\def\Mar{Mar}\def\Apr{Apr}%
-  \def\May{May}\def\Jun{Jun}\def\Jul{Jul}\def\Aug{Aug}%
-  \def\Sep{Sep}\def\Oct{Oct}\def\Nov{Nov}\def\Dec{Dec}%
-}
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 %
 % \subsection{tikz}
 %
@@ -461,7 +396,7 @@ The header contains the common package loading, title data, month setting, and a
 %<*B1>
 %
 %    \begin{macrocode}
-\documentclass{article}
+\documentclass[11pt]{article}
 
 \input{hep-erc-header}
 
@@ -586,7 +521,7 @@ Text \\
 %<*B2>
 %
 %    \begin{macrocode}
-\documentclass{article}
+\documentclass[11pt]{article}
 
 \input{hep-erc-header}
 

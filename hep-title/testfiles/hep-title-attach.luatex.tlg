@@ -14,45 +14,48 @@ affil=1, Maxaffil=2, authors=5, editors=2, endorsers=1
 ============================================================
 TEST 3: Stored lines
 ============================================================
-macro:->\protect \@nameuse {@sep1}\protect \Authfont Ann\email {ann@mail.com}\protect \@nameuse {@sep2}\protect \Authfont Bob\email {bob@mail.com}\orcid {0000-0002-1825-0097}\protect \@nameuse {@sep3}\protect \Authfont Cid \email {cid@mail.com}\protect \thanks {Funded}\protect \@nameuse {@sep4}\protect \Authfont Dan \email {dan@mail.com} \orcid {0000-0001-5109-3700}\protect \@nameuse {@sep5}\protect \Authfont Eli\email {eli@mail.com}\orcid {0000-0003-1415-9269}
-macro:->\protect \@nameuse {hep@editor@sep1}\protect \Authfont Eve\email {eve@mail.com}\protect \@nameuse {hep@editor@sep2}\protect \Authfont Fay
-macro:->\protect \@nameuse {hep@endorser@sep1}\protect \Authfont Gus\email {gus@mail.com}
+macro:->\protect \@nameuse {@sep1}\protect \Authfont \protect \hep@author@name  {Ann\email {ann@mail.com}}\protect \@nameuse {@sep2}\protect \Authfont \protect \hep@author@name  {Bob\email {bob@mail.com}\orcid {0000-0002-1825-0097}}\protect \@nameuse {@sep3}\protect \Authfont \protect \hep@author@name  {Cid \email {cid@mail.com}\protect \thanks {Funded}}\protect \@nameuse {@sep4}\protect \Authfont \protect \hep@author@name  {Dan \email {dan@mail.com} \orcid {0000-0001-5109-3700}}\protect \@nameuse {@sep5}\protect \Authfont \protect \hep@author@name  {Eli\email {eli@mail.com}\orcid {0000-0003-1415-9269}}
+macro:->\protect \@nameuse {hep@editor@sep1}\protect \Authfont \protect \hep@author@name  {Eve\email {eve@mail.com}}\protect \@nameuse {hep@editor@sep2}\protect \Authfont \protect \hep@author@name  {Fay}
+macro:->\protect \@nameuse {hep@endorser@sep1}\protect \Authfont \protect \hep@author@name  {Gus\email {gus@mail.com}}
 ============================================================
 ============================================================
 TEST 4: All authors without affiliations
 ============================================================
 > \box...=
-\hbox(7.16+1.93)x136.26999, direction TLT
-.\TU/lmr/m/n/10 A
-.\TU/lmr/m/n/10 n
-.\TU/lmr/m/n/10 n
+\hbox(7.16+1.93)x129.60999, direction TLT
+.\hbox(7.16+0.0)x18.62, direction TLT
+..\TU/lmr/m/n/10 A
+..\TU/lmr/m/n/10 n
+..\TU/lmr/m/n/10 n
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
-.\TU/lmr/m/n/10 B
-.\TU/lmr/m/n/10 o
-.\TU/lmr/m/n/10 b
+.\hbox(6.94+0.11)x17.64, direction TLT
+..\TU/lmr/m/n/10 B
+..\TU/lmr/m/n/10 o
+..\TU/lmr/m/n/10 b
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
-.\TU/lmr/m/n/10 C
-.\TU/lmr/m/n/10 i
-.\TU/lmr/m/n/10 d
-.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\hbox(7.05+0.22)x15.56, direction TLT
+..\TU/lmr/m/n/10 C
+..\TU/lmr/m/n/10 i
+..\TU/lmr/m/n/10 d
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
-.\TU/lmr/m/n/10 D
+.\hbox(6.83+0.11)x21.53, direction TLT
+..\TU/lmr/m/n/10 D
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 n
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
 .\TU/lmr/m/n/10 a
 .\TU/lmr/m/n/10 n
-.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
-.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 ,
-.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
-.\TU/lmr/m/n/10 a
-.\TU/lmr/m/n/10 n
 .\TU/lmr/m/n/10 d
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 E
-.\TU/lmr/m/n/10 l
-.\TU/lmr/m/n/10 i
+.\hbox(6.94+0.0)x12.37, direction TLT
+..\TU/lmr/m/n/10 E
+..\TU/lmr/m/n/10 l
+..\TU/lmr/m/n/10 i
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
 l. ...}

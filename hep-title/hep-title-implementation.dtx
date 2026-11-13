@@ -18,8 +18,8 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
-%<package>\ProvidesPackage{hep-title}[2026/11/12 v1.7 Extended title data: subtitles, series, preprints, affiliations, ORCID, keywords and abstracts]
-%<documentation>\ProvidesFile{hep-title-documentation.tex}[2026/11/12 v1.7 hep-title documentation]
+%<package>\ProvidesPackage{hep-title}[2026/11/13 v1.6 Extended title data: subtitles, series, preprints, affiliations, ORCID, keywords and abstracts]
+%<documentation>\ProvidesFile{hep-title-documentation.tex}[2026/11/13 v1.6 hep-title documentation]
 %
 %<*documentation>
 
@@ -55,7 +55,7 @@
 %
 % \fi
 %
-% \CheckSum{1206}
+% \CheckSum{1286}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -73,14 +73,13 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2021/09/01}{Created the dedicated title package with series, subtitle, preprint placement, author, affiliation, email, editor, endorser, keyword, and abstract handling.}
-% \changes{v1.1}{2022/11/01}{Added keyword metadata, improved author, affiliation, editor, and endorser documentation, made affiliation output conditional, and fixed affiliation references.}
-% \changes{v1.2}{2023/07/01}{Refreshed package metadata and documentation formatting.}
-% \changes{v1.3}{2024/11/01}{Updated release metadata.}
-% \changes{v1.4}{2025/09/01}{Added reprint blocks, \cs{doi}, \cs{arxiv}, multiple preprint and reprint lines, \cs{placereprint}, ragged preprint font, and applied starred command definitions.}
-% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, expanded title documentation and README, and added fuller title tests.}
-% \changes{v1.6}{2026/11/11}{Measured the preprint and reprint boxes into lengths before placing them, because \cs{put} no longer accepts \software{calc} expressions, and dropped the \software{picture} package, stored the authors unexpanded and set the \PDF author, title, and keywords at \cs{maketitle} without overwriting user settings, dropping labelled footnotes and turning line breaks into spaces, made \cs{author} compatible with the \software{hyperref} option \texttt{pdfusetitle}, fixed the separator between two endorsers, removed spurious spaces before the author line, the \cs{orcmail} mark, and in \cs{reprint}, restricted the ragged affiliation margins to the affiliation block, made \cs{email} usable in \PDF strings, generated the editor and endorser macros from a common definition, added \cs{orcid}, which shares the footnote with \cs{email}, allowed \cs{email}, \cs{orcid}, \cs{orcmail}, and \cs{thanks} directly after \cs{author}, \cs{editor}, and \cs{endorser}, printed all authors if there are no affiliations, kept editors out of the author blocks, and removed a spurious space after the \cs{thanks} mark.}
-% \changes{v1.7}{2026/11/12}{Accepted the abstract also before \cs{maketitle}, in the preamble and in the command form \cs{abstract}\marg{text}, and placed it after the title.}
+% \changes{v1.0}{2021/09/01}{First release on CTAN: series, subtitle, preprint placement, authors, affiliations, emails, editors, endorsers, keywords, and abstracts.}
+% \changes{v1.1}{2022/11/01}{Added keyword metadata, printed affiliations only when present, and fixed affiliation references.}
+% \changes{v1.2}{2023/07/01}{Refreshed the documentation.}
+% \changes{v1.3}{2024/11/01}{Released without changes.}
+% \changes{v1.4}{2025/09/01}{Added reprint blocks, \cs{doi}, \cs{arxiv}, multiple preprint and reprint lines, and \cs{placereprint}, set preprints ragged, and applied starred command definitions.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement and expanded the documentation and README.}
+% \changes{v1.6}{2026/11/13}{Measured the preprint and reprint boxes into lengths before placing them, because \cs{put} no longer accepts \software{calc} expressions, and dropped the \software{picture} package, stored the authors unexpanded and set the \PDF author, title, and keywords at \cs{maketitle} without overwriting user settings, dropping labelled footnotes and turning line breaks into spaces, made \cs{author} compatible with the \software{hyperref} option \texttt{pdfusetitle}, fixed the separator between two endorsers, removed spurious spaces before the author line, the \cs{orcmail} mark, and in \cs{reprint}, restricted the ragged affiliation margins to the affiliation block, made \cs{email} usable in \PDF strings, generated the editor and endorser macros from a common definition, added \cs{orcid}, which shares the footnote with \cs{email}, allowed \cs{email}, \cs{orcid}, \cs{orcmail}, and \cs{thanks} directly after \cs{author}, \cs{editor}, and \cs{endorser}, printed all authors if there are no affiliations, kept editors out of the author blocks, and removed a spurious space after the \cs{thanks} mark. Accepted the abstract also before \cs{maketitle}, in the preamble and in the command form \cs{abstract}\marg{text}, and placed it after the title, and broke affiliations preferably after commas, but only as long as this needs no additional line.}
 %
 % \ifshort
 %<*documentation>
@@ -246,7 +245,8 @@ The "\placereprint" hook places the reprint block on the first page, and "\repri
 % Print a URL or email address in typewriter font without \software{hyperref}.
 % As for "\nolinkurl", the text is printed verbatim, so that characters such as "_", "#", "&", and "~" need no escaping.
 % The escaped characters "\%", "\#", "\&", "\_", "\$", and "\~" become the characters themselves.
-% The \software{hep-text} package defines the same macro, so define it only once.
+% Macros in the text, such as the fields of \software{biblatex}, are expanded first.
+% The \software{hep-text} and \software{hep-bibliography} packages define the same macro, so define it only once.
 %    \begin{macrocode}
 \ExplSyntaxOn
 \cs_if_exist:NF \hep@url@text {
@@ -255,6 +255,8 @@ The "\placereprint" hook places the reprint block on the first page, and "\repri
   \cs_new_protected:Npn \hep@url@text #1 {
     \tl_set:Nn \l__hep_url_tl {#1}
     \regex_replace_all:nnN { \cP. } { \cO\# } \l__hep_url_tl
+    \protected@edef \l__hep_url_tl { \l__hep_url_tl }
+    \tl_remove_all:Nn \l__hep_url_tl { \protect }
     \tl_replace_all:NnV \l__hep_url_tl { \# } \c_hash_str
     \tl_replace_all:NnV \l__hep_url_tl { \% } \c_percent_str
     \tl_replace_all:NnV \l__hep_url_tl { \& } \c_ampersand_str
@@ -650,7 +652,7 @@ The "\placereprint" hook places the reprint block on the first page, and "\repri
     \expandafter\xdef\csname hep@#1list\endcsname{%
       \the\@temptokena%
       \protect\@nameuse{hep@#1@sep\number\value{#1s}}%
-      \protect\Authfont#3%
+      \protect\Authfont\hep@author@name{#3}%
       \if\relax#2\relax\else\protect\hep@multi@ref{#2}\fi%
     }%
   \endgroup%
@@ -792,13 +794,25 @@ The "\placereprint" hook places the reprint block on the first page, and "\repri
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\hep@author@name}
+% With many affiliations \software{authblk} typesets the authors as a centred paragraph, in which every break costs the same.
+% Each name is boxed, so that the lines break only between the names, at the commas or around \enquote{and}, and names are neither broken nor hyphenated.
+% Inside "\maketitle" "\thanks", "\email", and "\orcid" only place a mark in the box and store the footnote text; "\footnote" is made to do the same, since its text would be lost in the box.
+% The final "\unskip" removes a space after the name, such as the one restored after a contact mark.
+%    \begin{macrocode}
+\DeclareRobustCommand*\hep@author@name[1]{%
+  \mbox{\let\footnote\thanks#1\unskip}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
 % Switch authblk to a label ref system for affiliations using the \software{xpatch} package \cite{xpatch}.
 %    \begin{macrocode}
 \RequirePackage{xpatch}
 \xpatchcmd{\author}{%
   \protect\Authfont#2\AB@authnote{\AB@note}%
 }{%
-  \protect\Authfont#2%
+  \protect\Authfont\hep@author@name{#2}%
   \if\relax#1\relax\else\unskip\protect\hep@multi@ref{\AB@note}\fi%
 }{}{}
 %    \end{macrocode}
@@ -872,13 +886,45 @@ The "\placereprint" hook places the reprint block on the first page, and "\repri
 %
 % \begin{macro}{\affiliation}
 % Define the "\affiliation" macro, ensure that linebreaks happen after a comma.
+% The penalty is robust, so that \software{authblk} stores it unexpanded and the column mode is checked when the affiliation is typeset.
+% With the flexible margins of the affiliation block a break with a penalty of $-50$ has negative demerits, so on its own the comma penalty would add lines.
+% Therefore each affiliation, including its label, is measured twice in the current paragraph shape: once without comma penalties and with a high "\linepenalty", which gives the smallest number of lines, and once as it is typeset.
+% "\looseness" then asks for the smallest number of lines, among which the breaks after commas are preferred.
+% Footnotes are dropped while measuring, so that they are not counted twice, and "\everypar" is cleared and the paragraph ends with the primitive "\par", so that the pending list item of the "center" environment is left for the affiliation itself.
 %    \begin{macrocode}
 \newcommand*\hep@penalty{\if@twocolumn85\else50\fi}
-\newcommand*\hep@active@comma{,\penalty-\hep@penalty\relax}
+\newif\ifhep@affil@break\hep@affil@breaktrue
+\DeclareRobustCommand*\hep@comma@penalty{%
+  \ifhep@affil@break\penalty-\hep@penalty\relax\fi%
+}
+\newcommand*\hep@active@comma{,\hep@comma@penalty}
 \newcommand*\hep@cat@comma@active{\catcode`\,\active}
 {\hep@cat@comma@active\gdef,{\hep@active@comma}}
-\newcommand*\hep@affil[1]{\endgroup\affil{#1}}
-\def\hep@affil@opt[#1]#2{\endgroup\affil[#1]{#2}}
+\newcount\hep@affil@lines
+\newcommand\hep@affil@measure[2]{%
+  \setbox\z@\vbox{%
+    \let\footnote\@gobble\let\thanks\@gobble%
+    \let\footnotemark\@empty%
+    \everypar{}\looseness\z@\noindent%
+    \if\relax#1\relax\else\theaffiliation\fi#2\@@par%
+    \global\hep@affil@lines\prevgraf%
+  }%
+}
+\DeclareRobustCommand\hep@affil@text[2]{%
+  \begingroup%
+    \hep@affil@measure{#1}{#2}%
+    \count@\hep@affil@lines%
+    \hep@affil@breakfalse\linepenalty\@m%
+    \hep@affil@measure{#1}{#2}%
+    \advance\count@-\hep@affil@lines%
+    \count@-\count@%
+  \expandafter\endgroup\expandafter\looseness\the\count@\relax%
+  #2%
+}
+\newcommand*\hep@affil[1]{\endgroup\affil{\hep@affil@text{}{#1}}}
+\def\hep@affil@opt[#1]#2{%
+  \endgroup\affil[#1]{\hep@affil@text{#1}{#2}}%
+}
 \DeclareRobustCommand\hep@affiliation{%
   \@ifnextchar[{\hep@affil@opt}{\hep@affil}%
 }
@@ -1116,6 +1162,7 @@ The "\placereprint" hook places the reprint block on the first page, and "\repri
   \cs_set_eq:NN \email \__hep_pdf_drop_opt:w
   \cs_set_eq:NN \orcid \use_none:n
   \cs_set_eq:NN \orcmail \use_none:nn
+  \cs_set_eq:NN \hep@author@name \use:n
 }
 \ExplSyntaxOff
 %    \end{macrocode}

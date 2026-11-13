@@ -27,17 +27,18 @@ TEST 5: Author line: affiliation marks and email footnote marks
 ============================================================
 > \box...=
 \hbox(9.91026+2.33331)x136.57004
-.\OT1/cmr/m/n/12 A
-.\OT1/cmr/m/n/12 n
-.\OT1/cmr/m/n/12 n
-.\penalty 10000
-.\hbox(5.50977+1.55518)x3.77686, shifted -4.3547
-..\pdfcolorstack 0 push {0 g 0 G}
-..\TS1/cmr/m/n/8 ^^84
-..\pdfcolorstack 0 pop
-.\penalty 10000
-.\glue 0.5
-.\kern 0.0
+.\hbox(9.86447+0.0)x26.14052
+..\OT1/cmr/m/n/12 A
+..\OT1/cmr/m/n/12 n
+..\OT1/cmr/m/n/12 n
+..\penalty 10000
+..\hbox(5.50977+1.55518)x3.77686, shifted -4.3547
+...\pdfcolorstack 0 push {0 g 0 G}
+...\TS1/cmr/m/n/8 ^^84
+...\pdfcolorstack 0 pop
+..\penalty 10000
+..\glue 0.5
+..\kern 0.0
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.1}
 .\hbox(3.44444+0.0)x4.25006, shifted -4.3547
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -65,9 +66,10 @@ TEST 5: Author line: affiliation marks and email footnote marks
 .\pdfendlink
 .\OT1/cmr/m/n/12 ,
 .\glue 3.91663 plus 2.44789 minus 1.04443
-.\OT1/cmr/m/n/12 B
-.\OT1/cmr/m/n/12 o
-.\OT1/cmr/m/n/12 b
+.\hbox(8.33331+0.0)x20.7234
+..\OT1/cmr/m/n/12 B
+..\OT1/cmr/m/n/12 o
+..\OT1/cmr/m/n/12 b
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.2}
 .\hbox(5.55556+0.0)x4.72229, shifted -4.3547
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -99,17 +101,18 @@ TEST 5: Author line: affiliation marks and email footnote marks
 .\OT1/cmr/m/n/12 n
 .\OT1/cmr/m/n/12 d
 .\glue 3.91663 plus 1.95831 minus 1.30554
-.\OT1/cmr/m/n/12 C
-.\OT1/cmr/m/n/12 i
-.\OT1/cmr/m/n/12 d
-.\penalty 10000
-.\hbox(5.50977+1.55518)x3.77686, shifted -4.3547
-..\pdfcolorstack 0 push {0 g 0 G}
-..\TS1/cmr/m/n/8 ^^85
-..\pdfcolorstack 0 pop
-.\penalty 10000
-.\glue 0.5
-.\kern 0.0
+.\hbox(9.86447+0.0)x22.55444
+..\OT1/cmr/m/n/12 C
+..\OT1/cmr/m/n/12 i
+..\OT1/cmr/m/n/12 d
+..\penalty 10000
+..\hbox(5.50977+1.55518)x3.77686, shifted -4.3547
+...\pdfcolorstack 0 push {0 g 0 G}
+...\TS1/cmr/m/n/8 ^^85
+...\pdfcolorstack 0 pop
+..\penalty 10000
+..\glue 0.5
+..\kern 0.0
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.3}
 .\hbox(3.44444+0.0)x3.77783, shifted -4.3547
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -128,10 +131,11 @@ TEST 6: Editor line
 ============================================================
 > \box...=
 \hbox(9.91026+2.33331)x81.87735
-.\OT1/cmr/m/n/12 E
-.\OT1/cmr/m/n/12 v
-.\kern-0.32639
-.\OT1/cmr/m/n/12 e
+.\hbox(8.2+0.0)x19.09148
+..\OT1/cmr/m/n/12 E
+..\OT1/cmr/m/n/12 v
+..\kern-0.32639
+..\OT1/cmr/m/n/12 e
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.4}
 .\hbox(5.55556+0.0)x4.72229, shifted -4.3547
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -146,11 +150,12 @@ TEST 6: Editor line
 .\OT1/cmr/m/n/12 n
 .\OT1/cmr/m/n/12 d
 .\glue 3.91663 plus 1.95831 minus 1.30554
-.\OT1/cmr/m/n/12 F
-.\kern-0.97916
-.\OT1/cmr/m/n/12 a
-.\kern-0.32639
-.\OT1/cmr/m/n/12 y
+.\hbox(8.2+2.33331)x18.4387
+..\OT1/cmr/m/n/12 F
+..\kern-0.97916
+..\OT1/cmr/m/n/12 a
+..\kern-0.32639
+..\OT1/cmr/m/n/12 y
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.4}
 .\hbox(5.55556+0.0)x4.72229, shifted -4.3547
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -185,9 +190,10 @@ TEST 7: Endorser line with two endorsers
 ============================================================
 > \box...=
 \hbox(8.33331+0.0)x74.12029
-.\OT1/cmr/m/n/12 G
-.\OT1/cmr/m/n/12 u
-.\OT1/cmr/m/n/12 s
+.\hbox(8.2+0.0)x20.38174
+..\OT1/cmr/m/n/12 G
+..\OT1/cmr/m/n/12 u
+..\OT1/cmr/m/n/12 s
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.1}
 .\hbox(3.44444+0.0)x4.25006, shifted -4.3547
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -202,9 +208,10 @@ TEST 7: Endorser line with two endorsers
 .\OT1/cmr/m/n/12 n
 .\OT1/cmr/m/n/12 d
 .\glue 3.91663 plus 1.95831 minus 1.30554
-.\OT1/cmr/m/n/12 H
-.\OT1/cmr/m/n/12 a
-.\OT1/cmr/m/n/12 l
+.\hbox(8.33331+0.0)x17.94704
+..\OT1/cmr/m/n/12 H
+..\OT1/cmr/m/n/12 a
+..\OT1/cmr/m/n/12 l
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.3}
 .\hbox(3.44444+0.0)x3.77783, shifted -4.3547
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -261,9 +268,10 @@ TEST 8: Endorser and affiliation block
 ..\OT1/cmr/m/it/12 :
 ..\glue 5.40004 plus 3.60004 minus 0.6
 ..\hbox(8.33331+0.0)x74.12029
-...\OT1/cmr/m/n/12 G
-...\OT1/cmr/m/n/12 u
-...\OT1/cmr/m/n/12 s
+...\hbox(8.2+0.0)x20.38174
+....\OT1/cmr/m/n/12 G
+....\OT1/cmr/m/n/12 u
+....\OT1/cmr/m/n/12 s
 ...\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.1}
 ...\hbox(3.44444+0.0)x4.25006, shifted -4.3547
 ....\pdfcolorstack 0 push {0 g 0 G}
@@ -278,9 +286,10 @@ TEST 8: Endorser and affiliation block
 ...\OT1/cmr/m/n/12 n
 ...\OT1/cmr/m/n/12 d
 ...\glue 3.91663 plus 1.95831 minus 1.30554
-...\OT1/cmr/m/n/12 H
-...\OT1/cmr/m/n/12 a
-...\OT1/cmr/m/n/12 l
+...\hbox(8.33331+0.0)x17.94704
+....\OT1/cmr/m/n/12 H
+....\OT1/cmr/m/n/12 a
+....\OT1/cmr/m/n/12 l
 ...\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.3}
 ...\hbox(3.44444+0.0)x3.77783, shifted -4.3547
 ....\pdfcolorstack 0 push {0 g 0 G}
@@ -965,9 +974,10 @@ TEST 14: Third endorser and third editor
 ============================================================
 > \box...=
 \hbox(6.94444+1.94444)x87.00018
-.\OT1/cmr/m/n/10 G
-.\OT1/cmr/m/n/10 u
-.\OT1/cmr/m/n/10 s
+.\hbox(6.83331+0.0)x17.34724
+..\OT1/cmr/m/n/10 G
+..\OT1/cmr/m/n/10 u
+..\OT1/cmr/m/n/10 s
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.1}
 .\hbox(3.01389+0.0)x3.98613, shifted -3.62892
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -979,9 +989,10 @@ TEST 14: Third endorser and third editor
 .\pdfendlink
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\OT1/cmr/m/n/10 H
-.\OT1/cmr/m/n/10 a
-.\OT1/cmr/m/n/10 l
+.\hbox(6.94444+0.0)x15.27782
+..\OT1/cmr/m/n/10 H
+..\OT1/cmr/m/n/10 a
+..\OT1/cmr/m/n/10 l
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.3}
 .\hbox(3.01389+0.0)x3.55557, shifted -3.62892
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -997,18 +1008,20 @@ TEST 14: Third endorser and third editor
 .\OT1/cmr/m/n/10 n
 .\OT1/cmr/m/n/10 d
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 I
-.\OT1/cmr/m/n/10 a
-.\OT1/cmr/m/n/10 n
+.\hbox(6.83331+0.0)x14.1667
+..\OT1/cmr/m/n/10 I
+..\OT1/cmr/m/n/10 a
+..\OT1/cmr/m/n/10 n
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
 l. ...}
 > \box...=
 \hbox(8.49002+1.94444)x95.12523
-.\OT1/cmr/m/n/10 E
-.\OT1/cmr/m/n/10 v
-.\kern-0.27779
-.\OT1/cmr/m/n/10 e
+.\hbox(6.83331+0.0)x16.25003
+..\OT1/cmr/m/n/10 E
+..\OT1/cmr/m/n/10 v
+..\kern-0.27779
+..\OT1/cmr/m/n/10 e
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.4}
 .\hbox(4.8611+0.0)x4.41669, shifted -3.62892
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -1020,11 +1033,12 @@ l. ...}
 .\pdfendlink
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\OT1/cmr/m/n/10 F
-.\kern-0.83334
-.\OT1/cmr/m/n/10 a
-.\kern-0.27779
-.\OT1/cmr/m/n/10 y
+.\hbox(6.83331+1.94444)x15.69449
+..\OT1/cmr/m/n/10 F
+..\kern-0.83334
+..\OT1/cmr/m/n/10 a
+..\kern-0.27779
+..\OT1/cmr/m/n/10 y
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.4}
 .\hbox(4.8611+0.0)x4.41669, shifted -3.62892
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -1056,10 +1070,11 @@ l. ...}
 .\OT1/cmr/m/n/10 n
 .\OT1/cmr/m/n/10 d
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 J
-.\OT1/cmr/m/n/10 o
-.\kern0.27779
-.\OT1/cmr/m/n/10 e
+.\hbox(6.83331+0.0)x14.86115
+..\OT1/cmr/m/n/10 J
+..\OT1/cmr/m/n/10 o
+..\kern0.27779
+..\OT1/cmr/m/n/10 e
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
 l. ...}

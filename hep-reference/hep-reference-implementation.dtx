@@ -18,8 +18,8 @@
 % \iffalse
 %
 %<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
-%<package>\ProvidesPackage{hep-reference}[2026/11/12 v1.7 Hyperref and cleveref setup with unbreakable references, footnote back-links and PDF metadata]
-%<documentation>\ProvidesFile{hep-reference-documentation.tex}[2026/11/12 v1.7 HEP-reference documentation]
+%<package>\ProvidesPackage{hep-reference}[2026/11/13 v1.6 Hyperref and cleveref setup with unbreakable references, footnote back-links and PDF metadata]
+%<documentation>\ProvidesFile{hep-reference-documentation.tex}[2026/11/13 v1.6 HEP-reference documentation]
 %
 %<*documentation>
 \documentclass{ltxdoc}
@@ -50,7 +50,7 @@
 %
 % \fi
 %
-% \CheckSum{245}
+% \CheckSum{293}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -68,14 +68,12 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2011/08/01}{Provided hidden hyperref links, PDF metadata setup, footnote backlinks, non-breaking references and citations, cleveref integration, subreference helpers, and title-page affiliation reference formats.}
-% \changes{v1.1}{2022/11/01}{Rescoped the package metadata and documentation, added keyword metadata, added usecommand and textlabel, and made the amsmath, subcaption, and hep-title patches conditional on the corresponding packages.}
-% \changes{v1.2}{2023/07/01}{Updated documentation formatting and package metadata, made PDF titles subtitle-aware, namespaced the temporary command helper, loaded etoolbox for textlabel, and refreshed the README.}
-% \changes{v1.3}{2024/11/01}{Updated the release metadata for the 2024 package version.}
-% \changes{v1.4}{2025/09/01}{Applied starred command definitions consistently, guarded missing titles in PDF metadata, and stopped setting the PDF author from the raw author macro.}
-% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, moved PDF metadata setup to the maketitle hook, and expanded the documentation and README to cover the package interface.}
-% \changes{v1.6}{2026/11/11}{Kept the optional footnote argument, made ref, eqref, subref, and cite robust, fixed line breaks, equation references, citations, and math in PDF strings, removed the negative space from textlabel references, and removed spurious spaces and split links from eqcrefname, left the PDF title and keywords to hep-title and to the user, and loaded amsmath before cleveref, so that the package can be loaded first.}
-% \changes{v1.7}{2026/11/12}{Left the PDF title and keywords also to hep-journal and dropped a missing title, which looped in the PDF string.}
+% \changes{v1.1}{2022/11/01}{First release on CTAN: hidden hyperref links, PDF metadata including keywords, footnote back-links, non-breaking references and citations, cleveref integration, subreferences, \cs{usecommand}, \cs{textlabel}, and affiliation reference formats.}
+% \changes{v1.2}{2023/07/01}{Included the subtitle in the PDF title.}
+% \changes{v1.3}{2024/11/01}{Released without changes.}
+% \changes{v1.4}{2025/09/01}{Applied starred command definitions consistently, handled missing titles in the PDF metadata, and stopped setting the PDF author from the raw author macro.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, set the PDF metadata at \cs{maketitle}, and expanded the documentation and README.}
+% \changes{v1.6}{2026/11/13}{Kept the optional footnote argument, made ref, eqref, subref, and cite robust, fixed line breaks, equation references, citations, and math in PDF strings, removed the negative space from textlabel references, and removed spurious spaces and split links from eqcrefname, left the PDF title and keywords to hep-title and to the user, and loaded amsmath before cleveref, so that the package can be loaded first. Left the PDF title and keywords also to hep-journal and dropped a missing title, which looped in the PDF string. Made \cs{cref} work with \cs{textlabel}, and kept skips wider than an inter-word space before references and citations.}
 %
 % \ifshort
 %<*documentation>
@@ -130,6 +128,7 @@ If the optional plural is omitted, the plural form is built by appending \enquot
 \DescribeMacro{\subref}
 \DescribeMacro{\cite}
 The "\ref", "\eqref", "\subref", and "\cite" commands are adjusted so that a preceding inter-word space is converted to a non-breaking space.
+Wider spaces, such as "\quad", are kept.
 This avoids line starts such as \enquote{[1]} or \enquote{(2)} without requiring repeated manual uses of "~\cite"\marg{key}.
 The adjusted commands are robust, so they can be used in section titles and captions.
 When \software{amsmath} is loaded, "\eqref" is routed through "\labelcref".
@@ -145,6 +144,7 @@ They also receive backlinks to the text location from which they were called.
 \DescribeMacro{\textlabel}
 The "\textlabel"\oarg{reference format}\marg{key}\oarg{text format}\marg{text} macro creates a hyperlink target and a label for a piece of text while also printing the text.
 The first optional argument formats the text stored in the label and the second optional argument formats the printed text.
+The text is the reference of both "\ref" and "\cref".
 
 \DescribeMacro{\usecommand}
 The "\usecommand"\oarg{number of arguments}\marg{definition} helper defines a temporary command with the requested number of arguments and immediately applies it to the following arguments.
@@ -317,12 +317,19 @@ The "\usecommand"\oarg{number of arguments}\marg{definition} helper defines a te
 %
 % \begin{macro}{\textlabel}
 % Define the "\textlabel" macro allowing to link to a piece of text using the \software{etoolbox} pcakage \cite{etoolbox}.
+% The label is also written in the form of \software{cleveref}, with the type "textlabel" and a value that grows by two with every text label, so that "\cref" lists several text labels in the order of the document without combining them into ranges.
 %    \begin{macrocode}
 \RequirePackage{etoolbox}
+\newcount\hep@textlabel
 \NewDocumentCommand\textlabel{O{}mO{}m}{%
+  \global\advance\hep@textlabel\tw@
   \protected@write\@auxout{}{%
     \string\newlabel{#2}{%
       {\protecting{#1{#4}}}{\thepage}{#4}{#2}{}%
+    }%
+    \string\newlabel{#2@cref}{%
+      {[textlabel][\the\hep@textlabel][]\protecting{#1{#4}}}%
+      {[1][\arabic{page}][]\thepage}{}{}{}%
     }%
   }%
   \hypertarget{#2}{}%
@@ -344,19 +351,40 @@ The "\usecommand"\oarg{number of arguments}\marg{definition} helper defines a te
 %    \end{macrocode}
 % \end{macro}
 %
-%\begin{macro}{\no@break@before}
-% Define a macro able to prevent line breaks.
+% References to text labels consist of the text alone.
 %    \begin{macrocode}
+\crefformat{textlabel}{#2#1#3}
+\Crefformat{textlabel}{#2#1#3}
+\crefmultiformat{textlabel}{#2#1#3}{\crefpairconjunction#2#1#3}%
+  {\crefmiddleconjunction#2#1#3}{\creflastconjunction#2#1#3}
+\Crefmultiformat{textlabel}{#2#1#3}{\crefpairconjunction#2#1#3}%
+  {\crefmiddleconjunction#2#1#3}{\creflastconjunction#2#1#3}
+%    \end{macrocode}
+%
+%\begin{macro}{\no@break@before}
+%\begin{macro}{\hep@space@width}
+% Define a macro able to prevent line breaks.
+% A preceding inter-word space becomes a non-breaking space.
+% Wider skips, such as "\quad", are kept, so only a skip that is not wider than the widest inter-word space of the current font is replaced.
+% That is its width after a sentence, or the "\spaceskip" or "\xspaceskip" if they are set and wider.
+%    \begin{macrocode}
+\newdimen\hep@space@width
 \newcommand*\no@break@before{%
   \relax\ifvmode\else%
     \ifhmode%
       \ifdim\lastskip > 0pt%
-        \relax\unskip\nobreakspace%
+        \hep@space@width\dimexpr\fontdimen2\font+\fontdimen7\font\relax%
+        \ifdim\spaceskip>\hep@space@width\hep@space@width\spaceskip\fi%
+        \ifdim\xspaceskip>\hep@space@width\hep@space@width\xspaceskip\fi%
+        \ifdim\lastskip>\hep@space@width\else%
+          \unskip\nobreakspace%
+        \fi%
       \fi%
     \fi%
   \fi%
 }
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \begin{macro}{\subref}

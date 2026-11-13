@@ -152,6 +152,13 @@
   \SHOWHBOX{$\dv xf$}%
 }
 
+% The fraction follows the math style; the second star gives \tfrac.
+\TEST{Derivatives: math style}{%
+  \SHOWHBOX{$e^{\dv[f]x}$}%
+  \SHOWHBOX{$\displaystyle\dv[f]x*^n$}%
+  \SHOWHBOX{$\displaystyle\pdv[f]x*$}%
+}
+
 \TEST{Partial derivatives}{%
   \SHOWHBOX{$\pdv[f]x$}%
   \SHOWHBOX{$\pdv[f]x[y]$}%

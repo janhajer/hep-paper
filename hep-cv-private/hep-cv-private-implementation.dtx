@@ -69,9 +69,8 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2019/01/01}{Created the private CV bibliography filters and environments for work, visits, education, supervision, funding, talks, publications, software, theses, and service entries.}
-% \changes{v1.3}{2024/11/01}{Split the private CV helpers into a dedicated documented package with keyword filters, CV bibliography environments, and Indico e-print formatting.}
-% \changes{v1.4}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, replaced the stub documentation with package documentation, added README content, and added README extraction to the installer.}
+% \changes{v1.3}{2024/11/01}{Split the private CV helpers from hep-cv into a package with keyword filters, CV bibliography environments, and Indico e-print formatting.}
+% \changes{v1.4}{2026/08/01}{Raised the LaTeX format requirement and replaced the stub documentation and README.}
 %
 % \ifshort
 %<*documentation>
@@ -319,7 +318,7 @@ Entries can use these eprint types to link both the event and a contribution num
   \renewbibmacro*{author}{}%
   \renewbibmacro*{date}{}%
   \DeclareFieldFormat*{title}{\emph{Proposal title: ##1.}}%
-  \list{\printindex\printcvdate}{\setlengths}%
+  \list{\printcvindex\printcvdate}{\setlengths}%
   \renewcommand*{\makelabel}[1]{\hss##1}%
 }{\endlist}{\item}
 %    \end{macrocode}
@@ -368,7 +367,7 @@ Entries can use these eprint types to link both the event and a contribution num
   }%
   \renewbibmacro*{date}{}%
   \renewbibmacro{issue+date}{}%
-  \list{\printindex\printcvdate}{\setlengths}%
+  \list{\printcvindex\printcvdate}{\setlengths}%
   \renewcommand*{\makelabel}[1]{\hss##1}%
 }{\endlist}{\item}
 %    \end{macrocode}

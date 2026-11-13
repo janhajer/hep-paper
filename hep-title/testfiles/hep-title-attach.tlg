@@ -14,45 +14,48 @@ affil=1, Maxaffil=2, authors=5, editors=2, endorsers=1
 ============================================================
 TEST 3: Stored lines
 ============================================================
-macro:->\protect \@nameuse {@sep1}\protect \Authfont Ann\email {ann@mail.com}\protect \@nameuse {@sep2}\protect \Authfont Bob\email {bob@mail.com}\orcid {0000-0002-1825-0097}\protect \@nameuse {@sep3}\protect \Authfont Cid \email {cid@mail.com}\protect \thanks {Funded}\protect \@nameuse {@sep4}\protect \Authfont Dan \email {dan@mail.com} \orcid {0000-0001-5109-3700}\protect \@nameuse {@sep5}\protect \Authfont Eli\email {eli@mail.com}\orcid {0000-0003-1415-9269}
-macro:->\protect \@nameuse {hep@editor@sep1}\protect \Authfont Eve\email {eve@mail.com}\protect \@nameuse {hep@editor@sep2}\protect \Authfont Fay
-macro:->\protect \@nameuse {hep@endorser@sep1}\protect \Authfont Gus\email {gus@mail.com}
+macro:->\protect \@nameuse {@sep1}\protect \Authfont \protect \hep@author@name  {Ann\email {ann@mail.com}}\protect \@nameuse {@sep2}\protect \Authfont \protect \hep@author@name  {Bob\email {bob@mail.com}\orcid {0000-0002-1825-0097}}\protect \@nameuse {@sep3}\protect \Authfont \protect \hep@author@name  {Cid \email {cid@mail.com}\protect \thanks {Funded}}\protect \@nameuse {@sep4}\protect \Authfont \protect \hep@author@name  {Dan \email {dan@mail.com} \orcid {0000-0001-5109-3700}}\protect \@nameuse {@sep5}\protect \Authfont \protect \hep@author@name  {Eli\email {eli@mail.com}\orcid {0000-0003-1415-9269}}
+macro:->\protect \@nameuse {hep@editor@sep1}\protect \Authfont \protect \hep@author@name  {Eve\email {eve@mail.com}}\protect \@nameuse {hep@editor@sep2}\protect \Authfont \protect \hep@author@name  {Fay}
+macro:->\protect \@nameuse {hep@endorser@sep1}\protect \Authfont \protect \hep@author@name  {Gus\email {gus@mail.com}}
 ============================================================
 ============================================================
 TEST 4: All authors without affiliations
 ============================================================
 > \box...=
-\hbox(6.94444+1.94444)x136.25026
-.\OT1/cmr/m/n/10 A
-.\OT1/cmr/m/n/10 n
-.\OT1/cmr/m/n/10 n
+\hbox(6.94444+1.94444)x129.5836
+.\hbox(6.83331+0.0)x18.61116
+..\OT1/cmr/m/n/10 A
+..\OT1/cmr/m/n/10 n
+..\OT1/cmr/m/n/10 n
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\OT1/cmr/m/n/10 B
-.\OT1/cmr/m/n/10 o
-.\OT1/cmr/m/n/10 b
+.\hbox(6.94444+0.0)x17.63895
+..\OT1/cmr/m/n/10 B
+..\OT1/cmr/m/n/10 o
+..\OT1/cmr/m/n/10 b
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\OT1/cmr/m/n/10 C
-.\OT1/cmr/m/n/10 i
-.\OT1/cmr/m/n/10 d
-.\glue 3.33333 plus 1.66666 minus 1.11111
+.\hbox(6.94444+0.0)x15.55559
+..\OT1/cmr/m/n/10 C
+..\OT1/cmr/m/n/10 i
+..\OT1/cmr/m/n/10 d
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\OT1/cmr/m/n/10 D
+.\hbox(6.83331+0.0)x21.52782
+..\OT1/cmr/m/n/10 D
+..\OT1/cmr/m/n/10 a
+..\OT1/cmr/m/n/10 n
+..\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 n
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 ,
-.\glue 3.33333 plus 2.08331 minus 0.88889
-.\OT1/cmr/m/n/10 a
-.\OT1/cmr/m/n/10 n
 .\OT1/cmr/m/n/10 d
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 E
-.\OT1/cmr/m/n/10 l
-.\OT1/cmr/m/n/10 i
+.\hbox(6.94444+0.0)x12.36115
+..\OT1/cmr/m/n/10 E
+..\OT1/cmr/m/n/10 l
+..\OT1/cmr/m/n/10 i
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
 l. ...}

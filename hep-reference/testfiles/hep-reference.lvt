@@ -33,6 +33,9 @@
 \newlabel{law:c}{{3}{1}{}{law.3}{}}
 \newlabel{law:c@cref}{{[law][3][]3}{[1][1][]1}{}{}{}}
 \newlabel{tl}{{\protecting {{Some text}}}{1}{Some text}{tl}{}}
+\newlabel{tl@cref}{{[textlabel][2][]\protecting {{Some text}}}{[1][1][]1}{}{}{}}
+\newlabel{tm}{{\protecting {{More text}}}{1}{More text}{tm}{}}
+\newlabel{tm@cref}{{[textlabel][4][]\protecting {{More text}}}{[1][1][]1}{}{}{}}
 \bibcite{key}{1}
 \end{filecontents*}
 
@@ -67,6 +70,13 @@
 \TEST{No line break before ref}{%
   \SHOWHBOX{a \ref{sec:a}}%
   \SHOWHBOX{a\ref{sec:a}}%
+}
+
+% Only inter-word spaces become non-breaking; wider skips are kept.
+\TEST{Wider skips before ref and cite are kept}{%
+  \SHOWHBOX{a. \ref{sec:a}}%
+  \SHOWHBOX{a\quad\ref{sec:a}}%
+  \SHOWHBOX{a\hspace{2em}\cite{key}}%
 }
 
 \TEST{No line break before cite}{%
@@ -136,6 +146,8 @@
 \TEST{textlabel: references}{%
   \SHOWHBOX{a \ref{tl}}%
   \SHOWHBOX{\nameref{tl}}%
+  \SHOWHBOX{\cref{tm,tl}}%
+  \SHOWHBOX{a \cref{tl}}%
 }
 
 % The PDF subject is set before \maketitle, from \subject or, if a class such

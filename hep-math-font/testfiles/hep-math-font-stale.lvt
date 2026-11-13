@@ -1,0 +1,17 @@
+\input{regression-test}
+\documentclass{article}
+% Virtual fonts generated for another version of the package: with
+% pdfTeX an error before \START (recorded in the .tlg), after which the
+% standard alphabets are kept. The Unicode engines do not use them.
+\makeatletter
+\def\hepmathfont@vfversion{2000/01/01 v0.0 Older fonts}
+\makeatother
+\usepackage{hep-math-font}
+\begin{document}
+\setbox0\hbox{$\mathbf{U1}\alpha$}
+\input{hep-regression}
+\START
+\TEST{formula}{%
+  \SHOWHBOX{$\mathbf{U1}\alpha$}
+}
+\END

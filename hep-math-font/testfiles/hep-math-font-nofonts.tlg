@@ -1,0 +1,46 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: commands
+============================================================
+same
+same
+same
+\protected\long macro:->\vec 
+\protected\long macro:->\vec 
+============================================================
+============================================================
+TEST 2: formulas
+============================================================
+> \box...=
+\hbox(6.85724+0.0)x19.61475
+.\mathon
+.\hbox(6.85724+0.0)x14.59697
+..\OT1/lmr/bx/n/10 U
+..\OT1/lmr/bx/n/10 1
+.\OT1/lmss/bx/n/10 x
+.\kern0.01778
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.14444+0.0)x12.63426
+.\mathon
+.\vbox(7.14444+0.0)x5.20601
+..\hbox(7.14444+0.0)x0.0, shifted -0.3883
+...\OML/lmm/m/it/10 ~
+..\kern-4.30554
+..\hbox(4.30554+0.0)x5.20601
+...\OML/lmm/m/it/10 v
+.\vbox(7.14444+0.0)x7.42825
+..\hbox(7.14444+0.0)x0.0, shifted 1.2784
+...\OML/lmm/m/it/10 ~
+..\kern-4.30554
+..\hbox(4.30554+0.0)x7.42825
+...\OML/lmm/m/it/10 w
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

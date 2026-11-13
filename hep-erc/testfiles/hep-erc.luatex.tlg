@@ -16,7 +16,7 @@ titlesec: loaded [compact,tiny,pagestyles,]
 titleps: not loaded
 lastpage: loaded []
 enumitem: loaded [inline,]
-hep-cv: loaded []
+hep-cv: loaded [date,]
 tabulary: loaded []
 tikz: loaded []
 standalone: loaded []
@@ -125,7 +125,7 @@ l. ...}
 ============================================================
 TEST 12: Month macros are robust and plain in PDF strings
 ============================================================
-\protected macro:->\heperc@month {Jan}
+\protected macro:->\hep@month {Jan}
 [Since Jan 2020 until Dec 2021]
 [Since May 2020]
 macro:->\Jan 

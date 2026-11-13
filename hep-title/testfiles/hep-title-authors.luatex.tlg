@@ -27,17 +27,18 @@ TEST 5: Author line: affiliation marks and email footnote marks
 ============================================================
 > \box...=
 \hbox(9.98671+2.316)x136.54803, direction TLT
-.\TU/lmr/m/n/12 A
-.\TU/lmr/m/n/12 n
-.\TU/lmr/m/n/12 n
-.\penalty 10000
-.\hbox(5.632+1.72)x3.776, shifted -4.3547, direction TLT
-..\pdfcolorstack 0 push {0 g 0 G}
-..\TU/lmr/m/n/8 †
-..\pdfcolorstack 0 pop
-.\penalty 10000
-.\glue 0.5
-.\kern0.0
+.\hbox(9.98671+0.0)x26.14, direction TLT
+..\TU/lmr/m/n/12 A
+..\TU/lmr/m/n/12 n
+..\TU/lmr/m/n/12 n
+..\penalty 10000
+..\hbox(5.632+1.72)x3.776, shifted -4.3547, direction TLT
+...\pdfcolorstack 0 push {0 g 0 G}
+...\TU/lmr/m/n/8 †
+...\pdfcolorstack 0 pop
+..\penalty 10000
+..\glue 0.5
+..\kern0.0
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.1}
 .\hbox(3.568+0.08)x4.248, shifted -4.3547, direction TLT
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -65,9 +66,10 @@ TEST 5: Author line: affiliation marks and email footnote marks
 .\pdfendlink
 .\TU/lmr/m/n/12 ,
 .\glue(\spaceskip) 3.912 plus 2.44499 minus 1.0432
-.\TU/lmr/m/n/12 B
-.\TU/lmr/m/n/12 o
-.\TU/lmr/m/n/12 b
+.\hbox(8.328+0.12)x20.724, direction TLT
+..\TU/lmr/m/n/12 B
+..\TU/lmr/m/n/12 o
+..\TU/lmr/m/n/12 b
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.2}
 .\hbox(5.552+0.08)x4.72, shifted -4.3547, direction TLT
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -99,17 +101,18 @@ TEST 5: Author line: affiliation marks and email footnote marks
 .\TU/lmr/m/n/12 n
 .\TU/lmr/m/n/12 d
 .\glue(\spaceskip) 3.912 plus 1.956 minus 1.304
-.\TU/lmr/m/n/12 C
-.\TU/lmr/m/n/12 i
-.\TU/lmr/m/n/12 d
-.\penalty 10000
-.\hbox(5.632+1.632)x3.776, shifted -4.3547, direction TLT
-..\pdfcolorstack 0 push {0 g 0 G}
-..\TU/lmr/m/n/8 ‡
-..\pdfcolorstack 0 pop
-.\penalty 10000
-.\glue 0.5
-.\kern0.0
+.\hbox(9.98671+0.252)x22.552, direction TLT
+..\TU/lmr/m/n/12 C
+..\TU/lmr/m/n/12 i
+..\TU/lmr/m/n/12 d
+..\penalty 10000
+..\hbox(5.632+1.632)x3.776, shifted -4.3547, direction TLT
+...\pdfcolorstack 0 push {0 g 0 G}
+...\TU/lmr/m/n/8 ‡
+...\pdfcolorstack 0 pop
+..\penalty 10000
+..\glue 0.5
+..\kern0.0
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.3}
 .\hbox(3.568+0.08)x3.776, shifted -4.3547, direction TLT
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -128,10 +131,11 @@ TEST 6: Editor line
 ============================================================
 > \box...=
 \hbox(9.90671+2.448)x81.87201, direction TLT
-.\TU/lmr/m/n/12 E
-.\TU/lmr/m/n/12 v
-.\kern-0.324 (font)
-.\TU/lmr/m/n/12 e
+.\hbox(8.172+0.12)x19.092, direction TLT
+..\TU/lmr/m/n/12 E
+..\TU/lmr/m/n/12 v
+..\kern-0.324 (font)
+..\TU/lmr/m/n/12 e
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.4}
 .\hbox(5.552+0.08)x4.72, shifted -4.3547, direction TLT
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -146,11 +150,12 @@ TEST 6: Editor line
 .\TU/lmr/m/n/12 n
 .\TU/lmr/m/n/12 d
 .\glue(\spaceskip) 3.912 plus 1.956 minus 1.304
-.\TU/lmr/m/n/12 F
-.\kern-0.984 (font)
-.\TU/lmr/m/n/12 a
-.\kern-0.324 (font)
-.\TU/lmr/m/n/12 y
+.\hbox(8.172+2.448)x18.444, direction TLT
+..\TU/lmr/m/n/12 F
+..\kern-0.984 (font)
+..\TU/lmr/m/n/12 a
+..\kern-0.324 (font)
+..\TU/lmr/m/n/12 y
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.4}
 .\hbox(5.552+0.08)x4.72, shifted -4.3547, direction TLT
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -185,9 +190,10 @@ TEST 7: Endorser line with two endorsers
 ============================================================
 > \box...=
 \hbox(8.448+0.252)x74.11203, direction TLT
-.\TU/lmr/m/n/12 G
-.\TU/lmr/m/n/12 u
-.\TU/lmr/m/n/12 s
+.\hbox(8.448+0.252)x20.376, direction TLT
+..\TU/lmr/m/n/12 G
+..\TU/lmr/m/n/12 u
+..\TU/lmr/m/n/12 s
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.1}
 .\hbox(3.568+0.08)x4.248, shifted -4.3547, direction TLT
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -202,9 +208,10 @@ TEST 7: Endorser line with two endorsers
 .\TU/lmr/m/n/12 n
 .\TU/lmr/m/n/12 d
 .\glue(\spaceskip) 3.912 plus 1.956 minus 1.304
-.\TU/lmr/m/n/12 H
-.\TU/lmr/m/n/12 a
-.\TU/lmr/m/n/12 l
+.\hbox(8.328+0.12)x17.95201, direction TLT
+..\TU/lmr/m/n/12 H
+..\TU/lmr/m/n/12 a
+..\TU/lmr/m/n/12 l
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.3}
 .\hbox(3.568+0.08)x3.776, shifted -4.3547, direction TLT
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -268,9 +275,10 @@ TEST 8: Endorser and affiliation block
 ..\TU/lmr/m/it/12 :
 ..\glue(\spaceskip) 5.59999 plus 4.20001 minus 0.7
 ..\hbox(8.448+0.252)x74.11203, direction TLT
-...\TU/lmr/m/n/12 G
-...\TU/lmr/m/n/12 u
-...\TU/lmr/m/n/12 s
+...\hbox(8.448+0.252)x20.376, direction TLT
+....\TU/lmr/m/n/12 G
+....\TU/lmr/m/n/12 u
+....\TU/lmr/m/n/12 s
 ...\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.1}
 ...\hbox(3.568+0.08)x4.248, shifted -4.3547, direction TLT
 ....\pdfcolorstack 0 push {0 g 0 G}
@@ -285,9 +293,10 @@ TEST 8: Endorser and affiliation block
 ...\TU/lmr/m/n/12 n
 ...\TU/lmr/m/n/12 d
 ...\glue(\spaceskip) 3.912 plus 1.956 minus 1.304
-...\TU/lmr/m/n/12 H
-...\TU/lmr/m/n/12 a
-...\TU/lmr/m/n/12 l
+...\hbox(8.328+0.12)x17.95201, direction TLT
+....\TU/lmr/m/n/12 H
+....\TU/lmr/m/n/12 a
+....\TU/lmr/m/n/12 l
 ...\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.3}
 ...\hbox(3.568+0.08)x3.776, shifted -4.3547, direction TLT
 ....\pdfcolorstack 0 push {0 g 0 G}
@@ -1089,9 +1098,10 @@ TEST 14: Third endorser and third editor
 ============================================================
 > \box...=
 \hbox(7.05+1.93)x87.009, direction TLT
-.\TU/lmr/m/n/10 G
-.\TU/lmr/m/n/10 u
-.\TU/lmr/m/n/10 s
+.\hbox(7.05+0.22)x17.35, direction TLT
+..\TU/lmr/m/n/10 G
+..\TU/lmr/m/n/10 u
+..\TU/lmr/m/n/10 s
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.1}
 .\hbox(3.122+0.07)x3.983, shifted -3.62892, direction TLT
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -1103,9 +1113,10 @@ TEST 14: Third endorser and third editor
 .\pdfendlink
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
-.\TU/lmr/m/n/10 H
-.\TU/lmr/m/n/10 a
-.\TU/lmr/m/n/10 l
+.\hbox(6.94+0.11)x15.28, direction TLT
+..\TU/lmr/m/n/10 H
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 l
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.3}
 .\hbox(3.122+0.07)x3.556, shifted -3.62892, direction TLT
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -1121,18 +1132,20 @@ TEST 14: Third endorser and third editor
 .\TU/lmr/m/n/10 n
 .\TU/lmr/m/n/10 d
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 I
-.\TU/lmr/m/n/10 a
-.\TU/lmr/m/n/10 n
+.\hbox(6.83+0.11)x14.17, direction TLT
+..\TU/lmr/m/n/10 I
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 n
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
 l. ...}
 > \box...=
 \hbox(8.48692+2.05)x95.13101, direction TLT
-.\TU/lmr/m/n/10 E
-.\TU/lmr/m/n/10 v
-.\kern-0.28 (font)
-.\TU/lmr/m/n/10 e
+.\hbox(6.8+0.11)x16.25, direction TLT
+..\TU/lmr/m/n/10 E
+..\TU/lmr/m/n/10 v
+..\kern-0.28 (font)
+..\TU/lmr/m/n/10 e
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.4}
 .\hbox(4.858+0.07)x4.417, shifted -3.62892, direction TLT
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -1144,11 +1157,12 @@ l. ...}
 .\pdfendlink
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
-.\TU/lmr/m/n/10 F
-.\kern-0.83 (font)
-.\TU/lmr/m/n/10 a
-.\kern-0.28 (font)
-.\TU/lmr/m/n/10 y
+.\hbox(6.8+2.05)x15.7, direction TLT
+..\TU/lmr/m/n/10 F
+..\kern-0.83 (font)
+..\TU/lmr/m/n/10 a
+..\kern-0.28 (font)
+..\TU/lmr/m/n/10 y
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{affiliation.4}
 .\hbox(4.858+0.07)x4.417, shifted -3.62892, direction TLT
 ..\pdfcolorstack 0 push {0 g 0 G}
@@ -1180,10 +1194,11 @@ l. ...}
 .\TU/lmr/m/n/10 n
 .\TU/lmr/m/n/10 d
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 J
-.\TU/lmr/m/n/10 o
-.\kern0.28 (font)
-.\TU/lmr/m/n/10 e
+.\hbox(6.83+0.22)x14.86, direction TLT
+..\TU/lmr/m/n/10 J
+..\TU/lmr/m/n/10 o
+..\kern0.28 (font)
+..\TU/lmr/m/n/10 e
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
 l. ...}

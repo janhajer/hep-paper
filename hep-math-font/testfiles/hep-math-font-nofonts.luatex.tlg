@@ -1,0 +1,45 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: commands
+============================================================
+same
+different
+different
+\protected\long macro:->\vec 
+\protected\long macro:->\vec 
+============================================================
+============================================================
+TEST 2: formulas
+============================================================
+> \box...=
+\hbox(6.86+0.17)x20.84, direction TLT
+.\mathon
+.\TU/hep-serif/m/n/10 𝑼
+.\kern1.05 (italic)
+.\TU/hep-serif/m/n/10 𝟏
+.\TU/hep-sans/m/n/10 𝒙
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+> \box...=
+\hbox(7.11+0.11)x12.15001, direction TLT
+.\mathon
+.\vbox(7.11+0.11)x4.96, direction TLT
+..\hbox(7.11+0.0)x0.0, shifted 5.76, direction TLT
+...\TU/NewCMMath-Regular.otf(1)/m/n/10 ⃗
+..\kern-4.42 (font)
+..\hbox(4.42+0.11)x4.96, direction TLT
+...\TU/hep-serif/m/n/10 𝑣
+.\vbox(7.11+0.11)x7.19, direction TLT
+..\hbox(7.11+0.0)x0.0, shifted 7.13, direction TLT
+...\TU/NewCMMath-Regular.otf(1)/m/n/10 ⃗
+..\kern-4.42 (font)
+..\hbox(4.42+0.11)x7.19, direction TLT
+...\TU/hep-serif/m/n/10 𝑤
+.\mathoff
+! OK.
+\SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
+l. ...}
+============================================================

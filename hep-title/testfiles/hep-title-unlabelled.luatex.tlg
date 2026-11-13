@@ -10,23 +10,26 @@ TEST 2: Author line without affiliation marks
 ============================================================
 > \box...=
 \hbox(7.16+1.93)x83.48999, direction TLT
-.\TU/lmr/m/n/10 A
-.\TU/lmr/m/n/10 n
-.\TU/lmr/m/n/10 n
+.\hbox(7.16+0.0)x18.62, direction TLT
+..\TU/lmr/m/n/10 A
+..\TU/lmr/m/n/10 n
+..\TU/lmr/m/n/10 n
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
-.\TU/lmr/m/n/10 B
-.\TU/lmr/m/n/10 o
-.\TU/lmr/m/n/10 b
+.\hbox(6.94+0.11)x17.64, direction TLT
+..\TU/lmr/m/n/10 B
+..\TU/lmr/m/n/10 o
+..\TU/lmr/m/n/10 b
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
 .\TU/lmr/m/n/10 a
 .\TU/lmr/m/n/10 n
 .\TU/lmr/m/n/10 d
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 C
-.\TU/lmr/m/n/10 i
-.\TU/lmr/m/n/10 d
+.\hbox(7.05+0.22)x15.56, direction TLT
+..\TU/lmr/m/n/10 C
+..\TU/lmr/m/n/10 i
+..\TU/lmr/m/n/10 d
 ! OK.
 \SHOWHBOX #1->\setbox 0\hbox {#1}\showbox 0 
 l. ...}
@@ -34,7 +37,7 @@ l. ...}
 ============================================================
 TEST 3: Editor line
 ============================================================
-macro:->\protect \@nameuse {hep@editor@sep1}\protect \Authfont Eve
+macro:->\protect \@nameuse {hep@editor@sep1}\protect \Authfont \protect \hep@author@name  {Eve}
 ============================================================
 ============================================================
 TEST 4: Affiliation block without marks

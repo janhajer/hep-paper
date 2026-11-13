@@ -18,8 +18,8 @@
 % \iffalse
 
 %<package>\NeedsTeXFormat{LaTeX2e}[2021-11-15]
-%<package>\ProvidesPackage{hep-math}[2026/11/11 v1.6 Math macros for operators, derivatives, delimiters, bra-ket notation and expectation values]
-%<documentation>\ProvidesFile{hep-math-documentation.tex}[2026/11/11 v1.6 hep-math documentation]
+%<package>\ProvidesPackage{hep-math}[2026/11/13 v1.6 Math macros for operators, derivatives, delimiters, bra-ket notation and expectation values]
+%<documentation>\ProvidesFile{hep-math-documentation.tex}[2026/11/13 v1.6 hep-math documentation]
 %
 %<*documentation>
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -79,13 +79,13 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \changes{v1.0}{2021/09/01}{Created the dedicated math helper package with \cs{mathdef}, overlines, accents, operators, fractions, units, differentials, delimiters, probabilities, brackets, bra-ket notation, matrix elements, and vectors.}
-% \changes{v1.1}{2022/11/01}{Added optional defaults to \cs{mathdef}, \cs{widebar}, row and column vector documentation, centred colons, amssymb loading, improved flat fractions and slashed symbols, cfr-lm and nfssext-cfr patching, and separate bra-ket spacing.}
-% \changes{v1.2}{2023/07/01}{Added \cs{imaginaryunit}, math-mode \cs{unit} and \cs{unitfrac} wrappers, optional integral placement, \cs{floor} and \cs{ceil}, and differential and flat-fraction spacing refinements.}
-% \changes{v1.3}{2024/11/01}{Switched underline support from soulutf8 to soul, disabled the active \cs{int} redefinition, added \cs{slashedpartialdifferential} and \cs{spd}, and exposed \cs{row} and \cs{column} through \cs{mathdef}.}
-% \changes{v1.4}{2025/09/01}{Applied starred command definitions consistently and refreshed release metadata.}
-% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement, bumped release metadata, and expanded the documentation, README, and examples for the math interface.}
-% \changes{v1.6}{2026/11/11}{Removed the patch of nfssext-cfr, which ran before nfssext-cfr defined its macros. The hep-font package now keeps nfssext-cfr from overwriting \cs{set}. Fixed \cs{mathdef} macros, \cs{trans}, and \cs{slashed} in bookmarks and moving arguments, added PDF-string versions of operators, units, inverses, and fractions, gave all trigonometric functions the height of \cs{sin}, removed spurious spaces from \cs{unitfrac}, and avoided the clash of amssymb with unicode-math when loaded after hep-math-font.}
+% \changes{v1.0}{2021/09/01}{First release on CTAN: \cs{mathdef}, overlines, accents, operators, fractions, units, differentials, delimiters, probabilities, brackets, bra-ket notation, matrix elements, and vectors.}
+% \changes{v1.1}{2022/11/01}{Added optional defaults to \cs{mathdef}, \cs{widebar}, centred colons, and separate bra-ket spacing, loaded amssymb, and improved flat fractions and slashed symbols.}
+% \changes{v1.2}{2023/07/01}{Added \cs{imaginaryunit}, \cs{unit} and \cs{unitfrac} in math mode, optional integral placement, \cs{floor} and \cs{ceil}, and refined the spacing of differentials and flat fractions.}
+% \changes{v1.3}{2024/11/01}{Switched underlining from soulutf8 to soul, stopped redefining \cs{int}, added \cs{slashedpartialdifferential} and \cs{spd}, and defined \cs{row} and \cs{column} with \cs{mathdef}.}
+% \changes{v1.4}{2025/09/01}{Applied starred command definitions consistently.}
+% \changes{v1.5}{2026/08/01}{Raised the LaTeX format requirement and expanded the documentation, README, and examples.}
+% \changes{v1.6}{2026/11/13}{Removed the patch of nfssext-cfr, which ran before nfssext-cfr defined its macros. The hep-font package now keeps nfssext-cfr from overwriting \cs{set}. Fixed \cs{mathdef} macros, \cs{trans}, and \cs{slashed} in bookmarks and moving arguments, added PDF-string versions of operators, units, inverses, and fractions, gave all trigonometric functions the height of \cs{sin}, removed spurious spaces from \cs{unitfrac}, avoided the clash of amssymb with unicode-math when loaded after hep-math-font, and let the derivatives follow the math style, with \cs{tfrac} for the second star.}
 %
 % \ifshort
 %<*documentation>
@@ -191,6 +191,8 @@ $\dv xf$ & $\dv*xf$ & $\dv x*f$ & $\dv*x*f$
 \end{tabular}
 \end{center}
 via "\dv*"\oarg{f}\marg{x}"*""^"\marg{n}.
+The fraction follows the math style, like "\frac".
+The first star selects the flat fraction "\flatfrac" and the second star the small fractions "\tfrac" and "\nicefrac", respectively.
 Upright differential can be produced via "\renewcommand""{\diffsymbol}" "{\mathrm d}".
 The differential takes care of the correct spacing as long as it is placed at the end of the integral $\int f(x)\d x$.
 In order to archive correct spacing when it is placed at the beginning of the integral it is advisable to place the whole expression in a "\mathop{\int\d x} f(x)"  such that $\mathop{\int\d x} f(x)$.
@@ -858,9 +860,9 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
 \newcommand*\newderivative[2]{
   \NewDocumentCommand{#1}{somse{^}}{%
     \IfBooleanTF{##4}{%
-      \IfBooleanTF{##1}{\nicefrac}{\frac}%
+      \IfBooleanTF{##1}{\nicefrac}{\tfrac}%
     }{%
-      \IfBooleanTF{##1}{\flatfrac}{\dfrac}%
+      \IfBooleanTF{##1}{\flatfrac}{\frac}%
     }{%
       \differential#2\IfValueT{##5}{^{##5\!}}\IfValueT{##2}{##2}%
     }{%
@@ -934,9 +936,9 @@ As a rule of thumb if you have to use "\notag", "\nonumber", or perform manual s
     \IfValueT{##6}{\hep@order@add{##7}}%
     \IfValueT{##8}{\hep@order@add{##9}}%
     \IfBooleanTF{##4}{%
-      \IfBooleanTF{##1}{\nicefrac}{\frac}%
+      \IfBooleanTF{##1}{\nicefrac}{\tfrac}%
     }{%
-      \IfBooleanTF{##1}{\flatfrac}{\dfrac}%
+      \IfBooleanTF{##1}{\flatfrac}{\frac}%
     }{%
       \differential#2\hep@order@power
       \IfValueT{##2}{##2}%

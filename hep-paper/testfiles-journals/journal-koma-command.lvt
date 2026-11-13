@@ -1,0 +1,11 @@
+% hep-paper with koma: abstract in the preamble in the command form \abstract{...}.
+\input{regression-test}
+\documentclass{scrartcl}
+\usepackage{hep-paper}
+\input{journal-title}
+\abstract{Abstract text.}
+\begin{document}
+\maketitle
+\section{Section}
+Text.
+\end{document}

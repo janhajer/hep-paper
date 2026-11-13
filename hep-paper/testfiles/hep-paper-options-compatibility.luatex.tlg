@@ -1,0 +1,15 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: ignored compatibility options
+============================================================
+beamer false
+revtex false
+jhep false
+jcap false
+pos false
+springer false
+amsart false
+koma false
+hep-title loaded
+============================================================

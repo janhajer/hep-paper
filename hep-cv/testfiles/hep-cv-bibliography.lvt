@@ -119,7 +119,7 @@
 }
 
 \TEST{Helper macros}{%
-  \DEFINED{setlengths,printcvdate,printindex,printissuedate,%
+  \DEFINED{setlengths,printcvdate,printcvindex,printissuedate,%
     adjustOrgLocDat,cleardate,Jan,mkbibshortyear}%
 }
 
